@@ -1,11 +1,11 @@
 # builtin
 ## Type Aliases
-`type byte: u8`\
+### `type byte: u8`
 Is an alias for u8. It is used, by convention, to distinguish byte values from 8-bit unsigned integer values. 
 
 ---
 
-`type rune: i32`\
+### `type rune: i32`
 Is an alias for i32. It is used, by convention, to distinguish character values from integer values.
 
 ## Functions

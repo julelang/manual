@@ -37,11 +37,11 @@ struct Status {
 ```
 Status information. 
 
-**Methods:**\
+**Methods:**
+
 `fn is_dir(self): bool`\
 Reports path is directory or not.
 
-\
 `fn is_reg(self): bool`\
 Reports path is regular file or not.
 
@@ -62,13 +62,13 @@ struct File
 ```
 The file stream handle.
 
-**Methods:**\
+**Methods:**
+
 `fn seek(mut self, offset: i64, origin: Seek): (i64, FsError)`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end. Return 0 if error occurs.
 
 Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 
-\
 `fn read(mut self, mut buff: []byte): (n: int, FsError)`\
 Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read. Returns 0 if error occurs.
 

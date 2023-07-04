@@ -1,6 +1,6 @@
 # std::conv
 ## Globals
-`const INT_SIZE`\
+### `const INT_SIZE`
 Is the size in bits of an int or uint value.
 
 ## Functions
