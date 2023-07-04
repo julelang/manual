@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   srcDir: 'src',
   title: 'Jule Manual',
-  base: '/',
+  base: '/manual/',
   description: 'Documentations of the Jule Programming Language.',
   head: [
     [
