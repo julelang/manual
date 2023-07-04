@@ -1,0 +1,2 @@
+# Project
+In this chapter you understand the proposed project layout, their names and the purpose of the directories. Then you will be able to develop your projects by following this order. These are recommendations and are not obligatory to follow.

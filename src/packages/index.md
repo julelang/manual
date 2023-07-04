@@ -1,0 +1,22 @@
+# Packages
+Jule treats each directory as a package. Each package has the ability to use its own defines.
+
+For example: 
+```
+// file: ./hello_print.jule
+
+fn hello_print(name: str) {
+    outln("Hello " + name)
+}
+```
+```
+// file: ./main.jule
+
+fn main() {
+    hello_print("Packages")
+}
+```
+As shown in the example above, since both files are located in the same directory, they are considered the same package and therefore have access to each other's definitions.
+::: warning
+Be careful to design the packages according to their definition order, otherwise you may not get the result you expect.
+:::

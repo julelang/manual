@@ -1,0 +1,33 @@
+# Directory Order
+Recommended work pattern and use of project directories for Jule:
+
+## Source files
+Nice names for source of your project:
+- `src`
+- `source`
+
+The source directory is the directory where your project's source codes are located. It is recommended that you keep the source code of the language or languages you are using in this directory. If your project has more than one language, you can separate the languages in different directories in this directory. The same method can be applied if you have more than one program.
+
+You can place your source code files directly in this directory. But if there is more than one program source code from your project, you can create a new directory under this directory for each program. In addition, if you wish, you can store the source code in a directory specific to your program, even though it is your only program.
+
+## Scripts
+Nice names for scripts of your project:
+- `script`
+- `scripts`
+
+It is very natural for you to write some scripts for your project. It's better to have these scripts in a directory rather than having them cluttered around. If your scripts are applied for different directories, you can create a sub-order by creating those directories inside the script directory. Or you can create a new script directory in the corresponding directory.
+
+## Documentations
+Nice names for documentations of your project:
+- `docs`
+- `documentation`
+- `documentations`
+
+It is recommended to keep the documents and explanations of your projects in this directory.
+
+## Resources
+Nice names for resources of your project:
+- `res`
+- `resources`
+
+If you have resources for your project (png, jpg, gif etc.), it is recommended to keep them in this directory.
