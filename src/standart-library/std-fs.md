@@ -11,7 +11,9 @@ Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 
 ---
 
-`fn read_dir(path: str): ([]&DirEntry, FsError)`
+```
+fn read_dir(path: str): ([]&DirEntry, FsError)
+```
 Reads the named directory and returs all its directory entries can read.\
 Returns nil if no any directory entry or error occurs.
 
@@ -19,8 +21,9 @@ Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit
 
 ---
 
-`fn open(path: str, flag: OFlag, mode: int): (&File, FsError)`
-
+```
+fn open(path: str, flag: OFlag, mode: int): (&File, FsError)
+```
 Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) and perm. If named file does not exist and Sema.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Divice` `Overflow` `ReadOnly` `Retry` `Busy`
