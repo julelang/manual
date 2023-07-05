@@ -72,7 +72,7 @@ fn print_map[Key, Value](map: [Key:Value]) {
 }
 
 fn main() {
-    ket mymap = [int:str]{
+    let mymap: [int:str] = {
         0: "A",
         1: "B",
         2: "C",
