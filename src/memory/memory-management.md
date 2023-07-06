@@ -31,7 +31,7 @@ You can't use as reference these types:
 - Array
 
 ### Initialization
-The built-in `new` function is used to make the reference. Please refer to the [builtin](/standart-library/builtin) library documentation for this function.
+The built-in `new` function is used to make the reference. Please refer to the [builtin](/standard-library/builtin) library documentation for this function.
 
 It can be used in two ways. The first type allows you to get only one reference, but that reference is an uninitialized reference (aka nil reference), meaning it does not point to any allocation and does not perform reference counting.
 

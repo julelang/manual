@@ -103,7 +103,7 @@ In this example, the mutability of the `y` field is fully responsive. However, t
 The point that should not be forgotten in this regard is that even if there is interior mutability, this field cannot be changed from outside the structure with an immutable instance. Interior mutability only applies inside the structure itself. 
 
 ## Clonning
-You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/standart-library/builtin).
+You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/standard-library/builtin).
 
 Clonning supported types and copy methods:
 - Numeric Types\

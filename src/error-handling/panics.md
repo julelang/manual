@@ -1,5 +1,5 @@
 # Panics
-Panics abruptly stop program execution and "abort" it. If you're talking about an issue that will cause the program to crash while executing, using panic would be a good choice. The panic function is the builtin function. See the [builtin documentations](/standart-library/builtin).
+Panics abruptly stop program execution and "abort" it. If you're talking about an issue that will cause the program to crash while executing, using panic would be a good choice. The panic function is the builtin function. See the [builtin documentations](/standard-library/builtin).
 
 For example:
 ```

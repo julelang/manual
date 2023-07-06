@@ -1,4 +1,4 @@
-# Standart Library
+# Standard Library
 
 The standard library is language's own library. Usually each programming language have a standard library. This libraries, provides common functions to developer. Free time!
 

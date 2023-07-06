@@ -19,7 +19,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Manual', link: '/' },
-      { text: 'Standart Library', link: '/standart-library/' },
+      { text: 'Standard Library', link: '/standard-library/' },
     ],
     
     sidebar: {
@@ -165,88 +165,88 @@ export default defineConfig({
         },
         {
           items: [
-            { text: 'Standart Library', link: '/standart-library/' },
+            { text: 'Standard Library', link: '/standard-library/' },
             { text: 'End', link: '/end' },
           ]
         },
       ],
       
-      '/standart-library/': [
+      '/standard-library/': [
         {
-          text: 'Standart Library',
-          link: '/standart-library/',
+          text: 'Standard Library',
+          link: '/standard-library/',
           items: [
-            { text: 'builtin', link: '/standart-library/builtin' },
-            { text: 'std::conv', link: '/standart-library/std-conv' },
+            { text: 'builtin', link: '/standard-library/builtin' },
+            { text: 'std::conv', link: '/standard-library/std-conv' },
             { 
               text: 'std::debug', 
-              link: '/standart-library/std-debug', 
+              link: '/standard-library/std-debug', 
               items: [
-                { text: 'std::debug::assert', link: '/standart-library/std-debug-assert' }
+                { text: 'std::debug::assert', link: '/standard-library/std-debug-assert' }
               ] 
             },
-            { text: 'std::errors', link: '/standart-library/std-errors' },
+            { text: 'std::errors', link: '/standard-library/std-errors' },
             { 
               text: 'std::fs', 
-              link: '/standart-library/std-fs', 
+              link: '/standard-library/std-fs', 
               items: [
-                { text: 'std::fs::path', link: '/standart-library/std-fs-path' }
+                { text: 'std::fs::path', link: '/standard-library/std-fs-path' }
               ] 
             },
-            { text: 'std::io', link: '/standart-library/std-io' },
+            { text: 'std::io', link: '/standard-library/std-io' },
             { 
               text: 'std::jule', 
-              link: '/standart-library/std-jule',
+              link: '/standard-library/std-jule',
               items: [
-                { text: 'std::jule::ast', link: '/standart-library/std-jule-ast' },
-                { text: 'std::jule::build', link: '/standart-library/std-jule-build' },
+                { text: 'std::jule::ast', link: '/standard-library/std-jule-ast' },
+                { text: 'std::jule::build', link: '/standard-library/std-jule-build' },
                 {
                   text: 'std::jule::constant',
-                  link: '/standart-library/std-jule-constant',
+                  link: '/standard-library/std-jule-constant',
                   items: [
-                    { text: 'std::jule::constant::lit', link: '/standart-library/std-jule-constant-lit' }
+                    { text: 'std::jule::constant::lit', link: '/standard-library/std-jule-constant-lit' }
                   ]
                 },
-                { text: 'std::jule::lex', link: '/standart-library/std-jule-lex' },
-                { text: 'std::jule::parser', link: '/standart-library/std-jule-parser' },
-                { text: 'std::jule::sema', link: '/standart-library/std-jule-sema' },
-                { text: 'std::jule::types', link: '/standart-library/std-jule-types' },
+                { text: 'std::jule::lex', link: '/standard-library/std-jule-lex' },
+                { text: 'std::jule::parser', link: '/standard-library/std-jule-parser' },
+                { text: 'std::jule::sema', link: '/standard-library/std-jule-sema' },
+                { text: 'std::jule::types', link: '/standard-library/std-jule-types' },
               ]
             },
             { 
               text: 'std::math', 
-              link: '/standart-library/std-math',
+              link: '/standard-library/std-math',
               items: [
-                { text: 'std::math::bits', link:'/standart-library/std-math-bits' }
+                { text: 'std::math::bits', link:'/standard-library/std-math-bits' }
               ]
             },
             { 
               text: 'std::mem', 
-              link: '/standart-library/std-mem',
+              link: '/standard-library/std-mem',
               items: [
-                { text: 'std::mem::c', link:'/standart-library/std-mem-c' }
+                { text: 'std::mem::c', link:'/standard-library/std-mem-c' }
               ]
             },
-            { text: 'std::os', link: '/standart-library/std-os' },
-            { text: 'std::reflect', link: '/standart-library/std-reflect' },
-            { text: 'std::runtime', link: '/standart-library/std-runtime' },
+            { text: 'std::os', link: '/standard-library/std-os' },
+            { text: 'std::reflect', link: '/standard-library/std-reflect' },
+            { text: 'std::runtime', link: '/standard-library/std-runtime' },
             { 
               text: 'std::sync', 
-              link: '/standart-library/std-sync',
+              link: '/standard-library/std-sync',
               items: [
-                { text: 'std::sync::atomic', link:'/standart-library/std-sync-atomic' }
+                { text: 'std::sync::atomic', link:'/standard-library/std-sync-atomic' }
               ]
             },
-            { text: 'std::sys', link: '/standart-library/std-sys' },
+            { text: 'std::sys', link: '/standard-library/std-sys' },
             { 
               text: 'std::unicode', 
-              link: '/standart-library/std-mem',
+              link: '/standard-library/std-mem',
               items: [
-                { text: 'std::unicode::utf16', link:'/standart-library/std-unicode-utf16' },
-                { text: 'std::unicode::utf8', link:'/standart-library/std-unicode-utf8' },
+                { text: 'std::unicode::utf16', link:'/standard-library/std-unicode-utf16' },
+                { text: 'std::unicode::utf8', link:'/standard-library/std-unicode-utf8' },
               ]
             },
-            { text: 'std::vector', link: '/standart-library/std-vector' },
+            { text: 'std::vector', link: '/standard-library/std-vector' },
           ],
         },
       ]
