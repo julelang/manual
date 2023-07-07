@@ -40,7 +40,7 @@ fn main() {
     outln(result)
 }
 ```
-As seen in the example above, the owned variable `my_arr `holds an slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
+As seen in the example above, the owned variable `my_slice` holds an slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
 ::: warning
 If you pass slice to variadic parameter, you can't pass more value.
 :::
