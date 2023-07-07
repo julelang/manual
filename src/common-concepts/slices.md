@@ -1,7 +1,7 @@
 # Slices
-Slices is a dynamic allocated array, for this reason not has constant size expression. Slices are heap allocated and use Jule's reference counting memory management. A slice can be `nil` and its default value is `nil`. Slices are mutable.
+A slice is a dynamic allocated array, for this reason it doesn't have a constant size expression. Slices are heap allocated and use Jule's reference counting memory management. A slice can be `nil` and its default value is `nil`. Slices are mutable.
 
-Slices are defined using `[ ]`. Actually, you might remember this from the array section of documentation. They actually mean slice by default. When used in arrays, so examples always use type annotation, which indicates that it's an array. If no type annotation is given, A slice literal defaults to the data type of its first element as element type.
+Slices are defined using `[ ]`. Actually, you might remember this from the array section of documentation. They actually mean slice by default. When used in arrays, so examples always use type annotation, which indicates that it's an array. If no type annotation is given, a slice literal defaults to the data type of its first element as element type.
 
 Example to slices:
 ```
@@ -11,9 +11,9 @@ fn main() {
     outln(my_slice)
 }
 ```
-The nil is the default value of slices.
+Nil is the default value of slices.
 
-Second statement is set value of `my_slice` variable as `["Hello", "Jule", "slices!"]`. Seen at second statement, slices is should be define with data type. Last statement is prints to console the `my_slice` variable.
+As seen at the first statement, slices should be defined with a data type. The second statement sets the value of `my_slice` as `["Hello", "Jule", "slices!"]`.  The last statement prints `my_slice` to console.
 
 Output of program:
 ```
@@ -21,7 +21,7 @@ Output of program:
 ```
 
 ## Passing Slices to Variadic Parameter
-We know that `...` is used for Variadic parameters. We also know that each variadic parameter is actually an slices.
+We know that `...` is used for Variadic parameters. We also know that each variadic parameter is actually a slice.
 So can we pass an slice to a variadic parameter? Yes. Again, the `...` operator is used for this.
 
 For example:
@@ -40,13 +40,13 @@ fn main() {
     outln(result)
 }
 ```
-As seen in the example above, the owned variable `my_slice` holds an slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
+As seen in the example above, the owned variable `my_slice` holds a slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
 ::: warning
 If you pass slice to variadic parameter, you can't pass more value.
 :::
 
 ## Slicing
-You can slice compatible types with indexing. As a result of slicing a slice, a new allocation is not created, no copying is performed. The relevant memory section of the sliced slice is referenced and its length is limited by the length of the slice. 
+You can slice compatible types with indexing. As a result of slicing a slice, no new allocation is created, no copying is performed. The relevant memory section of the sliced slice is referenced and its length is limited by the length of the slice. 
 
 ### Syntax
 ```
@@ -56,11 +56,11 @@ For example:
 ```
 my_slice[2:10]
 ```
-The example at above, slices items starts at `2` to `10` The `10` index is not included. So if you want slice all components of slice after the index `2`, give length of slice.
+At the example above, slice items start at `2` to `10` The `10` index is not included. So if you want to slice all components of a slice after the index `2`, the length of the slice needs to be given.
 
 ### Auto Indexing
-If you don't give the start index expression, accepts as `0`.
-If you don't give the to index expression, accepts as length.
+If you don't give the start index expression, `0` is assumed.
+If you don't give the 'to index' expression, the whole length is assumed.
 
 For example:
 ```
@@ -77,7 +77,7 @@ fn main() {
 Arrays, slices and strings.
 
 ## Allocating Slices
-A certain size slice can be allocated with the builtin `make` function.
+A specifically sized slice can be allocated with the builtin `make` function.
 
 For example:
 ```
@@ -86,4 +86,4 @@ fn main() {
     outln(s)
 }
 ```
-The example at above, the `s` variable is 20 sized slice. 
+At the example above, the `s` variable is 20 sized slices. 
