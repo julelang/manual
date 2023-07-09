@@ -13,6 +13,11 @@ The JuleC project has scripts for building/compiling the compiler. You can use t
 These examples assume you are in the source code `(src/julec)` directory of the JuleC.
 :::
 
+::: warning
+The build scripts designed for developers. \
+Compiles JuleC with zero optimization.
+:::
+
 ### Windows
 ::: tip
 Ideal scripts for Windows: usally batchfiles (.bat). 
@@ -55,7 +60,22 @@ This example also accepts you already have JuleC in global path.
 julec -o ../../bin/julec .
 ```
 
-## Optimization Level
+## Compile Tips
+
+There are a few recommendations for getting the best JuleC build for manual compilation and Jule developers.
+Considering these recommendations can help the JuleC build you use during development to offer the best performance.
+
+### C++ Version
+
+Instead of the default version, it would be better for you to use ``c++17``.
+JuleC is dependent on several headers from ``c++17``.
+Even if you can compile with ``c++14``, compiling with ``c++17`` can provide a smoother experience for you.
+
+::: tip
+Pass ``--std=c++17`` flag for compile with C++17, if you are using Clang, GCC or something like this.
+:::
+
+### Optimization Level
 
 Jule compiles at zero optimization (``O0``) level by default.
 But this is not recommended if you are compiling for use.
