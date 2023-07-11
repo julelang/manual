@@ -50,3 +50,18 @@ Push items to end of heap.
 
 `fn push_front(mut self, mut item: T)`\
 Push item to front of heap.
+
+`fn merge(mut self, mut vec: Vector[T])`\
+Merge items to end of heap.
+
+`fn merge_front(mut self, mut vec: Vector[T])`\
+Merge items to front of heap.
+
+`fn remove_range(mut self, start: int, n: int)`\
+Remove range from heap.
+
+`fn insert(mut self, i: int, mut item: T)`\
+Insert item by index.
+
+`fn insert(mut self, start: int, end: int): Vector[T]`\
+Slice between indexes except end position.
