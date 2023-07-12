@@ -7,11 +7,11 @@ export default defineConfig({
   head: [
     [
       'link',
-      { rel: 'icon', type: 'image/x-icon', href: '/jule_icon.svg' }
+      { rel: 'icon', type: 'image/x-icon', href: 'https://raw.githubusercontent.com/julelang/resources/master/jule_icon.svg' }
     ],
   ],
   themeConfig: {
-    logo: '/jule_icon.svg',
+    logo: 'https://raw.githubusercontent.com/julelang/resources/master/jule_icon.svg',
 
     search: {
       provider: 'local'
