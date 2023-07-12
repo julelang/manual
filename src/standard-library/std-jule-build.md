@@ -6,6 +6,18 @@ Extension (includes dot) of Jule source code files.
 
 ---
 
+### `let mut OS: str`
+Target operating system. \
+Setted to current operating system by default.
+
+---
+
+### `let mut ARCH: str`
+Target architecture. \
+Setted to current architecture by default.
+
+---
+
 ### `const API: str`
 Directory name of JuleC++ API.
 

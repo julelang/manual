@@ -38,6 +38,12 @@ Values: `gcc` `clang`
 `-o <file>` `--out <file>` \
 Write output to `<file>`.
 
+---
+
+`--target <target>` \
+Change transpilation target. \
+See more about [cross-transpilation](/compiler/cross-transpilation).
+
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).

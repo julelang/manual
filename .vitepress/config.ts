@@ -49,6 +49,7 @@ export default defineConfig({
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
+            { text: 'Cross Transpilation', link: '/compiler/cross-transpilation' },
             { text: 'Compiling', link: '/compiler/compiling' },
           ],
         },
