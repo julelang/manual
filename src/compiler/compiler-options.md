@@ -17,23 +17,35 @@ $ julec -t --compiler clang .
 ```
 The example code above means: "Hey compiler, transpile main.jule's content using the clang compiler standard." 
 
-## --options
-`-c` `--compile`
+## Options
+`-c` `--compile` \
 Compiles source code. Actually this is not necessary because compiler's default option is compile.
 
 ---
 
-`-t` `--transpile`
-Just transpile source code. 
+`-t` `--transpile` \
+Just transpile source code.
 
 ---
 
-`--compiler` `<value>`
+`--compiler` `<value>` \
 Set the preferred compiler. Specify the compiler standard you will use for compilation from among the supported compilers.
 
 Values: `gcc` `clang`
 
 ---
 
-`-o <file>` `--out <file>`
-Write output to `<file>`. 
+`-o <file>` `--out <file>` \
+Write output to `<file>`.
+
+### Optimization Options
+
+Learn more about [compiler optimizations](/compiler/compiler-optimizations).
+
+`--opt <level>` \
+Set optimization level to `<level>`.
+
+---
+
+`--opt-copy` \
+Copy optimization.

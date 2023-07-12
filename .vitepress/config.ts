@@ -48,6 +48,7 @@ export default defineConfig({
             { text: 'Deriving', link: '/compiler/deriving' },
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
+            { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
             { text: 'Compiling', link: '/compiler/compiling' },
           ],
         },
