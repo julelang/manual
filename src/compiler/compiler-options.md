@@ -48,4 +48,4 @@ Set optimization level to `<level>`.
 ---
 
 `--opt-copy` \
-Copy optimization.
+Enable copy optimization.
