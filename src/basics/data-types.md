@@ -15,8 +15,8 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 | u64 | 8 bytes | 0 to 18446744073709551615 |
 | uint | Platform dependent | Platform dependent (unsigned) |
 | uintptr | Platform dependent | It is a unsigned integer type that is big enough to hold a pointer. |
-| f32 | 4 bytes |  |
-| f64 | 8 bytes |  |
+| f32 | 4 bytes | -3.4028234663852886e+38 to 3.4028234663852886e+38 |
+| f64 | 8 bytes | -1.797693134862315708e+308 to 1.797693134862315708e+308 |
 | bool | 1 byte | true or false |
 | str | - | UTF-8 byte encoded character string. |
 | any | - | Any data. |
@@ -123,8 +123,8 @@ String literals have a escape sequences.
 | \r | Carriage return. |
 | \t | ASCII Horizontal tab. |
 | \v | ASCII Vertical tab. |
-| \' | Single quote. |
-| \" | Double quote. |
+| \\' | Single quote. |
+| \\" | Double quote. |
 | \xhh | The byte whose numerical value is given by hh… interpreted as a hexadecimal number. |
 | \uhhhh | Unicode code point below 10000 hexadecimal. |
 | \Uhhhhhhhh | Unicode code point where h is a hexadecimal digit. |
