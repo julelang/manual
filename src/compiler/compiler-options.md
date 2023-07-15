@@ -55,3 +55,8 @@ Set optimization level to `<level>`.
 
 `--opt-copy` \
 Enable copy optimization.
+
+---
+
+`--opt-deadcode` \
+Enable deadcode optimization.

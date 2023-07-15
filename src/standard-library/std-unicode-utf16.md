@@ -36,6 +36,6 @@ Returns the Unicode code point sequence represented by the UTF-16 encoding s.
 ---
 
 ```
-fn append_rune(a: []u16, r: rune): []u16
+fn append_rune(mut a: []u16, r: rune): []u16
 ```
 Appends the UTF-16 encoding of the Unicode code point r to the end of p and returns the extended buffer. If the rune is not a valid Unicode code point, it appends the encoding of U+FFFD. 

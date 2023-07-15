@@ -14,6 +14,16 @@ It reduces copying operations whenever possible.
 
 - Refers to data instead of copying when using lvalue in foreach iterations.
 
+---
+
+`--opt-deadcode` \
+It eliminates dead codes (unused) from object code.
+
+- Eliminates dead globals.
+- Eliminates dead structs.
+- Eliminates dead traits. These traits are not implemented by any alive struct.
+- Eliminates dead functions.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -28,4 +38,4 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - ``L0``: disable all compiler optimizations (default value of JuleC)
-- ``L1``: passes ``--opt-copy``
+- ``L1``: passes ``--opt-copy``, and ``--opt-deadcode``

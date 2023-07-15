@@ -70,8 +70,8 @@ fn make(T, ...V): T
 ```
 Returns new instance of data type for supported types. 
 - Slices:\
-    Allocates slice with dynamic size.\
-    Negative sizes will be accepted as 0-sized. 
+    Allocates slices dynamically.
+    In addition to the slice type, it can take two more arguments. The first argument is mandatory. The first argument specifies the length of the slice. The second argument specifies the capacity of the slice and is optional. The slice is returned with its length, and the field within its length is initialized with the default value.
 
 ---
 
@@ -89,9 +89,9 @@ Special cases are:
 ---
 
 ```
-fn append(src: []T, mut values: ...T): []T
+fn append(mut src: []T, mut items: ...T): []T
 ```
-Creates new required sized slice. Copies all elements of given source slice and appends given values to end of new slice. Returns new slice, not changes given source slice. If you want append values to source slice, assign returned slice. 
+If there is enough capacity, it adds to the target slice. If there is not enough capacity, it creates a copy of the target slice with enough capacity and adds the new elements and returns the new allocation.
 
 ---
 

@@ -3,12 +3,19 @@
 ### `let ARGS: []str`
 Holds the command-line arguments.\
 Starts with the program name.
-
-Special bytes trimmed if program name have any special byte at begin or end.\
-Special bytes are: `" ' < >`
 ::: warning
 Command-line arguments sets at runtime with init function.\
 Initialize expression is nil.\
+You got nil slice if used as initialize expression to any global.
+:::
+
+---
+
+### `let ENV: []str`
+Holds the environment variables.
+::: warning
+Environment variables sets at runtime with init function. \
+Initialize expression is nil. \
 You got nil slice if used as initialize expression to any global.
 :::
 

@@ -84,7 +84,7 @@ Writes into p (which must be large enough) the UTF-8 encoding of the rune. If th
 ---
 
 ```
-fn append_rune(p: []byte, r: rune): []byte
+fn append_rune(mut p: []byte, r: rune): []byte
 ```
 Appends the UTF-8 encoding of r to the end of p and returns the extended buffer. If the rune is out of range, it appends the encoding of RUNE_ERROR.
 

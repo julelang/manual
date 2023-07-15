@@ -535,6 +535,7 @@ struct Fn {
     result:     &RetType
     params:     []&Param
     owner:      &Struct
+    references: &ReferenceStack
 
     // Function instances for each unique type combination of function call.
     // Nil if function is never used.
@@ -885,6 +886,30 @@ Built-in recover function call statement.
 ---
 
 ```
+struct ReferenceStack {}
+```
+Stack for symbol references.
+
+**Methods:**
+
+`fn len(self): int`\
+Returns count of references.
+
+`fn at(mut self, i: int): any`\
+Returns reference by index.
+
+`fn push(mut self, mut ref: any)`\
+Push new reference to stack.
+
+`fn remove(mut self, i: int)`\
+Removes reference by index.
+
+`fn exist[T](self, t: &T): bool`\
+Reports whether reference is exist.
+
+---
+
+```
 struct Field {
     owner:   &Struct
     token:   Token
@@ -911,6 +936,7 @@ struct Struct {
     generics:   []&GenericDecl
     implements: []&Trait
     instances:  []&StructIns
+    references: &ReferenceStack
 }
 ```
 Structure. 
@@ -1008,11 +1034,12 @@ Structure instance.
 
 ```
 struct Trait {
-    token:   Token
-    ident:   str
-    public:  bool
-    doc:     str
-    methods: []&Fn
+    token:       Token
+    ident:       str
+    public:      bool
+    doc:         str
+    methods:     []&Fn
+    implemented: []&Struct
 }
 ```
 Trait.
@@ -1266,6 +1293,7 @@ struct Var {
     doc:        str
     kind:       &TypeSymbol
     value:      &Value
+    references: &ReferenceStack
 
     // This variable depended to these variables for initialization expression.
     // Nil if not global variable.
