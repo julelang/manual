@@ -18,6 +18,7 @@ As you can see, the variable `x` is of type `f32` and the variable `y` is of typ
 
 ---
 
-There is an alternative syntax for single data types. It consists of using it like a constructor.
+There is an alternative syntax for single data types.
+It consists of using it like a function.
 
 For example: `u64(10)`

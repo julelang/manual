@@ -154,4 +154,4 @@ Import cycles are dependency cycles that shouldn't be, they are dependencies tha
 It is an illegal cycle when a package tries to import itself within itself.
 Logically, a package cannot be self-dependent.
 
-This invalid dependency status is also valid if the package has dependencies on itself from different packages. For example, if one of the package's dependencies is dependent on the package itself, it's still an invalid cycle. This also applies to nested dependencies. 
+This invalid dependency status is also valid if the package has dependencies on itself from different packages. For example, if one of the package's dependencies is dependent on the package itself, it's still an invalid cycle. This also applies to nested dependencies.

@@ -36,7 +36,7 @@ The entry point is the main entry point of your program.
 The program starts executing from here.
 Without the entry point your code will not compile.
 
-The initializer function function is part of Jule's package system.
+The initializer function is part of Jule's package system.
 The difference is that the initializer functions are called automatically when the package is imported.
 This function can be thought of as a kind of constructor function of packages.
 Therefore, all initializer functions are called before the entry point of program.

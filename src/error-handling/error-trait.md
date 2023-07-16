@@ -8,8 +8,8 @@ For example:
 use std::errors
 
 fn my_div(a: f64, b: f64): (f64, Error) {
-    if a == 0 || b == 0 {
-        ret 0, std::errors::new("divided with zero")
+    if b == 0 {
+        ret 0, std::errors::new("divide by zero")
     }
     ret a/b, nil
 }
@@ -35,14 +35,14 @@ struct MyError {
 }
 
 impl Error in MyError {
-    fn error(): str {
-        ret .message
+    fn error(self): str {
+        ret self.message
     }
 }
 
 fn my_div(a: f64, b: f64): (f64, Error) {
-    if a == 0 || b == 0 {
-        ret 0, MyError{"divided by zero"}
+    if b == 0 {
+        ret 0, MyError{"divide by zero"}
     }
     ret a/b, nil
 }

@@ -3,15 +3,15 @@ Panics abruptly stop program execution and "abort" it. If you're talking about a
 
 For example:
 ```
-fn add_pointer(rate: int, mut ptr: *int) {
-    if ptr == nil {
-        panic("pointer is nil")
+fn add_to_ref(rate: int, mut i: &int) {
+    if !real(i) {
+        panic("i is nil reference")
     }
-    unsafe { *ptr += rate }
+    i += rate
 }
 
 fn main() {
-    add_pointer(10, nil)
+    add_to_ref(10, new(int))
 }
 ```
 The code above is an example of panicking.
