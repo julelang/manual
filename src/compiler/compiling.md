@@ -35,7 +35,7 @@ julec .
 ```
 
 And compiler is transpile our Jule code to C++ code.
-Result is created by settings file and compile if mode setted as compile. In build mode, JuleC will show you the build command itself on the command line, which is used during compilation. You can also set the mod to transpile and choose to compile manually, or you can write a script that compiles the code after you have it in C++ form using the transpile mode to experience compile mode.
+In compile mode, JuleC will show you the build command itself on the command line, which is used during compilation. You can also set the mod to transpile and choose to compile manually, or you can write a script that compiles the code after you have it in C++ form using the transpile mode to experience compile mode.
 
 As result we have a executable machine code result of our program. 
 
