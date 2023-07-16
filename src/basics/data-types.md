@@ -76,6 +76,9 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 3.
 ```
 ```
+.3
+```
+```
 0.3
 ```
 ```
