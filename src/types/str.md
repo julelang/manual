@@ -1,9 +1,5 @@
 # The `str` Type
 
-## Constructor
-`fn str(obj: any): str`
-Returns string value of given object.
-
 ## Fields
 `len: int`
 Character count of string.

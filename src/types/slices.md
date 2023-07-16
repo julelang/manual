@@ -6,5 +6,5 @@ Length of slice.
 
 ---
 
-`len: int`\
+`cap: int`\
 Capacity of slice. 
