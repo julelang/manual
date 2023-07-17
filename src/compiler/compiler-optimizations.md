@@ -23,6 +23,7 @@ It eliminates dead codes (unused) from object code.
 - Eliminates dead structs.
 - Eliminates dead traits. These traits are not implemented by any alive struct.
 - Eliminates dead functions.
+- Eliminates followed statements of the return statement.
 
 ## Optimization Levels
 
