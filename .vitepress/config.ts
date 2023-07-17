@@ -230,7 +230,6 @@ export default defineConfig({
               ]
             },
             { text: 'std::os', link: '/standard-library/std-os' },
-            { text: 'std::reflect', link: '/standard-library/std-reflect' },
             { text: 'std::runtime', link: '/standard-library/std-runtime' },
             { 
               text: 'std::sync', 
