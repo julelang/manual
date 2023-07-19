@@ -73,6 +73,30 @@ static my_int: int = 20
 C++ linked variables can't be static.
 :::
 
+### Static Local Scope Variables
+
+Using static in fields where the concept of local scope is valid, such as function body, has the same effect as global scope static variables. Your static variable is allocated once and survives for the lifetime of the program. Therefore, the value of the variable can likewise be preserved between calls because the variable is a statically stored.
+
+For example:
+```
+fn count() {
+    static mut a: int = 0
+    a++
+    outln(a)
+}
+
+fn main() {
+    count()
+    count()
+    count()
+    count()
+    count()
+    count()
+}
+```
+
+In the example above, the variable `a` is static so it will retain its value and you will get an integer that is constantly increasing.
+
 ## Global Variables
 
 Global variables are in the main scope of the program and are static variables by nature. Therefore, variables in the global scope must be declared as static.

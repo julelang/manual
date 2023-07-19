@@ -1131,14 +1131,14 @@ Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm
 
 ### `const O_ASYNC`
 ::: warning
-Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
+Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
 ### `const O_CLOEXEC`
 ::: warning
-Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
+Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
@@ -1201,7 +1201,7 @@ Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm
 
 ### `const O_NOCTTY`
 ::: warning
-Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
+Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
@@ -1215,7 +1215,7 @@ Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm
 
 ### `const O_NONBLOCK`
 ::: warning
-Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
+Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
