@@ -81,4 +81,4 @@ Returns empty string if any error occurs.
 - `NotExist`: A component of path does not name an existing file or path is an empty string
 - `NotDir`: A component of the path prefix is not a directory
 - `InsufficientMemory`: Insufficient memory to complete the operation
-- `Divice`: Divice did not respond
+- `Device`: Device did not respond

@@ -22,11 +22,20 @@ Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit
 ---
 
 ```
+fn read_file(path: str): ([]byte, FsError)
+```
+Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
+
+Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
+
+---
+
+```
 fn open(path: str, flag: OFlag, mode: int): (&File, FsError)
 ```
 Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) and perm. If named file does not exist and Sema.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
 
-Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Divice` `Overflow` `ReadOnly` `Retry` `Busy`
+Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
 ## Structs
 ```
@@ -75,13 +84,13 @@ Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 `fn read(mut self, mut buff: []byte): (n: int, FsError)`\
 Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read. Returns 0 if error occurs.
 
-Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Divice` `Seek`
+Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
 \
 `fn write(mut self, buff: []byte): (n: int, FsError)`\
 Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff. Returns 0 if error occurs.
 
-Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Divice` `Buffer`
+Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
 
 \
 `fn close(mut self): FsError`\
@@ -111,7 +120,7 @@ Possible errors: `InvalidDescriptor` `Signal` `IO`
 - `IsDir`: The named file is a directory and flag includes O_WRONLY or O_RDWR
 - `UnableStream`: The path argument names a STREAMS-based file and the system is unable to allocate a STREAM
 - `NoSpace`: There is no space on the drive
-- `Divice`: Divice did not respond
+- `Device`: Device did not respond
 - `ReadOnly`: Read-only filesystem
 - `Retry`: Resource temporarily unavailable
 - `Busy`: File is busy
