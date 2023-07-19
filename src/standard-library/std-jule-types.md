@@ -7,17 +7,25 @@ Possible values are: 32, and 64.
 
 ---
 
-### `let SYS_INT: str`
+### `static SYS_INT: str`
 Signed integer kind of runtime architecture.\
 Is equavalent to `int`, but specific bit-sized integer kind.\
 Accept as constant.
 
+::: warning
+Setted by initializer function.
+:::
+
 ---
 
-### `let SYS_UINT: str`
+### `static SYS_UINT: str`
 Unsigned integer kind of runtime architecture.\
 Is equavalent to `uint` and `uintptr`, but specific bit-sized integer kind.\
 Accept as constant.
+
+::: warning
+Setted by initializer function.
+:::
 
 ---
 

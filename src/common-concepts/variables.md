@@ -69,6 +69,10 @@ For example:
 static my_int: int = 20
 ```
 
+::: tip
+C++ linked variables can't be static.
+:::
+
 ## Global Variables
 
 Global variables are in the main scope of the program and are static variables by nature. Therefore, variables in the global scope must be declared as static.
@@ -81,6 +85,10 @@ fn main() {
     // ...
 }
 ```
+
+::: tip
+C++ linked globals can be declare via `let` keyword.
+:::
 
 ## Multiple Assignment / Declaration
 You can multiple variable assignment or declaration. What? Sure, you can use two type in same statement. You know how to declare variable, okay it is same. The single difference, identifiers and expressions separate with comma.

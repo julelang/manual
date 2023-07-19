@@ -39,15 +39,15 @@ Available on: `windows`
 
 ---
 
-### `let STDIN: uintptr`
+### `static STDIN: uintptr`
 
 ---
 
-### `let STDOUT: uintptr`
+### `static STDOUT: uintptr`
 
 ---
 
-### `let STDERR: uintptr`
+### `static STDERR: uintptr`
 
 ---
 

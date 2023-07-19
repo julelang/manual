@@ -1,38 +1,38 @@
 # std::jule:lex
 
 ## Globals
-### `let PUNCTS: []rune`
+### `static PUNCTS: [...]rune`
 Punctuations.
 
 ---
 
-### `let SPACES: []rune`
+### `static SPACES: [...]rune`
 Space characters.
 
 ---
 
-### `let UNARY_OPS: []TokenKind`
+### `static UNARY_OPS: [...]TokenKind`
 Kind list of unary operators.
 
 ---
 
-### `let BIN_OPS: []TokenKind`
+### `static BIN_OPS: [...]TokenKind`
 Kind list of binary operators.
 
 ---
 
-### `let WEAK_OPS: []TokenKind`
+### `static WEAK_OPS: [...]TokenKind`
 Kind list of weak operators.\
 These operators are weak, can used as part of expression.
 
 ---
 
-### `let POSTFIX_OPS: []TokenKind`
+### `static POSTFIX_OPS: [...]TokenKind`
 List of postfix operators.
 
 ---
 
-### `let ASSIGN_OPS: []TokenKind`
+### `static ASSIGN_OPS: [...]TokenKind`
 List of assign operators.
 
 ## Functions

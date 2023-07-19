@@ -1,6 +1,6 @@
 # std::os
 ## Globals
-### `let ARGS: []str`
+### `static ARGS: []str`
 Holds the command-line arguments.\
 Starts with the program name.
 ::: warning
@@ -11,7 +11,7 @@ You got nil slice if used as initialize expression to any global.
 
 ---
 
-### `let ENV: []str`
+### `static ENV: []str`
 Holds the environment variables.
 ::: warning
 Environment variables sets at runtime with init function. \

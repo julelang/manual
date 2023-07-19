@@ -6,13 +6,13 @@ Extension (includes dot) of Jule source code files.
 
 ---
 
-### `let mut OS: str`
+### `let static OS: str`
 Target operating system. \
 Setted to current operating system by default.
 
 ---
 
-### `let mut ARCH: str`
+### `let static ARCH: str`
 Target architecture. \
 Setted to current architecture by default.
 
@@ -38,47 +38,47 @@ Identifier of initializer function.
 
 ---
 
-### `let DIRECTIVES: [...]Directive`
+### `static DIRECTIVES: [...]Directive`
 List of all directives. 
 
 ---
 
-### `let CPP_HEADER_EXTS: []str`
+### `static CPP_HEADER_EXTS: [...]str`
 Valid extensions of C++ headers.
 
 ---
 
-### `let CPP_EXTS: []str`
+### `static CPP_EXTS: [...]str`
 Valid extensions of C++ source files. 
 
 ---
 
-### `let OBJECTIVE_CPP_EXTS: []str`
+### `static OBJECTIVE_CPP_EXTS: [...]str`
 Valid extensions of Objective-C++ source files.
 
 ---
 
-### `let ERRORS: [str:str]`
+### `static ERRORS: [str:str]`
 Error messages.
 
 ---
 
-### `let DISTOS: []Os`
+### `static DISTOS: [...]Os`
 List of supported operating systems.
 
 ---
 
-### `let DISTARCH: []Arch`
+### `static DISTARCH: [...]Arch`
 List of supported architectures.
 
 ---
 
-### `let DIRECTIVE_PREFIX: str`
+### `const DIRECTIVE_PREFIX: str`
 Prefix of directive comments.
 
 ---
 
-### `let PATH_STDLIB: str`
+### `static PATH_STDLIB: str`
 Path of standard library.
 ::: warning
 Initialized by initializer function.
@@ -86,7 +86,7 @@ Initialized by initializer function.
 
 ---
 
-### `let PATH_EXEC: str`
+### `static PATH_EXEC: str`
 Path of executable file's directory.
 ::: warning
 Initialized by initializer function.
@@ -94,7 +94,7 @@ Initialized by initializer function.
 
 ---
 
-### `let PATH_WD: str`
+### `static PATH_WD: str`
 Path of working directory.
 ::: warning
 Initialized by initializer function.
@@ -102,7 +102,7 @@ Initialized by initializer function.
 
 ---
 
-### `let PATH_API: str`
+### `static PATH_API: str`
 Path of main API header file.
 ::: warning
 Initialized by initializer function.
