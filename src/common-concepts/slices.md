@@ -98,3 +98,39 @@ fn main() {
 }
 ```
 At the example above, the `s` variable is 20 sized slices and first 20 elements initialized with default value. Slice capacity is `100`.
+
+## Copy Slices
+
+For copy slices, here is the built-in `copy` function. The built-in `copy` function copies source elements into destination slice and returns count of copied elements.
+
+For example:
+```
+let mut slice_1 = [1, 2, 3, 4, 5]
+let mut slice_2 = make([]int, 5)
+copy(slice_2, slice_1)
+```
+
+## Append Elements into Slices
+
+For append elements into slice, here is the built-in `append` function. The built-in `append` function appends elements into slice if slice already have enough capacity for new elements. If slice have not enough capacity for new elements, the `copy` function makes new allocation with new capacity, copies source slice elements to new allocation and then appends elements to new allocation. Returns appended slice.
+
+For example:
+```
+let mut s = [1, 2, 3, 4, 5]
+outln(uintptr(&s[0]))
+s = append(s, 6, 7, 8, 9)
+outln(uintptr(&s[0]))
+```
+
+The example above, shows basic append operation. The slice `s` has 5 element with 5 length and 5 capacity. Then we appending new elements into slice. The slice `s` has 9 elements with 9 length now. But remember capacity thing. In the beginning, slice `s` have not enough capacity for more 4 elements. Therefore, the `append` function returns new allocated slice, so you can see there is difference between addresses of slice's first element.
+
+Same example with capacity:
+```
+let mut s = make([]int, 0, 10)
+s = append(s, 1, 2, 3, 4, 5)
+outln(uintptr(&s[0]))
+s = append(s, 6, 7, 8, 9)
+outln(uintptr(&s[0]))
+```
+
+This time, you can see there is no difference between addresses of first slice's element. Because slice `s` allocated with 10 capacity, so the `append` function just copies new elements to slice and returns same destination slice allocation.
