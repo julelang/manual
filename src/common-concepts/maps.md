@@ -1,7 +1,7 @@
 # Maps
 Maps is a hashmap. Maps a unique key value to a value.
 ::: tip
-The built-in out functions prints map in LIFO format. 
+Map values ​​are not kept in the inserted order. Hence iterations etc. It's very likely that you don't get a sequential output in actions.
 :::
 
 Example to maps:

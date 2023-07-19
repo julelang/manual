@@ -52,7 +52,7 @@ const age = 18
 const age: int = 18
 ```
 ::: warning
-No matter which method the constant variables are defined by, a value must be given. 
+No matter which method the constant variables are defined by, initialize expression is mandatory. 
 :::
 
 ### Differences Between Variables and Constants Variables
