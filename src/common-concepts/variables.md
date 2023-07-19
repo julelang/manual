@@ -180,7 +180,7 @@ In the basic sense, shadowing is when a definition with the same identifier shad
 
 For example:
 ```
-let a = 100
+static a: int = 100
 
 fn my_func(a: bool) {
     outln(a)
@@ -192,7 +192,7 @@ So how does this work in child scopes?
 
 For example:
 ```
-let a = 100
+static a: int = 100
 
 fn my_func() {
     let a = 10
