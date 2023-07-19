@@ -315,6 +315,7 @@ Token identities.
 - `Unsafe`
 - `Mut`
 - `Defer`
+- `Static`
 
 ---
 
@@ -413,3 +414,4 @@ Token kinds.
 - `Unsafe`
 - `Mut`
 - `Defer`
+- `Static`

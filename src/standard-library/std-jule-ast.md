@@ -580,6 +580,7 @@ struct VarDecl {
     public:       bool
     mutable:      bool
     constant:     bool
+    statically:   bool
     doc_comments: &CommentGroup
     kind:         &TypeDecl     // nil for auto-typed
     expr:         &Expr

@@ -1290,6 +1290,7 @@ struct Var {
     mutable:    bool
     public:     bool
     used:       bool
+    statically: bool
     doc:        str
     kind:       &TypeSymbol
     value:      &Value

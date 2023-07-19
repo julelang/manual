@@ -58,6 +58,30 @@ No matter which method the constant variables are defined by, a value must be gi
 ### Differences Between Variables and Constants Variables
 The value of the variables can change (with mutability), then they can be updated with a different value to match the data type. Constants take a constant expressions and never change again. Constant expressions do not exist as a variable in memory at runtime. Constant expressions used are copied exactly where they are used. Constant expressions are all evaluated at compile time.
 
+## Static Variables
+
+Static variables are initialized once, they are living allocations over the life of the program. They are declared with the `static` keyword and, like constant variables, an initialize expression is required.
+
+In addition, a static variables must be type annotated.
+
+For example:
+```
+static my_int: int = 20
+```
+
+## Global Variables
+
+Global variables are in the main scope of the program and are static variables by nature. Therefore, variables in the global scope must be declared as static.
+
+For example:
+```
+static my_int: int = 20
+
+fn main() {
+    // ...
+}
+```
+
 ## Multiple Assignment / Declaration
 You can multiple variable assignment or declaration. What? Sure, you can use two type in same statement. You know how to declare variable, okay it is same. The single difference, identifiers and expressions separate with comma.
 
