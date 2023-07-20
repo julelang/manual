@@ -127,3 +127,32 @@ let pos = &Position{x: 10, y: 20}
 ::: warning
 If you not have any idea about references, check the [memory management documentations](/memory/memory-management). 
 :::
+
+
+## Static Methods
+
+Static methods, like normal methods, are dependent on the structure itself, but there are some differences.
+
+These differences are:
+
+- Can called via type declaration without instances
+- Don't dependent to instances
+- Don't takes receiver parameters
+- Can't access via instances
+
+For example:
+
+```
+struct Dog {}
+
+impl Dog {
+    static fn voice() {
+        outln("woof woof")
+    }
+}
+
+fn main() {
+    // Call static method via type declaration.
+    Dog.voice()
+}
+```
