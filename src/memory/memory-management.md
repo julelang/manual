@@ -3,7 +3,7 @@ Jule does the memory management itself. But it's not fully automatic. You decide
 
 Jule uses reference counting for heap allocations. It is automatically released when the reference count of the pointer reaches zero, that is, when it is certain that the heap allocation is no longer used. It is guaranteed that no allocation goes unnoticed and is also not released while the allocation is still in use.
 
-## References
+## Reference Types
 References are heap allocation data types. A reference is annotated by an `&` operator.
 
 A reference is always heap-allocation and is always within the reference counting. When a pointer to a reference is taken, you don't get a pointer to the reference. You get a pointer to the address of the heap allocation that the reference is using.
@@ -68,7 +68,7 @@ fn main() {
 ```
 
 ### Allocation Management
- References can be `nil` (aka null). This is safe, when a `nil` reference is used unsafe it will give you a panic that it is nil. When a reference is set to nil, the reference count continues to run. So when you assign to nil any reference, this reference countdown by reference count and deallocates if necessary.
+References can be `nil` (aka null). This is safe, when a `nil` reference is used unsafe it will give you a panic that it is nil. When a reference is set to nil, the reference count continues to run. So when you assign to nil any reference, this reference countdown by reference count and deallocates if necessary.
 
 Classic assignment cannot be made to assign a reference to nil. Classic assignments are always assignments to the data carried by the reference. If the data type carried by the reference is nil compatible, the nil assignment is made to the data it contains.
 
