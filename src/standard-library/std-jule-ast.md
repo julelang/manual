@@ -495,10 +495,11 @@ Fall statement.
 
 ```
 struct AssignLeft {
-    token:   Token // From std::jule::lex
-    mutable: bool
-    ident:   str
-    expr:    &Expr
+    token:     Token // From std::jule::lex
+    mutable:   bool
+    reference: bool
+    ident:     str
+    expr:      &Expr
 }
 ```
 Left expression of assign statement.
@@ -531,11 +532,12 @@ Scope tree.
 
 ```
 struct ParamDecl {
-    token:    Token // From std::jule::lex
-    mutable:  bool
-    variadic: bool
-    kind:     &TypeDecl
-    ident:    str
+    token:     Token // From std::jule::lex
+    mutable:   bool
+    variadic:  bool
+    reference: bool
+    kind:      &TypeDecl
+    ident:     str
 }
 ```
 Parameter.

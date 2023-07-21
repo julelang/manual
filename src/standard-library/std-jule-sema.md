@@ -98,6 +98,7 @@ struct Data {
     kind:       &TypeKind
     cast_kind:  &TypeKind // This expression should be cast to this kind.
     mutable:    bool
+    reference:  bool
     lvalue:     bool
     variadiced: bool
     is_rune:    bool
@@ -501,11 +502,12 @@ Return type.
 
 ```
 struct Param {
-    token:    Token
-    mutable:  bool
-    variadic: bool
-    kind:     &TypeSymbol
-    ident:    str
+    token:     Token
+    mutable:   bool
+    variadic:  bool
+    reference: bool
+    kind:      &TypeSymbol
+    ident:     str
 }
 ```
 Parameter.
@@ -1291,6 +1293,7 @@ struct Var {
     public:     bool
     used:       bool
     statically: bool
+    reference:  bool
     doc:        str
     kind:       &TypeSymbol
     value:      &Value
