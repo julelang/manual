@@ -1,9 +1,4 @@
 # std::vector
-## Functions
-```
-fn new_vector[T](cap: int): Vector[T]
-```
-Allocate new vector. 
 
 ## Structs
 ```
@@ -21,6 +16,9 @@ Vectors aren't use shared allocation between them.\
 Allocates new space and copies (not deep copy) items into space.
 
 **Methods:**
+
+`static fn new(cap: int): Vector[T]` \
+Allocate new vector with capacity. 
 
 `fn len(self): int`\
 Returns length.
