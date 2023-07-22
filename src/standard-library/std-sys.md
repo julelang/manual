@@ -1936,6 +1936,16 @@ Available on: `windows`
 ---
 
 ```
+unsafe fn remove(path: *byte): int
+```
+Wrapper for C's remove function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```
 unsafe fn closedir(mut dir: *Dir): int
 ```
 Calls C's closedir function.
@@ -1965,9 +1975,19 @@ Wrapper for C's exit.
 ```
 unsafe fn chdir(path: *byte): int
 ```
-Calls for C's chdir function.
+Calls C's chdir function.
 ::: warning
 Available on: `unix`
+:::
+
+---
+
+```
+unsafe fn delete_file(path: *u16): bool
+```
+Delete file.
+::: warning
+Available on: `windows`
 :::
 
 ---

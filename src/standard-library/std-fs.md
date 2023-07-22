@@ -31,6 +31,14 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 ---
 
 ```
+fs delete_file(path: str): bool
+```
+Deletes named file.
+Reports whether operation is success.
+
+---
+
+```
 fn open(path: str, flag: OFlag, mode: int): (&File, FsError)
 ```
 Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) and perm. If named file does not exist and Sema.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
