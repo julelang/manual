@@ -31,10 +31,18 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 ---
 
 ```
-fs delete_file(path: str): bool
+fn delete_file(path: str): FsError
 ```
 Deletes named file.
-Reports whether operation is success.
+
+---
+
+```
+fn create_directory(path: str): FsError
+```
+Creates directory.
+
+Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
 
 ---
 

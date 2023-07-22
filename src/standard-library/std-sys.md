@@ -1983,9 +1983,29 @@ Available on: `unix`
 ---
 
 ```
+unsafe fn mkdir(path: *byte, mode: int): int
+```
+Wrapper for C's mkdir function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```
 unsafe fn delete_file(path: *u16): bool
 ```
 Delete file.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```
+unsafe fn create_directory(path: *u16): bool
+```
+Creates directory.
 ::: warning
 Available on: `windows`
 :::

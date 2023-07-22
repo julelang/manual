@@ -221,8 +221,9 @@ fn main() {
 }
 ```
 ::: warning
-The program does not automatically wait for the execution of concurrent calls to terminate.
+The concurrent calls spawns real threads that managed by kernel and the program does not automatically wait for the execution of concurrent calls to terminate.
 :::
+
 
 ## Valid Return Statements
 A return expression need not always be specified in the main scope of the function. The only criterion is that the function returns under all conditions. Return statements in inner scopes are considered valid if they guarantee the return under all conditions.
