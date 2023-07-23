@@ -43,7 +43,7 @@ Macro definitions are declared just like variables. Let's assume that the tickra
 
 For example:\
 **tickrate.hpp**
-```
+```cpp
 #define TICKRATE 256
 ```
 **sum.jule**
@@ -78,7 +78,7 @@ It is possible report macros to Jule. However, type protection must be provided 
 
 For example:\
 **sum.hpp**
-```
+```cpp
 #define SUM(X, Y) (X+Y)
 ```
 **sum.jule**
@@ -101,6 +101,45 @@ cpp struct my_struct{}
 cpp struct my_struct {
     x: int
     y: str
+}
+```
+
+::: warning
+Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for C++ linked structs.
+:::
+
+### Linking Methods to Jule
+
+Your C++ structures may have methods and you want to link them to Jule. To do this, struct fields might be a trick for you. You can define struct fields with the name of your methods in the function type.
+
+For example:
+
+Our `mystruct.hpp` file:
+```cpp
+struct MyStruct {
+    jule::Str text;
+
+    void my_method(void) {
+        std::cout << "My text is: " << text << std::endl;
+    }
+};
+```
+
+Our `main.jule` file:
+```
+use cpp "mystruct.hpp"
+
+//jule:typedef
+cpp struct MyStruct {
+    text:      str
+    my_method: fn()
+}
+
+fn main() {
+    let ms = cpp.MyStruct{
+        text: "Hello World",
+    }
+    ms.my_method()
 }
 ```
 
@@ -139,7 +178,7 @@ cpp.my_function(x, y, z)
 
 ## Example to Interoperability
 **sum.hpp**
-```
+```cpp
 using namespace jule;
 
 Int sum(const Slice<Int> slice) {
