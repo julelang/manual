@@ -1,4 +1,4 @@
-# std::os
+# std::env
 ## Globals
 ### `static ARGS: []str`
 Holds the command-line arguments.\
@@ -19,27 +19,10 @@ Initialize expression is nil. \
 You got nil slice if used as initialize expression to any global.
 :::
 
----
-
-### `const PATH_SEPARATOR`
-Operating system specific path separator.
-
----
-
-### `const PATH_LIST_SEPARATOR`
-Operating system specific path list separator.
-
 ## Functions
-```
-exit(code: int)
-```
-Causes the current program to exit with the given status code.\
-Conventionally, code zero indicates success, non-zero an error.
-
----
 
 ```
-fn getwd(): (str, OsError)
+fn getwd(): (str, EnvError)
 ```
 Returns an absolute path name of the current working directory of the calling process.
 
@@ -48,29 +31,14 @@ Possible errors: `Denied`
 ---
 
 ```
-fn chdir(path: str): OsError
+fn chdir(path: str): EnvError
 ```
 Changes the current working directory to the given directory.
 
 Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `InsufficientMemory`
 
----
-
-```
-fn is_path_sep(c: u8): bool
-```
-Reports whether c is path separator.
-
----
-
-```
-fn executable(): str
-```
-Returns executable path.\
-Returns empty string if any error occurs. 
-
 ## Enums
-`enum OsError`
+`enum EnvError`
 
 **Fields:**
 - `Ok`: No problem

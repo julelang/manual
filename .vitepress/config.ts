@@ -188,6 +188,7 @@ export default defineConfig({
                 { text: 'std::debug::assert', link: '/standard-library/std-debug-assert' }
               ] 
             },
+            { text: 'std::env', link: '/standard-library/std-env' },
             { text: 'std::errors', link: '/standard-library/std-errors' },
             { 
               text: 'std::fs', 
@@ -230,7 +231,7 @@ export default defineConfig({
                 { text: 'std::mem::c', link:'/standard-library/std-mem-c' }
               ]
             },
-            { text: 'std::os', link: '/standard-library/std-os' },
+            { text: 'std::process', link: '/standard-library/std-process' },
             { text: 'std::runtime', link: '/standard-library/std-runtime' },
             { 
               text: 'std::sync', 

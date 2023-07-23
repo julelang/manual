@@ -4,22 +4,27 @@
 ```
 const SEPARATOR
 ```
-Path separator.\
-Same as `std::os::{PATH_SEPARATOR}`
+Operating system specific path separator.
 
 ---
 
 ```
 const LIST_SEPARATOR
 ```
-Path list separator.\
-Same as `std::os::{PATH_LIST_SEPARATOR}`
+Operating system specific path list separator.
 
 ## Functions
 ```
 fn is_abs(path: str): bool
 ```
 Reports whether the path is absolute.
+
+---
+
+```
+fn is_path_sep(c: u8): bool
+```
+Reports whether c is path separator.
 
 ---
 
