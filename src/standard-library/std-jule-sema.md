@@ -832,7 +832,7 @@ Multi-declarative assignment.
 
 ```
 struct Match {
-    expr:       ExprModel
+    expr:       &Data
     type_match: bool
     cases:      []&Case
     default:    &Case

@@ -13,6 +13,7 @@ Optimizations are enabled with options in the build command.
 It reduces copying operations whenever possible.
 
 - Refers to data instead of copying when using lvalue in foreach iterations.
+- Refers to data instead of copying when using lvalue in match statements.
 
 ---
 
