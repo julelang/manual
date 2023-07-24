@@ -108,7 +108,7 @@ Allowed types:
 - `*T:`
 - `jule:derive Clone`
 ::: tip
-[See more clonning information.](/memory/immutability#clonning)
+[See more cloning information.](/memory/immutability#cloning)
 :::
 
 ## Traits

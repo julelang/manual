@@ -102,10 +102,10 @@ In this example, the mutability of the `y` field is fully responsive. However, t
 
 The point that should not be forgotten in this regard is that even if there is interior mutability, this field cannot be changed from outside the structure with an immutable instance. Interior mutability only applies inside the structure itself. 
 
-## Clonning
+## Cloning
 You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/standard-library/builtin).
 
-Clonning supported types and copy methods:
+Cloning supported types and copy methods:
 - Numeric Types\
   Returns copy of value.
 
@@ -140,7 +140,7 @@ Clonning supported types and copy methods:
   Clones struct if derives `Clone`.\
   Returns new independent mutable struct. 
 
-### Clonning Cycles
+### Cloning Cycles
 Clone cycles are a kind of illegal cycle. In cases where you risk an endless cloning cycle at runtime, the compiler will give you an illegal cycle error. Cloning cycles usually occur in nested types, in which it will try to clone itself forever, which somehow attaches to itself.
 
 For example:
