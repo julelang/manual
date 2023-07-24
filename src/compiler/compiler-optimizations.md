@@ -7,6 +7,14 @@ These changes are promised to provide gains in various aspects (eg runtime perfo
 Compiler optimizations are turned off by default.
 Optimizations are enabled with options in the build command.
 
+## Always Enabled Optimizations
+
+Some optimizations may be enabled by default and it may not be possible to disable them. These optimizations are mostly things that will not affect you if they are turned on even when you want to turn off all optimizations for your debugging.
+
+### Constant Optimization
+
+Values ​​that can be evaluated at compile-time, such as literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
+
 ## Optimization Options
 
 `--opt-copy` \
