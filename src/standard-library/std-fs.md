@@ -12,7 +12,7 @@ Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 ---
 
 ```
-fn read_directory(path: str): ([]&DirEntry, FsError)
+fn read_dir(path: str): ([]&DirEntry, FsError)
 ```
 Reads the named directory and returs all its directory entries can read.\
 Returns nil if no any directory entry or error occurs.

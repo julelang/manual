@@ -22,7 +22,7 @@ You got nil slice if used as initialize expression to any global.
 ## Functions
 
 ```
-fn getwd(): (str, EnvError)
+fn working_dir(): (str, EnvError)
 ```
 Returns an absolute path name of the current working directory of the calling process.
 
@@ -31,7 +31,7 @@ Possible errors: `Denied`
 ---
 
 ```
-fn chdir(path: str): EnvError
+fn set_working_dir(path: str): EnvError
 ```
 Changes the current working directory to the given directory.
 
