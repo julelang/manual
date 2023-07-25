@@ -15,6 +15,8 @@ Benefits of Unsafe Jule:
 - Indexing with raw pointers
 - Cast raw pointers
 - Call unsafe functions or methods
+- Concurrent calls with reference parameters
+- Pass pointer to reference
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
 
@@ -104,3 +106,23 @@ Before qualifying a function or method as unsafe, make sure that the function is
 
 If safety depends on parameters and other external factors then it is better to qualify as unsafe. 
 :::
+
+## Concurrent Calls with Reference Parameters
+
+References cannot be used with concurrent calls because of potantial reference dangling. Because there is no clear guarantee that the concurrent call is being followed and that the program is safely waiting for the concurrent call to terminate at a non-dangling point. Therefore, your compiler cannot be sure that what you are doing is safe.
+
+If you are confident and aware that this concurrent call you make will be safe, you should take responsibility by showing that you know that the call you are making is unsafe. So your compiler will respect you and allow you to concurrent call a function with reference parameters.
+
+For example:
+```
+unsafe { co my_function() }
+```
+
+## Pass Pointer to Reference
+
+If you want to send your pointers to a reference parameter, you can do so with a simple pointer dereferencing. You are aware of the insecurity as this is already an action you would take using Unsafe Jule.
+
+For example:
+```
+my_function(unsafe { *my_pointer })
+```

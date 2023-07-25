@@ -1,6 +1,6 @@
 # References
 
-References can be confused with the reference types described in memory management, but they are completely different things. References are like an alias for an lvalue. You can think of them as pointers but they are safer.
+References can be confused with the reference types described in memory management, but they are completely different things. References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable. You can think of them as pointers but they are safer because of compiler's safety obsessions.
 
 They are used with `&` operator in syntax. You can't have nested references, for example you can have a pointer pointing to a pointer but not a reference referencing to a reference.
 
@@ -48,3 +48,13 @@ fn main() {
     outln(a) // 40
 }
 ```
+
+## Why References Accept Lvalues as Variable
+
+This is the result of the compiler trying to make sure things are safe. It always asks to reference a variable to keep a good watch on your reference and make sure it's safe. This is an effort to guarantee that your reference will never be dangling because the scope of your variable is traceable.
+
+## Concurrency
+
+Concurrency imposes a number of process-intensive conditions that are difficult to trace at compile time and further increase compile times. Using references in a concurrent call means that the scope of the variable cannot be properly traced. Therefore, concurrent calls do not support functions with reference parameters.
+
+Of course, if you want to do this even though you know it's unsafe, [Unsafe Jule](/unsafe-jule/) lets you do it.
