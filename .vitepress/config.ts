@@ -132,6 +132,14 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Concurrency',
+          link: "/concurrency/",
+          items: [
+            { text: 'Synchronization', link: '/concurrency/synchronization' },
+            { text: 'Atomicity', link: '/concurrency/atomicity' },
+          ],
+        },
+        {
           text: 'Type Statics',
           link: '/type-statics/',
           items: [

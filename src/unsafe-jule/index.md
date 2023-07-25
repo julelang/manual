@@ -115,7 +115,7 @@ If you are confident and aware that this concurrent call you make will be safe, 
 
 For example:
 ```
-unsafe { co my_function() }
+unsafe { co my_function(my_var) }
 ```
 
 ## Pass Pointer to Reference
