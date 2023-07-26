@@ -56,6 +56,9 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 ```
 0455
 ```
+```
+0o455
+```
 
 ### Hexadecimal
 ```
