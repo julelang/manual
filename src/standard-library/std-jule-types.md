@@ -7,25 +7,15 @@ Possible values are: 32, and 64.
 
 ---
 
-### `static SYS_INT: str`
+### `const SYS_INT: str`
 Signed integer kind of runtime architecture.\
-Is equavalent to `int`, but specific bit-sized integer kind.\
-Accept as constant.
-
-::: warning
-Setted by initializer function.
-:::
+Is equavalent to `int`, but specific bit-sized integer kind.
 
 ---
 
-### `static SYS_UINT: str`
+### `const SYS_UINT: str`
 Unsigned integer kind of runtime architecture.\
-Is equavalent to `uint` and `uintptr`, but specific bit-sized integer kind.\
-Accept as constant.
-
-::: warning
-Setted by initializer function.
-:::
+Is equavalent to `uint` and `uintptr`, but specific bit-sized integer kind.
 
 ---
 
