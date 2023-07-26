@@ -17,6 +17,7 @@ Benefits of Unsafe Jule:
 - Call unsafe functions or methods
 - Concurrent calls with reference parameters
 - Pass pointer to reference
+- Access reference from parent scope
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
 
@@ -125,4 +126,19 @@ If you want to send your pointers to a reference parameter, you can do so with a
 For example:
 ```
 my_function(unsafe { *my_pointer })
+```
+
+## Access Reference from Parent Scope
+
+Anonymous functions copy the definitions of the scope in which they are defined for safety reasons, they do not refer to them. But a copied reference is still a reference and is in danger of dangling. Therefore, anonymous functions do not use references from parent scopes. But Unsafe Jule lets you do just that. Access the relevant reference only with Unsafe Jule.
+
+For example:
+```
+fn main() {
+    let x = 10
+    let &y = x
+    fn() {
+        unsafe { outln(y) }
+    }()
+}
 ```

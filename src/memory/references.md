@@ -32,6 +32,12 @@ fn main() {
 }
 ```
 
+### Anonymous Functions with References
+
+Anonymous functions copies instead of referencing the definitions of the scope in which they are defined, for safety reasons. Thus, a possible danger of dangling is prevented. But some copied things can be undsgr, one of them being references. Even if the references are copied, they will still continue to point to the same address as it is an address alias in nature. Therefore, there is a danger of dangling the reference if it goes out of scope. To avoid this, Safe Jule does not allow you to use references from parent scopes.
+
+If you're sure it's safe to do so, [Unsafe Jule](/unsafe-jule/) lets you access such dangerous references.
+
 ## Reference Parameters
 
 Reference parameters must take an lvalue as an argument. To specify a reference parameter, the parameter identifier must be preceded by the `&` operator.

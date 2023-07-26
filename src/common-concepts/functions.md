@@ -105,7 +105,7 @@ fn main() {
 
 ---
 
-Anonymous functions can access the definitions of the block in which they are defined.
+Anonymous functions can access the definitions of the block in which they are defined. But doesn't referring them, copies all definition for itself. Therefore, you can't affect to parent scope definitions in most case.
 
 For example: 
 ```

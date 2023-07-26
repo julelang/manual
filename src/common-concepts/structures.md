@@ -55,7 +55,7 @@ Just give structure identifier as receiver. Not generics or type alias.
 :::
 
 ### Receiver Parameters
-Receivers indicate how instance the function will use. Receiver parameters must be the first parameter of each method.
+Receivers indicate how instance the function will use. Receiver parameters must be the first parameter of each method. Receiver parameters are also a [reference](/memory/references) by default.
 
 There are two types of receiver parameters;
 
