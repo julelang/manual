@@ -81,3 +81,9 @@ Jule compiles at zero optimization (``O0``) level by default.
 But this is not recommended if you are compiling for use.
 Zero optimization level will produce the dumbest code possible and you can suffer serious performance losses.
 It is recommended to compile JuleC's C++ IR with ``O3`` or ``Ofast`` to get the fastest and most performing JuleC compilation.
+
+#### Notice about `Ofast` Optimization Level
+
+The `Ofast` optimization is quite an aggressive level and can break language standards. For example, it has been observed that a JuleC build with `Ofast` produces different numbers than expected due to probably math optimizations.
+
+Therefore, we recommend using 'O3' as the highest optimization level to get a more reliable build.
