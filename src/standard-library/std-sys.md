@@ -1993,6 +1993,16 @@ Available on: `unix`
 ---
 
 ```
+unsafe fn rmdir(path: *byte): int
+```
+Wrapper for C's rmdir function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```
 unsafe fn delete_file(path: *u16): bool
 ```
 Delete file.
@@ -2006,6 +2016,16 @@ Available on: `windows`
 unsafe fn create_directory(path: *u16): bool
 ```
 Creates directory.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```
+unsafe fn remove_directory(path: *u16): bool
+```
+Remove empty directory.
 ::: warning
 Available on: `windows`
 :::
