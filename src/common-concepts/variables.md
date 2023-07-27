@@ -1,7 +1,7 @@
 # Variables
 There is more than one way in Jule to define a variable. 
 
-Jule is uses the `let` and `const` keywords for variable declarations. Jule uses the `:` operator for type annotations. When you don't use `:` operator, you report you want the type to be detect automatically by compiler. The type is set by the compiler based on the data. 
+Jule is uses the `let` and `const` keywords for variable declarations. Jule uses the `:` operator for type annotations. When you don't use `:` operator, you report you want the type to be detect automatically by compiler. The type is set by the compiler based on the data. Aka type inference.
 
 For example:
 ```

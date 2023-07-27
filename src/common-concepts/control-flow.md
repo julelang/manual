@@ -92,7 +92,7 @@ fn main() {
 ```
 As you can see, it is possible to use the ignore operator for unused fields.
 ::: tip
-Jule assign variables data types by automatically by collection. Similar to auto type variables. If the index variable is be numeric, Jule's auto data type is `int` type.
+Jule assign variables data types by automatically by collection. Similar to type inferred variables. If the index variable is be numeric, Jule's auto data type is `int` type.
 :::
 
 ---

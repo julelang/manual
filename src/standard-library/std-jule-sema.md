@@ -1311,8 +1311,8 @@ Variable.
 `fn is_initialized(self): bool`\
 Reports whether variable is initialized explicitly.
 
-`fn is_auto_typed(self): bool`\
-Reports whether variable is auto-typed.
+`fn is_type_inferred(self): bool`\
+Reports whether variable is type inferred.
 
 ## Traits
 ```
