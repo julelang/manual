@@ -31,9 +31,11 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 ---
 
 ```
-fn delete_file(path: str): FsError
+fn remove_file(path: str): FsError
 ```
-Deletes named file.
+Removes named file.
+
+Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `NotDir`
 
 ---
 

@@ -2003,6 +2003,16 @@ Available on: `unix`
 ---
 
 ```
+unsafe fn unlink(path: *byte): int
+```
+Wrapper for C's unlink function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```
 unsafe fn delete_file(path: *u16): bool
 ```
 Delete file.
