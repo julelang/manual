@@ -38,11 +38,20 @@ Deletes named file.
 ---
 
 ```
-fn create_directory(path: str): FsError
+fn create_dir(path: str): FsError
 ```
 Creates directory.
 
 Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
+
+---
+
+```
+fn remove_dir(path: str): FsError
+```
+Removes empty directory.
+
+Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ---
 
@@ -146,6 +155,7 @@ Possible errors: `InvalidDescriptor` `Signal` `IO`
 - `NoDest`: No such device or address
 - `Buffer`: No buffer space available
 - `BadMessage`: Not a data message
+- `NotEmpty`: Not empty
 
 ---
 
