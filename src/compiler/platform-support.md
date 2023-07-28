@@ -4,7 +4,7 @@ Jule supports multiple platforms. JuleC undertakes that the code and standard li
 ## Supported Operating Systems
 `windows` `darwin` `linux`
 
-The unix includes: `darwin` `linux`
+The `unix` includes: `darwin` `linux`
 
 ## Supported Architectures
 `i386` `amd64` `arm` `arm64`
