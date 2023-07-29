@@ -26,18 +26,18 @@ For example:
 struct MyStruct {}
 ```
 
-## Directive: typedef
+## Directive: `typedef`
 In C++-linked structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
 
-## Directive: cdef
+## Directive: `cdef`
 In C++-linked functions, if the function is a `#define`, it configures code generation to be compatible.
 
-## Directive: derive
+## Directive: `derive`
 Specify what additions the compiler will make.
 Supported by only structures.
 See more information about [deriving](/compiler/deriving).
 
-## Directive: pass
+## Directive: `pass`
 Directive pass is a top directive.
 Passes compiler flags to generated compile command for compiling source code.
 Passes are must be start with dash.

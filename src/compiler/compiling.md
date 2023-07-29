@@ -19,7 +19,18 @@ julec .
 And compiler is transpile our Jule code to C++ code.
 In compile mode, JuleC will show you the build command itself on the command line, which is used during compilation. You can also set the mod to transpile and choose to compile manually, or you can write a script that compiles the code after you have it in C++ form using the transpile mode to experience compile mode.
 
-As result we have a executable machine code result of our program. 
+As result we have a executable machine code result of our program.
+
+### Transpilation
+
+Preferably, instead of compiling your code directly, you may want to transpile your code for various reasons to obtain the IR code. This scenario is mostly used when you want to distribute IR code, modify it, debug compiler's code generation, compile with different compilers or compilation commands.
+
+To do this, pass the flag that you activate the transpile mode in your compiler. \
+For example:
+
+```
+julec --transpile .
+```
 
 ### Why JuleC Needs Directory Path Instead File Path?
 In Jule, each program is also a package. Jule source codes in the directory are accepted within the package. Accordingly, every directory is actually a potential Jule package. The directory of the program you will compile should be the main package of your program.

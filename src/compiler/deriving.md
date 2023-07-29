@@ -1,7 +1,7 @@
 # Deriving
 Deriving is a set of behaviors or extensions that the compiler must implement for types. These are implemented by the compiler, the developer should only request them to be implemented.
 
-## Derive: Clone
+## Derive: `Clone`
 `Clone` adds support to structs for the built-in `clone` function.
 The compiler adds an algorithm that can deep copy every field of the structure at runtime.
 

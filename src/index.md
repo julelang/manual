@@ -2,12 +2,10 @@
 This version of the text assumes you're using the latest version of the JuleC compiler (compiled from source).\
 \
 \
-Jule is a statically typed, compiled programming language. It's designed for system development, and for building maintainable and reliable software. It has syntax similar to today's programming languages. So, if you already know a language, it probably won't take you long to get used to Jule.
+Jule is a statically typed, compiled programming language. It's designed for systems programming, and for building maintainable and reliable software. Its goal is safe programming, memory safety, no undefined behavior and fast speed. It also integrates well with C/C++, making it easy to integrate and interop Jule code with existing C/C++ code.
 
-Jule is a very simple language. You will not have much difficulty in learning. It is a suitable language for developers of all levels.
+Jule focuses on key features such as simplicity, maintainability, speed, performance, safety, efficiency and interoperability with C/C++. It uses reference counting for memory management. Immutable by default, and has no undefined behavior.
 
-The fact that Jule is simple does not diminish its power, as Jule is a pretty powerful language. It transpiles directly to C++ and compiles from C++ to an executable file, which means that the programming environment is familiar to C++ developers.
+If you have used another programming language before, Jule's syntax will be familiar to you. It is readable and simple as possible. Since it has similar features to C++, it is compatible with popular compilers such as Clang and GCC, and Jule is self-compiling thanks to a bootstrapped compiler. The fact that the language has reached this level shows that it has matured. Also, compiler components such as lexer, parser and ast are provided as part of the standard library.
 
-Jule is also a good choice as a simpler way to write C++, because at the developer's request Jule can also just transpile to C++. It is the developer's choice.
-
-The purpose of Jule is to keep functionality high while maintaining a simple form and readability. It guarantees memory safety and does not contain undefined behavior. 
+Cross-platform support is provided, making it easy to write platform-specific code and implement standard library functions such as file deletion, cross-platform. It supports most popular operating systems such as Windows, Linux and macOS, and most popular architetures such has ARM64, AMD64 and intel 386. Jule also provides cross-transpile support to compile your code on different systems.
