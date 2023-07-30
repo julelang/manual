@@ -45,6 +45,7 @@ export default defineConfig({
           items: [
             { text: 'Platform Support', link: '/compiler/platform-support' },
             { text: 'Directives', link: '/compiler/directives' },
+            { text: 'Platform Specific Programming', link: '/compiler/platform-specific-programming' },
             { text: 'Deriving', link: '/compiler/deriving' },
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },

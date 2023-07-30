@@ -57,3 +57,9 @@ fn main() {
     // ...
 }
 ```
+
+## Directive: `build`
+
+The `build` directive is a top directive. Different way of platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
+
+Plese look at the [platform specific programming](/compiler/platform-specific-programming) page for information.

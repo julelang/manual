@@ -227,6 +227,7 @@ Compiler directives.
 - `Typedef`
 - `Derive`
 - `Pass`
+- `Build`
 
 ---
 
