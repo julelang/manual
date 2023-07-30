@@ -169,11 +169,6 @@ Reports whether architecture is amd64.
 
 ---
 
-`fn is_arm(arch: str): bool`\
-Reports whether architecture is arm.
-
----
-
 `fn is_arm64(arch: str): bool`\
 Reports whether architecture is arm64.
 
@@ -249,7 +244,6 @@ Architectures for file annotation kind.
 
 **Fields:**
 - `I386`
-- `Arm`
 - `Arm64`
 - `Amd64`
 - `Bit32`
