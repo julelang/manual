@@ -19,3 +19,9 @@ See the command's help table for more information:
 ```
 $ julec tool
 ```
+
+## julenv
+Show information about native jule environment.
+```
+$ julec julenv
+```
