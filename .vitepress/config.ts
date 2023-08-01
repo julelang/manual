@@ -21,7 +21,7 @@ export default defineConfig({
       { text: 'Manual', link: '/' },
       { text: 'Standard Library', link: '/standard-library/' },
     ],
-    
+
     sidebar: {
       '/': [
         {
@@ -51,6 +51,7 @@ export default defineConfig({
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
             { text: 'Cross Transpilation', link: '/compiler/cross-transpilation' },
+            { text: 'Backend', link: '/compiler/backend' },
             { text: 'Compiling', link: '/compiler/compiling' },
           ],
         },
