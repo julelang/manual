@@ -881,6 +881,7 @@ struct Recover {
     handler:      &FnIns
     handler_expr: ExprModel
     scope:        &Scope
+    scope_owner:  &FnIns
 }
 ```
 Built-in recover function call statement.
