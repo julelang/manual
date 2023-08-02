@@ -43,3 +43,26 @@ fn main() {
     // ...
 }
 ```
+
+## Return Statements with Recover Calls
+
+You can catch panics with the built-in `recover` function in a returning function. However, when there is any panic and the `recover` function catches it, the function call returns its default values.
+
+For example:
+
+```
+fn test(): int {
+    recover(fn(e: Error) {
+        outln("Panic Catched!")
+    })
+
+    panic("test")
+    ret 10
+}
+
+fn main() {
+    outln(test())
+}
+```
+
+In the above example, the function returns the default value of the `int` data type, so `0`.
