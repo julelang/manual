@@ -32,17 +32,9 @@ example_linux.jule
 
 ## The `build` Directive
 
-The `build` directive evaluates the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return boolean. Expressions are only logical. So the variables you will use are boolean and the binary operations you can do are only logical and and logical or.
+The `build` directive is a top directive that includes the source code file in the build based on the evaluation result using directive expressions. For more information about expressions, you can read the [Directive Expressions](/compiler/directives#directive-expressions) section.
 
 Your variables are set automatically by your compiler. The variables you can use are the same as in file annotation. They are variables that are also described in the [platform support](/compiler/platform-support) documentation.
-
-::: warning
-Evaluation results in `false` on any syntax errors and empty expressions.
-:::
-
-### Syntax
-
-The syntax is simple and easy to learn. The logical and operator is `&&` and the logical or operator is `||`. These are exactly the same as Jule. The precedence of these operators is also the same. First, the logical or (`||`) operator is evaluated, then the logical and (`&&`) operator is evaluated. You also have parentheses. The parentheses, of course, are evaluated first. In addition to these, logical not (`!`) operator is also available.
 
 ### Examples
 
