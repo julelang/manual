@@ -159,13 +159,13 @@ export default defineConfig({
           ],
         },
         {
-          text: 'CPP',
+          text: 'C/C++',
           link: '/cpp/',
           items: [
             { text: 'API', link: '/cpp/api' },
             {
               text: 'Interoperability',
-              link: '/cpp/interoperability/index',
+              link: '/cpp/interoperability/',
               items: [
                 { text: 'Headers', link: '/cpp/interoperability/header-files' },
                 { text: 'Variables', link: '/cpp/interoperability/variables' },
