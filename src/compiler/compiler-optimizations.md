@@ -32,6 +32,10 @@ It eliminates dead codes (unused) from object code.
 - Eliminates dead functions.
 - Eliminates followed statements of the return statement.
 
+::: warning
+Experimental optimization, compilation problems may occur.
+:::
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.

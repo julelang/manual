@@ -163,7 +163,18 @@ export default defineConfig({
           link: '/cpp/',
           items: [
             { text: 'API', link: '/cpp/api' },
-            { text: 'Interoperability', link: '/cpp/interoperability' },
+            {
+              text: 'Interoperability',
+              link: '/cpp/interoperability/index',
+              items: [
+                { text: 'Headers', link: '/cpp/interoperability/header-files' },
+                { text: 'Variables', link: '/cpp/interoperability/variables' },
+                { text: 'Functions', link: '/cpp/interoperability/functions' },
+                { text: 'Structures', link: '/cpp/interoperability/structures' },
+                { text: 'Types', link: '/cpp/interoperability/types' },
+                { text: 'Macros', link: '/cpp/interoperability/macros' },
+              ],
+            },
           ],
         },
         {
