@@ -537,7 +537,6 @@ struct Fn {
     result:     &RetType
     params:     []&Param
     owner:      &Struct
-    references: &ReferenceStack
 
     // Function instances for each unique type combination of function call.
     // Nil if function is never used.
@@ -587,12 +586,17 @@ Parameter instance.
 
 ```
 struct FnIns {
-    owner:    &StructIns
-    decl:     &Fn
-    generics: []&TypeKind
-    params:   []&ParamIns
-    result:   &TypeKind
-    scope:    &Scope
+    owner:      &StructIns
+    decl:       &Fn
+    generics:   []&TypeKind
+    params:     []&ParamIns
+    result:     &TypeKind
+    scope:      &Scope
+    references: &ReferenceStack
+
+    // Stores all referenced definitions.
+    // Only stores for initializer functions.
+    refers: &ReferenceStack
 }
 ```
 Function instance. 
@@ -939,10 +943,9 @@ struct Struct {
     generics:   []&GenericDecl
     implements: []&Trait
     instances:  []&StructIns
-    references: &ReferenceStack
 }
 ```
-Structure. 
+Structure.
 
 **Methods:**
 
@@ -977,12 +980,13 @@ Field instance.
 
 ```
 struct StructIns {
-    checked:  bool
-    decl:     &Struct
-    generics: []&TypeKind
-    fields:   []&FieldIns
-    methods:  []&Fn
-    has_mut:  bool
+    checked:    bool
+    decl:       &Struct
+    generics:   []&TypeKind
+    fields:     []&FieldIns
+    methods:    []&Fn
+    has_mut:    bool
+    references: &ReferenceStack
 }
 ```
 Structure instance.
