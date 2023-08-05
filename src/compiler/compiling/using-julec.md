@@ -1,6 +1,4 @@
-# Compiling
-
-## Using JuleC (Reference Compiler)
+# Using JuleC (Reference Compiler)
 Let's start with a simple hello world program and learn compiling from this program.
 
 We have a `main.jule` file:
@@ -21,13 +19,13 @@ In compile mode, JuleC will show you the build command itself on the command lin
 
 As result we have a executable machine code result of our program.
 
-### Backend Compiler Optimizations
+## Backend Compiler Optimizations
 
 By default, JuleC sets your backend compiler's optimizations to the lowest possible level and compiles your code as such. These optimizations are independent of the compiler optimizations that JuleC has, they are the backend-compiler optimizations you use for IR compilation. The created executable file is available for debugging. The lowest optimization level usually allows the backend-compiler to exhibit the fastest compilation performance. But without the generated executable optimizations it can be significantly underperforming.
 
 If you want to compile your code with backend-compiler optimizations, there are several ways you can do it.
 
-#### Set Backend Compiler Optimizations via `pass` Directive
+### Set Backend Compiler Optimizations via `pass` Directive
 
 You can add the `pass` directive to a suitable place in the main package of your program and adjust the optimizations of your backend-compiler. This method works most of the time.
 
@@ -36,11 +34,11 @@ For example to enable Clang's `O3` optimizations:
 //jule:pass -O3
 ```
 
-#### Transpile and Compile Manually
+### Transpile and Compile Manually
 
 You can transpile your code and compile your IR code with your desired optimization setting by customizing the suggested compile command by compiler or with a completely custom compile command.
 
-### Transpilation
+## Transpilation
 
 Preferably, instead of compiling your code directly, you may want to transpile your code for various reasons to obtain the IR code. This scenario is mostly used when you want to distribute IR code, modify it, debug compiler's code generation, compile with different compilers or compilation commands.
 
@@ -51,16 +49,7 @@ For example:
 julec --transpile .
 ```
 
-### Why JuleC Needs Directory Path Instead File Path?
+## Why JuleC Needs Directory Path Instead File Path?
 In Jule, each program is also a package. Jule source codes in the directory are accepted within the package. Accordingly, every directory is actually a potential Jule package. The directory of the program you will compile should be the main package of your program.
 
 This also eliminates the need to link individual source codes to the compiler and significantly avoids the occurrence of long compiler commands. It makes it easy to understand which of the source codes are in the main program, the answer is simple: all the Jule source codes in the directory. Because of this approach, each Jule program is kept in a separate directory as a package, causing optimistic pressure on the project organization. 
-
-## Using Backend Compiler
-JuleC has multiple officially supported C++ compilers. For this reason, it does not contain a specific C++ compiler in itself to keep your download sizes small and leave the choice to you. If you're using Linux or a similar operating system, you can usually already have an officially supported C++ compiler. Once you've decided on the C++ compiler you want to use, JuleC can take care of the rest for you. Before that, you need to give JuleC a few simple instructions.
-
-JuleC will automatically choose the recommended C++ compiler when compiling your code. If the recommended compiler is your preferred compiler, you don't need to take an action. But if not, you need to set your compiler using the related compiler option(s).
-
-If you need a special configuration for your build, it is recommended to create a script file for it or write compile command in a document such as a readme files. This makes it clearer and easier how to compile the project, as well as a faster and more comfortable development experience.
-
-Please read [backend](/compiler/backend) documentations for more information about supported C++ compilers and standards.

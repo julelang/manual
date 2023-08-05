@@ -36,7 +36,15 @@ export default defineConfig({
           link: '/getting-started/',
           items: [
             { text: 'Downloads', link: '/getting-started/downloads' },
-            { text: 'Install from Source', link: '/getting-started/install-from-source' },
+            {
+              text: 'Install from Source',
+              link: '/getting-started/install-from-source/',
+              items: [
+                { text: 'Build Scripts', link: '/getting-started/install-from-source/build-scripts' },
+                { text: 'Manual Compilation', link: '/getting-started/install-from-source/manual-compilation' },
+                { text: 'Compile From IR', link: '/getting-started/install-from-source/compile-from-ir' },
+              ],
+            },
           ],
         },
         {
@@ -52,7 +60,14 @@ export default defineConfig({
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
             { text: 'Cross Transpilation', link: '/compiler/cross-transpilation' },
             { text: 'Backend', link: '/compiler/backend' },
-            { text: 'Compiling', link: '/compiler/compiling' },
+            {
+              text: 'Compiling',
+              link: '/compiler/compiling/',
+              items: [
+                { text: 'Using JuleC', link: '/compiler/compiling/using-julec' },
+                { text: 'Using Backend Compiler', link: '/compiler/compiling/using-backend-compiler' },
+              ],
+            },
           ],
         },
         {
@@ -66,15 +81,15 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Basics',
-          link: '/basics/',
+          text: 'Introduction',
+          link: '/introduction/',
           items: [
-            { text: 'Comments', link: '/basics/comments' },
-            { text: 'Reserved Functions', link: '/basics/reserved-functions' },
-            { text: 'Data Types', link: '/basics/data-types' },
-            { text: 'Operators', link: '/basics/operators' },
-            { text: 'Syntax', link: '/basics/syntax' },
-            { text: 'Blocks', link: '/basics/blocks' },
+            { text: 'Comments', link: '/introduction/comments' },
+            { text: 'Reserved Functions', link: '/introduction/reserved-functions' },
+            { text: 'Data Types', link: '/introduction/data-types' },
+            { text: 'Operators', link: '/introduction/operators' },
+            { text: 'Syntax', link: '/introduction/syntax' },
+            { text: 'Blocks', link: '/introduction/blocks' },
           ],
         },
         {
@@ -86,7 +101,16 @@ export default defineConfig({
             { text: 'Arrays', link: '/common-concepts/arrays' },
             { text: 'Slices', link: '/common-concepts/slices' },
             { text: 'Maps', link: '/common-concepts/maps' },
-            { text: 'Control Flow', link: '/common-concepts/control-flow' },
+            {
+              text: 'Control Flow',
+              link: '/common-concepts/control-flow/',
+              items: [
+                { text: 'Iterations', link: '/common-concepts/control-flow/iterations' },
+                { text: 'Conditional', link: '/common-concepts/control-flow/conditional' },
+                { text: 'Match Statement', link: '/common-concepts/control-flow/match-statement' },
+                { text: 'Labels', link: '/common-concepts/control-flow/labels' },
+              ],
+            },
             { text: 'Enums', link: '/common-concepts/enums' },
             { text: 'Structures', link: '/common-concepts/structures' },
           ],
@@ -108,7 +132,16 @@ export default defineConfig({
             { text: 'Memory Management', link: '/memory/memory-management' },
           ],
         },
-        { text: 'Unsafe Jule', link: '/unsafe-jule/index.md', items: [] },
+        {
+          text: 'Unsafe Jule',
+          link: '/unsafe-jule/',
+          items: [
+            { text: 'Immutability', link: '/unsafe-jule/immutability' },
+            { text: 'Raw Pointers', link: '/unsafe-jule/raw-pointers' },
+            { text: 'Unsafe Defines', link: '/unsafe-jule/unsafe-defines' },
+            { text: 'References', link: '/unsafe-jule/references' },
+          ],
+        },
         {
           text: 'Error Handling',
           link: '/error-handling/',
@@ -126,7 +159,7 @@ export default defineConfig({
             { text: 'Aliasing', link: '/types/aliasing' },
             { text: 'Casting', link: '/types/casting' },
             { text: 'Generics', link: '/types/generics' },
-            { text: 'String', link: '/types/string' },
+            { text: 'Strings', link: '/types/strings' },
             { text: 'Arrays', link: '/types/arrays' },
             { text: 'Slices', link: '/types/slices' },
             { text: 'Maps', link: '/types/maps' },
