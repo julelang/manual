@@ -28,13 +28,18 @@ Starts searching at right of string to left.
 
 ---
 
-`fn trim(self, bytes: str): str`\
+`fn ltrim(self, bytes: str): str`\
 Trims string by specified bytes at left. Each character is each byte.
 
 ---
 
 `fn rtrim(self, bytes: str): str`\
 Trims string by specified bytes at right. Each character is each byte.
+
+---
+
+`fn trim(self, bytes: str): str`\
+Trims string by specified bytes at left and right. Each character is each byte.
 
 ---
 

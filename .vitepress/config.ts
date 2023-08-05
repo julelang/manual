@@ -126,7 +126,7 @@ export default defineConfig({
             { text: 'Aliasing', link: '/types/aliasing' },
             { text: 'Casting', link: '/types/casting' },
             { text: 'Generics', link: '/types/generics' },
-            { text: 'str', link: '/types/str' },
+            { text: 'String', link: '/types/string' },
             { text: 'Arrays', link: '/types/arrays' },
             { text: 'Slices', link: '/types/slices' },
             { text: 'Maps', link: '/types/maps' },
