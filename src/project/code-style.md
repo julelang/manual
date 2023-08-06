@@ -1,9 +1,12 @@
-# Naming
+# Code Style
+
+About code style of Jule source codes.
+
+## Naming Conventions
 ::: warning
 These examples are the recommended style, not mandatory.
 :::
 
-## Styles
 | Type | Naming Case | Examples |
 | ---- | ----------- | -------- |
 | Package | lowercase | package, mypackage |
@@ -20,3 +23,7 @@ These examples are the recommended style, not mandatory.
 | Enum Variants | PascalCase | Variant, MyVariant |
 | Type | Full lowercase and not separated or PascalCase | mytype, Type, MyType |
 | Generic Type | Starts with T and continue with numbers, or PascalCase | T1, T2, T, Generic, GenericType |
+
+## Indentions
+
+The recommended indentation character for Jule is space. And the recommended indentation size is 4. So it is recommended to make your indents with 4 spaces. Lexer of Jule accepts tab characters in 8-sized.

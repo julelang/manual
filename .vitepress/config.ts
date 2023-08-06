@@ -75,7 +75,7 @@ export default defineConfig({
           link: '/project/',
           items: [
             { text: 'Directory Order', link: '/project/directory-order' },
-            { text: 'Naming', link: '/project/naming' },
+            { text: 'Code Style', link: '/project/code-style' },
             { text: 'Declarations', link: '/project/declarations' },
             { text: 'Cycles', link: '/project/cycles' },
           ],
