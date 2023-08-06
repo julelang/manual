@@ -5,7 +5,7 @@ Thanks for reading.
 Please tell us, share with us your ideas and experiences.\
 Support us to improve the documentation.
 
-[Open Issue](https://github.com/julelang/website/issues/new/choose)
+[Open Issue](https://github.com/julelang/website/issues/new/choose) \
 [Fork Project](https://github.com/julelang/website/fork)
 
 ## Source Code

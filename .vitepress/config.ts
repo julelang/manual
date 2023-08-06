@@ -226,7 +226,7 @@ export default defineConfig({
           ]
         },
       ],
-      
+
       '/standard-library/': [
         {
           text: 'Standard Library',
