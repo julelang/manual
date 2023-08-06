@@ -1,42 +1,31 @@
 # std::jule::constant
 
-## Functions
-`fn new_i64(x: i64): &Const`\
-Returns new constant value instance from 64-bit signed integer.
-
----
-
-`fn new_u64(x: u64): &Const`\
-Returns new constant value instance from 64-bit unsigned integer.
-
----
-
-`fn new_bool(x: bool): &Const`\
-Returns new constant value instance from boolean.
-
----
-
-`fn new_str(x: str): &Const`\
-Returns new constant value instance from string.
-
----
-
-`fn new_f64(x: f64): &Const`\
-Returns new constant value instance from 64-bit floating-point.
-
----
-
-`fn new_nil(): &Const`\
-Returns new constant value instance with nil. 
-
 ## Structs
 ```
 struct Const
 ```
 Constant data.\
-Use `new_nil` function istead of `Const{}` for nil literal.
+Use `Const.new_nil` function istead of `Const{}` for nil literal.
 
 **Methods:**
+
+`static fn new_i64(x: i64): &Const`\
+Returns new constant value instance from 64-bit signed integer.
+
+`static fn new_u64(x: u64): &Const`\
+Returns new constant value instance from 64-bit unsigned integer.
+
+`static fn new_bool(x: bool): &Const`\
+Returns new constant value instance from boolean.
+
+`static fn new_str(x: str): &Const`\
+Returns new constant value instance from string.
+
+`static fn new_f64(x: f64): &Const`\
+Returns new constant value instance from 64-bit floating-point.
+
+`static fn new_nil(): &Const`\
+Returns new constant value instance with nil. 
 
 `fn read_i64(self): i64`\
 Reads 64-bit signed integer data.\
