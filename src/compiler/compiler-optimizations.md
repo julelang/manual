@@ -31,6 +31,7 @@ It eliminates dead codes (unused) from object code.
 - Eliminates dead globals.
 - Eliminates dead functions.
 - Eliminates followed statements of the return statement.
+- Eliminates followed statements of the built-in `panic` function calls.
 
 ::: warning
 Experimental optimization, compilation problems may occur.
