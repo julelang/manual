@@ -20,6 +20,7 @@ export default defineConfig({
     nav: [
       { text: 'Manual', link: '/' },
       { text: 'Standard Library', link: '/standard-library/' },
+      { text: 'API', link: '/api/' },
     ],
 
     sidebar: {
@@ -195,7 +196,7 @@ export default defineConfig({
           text: 'C/C++',
           link: '/cpp/',
           items: [
-            { text: 'API', link: '/cpp/api' },
+            { text: 'API', link: '/api/' },
             {
               text: 'Interoperability',
               link: '/cpp/interoperability/',
@@ -225,6 +226,72 @@ export default defineConfig({
             { text: 'End', link: '/end' },
           ]
         },
+      ],
+
+      '/api/': [
+        {
+          text: 'API',
+          link: '/api/',
+          items: [
+            {
+              text: 'Implementation',
+              link: '/api/implementation/',
+              items: [
+                { text: 'Disable RC', link: '/api/implementation/disable-rc' },
+              ],
+            },
+            {
+              text: 'Environment',
+              link: '/api/environment/',
+              items: [
+                { text: 'Command-Line Arguments', link: '/api/environment/command-line-arguments' },
+                { text: 'Environment Variables', link: '/api/environment/environment-variables' },
+                { text: 'Executable Path', link: '/api/environment/executable-path' },
+              ],
+            },
+            {
+              text: 'Process',
+              link: '/api/process/',
+              items: [
+                { text: 'Signals', link: '/api/process/signals' },
+                { text: 'Termination', link: '/api/process/termination' },
+              ],
+            },
+            { text: 'Platform Specific', link: '/api/platform-specific' },
+            {
+              text: 'Types',
+              link: '/api/types/',
+              items: [
+                { text: 'Primitive', link: '/api/types/primitive' },
+                { text: 'Limits', link: '/api/types/limits' },
+              ],
+            },
+            { text: 'Atomicity', link: '/api/atomicity' },
+            { text: 'Deferred Blocks', link: '/api/deferred-blocks' },
+            { text: 'Concurrency', link: '/api/concurrency' },
+            {
+              text: 'Unicode',
+              link: '/api/unicode/',
+              items: [
+                { text: 'UTF-8', link: '/api/unicode/utf-8' },
+                { text: 'UTF-16', link: '/api/unicode/utf-16' },
+              ],
+            },
+            {
+              text: 'Reference Counting',
+              link: '/api/reference-counting/',
+              items: [
+                { text: 'Using', link: '/api/reference-counting/using' },
+              ],
+            },
+            {
+              text: 'Using as Library',
+              link: '/api/using-as-library/',
+              items: [
+              ],
+            },
+          ],
+        }
       ],
 
       '/standard-library/': [

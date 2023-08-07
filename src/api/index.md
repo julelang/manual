@@ -7,10 +7,6 @@ With this API, you can use the definitions of JuleC in C++ codes and adapt funct
 
 [See API source codes](https://github.com/julelang/jule/tree/master/api)
 
-## Implementation
-
-Header files alone have the entire implementation. So if you want to use them, just include them. If you want to have the whole API, just include `jule.hpp`.
-
 ## Naming Conventions
 
 - All define directives starts with `__JULE_` prefix (with exception defines like atomic functions)
