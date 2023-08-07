@@ -285,10 +285,16 @@ export default defineConfig({
               ],
             },
             {
+              text: 'Integrated Jule',
+              link: '/api/integrated-jule/',
+              items: [
+                { text: 'Wrappers', link: '/api/integrated-jule/wrappers' },
+              ],
+            },
+            {
               text: 'Using as Library',
               link: '/api/using-as-library/',
-              items: [
-              ],
+              items: [],
             },
           ],
         }

@@ -104,9 +104,4 @@ In the above example, your compiler does not detect the types of fields of the l
 
 While this type compatibility may work well with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes or etc.
 
-<strong>Why wrappers are recommended way?</strong>
-
-- You can add additional functionality to your wrapper with the Jule API.
-- Having a fully compatible Jule wrapper from a single point makes it easy to make changes and new additions.
-- You can debug more easily when any changes occur in the structure you are wrapping.
-- You gain more control over the structure you wrap.
+See [wrappers](/api/integrated-jule/wrappers) section of API manual.
