@@ -5,13 +5,13 @@ The use declarations of Jule are used to include C++ headers in the Jule code to
 
 For example:
 ```
-use cpp "<stdlib.h>"
+cpp use "<stdlib.h>"
 ```
 ```
-use cpp "<iostream>"
+cpp use "<iostream>"
 ```
 ```
-use cpp "header.hpp"
+cpp use "header.hpp"
 ```
 The correctness and validity of the file path is checked by the compiler.
 Valid header extensions; `.h`, `.hh`, `.hpp`, `.hxx`
@@ -21,10 +21,10 @@ You may not write your header files to include all the code (with implementation
 
 For example:
 ```
-use cpp "myfile.cpp"
+cpp use "myfile.cpp"
 ```
 ```
-use cpp "implementation.cxx"
+cpp use "implementation.cxx"
 ```
 The correctness and validity of the file path is checked by the compiler.
 Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.mm`

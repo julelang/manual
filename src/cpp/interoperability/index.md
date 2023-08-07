@@ -30,7 +30,7 @@ Int sum(const Slice<Int> slice) {
 ```
 **main.jule**
 ```
-use cpp "sum.hpp"
+cpp use "sum.hpp"
 
 cpp fn sum([]int): int
 

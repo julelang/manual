@@ -51,7 +51,7 @@ struct MyStruct {
 
 Our `main.jule` file:
 ```
-use cpp "mystruct.hpp"
+cpp use "mystruct.hpp"
 
 //jule:typedef
 cpp struct MyStruct {

@@ -10,7 +10,7 @@ For example:\
 ```
 **sum.jule**
 ```
-use cpp "tickrate.hpp"
+cpp use "tickrate.hpp"
 
 cpp let tickrate: int
 ```
@@ -34,7 +34,7 @@ For example:\
 ```
 **sum.jule**
 ```
-use cpp "sum.hpp"
+cpp use "sum.hpp"
 
 //jule:cdef
 cpp fn SUM(int, int): int

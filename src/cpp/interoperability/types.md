@@ -79,7 +79,7 @@ public:
 
 Jule code:
 ```
-use cpp "myclass.hpp"
+cpp use "myclass.hpp"
 
 //jule:typedef
 cpp struct MyClass {

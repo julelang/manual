@@ -90,7 +90,7 @@ You can integrate and use your wrappers by linking them to your Jule code accord
 
 Integrating the STL Vector wrapper described above with Jule would look like this:
 ```
-use cpp "vector.hpp"
+cpp use "vector.hpp"
 
 //jule:typedef
 cpp struct Vector[T] {
