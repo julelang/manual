@@ -613,6 +613,11 @@ Reports whether instance is built-in.
 `fn is_anon(self): bool`\
 Reports whether instance is anonymous function.
 
+`fn get_kind_str(self, ident: bool): str` \
+Returns kind string of function instance.
+Appends identifier to kind of this instance.
+Does not appends identifier of this instance to kind if self.decl is nil reference.
+
 ---
 
 ```
