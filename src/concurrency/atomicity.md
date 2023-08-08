@@ -36,8 +36,8 @@ use std::sync::atomic::{MemoryOrder, add_i64}
 
 static mut n: i64 = 0
 
-fn add_to_n(mut &wg: WaitGroup) {
-    defer { wg.done() }
+fn add_to_n(mut wg: *WaitGroup) {
+    unsafe defer { wg.done() }
     add_i64(n, 1, MemoryOrder.Relaxed)
 }
 
@@ -47,7 +47,7 @@ fn main() {
     let mut j = 0
     for j < 1000000; j++ {
         wg.add(1)
-        co add_to_n(wg)
+        co add_to_n(&wg)
     }
 
     wg.wait()

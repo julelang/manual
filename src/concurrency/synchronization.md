@@ -23,8 +23,8 @@ For example:
 ```
 use std::sync::{WaitGroup}
 
-fn say_hello(mut &wg: WaitGroup) {
-    defer { wg.done() }
+fn say_hello(mut wg: *WaitGroup) {
+    unsafe defer { wg.done() }
     co outln("Hello World")
 }
 
@@ -32,14 +32,14 @@ fn main() {
     let mut wg = WaitGroup{}
 
     wg.add(1)
-    co say_hello(wg)
+    co say_hello(&wg)
     wg.wait()
 }
 ```
 
 The above example is the first example using `WaitGroup`. Since this code watches threads thanks to `WaitGroup`, it waits for all threads to finish executing, thus guaranteeing that printing `Hello World` will definitely complete.
 
-As can be seen in the example, the `WaitGroup` function is passed with a reference parameter. This is because counting needs to act on the original `WaitGroup`. To achieve this, you can also follow a different method such as reference type or pointer.
+As can be seen in the example, the `WaitGroup` function is passed with a pointer parameter. This is because counting needs to act on the original `WaitGroup`. To achieve this, you can also follow a different method such as using reference type.
 
 Calling `wg.add(1)` increments the counter of `WaitGroup` by one. In other words, it means we have a new thread. If there is an important point here, it is that the counting must be done correctly. For example, you have 1 thread but you are trying to count 10 threads, so if your counter never reaches 0, you may enter a continuous waiting loop.
 
