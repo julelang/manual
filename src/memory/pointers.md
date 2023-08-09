@@ -4,7 +4,7 @@ Each location at memory have an address. These addresses points to location at m
 To declare a pointer data-type, use `*` operator.
 
 For example:
-```
+```jule
 let x: *int = nil
 ```
 That's pointer for `int` type.
@@ -13,7 +13,7 @@ That's pointer for `int` type.
 The `&` operator used to get pointer of variable.
 
 For example:
-```
+```jule
 fn main() {
     let x: int = 10
     let y: *int = &x
@@ -35,7 +35,7 @@ What follows is related to Unsafe Jule. If you're not familiar with this topic, 
 The `*` operator is used to access the value in the memory address that the pointer store.
 
 For example:
-```
+```jule
 fn main() {
     let x: int = 10
     let y: *int = &x
@@ -48,7 +48,7 @@ fn main() {
 Pointers can take on value assignment just like a variable, with values of the appropriate data type, because they are already variables.
 
 For example:
-```
+```jule
 fn main() {
     let x: int = 10
     let z: *int = &x // The 'z' store now memory address of the 'x' variable.
@@ -63,7 +63,7 @@ Additionally, pointers can assign the value of the memory address they store.
 The `*` operator used for that too.
 
 For example:
-```
+```jule
 fn main() {
     let x: int = 10
     let y: *int = &x
@@ -78,7 +78,7 @@ Developers who have previously worked with programming languages such as C and C
 These pointers are known as unsafe pointers in Jule because they are actually more unsafe than regular pointers. This is mainly because they are not a pointer to a data type. It is assumed that they simply point to a memory location. Therefore, there is no guarantee that it is correct, even if cast to a datatype pointer. The developer must know the data type at the pointed address. Unsafe pointers are not helpful in this regard.
 
 For example:
-```
+```jule
 fn main() {
     let a: int = 20
     let ptr: *unsafe = &a

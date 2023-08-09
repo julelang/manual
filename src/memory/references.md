@@ -11,7 +11,7 @@ References point to the value from which they were initialized and must receive 
 Reference variables are variables that reference an lvalue. Any assignment made affects the referenced lvalue. Declared with `&` operator.
 
 For example:
-```
+```jule
 fn main() {
     let mut a = 20
     let mut &b = a
@@ -23,7 +23,7 @@ fn main() {
 Also you can use reference types in mult-declarative assignments.
 
 For example:
-```
+```jule
 fn main() {
     let mut a = 20
     let (mut &x, mut y) = a, 20
@@ -43,7 +43,7 @@ If you're sure it's safe to do so, [Unsafe Jule](/unsafe-jule/) lets you access 
 Reference parameters must take an lvalue as an argument. To specify a reference parameter, the parameter identifier must be preceded by the `&` operator.
 
 For example:
-```
+```jule
 fn add_20(mut &a: int) {
     a += 20
 }

@@ -5,7 +5,7 @@ Iterations allow you to repeat the algorithm according to certain conditions. Th
 Infinite iterations keep repeating endlessly until the loop is somehow broken.
 
 For example:
-```
+```jule
 fn main() {
     for {
         outln("Hello, iterations")
@@ -18,7 +18,7 @@ The above example prints `Hello, iterations` repeatedly.
 The while iterations are iterations that repeat as long as a certain condition is met. It is not much different from defining an infinite iteration.
 
 For example:
-```
+```jule
 fn main() {
     let mut counter = 0
     for counter <= 5 {
@@ -35,7 +35,7 @@ If you've ever used a programming language, you're probably familiar with for lo
 While-next is almost the same as a classic while iteration. In this, the only addition is to be able to write an expression that will happen after the iteration step. While-next's statement is separated by the statement terminator. First comes the condition expression, then statement.
 
 For example:
-```
+```jule
 fn main() {
     let mut i = 1
     for i <= 5; i++ {
@@ -51,7 +51,7 @@ Foreach or for-each can be summarized as an iteration standard for collections. 
 Each identifier used for foreach is used to create a new variable. So if there is a definition that already has this identifier, it will be shaded.
 
 For example:
-```
+```jule
 fn main() {
     let s = "Hello"
     for i in s {
@@ -72,7 +72,7 @@ Iterations can have two variables: Current index and current element.
 This example, just shows index. Let's see foreach iteration with content.
 
 For example:
-```
+```jule
 fn main() {
     let s = "Hello"
     for _, b in s {
@@ -97,7 +97,7 @@ Jule assign variables data types by automatically by collection. Similar to type
 Foreach iterations have immutable variables by default. But you may want to get them as mutable. For this, enclose the identifiers in parentheses and qualify the variable you want to be mutable as mutable.
 
 For example:
-```
+```jule
 fn main() {
     let s = "Hello"
     for (_, mut b) in s {
@@ -112,7 +112,7 @@ We may want to check for iterations, this is normal and common. There are two wa
 If you want break the iteration, use the `break` keyword.
 
 For example:
-```
+```jule
 fn main() {
     for {
         outln("Hello, World")
@@ -127,7 +127,7 @@ The example at above, normally prints `Hello, World` again and again. But just p
 If you want continue to next iteration, use the `continue` keyword.
 
 For example:
-```
+```jule
 fn main() {
     for {
         continue

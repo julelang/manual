@@ -18,7 +18,7 @@ Generics are never supports shadowing.
 ::: warning
 Genericed functions never can used as anonymous function or type annotation.
 :::
-```
+```jule
 fn sum[T](a: T, b: T) T {
     let x: T = a + b
     ret x
@@ -35,7 +35,7 @@ There is a use for a generic type annotation, as seen in the example above. Use 
 ---
 
 To specify multiple different generic types, comma-separation syntax are available:
-```
+```jule
 fn example_func[T1, T2](a: T1, b: T2) {}
 ```
 
@@ -43,7 +43,7 @@ fn example_func[T1, T2](a: T1, b: T2) {}
 Structures support generics. There is no additional syntax to use it. Combine only what you know with the struct declaration.
 
 For example:
-```
+```jule
 struct Position[T] {
     x: T
     y: T
@@ -54,7 +54,7 @@ struct Position[T] {
 Generic types must also be specified to specify an instance of a specific type of the position structure. Doing this is like calling a function.
 
 For example:
-```
+```jule
 let pos: Position[int]
 ```
 
@@ -62,7 +62,7 @@ let pos: Position[int]
 Dynamic generic annotation can be used if all generic types are detectable by the compiler.
 
 For example:
-```
+```jule
 fn print_map[Key, Value](map: [Key:Value]) {
     for key, value in map {
         out(key)

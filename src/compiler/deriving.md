@@ -7,7 +7,7 @@ The compiler adds an algorithm that can deep copy every field of the structure a
 
 \
 For example:
-```
+```jule
 //jule:derive Clone
 struct SliceWrapper {
     buffer: []int

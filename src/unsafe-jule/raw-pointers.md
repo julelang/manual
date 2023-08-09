@@ -4,7 +4,7 @@
 Unsafe Jule allows deference raw pointers.
 
 For example:
-```
+```jule
 fn main() {
     let x = 200
     let ptr = &x
@@ -18,7 +18,7 @@ Note that no safety is provided in this regard. Pointers can benefit you, but yo
 Unsafe Jule supports postfixes for raw pointers.
 
 For example:
-```
+```jule
 fn print_slice_components_with_unsafe(slc: []int) {
     unsafe {
         let mut ptr = &slc[0]
@@ -44,7 +44,7 @@ To better understand data type sampling, array pointers can be interpreted as:
 -  `*str` = `[]str`
 
 For example:
-```
+```jule
 ptr[9]
 ```
 Suppose the variable `ptr` is `*int`. Let this pointer be an array pointer. The above expression takes the data at index 9 of this array.
@@ -53,7 +53,7 @@ Suppose the variable `ptr` is `*int`. Let this pointer be an array pointer. The 
 You can cast a pointer to an integer with valid integer types or cast a raw pointer from an integer. However, you can also cast a pointer to a pointer of different type.
 
 For example:
-```
+```jule
 let ptr: int = 0
 let unsafe_ptr = unsafe { (*str)(ptr) }
 ```
@@ -63,6 +63,6 @@ let unsafe_ptr = unsafe { (*str)(ptr) }
 If you want to send your pointers to a reference parameter, you can do so with a simple pointer dereferencing. You are aware of the insecurity as this is already an action you would take using Unsafe Jule.
 
 For example:
-```
+```jule
 my_function(unsafe { *my_pointer })
 ```

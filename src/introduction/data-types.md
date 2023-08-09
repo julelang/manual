@@ -43,78 +43,78 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 
 ## Integer Literals
 ### Decimal
-```
+```jule
 12345
 ```
 
 ### Binary
-```
+```jule
 0b0001010101
 ```
 
 ### Octal
-```
+```jule
 0455
 ```
-```
+```jule
 0o455
 ```
 
 ### Hexadecimal
-```
+```jule
 0xDFF90
 ```
 
 ## Floating-Point Literals
-```
+```jule
 3.14
 ```
-```
+```jule
 32.60
 ```
-```
+```jule
 032.60
 ```
-```
+```jule
 3.
 ```
-```
+```jule
 .3
 ```
-```
+```jule
 0.3
 ```
-```
+```jule
 1E2
 ```
-```
+```jule
 .12345E+6
 ```
-```
+```jule
 1.e+0
 ```
-```
+```jule
 0x1p-2
 ```
-```
+```jule
 0x2.p10
 ```
-```
+```jule
 0x1.Fp+0
 ```
-```
+```jule
 0X.8p-0
 ```
-```
+```jule
 0x1fffp-16
 ```
-```
+```jule
 0x15e-2
 ```
 
 ## String
 ### String Literals
-```
+```jule
 "String literal of Jule."
 ```
 String literals have a escape sequences.
@@ -138,10 +138,10 @@ String literals have a escape sequences.
 
 ### Raw String Literals
 Raw strings do not contain escape sequences and are not required to be defined in a single line. They are represents with `` ` ``.
-```
+```jule
 `Raw String literal of Jule.`
 ```
-```
+```jule
 `Raw String literal of Jule
 with
 new
@@ -150,7 +150,7 @@ new
 
 ## Nil
 Zero value for pointers and function data typed defines. 
-```
+```jule
 nil
 ```
 
@@ -164,7 +164,7 @@ Only supports equals (==) and not equals (!=) operators.
 Supports casting to any type.
 You can get type-safe value of `any` with casting.
 For example:
-```
+```jule
 let my_any: any = 10
 let x = (int)(my_any)
 ```

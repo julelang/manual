@@ -89,7 +89,7 @@ public:
 You can integrate and use your wrappers by linking them to your Jule code according to the information described in the [interoperability](/cpp/interoperability/) section of manual.
 
 Integrating the STL Vector wrapper described above with Jule would look like this:
-```
+```jule
 cpp use "vector.hpp"
 
 //jule:typedef

@@ -2,7 +2,7 @@
 Functions are common in Jule code. Previously, the entry point function was mentioned in the basics. We have seen partially there how to define a function.
 
 To remember:
-```
+```jule
 fn example() {
     // ...
 }
@@ -11,7 +11,7 @@ For functions, the name of the function comes first, followed by the parentheses
 
 So how can we call this function?\
 For example:
-```
+```jule
 example()
 ```
 The name of the function comes first and then the parentheses again. 
@@ -20,7 +20,7 @@ The name of the function comes first and then the parentheses again.
 Functions can have parameters. These parameters must be specified with arguments at the time the function is called.
 
 For example:
-```
+```jule
 fn print_int(i: int) {
     outln(i)
 }
@@ -37,7 +37,7 @@ When calling the function, as seen in the example in the entry point, arguments 
 Parameters are immutable by default. For mutability, use the `mut` keyword.
 
 For example:
-```
+```jule
 fn my_func(mut i: int) { /* ... */ }
 ```
 
@@ -45,7 +45,7 @@ fn my_func(mut i: int) { /* ... */ }
 Variadic parameters can contain more than one value. The `...` operator is used for this.
 
 For example: 
-```
+```jule
 fn str_out(values: ...str) {
     for _, s in values {
         out(s)
@@ -70,7 +70,7 @@ As seen in the example above, many arguments could be given to the function even
 Functions can return values.
 
 For example:
-```
+```jule
 fn main() {
     outln(div(10, 2))
 }
@@ -94,7 +94,7 @@ The example at above, is a variable definition with function data type. The comp
 Anonymous functions are like standard functions, but they are anonymous and are usually defined as a value. Anonymous functions is not have any name. Defining anonymous function is like declaring a function as a value type. Just in addition, the block of the function must be written.
 
 For example:
-```
+```jule
 fn main() {
     let make_hello = fn(name: str): str {
         ret "Hello " + name + "!"
@@ -108,7 +108,7 @@ fn main() {
 Anonymous functions can access the definitions of the block in which they are defined. But doesn't referring them, copies all definition for itself. Therefore, you can't affect to parent scope definitions in most case.
 
 For example: 
-```
+```jule
 fn main() {
     let message = "Hello, World!"
     let func = fn() { outln(message) }
@@ -121,7 +121,7 @@ The anonymous function defined in the example above uses the message variable be
 Functions can returns more then one values. For that, specify return data-type with multiple type.
 
 For example:
-```
+```jule
 my_func(): (int, int) { ret 18, 96 }
 ```
 Parentheses are used to specify multiple data types, seen as example at above. This option, only valid for function returns.
@@ -131,7 +131,7 @@ Parentheses are used to specify multiple data types, seen as example at above. T
 What happens when specified single data type with parentheses? Nothing, you not see compiler error. But not compile as multi type, compiles single data type.
 
 For example:
-```
+```jule
 fn less_than(x: int, y: int): (bool) { ret x < y }
 ```
 The example at above, accepted as one type return. 
@@ -140,7 +140,7 @@ The example at above, accepted as one type return.
 To give an identifier to the return types, it's enough to make them look like multiple returns. The only addition is to give that return value an identifier before the return type.
 
 For example:
-```
+```jule
 fn example(): (x: int, y: int) {
     x = 10
     y = 20
@@ -156,7 +156,7 @@ As noticed, they are mutable variables by default. This is because of some of co
 Also, a function that has at least one return type identifier does not have to have a return expression.
 
 For example:
-```
+```jule
 fn example(): (x: int, y: int) {
     x = 10
     y = 20
@@ -170,7 +170,7 @@ Respectively the related variables will be treated as the return statement.
 If you provide a return expression while there are return identifiers, the expressions you provide as the expression of the identifiers will be accepted.
 
 For example:
-```
+```jule
 fn example(): (x: int, y: int) { ret 90, 100 }
 ```
 
@@ -178,7 +178,7 @@ fn example(): (x: int, y: int) { ret 90, 100 }
 It's too similar to normal assignment. Give much identifier same count with function return values and give function call as value.
 
 For example:
-```
+```jule
 fn compare_int(x: int, y: int): (bool, bool) { ret x < y, x == y }
 
 fn main() {
@@ -195,7 +195,7 @@ You can't use multiple returnable functions combined with normal multiple assign
 When you have a function that returns more than one value, and to use these return values as a return value in another function that returns exactly the same, using a variable too is not a necessity but a preference. Jule allows you to use the return values of a multi-return function as the return value and automatically maps the values if the return values and data types match exactly.
 
 For example:
-```
+```jule
 fn example1(): (int, str, byte) { ret 143, "STR", 'W' }
 fn example2(): (int, str, byte) { ret example1() }
 
@@ -213,7 +213,7 @@ Concurrency works on performing multiple tasks at the same time. This means that
 The keyword `co` is used to do a concurrent call.
 
 For example:
-```
+```jule
 fn hello_world() { outln("Hello World") }
 
 fn main() {
@@ -230,7 +230,7 @@ Please see [concurrency](/concurrency/) page of manual for more information.
 A return expression need not always be specified in the main scope of the function. The only criterion is that the function returns under all conditions. Return statements in inner scopes are considered valid if they guarantee the return under all conditions.
 
 For example:
-```
+```jule
 fn get_rate(x: int): int {
     match {
     | x <= 30:

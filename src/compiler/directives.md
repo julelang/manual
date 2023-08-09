@@ -7,7 +7,7 @@ Incorrect directives will cause compiler errors if necessary.
 
 \
 For example to directives:
-```
+```jule
 //jule:typedef
 ```
 As seen in the example, it is essentially a comment as explained. For a directive to be valid, it must be used correctly in the right place. The comment must be at the beginning of the line and begin with the `jule:` prefix.
@@ -21,7 +21,7 @@ The arguments of the directives are separated by spaces. The directive must be f
 
 \
 For example:
-```
+```jule
 //jule:derive Clone
 struct MyStruct {}
 ```
@@ -44,10 +44,10 @@ The syntax is simple and easy to learn. The logical and operator is `&&` and the
 
 Here is an example code via `build` directive:
 
-```
+```jule
 //jule:build (darwin || windows) && 64bit
 ```
-```
+```jule
 //jule:build unix && !darwin
 ```
 
@@ -74,7 +74,7 @@ The compiler eliminates duplicate passes.
 
 \
 For example:
-```
+```jule
 //jule:pass -framework Foundation
 //jule:pass -framework Cocoa
 

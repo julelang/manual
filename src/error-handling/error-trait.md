@@ -4,7 +4,7 @@ The Error trait is a builtin definition. It is a way of handling errors. While t
 If a function does not panic when there is an error, it can return the error with the Error trait and provides handle it. Returns nil when there is no error.
 
 For example:
-```
+```jule
 use std::errors
 
 fn my_div(a: f64, b: f64): (f64, Error) {
@@ -29,7 +29,7 @@ In the example above, a potential error is handled with the Error trait.
 You can create your own error structure for error handling by implementing the Error trait.
 
 For example:
-```
+```jule
 struct MyError {
     message: str
 }

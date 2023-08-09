@@ -6,7 +6,7 @@ To make a cast, you need to write the target data type you want to cast in paren
 Example: `(int)(3.14)`
 
 For code example:
-```
+```jule
 fn main() {
     let x: f32 = 3.14
     let y: int = (int)(x) // Casting

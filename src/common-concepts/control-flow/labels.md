@@ -21,7 +21,7 @@ For example: `goto repeat`
 When using nested iterations or match expressions, the keywords `break` and `continue` are targeted to the last valid block. This makes it harder to target outer loops or the match expression.
 
 For example:
-```
+```jule
 fn main() {
     for {
         match {
@@ -36,7 +36,7 @@ An infinite iteration appears in this example. The `break` keyword inside the ma
 Again, label can be used to clear up this confusion. This is a more maintainable and clearer solution. Labels defined before an iteration and match expression can be used for targeting.
 
 For example:
-```
+```jule
 fn main() {
 loop:
     for {

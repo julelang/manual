@@ -9,7 +9,7 @@ Entry point is should be void function and not have any parameter.
 
 \
 For example:
-```
+```jule
 fn main() {
     // Your entry point function body.
 }
@@ -24,7 +24,7 @@ Initializer function is should be void function and not have any parameter.
 
 \
 For example:
-```
+```jule
 fn init() {
     // Your initialize function body.
 }

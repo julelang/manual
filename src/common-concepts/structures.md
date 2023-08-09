@@ -2,7 +2,7 @@
 Structures (aka structs) are a good way to collect many variables in one spot. Every declaration within the structure is called a member (aka field). The difference from a slice or aray is that contain values of the same data-type, while each of the struct fields can have a different data type. Also, the fields of structures are accessed with an identifier.
 
 For example to declaration a struct:
-```
+```jule
 struct Employee {
     name: str
     age: u8
@@ -16,7 +16,7 @@ Members of structures are the same as a variable definition except `const` keywo
 To instantiate structs, you can either give the values of the fields using braces after the struct name, or create them with their default values.
 
 For example:
-```
+```jule
 struct Character {
     name: str
     age: u8
@@ -45,7 +45,7 @@ You can't shadow generics.
 
 ### Implementing Methods
 To implement method(s) to structure, the following syntax is applied:
-```
+```jule
 impl STRUCT_IDENTIFIER {
     // Methods
 }
@@ -76,25 +76,25 @@ fn IDENTIFIER([RECEIVER_PARAMETER], PARAMETERS...): RET_TYPE {
 ```
 
 For example to receiver parameters:
-```
+```jule
 // Immutable Reference Receiver
 fn method(&self): str { /* Body */ }
 ```
-```
+```jule
 // Mutable Reference Receiver
 fn method(mut &self): str { /* Body */ }
 ```
-```
+```jule
 // Immutable Receiver
 fn method(self): str { /* Body */ }
 ```
-```
+```jule
 // Mutable Receiver
 fn method(mut self): str { /* Body */ }
 ```
 
 For example to implementing method to structure:
-```
+```jule
 impl Position {
     fn is_origin(self): bool {
         ret self.x == 0 && self.y == 0
@@ -107,7 +107,7 @@ He example at above, implements `is_origin(): bool` method to `Position` structu
 The `self` keyword represents the receiver a receiver function has. It is used to access and use the members of the structure. The data type is the same as the data type of the receiver.
 
 For example:
-```
+```jule
 impl Person {
     fn get_name(self): str {
         ret self.name
@@ -120,7 +120,7 @@ In the example above, the `name` field of the `Employee` structure instance is a
 You can heap-allocated structure instancing. The unary `&` operator returns reference to if you use at instancing.
 
 For example:
-```
+```jule
 let pos = &Position{x: 10, y: 20}
 ```
 `pos` variable is the reference points to heap-allocated `Position` structure instance.
@@ -142,7 +142,7 @@ These differences are:
 
 For example:
 
-```
+```jule
 struct Dog {}
 
 impl Dog {

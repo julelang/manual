@@ -2,14 +2,14 @@
 Jule treats each directory as a package. Each package has the ability to use its own defines.
 
 For example: 
-```
+```jule
 // file: ./hello_print.jule
 
 fn hello_print(name: str) {
     outln("Hello " + name)
 }
 ```
-```
+```jule
 // file: ./main.jule
 
 fn main() {

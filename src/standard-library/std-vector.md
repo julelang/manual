@@ -1,7 +1,7 @@
 # std::vector
 
 ## Structs
-```
+```jule
 struct Vector[T]
 ```
 Wrapper for dynamic array.\

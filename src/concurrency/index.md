@@ -10,7 +10,7 @@ In Jule, concurrent calls spawn a new thread.
 Concurrent calls are made with the `co` keyword.
 
 For example:
-```
+```jule
 co my_function()
 ```
 
@@ -22,6 +22,6 @@ You can call any function for concurrency with some safety constraints.
 You cannot use any function that has reference parameters for concurrency. At least with Safe Jule. Because the scopes of the references must be traceable by compiler, a kind of safety obsession of compiler. Concurrent calls break this. During concurrency, your reference may fall into a dangling position, which can be a serious problem. To avoid this, Safe Jule does not allow this, but if you are aware of what you are doing, Unsafe Jule will allow you to use a function with reference parameters for concurrency.
 
 For example:
-```
+```jule
 unsafe { co my_function(my_var) }
 ```

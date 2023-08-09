@@ -2,7 +2,7 @@
 Enumerations are a structure that allows to collect numeric constant values together. This increases the readability of the code and makes it easier to maintain. The keyword enum is used to declare an enum.
 
 For example:
-```
+```jule
 enum FileMode {
     Read  = 35,
     Write = 89,
@@ -26,7 +26,7 @@ You can't use any global, function or etc. in custom value expressions.
 If you want to give enums a data type other than the default, it is possible to do so.
 
 For example:
-```
+```jule
 enum FileMode: u8 {
     Read,
     Write,
@@ -48,7 +48,7 @@ The default values ​​of enums are always what is the default value of the da
 ## Casting
 You may want to cast your enum for various reasons. Normal casting rules apply here. When casting an enum value, it is based on the enum value type.
 
-```
+```jule
 enum MyEnum {
     MyVal = 10
 }

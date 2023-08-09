@@ -1,7 +1,7 @@
 # std::jule::constant
 
 ## Structs
-```
+```jule
 struct Const
 ```
 Constant data.\

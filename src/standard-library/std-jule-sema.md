@@ -8,7 +8,7 @@ Expression model.
 Statement type. 
 
 ## Functions
-```
+```jule
 fn analyze_package(mut files: []&Ast, mut importer: Importer): (&Package, []Log)
 ```
 Builds symbol table of package's ASTs.\
@@ -31,7 +31,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 
 ---
 
-```
+```jule
 fn analyze_file(mut f: &Ast, mut importer: Importer): (&SymbolTable, []Log)
 ```
 Builds symbol table of package's ASTs.\
@@ -53,7 +53,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 :::
 
 ## Structs
-```
+```jule
 struct EnumItem {
     token: Token
     ident: str
@@ -69,7 +69,7 @@ Reports whether item has auto expression.
 
 ---
 
-```
+```jule
 struct Enum {
     token:  Token
     public: bool
@@ -93,7 +93,7 @@ Returns nil reference if not exist any item in this identifier.
 
 ---
 
-```
+```jule
 struct Data {
     kind:       &TypeKind
     cast_kind:  &TypeKind // This expression should be cast to this kind.
@@ -134,7 +134,7 @@ Reports whether Data is constant expression.
 
 ---
 
-```
+```jule
 struct Value {
     expr: &Expr
     data: &Data
@@ -144,7 +144,7 @@ Value.
 
 ---
 
-```
+```jule
 struct BinopExprModel {
     left:  ExprModel
     right: ExprModel
@@ -155,7 +155,7 @@ Binary operation expression model.
 
 ---
 
-```
+```jule
 struct UnaryExprModel {
     expr:  ExprModel
     op:    str
@@ -165,7 +165,7 @@ Unary operation expression model.
 
 ---
 
-```
+```jule
 struct GetRefExprModel {
     expr: ExprModel
 }
@@ -175,7 +175,7 @@ For example: `&my_reference`
 
 ---
 
-```
+```jule
 struct StructArgExprModel {
     field: &FieldIns
     expr:  ExprModel
@@ -186,7 +186,7 @@ For example: `&MyStruct{10, false, "-"}`
 
 ---
 
-```
+```jule
 struct StructLitExprModel {
     strct: &StructIns
     args:  []&StructArgExprModel
@@ -196,7 +196,7 @@ Structure literal.
 
 ---
 
-```
+```jule
 struct AllocStructLitExprModel {
     lit: &StructLitExprModel
 }
@@ -206,7 +206,7 @@ For example: `&MyStruct{}`
 
 ---
 
-```
+```jule
 struct CastingExprModel {
     expr:      ExprModel
     kind:      &TypeKind
@@ -217,7 +217,7 @@ Casting expression model. For example: `(int)(my_float)`
 
 ---
 
-```
+```jule
 struct FnCallExprModel {
     func:  &FnIns
     is_co: bool
@@ -229,7 +229,7 @@ Function call expression model.
 
 ---
 
-```
+```jule
 struct SliceExprModel {
     elem_kind: &TypeKind
     elems:     []ExprModel
@@ -240,7 +240,7 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ---
 
-```
+```jule
 struct IndexingExprModel {
     expr:  ExprModel
     index: ExprModel
@@ -251,7 +251,7 @@ For example: `my_slice[my_index]`
 
 ---
 
-```
+```jule
 struct AnonFnExprModel {
     func:   &FnIns
     global: bool
@@ -261,7 +261,7 @@ Anonymous function expression model.
 
 ---
 
-```
+```jule
 struct KeyValPairExprModel {
     key: ExprModel
     val: ExprModel
@@ -271,7 +271,7 @@ Key-value expression pair model.
 
 ---
 
-```
+```jule
 struct MapExprModel {
     key_kind: &TypeKind
     val_kind: &TypeKind
@@ -283,7 +283,7 @@ For example: `{0: false, 1: true}`
 
 ---
 
-```
+```jule
 struct SlicingExprModel {
     expr:  ExprModel
     left:  ExprModel
@@ -295,7 +295,7 @@ For example: `my_slice[2:my_slice.len-5]`
 
 ---
 
-```
+```jule
 struct TraitSubIdentExprModel {
     expr:  ExprModel
     ident: str
@@ -306,7 +306,7 @@ For example: `my_trait.my_sub_ident`
 
 ---
 
-```
+```jule
 struct StructSubIdentExprModel {
     expr:      ExprModel
     expr_kind: &TypeKind
@@ -319,7 +319,7 @@ For example: `my_struct.my_sub_ident`
 
 ---
 
-```
+```jule
 struct ArrayExprModel {
     kind:  &Arr
     elems: []ExprModel
@@ -329,7 +329,7 @@ Array expression model.
 
 ---
 
-```
+```jule
 struct CommonIdentExprModel {
     ident: str
 }
@@ -338,7 +338,7 @@ Common ident expression model.
 
 ---
 
-```
+```jule
 struct CommonSubIdentExprModel {
     expr:  ExprModel
     ident: str
@@ -348,7 +348,7 @@ Common sub-ident expression model.
 
 ---
 
-```
+```jule
 struct TupleExprModel {
     datas: []&Data
 }
@@ -357,7 +357,7 @@ Tuple expression model.
 
 ---
 
-```
+```jule
 struct BuiltinOutCallExprModel {
     expr:  ExprModel
 }
@@ -366,7 +366,7 @@ Expression model for built-in out function calls.
 
 ---
 
-```
+```jule
 struct BuiltinOutlnCallExprModel {
     expr:  ExprModel
 }
@@ -375,7 +375,7 @@ Expression model for built-in outln function calls.
 
 ---
 
-```
+```jule
 struct BuiltinCloneCallExprModel {
     expr:  ExprModel
 }
@@ -384,7 +384,7 @@ Expression model for built-in clone function calls.
 
 ---
 
-```
+```jule
 struct BuiltinCloneNewExprModel {
     kind: &TypeKind
     init: ExprModel
@@ -394,7 +394,7 @@ Expression model for built-in new function calls.
 
 ---
 
-```
+```jule
 struct BuiltinRealCallExprModel {
     expr:  ExprModel
 }
@@ -403,7 +403,7 @@ Expression model for built-in real function calls.
 
 ---
 
-```
+```jule
 struct BuiltinDropCallExprModel {
     expr:  ExprModel
 }
@@ -412,7 +412,7 @@ Expression model for built-in drop function calls.
 
 ---
 
-```
+```jule
 struct BuiltinPanicCallExprModel {
     expr:  ExprModel
 }
@@ -421,7 +421,7 @@ Expression model for built-in panic function calls.
 
 ---
 
-```
+```jule
 struct BuiltinMakeCallExprModel {
     kind: &TypeKind
     size: ExprModel
@@ -431,7 +431,7 @@ Expression model for built-in make function calls.
 
 ---
 
-```
+```jule
 struct BuiltinErrorTraitSubIdentCallExprModel {
     expr:  ExprModel
     ident: str
@@ -441,7 +441,7 @@ Expression model for sub-ident expression to built-in Error trait.
 
 ---
 
-```
+```jule
 struct SizeofExprModel {
     expr:  ExprModel
 }
@@ -451,7 +451,7 @@ For exmaple, in C++: `sizeof(int)`
 
 ---
 
-```
+```jule
 struct AlignofExprModel {
     expr:  ExprModel
 }
@@ -461,7 +461,7 @@ For exmaple, in C++: `alignof(int)`
 
 ---
 
-```
+```jule
 struct StrConstructorCallExprModel {
     expr:  ExprModel
 }
@@ -471,7 +471,7 @@ For exmaple: `str(my_expr)`
 
 ---
 
-```
+```jule
 struct RuneExprModel {
     code: rune
 }
@@ -481,7 +481,7 @@ For exmaple: `'a'`
 
 ---
 
-```
+```jule
 struct ExplicitDerefExprModel {
     expr: ExprModel
 }
@@ -490,7 +490,7 @@ Expression model for explicit dereferencing of reference.
 
 ---
 
-```
+```jule
 struct RetType {
     kind:   &TypeSymbol
     idents: []Token
@@ -500,7 +500,7 @@ Return type.
 
 ---
 
-```
+```jule
 struct Param {
     token:     Token
     mutable:   bool
@@ -522,7 +522,7 @@ Reports whether self (receiver) parameter is reference.
 
 ---
 
-```
+```jule
 struct Fn {
     token:      Token
     global:     bool
@@ -570,7 +570,7 @@ Reports whether result type uses generic types.
 
 ---
 
-```
+```jule
 struct ParamIns {
     decl: &Param
     kind: &TypeKind
@@ -584,7 +584,7 @@ Parameter instance.
 
 ---
 
-```
+```jule
 struct FnIns {
     owner:      &StructIns
     decl:       &Fn
@@ -620,7 +620,7 @@ Does not appends identifier of this instance to kind if self.decl is nil referen
 
 ---
 
-```
+```jule
 struct Impl {
     base:    Token
     dest:    Token
@@ -639,7 +639,7 @@ Reports whether implementation type is append to destination structure.
 
 ---
 
-```
+```jule
 struct ImportInfo {
     // Use declaration token.
     token: Token
@@ -682,7 +682,7 @@ Represents imported package by use declaration.
 
 ---
 
-```
+```jule
 struct Package {
     files: []&SymbolTable
 }
@@ -695,7 +695,7 @@ Package.
 
 ---
 
-```
+```jule
 struct Scope {
     parent:   &Scope
     unsafety: bool
@@ -707,7 +707,7 @@ Scope.
 
 ---
 
-```
+```jule
 struct If {
     expr:  ExprModel
     scope: &Scope
@@ -717,7 +717,7 @@ Cain conditional node.
 
 ---
 
-```
+```jule
 struct Else {
     scope: &Scope
 }
@@ -726,7 +726,7 @@ Default scope of conditional chain.
 
 ---
 
-```
+```jule
 struct Conditional {
     elifs:  []&If
     default: &Else
@@ -736,7 +736,7 @@ Conditional chain.
 
 ---
 
-```
+```jule
 struct InfIter {
     scope: &Scope
 }
@@ -745,7 +745,7 @@ Infinity iteration.
 
 ---
 
-```
+```jule
 struct WhileIter {
     expr:  ExprModel
     next:  St
@@ -761,7 +761,7 @@ Reports whether iteration is while-next.
 
 ---
 
-```
+```jule
 struct RangeIter {
     expr:  ExprModel
     scope: &Scope
@@ -773,7 +773,7 @@ Range iteration.
 
 ---
 
-```
+```jule
 struct Contst {
     it: uintptr
 }
@@ -782,7 +782,7 @@ Continue statement.
 
 ---
 
-```
+```jule
 struct Breakst {
     it:   uintptr
     mtch: uintptr
@@ -792,7 +792,7 @@ Break statement.
 
 ---
 
-```
+```jule
 struct Label {
     ident: str
 }
@@ -800,7 +800,7 @@ struct Label {
 
 ---
 
-```
+```jule
 struct GotoSt {
     ident: str
 }
@@ -808,7 +808,7 @@ struct GotoSt {
 
 ---
 
-```
+```jule
 struct Postfix {
     expr: ExprModel
     op:   str
@@ -818,7 +818,7 @@ Postfix assignment.
 
 ---
 
-```
+```jule
 struct Assign {
     l:  ExprModel
     r:  ExprModel
@@ -829,7 +829,7 @@ Assignment.
 
 ---
 
-```
+```jule
 struct MultiAssign {
     l: []ExprModel
     r: ExprModel
@@ -839,7 +839,7 @@ Multi-declarative assignment.
 
 ---
 
-```
+```jule
 struct Match {
     expr:       &Data
     type_match: bool
@@ -851,7 +851,7 @@ Match-Case.
 
 ---
 
-```
+```jule
 struct Case {
     owner: &Match
     scope: &Scope
@@ -867,7 +867,7 @@ Reports whether case is default.
 
 ---
 
-```
+```jule
 struct FallSt {
     dest_case: uintptr
 }
@@ -875,7 +875,7 @@ struct FallSt {
 
 ---
 
-```
+```jule
 struct RetSt {
     vars: []&Var
     expr: ExprModel
@@ -885,7 +885,7 @@ Return statement.
 
 ---
 
-```
+```jule
 struct Recover {
     handler:      &FnIns
     handler_expr: ExprModel
@@ -897,7 +897,7 @@ Built-in recover function call statement.
 
 ---
 
-```
+```jule
 struct ReferenceStack {}
 ```
 Stack for symbol references.
@@ -921,7 +921,7 @@ Reports whether reference is exist.
 
 ---
 
-```
+```jule
 struct Field {
     owner:   &Struct
     token:   Token
@@ -934,7 +934,7 @@ struct Field {
 
 ---
 
-```
+```jule
 struct Struct {
     depends:    []&Struct
     uses:       []&Struct
@@ -973,7 +973,7 @@ Reports whether structure is uses given structure.
 
 ---
 
-```
+```jule
 struct FieldIns {
     decl: &Field
     kind: &TypeKind
@@ -983,7 +983,7 @@ Field instance.
 
 ---
 
-```
+```jule
 struct StructIns {
     checked:    bool
     decl:       &Struct
@@ -1012,7 +1012,7 @@ Returns nil reference if not exist any field in this identifier.
 
 ---
 
-```
+```jule
 struct Pass {
     token: Token
     text:  str
@@ -1022,7 +1022,7 @@ Directive pass.
 
 ---
 
-```
+```jule
 struct SymbolTable {
     file:         &File               // Owner fileset of this symbol table.
     passes:       Vector[Pass]        // All passed flags with jule:pass directive.
@@ -1044,7 +1044,7 @@ Structure instance.
 
 ---
 
-```
+```jule
 struct Trait {
     token:       Token
     ident:       str
@@ -1071,7 +1071,7 @@ Returns nil reference if not exist any method in this identifier.
 
 ---
 
-```
+```jule
 struct TypeAlias {
     scope:      &ScopeTree
     public:     bool
@@ -1092,7 +1092,7 @@ Type alias.
 
 ---
 
-```
+```jule
 struct TypeKind {
     cpp_linked: bool
     cpp_ident:  str
@@ -1148,7 +1148,7 @@ Returns primitive type if kind is tuple, nil reference if not.
 
 ---
 
-```
+```jule
 struct TypeSymbol {
     decl: &TypeDecl
     kind: &TypeDecl
@@ -1158,7 +1158,7 @@ Type.
 
 ---
 
-```
+```jule
 struct Prim {
     kind: str
 }
@@ -1221,7 +1221,7 @@ Reports whether type is primitive any.
 
 ---
 
-```
+```jule
 struct Slc {
     elem: &TypeKind
 }
@@ -1234,7 +1234,7 @@ Slice type.
 
 ---
 
-```
+```jule
 struct Tuple {
     types: []&TypeKind
 }
@@ -1247,7 +1247,7 @@ Tuple type.
 
 ---
 
-```
+```jule
 struct Map {
     key: &TypeKind
     val: &TypeKind
@@ -1261,7 +1261,7 @@ Map type.
 
 ---
 
-```
+```jule
 struct Arr {
     elem: &TypeKind
 }
@@ -1274,7 +1274,7 @@ Array type.
 
 ---
 
-```
+```jule
 struct Ptr {
     elem: &TypeKind
 }
@@ -1292,7 +1292,7 @@ Reports whether pointer is unsafe pointer (*unsafe).
 
 ---
 
-```
+```jule
 struct Var {
     scope:      &ScopeTree
     token:      Token
@@ -1325,7 +1325,7 @@ Reports whether variable is initialized explicitly.
 Reports whether variable is type inferred.
 
 ## Traits
-```
+```jule
 trait Lookup {
     // Find imported package.
     // Returns nil reference if did not found any match.
@@ -1364,7 +1364,7 @@ Lookup.
 
 ---
 
-```
+```jule
 trait Importer {
     // Returns &ImportInfo by path.
     // This function accepted as returns already imported and checked package.

@@ -1,34 +1,34 @@
 # std::fs::path
 
 ## Constants
-```
+```jule
 const SEPARATOR
 ```
 Operating system specific path separator.
 
 ---
 
-```
+```jule
 const LIST_SEPARATOR
 ```
 Operating system specific path list separator.
 
 ## Functions
-```
+```jule
 fn is_abs(path: str): bool
 ```
 Reports whether the path is absolute.
 
 ---
 
-```
+```jule
 fn is_path_sep(c: u8): bool
 ```
 Reports whether c is path separator.
 
 ---
 
-```
+```jule
 fn clean(mut path: str): str
 ```
 Returns the shortest path name equivalent to path by purely lexical processing.\
@@ -52,7 +52,7 @@ For example, `clean("//host/share/../x")` returns `\\host\share\x`.
 
 ---
 
-```
+```jule
 fn to_slash(path: str): str
 ```
 Returns the result of replacing each separator character in path with a slash (`/`) character.\
@@ -60,7 +60,7 @@ Multiple separators are replaced by multiple slashes.
 
 ---
 
-```
+```jule
 fn from_slash(path: str): str
 ```
 Returns the result of replacing each slash (`/`) character in path with a separator character.\
@@ -68,7 +68,7 @@ Multiple slashes are replaced by multiple separators.
 
 ---
 
-```
+```jule
 fn join(elem: ...str): str
 ```
 Joins any number of path elements into a single path, separating them with an OS specific `SEPARATOR`.
@@ -78,7 +78,7 @@ On Windows, the result will only be a UNC path if the first non-empty element is
 
 ---
 
-```
+```jule
 fn ext(path: str): str
 ```
 Returns the file name extension used by path.\
@@ -86,7 +86,7 @@ The extension is the suffix beginning at the final dot in the final element of p
 
 ---
 
-```
+```jule
 fn abs(path: str): (str, ok: bool)
 ```
 Returns an absolute representation of path.\
@@ -96,7 +96,7 @@ The absolute path name for a given file is not guaranteed to be unique.\
 
 ---
 
-```
+```jule
 fn base(mut path: str): str
 ```
 Returns the last element of path.\
@@ -106,7 +106,7 @@ If the path consists entirely of separators, base returns a single separator.
 
 ---
 
-```
+```jule
 fn dir(path: str): str
 ```
 Returns all but the last element of path, typically the path's directory.\
@@ -117,7 +117,7 @@ The returned path does not end in a separator unless it is the root directory.
 
 ---
 
-```
+```jule
 fn volume_name(path: str): str
 ```
 Returns leading volume name.\

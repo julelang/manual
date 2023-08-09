@@ -2,7 +2,7 @@
 Type aliases is an alias for existing types defined by developer. When these aliases are used, they qualify the types they represent.
 
 For example:
-```
+```jule
 type int32: i32
 
 fn main() {

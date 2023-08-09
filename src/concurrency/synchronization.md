@@ -4,7 +4,7 @@ Synchronization is something you might want for concurrency. It has been mention
 
 For example:
 
-```
+```jule
 fn say_hello() {
     co outln("Hello World")
 }
@@ -20,7 +20,7 @@ Jule provides the `WaitGroup` struct in the `std::sync` standard library so that
 
 For example:
 
-```
+```jule
 use std::sync::{WaitGroup}
 
 fn say_hello(mut wg: *WaitGroup) {

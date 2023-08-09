@@ -4,42 +4,42 @@
 Is the size in bits of an int or uint value.
 
 ## Functions
-```
+```jule
 fn conv_bool(s: str): (bool, ConvError)
 ```
 Returns the boolean value represented by the string. It accepts 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False. Any other value returns an error.
 
 ---
 
-```
+```jule
 fn fmt_bool(b: bool): str
 ```
 Returns "true" or "false" according to the value of b.
 
 ---
 
-```
+```jule
 fn fmt_uint(i: u64, base: int): str
 ```
 Returns the string representation of i in the given base, for 2 <= base <= 36. The result uses the lower-case letters 'a' to 'z' for digit values >= 10.
 
 ---
 
-```
+```jule
 fn fmt_int(i: i64, base: int): str
 ```
 Returns the string representation of i in the given base, for 2 <= base <= 36. The result uses the lower-case letters 'a' to 'z' for digit values >= 10. 
 
 ---
 
-```
+```jule
 fn itoa(i: int): str
 ```
 Is equivalent to fmt_int(i64(i), 10).
 
 ---
 
-```
+```jule
 fn fmt_float(f: f64, fmt: byte, prec: int, bit_size: int): str
 ```
 Converts the floating-point number f to a string, according to the format fmt and precision prec. It rounds the result assuming that the original was obtained from a floating-point value of bit_size bits (32 for f32, 64 for f64).
@@ -58,7 +58,7 @@ The precision prec controls the number of digits (excluding the exponent) printe
 
 ---
 
-```
+```jule
 fn parse_int(mut s: str, base: int, mut bit_size: int): (i64, ConvError)
 ```
 Interprets a string s in the given base (0, 2 to 36) and bit size (0 to 64) and returns the corresponding value i.
@@ -73,14 +73,14 @@ The errors that parse_int returns have concrete type ConvError. If s is empty or
 
 ---
 
-```
+```jule
 fn parse_uint(mut s: str, mut base: int, mut bit_size: int): (u64, ConvError)
 ```
 Is like parse_int but for unsigned numbers. A sign prefix is not permitted. 
 
 ---
 
-```
+```jule
 fn parse_float(s: str, bit_size: int): (f64, ConvError)
 ```
 Converts the string s to a floating-point number with the precision specified by bit_size: 32 for f32, or 64 for f64. When bit_size=32, the result still has type f64, but it will be convertible to f32 without changing its value.
@@ -96,7 +96,7 @@ If s is syntactically well-formed but is more than 1/2 ULP away from the largest
 Recognizes the string "nan", and the (possibly signed) strings "inf" and "infinity" as their respective special floating point values. It ignores case when matching. 
 
 ## Enums
-```
+```jule
 enum ConvError
 ```
 Error codes of conv package.

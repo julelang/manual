@@ -2,7 +2,7 @@
 Illegal cycles occur when the program will have an invalid runtime cycle. 
 
 For example:
-```
+```jule
 struct A {
     b: B
 }
@@ -16,7 +16,7 @@ In the example above, both structures refer directly to each other. This is an i
 
 ---
 
-```
+```jule
 struct A {
     a: A
 }

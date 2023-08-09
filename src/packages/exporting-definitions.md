@@ -14,14 +14,14 @@ You can mark public these kind of definitions:
 - Trait
 
 For example to public definitions: 
-```
+```jule
 fn add(x: int, y: int): int { ret x + y }
 ```
 The `add` function is private.\
 With the keyword `pub`, you can public definition.
 
 For example: 
-```
+```jule
 pub fn add(x: int, y: int): int { ret x + y }
 ```
 The `add` function is public now.
@@ -30,7 +30,7 @@ The `add` function is public now.
 Implicit export is when definitions that are not explicitly defined as public are implicitly served as public by another public definition. For example, a private struct can have public fields. But since the struct is private, it cannot be accessed from outside the package. A wrapper function that provides this can access the struct and return an instance of it because it is in its own package. This is an implicit export.
 
 For example, the package `foo`:
-```
+```jule
 struct MyStruct {
     pub number: int
 }
@@ -42,7 +42,7 @@ pub fn new_mystruct(number: int): MyStruct {
 }
 ```
 Your code:
-```
+```jule
 use foo::{new_mystruct}
 
 fn main() {

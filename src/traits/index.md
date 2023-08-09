@@ -5,7 +5,7 @@ Traits can be used to represent common behaviors. As a result of the implementat
 Functions in a trait should only exist as prototypes (declaration of a trait, not a definition).
 
 For example:
-```
+```jule
 trait Person {
     fn name(): str
     fn age(): u8
@@ -18,7 +18,7 @@ All constructs that implement the trait above, must have the methods `name() str
 Traits supports access modifiers for definitions. And access modifier of relevant define, should implemented as same.
 
 For example:
-```
+```jule
 trait Person {
     pub fn name(): str
     pub fn age(): u8

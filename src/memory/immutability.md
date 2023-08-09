@@ -24,7 +24,7 @@ Okay, so why doesn't the compiler implement immutability by default only for tho
 Let's learn to say how we want a variable that is immutable by default to be mutable. The keyword `mut` is used for this. Before defining a variable, declare it mutable with this keyword. Then you will have a mutable variable.
 
 But before that, let's make a deliberate mistake to better understand immutability:
-```
+```jule
 fn main() {
     let x = 20
     x++
@@ -32,7 +32,7 @@ fn main() {
 }
 ```
 The example above is absolutely wrong. Because the variable `x` we have is an immutable variable. And the `x++` statement definitely breaks immutability. In this case, compiler will give error. Now let's repeat the same example using a mutable variable. 
-```
+```jule
 fn main() {
     let mut x = 20
     x++
@@ -48,7 +48,7 @@ All literals and received pointers are considered mutable.
 Mutable structures are risky structures that can break immutability when directly copied. For a structure to be mutable, one of its fields must have an explicitly mutable data type. When a struct is mutable, it loses its ability to be copied. In this case, if you try to assign an immutable mutable struct instance to a mutable definition, you will fail because there is no copy and you risk breaking immutability.
 
 See the example below for better understanding:
-```
+```jule
 struct Wrapper {
     slc: []int
 }
@@ -68,7 +68,7 @@ The variable `x` in the example shows the case of keeping the mutable structure 
 You can derive `Clone` to solve this problem.
 
 For example:
-```
+```jule
 //jule:derive Clone
 struct Wrapper {
     slc: []int
@@ -92,7 +92,7 @@ It is recommended that fields within interior mutability not be public, although
 Now let's take a look at how interior mutability is achieved. Actually, this is a pretty simple. If you are a developer who has used C++ before, you may be familiar with the mutable keyword in this regard. Similarly, Jule uses the already existing keyword mut for mutability. For interior mutability, the relevant field must be declared with the mut keyword. This means that field can exhibit interior mutability.
 
 For example:
-```
+```jule
 struct MyStruct {
     mut x: int
     y: int
@@ -144,7 +144,7 @@ Cloning supported types and copy methods:
 Clone cycles are a kind of illegal cycle. In cases where you risk an endless cloning cycle at runtime, the compiler will give you an illegal cycle error. Cloning cycles usually occur in nested types, in which it will try to clone itself forever, which somehow attaches to itself.
 
 For example:
-```
+```jule
 //jule:derive Clone
 struct A {
     b: &B

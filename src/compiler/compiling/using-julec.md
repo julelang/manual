@@ -2,7 +2,7 @@
 Let's start with a simple hello world program and learn compiling from this program.
 
 We have a `main.jule` file:
-```
+```jule
 fn main() {
     outln("Hello, World!")
 }
@@ -30,7 +30,7 @@ If you want to compile your code with backend-compiler optimizations, there are 
 You can add the `pass` directive to a suitable place in the main package of your program and adjust the optimizations of your backend-compiler. This method works most of the time.
 
 For example to enable Clang's `O3` optimizations:
-```
+```jule
 //jule:pass -O3
 ```
 

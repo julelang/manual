@@ -17,10 +17,10 @@ It is unnecessary for a pointer to point to a reference. You're probably doing t
 As explained above, you are probably doing this to share the same address. Getting a pointer to a reference and getting a pointer pointing to the address that reference is pointing to should then be the same for you. If you had a pointer to a reference, that would raise issues for you. Because the references you point to are also variables, for example, when using the atomicity functions in the standard library, instead of performing an atomic operation for the allocation of that reference, you have to perform an atomic operation for the reference itself. This atomicity is unnecessary because what you need is the atomicity that is above the allocation of the reference.
 
 Example to reference data type anotations:
-```
+```jule
 &int
 ```
-```
+```jule
 &MyStruct
 ```
 
@@ -36,7 +36,7 @@ The built-in `new` function is used to make the reference. Please refer to the [
 It can be used in two ways. The first type allows you to get only one reference, but that reference is an uninitialized reference (aka nil reference), meaning it does not point to any allocation and does not perform reference counting.
 
 For example:
-```
+```jule
 fn main() {
     let x = new(int)
     outln(x)
@@ -47,7 +47,7 @@ The `x` variable is integer reference, but not have allocation.
 The second type is references initialized with a value. These references are initialized with an allocation when they are created and perform reference counting, the given value is assigned to the created allocation. 
 
 For example:
-```
+```jule
 fn main() {
     let x = new(int, 100)
     outln(x)
@@ -60,7 +60,7 @@ The `x` variable is a heap-allocated reference initialized with 100.
 References that are automatically initialized by the compiler are created as null references. 
 
 For example:
-```
+```jule
 fn main() {
     let x = make([]&int, 1)
     outln(real(x[0])) // false
@@ -77,7 +77,7 @@ Assigning a reference to nil does not make all references to be set to nil. It s
 The built-in `drop` function drops allocation and reference counting, sets reference to nil. If you want to check if the reference is zero and has allocation, use the built-in real function. The real function returns boolean.
 
 For example:
-```
+```jule
 fn main() {
     let mut x = new(int, 20)
     outln(real(x)) // true
@@ -92,7 +92,7 @@ A reference counting heap counts each time it gets a reference to a dedicated po
 Reference counting is not a program running in the background. Therefore, it does not host variable loads at runtime like the garbage collector and its release times are always specific. Reference counting offers the developer a deterministic memory management.
 
 For example:
-```
+```jule
 fn test() {
 
     // Make heap-allocation, returns heap-allocated &int initialized with 100
@@ -141,7 +141,7 @@ Data types that already perform reference counting can be used with references i
 If the reference count of the migrated data has not reached zero, but the reference carrying it has now released its allocation, there is no problem. This is because the reference counting and allocation control of the data it carries take place independently.
 
 For example:
-```
+```jule
 fn main() {
     let ref = new([]int, [1, 2, 3, 4])
     let s: []int = ref
@@ -162,7 +162,7 @@ Jule does not handle reference cycles. Obviously this can create a significant o
 If the references point to each other or to themselves, a cycle occurs, and even if it goes out of use, the allocation is not freed, so memory leaks can occur. The best way to avoid this is to consider cycles in the programming phase.
 
 For example:
-```
+```jule
 struct A {
     b: &B
 }
@@ -181,7 +181,7 @@ fn main() {
 There is a cycle in the above code. Obviously this cycle is creates a memory leak. If there is such a cycle risk, the easiest and shortest solution is to drop the references so that the cycle will break.
 
 For example:
-```
+```jule
 struct A {
     b: &B
 }
@@ -206,7 +206,7 @@ Software developers may not always have code that they can cycle through. But wh
 Slices have a capacity, but don't free unused capacities. This capacity can be used during slicing. If you have a slice with a length of 5 but its capacity is 8, you can expand the slice to use all the capacity by giving 8 during slicing.
 
 For example:
-```
+```jule
 fn main() {
     let mut s = [1, 2, 3]
     s = append(s, 4, 5)

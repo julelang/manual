@@ -4,10 +4,10 @@
 As always, your links are reliable. Generics are supported in linking a structure. Not all fields have to be specified. If you're only going to use the struct by name, you can also declare it without the fields. The requirements here are limited to your needs and what needs to be declared for compliance.
 
 For example:
-```
+```jule
 cpp struct my_struct{}
 ```
-```
+```jule
 cpp struct my_struct {
     x: int
     y: str
@@ -24,7 +24,7 @@ Structure linking is C-compliant by default. You can use the `typedef` directive
 
 For example:
 
-```
+```jule
 //jule:typedef
 cpp struct my_struct {
     x: int
@@ -50,7 +50,7 @@ struct MyStruct {
 ```
 
 Our `main.jule` file:
-```
+```jule
 cpp use "mystruct.hpp"
 
 //jule:typedef
@@ -70,7 +70,7 @@ fn main() {
 ---
 
 If the struct is a typedef, say it's a typedef with attribute `typedef` for correct linking:
-```
+```jule
 //jule:typedef
 cpp struct my_struct {}
 ```
@@ -91,7 +91,7 @@ public:
 ```
 
 The Jule code:
-```
+```jule
 //jule:typedef
 cpp struct MyClass {
     data: str

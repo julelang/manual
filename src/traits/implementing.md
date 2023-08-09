@@ -1,6 +1,6 @@
 # Implementing
 To implement a trait to a structure, the following syntax needs to be applied:
-```
+```jule
 impl TRAIT for STRUCT {
     // Implementations...
 }
@@ -9,7 +9,7 @@ impl TRAIT for STRUCT {
 `STRUCT`: Structure implementing the trait
 
 For example:
-```
+```jule
 const PI = 3.14159265359
 
 trait Shape {

@@ -4,7 +4,7 @@
 Although it is possible to link any typedef, these type aliases are not like standard aliases, for example they cannot be used as an alias for a struct if you use them in an expression. These type aliases are for linking unavoidable types to Jule.
 
 For example: 
-```
+```jule
 cpp type char: byte
 ```
 
@@ -17,7 +17,7 @@ If the types you use do not belong to Jule, if you are linking from C/++, make s
 Type alias linking is the same as type linking.
 
 For example:
-```
+```jule
 cpp type char: byte
 cpp type CPTR: *cpp.char
 ```
@@ -27,7 +27,7 @@ cpp type CPTR: *cpp.char
 For type safety reasons, linked types are only compatible with linked types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a linked `char` type, or vice versa, even if you have linked the `char` type as `byte`. To do this, if you have linked with a compatible type, you can cast it.
 
 For example:
-```
+```jule
 cpp type char: byte
 
 cpp fn get_char(): cpp.char
@@ -45,7 +45,7 @@ The above code should execute without problems, but removing casting will result
 To achieve full compatibility with C types, your compiler encourages you to use only those types. There is an important and simple reason for this: type safety. Even if they are fully compatible, if your compiler treated them like Jule types, it would be easier to get compiler errors and you would run into various problems.
 
 For example:
-```
+```jule
 cpp type char: byte
 
 cpp unsafe fn printf(*cpp.char)

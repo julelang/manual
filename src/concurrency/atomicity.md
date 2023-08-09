@@ -4,7 +4,7 @@ Atomicity is important for concurrency. An atomic operation guarantees that the 
 
 Here is an example code:
 
-```
+```jule
 static mut n: int = 0
 
 fn add_to_n() {
@@ -30,7 +30,7 @@ Atomic accesses can be used to synchronize memory accesses. An atomic process lo
 
 Jule provides the `std::sync::atomic` package for atomicity as standard. Now let's take a look at the above code secured with `WaitGroup` and atomic operations:
 
-```
+```jule
 use std::sync::{WaitGroup}
 use std::sync::atomic::{MemoryOrder, add_i64}
 

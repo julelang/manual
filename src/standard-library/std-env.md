@@ -21,7 +21,7 @@ You got nil slice if used as initialize expression to any global.
 
 ## Functions
 
-```
+```jule
 fn working_dir(): (str, EnvError)
 ```
 Returns an absolute path name of the current working directory of the calling process.
@@ -30,12 +30,20 @@ Possible errors: `Denied`
 
 ---
 
-```
+```jule
 fn set_working_dir(path: str): EnvError
 ```
 Changes the current working directory to the given directory.
 
 Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `InsufficientMemory`
+
+---
+
+```jule
+fn executable(): str
+```
+Returns executable path.\
+Returns empty string if any error occurs. 
 
 ## Enums
 `enum EnvError`

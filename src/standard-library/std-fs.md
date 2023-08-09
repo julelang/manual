@@ -1,7 +1,7 @@
 # std::fs
 
 ## Functions
-```
+```jule
 fn stat(path: str): (s: &Status, err: FsError)
 ```
 Returns a Status describing the path.\
@@ -11,7 +11,7 @@ Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 
 ---
 
-```
+```jule
 fn read_dir(path: str): ([]&DirEntry, FsError)
 ```
 Reads the named directory and returs all its directory entries can read.\
@@ -21,7 +21,7 @@ Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit
 
 ---
 
-```
+```jule
 fn read_file(path: str): ([]byte, FsError)
 ```
 Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
@@ -30,7 +30,7 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 
 ---
 
-```
+```jule
 fn remove_file(path: str): FsError
 ```
 Removes named file.
@@ -39,7 +39,7 @@ Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `No
 
 ---
 
-```
+```jule
 fn create_dir(path: str): FsError
 ```
 Creates directory.
@@ -48,7 +48,7 @@ Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
 
 ---
 
-```
+```jule
 fn remove_dir(path: str): FsError
 ```
 Removes empty directory.
@@ -57,7 +57,7 @@ Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ---
 
-```
+```jule
 fn open(path: str, flag: OFlag, mode: int): (&File, FsError)
 ```
 Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) and perm. If named file does not exist and Sema.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
@@ -65,7 +65,7 @@ Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) a
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
 ## Structs
-```
+```jule
 struct Status {
     // Type and mode.
     mode: uint

@@ -13,7 +13,7 @@ Byte literal patterns:
 
 ---
 
-```
+```jule
 fn to_rune(bytes: []byte): rune
 ```
 Returns rune value string from bytes, not includes quotes.\
@@ -22,7 +22,7 @@ Returns empty string if bytes.len == 0
 
 ---
 
-```
+```jule
 fn to_raw_str(bytes: []byte): str
 ```
 Returns raw-string value string from bytes, not includes quotes.\
@@ -31,7 +31,7 @@ Returns empty string if bytes.len == 0
 
 ---
 
-```
+```jule
 fn to_str(bytes: []byte): str
 ```
 Returns string value string from bytes, not includes quotes.\

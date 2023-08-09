@@ -5,7 +5,7 @@ Blocks are indicated by braces, except in exceptional cases. Each block represen
 Anonymous blocks are blocks that do not belong to a definition (function, etc.).
 
 For example:
-```
+```jule
 fn main() {
     {
       // Anonymous block
@@ -18,7 +18,7 @@ The above example shows an anonymous block (scope) contained within the block (s
 Deferred blocks are blocks whose execution is deferred until the scope they are in expires. Declares with the `defer` keyword.
 
 For example:
-```
+```jule
 fn main() {
     defer {
         outln("Hello Defer")
@@ -32,7 +32,7 @@ In the example above, the output `Hello World` appears before. This is because t
 Unsafe blocks allows to use Unsafe Jule. Declares with the `unsafe` keyword.
 
 For example:
-```
+```jule
 fn main() {
     unsafe {
       // Unsafe anonymous block
@@ -45,7 +45,7 @@ fn main() {
 You may want to use Unsafe Jule and deferred blocks at the same time. You can do this.
 
 For example: 
-```
+```jule
 fn main() {
     unsafe defer {
       // Deferred unsafe anonymous block

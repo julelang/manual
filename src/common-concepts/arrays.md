@@ -6,7 +6,7 @@ The array for storing a fixed size sequence of elements.
 [CONST_SIZE_EXPRESSION]DATA_TYPE
 ```
 For example:
-```
+```jule
 [50]int
 ```
 
@@ -14,7 +14,7 @@ For example:
 You can use `...` for auto computing size of array literal at compile time.
 
 For example:
-```
+```jule
 let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 ```
 
@@ -24,7 +24,7 @@ Index system is simple. Starts at `0` and continue step by step, it is never not
 Arrays is use indexes to access elements and assignment.
 
 For example:
-```
+```jule
 fn main() {
     let mut my_array: [3]str = ["Hello", "arrays", "indexes"]
     outln(my_array[0])
@@ -44,7 +44,7 @@ Hello
 Multidimensional arrays is array storing arrays.
 
 For example:
-```
+```jule
 fn main() {
     let my_array: [2][2]str = [
         ["Apple", "Banana"],

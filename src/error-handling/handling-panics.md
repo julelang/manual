@@ -2,7 +2,7 @@
 There is a builtin function that allows you to catch panics and keep your program running. The buil-in `recover` function once used, it catches panics of ongoing codes. It just catch panics the codes of the scope it is in. It just catch panics of the codes of the scope it is in.
 
 For example:
-```
+```jule
 fn may_panic() {
     panic("a problem")
 }
@@ -14,7 +14,7 @@ fn main() {
 The example code above will panic. To be recovered it must be editing using the `recover` function.
 
 For example:
-```
+```jule
 fn may_panic() {
     panic("a problem")
 }
@@ -33,7 +33,7 @@ Since the `recover` function is used, the panic of the `may_panic` function will
 You can use a function as recover handler.
 
 For example:
-```
+```jule
 fn handler(e: Error) {
     // ...
 }
@@ -50,7 +50,7 @@ You can catch panics with the built-in `recover` function in a returning functio
 
 For example:
 
-```
+```jule
 fn test(): int {
     recover(fn(e: Error) {
         outln("Panic Catched!")

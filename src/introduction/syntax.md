@@ -8,7 +8,7 @@ Any body should follow its declaration. For example, you are defining a function
 
 For example:
 
-```
+```jule
 // It's fine.
 fn main() {
     // ...
@@ -29,7 +29,7 @@ You can use statement terminator if you want write two or more statement as side
 Well, how we separate statements? Easy, please skip to next line or finish write.
 
 For example:
-```
+```jule
 fn main() {
     [STATEMENT_1]; [STATEMENT_2]
     [STATEMENT_3]
@@ -47,7 +47,7 @@ Parentheses accept all tokens until closed when used with expression. Therefore,
 
 For example:
 
-```
+```jule
 let (x, y) = 20, false
 if (x == 10 ||
 	y == false) {
@@ -60,7 +60,7 @@ Binary expressions try to check from the next line if they need an operand even 
 
 For example:
 
-```
+```jule
 let (x, y) = 20, false
 if x == 10 ||
 	y == false {

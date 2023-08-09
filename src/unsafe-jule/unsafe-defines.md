@@ -4,7 +4,7 @@
 You can call unsafe functions with Unsafe Jule. Functions or methods that qualify as unsafe can only be called with Unsafe Jule. Functions that qualify as unsafe can only be called with an Unsafe Jule and have an Unsafe Jule throughout their entire body.
 
 For example:
-```
+```jule
 unsafe fn my_unsafe_fn() { /* ... */ }
 ```
 ::: tip

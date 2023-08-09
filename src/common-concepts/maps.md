@@ -5,7 +5,7 @@ Map values ​​are not kept in the inserted order. Hence iterations etc. It's 
 :::
 
 Example to maps:
-```
+```jule
 fn main() {
     let mut mymap: [i8:str] = {
         0: "CPU",
@@ -24,7 +24,7 @@ In iterations, the first variable is the key and the second variable is the valu
 To get the value of a key, it is sufficient to index it with the key.
 
 For example:
-```
+```jule
 mymap[1]
 ```
 The example at above, gives `"RAM"` value.\
@@ -35,14 +35,14 @@ If you try to access a key that does not exist, it will return the default value
 To change the value of a key, it is sufficient to do a classic assignment by indexing the key.
 
 For example:
-```
+```jule
 mymap[1] = "SSD"
 ```
 
 To add a key-value pair that doesn't exist, it's still just a classic assignment.
 
 For example:
-```
+```jule
 mymap[3] = "HDD"
 ```
 If the key does not exist when you assign it, the key is generated and matched with the value you assigned. 

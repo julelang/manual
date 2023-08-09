@@ -9,7 +9,7 @@ For example:\
 #define TICKRATE 256
 ```
 **sum.jule**
-```
+```jule
 cpp use "tickrate.hpp"
 
 cpp let tickrate: int
@@ -33,7 +33,7 @@ For example:\
 #define SUM(X, Y) (X+Y)
 ```
 **sum.jule**
-```
+```jule
 cpp use "sum.hpp"
 
 //jule:cdef

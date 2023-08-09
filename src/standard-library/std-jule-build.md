@@ -188,7 +188,7 @@ Reports whether architecture is 32-bit.
 Reports whether architecture is 64-bit.
 
 ## Structs
-```
+```jule
 struct Log {
     kind:   LogKind
     row:    int

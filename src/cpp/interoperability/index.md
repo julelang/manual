@@ -5,13 +5,13 @@ Jule can interop with C++. A code written in C++ compatible with Jule can be tra
 C++ links are stored separately. So to access C++ definitions it is necessary to use the C++ scope. The keyword `cpp` is used to use the C++ scope. The linked identifier can be used after the expression `cpp.`.
 
 For example:
-```
+```jule
 cpp.my_variable
 ```
-```
+```jule
 cpp.my_struct{}
 ```
-```
+```jule
 cpp.my_function(x, y, z)
 ```
 
@@ -29,7 +29,7 @@ Int sum(const Slice<Int> slice) {
 }
 ```
 **main.jule**
-```
+```jule
 cpp use "sum.hpp"
 
 cpp fn sum([]int): int

@@ -1723,7 +1723,7 @@ Available on: `windows`
 :::
 
 ## Functions
-```
+```jule
 fn utf16_from_str(s: str): []u16
 ```
 Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.
@@ -1733,7 +1733,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 fn utf16_to_str(s: []u16): str
 ```
 Returns the UTF-8 encoding of the UTF-16 sequence s, with a terminating NULL removed. Returns empty string if s is nil.
@@ -1743,7 +1743,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 fn get_std_handle(stdh: uintptr): handle
 ```
 ::: warning
@@ -1752,7 +1752,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn close_handle(stdh: handle): bool
 ```
 ::: warning
@@ -1761,14 +1761,14 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 fn get_last_errno(): errno
 ```
 Returns number of last error.
 
 ---
 
-```
+```jule
 unsafe fn stat(path: *byte, mut stat: *Stat): int
 ```
 Calls C's stat function.
@@ -1778,7 +1778,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn wstat(path: *u16, mut stat: *Stat): int
 ```
 Calls C's wstat function.
@@ -1788,7 +1788,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn open(path: *byte, flag: int, mode: int): int
 ```
 Wrapper for C's open function.
@@ -1798,7 +1798,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn _wopen(path: *u16, flag: int, mode: int): int
 ```
 Wrapper for C's _wopen function.
@@ -1808,35 +1808,35 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 fn seek(handle: int, offset: i64, origin: int): i64
 ```
 Wrapper for C's lseek function.
 
 ---
 
-```
+```jule
 unsafe fn read(handle: int, mut buff: *unsafe, n: uint): int
 ```
 Wrapper for C's read function.
 
 ---
 
-```
+```jule
 fn close(handle: int): int
 ```
 Wrapper for C's close function.
 
 ---
 
-```
+```jule
 unsafe fn write(handle: int, buff: *unsafe, n: uint): int 
 ```
 Wrapper for C's write function.
 
 ---
 
-```
+```jule
 fn get_last_error(): u32
 ```
 ::: warning
@@ -1845,7 +1845,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn get_current_directory(bufflen: u32, mut buff: *u16): u32
 ```
 Reads working directory into buff and returns readed rune count of current process. Returns 0 if fail.
@@ -1855,7 +1855,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn set_current_directory(path: *u16): bool
 ```
 Sets working directory to path. Reports operation is success.
@@ -1865,7 +1865,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn getcwd(buff: *byte, bufflen: uint): *byte
 ```
 Reads current working directory into buff. Returns pointer to buff if success, nil pointer if error occurs.
@@ -1875,7 +1875,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn u16_ptr_to_str(s: *u16): str
 ```
 Returns the UTF-8 encoding of the UTF-16 sequence s in *u16 form, with a terminating NULL removed. Returns empty string if s is nil.
@@ -1885,7 +1885,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn char_ptr_to_str(s: *cpp.char): str
 ```
 Returns the string of s, with a terminating NULL removed. Returns empty string if pointer is nil.
@@ -1895,7 +1895,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn opendir(path: *byte): *Dir
 ```
 Calls C's opendir function.
@@ -1905,7 +1905,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn _wopendir(path: *u16): *Wdir
 ```
 Calls C's _wopendir function.
@@ -1915,7 +1915,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn readdir(mut dir: *Dir): *Dirent
 ```
 Calls C's readdir function.
@@ -1925,7 +1925,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn _wreaddir(mut dir: *Wdir): *Wdirent
 ```
 Calls C's _wreaddir function.
@@ -1935,7 +1935,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn remove(path: *byte): int
 ```
 Wrapper for C's remove function.
@@ -1945,7 +1945,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn closedir(mut dir: *Dir): int
 ```
 Calls C's closedir function.
@@ -1955,7 +1955,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn _wclosedir(mut dir: *Wdir): int
 ```
 Calls C's _wclosedir function.
@@ -1965,14 +1965,14 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 fn exit(code: int)
 ```
 Wrapper for C's exit.
 
 ---
 
-```
+```jule
 unsafe fn chdir(path: *byte): int
 ```
 Calls C's chdir function.
@@ -1982,7 +1982,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn mkdir(path: *byte, mode: int): int
 ```
 Wrapper for C's mkdir function.
@@ -1992,7 +1992,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn rmdir(path: *byte): int
 ```
 Wrapper for C's rmdir function.
@@ -2002,7 +2002,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn unlink(path: *byte): int
 ```
 Wrapper for C's unlink function.
@@ -2012,7 +2012,7 @@ Available on: `unix`
 
 ---
 
-```
+```jule
 unsafe fn delete_file(path: *u16): bool
 ```
 Delete file.
@@ -2022,7 +2022,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn create_directory(path: *u16): bool
 ```
 Creates directory.
@@ -2032,7 +2032,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn remove_directory(path: *u16): bool
 ```
 Remove empty directory.
@@ -2042,7 +2042,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 unsafe fn get_full_path_name(path: *u16, bufflen: u32, buff: *u16, fname: **u16): u32
 ```
 Calls Windows's GetFullPathNameW function.
@@ -2051,7 +2051,7 @@ Available on: `windows`
 :::
 
 ## Structs
-```
+```jule
 struct Stat {
     st_mode: uint // _mode_t
     st_size: uint // _off_t
@@ -2061,7 +2061,7 @@ C's stat.
 
 ---
 
-```
+```jule
 struct Wdirent {
     d_name: *u16 // wchar_t*
 }
@@ -2073,7 +2073,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 struct Dirent {
     d_name: *byte // char*
 }
@@ -2085,7 +2085,7 @@ Available on: unix
 
 ---
 
-```
+```jule
 struct Wdir
 ```
 C's _WDIR.
@@ -2095,7 +2095,7 @@ Available on: `windows`
 
 ---
 
-```
+```jule
 struct Dir
 ```
 C's DIR.
