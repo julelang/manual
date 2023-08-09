@@ -60,7 +60,13 @@ export default defineConfig({
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
             { text: 'Cross Transpilation', link: '/compiler/cross-transpilation' },
-            { text: 'Backend', link: '/compiler/backend' },
+            {
+              text: 'Backend',
+              link: '/compiler/backend/',
+              items: [
+                { text: 'C++ Backend Compilers', link: '/compiler/backend/cpp-backend-compilers' },
+              ],
+            },
             {
               text: 'Compiling',
               link: '/compiler/compiling/',
