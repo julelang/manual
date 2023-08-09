@@ -78,7 +78,7 @@ public:
 ```
 
 Jule code:
-```
+```jule
 cpp use "myclass.hpp"
 
 //jule:typedef

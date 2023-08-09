@@ -1,0 +1,226 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Jule",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#storage"
+		},
+		{
+			"include": "#runes"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#raw_strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#punctuation"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#identifiers"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.jule",
+				"match": "\\b(use|fn|pub|struct|byte|rune|enum|unsafe|const|let|static|mut|self|match|defer|if|else|for|in|impl|trait|break|continue|goto|cpp|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|str|int|uint|type|any|bool|ret|fall|uintptr|co)\\b"
+			}]
+		},
+		"storage": {
+			"name": "storage.modifier.jule",
+			"match": "\\b(let|static|const|mut|pub|self)\\b"
+		},
+		"runes": {
+			"name": "string.quoted.single",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jule",
+					"match": "\\\\."
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.jule",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.jule",
+					"match": "\\\\."
+				}
+			]
+		},
+		"raw_strings": {
+			"name": "string.quoted.other.jule",
+			"begin": "`",
+			"end": "`"
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block.documentation.jule",
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.jule"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.jule"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comments"
+						}
+					]
+				},
+				{
+					"name": "comment.line.double-slash.jule",
+					"begin": "//",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.jule"
+						}
+					},
+					"end": "$"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.exponential.jule",
+					"match": "([0-9]+(_?))+(\\.)([0-9]+[eE][-+]?[0-9]+)"
+				},
+				{
+					"name": "constant.numeric.floating_point.jule",
+					"match": "([0-9]+(_?))+(\\.)([0-9]+)"
+				},
+				{
+					"name": "constant.numeric.binary.jule",
+					"match": "(?:0b)(?:(?:[0-1]+)(?:_?))+"
+				},
+				{
+					"name": "constant.numeric.octal.jule",
+					"match": "(?:0o)(?:(?:[0-7]+)(?:_?))+"
+				},
+				{
+					"name": "constant.numeric.hex.jule",
+					"match": "(?:0x)(?:(?:[0-9a-fA-F]+)(?:_?))+"
+				},
+				{
+					"name": "constant.numeric.decimal.jule",
+					"match": "(?:(?:[0-9]+)(?:[_]?))+"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.arithmetic.jule",
+					"match": "(\\+|\\-|\\*|\\/|\\%|\\+\\+|\\-\\-|\\>\\>|\\<\\<)"
+				},
+				{
+					"name": "keyword.operator.relation.jule",
+					"match": "(\\=\\=|\\!\\=|\\>|\\<|\\>\\=|\\<\\=)"
+				},
+				{
+					"name": "keyword.operator.assignment.jule",
+					"match": "(\\=|\\+\\=|\\-\\=|\\*\\=|\\/\\=|\\%\\=|\\&\\=|\\|\\=|\\^\\=|\\>\\>\\=|\\<\\<\\=)"
+				},
+				{
+					"name": "keyword.operator.bitwise.jule",
+					"match": "(\\&|\\||\\^)"
+				},
+				{
+					"name": "keyword.operator.logical.jule",
+					"match": "(\\&\\&|\\|\\||\\!)"
+				}
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.delimiter.period.dot.jule",
+					"match": "\\."
+				},
+				{
+					"name": "punctuation.delimiter.comma.jule",
+					"match": ","
+				},
+				{
+					"name": "punctuation.separator.key-value.colon.jule",
+					"match": ":"
+				},
+				{
+					"name": "punctuation.definition.other.semicolon.jule",
+					"match": ";"
+				}
+			]
+		},
+		"constants": {
+			"name": "constant.language.jule",
+			"match": "\\b(true|false|nil)\\b"
+		},
+		"functions": {
+			"match": "[a-zA-Z_]\\w*(\b|)(?=\\()",
+			"name": "support.function.jule",
+			"patterns": [
+				{
+					"include": "#brackets"
+				}
+			]
+		},
+		"variables": {
+			"match": "[a-zA-Z_]\\w*(\\s*)(:|\\=|\\.)",
+			"captures": {
+				"0": {
+					"patterns": [
+						{
+							"match": "[a-zA-Z_]\\w*",
+							"name": "variable.other.assignment.jule"
+						},
+						{
+							"include": "#punctuation"
+						},
+						{
+							"include": "#operators"
+						}
+					]
+				}
+			}
+		},
+		"identifiers": {
+			"patterns": []
+		}
+	},
+	"scopeName": "source.jule"
+}

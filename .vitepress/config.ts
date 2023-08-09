@@ -1,9 +1,41 @@
 import { defineConfig } from 'vitepress'
+import { ILanguageRegistration, getHighlighter } from 'shiki';
+import { IGrammar } from 'vscode-textmate';
+import { readFileSync } from 'fs';
+
+class Jule implements ILanguageRegistration {
+  id: string;
+  scopeName: string;
+  path: string;
+  grammar?: IGrammar | undefined;
+  aliases?: string[] | undefined;
+
+  constructor() {
+    this.id = "jule";
+    this.scopeName = "source.jule";
+    this.path = "";
+    this.aliases = [ "jule" ];
+    this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json"));
+  }
+}
+
+const jule = new Jule();
+(async () => {
+  const highlighter = await getHighlighter({});
+  await highlighter.loadLanguage(jule);
+})();
 
 export default defineConfig({
   srcDir: 'src',
   title: 'Jule Manual',
   description: 'Documentations of the Jule Programming Language.',
+
+  markdown: {
+    theme: 'github-dark',
+    lineNumbers: true,
+    languages: [ jule ],
+  },
+
   head: [
     [
       'link',
