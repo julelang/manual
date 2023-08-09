@@ -5,4 +5,4 @@ JuleC will automatically choose the recommended C++ compiler when compiling your
 
 If you need a special configuration for your build, it is recommended to create a script file for it or write compile command in a document such as a readme files. This makes it clearer and easier how to compile the project, as well as a faster and more comfortable development experience.
 
-Please read [backend](/compiler/backend) documentations for more information about supported C++ compilers and standards.
+Please read [backend](/compiler/backend/) documentations for more information about supported C++ compilers and standards.
