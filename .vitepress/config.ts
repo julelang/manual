@@ -254,6 +254,7 @@ export default defineConfig({
                 { text: 'Macros', link: '/cpp/interoperability/macros' },
               ],
             },
+            { text: 'Objective-C', link: '/cpp/objective-c' },
           ],
         },
         {
