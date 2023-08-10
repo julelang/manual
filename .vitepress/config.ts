@@ -96,7 +96,14 @@ export default defineConfig({
               text: 'Backend',
               link: '/compiler/backend/',
               items: [
-                { text: 'C++ Backend Compilers', link: '/compiler/backend/cpp-backend-compilers' },
+                {
+                  text: 'C++ Backend Compilers',
+                  link: '/compiler/backend/cpp-backend-compilers/',
+                  items: [
+                    { text: 'Clang', link: '/compiler/backend/cpp-backend-compilers/clang' },
+                    { text: 'GNU Compiler Collection', link: '/compiler/backend/cpp-backend-compilers/gnu-compiler-collection' },
+                  ],
+                },
               ],
             },
             {

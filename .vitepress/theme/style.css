@@ -66,3 +66,13 @@ li {
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand) !important;
 }
+
+.green {
+  color: yellowgreen;
+  font-weight: bold;
+}
+
+.orange {
+  color: orange;
+  font-weight: bold;
+}
