@@ -15,7 +15,8 @@ cpp struct my_struct {
 ```
 
 ::: warning
-Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for C++ linked structs.
+- Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for C++ linked structs.
+- If the linked structures have a constructor, the generated IR will have compilation errors.
 :::
 
 ### C++ Structures and Typedef C Structures
