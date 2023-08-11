@@ -243,7 +243,7 @@ Reports whether expression kind is function call.
 
 ```jule
 struct TupleExpr {
-    expr: []ExprData
+    expr: []&Expr
 }
 ```
 Tuple expression.
