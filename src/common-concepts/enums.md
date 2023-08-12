@@ -14,7 +14,7 @@ fn main() {
 }
 ```
 As seen in the example above, there is an enumeration definition. If you do not assign a value to the enumeration elements, the index value is automatically assigned. In this case, the element `both` in the example above has the value `2`.
-::: tip
+::: info
 - You can use an element before them as a value in enumerations.
 - Enumerations has `int` data type by default.
 :::

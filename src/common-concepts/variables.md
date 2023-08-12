@@ -69,7 +69,7 @@ For example:
 static my_int: int = 20
 ```
 
-::: tip
+::: info
 C++ linked variables can't be static.
 :::
 
@@ -110,7 +110,7 @@ fn main() {
 }
 ```
 
-::: tip
+::: info
 C++ linked globals can be declare via `let` keyword.
 :::
 

@@ -1,7 +1,7 @@
 # Directives
 Compiler directives (or pragma), they are statements that describe how the compiler should handle the source code. Directives are safe to use. Each one is essentially a comment. Any part or directive that is incorrect is considered invalid. You won't get a headache with any compiler errors. 
 
-::: tip
+::: info
 Incorrect directives will cause compiler errors if necessary.
 :::
 
@@ -67,7 +67,7 @@ Directive pass is a top directive.
 Passes compiler flags to generated compile command for compiling source code.
 Passes are must be start with dash.
 
-::: tip
+::: info
 There are no issue if you are using same passes.
 The compiler eliminates duplicate passes.
 :::

@@ -9,7 +9,7 @@ cpp type char: byte
 ```
 
 ::: tip
-If the types you use do not belong to Jule, if you are linking from C/++, make sure to use the types you link, even if you have a compatible Jule type. This is important for your type safety.
+If the types you use do not belong to Jule, if you are linking from C/C++, make sure to use the types you link, even if you have a compatible Jule type. This is important for your type safety.
 :::
 
 ## Linking Type Aliases

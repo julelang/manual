@@ -26,6 +26,6 @@ int main(int argc, char *argv[], char *envp[]) {
 }
 ```
 
-::: tip
+::: info
 JuleC generates IR wich is calls the setup function in entry point by default.
 :::

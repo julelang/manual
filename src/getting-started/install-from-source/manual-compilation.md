@@ -15,9 +15,9 @@ julec -o ./bin/julec ./src/julec
 There are a few recommendations for getting the best JuleC build for manual compilation and Jule developers.
 Considering these recommendations can help the JuleC build you use during development to offer the best performance.
 
-### C++ Version
+### C++ Standard
 
-Instead of the default version, it would be better for you to use ``c++17``.
+Instead of the default standard, it would be better for you to use ``c++17``.
 JuleC is dependent on several headers from ``c++17``.
 Even if you can compile with ``c++14``, compiling with ``c++17`` can provide a smoother experience for you.
 

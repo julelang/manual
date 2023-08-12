@@ -1,6 +1,6 @@
 # Maps
 Maps is a hashmap. Maps a unique key value to a value.
-::: tip
+::: info
 Map values ​​are not kept in the inserted order. Hence iterations etc. It's very likely that you don't get a sequential output in actions.
 :::
 

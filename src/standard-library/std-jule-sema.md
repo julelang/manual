@@ -80,7 +80,7 @@ struct Enum {
 }
 ```
 Enum.
-::: tip
+::: info
 **Implemented Traits**\
 - Kind
 :::
@@ -116,7 +116,7 @@ struct Data {
 }
 ```
 Value data.
-::: tip
+::: info
 **Implemented Traits**\
 - Kind
 :::
@@ -577,7 +577,7 @@ struct ParamIns {
 }
 ```
 Parameter instance.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -600,7 +600,7 @@ struct FnIns {
 }
 ```
 Function instance. 
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -675,7 +675,7 @@ struct ImportInfo {
 ```
 Import information.\
 Represents imported package by use declaration. 
-::: tip
+::: info
 **Implemented Traits**
 - Lookup
 :::
@@ -688,7 +688,7 @@ struct Package {
 }
 ```
 Package.
-::: tip
+::: info
 **Implemented Traits**
 - Lookup
 :::
@@ -995,7 +995,7 @@ struct StructIns {
 }
 ```
 Structure instance.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1037,7 +1037,7 @@ struct SymbolTable {
 }
 ```
 Structure instance.
-::: tip
+::: info
 **Implemented Traits**
 - Lookup
 :::
@@ -1055,7 +1055,7 @@ struct Trait {
 }
 ```
 Trait.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1085,7 +1085,7 @@ struct TypeAlias {
 }
 ```
 Type alias.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1100,7 +1100,7 @@ struct TypeKind {
 }
 ```
 Type alias.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1164,7 +1164,7 @@ struct Prim {
 }
 ```
 Primitive type. 
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1227,7 +1227,7 @@ struct Slc {
 }
 ```
 Slice type.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1240,7 +1240,7 @@ struct Tuple {
 }
 ```
 Tuple type.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1254,7 +1254,7 @@ struct Map {
 }
 ```
 Map type.
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1267,7 +1267,7 @@ struct Arr {
 }
 ```
 Array type. 
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
@@ -1280,7 +1280,7 @@ struct Ptr {
 }
 ```
 Pointer type. 
-::: tip
+::: info
 **Implemented Traits**
 - Kind
 :::
