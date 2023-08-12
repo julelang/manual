@@ -27,7 +27,7 @@ Example to reference data type anotations:
 You can't use as reference these types:
 - Enum
 - Pointer
-- Reference
+- Reference Type
 - Array
 
 ### Initialization
@@ -130,9 +130,8 @@ All of these are minor overheads, but for performance-critical software, the dev
 Some data types of Jule also use references in the background. This is because they reference each other the space they allocate. This is why some types use background references to minimize the amount of allocations. Therefore, they have additional overhead such as the additional atomicity of references and the memory space allocated for reference counting.
 
 List of all types which is performs reference counting:
-- Reference
+- Reference Type
 - Slice
-- Any
 - Trait
 
 ### Using References with Reference-Counted Types
