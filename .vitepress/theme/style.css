@@ -3,20 +3,50 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-c-brand: #5f7389;
-  --vp-c-brand-light: #708090;
+  --vp-c-brand: #7896b6;
+  --vp-c-brand-light: #7896b6;
   --vp-c-brand-lighter: rgb(174, 178, 255);
   --vp-c-brand-lightest: #d1d4fd;
-  --vp-c-brand-dark: #5f7389;
+  --vp-c-brand-dark: #7896b6;
   --vp-c-brand-darker: #3f556c;
   --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
+  --vp-code-block-bg: #161618;
+  --vp-custom-block-info-bg: rgba(84, 110, 155, 0.1);
+  --vp-custom-block-info-border: #3686b1;
+  --vp-custom-block-info-text: #52b0e3;
+  --vp-custom-block-info-text-deep: #00b7ff;
+  --vp-custom-block-tip-bg: rgba(51, 130, 118, 0.1);
+  --vp-custom-block-tip-border: rgba(4, 120, 87, 1);
+  --vp-custom-block-tip-text: rgb(25, 190, 129);
+  --vp-custom-block-tip-text-deep: rgba(52, 211, 153, 1);
+  --vp-custom-block-warning-bg: rgba(253, 224, 71, .1);
+  --vp-custom-block-warning-border: rgba(202, 138, 4, 1);
+  --vp-custom-block-warning-text: rgba(234, 179, 8, 1);
+  --vp-custom-block-warning-text-deep: rgba(250, 204, 21, 1);
+  --vp-custom-block-danger-bg: rgba(239, 68, 68, .1);
+  --vp-custom-block-danger-border: rgba(127, 29, 29, 1);
+  --vp-custom-block-danger-text: rgba(248, 113, 113, 1);
+  --vp-custom-block-danger-text-deep: rgba(248, 113, 113, 1);
+}
+
+.dark {
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: rgb(9, 9, 10);
+}
+
+table td {
+  background: rgb(250, 250, 250);
+}
+
+.dark table td {
+  background-color: rgb(20, 20, 20);
 }
 
 ::-moz-selection,
 ::selection
 {
-    background-color: var(--vp-c-brand);
-    color: white;
+  background-color: var(--vp-c-brand);
+  color: white;
 }
 
 /**
