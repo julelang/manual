@@ -252,6 +252,7 @@ export default defineConfig({
                 { text: 'Structures', link: '/cpp/interoperability/structures' },
                 { text: 'Types', link: '/cpp/interoperability/types' },
                 { text: 'Macros', link: '/cpp/interoperability/macros' },
+                { text: 'Namespaces', link: '/cpp/interoperability/namespaces' },
                 { text: 'Jule Wrappers', link: '/cpp/interoperability/jule-wrappers' },
               ],
             },

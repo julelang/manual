@@ -51,12 +51,6 @@ Here is an example code via `build` directive:
 //jule:build unix && !darwin
 ```
 
-## Directive: `typedef`
-In C++-linked structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
-
-## Directive: `cdef`
-In C++-linked functions, if the function is a `#define`, it configures code generation to be compatible.
-
 ## Directive: `derive`
 Specify what additions the compiler will make.
 Supported by only structures.
@@ -88,3 +82,12 @@ fn main() {
 The `build` directive is a top directive. Different way of platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
 
 Plese look at the [platform specific programming](/compiler/platform-specific-programming) page for information.
+
+## Directive: `typedef`
+In C++-linked structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
+
+## Directive: `cdef`
+In C++-linked functions, if the function is a `#define`, it configures code generation to be compatible.
+
+## Directive: `namespace`
+Adds namesapce selection for supported C++-linked types.
