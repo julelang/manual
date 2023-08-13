@@ -1094,7 +1094,6 @@ Type alias.
 
 ```jule
 struct TypeKind {
-    cpp_linked: bool
     cpp_ident:  str
     kind:       Kind
 }
@@ -1106,6 +1105,9 @@ Type alias.
 :::
 
 **Methods:**
+
+`fn is_cpp_linked(self): bool`\
+Reports whether type is cpp-linked kind.
 
 `fn is_nil(self): bool`\
 Reports whether kind is nil.

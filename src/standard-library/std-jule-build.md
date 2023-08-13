@@ -223,6 +223,7 @@ Compiler directives.
 - `Derive`
 - `Pass`
 - `Build`
+- `Namespace`
 
 ---
 
