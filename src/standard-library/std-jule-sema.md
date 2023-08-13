@@ -1306,6 +1306,7 @@ struct Var {
     used:       bool
     statically: bool
     reference:  bool
+    directives: []&Directive
     doc:        str
     kind:       &TypeSymbol
     value:      &Value

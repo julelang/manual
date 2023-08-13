@@ -3,6 +3,7 @@
 C++ definitions can sometimes be in a namespace. In this case, it is necessary to add the namespace for code generation to be correct. The `namespace` directive is used to specify the namespaces of the definitions.
 
 **Supported types:**
+- Variables
 - Functions
 - Structures
 
@@ -25,3 +26,20 @@ fn main() {
 }
 ```
 For the above function call, the code `foo::bar::exit` will be generated.
+
+## Accessing Static Defines
+
+The `namespace` directive can be a kind of trick that can also be used to achieve static definitions.
+
+For example:
+```jule
+//jule:namespace std::numeric_limits<jule::Int>
+cpp fn max(): int
+
+fn main() {
+    let int_max = cpp.max()
+    outln(int_max)
+}
+```
+
+In the example above, the `max` function actually points to the `jule::Int` (ie Jule's type `int`) instance of `std::numeric_limits`. So calls to the `max` function actually happen as `std::numeric_limits<jule::Int>::max()`.

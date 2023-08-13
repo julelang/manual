@@ -583,6 +583,7 @@ struct VarDecl {
     mutable:      bool
     constant:     bool
     statically:   bool
+    directives:   []&Directive
     doc_comments: &CommentGroup
     kind:         &TypeDecl     // nil for auto-typed
     expr:         &Expr
