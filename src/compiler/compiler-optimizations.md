@@ -42,7 +42,7 @@ Experimental optimization, compilation problems may occur.
 `--opt-append` \
 Enable special optimizations for built-in `append` function.
 
-- It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement and return slice of append is assigned to itself.
+- It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement.
 
 ## Optimization Levels
 
