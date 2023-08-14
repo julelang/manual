@@ -571,6 +571,11 @@ struct FnDecl {
 Function declaration.\
 Also represents anonymous function expression.
 
+**Methods:**
+
+`fn is_anon(self): bool`\
+Reports whether function is anonymous.
+
 ---
 
 ```jule
