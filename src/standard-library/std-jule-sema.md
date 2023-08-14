@@ -432,6 +432,16 @@ Expression model for built-in make function calls.
 ---
 
 ```jule
+struct BuiltinAppendCallExprModel {
+    dest:     ExprModel
+    elements: ExprModel
+}
+```
+Expression model for built-in append function calls.
+
+---
+
+```jule
 struct BuiltinErrorTraitSubIdentCallExprModel {
     expr:  ExprModel
     ident: str

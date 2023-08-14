@@ -37,6 +37,13 @@ It eliminates dead codes (unused) from object code.
 Experimental optimization, compilation problems may occur.
 :::
 
+---
+
+`--opt-append` \
+Enable special optimizations for built-in `append` function.
+
+- It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement and return slice of append is assigned to itself.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -50,5 +57,5 @@ Set optimization level to `<level>`.
 
 The optimization levels are as follows:
 
-- ``L0``: disable all compiler optimizations (default value of JuleC)
-- ``L1``: passes ``--opt-copy``, and ``--opt-deadcode``
+- `L0`: disable all compiler optimizations (default value of JuleC)
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, and `--opt-append`

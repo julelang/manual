@@ -60,3 +60,6 @@ Enable copy optimization.
 
 `--opt-deadcode` \
 Enable deadcode optimization.
+
+`--opt-append` \
+Enable special optimizations for built-in `append` function.
