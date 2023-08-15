@@ -40,7 +40,7 @@ The fact that this operation is covered by Unsafe Jule is not only because it ha
 When you have an array of pointers, it can be interpreted semantically like this: It is a pointer to the component type, as the pointer usually points to one of the memory areas. So think of it like a pointer to the field of an element of an array. Indexing is sensitive to the data type according to the offset, skipping that much space in the memory, finding the position of the offset and selecting that area. 
 
 To better understand data type sampling, array pointers can be interpreted as:
-- `*int` = `[]int `
+- `*int` = `[]int`
 -  `*str` = `[]str`
 
 For example:
