@@ -190,11 +190,13 @@ Reports whether architecture is 64-bit.
 ## Structs
 ```jule
 struct Log {
-    kind:   LogKind
-    row:    int
-    column: int
-    path:   str
-    text:   str
+    kind:    LogKind
+    row:     int
+    column:  int
+    path:    str
+    text:    str
+    line:    str
+    suggest: str
 }
 ```
 Compiler log.
@@ -468,3 +470,25 @@ Compiler log messages with formatting.
 - `RefIsDangling`
 - `ConcurrenctCallWithRefParam`
 - `UsedRefInAnonFnFromParentScope`
+- `ExpectedIdentifier`
+- `ExpectedLabelIdent`
+- `ExpectedDotForCpp`
+- `ExpectedDblColon`
+- `EmptyParentNotValid`
+- `GiveExprToCast`
+- `GiveTypeForCast`
+- `ExpectedExpr`
+- `ExpectedAnonFn`
+- `ExpectedLeftOperand`
+- `ExpectedRightOperand`
+- `ExpectedColon`
+- `ExpectedBody`
+- `MoveUseDeclToTopOfFile`
+- `RenameForAvoidDuplication`
+- `RemoveUseDeclAvoidDuplication`
+- `RemoveUseSelectionAvoidDupliation`
+- `RemoveConstToAssign`
+- `UseStaticKeywordToDef`
+- `RemoveFallthroughFromFinalCase`
+- `MakePubToAccess`
+- `ExpressionMustBeReferenceType`
