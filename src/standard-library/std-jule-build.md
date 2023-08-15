@@ -139,8 +139,8 @@ Reports whether file path is Jule source code.
 
 ---
 
-`fn errorf(key: str, args: ...any): str`\
-Returns formatted error message by key and args.
+`fn logf(key: str, args: ...any): str`\
+Returns formatted error message by fmt and args.
 
 ---
 
