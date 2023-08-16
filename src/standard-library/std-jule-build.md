@@ -460,6 +460,7 @@ Compiler log messages with formatting.
 - `RefIsDangling`
 - `ConcurrenctCallWithRefParam`
 - `UsedRefInAnonFnFromParentScope`
+- `EnumCastedFromAny`
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
 - `ExpectedDotForCpp`
@@ -482,3 +483,4 @@ Compiler log messages with formatting.
 - `RemoveFallthroughFromFinalCase`
 - `MakePubToAccess`
 - `ExpressionMustBeReferenceType`
+- `CastToEnumTypeInsteadOfEnum`
