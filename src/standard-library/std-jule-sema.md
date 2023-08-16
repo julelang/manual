@@ -1105,6 +1105,7 @@ Type alias.
 ```jule
 struct TypeKind {
     cpp_ident:  str
+    variadic:   bool
     kind:       Kind
 }
 ```

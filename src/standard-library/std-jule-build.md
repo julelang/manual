@@ -201,17 +201,6 @@ struct Log {
 ```
 Compiler log.
 
-**Methods:**
-
-`fn flat(self): str`\
-Returns text.
-
-`fn error(self): str`\
-Returns error message text.
-
-`fn to_str(self): str`\
-Returns message form of log.
-
 ---
 
 ## Enums
@@ -328,6 +317,7 @@ Compiler log messages with formatting.
 - `InvalidExpr`
 - `InvalidCppExt`
 - `InvalidLabel`
+- `InvalidExprForTypeInference`
 - `MissingValueForTypeInference`
 - `MissingType`
 - `MissingExpr`
