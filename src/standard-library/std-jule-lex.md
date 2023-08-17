@@ -200,7 +200,9 @@ Reports whether byte is hexadecimal sequence.
 
 ## Structs
 ```jule
-struct File
+struct File {
+    data: []byte
+}
 ```
 Fileset for lexing.
 
@@ -224,6 +226,13 @@ Returns self as uintptr.
 `fn tokens(mut self): Vector[Token]`\
 Returns tokens of file.\
 Tokens are mutable.
+
+`fn fill(mut self, mut data: []byte)`\
+Fill data.
+
+`fn get_row(self, row: int): str`\
+Return line (not include new-line char) by row. \
+Returns empty string if line is not exist in buffer.
 
 ---
 
