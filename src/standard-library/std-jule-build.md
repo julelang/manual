@@ -485,3 +485,4 @@ Compiler log messages with formatting.
 - `ExpressionMustBeReferenceType`
 - `CastToEnumTypeInsteadOfEnum`
 - `TryFloatingPoint`
+- `ExpectedEqualsForAssign`
