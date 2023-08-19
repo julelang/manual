@@ -484,3 +484,4 @@ Compiler log messages with formatting.
 - `MakePubToAccess`
 - `ExpressionMustBeReferenceType`
 - `CastToEnumTypeInsteadOfEnum`
+- `TryFloatingPoint`
