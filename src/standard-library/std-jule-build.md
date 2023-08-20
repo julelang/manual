@@ -190,13 +190,13 @@ Reports whether architecture is 64-bit.
 ## Structs
 ```jule
 struct Log {
-    kind:    LogKind
-    row:     int
-    column:  int
-    path:    str
-    text:    str
-    line:    str
-    suggest: str
+    kind:       LogKind
+    row:        int
+    column:     int
+    path:       str
+    text:       str
+    line:       str
+    suggestion: str
 }
 ```
 Compiler log.
