@@ -223,7 +223,7 @@ Returns filename.
 `fn addr(self): uintptr`\
 Returns self as uintptr.
 
-`fn tokens(mut self): Vector[Token]`\
+`fn tokens(mut self): []Token`\
 Returns tokens of file.\
 Tokens are mutable.
 
