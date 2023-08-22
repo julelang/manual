@@ -461,6 +461,8 @@ Compiler log messages with formatting.
 - `ConcurrenctCallWithRefParam`
 - `UsedRefInAnonFnFromParentScope`
 - `EnumCastedFromAny`
+- `UseAliasUsedForSelection`
+- `DuplicatedUseAlias`
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
 - `ExpectedDotForCpp`
@@ -477,6 +479,7 @@ Compiler log messages with formatting.
 - `MoveUseDeclToTopOfFile`
 - `RenameForAvoidDuplication`
 - `RemoveUseDeclAvoidDuplication`
+- `RenameUseAliasAvoidDuplication`
 - `RemoveUseSelectionAvoidDupliation`
 - `RemoveConstToAssign`
 - `UseStaticKeywordToDef`

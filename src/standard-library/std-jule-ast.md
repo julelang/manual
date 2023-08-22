@@ -745,6 +745,7 @@ Match-Case.
 struct UseDecl {
     token:      Token       // From std::jule::lex
     link_path:  str         // Use declaration path string.
+    alias:      str
     full:       bool        // Full implicit import.
     selected:   []Token
     cpp_linked: bool        // Cpp header use declaration.

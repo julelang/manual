@@ -664,6 +664,9 @@ struct ImportInfo {
     // Empty if package is cpp header.
     ident: str
 
+    // Package alias identifier.
+    alias: str
+
     // True if imported with Importer.Get_import function.
     duplicate: bool
 
