@@ -287,6 +287,7 @@ export default defineConfig({
               link: '/api/implementation/',
               items: [
                 { text: 'Disable RC', link: '/api/implementation/disable-rc' },
+                { text: 'Disable Safety', link: '/api/implementation/disable-safety' },
               ],
             },
             {
