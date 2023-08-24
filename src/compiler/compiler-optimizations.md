@@ -44,6 +44,14 @@ Enable special optimizations for built-in `append` function.
 
 - It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement.
 
+---
+
+`--opt-math` \
+Enable optimizations for mathematical operations.
+
+- Skip the divide-by-zero check for division when operand is constant.
+- Skip the divide-by-zero check for modulo when operand is constant.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -58,4 +66,4 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, and `--opt-append`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, and `--opt-math`
