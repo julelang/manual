@@ -1766,6 +1766,108 @@ static FOLD_SCRIPT: [str:&RangeTable]
 ```
 Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script. If there is NO entry for a script name, there are NO such points.
 
+---
+
+```jule
+static GRAPHIC_RANGES: []&RangeTable
+```
+Defines the set of graphic characters according to Unicode.
+
+## Functions
+
+```jule
+fn to(case: int, mut r: rune): rune
+```
+Maps the rune to the specified case: UpperCase, LowerCase, or TitleCase.
+
+---
+
+```jule
+fn to_upper(mut r: rune): rune
+```
+Maps the rune to upper case.
+
+---
+
+```jule
+fn to_lower(mut r: rune): rune
+```
+Maps the rune to lower case.
+
+---
+
+```jule
+fn is(range_tab: &RangeTable, r: rune): bool
+```
+Reports whether the rune is in the specified table of ranges.
+
+---
+
+```jule
+fn is_upper(r: rune): bool
+```
+Reports whether the rune is an upper case letter.
+
+---
+
+```jule
+fn is_lower(r: rune): bool
+```
+Reports whether the rune is a lower case letter.
+
+---
+
+```jule
+fn is_digit(r: rune): bool
+```
+Reports whether the rune is a decimal digit.
+
+---
+
+```jule
+fn is_letter(r: rune): bool
+```
+Reports whether the rune is a letter (category L).
+
+---
+
+```jule
+fn is_number(r: rune): bool
+```
+Reports whether the rune is a number (category N).
+
+---
+
+```jule
+fn is_punct(r: rune): bool
+```
+Reports whether the rune is a Unicode punctuation character (category P).
+
+---
+
+```jule
+fn is_space(r: rune): bool
+```
+Reports whether the rune is a space character as defined by Unicode's White Space property; in the Latin-1 space this is
+
+`'\t'`, `'\n'`, `'\v'`, `'\f'`, `'\r'`, `' '`, `U+0085` (NEL), `U+00A0` (NBSP).
+
+Other definitions of spacing characters are set by category Z and property PATTERN_WHITE_SPACE.
+
+---
+
+```jule
+fn is_graphic(r: rune): bool
+```
+Such characters include letters, marks, numbers punctuation, symbols, and spaces, from categories L, M, N, P, S, ZS.
+
+---
+
+```jule
+fn is_in(r: rune, ranges: ...&RangeTable): bool
+```
+Reports whether the rune is a member of one of the ranges.
+
 ## Structs
 
 ```jule
