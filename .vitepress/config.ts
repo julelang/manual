@@ -419,7 +419,7 @@ export default defineConfig({
             { text: 'std::sys', link: '/standard-library/std-sys' },
             { 
               text: 'std::unicode', 
-              link: '/standard-library/std-mem',
+              link: '/standard-library/std-unicode',
               items: [
                 { text: 'std::unicode::utf16', link:'/standard-library/std-unicode-utf16' },
                 { text: 'std::unicode::utf8', link:'/standard-library/std-unicode-utf8' },
