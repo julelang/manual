@@ -29,6 +29,30 @@ Maximum Latin-1 value.
 ---
 
 ```jule
+const UPPER_CASE
+```
+
+---
+
+```jule
+const LOWER_CASE
+```
+
+---
+
+```jule
+const TITLE_CASE
+```
+
+---
+
+```jule
+const MAX_CASE
+```
+
+---
+
+```jule
 static CATEGORIES: [str:&RangeTable]
 ```
 The set of Unicode category tables.
@@ -1515,7 +1539,7 @@ The set of Unicode characters in script Zanabazar_Square.
 ```jule
 static PROPERTIES: [str:&RangeTable]
 ```
-// The set of Unicode property tables.
+The set of Unicode property tables.
 
 ---
 
@@ -1741,3 +1765,36 @@ Maps a category name to a table of code points outside the category that are equ
 static FOLD_SCRIPT: [str:&RangeTable]
 ```
 Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script. If there is NO entry for a script name, there are NO such points.
+
+## Structs
+
+```jule
+struct Range16 {
+    lo:     u16
+    hi:     u16
+    stride: u16
+}
+```
+Represents of a range of 16-bit Unicode code points. The range runs from lo to hi inclusive and has the specified stride.
+
+---
+
+```jule
+struct Range32 {
+    lo:     u16
+    hi:     u16
+    stride: u16
+}
+```
+Represents of a range of Unicode code points and is used when one or more of the values will not fit in 16 bits. The range runs from lo to hi inclusive and has the specified stride. lo and hi must always be >= 1<<16.
+
+---
+
+```jule
+struct RangeTable {
+    r16:          []Range16
+    r32:          []Range32
+    latin_offset: int
+}
+```
+Defines a set of Unicode code points by listing the ranges of code points within the set. The ranges are listed in two slices to save space: a slice of 16-bit ranges and a slice of 32-bit ranges. The two slices must be in sorted order and non-overlapping. Also, r32 should contain only values >= 0x10000 (1<<16).
