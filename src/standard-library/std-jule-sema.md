@@ -1120,14 +1120,29 @@ Type alias.
 
 **Methods:**
 
-`fn is_cpp_linked(self): bool`\
+`fn cpp_linked(self): bool`\
 Reports whether type is cpp-linked kind.
 
 `fn is_nil(self): bool`\
 Reports whether kind is nil.
 
-`fn is_void(self): bool`\
+`fn void(self): bool`\
 Reports whether kind is void.
+
+`fn lvalue(self): bool`\
+Reports whether kind is lvalue.
+
+`fn mut(self): bool`\
+Reports whether kind is mutable.
+
+`fn nil_compatible(self): bool`\
+Reports whether kind is nil compatible.
+
+`fn supports_cloning(self): bool`\
+Reports whether kind supports clonning via jule::Clone derive.
+
+`fn variadicable(self): bool`\
+Reports whether kind is variadicable.
 
 `fn prim(self): &Prim`\
 Returns primitive type if kind is primitive type, nil reference if not.
