@@ -52,6 +52,13 @@ Enable optimizations for mathematical operations.
 - Skip the divide-by-zero check for division when operand is constant.
 - Skip the divide-by-zero check for modulo when operand is constant.
 
+---
+
+`--opt-access` \
+Enable optimizations for memory acessing.
+
+- Skip safety checkings such as boundary checking if accessed to array via constant index expression.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -66,4 +73,4 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, and `--opt-math`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, and `--opt-access`

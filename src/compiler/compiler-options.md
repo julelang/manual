@@ -61,5 +61,17 @@ Enable copy optimization.
 `--opt-deadcode` \
 Enable deadcode optimization.
 
+---
+
 `--opt-append` \
 Enable special optimizations for built-in `append` function.
+
+---
+
+`--opt-math` \
+Enable special optimizations for mathematical operations.
+
+---
+
+`--opt-access` \
+Enable special optimizations for memory accessing.

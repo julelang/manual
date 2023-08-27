@@ -242,8 +242,8 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ```jule
 struct IndexingExprModel {
-    expr:  ExprModel
-    index: ExprModel
+    expr:  &Data
+    index: &Data
 }
 ```
 Indexing expression model.\
