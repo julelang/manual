@@ -7,6 +7,13 @@ Expression model.
 ### `type St: any`
 Statement type. 
 
+## Globals
+
+```jule
+static mut BUILTIN_TRAIT_DISPOSE: &Trait
+```
+Definition of built-in Dispose trait.
+
 ## Functions
 ```jule
 fn analyze_package(mut files: []&Ast, mut importer: Importer): (&Package, []Log)
