@@ -158,7 +158,12 @@ export default defineConfig({
               ],
             },
             { text: 'Enums', link: '/common-concepts/enums' },
-            { text: 'Structures', link: '/common-concepts/structures' },
+            {
+              text: 'Structures', link: '/common-concepts/structures/',
+              items: [
+                { text: 'Destructors', link: '/common-concepts/structures/destructors' },
+              ],
+            },
           ],
         },
         {
