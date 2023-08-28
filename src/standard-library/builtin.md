@@ -135,3 +135,12 @@ if err != nil {
     // If has error...
 }
 ```
+
+---
+
+```jule
+trait Dispose {
+    pub fn dispose(mut self)
+}
+```
+Implements destructor method.
