@@ -103,6 +103,10 @@ The file stream handle.
 
 **Methods:**
 
+`static fn new(handle: uintptr): &File`\
+Returns new `&File` by handle.
+If hadle <= 0, returns nil reference.
+
 `fn seek(mut self, offset: i64, origin: Seek): (i64, FsError)`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end. Return 0 if error occurs.
 
