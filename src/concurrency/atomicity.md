@@ -32,13 +32,13 @@ Jule provides the `std::sync::atomic` package for atomicity as standard. Now let
 
 ```jule
 use std::sync::{WaitGroup}
-use std::sync::atomic::{MemoryOrder, add_i64}
+use std::sync::atomic::{AtomicInt, MemoryOrder}
 
-static mut n: i64 = 0
+static mut n: AtomicInt = AtomicInt.new(0)
 
 fn add_to_n(mut wg: *WaitGroup) {
     unsafe defer { wg.done() }
-    add_i64(n, 1, MemoryOrder.Relaxed)
+    n.add(1, MemoryOrder.Relaxed)
 }
 
 fn main() {
@@ -52,7 +52,7 @@ fn main() {
 
     wg.wait()
 
-    outln(n)
+    outln(n.load(MemoryOrder.Relaxed))
 }
 ```
 
