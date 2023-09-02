@@ -367,7 +367,7 @@ export default defineConfig({
               link: '/standard-library/std-debug', 
               items: [
                 { text: 'std::debug::assert', link: '/standard-library/std-debug-assert' }
-              ] 
+              ],
             },
             { text: 'std::env', link: '/standard-library/std-env' },
             { text: 'std::errors', link: '/standard-library/std-errors' },
@@ -376,7 +376,7 @@ export default defineConfig({
               link: '/standard-library/std-fs', 
               items: [
                 { text: 'std::fs::path', link: '/standard-library/std-fs-path' }
-              ] 
+              ],
             },
             { text: 'std::io', link: '/standard-library/std-io' },
             { 
@@ -392,6 +392,7 @@ export default defineConfig({
                     { text: 'std::jule::constant::lit', link: '/standard-library/std-jule-constant-lit' }
                   ]
                 },
+                { text: 'std::jule::integrated', link: '/standard-library/std-jule-integrated' },
                 { text: 'std::jule::lex', link: '/standard-library/std-jule-lex' },
                 { text: 'std::jule::parser', link: '/standard-library/std-jule-parser' },
                 { text: 'std::jule::sema', link: '/standard-library/std-jule-sema' },
@@ -403,14 +404,12 @@ export default defineConfig({
               link: '/standard-library/std-math',
               items: [
                 { text: 'std::math::bits', link:'/standard-library/std-math-bits' }
-              ]
+              ],
             },
             { 
               text: 'std::mem', 
               link: '/standard-library/std-mem',
-              items: [
-                { text: 'std::mem::c', link:'/standard-library/std-mem-c' }
-              ]
+              items: [],
             },
             { text: 'std::process', link: '/standard-library/std-process' },
             { text: 'std::runtime', link: '/standard-library/std-runtime' },
@@ -419,7 +418,7 @@ export default defineConfig({
               link: '/standard-library/std-sync',
               items: [
                 { text: 'std::sync::atomic', link:'/standard-library/std-sync-atomic' }
-              ]
+              ],
             },
             { text: 'std::sys', link: '/standard-library/std-sys' },
             { 
@@ -428,7 +427,7 @@ export default defineConfig({
               items: [
                 { text: 'std::unicode::utf16', link:'/standard-library/std-unicode-utf16' },
                 { text: 'std::unicode::utf8', link:'/standard-library/std-unicode-utf8' },
-              ]
+              ],
             },
             { text: 'std::vector', link: '/standard-library/std-vector' },
           ],

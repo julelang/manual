@@ -1723,25 +1723,6 @@ Available on: `windows`
 :::
 
 ## Functions
-```jule
-fn utf16_from_str(s: str): []u16
-```
-Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.
-::: warning
-Available on: `windows`
-:::
-
----
-
-```jule
-fn utf16_to_str(s: []u16): str
-```
-Returns the UTF-8 encoding of the UTF-16 sequence s, with a terminating NULL removed. Returns empty string if s is nil.
-::: warning
-Available on: `windows`
-:::
-
----
 
 ```jule
 fn get_std_handle(stdh: uintptr): handle
@@ -1869,26 +1850,6 @@ Available on: `windows`
 unsafe fn getcwd(buff: *byte, bufflen: uint): *byte
 ```
 Reads current working directory into buff. Returns pointer to buff if success, nil pointer if error occurs.
-::: warning
-Available on: `unix`
-:::
-
----
-
-```jule
-unsafe fn u16_ptr_to_str(s: *u16): str
-```
-Returns the UTF-8 encoding of the UTF-16 sequence s in *u16 form, with a terminating NULL removed. Returns empty string if s is nil.
-::: warning
-Available on: `windows`
-:::
-
----
-
-```jule
-unsafe fn char_ptr_to_str(s: *cpp.char): str
-```
-Returns the string of s, with a terminating NULL removed. Returns empty string if pointer is nil.
 ::: warning
 Available on: `unix`
 :::
