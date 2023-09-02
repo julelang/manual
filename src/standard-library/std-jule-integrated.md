@@ -327,3 +327,11 @@ unsafe fn delete_array[T](heap: *T)
 ```
 Deallocates array memory allocation.
 Equavalent to: `delete[] heap` in C++
+
+---
+
+```jule
+fn puts(s: str): int
+```
+Calls C's puts function.
+Returns non-negative integer if success, returns EOF if not.
