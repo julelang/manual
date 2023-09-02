@@ -263,6 +263,7 @@ export default defineConfig({
             },
             { text: 'Objective-C', link: '/cpp/objective-c' },
             { text: 'Objective-C++', link: '/cpp/objective-cpp' },
+            { text: 'Integrated Jule', link: '/cpp/integrated-jule' },
           ],
         },
         {
