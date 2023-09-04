@@ -307,10 +307,30 @@ Equavalent to: `new T` in C++
 ---
 
 ```jule
+fn new_u[T](): uintptr
+```
+Allocates new memory and returns pointer as uintptr.
+Equavalent to: `(uintptr_t)new T` in C++
+
+It can be used also for unsupported types by pointers such as references. So you can get `*&T` actually.
+
+---
+
+```jule
 fn new_array[T](size: int): *T
 ```
 Allocates new array memory.
 Equavalent to: `new T[size]` in C++
+
+---
+
+```jule
+fn new_array_u[T](size: int): uintptr
+```
+Allocates new array memory.
+Equavalent to: `(uintptr_t)new T[size]` in C++
+
+It can be used also for unsupported types by pointers such as references. So you can get `*&T` actually.
 
 ---
 
@@ -323,10 +343,50 @@ Equavalent to: `delete heap` in C++
 ---
 
 ```jule
+unsafe fn delete_u[T](heap: uintptr)
+```
+Deallocates memory allocation.
+Equavalent to: `delete (T*)heap` in C++
+
+It can be used also for unsupported types by pointers such as references. So you can delete `*&T` actually.
+
+---
+
+```jule
 unsafe fn delete_array[T](heap: *T)
 ```
 Deallocates array memory allocation.
 Equavalent to: `delete[] heap` in C++
+
+---
+
+```jule
+unsafe fn delete_array_u[T](heap: uintptr)
+```
+Deallocates array memory allocation.
+Equavalent to: delete[] (T*)heap in C++
+
+It can be used also for unsupported types by pointers such as references. So you can delete `*&T` actually.
+
+---
+
+```jule
+unsafe fn deref[T](heap: uintptr): T
+```
+Dereferences pointer by address.
+Equavalent to: `*(T*)heap` in C++
+
+It can be used also for unsupported types by pointers such as references. So you can dereference `*&T` actually.
+
+---
+
+```jule
+unsafe fn assign[T](heap: uintptr, mut val: T)
+```
+Assign to pointer by address.
+Equavalent to: `*(T*)heap = val` in C++
+
+It can be used also for unsupported types by pointers such as references. So you can assign to `*&T` actually.
 
 ---
 
