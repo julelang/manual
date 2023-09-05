@@ -1827,6 +1827,28 @@ Available on: `windows`
 ---
 
 ```jule
+fn get_console_mode(handle: handle, mut &mode: int): bool
+```
+Calls Windows's GetConsoleMode function.
+
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn set_console_mode(handle: handle, mode: int): bool
+```
+Calls Windows's SetConsoleMode function.
+
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
 unsafe fn get_current_directory(bufflen: u32, mut buff: *u16): u32
 ```
 Reads working directory into buff and returns readed rune count of current process. Returns 0 if fail.
