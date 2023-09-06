@@ -227,6 +227,13 @@ Type alias for `bool` type.
 ## Functions
 
 ```jule
+fn to_str(expr: any): str
+```
+Returns string converted from of expression.
+
+---
+
+```jule
 fn utf16_from_str(s: str): []u16
 ```
 Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.
