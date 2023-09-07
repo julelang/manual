@@ -402,3 +402,11 @@ fn puts(s: str): int
 ```
 Calls C's puts function.
 Returns non-negative integer if success, returns EOF if not.
+
+---
+
+```jule
+fn type_id(a: any): str
+```
+Returns C++ type-id of any type.
+Returns empty string if a is nil.
