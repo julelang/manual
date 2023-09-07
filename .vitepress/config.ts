@@ -372,6 +372,7 @@ export default defineConfig({
             },
             { text: 'std::env', link: '/standard-library/std-env' },
             { text: 'std::errors', link: '/standard-library/std-errors' },
+            { text: 'std::fmt', link: '/standard-library/std-fmt' },
             { 
               text: 'std::fs', 
               link: '/standard-library/std-fs', 
