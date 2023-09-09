@@ -12,8 +12,18 @@ Arguments are processed sequentially. That is, when an argument encounters a for
 
 Each format parameter is represented as `{}` in the format string. These parameters will then be deleted according to the processing algorithm and replaced with arguments.
 
+The parameter `{{}}` is formatted as `{}` actually,
+And does not increase argument list offset.
+
 **Examples:**
 
 - `format("{} {}!", "Hello", "World")` = `"Hello World!"`
 - `format("{} {}")` = `"{} {}"`
 - `format("{} is the {}", "PI Number")` = `"PI Number is the {}"`
+
+---
+
+```jule
+fn printf(fmt: str, args: ...any)
+```
+Prints result of formatting. See documentation of format function for formatting.
