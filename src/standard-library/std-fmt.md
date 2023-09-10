@@ -27,3 +27,18 @@ And does not increase argument list offset.
 fn printf(fmt: str, args: ...any)
 ```
 Prints result of formatting. See documentation of format function for formatting.
+
+---
+
+```jule
+fn print(args: ...any)
+```
+Prints arguments by default formatting.
+
+---
+
+```jule
+fn println(args: ...any)
+```
+Prints arguments by default formatting.
+Prints new-line after arguments.
