@@ -1849,6 +1849,28 @@ Available on: `windows`
 ---
 
 ```jule
+unsafe fn write_console(handle: handle, buffer: *u16, to_write: int, mut &written: int, reserved: *unsafe): bool
+```
+Calls Windows's WriteConsoleW function.
+
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn read_console(handle: handle, mut buffer: *u16, to_read: int, mut &readed: int, input_control: *unsafe): bool
+```
+Calls Windows's ReadConsoleW function.
+
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
 unsafe fn get_current_directory(bufflen: u32, mut buff: *u16): u32
 ```
 Reads working directory into buff and returns readed rune count of current process. Returns 0 if fail.
