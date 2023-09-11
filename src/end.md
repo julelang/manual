@@ -1,12 +1,12 @@
 # End
-Thanks for reading.
+
+Thanks for reading through the whole manual!
 
 ## Feedback
-Please tell us, share with us your ideas and experiences.\
-Support us to improve the documentation.
 
-[Open Issue](https://github.com/julelang/website/issues/new/choose) \
-[Fork Project](https://github.com/julelang/website/fork)
+Have any ideas, feedback, or errors that you found in the manual?
+Feel free to [report an issue](https://github.com/julelang/manual/issues/new/) and we'll check it out.
 
 ## Source Code
-The source code files is accessible from [GitHub](https://github.com/julelang/manual) repository. 
+
+The source code files are accessible from the [GitHub](https://github.com/julelang/manual) repository.
