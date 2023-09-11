@@ -391,6 +391,7 @@ Compiler log messages with formatting.
 - `UnsafeBehaviorAtOutOfUnsafeScope`
 - `RefMethodUsedWithNotRefInstance`
 - `MethodAsAnonFn`
+- `CppFnAsAnonFn`
 - `GenericedFnAsAnonFn`
 - `IllegalCycleRefersItself`
 - `IllegalCrossCycle`
