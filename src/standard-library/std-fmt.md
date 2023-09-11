@@ -26,19 +26,47 @@ And does not increase argument list offset.
 ```jule
 fn printf(fmt: str, args: ...any)
 ```
-Prints result of formatting. See documentation of format function for formatting.
+Prints result of formatting to stdout. See documentation of format function for formatting.
 
 ---
 
 ```jule
 fn print(args: ...any)
 ```
-Prints arguments by default formatting.
+Prints arguments by default formatting to stdout.
 
 ---
 
 ```jule
 fn println(args: ...any)
 ```
-Prints arguments by default formatting.
+Prints arguments by default formatting to stdout.
 Prints new-line after arguments.
+
+---
+
+```jule
+fn fprint(mut f: &File, args: ...any)
+```
+Prints arguments to file by default formatting. See documentation of format function for formatting.
+
+---
+
+```jule
+fn fprintln(mut f: &File, args: ...any)
+```
+Prints arguments to file by default formatting. Prints new-line after arguments. See documentation of format function for formatting.
+
+---
+
+```jule
+fn fprintf(mut f: &File, fmt: str, args: ...any)
+```
+Prints result of formatting to file. See documentation of format function for formatting.
+
+---
+
+```jule
+fn sprint(args: ...any): str
+```
+Returns string result of arguments by default formatting.

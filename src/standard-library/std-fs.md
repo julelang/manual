@@ -101,6 +101,10 @@ struct File
 ```
 The file stream handle.
 
+It works like a wrapper when it comes to console handle like stdin, stdout or stderr. Read and write functions are supported for console handlers. The rest of the functions are not supported and not checked, it is undefined behavior.
+
+There may be system call differences and performance differences for console handlers depending on the operating system. For example, Windows has an overhead for UTF-16 processing.
+
 **Methods:**
 
 `static fn new(handle: uintptr): &File`\
