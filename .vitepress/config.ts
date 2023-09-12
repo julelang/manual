@@ -222,6 +222,7 @@ export default defineConfig({
           items: [
             { text: 'Synchronization', link: '/concurrency/synchronization' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
+            { text: 'Threads', link: '/concurrency/threads' },
           ],
         },
         {
