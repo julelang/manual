@@ -125,7 +125,7 @@ let pos = &Position{x: 10, y: 20}
 ```
 `pos` variable is the reference points to heap-allocated `Position` structure instance.
 ::: warning
-If you not have any idea about references, check the [memory management documentations](/memory/memory-management). 
+If you not have any idea about references, check the [memory management documentations](/memory/management/). 
 :::
 
 
