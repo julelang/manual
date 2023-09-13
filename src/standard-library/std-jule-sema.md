@@ -1010,7 +1010,7 @@ struct StructIns {
     generics:   []&TypeKind
     fields:     []&FieldIns
     methods:    []&Fn
-    has_mut:    bool
+    mutable:    bool
     references: &ReferenceStack
 }
 ```
@@ -1069,6 +1069,7 @@ struct Trait {
     token:       Token
     ident:       str
     public:      bool
+    mutable:     bool
     doc:         str
     methods:     []&Fn
     implemented: []&Struct
