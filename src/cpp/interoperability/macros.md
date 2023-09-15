@@ -12,7 +12,7 @@ For example:\
 ```jule
 cpp use "tickrate.hpp"
 
-cpp let tickrate: int
+cpp let TICKRATE: int
 ```
 
 ---

@@ -5,8 +5,6 @@ If you don't use a generic function at all, you'll only get AST generation error
 
 There are no restrictions; variadic parameters or recursive calls. It behaves like a normal function.
 
-No new keyword has been introduced to denote generic types, it is possible to add generic types with the syntax difference of an existing feature type aliases.
-
 ::: tip
 Generic types are also assumed to be local in-scope type aliases. Therefore, they can be used for type annotation in variable and similar definitions in scope.
 :::
