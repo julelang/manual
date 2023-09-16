@@ -77,3 +77,8 @@ Stream implementation for file handles.
 - Writer
 - Stream
 :::
+
+**Methods:**
+
+`fn read_line(mut self): ([]byte, Error)`\
+Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice and nil error when reached EOF.
