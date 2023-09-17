@@ -20,12 +20,6 @@ static mut STDERR: &File
 ```
 File handler for stderr.
 
-## Functions
-```jule
-fn readln(): str
-```
-Reads full-complete line from command-line. 
-
 ## Traits
 
 ```jule
@@ -82,3 +76,30 @@ Stream implementation for file handles.
 
 `fn read_line(mut self): ([]byte, Error)`\
 Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice and nil error when reached EOF.
+
+---
+
+```jule
+struct Scanner
+```
+Scanner for files or etc.
+Scans bytes line-by-line.
+
+**Methods:**
+
+`static fn new(mut r: Reader): &Scanner`\
+New `&Scanner` from `Reader`.
+
+`static fn newf(mut f: &File): &Scanner`\
+New `&Scanner` from `&File`.
+Uses `&FileStream` for `Reader` trait compatibility.
+
+`fn bytes(self): []byte`\
+Returns bytes of recent scan.
+Returned slice is mutable copy of buffer.
+
+`fn text(self): str`\
+Returns text from bytes of recent scan.
+
+`fn scan(self): Error`\
+Reads line from handle via read method. Returns bytes until line delimiter (`\n`) byte, delimiter not included. Returns nil error and sets byte buffer to zero-length byte slice when there is no error and readed byte count is zero, so reached to EOF.
