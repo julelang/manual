@@ -6,18 +6,6 @@ Extension (includes dot) of Jule source code files.
 
 ---
 
-### `let static OS: str`
-Target operating system. \
-Setted to current operating system by default.
-
----
-
-### `let static ARCH: str`
-Target architecture. \
-Setted to current architecture by default.
-
----
-
 ### `const API: str`
 Directory name of JuleC++ API.
 
@@ -109,10 +97,6 @@ Initialized by initializer function.
 :::
 
 ## Functions
-`fn is_pass_file_annotation(mut p: str): bool`\
-Reports whether file path passes file annotation by current system.
-
----
 
 `fn is_top_directive(directive: str): bool`\
 Reports whether directive is top-directive.
