@@ -29,7 +29,7 @@ Jule does not support MSVC. This is why you won't have an official MSVC support.
 
 C++ support and support status of the jule release standards.
 
-### Beta 0.0.3
+### Beta 0.0.3 and Higher
 
 JuleC accepts the default C++ standard as C++17, along with the beta 0.0.3 release standard. It also generates code that is quite compatible with C++20 standard. According to our tests, the beta 0.0.3 release standard works well with C++14, C++17, and C++20. However, recommended standard is C++17 which is default standard for beta 0.0.3 release standard.
 
