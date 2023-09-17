@@ -1,24 +1,24 @@
 # std::io
-## Globals
+## Functions
 
 ```jule
-static mut STDIN: &File
+fn stdin(): &File
 ```
-File handler for stdin.
+Returns File handler for stdin.
 
 ---
 
 ```jule
-static mut STDOUT: &File
+fn stdout(): &File
 ```
-File handler for stdout.
+Returns File handler for stdout.
 
 ---
 
 ```jule
-static mut STDERR: &File
+fn stderr(): &File
 ```
-File handler for stderr.
+Returns File handler for stderr.
 
 ## Traits
 
