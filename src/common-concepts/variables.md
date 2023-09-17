@@ -62,8 +62,6 @@ The value of the variables can change (with mutability), then they can be update
 
 Static variables are initialized once, they are living allocations over the life of the program. They are declared with the `static` keyword and, like constant variables, an initialize expression is required.
 
-In addition, a static variables must be type annotated.
-
 For example:
 ```jule
 static my_int: int = 20

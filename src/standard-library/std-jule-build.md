@@ -451,7 +451,6 @@ Compiler log messages with formatting.
 - `TraitMethodHasGenerics`
 - `EnumAsMapVal`
 - `GlobalNotStatic`
-- `StaticIsTypeInferred`
 - `StaticNotHaveExpr`
 - `StaticFnHasReceiver`
 - `RefAssignNonVar`
