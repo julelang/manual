@@ -94,6 +94,9 @@ New `&Scanner` from `Reader`.
 New `&Scanner` from `&File`.
 Uses `&FileStream` for `Reader` trait compatibility.
 
+`fn error(self): Error`\
+Returns error of recent scan.
+
 `fn bytes(self): []byte`\
 Returns bytes of recent scan.
 Returned slice is mutable copy of buffer.
@@ -101,5 +104,5 @@ Returned slice is mutable copy of buffer.
 `fn text(self): str`\
 Returns text from bytes of recent scan.
 
-`fn scan(self): Error`\
-Reads line from handle via read method. Returns bytes until line delimiter (`\n`) byte, delimiter not included. Returns nil error and sets byte buffer to zero-length byte slice when there is no error and readed byte count is zero, so reached to EOF.
+`fn scan(self): bool`\
+Scans line from handle via read method. Scans bytes until line delimiter (`\n`) byte, delimiter not included. Reports whether readed byte into buffer. Sets error if any error occurs.
