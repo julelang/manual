@@ -200,25 +200,17 @@ This can make the statement very complex and impair readability. For this reason
 :::
 
 ## Shadowing
+
 In the basic sense, shadowing is when a definition with the same identifier shadows a define with the same identifier before it in scope. This is made possible by performing a new definition in subscopes of a scope with the name of a definition defined in that parent scope, or by using the identifier of a global definition in the main scope of a function.
 
-For example:
+Shadowing can cause various developer errors and make reading code more complicated. Therefore, by default your compiler does not allow shadowing. However, you can enable this by passing the `--shadowing` option to your compiler.
+
+### What if Shadowing Enabled
+
+When you tell your compiler to allow shadowing, it allows you to implement shadowing. What Shadowing is explained. To give an example:
+
 ```jule
-static a: int = 100
-
-fn my_func(a: bool) {
-    outln(a)
-}
-```
-In the code above, the function's parameter is the same as the name of a global definition. In this case, the parameter name is valid and the global definition is shaded.
-
-So how does this work in child scopes?
-
-For example:
-```jule
-static a: int = 100
-
-fn my_func() {
+fn main() {
     let a = 10
     {
         let a = 200

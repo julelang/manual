@@ -16,7 +16,7 @@ Definition of built-in Dispose trait.
 
 ## Functions
 ```jule
-fn analyze_package(mut files: []&Ast, mut importer: Importer): (&Package, []Log)
+fn analyze_package(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -39,7 +39,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ---
 
 ```jule
-fn analyze_file(mut f: &Ast, mut importer: Importer): (&SymbolTable, []Log)
+fn analyze_file(mut f: &Ast, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -1421,3 +1421,14 @@ trait Importer {
 ```
 Importer.\
 Used by semantic analyzer for import use declarations. 
+
+## Enums
+
+```jule
+enum SemaFlag
+```
+Flags for semantic analysis.
+
+**Fields:**
+- `Default`: Default semantic analysis of Jule.
+- `Shadowing`: Default + enable shadowing.

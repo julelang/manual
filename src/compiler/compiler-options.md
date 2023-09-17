@@ -44,6 +44,11 @@ Write output to `<file>`.
 Change transpilation target. \
 See more about [cross-transpilation](/compiler/cross-transpilation).
 
+---
+
+`--shadowing`\
+Enable variable shadowing.
+
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).
