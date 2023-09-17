@@ -56,7 +56,7 @@ fn main() {
     str_out("Hello", "World", "Variadic")
 }
 ```
-As seen in the example above, many arguments could be given to the function even though it was a single parameter. This is a result of the variadic parameter. Putting the `...` operator before its name makes parameter variadic. 
+As seen in the example above, many arguments could be given to the function even though it was a single parameter. This is a result of the variadic parameter. Putting the `...` operator before its type makes parameter variadic. 
 ::: tip
 - Each variadic parameter, actually is an slice.
 - Variadic parameters is not must have an argument in calling.
