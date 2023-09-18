@@ -447,6 +447,9 @@ Compiler log messages with formatting.
 - `EnumCastedFromAny`
 - `UseAliasUsedForSelection`
 - `DuplicatedUseAlias`
+- `MissedTernaryElse`
+- `TernaryCompatiblity`
+
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
 - `ExpectedDotForCpp`
@@ -473,3 +476,5 @@ Compiler log messages with formatting.
 - `CastToEnumTypeInsteadOfEnum`
 - `TryFloatingPoint`
 - `ExpectedEqualsForAssign`
+- `ExpectedElseKeywordForTernary`
+- `UseCompatibleValuesForTernary`

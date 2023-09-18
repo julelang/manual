@@ -443,7 +443,7 @@ Indexing expression.
 ---
 
 ```jule
-struct SliceExpr {
+struct SlicingExpr {
     token: Token // From std::jule::lex
     expr:  ExprData
     start: ExprData
@@ -451,6 +451,18 @@ struct SliceExpr {
 }
 ```
 Slicing expression.
+
+---
+
+```jule
+struct TernaryExpr {
+    token:      Token
+    condition:  ExprData
+    true_expr:  ExprData
+    false_expr: ExprData
+}
+```
+Ternary expression.
 
 ---
 

@@ -508,6 +508,26 @@ Expression model for explicit dereferencing of reference.
 ---
 
 ```jule
+struct IntegratedToStrExprModel {
+    pexpr: ExprModel
+}
+```
+Expression model for to_str function of std::jule::integrated library.
+
+---
+
+```jule
+struct TernaryExprModel {
+    condition:  ExprModel
+    true_expr:  ExprModel
+    false_expr: ExprModel
+}
+```
+Expression model for ternary operator.
+
+---
+
+```jule
 struct RetType {
     kind:   &TypeSymbol
     idents: []Token
