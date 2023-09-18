@@ -49,3 +49,55 @@ fn main() {
     }
 }
 ```
+
+## Ternary Operator
+
+Ternary operator is a tool that can be used when two different expressions are required according to a condition. It must return two values ​​and the data types of the returned values ​​must be the same. The data type to be returned is accepted as the returned data type provided that it is true. The Else data must be a compatible type. Ternary is written like an if-else chain.
+
+For example:
+```jule
+fn my_func(x: int): int {
+    ret if x >= 50 {
+            if x%2 == 0 {
+                1000
+            } else {
+                500
+            }
+        } else {
+            100
+        }
+}
+
+fn main() {
+    outln(my_func(50))
+}
+```
+
+The return value obtained in the code example above should be `1000`.
+
+### Restrictions
+
+Ternary operators have restrictions on binary expressions to reduce complexity. You cannot use a ternary operator in a binary expression.
+
+For example:
+```jule
+if x >= 50 { test() } else { 100 } + 20
+```
+
+The example above is incorrect. Your compiler does not allow such usage.
+
+### Constant Evaluation
+
+Where possible, ternary expressions can be subject to constant evaluation optimization.
+
+For example:
+```jule
+const RATE = 60
+
+fn rate_delta(): int {
+    const r = if RATE >= 50 { 1000 } else { 100 }
+    ret r + 20
+}
+```
+
+The function in the example above returns the constant value `1020`.

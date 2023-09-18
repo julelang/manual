@@ -449,6 +449,7 @@ Compiler log messages with formatting.
 - `DuplicatedUseAlias`
 - `MissedTernaryElse`
 - `TernaryCompatiblity`
+- `VoidUsedForTernary`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
