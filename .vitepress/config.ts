@@ -431,6 +431,7 @@ export default defineConfig({
             },
             { text: 'std::sys', link: '/standard-library/std-sys' },
             { text: 'std::thread', link: '/standard-library/std-thread', },
+            { text: 'std::time', link: '/standard-library/std-time', },
             { 
               text: 'std::unicode', 
               link: '/standard-library/std-unicode',
