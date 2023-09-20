@@ -1,5 +1,5 @@
 # Match Statements
-If you need to make a selection and run an algorithm based on that selection, `match` is a good choice. The operator `|` is used for each case. For a block to be executed if not exist any match, don't give any expression to one case. 
+If you need to make a selection and run an algorithm based on that selection, `match` is a good choice. The operator `|` is used for each case. For a block to be executed if not exist any match, don't give any expression to one case, aka default case. The default case should be last case.
 
 **Syntax**
 ```jule

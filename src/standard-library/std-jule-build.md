@@ -452,6 +452,7 @@ Compiler log messages with formatting.
 - `VoidUsedForTernary`
 - `BuiltinUsedForRef`
 - `RefPointsToInvalidType`
+- `DefaultNotLast`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
