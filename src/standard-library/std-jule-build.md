@@ -450,6 +450,8 @@ Compiler log messages with formatting.
 - `MissedTernaryElse`
 - `TernaryCompatiblity`
 - `VoidUsedForTernary`
+- `BuiltinUsedForRef`
+- `RefPointsToInvalidType`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

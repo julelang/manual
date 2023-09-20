@@ -6,6 +6,8 @@ They are used with `&` operator in syntax. You can't have nested references, for
 
 References point to the value from which they were initialized and must receive an initialize expression. The lvalue pointing to later references cannot be changed. Any assignment statement is always about changing the data they refer to.
 
+Type safety accepts when a reference is the exact same data-type by value. Implicit cast or etc. cannot be used to pass references.
+
 ## Reference Variables
 
 Reference variables are variables that reference an lvalue. Any assignment made affects the referenced lvalue. Declared with `&` operator.
