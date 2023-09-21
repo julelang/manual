@@ -30,6 +30,11 @@ struct AbsTime {
 ```
 Abstract time.
 
+**Methods:**
+
+`fn unix(self): UnixTime`\
+Returns abstract time as unix-time seconds.
+
 ---
 
 ```jule
