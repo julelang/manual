@@ -21,6 +21,9 @@ It is experimental.
 `static fn spawn(routine: fn()): &Thread`\
 Spawns new thread by routine. Panics if routine is nil. Thread starts execution of routine when spawned.
 
+`static fn sleep(ns: u64)`\
+Stop execution of caller thread by nanoseconds. This functions only affects execution of caller thread, not process.
+
 `fn wait(self)`\
 Wait for complete execution of thread if active. Returns when the thread execution has completed. So program stops execution until thread's execution has completed. Panics if thread is not active.
 
