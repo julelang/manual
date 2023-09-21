@@ -662,6 +662,7 @@ struct Impl {
     base:    Token
     dest:    Token
     methods: []&Fn
+    statics: []&Var
 }
 ```
 Implementation. 
@@ -997,6 +998,10 @@ Structure.
 `fn find_method(mut self, ident: str): &Fn`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier.
+
+`fn find_static(mut self, ident: str): &Var`\
+Returns static field by identifier.
+Returns nil reference if not exist any static field in this identifier.
 
 `fn find_field(mut self, ident: str): &Field`\
 Returns field by identifier.\

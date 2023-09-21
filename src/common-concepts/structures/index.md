@@ -156,3 +156,23 @@ fn main() {
     Dog.voice()
 }
 ```
+
+## Static Fields
+
+Static fields can be accessed without any instance, like static methods. All fields used statically must be constant and are implemented with the `impl` statement.
+
+For example:
+
+```jule
+struct Number {}
+
+impl Number {
+    const PI = 3.14159
+    const E  = 2.71828
+}
+
+fn main() {
+    outln(Number.PI)
+    outln(Number.E)
+}
+```

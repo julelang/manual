@@ -849,15 +849,18 @@ Trait declaration.
 struct Impl {
     // This token available for these cases:
     //  - Implementation trait to structure, represents trait's token.
-    pub base:    Token // Token from std::jule::lex
+    base:    Token // Token from std::jule::lex
 
     // This token available for these cases:
     //  - Implementation trait to structure, represents structure's token.
     //  - Implementation to structure, represents structure's token.
-    pub dest:    Token // Token from std::jule::lex
+    dest:    Token // Token from std::jule::lex
 
     // Given methods to implement.
-    pub methods: []&FnDecl
+    methods: []&FnDecl
+
+    // Static varaibles to implement.
+    statics: []&VarDecl
 }
 ```
 Implementation.

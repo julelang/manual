@@ -453,6 +453,7 @@ Compiler log messages with formatting.
 - `BuiltinUsedForRef`
 - `RefPointsToInvalidType`
 - `DefaultNotLast`
+- `TraitImplHasStatic`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
