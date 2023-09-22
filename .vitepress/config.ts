@@ -377,7 +377,7 @@ export default defineConfig({
                 { text: 'std::debug::assert', link: '/std/debug-assert' }
               ],
             },
-            { text: 'std::env', link: '/std/std-env' },
+            { text: 'std::env', link: '/std/env' },
             { text: 'std::errors', link: '/std/errors' },
             { text: 'std::fmt', link: '/std/fmt' },
             { 
