@@ -139,7 +139,7 @@ fn main() {
 In the example above, an immutable trait contains a mutable type `&Circle`. We can get this by casting and change the result of the `area` method by changing the `r` field. This is because the `&Circle` instance it stores has interior mutability.
 
 ## Cloning
-You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/standard-library/builtin).
+You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/std/builtin).
 
 Cloning supported types and copy methods:
 - Numeric Types\

@@ -51,7 +51,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Manual', link: '/' },
-      { text: 'Standard Library', link: '/standard-library/' },
+      { text: 'Standard Library', link: '/std/' },
       { text: 'API', link: '/api/' },
     ],
 
@@ -284,7 +284,7 @@ export default defineConfig({
         },
         {
           items: [
-            { text: 'Standard Library', link: '/standard-library/' },
+            { text: 'Standard Library', link: '/std/' },
             { text: 'End', link: '/end' },
           ]
         },
@@ -363,84 +363,84 @@ export default defineConfig({
         }
       ],
 
-      '/standard-library/': [
+      '/std/': [
         {
           text: 'Standard Library',
-          link: '/standard-library/',
+          link: '/std/',
           items: [
-            { text: 'builtin', link: '/standard-library/builtin' },
-            { text: 'std::conv', link: '/standard-library/std-conv' },
+            { text: 'builtin', link: '/std/builtin' },
+            { text: 'std::conv', link: '/std/conv' },
             { 
               text: 'std::debug', 
-              link: '/standard-library/std-debug', 
+              link: '/std/debug', 
               items: [
-                { text: 'std::debug::assert', link: '/standard-library/std-debug-assert' }
+                { text: 'std::debug::assert', link: '/std/debug-assert' }
               ],
             },
-            { text: 'std::env', link: '/standard-library/std-env' },
-            { text: 'std::errors', link: '/standard-library/std-errors' },
-            { text: 'std::fmt', link: '/standard-library/std-fmt' },
+            { text: 'std::env', link: '/std/std-env' },
+            { text: 'std::errors', link: '/std/errors' },
+            { text: 'std::fmt', link: '/std/fmt' },
             { 
               text: 'std::fs', 
-              link: '/standard-library/std-fs', 
+              link: '/std/fs',
               items: [
-                { text: 'std::fs::path', link: '/standard-library/std-fs-path' }
+                { text: 'std::fs::path', link: '/std/fs-path' }
               ],
             },
-            { text: 'std::io', link: '/standard-library/std-io' },
+            { text: 'std::io', link: '/std/io' },
             { 
               text: 'std::jule', 
-              link: '/standard-library/std-jule',
+              link: '/std/jule',
               items: [
-                { text: 'std::jule::ast', link: '/standard-library/std-jule-ast' },
-                { text: 'std::jule::build', link: '/standard-library/std-jule-build' },
+                { text: 'std::jule::ast', link: '/std/jule-ast' },
+                { text: 'std::jule::build', link: '/std/jule-build' },
                 {
                   text: 'std::jule::constant',
-                  link: '/standard-library/std-jule-constant',
+                  link: '/std/jule-constant',
                   items: [
-                    { text: 'std::jule::constant::lit', link: '/standard-library/std-jule-constant-lit' }
+                    { text: 'std::jule::constant::lit', link: '/std/jule-constant-lit' }
                   ]
                 },
-                { text: 'std::jule::integrated', link: '/standard-library/std-jule-integrated' },
-                { text: 'std::jule::lex', link: '/standard-library/std-jule-lex' },
-                { text: 'std::jule::parser', link: '/standard-library/std-jule-parser' },
-                { text: 'std::jule::sema', link: '/standard-library/std-jule-sema' },
-                { text: 'std::jule::types', link: '/standard-library/std-jule-types' },
+                { text: 'std::jule::integrated', link: '/std/jule-integrated' },
+                { text: 'std::jule::lex', link: '/std/jule-lex' },
+                { text: 'std::jule::parser', link: '/std/jule-parser' },
+                { text: 'std::jule::sema', link: '/std/jule-sema' },
+                { text: 'std::jule::types', link: '/std/jule-types' },
               ]
             },
             { 
               text: 'std::math', 
-              link: '/standard-library/std-math',
+              link: '/std/math',
               items: [
-                { text: 'std::math::bits', link:'/standard-library/std-math-bits' }
+                { text: 'std::math::bits', link:'/std/math-bits' }
               ],
             },
             { 
               text: 'std::mem', 
-              link: '/standard-library/std-mem',
+              link: '/std/mem',
               items: [],
             },
-            { text: 'std::process', link: '/standard-library/std-process' },
-            { text: 'std::runtime', link: '/standard-library/std-runtime' },
+            { text: 'std::process', link: '/std/process' },
+            { text: 'std::runtime', link: '/std/runtime' },
             { 
               text: 'std::sync', 
-              link: '/standard-library/std-sync',
+              link: '/std/sync',
               items: [
-                { text: 'std::sync::atomic', link:'/standard-library/std-sync-atomic' }
+                { text: 'std::sync::atomic', link:'/std/sync-atomic' }
               ],
             },
-            { text: 'std::sys', link: '/standard-library/std-sys' },
-            { text: 'std::thread', link: '/standard-library/std-thread', },
-            { text: 'std::time', link: '/standard-library/std-time', },
+            { text: 'std::sys', link: '/std/sys' },
+            { text: 'std::thread', link: '/std/thread', },
+            { text: 'std::time', link: '/std/time', },
             { 
               text: 'std::unicode', 
-              link: '/standard-library/std-unicode',
+              link: '/std/unicode',
               items: [
-                { text: 'std::unicode::utf16', link:'/standard-library/std-unicode-utf16' },
-                { text: 'std::unicode::utf8', link:'/standard-library/std-unicode-utf8' },
+                { text: 'std::unicode::utf16', link:'/std/unicode-utf16' },
+                { text: 'std::unicode::utf8', link:'/std/unicode-utf8' },
               ],
             },
-            { text: 'std::vec', link: '/standard-library/std-vec' },
+            { text: 'std::vec', link: '/std/vec' },
           ],
         },
       ]
