@@ -1,8 +1,8 @@
-# std::vector
+# std::vec
 
 ## Structs
 ```jule
-struct Vector[T]
+struct Vec[T]
 ```
 Wrapper for dynamic array.\
 Uses capacity for performanc\e.\
@@ -17,7 +17,7 @@ Allocates new space and copies (not deep copy) items into space.
 
 **Methods:**
 
-`static fn new(cap: int): Vector[T]` \
+`static fn new(cap: int): Vec[T]` \
 Allocate new vector with capacity. 
 
 `fn len(self): int`\
@@ -49,10 +49,10 @@ Push items to end of heap.
 `fn push_front(mut self, mut item: T)`\
 Push item to front of heap.
 
-`fn merge(mut self, mut vec: Vector[T])`\
+`fn merge(mut self, mut vec: Vec[T])`\
 Merge items to end of heap.
 
-`fn merge_front(mut self, mut vec: Vector[T])`\
+`fn merge_front(mut self, mut vec: Vec[T])`\
 Merge items to front of heap.
 
 `fn remove_range(mut self, start: int, n: int)`\
@@ -61,5 +61,5 @@ Remove range from heap.
 `fn insert(mut self, i: int, mut item: T)`\
 Insert item by index.
 
-`fn insert(mut self, start: int, end: int): Vector[T]`\
+`fn insert(mut self, start: int, end: int): Vec[T]`\
 Slice between indexes except end position.

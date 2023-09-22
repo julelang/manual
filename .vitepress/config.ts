@@ -440,7 +440,7 @@ export default defineConfig({
                 { text: 'std::unicode::utf8', link:'/standard-library/std-unicode-utf8' },
               ],
             },
-            { text: 'std::vector', link: '/standard-library/std-vector' },
+            { text: 'std::vec', link: '/standard-library/std-vec' },
           ],
         },
       ]
