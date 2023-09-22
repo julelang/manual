@@ -86,3 +86,23 @@ fn main() {
 }
 ```
  In this example, the variable `ptr` is an unsafe pointer and points to the variable `a`. Then we see that this pointer is cast to the `int` pointer and deferenced. As a result, we get the value the `20` because was done right. 
+
+## Pointer Arithmetic
+
+Pointer arithmetic is available for typed pointers other than `*unsafe`. Thanks to pointer arithmetic, you can shift your pointers with the help of integers.
+
+For example, summing a pointer to the integer `1` means that it will be shifted forward by the size of the data type it points to in memory. This means that if you point to a block of memory, the pointer will point to the next block element.
+
+For example:
+```jule
+fn main() {
+    let s = [1, 2, 3, 4, 5]
+    let mut p = &s[0]
+    let end = p + s.len
+    for p < end; p++ {
+        unsafe { outln(*p) }
+    }
+}
+```
+
+In the example above, the elements of the slice are written to stdout with the help of pointers and pointer arithmetic.
