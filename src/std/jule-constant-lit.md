@@ -1,7 +1,7 @@
 # std::jule::constant::lit
 
 ## Functions
-```
+```jule
 fn is_byte_lit(mut kind: str): (str, bool)
 ```
 Reports whether kind is byte literal and returns literal without quotes.
