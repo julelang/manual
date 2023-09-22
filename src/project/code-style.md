@@ -18,10 +18,12 @@ These examples are the recommended style, not mandatory.
 | Function | snake_case | function, my_function |
 | Struct | PascalCase | Struct, MyStruct |
 | Method | snake_case | method, my_method |
+| Static Method | snake_case | method, my_method |
+| Static Field | PascalCase | Field, MyField |
 | Field | snake_case | field, my_field |
 | Enum | PascalCase | Enum, MyEnum |
-| Enum Variants | PascalCase | Variant, MyVariant |
-| Type | Full lowercase and not separated or PascalCase | mytype, Type, MyType |
+| Enum Fields | PascalCase | Variant, MyVariant |
+| Type Alias | Full lowercase and not separated or PascalCase | mytype, Type, MyType |
 | Generic Type | Starts with T and continue with numbers, or PascalCase | T1, T2, T, Generic, GenericType |
 
 ## Indentions
