@@ -91,6 +91,8 @@ Dynamic generic annotation is used in the above example. Generic types are autom
 
 [Type-match](/common-concepts/control-flow/match-statement#type-matching) statements can be used to implement different algorithms for generic types. There is no runtime cost, matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches and you will prevent semantic analysis errors for mismatched cases.
 
+Types must always match exactly. For example, when checking a trait, not all types that implement the trait are accepted. Matching is always done with exactly the same types.
+
 For example:
 
 ```jule
