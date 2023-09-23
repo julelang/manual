@@ -412,7 +412,8 @@ export default defineConfig({
               text: 'std::math', 
               link: '/std/math',
               items: [
-                { text: 'std::math::bits', link:'/std/math-bits' }
+                { text: 'std::math::bits', link:'/std/math-bits' },
+                { text: 'std::math::rand', link:'/std/math-rand' },
               ],
             },
             { 
