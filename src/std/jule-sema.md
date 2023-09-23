@@ -888,7 +888,12 @@ struct Match {
     default:    &Case
 }
 ```
-Match-Case. 
+Match-Case.
+
+**Methods:**
+
+`fn is_generic_type_match(self): bool`\
+Reports whether match is type-match for generic type.
 
 ---
 
@@ -1123,6 +1128,7 @@ struct TypeAlias {
     public:     bool
     cpp_linked: bool
     used:       bool
+    generic:    bool
     token:      Token
     ident:      str
     kind:       &TypeSymbol
@@ -1140,9 +1146,10 @@ Type alias.
 
 ```jule
 struct TypeKind {
-    cpp_ident:  str
-    variadic:   bool
-    kind:       Kind
+    cpp_ident: str
+    generic:   bool
+    variadic:  bool
+    kind:      Kind
 }
 ```
 Type alias.

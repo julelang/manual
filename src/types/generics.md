@@ -12,6 +12,13 @@ Generic types are also assumed to be local in-scope type aliases. Therefore, the
 Generics are never supports shadowing.
 :::
 
+## Runtime Cost of Generics
+Short answer: Generics hasn't any cost for runtime.
+
+The cost of generics is that they typically add potentially additional time to compile times. When generics are evaluated as compile-time, there may be a cost, but the same is not true for runtime. Jule's generics cost nothing to runtime, you have no losses.
+
+The generated code is created specifically for each generic combination, and each combination uses its own unique algorithms. There is no difference in runtime. Each generic type is determined at compile time and is compiled accordingly preserving the static type. So even if you use generic types at runtime, you get the performance of no-generic definitions at no cost. 
+
 ## Generics for Functions
 ::: warning
 Genericed functions never can used as anonymous function or type annotation.
@@ -80,9 +87,29 @@ fn main() {
 ```
 Dynamic generic annotation is used in the above example. Generic types are automatically detected from the data type of argument by compiler.
 
-## Runtime Cost of Generics
-Short answer: Generics hasn't any cost for runtime.
+## Generic Type Matching
 
-The cost of generics is that they typically add potentially additional time to compile times. When generics are evaluated as compile-time, there may be a cost, but the same is not true for runtime. Jule's generics cost nothing to runtime, you have no losses.
+[Type-match](/common-concepts/control-flow/match-statement#type-matching) statements can be used to implement different algorithms for generic types. There is no runtime cost, matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches and you will prevent semantic analysis errors for mismatched cases.
 
-The generated code is created specifically for each generic combination, and each combination uses its own unique algorithms. There is no difference in runtime. Each generic type is determined at compile time and is compiled accordingly preserving the static type. So even if you use generic types at runtime, you get the performance of no-generic definitions at no cost. 
+For example:
+
+```jule
+fn println[T](x: T) {
+    match type T {
+    | str:  out("Str: ")
+    | bool: out("Bool: ")
+    | f64:  out("64-bit float: ")
+    | int:  out("Integer: ")
+    |:      out("Unkown: ")
+    }
+    outln(x)
+}
+
+fn main() {
+    println(10)
+    println(true)
+    println(20.5)
+    println("MyString")
+    println(any(nil))
+}
+```

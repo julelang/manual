@@ -102,7 +102,7 @@ Default
 ```
 
 ### Type Matching
-The `any` data type may contain any data and you may want to execute different algorithms based on this data, in which case type matching is useful. You can also determine types of trait's data. Type matching is easy. Just use the keyword `type` and then use the data type in case to match.
+The `any` or `trait` data type may contain any data and you may want to execute different algorithms based on this data, in which case type matching is useful. You can also determine types of trait's data. Type matching is easy. Just use the keyword `type` and then use the data type in case to match.
 
 For example:
 ```jule
@@ -118,3 +118,8 @@ fn main() {
     }
 }
 ```
+
+### Generic Matching
+
+Type-Math is also used to map generics.
+See the [Generic Type Matching](/types/generics#generic-type-matching) section for more information about this.
