@@ -75,17 +75,6 @@ fn main() {
 
 The return value obtained in the code example above should be `1000`.
 
-### Restrictions
-
-Ternary operators have restrictions on binary expressions to reduce complexity. You cannot use a ternary operator in a binary expression.
-
-For example:
-```jule
-if x >= 50 { test() } else { 100 } + 20
-```
-
-The example above is incorrect. Your compiler does not allow such usage.
-
 ### Constant Evaluation
 
 Where possible, ternary expressions can be subject to constant evaluation optimization.
