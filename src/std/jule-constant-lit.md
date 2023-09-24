@@ -2,14 +2,9 @@
 
 ## Functions
 ```jule
-fn is_byte_lit(mut kind: str): (str, bool)
+fn is_ascii(r: rune): bool
 ```
-Reports whether kind is byte literal and returns literal without quotes.
-
-Byte literal patterns:
-- `0 <= r <= 255`
-- `'\xhh'`
-- `'\nnn'`
+Reports whether rune is byte actually. In other words, whether rune is ACII.
 
 ---
 
