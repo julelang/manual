@@ -370,26 +370,33 @@ export default defineConfig({
           items: [
             { text: 'builtin', link: '/std/builtin' },
             { text: 'std::conv', link: '/std/conv' },
-            { 
-              text: 'std::debug', 
-              link: '/std/debug', 
+            {
+              text: 'std::debug',
+              link: '/std/debug',
               items: [
-                { text: 'std::debug::assert', link: '/std/debug-assert' }
+                { text: 'std::debug::assert', link: '/std/debug-assert' },
+              ],
+            },
+            {
+              text: 'std::encoding',
+              link: '/std/encoding',
+              items: [
+                { text: 'std::encoding::base64', link: '/std/encoding-base64' },
               ],
             },
             { text: 'std::env', link: '/std/env' },
             { text: 'std::errors', link: '/std/errors' },
             { text: 'std::fmt', link: '/std/fmt' },
-            { 
-              text: 'std::fs', 
+            {
+              text: 'std::fs',
               link: '/std/fs',
               items: [
-                { text: 'std::fs::path', link: '/std/fs-path' }
+                { text: 'std::fs::path', link: '/std/fs-path' },
               ],
             },
             { text: 'std::io', link: '/std/io' },
-            { 
-              text: 'std::jule', 
+            {
+              text: 'std::jule',
               link: '/std/jule',
               items: [
                 { text: 'std::jule::ast', link: '/std/jule-ast' },
@@ -408,23 +415,23 @@ export default defineConfig({
                 { text: 'std::jule::types', link: '/std/jule-types' },
               ]
             },
-            { 
-              text: 'std::math', 
+            {
+              text: 'std::math',
               link: '/std/math',
               items: [
                 { text: 'std::math::bits', link:'/std/math-bits' },
                 { text: 'std::math::rand', link:'/std/math-rand' },
               ],
             },
-            { 
-              text: 'std::mem', 
+            {
+              text: 'std::mem',
               link: '/std/mem',
               items: [],
             },
             { text: 'std::process', link: '/std/process' },
             { text: 'std::runtime', link: '/std/runtime' },
-            { 
-              text: 'std::sync', 
+            {
+              text: 'std::sync',
               link: '/std/sync',
               items: [
                 { text: 'std::sync::atomic', link:'/std/sync-atomic' }
@@ -433,8 +440,8 @@ export default defineConfig({
             { text: 'std::sys', link: '/std/sys' },
             { text: 'std::thread', link: '/std/thread', },
             { text: 'std::time', link: '/std/time', },
-            { 
-              text: 'std::unicode', 
+            {
+              text: 'std::unicode',
               link: '/std/unicode',
               items: [
                 { text: 'std::unicode::utf16', link:'/std/unicode-utf16' },
