@@ -36,21 +36,31 @@ Returns new PRNG for seed.
 
 ---
 
-`fn unext(mut self): uint`\
-Returns pseudo random number in `[0, uint.MAX)` range.
+`fn next63(mut self): i64`\
+Returns a non-genative pseudo-random 63-bit signed integer as an 64-bit signed integer.
 
 ---
 
-`fn next(mut self): int`\
-Returns pseudo random number in `[0, int.MAX)` range.
+`fn next31(mut self): i32`\
+Returns a non-genative pseudo-random 31-bit signed integer as an 31-bit signed integer.
 
 ---
 
-`fn nextn(mut self, n: int): int`\
-Returns pseudo random number in `[0, n)` range.
-Panics if `n < 0`.
+`fn nextn63(mut self, n: i64): i64`\
+Returns a non-genative pseudo-random in `[0, n)` range 63-bit signed integer as an 64-bit signed integer. If `n <= 0`, it panics.
 
 ---
 
-`fn unextn(mut self, n: uint): uint`\
-Returns pseudo random number in `[0, n)` range.
+`fn nextn31(mut self, n: i32): i32`\
+Returns a non-genative pseudo-random in `[0, n)` range 31-bit signed integer as an 31-bit signed integer. If `n <= 0`, it panics.
+
+---
+
+`fn fnext64(mut self): f64`\
+Returns a non-genative pseudo-random in `[0.0, 1.0)` range as f64 floating-point.
+
+---
+
+`fn fnext32(mut self): f32`\
+Returns a non-genative pseudo-random in `[0.0, 1.0)` range as f32 floating-point.
+
