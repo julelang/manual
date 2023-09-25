@@ -20,7 +20,7 @@ Values ​​that can be evaluated at compile-time, such as literals and constan
 `--opt-copy` \
 It reduces copying operations whenever possible.
 
-- Refers to data instead of copying when using lvalue in foreach iterations.
+- If the second variable of range iteration is immutable or has a mutable type, its address is pointed to instead of being copied.
 - Refers to data instead of copying when using lvalue in match statements.
 
 ---

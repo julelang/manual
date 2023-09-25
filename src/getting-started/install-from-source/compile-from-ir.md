@@ -1,5 +1,9 @@
 # Compile From IR
 
+::: info
+This is the recommended way.
+:::
+
 The IR codes are kept in this [respository](https://github.com/julelang/julec-ir), you need to get them here.
 
 This repository contains the platform-specific C++ IR code of JuleC, the reference compiler of the Jule programming language, that was created by leveraging JuleC's cross-transpile feature. When you are unable to compile the JuleC's new major branch codes with an existing JuleC build, when you want to get a JuleC build from IR code, when you want to examine the IRs created by JuleC, or for a different purpose, you can consider using C++ IR codes. A common usage scenario of this repository is to get a JuleC build that can compile up-to-date code and access up-to-date major code.
@@ -10,7 +14,7 @@ If this code does not allow you to get the latest JuleC build, you can get a lat
 
 ## How to Compile an IR
 
-You need the Jule source codes to compile the IR code. IR codes have dependencies like some header files in API and standard library. Therefore, you must have obtained the Jule source code to compile the IR code. In most cases, it shouldn't be a problem for you to compile the most recent C++ headers in the main branch. However, for the most guaranteed experience, it is recommended to obtain the source tree of the commit where these IR codes were generated. The commit IR uses is mentioned above.
+You need the Jule source codes to compile the IR code. IR codes have dependencies like some header files in API and standard library. Therefore, you must have obtained the Jule source code to compile the IR code. In most cases, it shouldn't be a problem for you to compile the most recent C++ headers in the main branch. However, for the most guaranteed experience, it is recommended to obtain the source tree of the commit where these IR codes were generated. The commit IR uses is mentioned above of repository.
 
 The include directories of the IR codes are set to be in the root directory of the Jule source code of the IR code. So put your IR code inside the root directory of Jule source tree you got and build in that directory. If you want a different directory, you need to change the include directories of IR.
 

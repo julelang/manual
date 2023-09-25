@@ -73,9 +73,9 @@ export default defineConfig({
               text: 'Install from Source',
               link: '/getting-started/install-from-source/',
               items: [
+                { text: 'Compile From IR', link: '/getting-started/install-from-source/compile-from-ir' },
                 { text: 'Build Scripts', link: '/getting-started/install-from-source/build-scripts' },
                 { text: 'Manual Compilation', link: '/getting-started/install-from-source/manual-compilation' },
-                { text: 'Compile From IR', link: '/getting-started/install-from-source/compile-from-ir' },
               ],
             },
           ],
