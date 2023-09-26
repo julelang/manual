@@ -1021,6 +1021,9 @@ Reports whether structure is derives given derive.
 `fn is_uses(self, s: &Struct): bool`\
 Reports whether structure is uses given structure. 
 
+`fn has_ref_accessible(self): bool`\
+Reports whether structure has only reference-type-accessible defines.
+
 ---
 
 ```jule
