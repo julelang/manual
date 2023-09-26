@@ -655,6 +655,9 @@ Returns kind string of function instance.
 Appends identifier to kind of this instance.
 Does not appends identifier of this instance to kind if self.decl is nil reference.
 
+`fn same(self, f: &FnIns): bool`\
+Reports whether instances are same. Returns true if declarations and generics are same.
+
 ---
 
 ```jule
@@ -1062,6 +1065,10 @@ Returns nil reference if not exist any method in this identifier.
 `fn find_field(mut self, ident: str): &FieldIns`\
 Returns field by identifier.\
 Returns nil reference if not exist any field in this identifier. 
+
+`fn same(self, s: &StructIns): bool`\
+Reports whether instances are same.\
+Returns true if declarations and generics are same.
 
 ---
 
