@@ -1,25 +1,20 @@
 # std::env
-## Globals
-### `static ARGS: []str`
-Holds the command-line arguments.\
+## Functions
+
+```jule
+fn args(): []str
+```
+Returns command-line arguments.
 Starts with the program name.
-::: warning
-Command-line arguments sets at runtime with init function.\
-Initialize expression is nil.\
-You got nil slice if used as initialize expression to any global.
-:::
 
 ---
 
-### `static ENV: []str`
-Holds the environment variables.
-::: warning
-Environment variables sets at runtime with init function. \
-Initialize expression is nil. \
-You got nil slice if used as initialize expression to any global.
-:::
+```jule
+fn env(): []str
+```
+Returns envrionment variables.
 
-## Functions
+---
 
 ```jule
 fn working_dir(): (str, EnvError)

@@ -4,7 +4,7 @@ The API provides a function for you to get the executable path of the program. T
 
 Returns empty string if any error occurrs.
 
-Relevant function (in `environment.hpp`):
+Relevant function (in `env.hpp`):
 ```cpp
 jule::Str executable(void);
 ```
