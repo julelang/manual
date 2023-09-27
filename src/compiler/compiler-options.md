@@ -80,3 +80,8 @@ Enable special optimizations for mathematical operations.
 
 `--opt-access` \
 Enable special optimizations for memory accessing.
+
+---
+
+`--opt-inline` \
+Enable special optimizations for inlining.
