@@ -1374,22 +1374,33 @@ Reports whether pointer is unsafe pointer (*unsafe).
 ---
 
 ```jule
+struct IterRelation {
+    range: &Var
+}
+```
+Iteration relationship of variables.
+Stored only for indexing variable and ranged by variable.
+
+---
+
+```jule
 struct Var {
-    scope:      &ScopeTree
-    token:      Token
-    ident:      str
-    cpp_linked: bool
-    constant:   bool
-    mutable:    bool
-    public:     bool
-    used:       bool
-    statically: bool
-    reference:  bool
-    directives: []&Directive
-    doc:        str
-    kind:       &TypeSymbol
-    value:      &Value
-    references: &ReferenceStack
+    scope:         &ScopeTree
+    token:         Token
+    ident:         str
+    cpp_linked:    bool
+    constant:      bool
+    mutable:       bool
+    public:        bool
+    used:          bool
+    statically:    bool
+    reference:     bool
+    directives:    []&Directive
+    doc:           str
+    kind:          &TypeSymbol
+    value:         &Value
+    references:    &ReferenceStack
+    iter_relation: &IterRelation
 
     // This variable depended to these variables for initialization expression.
     // Nil if not global variable.
