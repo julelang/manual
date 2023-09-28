@@ -85,7 +85,7 @@ Return values are written with the `ret` keyword. Although the keyword `return` 
 Functions can be used as data type. It is similar to defining a function. Just parameters and return value are necessary.
 
 For example:
-```
+```jule
 let my_function: fn(int, int): int
 ```
 The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
@@ -190,22 +190,6 @@ fn main() {
 ::: warning
 You can't use multiple returnable functions combined with normal multiple assignments.
 :::
-
-### Multiple Returns as Multiple Return
-When you have a function that returns more than one value, and to use these return values as a return value in another function that returns exactly the same, using a variable too is not a necessity but a preference. Jule allows you to use the return values of a multi-return function as the return value and automatically maps the values if the return values and data types match exactly.
-
-For example:
-```jule
-fn example1(): (int, str, byte) { ret 143, "STR", 'W' }
-fn example2(): (int, str, byte) { ret example1() }
-
-fn main() {
-    let (a, b, c) = test2()
-    outln(a)
-    outln(b)
-    outln(c)
-}
-```
 
 ## Concurrent Calls
 Concurrency works on performing multiple tasks at the same time. This means that you are working on multiple tasks simultaneously in one time frame. However, you can only do one task for the same time. This tends to happen in programs where a task is waiting and the program has determined to run another task at idle time.

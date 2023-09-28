@@ -178,6 +178,7 @@ export default defineConfig({
           link: '/memory/',
           items: [
             { text: 'Immutability', link: '/memory/immutability' },
+            { text: 'Mutability', link: '/memory/mutability' },
             { text: 'Pointers', link: '/memory/pointers' },
             { text: 'References', link: '/memory/references' },
             {

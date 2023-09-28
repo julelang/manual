@@ -41,6 +41,10 @@ fn example() {
 }
 ```
 
+::: tip
+Variables must be mutable in order for their values ​​to change. For this, the keyword 'mut' was used in the example above. For more information about mutability, you can refer to the [mutability](/memory/mutability) section.
+:::
+
 ## Constant Variable
 Constant variables are declared same method, the only difference being that the keyword `const` is used when defining them.
 
@@ -114,6 +118,30 @@ fn main() {
 C++ linked globals can be declare via `let` keyword.
 :::
 
+## Shadowing
+
+In the basic sense, shadowing is when a definition with the same identifier shadows a define with the same identifier before it in scope. This is made possible by performing a new definition in subscopes of a scope with the name of a definition defined in that parent scope, or by using the identifier of a global definition in the main scope of a function.
+
+Shadowing can cause various developer errors and make reading code more complicated. Therefore, by default your compiler does not allow shadowing. However, you can enable this by passing the `--shadowing` option to your compiler.
+
+### What if Shadowing Enabled
+
+When you tell your compiler to allow shadowing, it allows you to implement shadowing. What Shadowing is explained. To give an example:
+
+```jule
+fn main() {
+    let a = 10
+    {
+        let a = 200
+        outln(a)
+    }
+    outln(a)
+}
+```
+In the above example, the main scope of the function has a child scope. This scope has a variable with the same identifier as the variable `a` in the main scope. This variable replaces and shadows the parent scope's variable `a` in it and its child scopes.
+
+Can a definition in the same scope be shadowed, how does the compiler behave about it? Obviously, you can't. The compiler will never allow two identifiers in the same scope. Therefore, you cannot have definitions with the same identifier in the same scope.
+
 ## Multiple Assignment / Declaration
 You can multiple variable assignment or declaration. What? Sure, you can use two type in same statement. You know how to declare variable, okay it is same. The single difference, identifiers and expressions separate with comma.
 
@@ -179,10 +207,10 @@ fn main() {
         outln(y) // 200
         outln(z) // 20
     }
-    outln(x) / 100
+    outln(x) // 100
 }
 ```
-In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement.
+In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement. The above example cannot be done by default, this requires allowing shadowing.
 
 Also if you want to perform an assignment, but not to a variable but to a pointer etc. If you want to do it, your statements must be in parentheses. Expressions enclosed in parentheses are clean assignment expressions, the brackets are evaluated and the value is assigned.
 
@@ -198,27 +226,3 @@ fn main() {
 ::: warning
 This can make the statement very complex and impair readability. For this reason, it is recommended not to use too complex expressions in parentheses. 
 :::
-
-## Shadowing
-
-In the basic sense, shadowing is when a definition with the same identifier shadows a define with the same identifier before it in scope. This is made possible by performing a new definition in subscopes of a scope with the name of a definition defined in that parent scope, or by using the identifier of a global definition in the main scope of a function.
-
-Shadowing can cause various developer errors and make reading code more complicated. Therefore, by default your compiler does not allow shadowing. However, you can enable this by passing the `--shadowing` option to your compiler.
-
-### What if Shadowing Enabled
-
-When you tell your compiler to allow shadowing, it allows you to implement shadowing. What Shadowing is explained. To give an example:
-
-```jule
-fn main() {
-    let a = 10
-    {
-        let a = 200
-        outln(a)
-    }
-    outln(a)
-}
-```
-In the above example, the main scope of the function has a child scope. This scope has a variable with the same identifier as the variable `a` in the main scope. This variable replaces and shadows the parent scope's variable `a` in it and its child scopes.
-
-Can a definition in the same scope be shadowed, how does the compiler behave about it? Obviously, you can't. The compiler will never allow two identifiers in the same scope. Therefore, you cannot have definitions with the same identifier in the same scope.
