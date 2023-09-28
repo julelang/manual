@@ -1,4 +1,17 @@
 /**
+ * Fonts
+ * -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: SourceCodePro;
+  src: url(fonts/SourceCodePro-Regular.ttf);
+}
+
+:root {
+  --vp-font-family-mono: SourceCodePro;
+}
+
+/**
  * Colors
  * -------------------------------------------------------------------------- */
 
