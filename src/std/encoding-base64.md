@@ -3,7 +3,7 @@
 ## Functions
 
 ```jule
-fn encode(src: []byte): []byte
+fn encode(src: []byte, pad: bool): []byte
 ```
 Encodes source bytes with standard base64 table. Returns encoded base64 bytes if success, nil slice if not. Adds padding if pad is true.
 
