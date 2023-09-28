@@ -31,6 +31,20 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 ---
 
 ```jule
+fn write_file(path: str, data: []byte, perm: int): FsError
+```
+Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
+
+---
+
+```jule
+fn create_file(path: str): (&File, FsError)
+```
+Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
+
+---
+
+```jule
 fn remove_file(path: str): FsError
 ```
 Removes named file.
@@ -58,9 +72,9 @@ Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 ---
 
 ```jule
-fn open(path: str, flag: OFlag, mode: int): (&File, FsError)
+fn open_file(path: str, flag: OFlag, mode: int): (&File, FsError)
 ```
-Opens file stream with named file, specified flag (Sema.Rdwr, Sema.Trunc etc.) and perm. If named file does not exist and Sema.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
+Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
@@ -190,7 +204,7 @@ Exactly one of Rdonly, Wronly, or Rdwr must be specified.
 - `Rdwr`: Open the file read-write
 - `Append`: Append data to the file when writing
 - `Create`: Create a new file if none exists
-- `Excl`: Used with Sema.Create, file must not exist
+- `Excl`: Used with OFlag.Create, file must not exist
 - `Sync`: Open for synchronous I/O
 - `Trunc`: Truncate regular writable file when opened
 
