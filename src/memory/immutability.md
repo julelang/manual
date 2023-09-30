@@ -19,3 +19,24 @@ For the same reason, the compiler will force you to return a mutable variable if
 An immutable variable with mutable data type returned from the function then poses a unsafety. Because it is not possible to specify it as immutable in return data type. That's why the compiler assumes that the return value can change, and shows you one of its strict obsessions about it: if you're returning, please use a mutable variable. Even if you're just returning the variable, the compiler doesn't want to understand it. According to the compiler, if that variable is an immutable and is also used within the function, the immutable obtained instance obtained from the return value may break this immutability. Even if there is no such thing, the compiler will continue to insist on this.
 
 Okay, so why doesn't the compiler implement immutability by default only for those data types? This is a good question. The answer lies in the compiler wanting to be stable. It is a mental overhead during the development phase that the developer has to constantly consider these data types. This stability of the compiler ensures that the developer always knows that all variables are immutable by default. This also helps the developer to understand what he or she is changing and will change while developing and reading algorithms. It is more obvious which variables should be paid attention to, especially when using concurrency.
+
+## Responsive Immutability
+
+Responsive immutability is the state of protection when immutability is guaranteed. For example, if a slice is guaranteed to have an immutable memory area at the time it is created, it is allowed to have mutable types stored in the immutable memory area, even though it is a mutable type.
+
+For example:
+```jule
+struct Test {
+    slice: []int
+}
+
+fn main() {
+    let x = [1, 2, 3, 4, 5]
+    let s = Test{
+        slice: x,
+    }
+    outln(s)
+}
+```
+
+In the example above, the variable `x` is an immutable slice. However, when a mutable field is assigned, it becomes possible to change immutable data because it is mutable. This is clearly a violation of immutability. However, it is guaranteed that the `Test` structure created for the `s` variable will be immutable because the `s` variable to which it will be assigned is immutable. Your compiler will be fine with this. However, if immutability is not guaranteed or the compiler cannot understand it, you will be explicitly warned about mutability.
