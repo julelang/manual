@@ -23,3 +23,31 @@ Decrements the WaitGroup counter by one.
 
 `fn wait(mut self)` \
 Blocks until all tasks are done (task count becomes zero) 
+
+---
+
+```jule
+struct Mutex
+```
+Muxtex is a primitive used to protect memory in multi-threading situations such as concurrent access.
+
+A Mutex must be initialized, use the new static method for this. If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
+
+::: info
+**Implemented Traits**
+- Dispose
+:::
+
+**Methods:**
+
+`static fn new(): &Mutex`\
+Returns new initialized ready-for-use Mutex.
+
+`fn lock(self)`\
+Locks the mutex. If the mutex is locked by another thread, it stops the execution of the algorithm to seize it and waits to lock the mutex.
+
+`fn unlock(self)`\
+Unlock the mutex you locked and make it open to locking by the thread.
+
+`fn try_lock(self): bool`\
+Try locking the mutex. But unlike the lock method, it just tries to lock instead of waiting to lock. Returns true if the locking was successful, false otherwise.
