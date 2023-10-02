@@ -13,7 +13,14 @@ Some optimizations may be enabled by default and it may not be possible to disab
 
 ### Constant Optimization
 
-Values ​​that can be evaluated at compile-time, such as literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
+Constant optimization, in short, is the processing of constant expressions that can be evaluated at runtime. Since processed constant values ​​represent the direct result, it helps to create code that creates less load at runtime.
+
+Constant optimization does the following:
+
+- Values ​​that can be evaluated at compile-time, such as literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
+- May choose the ternary operator result whenever possible.
+- Indexing of constant strings is evaluated if the indexing is done with a constant expression.
+- Slicing of constant strings is evaluated if the indexes are done with a constant expression.
 
 ## Optimization Options
 
