@@ -27,7 +27,7 @@ Constant optimization does the following:
 `--opt-copy` \
 It reduces copying operations whenever possible.
 
-- If the second variable of range iteration is immutable or has a mutable type, its address is pointed to instead of being copied.
+- Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
 
 ---
