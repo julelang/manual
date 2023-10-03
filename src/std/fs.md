@@ -1,83 +1,5 @@
 # std::fs
 
-## Functions
-```jule
-fn stat(path: str): (s: &Status, err: FsError)
-```
-Returns a Status describing the path.\
-Returns nil reference if error occurs.
-
-Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
-
----
-
-```jule
-fn read_dir(path: str): ([]&DirEntry, FsError)
-```
-Reads the named directory and returs all its directory entries can read.\
-Returns nil if no any directory entry or error occurs.
-
-Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
-
----
-
-```jule
-fn read_file(path: str): ([]byte, FsError)
-```
-Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
-
-Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
-
----
-
-```jule
-fn write_file(path: str, data: []byte, perm: int): FsError
-```
-Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
-
----
-
-```jule
-fn create_file(path: str): (&File, FsError)
-```
-Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
-
----
-
-```jule
-fn remove_file(path: str): FsError
-```
-Removes named file.
-
-Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `NotDir`
-
----
-
-```jule
-fn create_dir(path: str): FsError
-```
-Creates directory.
-
-Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
-
----
-
-```jule
-fn remove_dir(path: str): FsError
-```
-Removes empty directory.
-
-Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
-
----
-
-```jule
-fn open_file(path: str, flag: OFlag, mode: int): (&File, FsError)
-```
-Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
-
-Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
-
 ## Structs
 ```jule
 struct Status {
@@ -92,6 +14,12 @@ Status information.
 
 **Methods:**
 
+`static fn stat(path: str): (s: &Status, err: FsError)`\
+Returns a Status describing the path.\
+Returns nil reference if error occurs.
+
+Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
+
 `fn is_dir(self): bool`\
 Reports path is directory or not.
 
@@ -100,7 +28,7 @@ Reports path is regular file or not.
 
 ---
 
-```
+```jule
 struct DirEntry {
     name: str
     stat: &Status
@@ -110,7 +38,7 @@ Directory entry.
 
 ---
 
-```
+```jule
 struct File
 ```
 The file stream handle.
@@ -124,6 +52,27 @@ There may be system call differences and performance differences for console han
 `static fn new(handle: uintptr): &File`\
 Returns new `&File` by handle.
 If hadle <= 0, returns nil reference.
+
+`static fn open_file(path: str, flag: OFlag, mode: int): (&File, FsError)`\
+Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
+
+Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
+
+`static fn remove(path: str): FsError`\
+Removes named file.
+
+Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `NotDir`
+
+`static fn read(path: str): ([]byte, FsError)`\
+Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
+
+Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
+
+`static fn write(path: str, data: []byte, perm: int): FsError`\
+Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
+
+`static fn create(path: str): (&File, FsError)`\
+Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
 
 `fn seek(mut self, offset: i64, origin: Seek): (i64, FsError)`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end. Return 0 if error occurs.
@@ -146,6 +95,31 @@ Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe
 Closes file handle. 
 
 Possible errors: `InvalidDescriptor` `Signal` `IO`
+
+---
+
+```jule
+struct Directory
+```
+Directory.
+
+**Methods:**
+
+`static fn read_dir(path: str): ([]&DirEntry, FsError)`\
+Reads the named directory and returs all its directory entries can read.\
+Returns nil if no any directory entry or error occurs.
+
+Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
+
+`static fn create_dir(path: str): FsError`\
+Creates directory.
+
+Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
+
+`static fn remove_dir(path: str): FsError`\
+Removes empty directory.
+
+Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ## Enums
 `enum FsError`
