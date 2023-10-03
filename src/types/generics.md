@@ -115,3 +115,30 @@ fn main() {
     println(any(nil))
 }
 ```
+
+### Compile-Time Panic
+
+Generic type matching statements provides compile-time panic calls. You can issue a compile error with a panic call to prevent improper matches and fail the compilation. To call compile-time panic on inappropriate matches, call panic only in that case and do it using a constant string value.
+
+For example:
+
+```jule
+fn print_kind[T]() {
+    match type T {
+    | bool: outln("type is boolean")
+    | int:  outln("type is integer")
+    | f64:  outln("type is floating-point")
+    | str:  outln("type is string")
+    |:      panic("print_kind[T]: unsupported type")
+    }
+}
+
+fn main() {
+    print_kind[bool]()
+    print_kind[int]()
+    print_kind[f64]()
+    print_kind[any]()
+}
+```
+
+The code in the above example cannot be compiled because the `any` type causes a compile-time panic call.
