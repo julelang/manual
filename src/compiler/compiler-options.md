@@ -18,11 +18,6 @@ $ julec -t --compiler clang .
 The example code above means: "Hey compiler, transpile main.jule's content using the clang compiler standard." 
 
 ## Options
-`-c` `--compile` \
-Compiles source code. Actually this is not necessary because compiler's default option is compile.
-
----
-
 `-t` `--transpile` \
 Just transpile source code.
 
