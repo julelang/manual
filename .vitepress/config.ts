@@ -388,6 +388,7 @@ export default defineConfig({
             },
             { text: 'std::env', link: '/std/env' },
             { text: 'std::errors', link: '/std/errors' },
+            { text: 'std::flag', link: '/std/flag' },
             { text: 'std::fmt', link: '/std/fmt' },
             {
               text: 'std::fs',
