@@ -64,7 +64,7 @@ Enums consider themselves a data type. Therefore, even an enum with an int data 
 
 It must be cast in order to be processed with different types, but due to type safety. However, you also cannot cast an integer value to an enum that uses the integer type. Assignments should always be of their own type.
 
-Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|` and `&` operators.
+Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators.
 
 ::: warning
 Maps doen't support enums for type safety.
