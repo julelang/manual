@@ -50,11 +50,11 @@ For example:
 ```jule
 let (x, y) = 20, false
 if (x == 10 ||
-	y == false) {
+    y == false) {
 }
 ```
 
-### Binary Expressions
+### Contiguous expressions
 
 Binary expressions try to check from the next line if they need an operand even without parentheses. Therefore, with correct use, you can proceed to the next lines with a binary expression. It is often considered a more readable approach than parentheses.
 
@@ -63,6 +63,17 @@ For example:
 ```jule
 let (x, y) = 20, false
 if x == 10 ||
-	y == false {
+    y == false {
 }
+```
+
+---
+
+The same applies to dots.
+
+For example:
+```jule
+foo.
+    bar().
+    baz()
 ```
