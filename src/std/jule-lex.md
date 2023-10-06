@@ -298,7 +298,7 @@ Token identities.
 - `Const`
 - `Type`
 - `Colon`
-- `Iter`
+- `For`
 - `Break`
 - `Cont`
 - `In`
@@ -400,7 +400,7 @@ Token kinds.
 - `Const`
 - `Ret`
 - `Type`
-- `Iter`
+- `For`
 - `Break`
 - `Cont`
 - `In`
