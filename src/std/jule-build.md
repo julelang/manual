@@ -456,6 +456,7 @@ Compiler log messages with formatting.
 - `TraitImplHasStatic`
 - `IncompatibleTypeForPtrArithmetic`
 - `ComptimePanic`
+- `InvalidTypeForIndexing`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
