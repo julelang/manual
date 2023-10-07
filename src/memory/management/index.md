@@ -3,20 +3,22 @@ Jule does the memory management itself. But it's not fully automatic. You decide
 
 Jule uses reference counting for heap allocations. It is automatically released when the reference count of the pointer reaches zero, that is, when it is certain that the heap allocation is no longer used. It is guaranteed that no allocation goes unnoticed and is also not released while the allocation is still in use.
 
-## Reference Types
-References are heap allocation data types. A reference is annotated by an `&` operator.
+## Smart Pointers
 
-A reference is always heap-allocation and is always within the reference counting. When a pointer to a reference is taken, you don't get a pointer to the reference. You get a pointer to the address of the heap allocation that the reference is using.
+Smart pointers (aka reference types or references) are more safet pointers than raw pointers and have a structure that automates memory management. They implement reference counting, which is Jule's default memory management approach, so they are also referred to as reference types. A smart pointer is annotated by an `&` operator.
 
-Because:
+Smart pointers are can be nil, and act just like a pointer. By default, they store heap-allocated data and perform reference counting. To access the pointed value, the unary `*` operator is used, just like in raw pointers.
 
-**Reference Pointer is Unnecessary**
-It is unnecessary for a pointer to point to a reference. You're probably doing this to share the same address. The truth is, references already do that. So instead of getting a pointer to a reference, using the reference directly gives the same experience. Therefore, pointers to a reference are not supported.
+The `&` operator always returns a raw pointer.
+Here are a few reasons why:
 
-**More Productive**
-As explained above, you are probably doing this to share the same address. Getting a pointer to a reference and getting a pointer pointing to the address that reference is pointing to should then be the same for you. If you had a pointer to a reference, that would raise issues for you. Because the references you point to are also variables, for example, when using the atomicity functions in the standard library, instead of performing an atomic operation for the allocation of that reference, you have to perform an atomic operation for the reference itself. This atomicity is unnecessary because what you need is the atomicity that is above the allocation of the reference.
+- **Reducing Implicit Heap Allocations**\
+One of the main reasons is to reduce implicit heap allocations and encourage developers to do this more consciously.
 
-Example to reference data type anotations:
+- **Efficiency**\
+This is an efficiency issue. Presumably, if you're getting a pointer to a smart pointer, you're doing so to share the address. The problem is that smart pointers already do this, and creating a smart pointer with an additional RC cost just because you will share the address is often not a good approach. Since you will be doing this mostly to reduce the RC cost or to share memory, it is suitable for a more general and efficient use when the "&" operator takes a raw pointer by default.
+
+Example to smart pointer declarations:
 ```jule
 &int
 ```
@@ -24,16 +26,10 @@ Example to reference data type anotations:
 &MyStruct
 ```
 
-You can't use as reference these types:
-- Enum
-- Pointer
-- Reference Type
-- Array
-
 ### Initialization
 The built-in `new` function is used to make the reference. Please refer to the [builtin](/std/builtin) library documentation for this function.
 
-It can be used in two ways. The first type allows you to get only one reference, but that reference is an uninitialized reference (aka nil reference), meaning it does not point to any allocation and does not perform reference counting.
+It can be used in two ways. The first type allows you to get only one reference, but that reference is an initialized with default value.
 
 For example:
 ```jule
@@ -42,9 +38,9 @@ fn main() {
     outln(x)
 }
 ```
-The `x` variable is integer reference, but not have allocation.
+The `x` variable is integer reference, and stores zero.
 
-The second type is references initialized with a value. These references are initialized with an allocation when they are created and perform reference counting, the given value is assigned to the created allocation. 
+The second type is references initialized with a value.
 
 For example:
 ```jule
@@ -57,13 +53,27 @@ The `x` variable is a heap-allocated reference initialized with 100.
 
 ---
 
-References that are automatically initialized by the compiler are created as null references. 
+References that are automatically initialized by the compiler are created as nil references.
 
 For example:
 ```jule
 fn main() {
     let x = make([]&int, 1)
-    outln(real(x[0])) // false
+    outln(x[0] == nil) // true
+}
+```
+
+### Addresses and Conversions
+
+A smart pointer can be cast to a raw pointer that points to the same type. When cast to uintptr, you get the address it points to, just like a raw pointer.
+
+For example:
+
+```jule
+fn main() {
+    let a = new(int, 10)
+    let b = (*int)(a)
+    unsafe { outln(*b) }
 }
 ```
 
@@ -72,17 +82,17 @@ References can be `nil` (aka null). This is safe, when a `nil` reference is used
 
 Classic assignment cannot be made to assign a reference to nil. Classic assignments are always assignments to the data carried by the reference. If the data type carried by the reference is nil compatible, the nil assignment is made to the data it contains.
 
-Assigning a reference to nil does not make all references to be set to nil. It simply ensures that the relevant reference no longer performs reference counting and disposes of ownership of the allocation.
+Assigning a reference to `nil` does not make all references to be set to nil. It simply ensures that the relevant reference no longer performs reference counting and disposes of ownership of the allocation.
 
-The built-in `drop` function drops allocation and reference counting, sets reference to nil. If you want to check if the reference is zero and has allocation, use the built-in real function. The real function returns boolean.
+The `nil` drops allocation and reference counting, sets reference to nil. If you want to check if the reference has allocation, use the `ptr != nil` approach.
 
 For example:
 ```jule
 fn main() {
     let mut x = new(int, 20)
-    outln(real(x)) // true
-    drop(x)
-    outln(real(x)) // false
+    outln(x != nil) // true
+    x = nil
+    outln(x != nil) // false
 }
 ```
 
@@ -93,14 +103,14 @@ Reference counting is not a program running in the background. Therefore, it doe
 
 For example:
 ```jule
-fn test() {
+fn main() {
 
     // Make heap-allocation, returns heap-allocated &int initialized with 100
     // Ref count is 1
     let mut x = new(int, 100)
 
     // Prints 100
-    outln(x)
+    outln(*x)
 
     // Make new heap-allocation with 50, ref count is 1
     // Frees old allocation because ref count is 0 now
@@ -111,7 +121,7 @@ fn test() {
     let y = x
 
     // Prints 50
-    outln(y)
+    outln(*y)
 
 } // Frees allocation because ref count is 0, destroyed all references
 ```
@@ -129,12 +139,12 @@ All of these are minor overheads, but for performance-critical software, the dev
 
 Some data types of Jule also use references in the background. This is because they reference each other the space they allocate. This is why some types use background references to minimize the amount of allocations. Therefore, they have additional overhead such as the additional atomicity of references and the memory space allocated for reference counting.
 
-List of all types which is performs reference counting:
-- Reference Type
+List of all types which is performs internal reference counting:
+- Smart Pointers
 - Slice
 - Trait
 
-### Using References with Reference-Counted Types
+### Using Smart Pointers with Reference-Counted Types
 Data types that already perform reference counting can be used with references if supported. This does not pose any problem. References perform a reference counting in themselves, if the data they carry has a reference counting, it does not interfere with them.
 
 If the reference count of the migrated data has not reached zero, but the reference carrying it has now released its allocation, there is no problem. This is because the reference counting and allocation control of the data it carries take place independently.
@@ -142,9 +152,9 @@ If the reference count of the migrated data has not reached zero, but the refere
 For example:
 ```jule
 fn main() {
-    let ref = new([]int, [1, 2, 3, 4])
-    let s: []int = ref
-    drop(ref)
+    let mut ref = new([]int, [1, 2, 3, 4])
+    let s = *ref
+    ref = nil
     outln(s)
 }
 ```
@@ -194,26 +204,9 @@ fn main() {
     let mut b = &B{}
     a.b = b
     b.a = a
-    drop(b.a)
+    b.a = nil
 }
 ```
 The reference count cycle is broken as one of the parties causing the cycle is removed, so there shouldn't be any memory leaks in the above code.
 
 Software developers may not always have code that they can cycle through. But when cycles do occur, they can be difficult to spot and locate. So just being a little more careful when there are potential cycle situations can make things a lot safer.
-
-## Slices
-Slices have a capacity, but don't free unused capacities. This capacity can be used during slicing. If you have a slice with a length of 5 but its capacity is 8, you can expand the slice to use all the capacity by giving 8 during slicing.
-
-For example:
-```jule
-fn main() {
-    let mut s = [1, 2, 3]
-    s = append(s, 4, 5)
-    s = s[:s.len-2]
-    outln(s)  // [1 2 3]
-    s = s[:]
-    outln(s)  // [1 2 3]
-    s = s[:5] // [1 2 3 4 5]
-    outln(s)
-}
-```

@@ -173,16 +173,6 @@ Unary operation expression model.
 ---
 
 ```jule
-struct GetRefExprModel {
-    expr: ExprModel
-}
-```
-Pointer getter expression for reference types.\
-For example: `&my_reference`
-
----
-
-```jule
 struct StructArgExprModel {
     field: &FieldIns
     expr:  ExprModel
@@ -495,15 +485,6 @@ struct RuneExprModel {
 ```
 Rune literal expression model.
 For exmaple: `'a'`
-
----
-
-```jule
-struct ExplicitDerefExprModel {
-    expr: ExprModel
-}
-```
-Expression model for explicit dereferencing of reference.
 
 ---
 
@@ -1179,9 +1160,6 @@ Reports whether kind is nil.
 `fn void(self): bool`\
 Reports whether kind is void.
 
-`fn lvalue(self): bool`\
-Reports whether kind is lvalue.
-
 `fn mut(self): bool`\
 Reports whether kind is mutable.
 
@@ -1197,8 +1175,8 @@ Reports whether kind is variadicable.
 `fn prim(self): &Prim`\
 Returns primitive type if kind is primitive type, nil reference if not.
 
-`fn ref(self): &Ref`\
-Returns primitive type if kind is reference, nil reference if not.
+`fn sptr(self): &Sptr`\
+Returns primitive type if kind is smart pointer, nil reference if not.
 
 `fn ptr(self): &Ptr`\
 Returns primitive type if kind is pointer, nil reference if not.

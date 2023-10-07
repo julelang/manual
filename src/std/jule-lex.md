@@ -40,7 +40,7 @@ List of assign operators.
 fn lex(mut f: &File, text: []byte): bool
 ```
 Lex source code into fileset.\
-Returns nil if `!real(f)`.\
+Returns nil if `f == nil`.\
 Returns nil slice for errors if no any error.
 
 ---

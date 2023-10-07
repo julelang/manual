@@ -1,6 +1,6 @@
 # Reference Counting
 
-Jule's reference counting functionality for allocations is provided in the API. The `ref.hpp` header contains the `Ref` struct for reference counting.
+Jule's reference counting functionality for allocations is provided in the API. The `ref.hpp` header contains the `Ptr` struct for reference counting.
 
 ## Variables
 
@@ -13,7 +13,7 @@ The reference counting data delta value that must occur per each reference count
 
 ```cpp
 template<typename T>
-jule::Ref<T> new_ref(void);
+jule::Ptr<T> new_ref(void);
 ```
 Equavelent of Jule's `new(T)` call.
 
@@ -21,7 +21,7 @@ Equavelent of Jule's `new(T)` call.
 
 ```cpp
 template<typename T>
-jule::Ref<T> new_ref(const T &init);
+jule::Ptr<T> new_ref(const T &init);
 ```
 
 Equavelent of Jule's `new(T, EXPR)` call.
@@ -30,7 +30,7 @@ Equavelent of Jule's `new(T, EXPR)` call.
 
 ```cpp
 template<typename T>
-struct Ref;
+struct Ptr;
 ```
 
 Wrapper structure for raw pointer of JuleC. This structure is the used by Jule references for reference-counting and memory management.
@@ -38,7 +38,7 @@ Wrapper structure for raw pointer of JuleC. This structure is the used by Jule r
 ### Statics
 
 ```cpp
-static jule::Ref<T>
+static jule::Ptr<T>
 make(T *ptr, jule::Uint *ref);
 ```
 Creates new reference from allocation and reference counting allocation. Reference does not counted if reference count allocation is null.
@@ -46,7 +46,7 @@ Creates new reference from allocation and reference counting allocation. Referen
 ---
 
 ```cpp
-static jule::Ref<T>
+static jule::Ptr<T>
 make(T *ptr);
 ```
 Creates new reference from allocation. Allocates new allocation for reference counting data and starts counting to `jule::REFERENCE_DELTA`.
@@ -54,20 +54,6 @@ Creates new reference from allocation. Allocates new allocation for reference co
 ### Methods
 
 ```cpp
-jule::Bool real(void) const;
-```
-Reports whether reference is counting for allocation. In other word, allocation is nil or not.
-
----
-
-```cpp
 void drop(void);
 ```
 Drops reference. This function will destruct this instace for reference counting. Frees memory if reference counting reaches to zero.
-
----
-
-```cpp
-T& get(void);
-```
-Returns data of allocation.

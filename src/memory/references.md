@@ -1,6 +1,6 @@
 # References
 
-References can be confused with the reference types described in memory management, but they are completely different things. References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable. You can think of them as pointers but they are safer because of compiler's safety obsessions.
+References can be confused with the reference types (aka smart pointers) described in memory management, but they are completely different things. References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable. You can think of them as pointers but they are safer because of compiler's safety obsessions.
 
 They are used with `&` operator in syntax. You can't have nested references, for example you can have a pointer pointing to a pointer but not a reference referencing to a reference.
 

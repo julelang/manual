@@ -148,11 +148,11 @@ Namespace chain type.
 ---
 
 ```jule
-struct RefTypeDecl {
+struct SptrTypeDecl {
     elem: &TypeDecl
 }
 ```
-Reference type. 
+Smart pointer type. 
 
 ---
 

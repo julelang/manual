@@ -1,5 +1,5 @@
 # Pointers
-Each location at memory have an address. These addresses points to location at memory. Pointers are variables can store this memory addresses.
+Each location at memory have an address. These addresses points to location at memory. Pointers (aka raw pointers) are variables can store this memory addresses.
 
 To declare a pointer data-type, use `*` operator.
 

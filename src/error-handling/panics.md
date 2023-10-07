@@ -4,14 +4,14 @@ Panics abruptly stop program execution and "abort" it. If you're talking about a
 For example:
 ```jule
 fn add_to_ref(rate: int, mut i: &int) {
-    if !real(i) {
+    if i == nil {
         panic("i is nil reference")
     }
     i += rate
 }
 
 fn main() {
-    add_to_ref(10, new(int))
+    add_to_ref(10, nil)
 }
 ```
 The code above is an example of panicking.

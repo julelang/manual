@@ -40,28 +40,14 @@ Recovers errors if exist and call given function with handled error instance.
 ```jule
 fn new(T): &T
 ```
-Returns nil reference of data type. 
+Returns new reference-type for T initialized with default.
 
 ---
 
 ```jule
-fn new(T, mut v: T): &T
+fn new(T, expr: T): &T
 ```
-Returns reference to new heap-allocation initialized with expression of data type if allocation is success, panics if not.
-
----
-
-```jule
-fn drop(ref: mut &T)
-```
-Drops allocation and reference counting of reference. 
-
----
-
-```jule
-fn real(ref: mut &T): bool
-```
-Reports reference is not nil. 
+Returns new reference-type for T initialized with expression.
 
 ---
 
