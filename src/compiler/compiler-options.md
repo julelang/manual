@@ -80,3 +80,8 @@ Enable special optimizations for memory accessing.
 
 `--opt-inline` \
 Enable special optimizations for inlining.
+
+---
+
+`--opt-ptr` \
+Enable special optimizations for pointers.

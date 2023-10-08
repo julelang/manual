@@ -76,6 +76,13 @@ Enable optimizatons for inlining.
 
 - The IR is generated includes encourage inline optimizations of the backend compiler.
 
+---
+
+`--opt-ptr` \
+Enable optimizations for pointers.
+
+- Immediate pointer simplifies dereferencing statements. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
