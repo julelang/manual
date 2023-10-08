@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   },
   "name": "jule-manual",
   "description": "The official manual of [the Jule programming language](https://github.com/julelang/jule).",
