@@ -97,4 +97,4 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, and `--opt-inline`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, and `--opt-ptr`
