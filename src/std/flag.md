@@ -66,5 +66,5 @@ Adds new flag and returns allocated reference variable. Panics if name or short 
 - `str`
 - `bool`
 
-`fn add_var[T](mut self, mut &var: &T, name: str, short: rune, what: str)`\
+`fn add_var[T](mut self, mut var: &T, name: str, short: rune, what: str)`\
 Same with add method but do not allocates new reference, uses existing.
