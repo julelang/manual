@@ -31,7 +31,7 @@ struct Mutex
 ```
 Muxtex is a primitive used to protect memory in multi-threading situations such as concurrent access.
 
-A Mutex must be initialized, use the new static method for this. If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
+If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
 
 ::: info
 **Implemented Traits**
