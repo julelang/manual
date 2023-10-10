@@ -1,179 +1,153 @@
 # std::sync::atomic
 ## Functions
+
 ```jule
-fn swap_i32(mut &addr: i32, new: i32, order: MemoryOrder): (old: i32)
+fn swap[T](mut &addr: T, new: T, order: MemoryOrder): (old: T)
 ```
 Atomically stores new into addr and returns the previous addr value.
+Only integer types are supported.
 
 ---
 
 ```jule
-fn swap_i64(mut &addr: i64, new: i64, order: MemoryOrder): (old: i64)
+fn compare_swap[T](mut &addr: T, old: T, new: T, order: MemoryOrder): (swapped: bool)
 ```
-Atomically stores new into addr and returns the previous addr value.
+Executes the compare-and-swap operation for value.
+Only integer types are supported.
 
 ---
 
 ```jule
-fn swap_u32(mut &addr: u32, new: u32, order: MemoryOrder): (old: u32)
-```
-Atomically stores new into addr and returns the previous addr value.
-
----
-
-```jule
-fn swap_u64(mut &addr: u64, new: u64, order: MemoryOrder): (old: u64)
-```
-Atomically stores new into addr and returns the previous addr value.
-
----
-
-```jule
-fn swap_uinptr(mut &addr: uintptr, new: uintptr, order: MemoryOrder): (old: uintptr)
-```
-Atomically stores new into addr and returns the previous addr value.
-
----
-
-```jule
-fn compare_swap_i32(mut &addr i32, old: i32, new: i32, order: MemoryOrder): (swapped: bool)
-```
-Executes the compare-and-swap operation for an i32 value.
-
----
-
-```jule
-fn compare_swap_i64(mut &addr: i64, old: i64, new: i64, order: MemoryOrder): (swapped: bool)
-```
-Executes the compare-and-swap operation for an i64 value.
-
----
-
-```jule
-fn compare_swap_u32(mut &addr: u32, old: u32, new: u32, order: MemoryOrder): (swapped: bool)
-```
-Executes the compare-and-swap operation for an u32 value.
-
----
-
-```jule
-fn compare_swap_u64(mut &addr: u64, old: u64, new: u64, order: MemoryOrder): (swapped: bool)
-```
-Executes the compare-and-swap operation for an u64 value.
-
----
-
-```jule
-fn compare_swap_uintptr(mut &addr: uintptr, old: uintptr, new: uintptr, order: MemoryOrder): (swapped: bool)
-```
-Executes the compare-and-swap operation for an uintptr value.
-
----
-
-```jule
-fn add_i32(mut &addr: i32, delta: i32, order: MemoryOrder): (old: i32)
+fn add[T](mut &addr: T, delta: T, order: MemoryOrder): (old: T)
 ```
 Atomically adds delta to addr and returns the previous addr value.
+Only integer types are supported.
 
 ---
 
 ```jule
-fn add_i64(mut &addr: i64, delta: i64, order: MemoryOrder): (old: i64)
-```
-Atomically adds delta to addr and returns the previous addr value.
-
----
-
-```jule
-fn add_u32(mut &addr: u32, delta: u32, order: MemoryOrder): (old: u32)
-```
-Atomically adds delta to addr and returns the previous addr value.
-
----
-
-```jule
-fn add_u64(mut &addr: u64, delta: u64, order: MemoryOrder): (old: u64)
-```
-Atomically adds delta to addr and returns the previous addr value.
-
----
-
-```jule
-fn add_uinptr(mut &addr: uintptr, delta: uintptr, order: MemoryOrder): (old: uintptr)
-```
-Atomically adds delta to addr and returns the previous addr value.
-
----
-
-```jule
-fn load_i32(&addr: i32, order: MemoryOrder): i32
+fn load[T](&addr: T, order: MemoryOrder): T
 ```
 Atomically loads addr.
+Only integer types are supported.
 
 ---
 
 ```jule
-fn load_i64(&addr: i64, order: MemoryOrder): i64
-```
-Atomically loads addr.
-
----
-
-```jule
-fn load_u32(&addr: u32, order: MemoryOrder): u32
-```
-Atomically loads addr.
-
----
-
-```jule
-fn load_u64(&addr: u64, order: MemoryOrder): u64
-```
-Atomically loads addr.
-
----
-
-```jule
-fn load_uinptr(&addr: uintptr, order: MemoryOrder): uintptr
-```
-Atomically loads addr.
-
----
-
-```jule
-fn store_i32(mut &addr: i32, val: i32, order: MemoryOrder)
+fn store[T](mut &addr: T, val: T, order: MemoryOrder)
 ```
 Atomically stores val into addr.
-
----
-
-```jule
-fn store_i64(mut &addr: i64, val: i64, order: MemoryOrder)
-```
-Atomically stores val into addr.
-
----
-
-```jule
-fn store_u32(mut &addr: u32, val: u32, order: MemoryOrder)
-```
-Atomically stores val into addr.
-
----
-
-```jule
-fn store_u64(mut &addr: u64, val: u64, order: MemoryOrder)
-```
-Atomically stores val into addr.
-
----
-
-```jule
-fn store_uinptr(mut &addr: uintptr, val: uintptr, order: MemoryOrder)
-```
-Atomically stores val into addr.
+Only integer types are supported.
 
 ## Structures
+
+```jule
+struct AtomicI8
+```
+Type alias for private wrapper structure for i8 type.
+
+**Methods:**
+
+`static fn new(n: i8): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: i8, order: MemoryOrder): (old: i8)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: i8, new: i8, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: i8, order: MemoryOrder): (old: i8)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): i8`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: i8, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicI16
+```
+Type alias for private wrapper structure for i16 type.
+
+**Methods:**
+
+`static fn new(n: i16): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: i16, order: MemoryOrder): (old: i16)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: i16, new: i16, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: i16, order: MemoryOrder): (old: i16)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): i16`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: i16, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicI32
+```
+Type alias for private wrapper structure for i32 type.
+
+**Methods:**
+
+`static fn new(n: i32): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: i32, order: MemoryOrder): (old: i32)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: i32, new: i32, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: i32, order: MemoryOrder): (old: i32)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): i32`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: i32, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicI64
+```
+Type alias for private wrapper structure for i64 type.
+
+**Methods:**
+
+`static fn new(n: i64): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: i64, order: MemoryOrder): (old: i64)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: i64, new: i64, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: i64, order: MemoryOrder): (old: i64)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): i64`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: i64, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
 
 ```jule
 struct AtomicInt
@@ -198,6 +172,114 @@ Atomically adds delta to value and returns the previous value.
 Atomically reads and returns value.
 
 `fn store(mut self, val: int, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicU8
+```
+Type alias for private wrapper structure for u8 type.
+
+**Methods:**
+
+`static fn new(n: u8): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: u8, order: MemoryOrder): (old: u8)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: u8, new: u8, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: u8, order: MemoryOrder): (old: u8)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): u8`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: u8, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicU16
+```
+Type alias for private wrapper structure for u16 type.
+
+**Methods:**
+
+`static fn new(n: u16): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: u16, order: MemoryOrder): (old: u16)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: u16, new: u16, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: u16, order: MemoryOrder): (old: u16)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): u16`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: u16, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicU32
+```
+Type alias for private wrapper structure for u32 type.
+
+**Methods:**
+
+`static fn new(n: u32): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: u32, order: MemoryOrder): (old: u32)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: u32, new: u32, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: u32, order: MemoryOrder): (old: u32)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): u32`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: u32, order: MemoryOrder)`\
+Atomically assigns to value.
+
+---
+
+```jule
+struct AtomicU64
+```
+Type alias for private wrapper structure for u64 type.
+
+**Methods:**
+
+`static fn new(n: u64): AtomicInt` \
+Returns new atomic instance for type with initializer value.
+
+`fn swap(mut self, new: u64, order: MemoryOrder): (old: u64)`\
+Atomically stores new value and returns the previous value.
+
+`fn compare_swap(mut self, old: u64, new: u64, order: MemoryOrder): (swapped: bool)`\
+Executes the compare-and-swap operation.
+
+`fn add(mut self, delta: u64, order: MemoryOrder): (old: u64)`\
+Atomically adds delta to value and returns the previous value.
+
+`fn load(self, order: MemoryOrder): u64`\
+Atomically reads and returns value.
+
+`fn store(mut self, val: u64, order: MemoryOrder)`\
 Atomically assigns to value.
 
 ---
