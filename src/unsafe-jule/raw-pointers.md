@@ -13,7 +13,6 @@ fn main() {
 ```
 Note that no safety is provided in this regard. Pointers can benefit you, but you have to provide safety yourself. You need to be wary of dangling pointers, buffer overflows, and similar memory issues.
 
-
 ## Postfixes for Raw Pointers
 Unsafe Jule supports postfixes for raw pointers.
 
@@ -56,6 +55,22 @@ For example:
 ```jule
 let ptr: int = 0
 let unsafe_ptr = unsafe { (*str)(ptr) }
+```
+
+## Get Smart Pointer from Raw Pointer
+
+From raw pointers, you can obtain smart pointers (aka reference types). One casting is sufficient for this. Of course, this conversion is not safe. Dangling pointers are not checked. Smart pointers continue to protect you only regarding nil pointers. However, smart pointers obtained in this way do not perform reference counting.
+
+It is an Unsafe Jule feature that can be used to achieve optimization for purposes such as eliminating reference counting for a statically stored reference type. In addition, you legitimize the use of raw pointers in Safe Jule and eliminate the need to use Unsafe Jule for issues such as dereferencing.
+
+For example:
+```jule
+fn main() {
+    let x: int = 0
+    let mut y = unsafe { (&int)(&x) }
+    *y = 20
+    outln(x)
+}
 ```
 
 ## Pass Pointer to Reference

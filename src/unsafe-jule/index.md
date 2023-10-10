@@ -14,6 +14,7 @@ Benefits of Unsafe Jule:
 - Postfixes for raw pointers
 - Indexing with raw pointers
 - Cast raw pointers
+- Get smart pointer from raw pointer
 - Call unsafe functions or methods
 - Concurrent calls with reference parameters
 - Pass pointer to reference
