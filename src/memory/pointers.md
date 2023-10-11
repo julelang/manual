@@ -99,7 +99,7 @@ fn main() {
     let s = [1, 2, 3, 4, 5]
     let mut p = &s[0]
     let end = p + s.len
-    for p < end; p++ {
+    for p != end; p++ {
         unsafe { outln(*p) }
     }
 }
