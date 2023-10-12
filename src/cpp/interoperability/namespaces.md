@@ -17,7 +17,7 @@ Jule also uses the namespace you type directly in code generation, without check
 
 For example:
 ```jule
-//jule:namespace foo::bar
+#namespace "foo::bar"
 cpp fn exit(code: int)
 
 fn main() {
@@ -33,7 +33,7 @@ The `namespace` directive can be a kind of trick that can also be used to achiev
 
 For example:
 ```jule
-//jule:namespace std::numeric_limits<jule::Int>
+#namespace "std::numeric_limits<jule::Int>"
 cpp fn max(): int
 
 fn main() {

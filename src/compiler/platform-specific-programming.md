@@ -41,7 +41,7 @@ Your variables are set automatically by your compiler. The variables you can use
 Here is an example code:
 
 ```
-//jule:build (darwin || windows) && 64bit
+#build (darwin || windows) && 64bit
 ```
 
 The above expression will return `true` for windows and darwin operating systems with 64-bit architecture.
@@ -49,7 +49,7 @@ The above expression will return `true` for windows and darwin operating systems
 Another example:
 
 ```
-//jule:build unix && !darwin
+#build unix && !darwin
 ```
 
 The above expression will return `true` for all unix operating systems except darwin.

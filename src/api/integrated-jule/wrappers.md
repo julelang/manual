@@ -92,7 +92,7 @@ Integrating the STL Vector wrapper described above with Jule would look like thi
 ```jule
 cpp use "vector.hpp"
 
-//jule:typedef
+#typedef
 cpp struct Vector[T] {
     size:     fn(): int
     capacity: fn(): int

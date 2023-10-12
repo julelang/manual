@@ -26,11 +26,6 @@ Identifier of initializer function.
 
 ---
 
-### `static DIRECTIVES: [...]Directive`
-List of all directives. 
-
----
-
 ### `static CPP_HEADER_EXTS: [...]str`
 Valid extensions of C++ headers.
 
@@ -227,7 +222,7 @@ Architectures for file annotation kind.
 
 ---
 
-`enum Derives: str`
+`enum Derive: str`
 
 All built-in derive defines.
 
@@ -427,7 +422,6 @@ Compiler log messages with formatting.
 - `CloneImmutStruct`
 - `InternalTypeNotSupportsClone`
 - `TypeNotCompatibleForDerive`
-- `PassDirectiveNotStartsWithDash`
 - `DeriveIllegalCycleRefersItself`
 - `DeriveIllegalCrossCycle`
 - `InvalidExprForBinop`
@@ -457,6 +451,9 @@ Compiler log messages with formatting.
 - `IncompatibleTypeForPtrArithmetic`
 - `ComptimePanic`
 - `InvalidTypeForIndexing`
+- `DirectiveUsedAtMiddle`
+- `UnusedDirective`
+- `UnsupportedDirective`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

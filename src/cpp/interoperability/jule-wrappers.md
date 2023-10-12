@@ -73,7 +73,7 @@ Our Jule code:
 ```jule
 cpp type char: byte
 
-//jule:typedef
+#typedef
 cpp struct Person {
     name:    *cpp.char
     surname: *cpp.char
@@ -131,7 +131,7 @@ You may not want to write such neat wrappers, though. In this context, it is als
 
 In this case the wrapper Jule code would look like this:
 ```jule
-//jule:typedef
+#typedef
 cpp struct Person {
     name:    str
     surname: str
@@ -178,7 +178,7 @@ void say_hi(void) {
 
 And this method is linked to the link of `Person` in Jule like this:
 ```jule
-//jule:typedef
+#typedef
 cpp struct Person {
     name:    str
     surname: str

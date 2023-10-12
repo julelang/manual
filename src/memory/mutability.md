@@ -51,7 +51,7 @@ You can derive `Clone` to solve this problem.
 
 For example:
 ```jule
-//jule:derive Clone
+#derive Clone
 struct Wrapper {
     slc: []int
 }
@@ -163,14 +163,14 @@ Clone cycles are a kind of illegal cycle. In cases where you risk an endless clo
 
 For example:
 ```jule
-//jule:derive Clone
+#derive Clone
 struct A {
-    b: &B
+    b: []B
 }
 
-//jule:derive Clone
+#derive Clone
 struct B {
-    a: &A
+    a: []A
 }
 ```
 The `A` struct and `B` struct in the example above have fields that reference each other. They both derive `Clone`. But this poses a risk at runtime. Because if you try to clone struct `A` and it points to a struct `B` pointing to itself, an endless cycle of cloning occurs. This is clearly a runtime risk. Therefore the compiler will not compile your code.

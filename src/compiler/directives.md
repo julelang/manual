@@ -8,9 +8,9 @@ Incorrect directives will cause compiler errors if necessary.
 \
 For example to directives:
 ```jule
-//jule:typedef
+#typedef
 ```
-As seen in the example, it is essentially a comment as explained. For a directive to be valid, it must be used correctly in the right place. The comment must be at the beginning of the line and begin with the `jule:` prefix.
+As seen in the example, it is essentially a comment as explained. For a directive to be valid, it must be used correctly in the right place. The comment must be at the beginning of the line and begin with the `#` prefix.
 
 ## Top Directives
 Top directives are must be placed at top of source file.
@@ -22,7 +22,7 @@ The arguments of the directives are separated by spaces. The directive must be f
 \
 For example:
 ```jule
-//jule:derive Clone
+#derive Clone
 struct MyStruct {}
 ```
 
@@ -45,10 +45,10 @@ The syntax is simple and easy to learn. The logical and operator is `&&` and the
 Here is an example code via `build` directive:
 
 ```jule
-//jule:build (darwin || windows) && 64bit
+#build (darwin || windows) && 64bit
 ```
 ```jule
-//jule:build unix && !darwin
+#build unix && !darwin
 ```
 
 ## Directive: `derive`
@@ -58,8 +58,7 @@ See more information about [deriving](/compiler/deriving).
 
 ## Directive: `pass`
 Directive pass is a top directive.
-Passes compiler flags to generated compile command for compiling source code.
-Passes are must be start with dash.
+Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
 
 ::: info
 There are no issue if you are using same passes.
@@ -69,8 +68,8 @@ The compiler eliminates duplicate passes.
 \
 For example:
 ```jule
-//jule:pass -framework Foundation
-//jule:pass -framework Cocoa
+#pass "-framework Foundation"
+#pass "-framework Cocoa"
 
 fn main() {
     // ...
@@ -90,4 +89,4 @@ In C++-linked structs, if the structure is a `typedef` use this will configure c
 In C++-linked functions, if the function is a `#define`, it configures code generation to be compatible.
 
 ## Directive: `namespace`
-Adds namesapce selection for supported C++-linked types.
+Adds namesapce selection for supported C++-linked types. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.

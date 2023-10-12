@@ -36,7 +36,7 @@ For example:\
 ```jule
 cpp use "sum.hpp"
 
-//jule:cdef
+#cdef
 cpp fn SUM(int, int): int
 ```
 The `cdef` attribute must be used for correct parsing of preprocessor defines.

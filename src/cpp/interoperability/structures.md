@@ -26,7 +26,7 @@ Structure linking is C-compliant by default. You can use the `typedef` directive
 For example:
 
 ```jule
-//jule:typedef
+#typedef
 cpp struct my_struct {
     x: int
     y: str
@@ -54,7 +54,7 @@ Our `main.jule` file:
 ```jule
 cpp use "mystruct.hpp"
 
-//jule:typedef
+#typedef
 cpp struct MyStruct {
     text:      str
     my_method: fn()
@@ -72,7 +72,7 @@ fn main() {
 
 If the struct is a typedef, say it's a typedef with attribute `typedef` for correct linking:
 ```jule
-//jule:typedef
+#typedef
 cpp struct my_struct {}
 ```
 
@@ -93,7 +93,7 @@ public:
 
 The Jule code:
 ```jule
-//jule:typedef
+#typedef
 cpp struct MyClass {
     data: str
     magic_data: str

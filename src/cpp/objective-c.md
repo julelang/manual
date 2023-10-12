@@ -42,7 +42,7 @@ For example:
 
 Our `main.jule`:
 ```jule
-//jule:pass -framework Cocoa
+#pass "-framework Cocoa"
 
 cpp use "cocoa.h"
 cpp use "cocoa.mm"

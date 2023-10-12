@@ -58,6 +58,9 @@ Reports whether node data is declaration.
 `fn is_comment(self): bool`\
 Reports whether node data is comment or comment group.
 
+`fn is_directive(self): bool`\
+Reports whether node data is directive.
+
 `fn is_impl(self): bool`\
 Reports whether node data is impl.
 
@@ -92,9 +95,8 @@ Reports whether comment is directive.
 
 ```jule
 struct Directive {
-    token: Token // From std::jule::lex
-    tag:   str
-    args:  []str
+    tag:  Token
+    args: []Token
 }
 ```
 Directive.

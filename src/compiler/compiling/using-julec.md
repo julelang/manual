@@ -31,7 +31,7 @@ You can add the `pass` directive to a suitable place in the main package of your
 
 For example to enable Clang's `O3` optimizations:
 ```jule
-//jule:pass -O3
+#pass "-O3"
 ```
 
 ### Transpile and Compile Manually

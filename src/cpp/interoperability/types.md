@@ -81,7 +81,7 @@ Jule code:
 ```jule
 cpp use "myclass.hpp"
 
-//jule:typedef
+#typedef
 cpp struct MyClass {
     data: str
     magic_data: str
