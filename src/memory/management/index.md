@@ -26,6 +26,11 @@ Example to smart pointer declarations:
 &MyStruct
 ```
 
+**Operators**
+
+`x == y`: true if addresses are same \
+`x == nil`: true if nil reference (aka nil pointer)
+
 ### Initialization
 The built-in `new` function is used to make the reference. Please refer to the [builtin](/std/builtin) library documentation for this function.
 
