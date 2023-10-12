@@ -1,9 +1,5 @@
 # Directives
-Compiler directives (or pragma), they are statements that describe how the compiler should handle the source code. Directives are safe to use. Each one is essentially a comment. Any part or directive that is incorrect is considered invalid. You won't get a headache with any compiler errors. 
-
-::: info
-Incorrect directives will cause compiler errors if necessary.
-:::
+Compiler directives (or pragmas) are statements that describe how the compiler should handle source code. Directives are safe to use. It is checked by the compiler and incorrect usage is warned.
 
 \
 For example to directives:
