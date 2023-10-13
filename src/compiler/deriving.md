@@ -15,5 +15,5 @@ struct SliceWrapper {
 ```
 This may not always be possible. If the structure defines fields with a data type that does not support deep copy, the `Clone` derive will fail. 
 ::: tip
-See more information about [cloning supported types](/memory/immutability).
+See more information about [cloning supported types](/memory/mutability#cloning).
 :::
