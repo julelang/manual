@@ -6,14 +6,14 @@ The GNU Compiler Collection (aka GCC) is a compiler produced by the GNU Project.
 
 GCC has `partial` support. This is because it has a number of identified problems. But that doesn't mean you can have a problematic experience on all platforms. The only problem we're aware of at the moment occurs on Windows systems. The related problem is that the program compiles successfully but does not execute as expected at runtime.
 
-However, Jule does not automatically interfere with the GCC build command to fix the `file too big` problem. For this reason, you may experience a `file too big` problem in large projects. The problem is addressed [here](#file-too-big).
+However, Jule does not automatically interfere with the GCC build command to fix the `file too big` or `too many sections` problem. For this reason, you may experience a `file too big` problem in large projects. The problem is addressed [here](#file-too-big).
 
 
 ## Known Problems
 
-### File Too Big
+### File Too Big or Too Many Sections
 
-GCC can sometimes document an error like `File too big` when compiling IR codes. We encountered this while compiling the JuleC IR when we tried to build a CI on GitHub Actions. We solved this by adding `-Wa,-mbig-obj` to the compile command.
+GCC can sometimes document an error like `File too big` or `Too Many Sections` when compiling IR codes. We encountered this while compiling the JuleC IR when we tried to build a CI on GitHub Actions. We solved this by adding `-Wa,-mbig-obj` to the compile command.
 
 Our command looked like this:
 ```
