@@ -3,10 +3,22 @@
 	"name": "Jule",
 	"patterns": [
 		{
+			"include": "#directives"
+		},
+		{
 			"include": "#keywords"
 		},
 		{
 			"include": "#storage"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#structures"
+		},
+		{
+			"include": "#variables"
 		},
 		{
 			"include": "#runes"
@@ -31,18 +43,13 @@
 		},
 		{
 			"include": "#constants"
-		},
-		{
-			"include": "#functions"
-		},
-		{
-			"include": "#variables"
-		},
-		{
-			"include": "#identifiers"
 		}
 	],
 	"repository": {
+		"directives": {
+			"match": "^#\\p{L}+\\b",
+			"name": "variable.language"
+		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.jule",
@@ -52,6 +59,37 @@
 		"storage": {
 			"name": "storage.modifier.jule",
 			"match": "\\b(let|static|const|mut|pub|self)\\b"
+		},
+		"functions": {
+			"match": "[a-zA-Z_]\\w*(\b|)(?=\\()",
+			"name": "support.function.jule",
+			"patterns": [
+				{
+					"include": "#brackets"
+				}
+			]
+		},
+		"variables": {
+			"match": "(\\p{L}|_)[\\p{L}_0-9]*",
+			"captures": {
+				"0": {
+					"patterns": [
+						{
+							"match": "(\\p{L}|_)[\\p{L}_0-9]*",
+							"name": ""
+						},
+						{
+							"include": "#punctuation"
+						},
+						{
+							"include": "#operators"
+						},
+						{
+							"include": "#numbers"
+						}
+					]
+				}
+			}
 		},
 		"runes": {
 			"name": "string.quoted.single",
@@ -189,37 +227,6 @@
 		"constants": {
 			"name": "constant.language.jule",
 			"match": "\\b(true|false|nil)\\b"
-		},
-		"functions": {
-			"match": "[a-zA-Z_]\\w*(\b|)(?=\\()",
-			"name": "support.function.jule",
-			"patterns": [
-				{
-					"include": "#brackets"
-				}
-			]
-		},
-		"variables": {
-			"match": "[a-zA-Z_]\\w*(\\s*)(:|\\=|\\.)",
-			"captures": {
-				"0": {
-					"patterns": [
-						{
-							"match": "[a-zA-Z_]\\w*",
-							"name": "variable.other.assignment.jule"
-						},
-						{
-							"include": "#punctuation"
-						},
-						{
-							"include": "#operators"
-						}
-					]
-				}
-			}
-		},
-		"identifiers": {
-			"patterns": []
 		}
 	},
 	"scopeName": "source.jule"
