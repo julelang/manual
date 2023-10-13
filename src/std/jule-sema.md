@@ -392,24 +392,6 @@ Expression model for built-in new function calls.
 ---
 
 ```jule
-struct BuiltinRealCallExprModel {
-    expr:  ExprModel
-}
-```
-Expression model for built-in real function calls.
-
----
-
-```jule
-struct BuiltinDropCallExprModel {
-    expr:  ExprModel
-}
-```
-Expression model for built-in drop function calls.
-
----
-
-```jule
 struct BuiltinPanicCallExprModel {
     expr:  ExprModel
 }

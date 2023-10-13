@@ -278,6 +278,16 @@ Unsafe expression.
 ---
 
 ```jule
+struct CoExpr {
+    token: Token
+    expr:  &Expr
+}
+```
+Co expression.
+
+---
+
+```jule
 struct IdentExpr {
     token:      Token // From std::jule::lex
     ident:      str
@@ -359,7 +369,6 @@ struct FnCallExpr {
     expr:       &Expr
     generics:   []&TypeDecl
     args:       []&Expr
-    concurrent: bool
 }
 ```
 Function call expression kind.
