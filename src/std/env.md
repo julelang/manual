@@ -17,7 +17,7 @@ Returns envrionment variables.
 ---
 
 ```jule
-fn working_dir(): (str, EnvError)
+fn working_dir()!: str
 ```
 Returns an absolute path name of the current working directory of the calling process.
 
@@ -26,7 +26,7 @@ Possible errors: `Denied`
 ---
 
 ```jule
-fn set_working_dir(path: str): EnvError
+fn set_working_dir(path: str)!
 ```
 Changes the current working directory to the given directory.
 
@@ -44,7 +44,6 @@ Returns empty string if any error occurs.
 `enum EnvError`
 
 **Fields:**
-- `Ok`: No problem
 - `Denied`: Search permission is denied for a component of the path prefix
 - `IO`: Input/Output error, an error occurred while reading from the file system
 - `Loop`: A loop exists in symbolic links encountered during resolution of the path argument
