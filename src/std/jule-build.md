@@ -462,6 +462,7 @@ Compiler log messages with formatting.
 - `CoForExceptional`
 - `RetInDeferred`
 - `ErrorInDeferred`
+- `NilError`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
