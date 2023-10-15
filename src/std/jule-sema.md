@@ -7,13 +7,6 @@ Expression model.
 ### `type St: any`
 Statement type. 
 
-## Globals
-
-```jule
-static mut BUILTIN_TRAIT_DISPOSE: &Trait
-```
-Definition of built-in Dispose trait.
-
 ## Functions
 ```jule
 fn analyze_package(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
@@ -139,6 +132,11 @@ Reports whether Data is void.
 `fn is_const(self): bool`\
 Reports whether Data is constant expression. 
 
+`fn good_operand(self, mut &other: &Data): bool`\
+Reports left and right operand is good order.
+If reports false, left and right operand should be swapped.
+Accepts itself as left operand.
+
 ---
 
 ```jule
@@ -216,13 +214,25 @@ Casting expression model. For example: `(int)(my_float)`
 
 ```jule
 struct FnCallExprModel {
-    func:  &FnIns
-    is_co: bool
-    expr:  ExprModel
-    args:  []ExprModel
+    token:  Token
+    func:   &FnIns
+    is_co:  bool
+    expr:   ExprModel
+    args:   []ExprModel
+    except: &Scope
 }
 ```
 Function call expression model. 
+
+---
+
+```jule
+struct BuiltinErrorCallExprModel {
+    func: &FnIns
+    err:  ExprModel
+}
+```
+Expression model for built-in error function calls.
 
 ---
 
@@ -421,16 +431,6 @@ Expression model for built-in append function calls.
 ---
 
 ```jule
-struct BuiltinErrorTraitSubIdentCallExprModel {
-    expr:  ExprModel
-    ident: str
-}
-```
-Expression model for sub-ident expression to built-in Error trait. 
-
----
-
-```jule
 struct SizeofExprModel {
     expr:  ExprModel
 }
@@ -524,19 +524,21 @@ Reports whether self (receiver) parameter is reference.
 
 ```jule
 struct Fn {
-    token:      Token
-    global:     bool
-    unsafety:   bool
-    public:     bool
-    cpp_linked: bool
-    ident:      str
-    directives: []&Directive
-    doc:        str
-    scope:      &ScopeTree
-    generics:   []&GenericDecl
-    result:     &RetType
-    params:     []&Param
-    owner:      &Struct
+    token:       Token
+    global:      bool
+    unsafety:    bool
+    public:      bool
+    cpp_linked:  bool
+    statically:  bool
+    exceptional: bool
+    ident:       str
+    directives:  []&Directive
+    doc:         str
+    scope:       &ScopeTree
+    generics:    []&GenericDecl
+    result:      &RetType
+    params:      []&Param
+    owner:       &Struct
 
     // Function instances for each unique type combination of function call.
     // Nil if function is never used.
@@ -867,7 +869,7 @@ Reports whether match is type-match for generic type.
 struct Case {
     owner: &Match
     scope: &Scope
-    exprs: []ExprModel
+    exprs: []&Data
     next:  &Case
 }
 ```
@@ -889,6 +891,7 @@ struct FallSt {
 
 ```jule
 struct RetSt {
+    func: &FnIns
     vars: []&Var
     expr: ExprModel
 }

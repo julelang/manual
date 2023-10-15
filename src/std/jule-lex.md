@@ -325,6 +325,7 @@ Token identities.
 - `Mut`
 - `Defer`
 - `Static`
+- `Error`
 
 ---
 
@@ -424,3 +425,5 @@ Token kinds.
 - `Mut`
 - `Defer`
 - `Static`
+- `Hash`
+- `Error`

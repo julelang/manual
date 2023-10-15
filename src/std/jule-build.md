@@ -454,6 +454,12 @@ Compiler log messages with formatting.
 - `DirectiveUsedAtMiddle`
 - `UnusedDirective`
 - `UnsupportedDirective`
+- `ErrorWithNonExceptional`
+- `CDefineExceptional`
+- `HandledUnexceptional`
+- `UnhandledExceptional`
+- `MissingAssignRet`
+- `CoForExceptional`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -483,3 +489,7 @@ Compiler log messages with formatting.
 - `ExpectedEqualsForAssign`
 - `ExpectedElseKeywordForTernary`
 - `UseCompatibleValuesForTernary`
+- `DeclareExceptional`
+- `HandleExceptional`
+- `HandleInFn`
+- `JustIgnoreOrHandle`

@@ -205,9 +205,8 @@ export default defineConfig({
           link: '/error-handling/',
           items: [
             { text: 'Error Coding', link: '/error-handling/error-coding' },
-            { text: 'Error Trait', link: '/error-handling/error-trait' },
+            { text: 'Exceptionals', link: '/error-handling/exceptionals' },
             { text: 'Panics', link: '/error-handling/panics' },
-            { text: 'Handling Panics', link: '/error-handling/handling-panics' },
           ],
         },
         {
@@ -388,7 +387,6 @@ export default defineConfig({
               ],
             },
             { text: 'std::env', link: '/std/env' },
-            { text: 'std::errors', link: '/std/errors' },
             { text: 'std::flag', link: '/std/flag' },
             { text: 'std::fmt', link: '/std/fmt' },
             {

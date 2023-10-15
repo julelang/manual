@@ -1,2 +1,2 @@
 # Types
-Types and type manuplation in Jule. 
+Types and type manipulation in Jule.

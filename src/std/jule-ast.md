@@ -235,12 +235,6 @@ struct Expr {
 ```
 Expression. 
 
-**Methods:**
-
-`fn is_fn_call(self): bool`
-
-Reports whether expression kind is function call.
-
 ---
 
 ```jule
@@ -365,13 +359,22 @@ Binary operation.
 
 ```jule
 struct FnCallExpr {
-    token:      Token // From std::jule::lex
-    expr:       &Expr
-    generics:   []&TypeDecl
-    args:       []&Expr
+    token:     Token // From std::jule::lex
+    expr:      &Expr
+    generics:  []&TypeDecl
+    args:      []&Expr
+    exception: &ScopeTree
 }
 ```
 Function call expression kind.
+
+**Methods:**
+
+`fn unhandled(self): bool`\
+Reports whether exception is not handled.
+
+`fn ignored(self): bool`\
+Reports whether exception is ignored.
 
 ---
 
@@ -582,6 +585,8 @@ struct FnDecl {
     unsafety:     bool
     public:       bool
     cpp_linked:   bool
+    statically:   bool
+    exceptional:  bool
     ident:        str
     directives:   []&Directive
     doc_comments: &CommentGroup

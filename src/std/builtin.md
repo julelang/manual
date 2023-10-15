@@ -24,16 +24,10 @@ This function same with the `out` function. One difference, prints new line afte
 ---
 
 ```jule
-fn panic(error: any)
+fn panic(message: str)
 ```
-Panics program with given error data. The data converting to str and panics with Error trait compatible structure instance. 
-
----
-
-```jule
-fn recover(handler: fn(Error))
-```
-Recovers errors if exist and call given function with handled error instance. 
+Panics program with given error message.
+This panics are not recoverable.
 
 ---
 
@@ -98,32 +92,6 @@ Allowed types:
 :::
 
 ## Traits
-```jule
-trait Error {
-    pub fn error(self): str
-}
-```
-This is a error handling trait of standard library.\
-It is used for error handling and panics.
-
-Example to error handling:\
-You have a `div` method have two `f64` parameter: `x` and `y`.\
-This function returns division of given arguments.\
-Actually returns: `(f64, Error)`\
-The first return value naturally result of computation.\
-Returns result and empty Error for if the `x` and `y` is not equals to `0`.\
-If not, returns `0` and returns `Error` instance with error message.\
-
-You can handle errors like that:
-```jule
-let (result, err) = div(x, y)
-if err != nil {
-    // If has error...
-}
-```
-
----
-
 ```jule
 trait Dispose {
     pub fn dispose(mut self)

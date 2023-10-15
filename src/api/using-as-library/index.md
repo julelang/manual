@@ -20,10 +20,10 @@ Just include and use them:
 #include "api/jule.hpp"
 
 int main(int argc, char *argv[]) {
-    jule::setup_command_line_args(argc, argv);
+    jule::setup_argv(argc, argv);
 
     std::cout << "Command line arguments:" << std::endl;
-    for (jule::Str arg: jule::command_line_args)
+    for (jule::Str arg: jule::args())
         std::cout << "  " << arg << std::endl;
 
     return 0;

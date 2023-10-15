@@ -29,8 +29,8 @@ Reader trait mask for stream reader.
 
 **Methods:**
 
-`pub fn read(mut self, mut buff: []byte): (n: int, err: Error)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Returns 0 if error occurs.
+`pub fn read(mut self, mut buff: []byte)!: (n: int)`\
+Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
 ---
 
@@ -41,8 +41,8 @@ Reader trait mask for stream writer.
 
 **Methods:**
 
-`pub fn write(mut self, buff: []byte): (n: int, err: Error)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff. Returns 0 if error occurs.
+`pub fn write(mut self, buff: []byte)!: (n: int)`\
+Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
 ---
 
@@ -53,10 +53,10 @@ Stream trait mask for R/W streams.
 
 **Methods:**
 
-`pub fn read(mut self, mut buff: []byte): (n: int, err: Error)`\
+`pub fn read(mut self, mut buff: []byte)!: (n: int)`\
 Derived from `Reader` trait.
 
-`pub fn write(mut self, buff: []byte): (n: int, err: Error)`\
+`pub fn write(mut self, buff: []byte)!: (n: int)`\
 Derived from `Writer` trait.
 
 ## Structures
@@ -74,8 +74,8 @@ Stream implementation for file handles.
 
 **Methods:**
 
-`fn read_line(mut self): ([]byte, Error)`\
-Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice and nil error when reached EOF.
+`fn read_line(mut self)!: []byte`\
+Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice when reached EOF.
 
 ---
 
@@ -94,9 +94,6 @@ New `&Scanner` from `Reader`.
 New `&Scanner` from `&File`.
 Uses `&FileStream` for `Reader` trait compatibility.
 
-`fn error(self): Error`\
-Returns error of recent scan.
-
 `fn bytes(self): []byte`\
 Returns bytes of recent scan.
 Returned slice is mutable copy of buffer.
@@ -104,5 +101,5 @@ Returned slice is mutable copy of buffer.
 `fn text(self): str`\
 Returns text from bytes of recent scan.
 
-`fn scan(self): bool`\
-Scans line from handle via read method. Scans bytes until line delimiter (`\n`) byte, delimiter not included. Reports whether readed byte into buffer. Sets error if any error occurs.
+`fn scan(self)!: bool`\
+Scans line from handle via read method. Scans bytes until line delimiter (`\n`) byte, delimiter not included. Reports whether readed byte into buffer.
