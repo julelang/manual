@@ -460,6 +460,8 @@ Compiler log messages with formatting.
 - `UnhandledExceptional`
 - `MissingAssignRet`
 - `CoForExceptional`
+- `RetInDeferred`
+- `ErrorInDeferred`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
