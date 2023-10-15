@@ -113,6 +113,11 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 ```
 
 ## String
+
+Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also mutable. So you don't need to use String Builder to compensate for the inefficiency of immutable strings as in some other languages, string concatenations are less of a performance concern. 
+
+Strings support the `+` operator for concatenation, It's that easy to concatenate two strings. Additionally, using the `==` and `!=` operators, you can easily determine whether two strings are the same or not.
+
 ### String Literals
 ```jule
 "String literal of Jule."
