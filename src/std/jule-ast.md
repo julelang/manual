@@ -238,6 +238,16 @@ Expression.
 ---
 
 ```jule
+struct UseExpr {
+    token: Token
+    expr:  &Expr
+}
+```
+Use expression.
+
+---
+
+```jule
 struct TupleExpr {
     expr: []&Expr
 }

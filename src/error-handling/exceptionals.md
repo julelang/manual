@@ -67,7 +67,7 @@ fn main() {
 
 #### Handling with Returns Values
 
-Regarding the handling of return values of exceptional calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and not required `ret` keyword.
+Regarding the handling of return values of exceptional calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and not required `ret` keyword, just write `use` keyword instead of `ret` keyword.
 
 For example:
 ```jule
@@ -78,7 +78,7 @@ fn my_exceptional()!: int {
 fn main() {
     let x = my_exceptional() else {
         outln(error)
-        10
+        use 10
     }
     outln(x) // 10
 }
@@ -118,7 +118,7 @@ fn main() {
         | DivError.Overflow:
             outln("denominator higher than 100")
         }
-        -1
+        use -1
     }
     outln(x) // -1
 }
@@ -141,7 +141,7 @@ fn exceptional1()!: int {
 fn main() {
     let x = exceptional1() else {
         outln(error)
-        20
+        use 20
     }
     outln(x)
 }

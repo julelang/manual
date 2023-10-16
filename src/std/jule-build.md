@@ -463,6 +463,9 @@ Compiler log messages with formatting.
 - `RetInDeferred`
 - `ErrorInDeferred`
 - `NilError`
+- `UseExprOutOfScope`
+- `UseExprInDeferred`
+- `UseExprNotLast`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
