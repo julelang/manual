@@ -371,13 +371,6 @@ export default defineConfig({
             { text: 'builtin', link: '/std/builtin' },
             { text: 'std::conv', link: '/std/conv' },
             {
-              text: 'std::debug',
-              link: '/std/debug',
-              items: [
-                { text: 'std::debug::assert', link: '/std/debug-assert' },
-              ],
-            },
-            {
               text: 'std::encoding',
               link: '/std/encoding',
               items: [
