@@ -19,9 +19,9 @@ let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 ```
 
 ## Access to Elements and Indexing
-Index system is simple. Starts at `0` and continue step by step, it is never not be negative and float.
+Index system is simple. Starts at `0` and continue step by step. Negative and floating-point indexes are considered invalid / not allowed for indexing.
 
-Arrays is use indexes to access elements and assignment.
+Arrays use indexes to access elements and assignment.
 
 For example:
 ```jule
@@ -32,7 +32,7 @@ fn main() {
     outln(my_array)
 }
 ```
-For element access, index is written between brackets (`[]`). First statement is declares our array. Second statement prints first element of our array. Next statement sets first element of our array as `"Hi"`. The last statement prints our array to console.
+For element access, index is written between brackets (`[]`). First statement declares our array. Second statement prints first element of our array. Next statement sets first element of our array as `"Hi"`. The last statement prints our array to console.
 
 Output of program:
 ```
@@ -41,7 +41,7 @@ Hello
 ```
 
 ## Multidimensional Arrays
-Multidimensional arrays is array storing arrays.
+A multidimensional array is an array storing arrays.
 
 For example:
 ```jule
