@@ -27,4 +27,4 @@ cpp use "myfile.cpp"
 cpp use "implementation.cxx"
 ```
 The correctness and validity of the file path is checked by the compiler.
-Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.mm`
+Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.c`, `.mm`
