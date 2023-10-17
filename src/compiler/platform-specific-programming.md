@@ -34,21 +34,34 @@ example_linux.jule
 
 The `build` directive is a top directive that includes the source code file in the build based on the evaluation result using directive expressions. For more information about expressions, you can read the [Directive Expressions](/compiler/directives#directive-expressions) section.
 
-Your variables are set automatically by your compiler. The variables you can use are the same as in file annotation. They are variables that are also described in the [platform support](/compiler/platform-support) documentation.
+### Variables
+
+Your variables are set automatically by your compiler. There are variables for many situations. You can also read the [platform support](/compiler/platform-support) section to get more ideas about platform specific variables.
+
+Here is the list of variables and their existence:
+
+- `windows`: operating system is windows
+- `darwin`: operating system is darwin
+- `linux`: operating system is linux
+- `unix`: operating system is UNIX, or UNIX-like
+- `i386`: cpu architecture is intel 386
+- `amd64`: cpu architecture is AMD64
+- `x32`: 32-bit cpu architecture
+- `x64`: 64-bit cpu architecture
 
 ### Examples
 
 Here is an example code:
 
-```
-#build (darwin || windows) && 64bit
+```jule
+#build (darwin || windows) && x64
 ```
 
 The above expression will return `true` for windows and darwin operating systems with 64-bit architecture.
 
 Another example:
 
-```
+```jule
 #build unix && !darwin
 ```
 

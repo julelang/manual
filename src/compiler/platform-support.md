@@ -15,6 +15,6 @@ The `unix` includes: `darwin` `linux`
 - `amd64`
 - `arm64`
 
-The `64bit` includes: `amd64` `arm64`
+The `x64` includes: `amd64` `arm64`
 
-The `32bit` includes: `i386`
+The `x32` includes: `i386`

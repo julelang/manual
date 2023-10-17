@@ -217,8 +217,8 @@ Architectures for file annotation kind.
 - `I386`
 - `Arm64`
 - `Amd64`
-- `Bit32`
-- `Bit64`
+- `X32`
+- `X64`
 
 ---
 

@@ -41,7 +41,7 @@ The syntax is simple and easy to learn. The logical and operator is `&&` and the
 Here is an example code via `build` directive:
 
 ```jule
-#build (darwin || windows) && 64bit
+#build (darwin || windows) && x64
 ```
 ```jule
 #build unix && !darwin
