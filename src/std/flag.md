@@ -40,8 +40,8 @@ Returns flag by short name, returns nil if not exist.
 `fn flags(mut self): []CommonFlag`\
 Returns all flags.
 
-`fn parse(mut self, args: []str): (content: []str, err: str)`\
-Parse arguments and process flags. Returns error text if any error occurs. Returns non-flag content.
+`fn parse(mut self, args: []str)!: []str`\
+Parse arguments and process flags. Returns non-flag content. Exceptional always is string and holds error message.
 
 **Syntax:**
 
