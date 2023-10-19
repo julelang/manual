@@ -95,14 +95,13 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct Data {
-    kind:       &TypeKind
-    cast_kind:  &TypeKind // This expression should be cast to this kind.
-    mutable:    bool
-    reference:  bool
-    lvalue:     bool
-    variadiced: bool
-    is_rune:    bool
-    model:      ExprModel
+    kind:      &TypeKind
+    cast_kind: &TypeKind // This expression should be cast to this kind.
+    mutable:   bool
+    reference: bool
+    lvalue:    bool
+    is_rune:   bool
+    model:     ExprModel
 
     // True if kind is declaration such as:
     //  - &Enum
