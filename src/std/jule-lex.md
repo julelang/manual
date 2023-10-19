@@ -249,9 +249,9 @@ Token is lexer token.
 
 **Methods:**
 
-`fn prec(self): int`\
+`fn prec(self): byte`\
 Returns operator precedence of token.\
-Returns `-1` if token is not operator or\
+Returns `0` if token is not operator or\
 invalid operator for operator precedence.
 
 `fn path(self): str`\
