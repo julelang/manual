@@ -402,6 +402,7 @@ Expression model for built-in new function calls.
 
 ```jule
 struct BuiltinPanicCallExprModel {
+    token: Token
     expr:  ExprModel
 }
 ```

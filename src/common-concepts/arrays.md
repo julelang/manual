@@ -19,7 +19,7 @@ let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 ```
 
 ::: info
-Only works as expected with variables. Other declarations are supports this syntax, but always uses zero length arrays, not auto-sized arrays.
+Only works as expected with variables. Other declarations supports this syntax, but always uses zero length arrays, not auto-sized arrays.
 :::
 
 ## Filling Arrays
@@ -34,7 +34,7 @@ let x: [1000]int = [100, ...]
 The array in the example above holds `1000` integers and each integer is setted to `100`.
 
 ::: info
-This method cannot useable for auto-sized arrays.
+This method cannot be used for auto-sized arrays.
 :::
 
 ## Access to Elements and Indexing
