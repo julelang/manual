@@ -213,12 +213,13 @@ Casting expression model. For example: `(int)(my_float)`
 
 ```jule
 struct FnCallExprModel {
-    token:  Token
-    func:   &FnIns
-    is_co:  bool
-    expr:   ExprModel
-    args:   []ExprModel
-    except: &Scope
+    token:    Token
+    func:     &FnIns
+    is_co:    bool
+    expr:     ExprModel
+    args:     []ExprModel
+    except:   &Scope
+    assigned: bool
 }
 ```
 Function call expression model. 
