@@ -120,7 +120,7 @@ export default defineConfig({
           text: 'Project',
           link: '/project/',
           items: [
-            { text: 'Directory Order', link: '/project/directory-order' },
+            { text: 'Project Structure', link: '/project/project-structure' },
             { text: 'Code Style', link: '/project/code-style' },
             { text: 'Declarations', link: '/project/declarations' },
             { text: 'Cycles', link: '/project/cycles' },
@@ -135,7 +135,7 @@ export default defineConfig({
             { text: 'Data Types', link: '/introduction/data-types' },
             { text: 'Operators', link: '/introduction/operators' },
             { text: 'Syntax', link: '/introduction/syntax' },
-            { text: 'Blocks', link: '/introduction/blocks' },
+            { text: 'Scopes', link: '/introduction/scopes' },
           ],
         },
         {
@@ -331,7 +331,7 @@ export default defineConfig({
               ],
             },
             { text: 'Atomicity', link: '/api/atomicity' },
-            { text: 'Deferred Blocks', link: '/api/deferred-blocks' },
+            { text: 'Deferred Scopes', link: '/api/deferred-scopes' },
             { text: 'Concurrency', link: '/api/concurrency' },
             {
               text: 'Unicode',

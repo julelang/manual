@@ -18,6 +18,10 @@ For example:
 let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 ```
 
+::: info
+Only works as expected with variables. Other declarations are supports this syntax, but always uses zero length arrays, not auto-sized arrays.
+:::
+
 ## Filling Arrays
 
 You can use `...` for filling arrays with special expression.
@@ -28,6 +32,10 @@ let x: [1000]int = [100, ...]
 ```
 
 The array in the example above holds `1000` integers and each integer is setted to `100`.
+
+::: info
+This method cannot useable for auto-sized arrays.
+:::
 
 ## Access to Elements and Indexing
 Index system is simple. Starts at `0` and continue step by step. Negative and floating-point indexes are considered invalid / not allowed for indexing.

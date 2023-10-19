@@ -1,4 +1,4 @@
-# Directory Order
+# Project Structure
 Recommended work pattern and use of project directories for Jule:
 
 ## Source files
@@ -16,6 +16,8 @@ Nice names for scripts of your project:
 - `scripts`
 
 It is very natural for you to write some scripts for your project. It's better to have these scripts in a directory rather than having them cluttered around. If your scripts are applied for different directories, you can create a sub-order by creating those directories inside the script directory. Or you can create a new script directory in the corresponding directory.
+
+If you would prefer not to have your scripts in the `scripts` directory or something like that within the current directory, or if this is a more efficient approach, leave them in directory as is.
 
 ## Documentations
 Nice names for documentations of your project:
