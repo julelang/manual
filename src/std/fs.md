@@ -14,7 +14,7 @@ Status information.
 
 **Methods:**
 
-`static fn stat(path: str): (s: &Status, err: FsError)`\
+`static fn of(path: str)!: &Status`\
 Returns a Status describing the path.\
 Returns nil reference if error occurs.
 
@@ -53,45 +53,45 @@ There may be system call differences and performance differences for console han
 Returns new `&File` by handle.
 If hadle <= 0, returns nil reference.
 
-`static fn open_file(path: str, flag: OFlag, mode: int): (&File, FsError)`\
-Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations. Returns nil reference if error occurs.
+`static fn open(path: str, flag: OFlag, mode: int)!: &File`\
+Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
-`static fn remove(path: str): FsError`\
+`static fn remove(path: str)!`\
 Removes named file.
 
 Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `NotDir`
 
-`static fn read(path: str): ([]byte, FsError)`\
+`static fn read(path: str)!: []byte`\
 Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
 
-`static fn write(path: str, data: []byte, perm: int): FsError`\
+`static fn write(path: str, data: []byte, perm: int)!`\
 Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
 
-`static fn create(path: str): (&File, FsError)`\
+`static fn create(path: str)!: &File`\
 Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
 
-`fn seek(mut self, offset: i64, origin: Seek): (i64, FsError)`\
-Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end. Return 0 if error occurs.
+`fn seek(mut self, offset: i64, origin: Seek)!: i64`\
+Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
 Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 
-`fn read(mut self, mut buff: []byte): (n: int, FsError)`\
-Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read. Returns 0 if error occurs.
+`fn read(mut self, mut buff: []byte)!: (n: int)`\
+Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
 
 Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
 \
-`fn write(mut self, buff: []byte): (n: int, FsError)`\
-Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff. Returns 0 if error occurs.
+`fn write(mut self, buff: []byte)!: (n: int)`\
+Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
 Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
 
 \
-`fn close(mut self): FsError`\
+`fn close(mut self)!`\
 Closes file handle. 
 
 Possible errors: `InvalidDescriptor` `Signal` `IO`
@@ -105,18 +105,17 @@ Directory.
 
 **Methods:**
 
-`static fn read_dir(path: str): ([]&DirEntry, FsError)`\
-Reads the named directory and returs all its directory entries can read.\
-Returns nil if no any directory entry or error occurs.
+`static fn read(path: str)!: []&DirEntry`\
+Reads the named directory and returs all its directory entries can read.
 
 Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
 
-`static fn create_dir(path: str): FsError`\
+`static fn create(path: str)!`\
 Creates directory.
 
 Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
 
-`static fn remove_dir(path: str): FsError`\
+`static fn remove(path: str)!`\
 Removes empty directory.
 
 Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
