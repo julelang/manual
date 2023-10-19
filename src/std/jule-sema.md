@@ -331,7 +331,7 @@ struct ArrayExprModel {
     elems: []ExprModel
 }
 ```
-Array expression model. 
+Array expression model.  If array filled, elems field holds 2 data. First data is expression, second is nil, kind of mark to that array filled.
 
 ---
 

@@ -10,13 +10,24 @@ For example:
 [50]int
 ```
 
-## Triple Dot for Auto Computing Size of Array Literals
+## Auto-Sized Arrays
 You can use `...` for auto computing size of array literal at compile time.
 
 For example:
 ```jule
 let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 ```
+
+## Filling Arrays
+
+You can use `...` for filling arrays with special expression.
+
+For example:
+```jule
+let x: [1000]int = [100, ...]
+```
+
+The array in the example above holds `1000` integers and each integer is setted to `100`.
 
 ## Access to Elements and Indexing
 Index system is simple. Starts at `0` and continue step by step. Negative and floating-point indexes are considered invalid / not allowed for indexing.

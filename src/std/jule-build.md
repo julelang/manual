@@ -468,6 +468,7 @@ Compiler log messages with formatting.
 - `UseExprNotLast`
 - `ExceptionalEntryPoint`
 - `ExceptionalInit`
+- `AutoSizedArrFilled`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
