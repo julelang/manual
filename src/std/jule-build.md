@@ -466,6 +466,8 @@ Compiler log messages with formatting.
 - `UseExprOutOfScope`
 - `UseExprInDeferred`
 - `UseExprNotLast`
+- `ExceptionalEntryPoint`
+- `ExceptionalInit`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
