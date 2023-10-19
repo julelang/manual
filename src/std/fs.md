@@ -124,7 +124,6 @@ Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 `enum FsError`
 
 **Fields:**
-- `Ok`: No problem
 - `Denied`: Search permission is denied for a component of the path prefix
 - `IO`: Input/Output error, an error occurred while reading from the file system
 - `Loop`: A loop exists in symbolic links encountered during resolution of the path argument
