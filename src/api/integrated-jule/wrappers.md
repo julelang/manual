@@ -86,7 +86,7 @@ public:
 
 ## Using Wrappers
 
-You can integrate and use your wrappers by linking them to your Jule code according to the information described in the [interoperability](/cpp/interoperability/) section of manual.
+You can integrate and use your wrappers by linking them to your Jule code according to the information described in the [interoperability](/integrated-jule/interoperability/) section of manual.
 
 Integrating the STL Vector wrapper described above with Jule would look like this:
 ```jule
