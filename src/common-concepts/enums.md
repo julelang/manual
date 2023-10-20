@@ -66,6 +66,10 @@ It must be cast in order to be processed with different types, but due to type s
 
 Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators.
 
-::: warning
-Maps doen't support enums for type safety.
-:::
+### Maps
+
+Maps doen't support enums for type safety. You can use enums for key type, but not for value type.
+
+### Any Type
+
+The `any` type can store enums. You can use `==` and `!=` operators, it is safe. But you cannot cast an enum type from `any` type because this is unsafe and the type is lost at compile time. To get the value, you can try to cast it to the type pointed to by the enum, but if you are using a value such as an integer, it may be converted to different types at compile time because of enum items are constant literals actually. So, even though the enum is `i32`, `any` may be storing it as `i64` in compile time code generation, so casting may fail.
