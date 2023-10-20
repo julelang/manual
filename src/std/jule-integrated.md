@@ -227,6 +227,20 @@ Type alias for `bool` type.
 ## Functions
 
 ```jule
+unsafe fn inline(const code: str)
+```
+Emit inline code for backend.
+
+---
+
+```jule
+unsafe fn inline[T](const code: str): T
+```
+Emit inline code for backend and read result.
+
+---
+
+```jule
 fn to_str(expr: any): str
 ```
 Returns string converted from of expression.
@@ -334,14 +348,6 @@ unsafe fn delete_array[T](heap: *T)
 ```
 Deallocates array memory allocation.
 Equavalent to: `delete[] heap` in C++
-
----
-
-```jule
-fn puts(s: str): int
-```
-Calls C's puts function.
-Returns non-negative integer if success, returns EOF if not.
 
 ---
 

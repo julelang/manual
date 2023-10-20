@@ -1,3 +1,3 @@
 # Integrated Jule
 
-See main section of [Integrated Jule](/cpp/integrated-jule) for more information.
+See main section of [Integrated Jule](/integrated-jule/) for more information.

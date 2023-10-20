@@ -48,6 +48,13 @@ Code points in the surrogate range are not valid for UTF-8.
 ## Functions
 
 ```cpp
+std::string runes_to_utf8(const std::vector<jule::I32> &s) noexcept;
+```
+Returns string from UTF-8 bytes.
+
+---
+
+```cpp
 std::tuple<jule::I32, jule::Int>
 utf8_decode_rune_str(const char *s, const jule::Int &len);
 ```
@@ -58,7 +65,7 @@ An encoding is invalid if it is incorrect UTF-8, encodes a rune that is out of r
 ---
 
 ```cpp
-jule::Slice<jule::U8>
+std::vector<jule::U8>
 utf8_rune_to_bytes(const jule::I32 &r);
 ```
 Returns byte slice for the UTF-8 encoding of the rune. If the rune is out of range, it writes the encoding of RUNE_ERROR. It returns bytes of rune.

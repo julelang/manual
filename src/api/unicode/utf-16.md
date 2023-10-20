@@ -49,15 +49,15 @@ Returns the UTF-16 decoding of a surrogate pair. If the pair is not a valid UTF-
 ---
 
 ```cpp
-jule::Slice<jule::I32>
-utf16_decode(const jule::Slice<jule::I32> s);
+std::vector<jule::I32>
+utf16_decode(const std::vector<jule::I32> s);
 ```
 Returns the Unicode code point sequence represented by the UTF-16 encoding s.
 
 ---
 
 ```cpp
-jule::Str
+std::string
 utf16_to_utf8_str(const wchar_t *wstr, const std::size_t len);
 ```
 Convert UTF-16 string pointer to UTF-8 encoded string.
@@ -73,23 +73,22 @@ Returns the UTF-16 surrogate pair r1, r2 for the given rune. If the rune is not 
 ---
 
 ```cpp
-jule::Slice<jule::U16>
-utf16_encode(const jule::Slice<jule::I32> &runes);
+std::vector<jule::U16>
+utf16_encode(const std::vector<jule::I32> &runes);
 ```
 Returns the UTF-16 encoding of the Unicode code point sequence s.
 
 ---
 
 ```cpp
-jule::Slice<jule::U16>
-utf16_append_rune(jule::Slice<jule::U16> &a, const jule::I32 &r);
+void utf16_append_rune(std::vector<jule::U16> &a, const jule::I32 &r);
 ```
-Appends the UTF-16 encoding of the Unicode code point r to the end of p and returns the extended buffer. If the rune is not a valid Unicode code point, it appends the encoding of U+FFFD.
+Appends the UTF-16 encoding of the Unicode code point r to the end of a. If the rune is not a valid Unicode code point, it appends the encoding of U+FFFD.
 
 ---
 
 ```cpp
-jule::Slice<jule::U16>
-utf16_from_str(const jule::Str &s);
+std::vector<jule::U16>
+utf16_from_str(const std::string &s);
 ```
 Convert UTF-8 encoded string to UTF-16 codepage.
