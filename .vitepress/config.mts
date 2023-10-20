@@ -310,14 +310,13 @@ export default defineConfig({
               items: [
                 { text: 'Command-Line Arguments', link: '/api/environment/command-line-arguments' },
                 { text: 'Environment Variables', link: '/api/environment/environment-variables' },
-                { text: 'Executable Path', link: '/api/environment/executable-path' },
               ],
             },
             {
               text: 'Process',
               link: '/api/process/',
               items: [
-                { text: 'Signals', link: '/api/process/signals' },
+                { text: 'Executable Path', link: '/api/process/executable-path' },
               ],
             },
             { text: 'Platform Specific', link: '/api/platform-specific' },
