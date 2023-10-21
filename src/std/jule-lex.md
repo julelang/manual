@@ -254,6 +254,8 @@ Returns operator precedence of token.\
 Returns `0` if token is not operator or\
 invalid operator for operator precedence.
 
+Accepts assignment tokens (like equals [=]) as precedenced operator to handle expression assignments.
+
 `fn path(self): str`\
 Returns path.
 

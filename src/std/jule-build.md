@@ -469,6 +469,7 @@ Compiler log messages with formatting.
 - `ExceptionalEntryPoint`
 - `ExceptionalInit`
 - `AutoSizedArrFilled`
+- `AssignInExpr`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -502,3 +503,4 @@ Compiler log messages with formatting.
 - `HandleExceptional`
 - `HandleInFn`
 - `JustIgnoreOrHandle`
+- `UseImperative`
