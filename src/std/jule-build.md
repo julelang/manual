@@ -194,6 +194,7 @@ Compiler directives.
 - `Pass`
 - `Build`
 - `Namespace`
+- `Deprecated`
 
 ---
 
@@ -451,7 +452,6 @@ Compiler log messages with formatting.
 - `IncompatibleTypeForPtrArithmetic`
 - `ComptimePanic`
 - `InvalidTypeForIndexing`
-- `DirectiveUsedAtMiddle`
 - `UnusedDirective`
 - `UnsupportedDirective`
 - `ErrorWithNonExceptional`
@@ -470,6 +470,7 @@ Compiler log messages with formatting.
 - `ExceptionalInit`
 - `AutoSizedArrFilled`
 - `AssignInExpr`
+- `UsingDeprecated`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -504,3 +505,4 @@ Compiler log messages with formatting.
 - `HandleInFn`
 - `JustIgnoreOrHandle`
 - `UseImperative`
+- `UseUnsafeForDeprecated`

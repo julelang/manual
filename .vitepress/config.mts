@@ -279,8 +279,14 @@ export default defineConfig({
           link: '/packages/',
           items: [
             { text: 'Using Packages', link: '/packages/using-packages' },
-            { text: 'Exporting Definitions', link: '/packages/exporting-definitions' },
-            { text: '3rd Party Packages', link: '/packages/3rd-party-packages' },
+            {
+              text: '3rd Party Packages',
+              link: '/packages/3rd-party-packages/',
+              items: [
+                { text: 'Exporting Definitions', link: '/packages/3rd-party-packages/exporting-definitions' },
+                { text: 'Deprecation', link: '/packages/3rd-party-packages/deprecation', },
+              ],
+            },
           ],
         },
         {

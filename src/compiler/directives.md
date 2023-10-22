@@ -1,12 +1,13 @@
 # Directives
 Compiler directives (or pragmas) are statements that describe how the compiler should handle source code. Directives are safe to use. It is checked by the compiler and incorrect usage is warned.
 
+For a directive to be valid, it must be used correctly in the right place. The directive must be strt with the `#` prefix.
+
 \
 For example to directives:
 ```jule
 #typedef
 ```
-As seen in the example, it is essentially a comment as explained. For a directive to be valid, it must be used correctly in the right place. The comment must be at the beginning of the line and begin with the `#` prefix.
 
 ## Top Directives
 Top directives are must be placed at top of source file.
@@ -86,3 +87,6 @@ In C++-linked functions, if the function is a `#define`, it configures code gene
 
 ## Directive: `namespace`
 Adds namesapce selection for supported C++-linked types. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
+
+## Directive: `deprecated`
+Definitions qualify as deprecated.

@@ -19,6 +19,7 @@ Benefits of Unsafe Jule:
 - Concurrent calls with reference parameters
 - Pass pointer to reference
 - Access reference from parent scope
-- [Emit Backend Code](/integrated-jule/backend-emits)
+- [Emit backend code](/integrated-jule/backend-emits)
+- [Use deprecated code](/packages/3rd-party-packages/deprecation)
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
