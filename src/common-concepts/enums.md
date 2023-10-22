@@ -66,6 +66,10 @@ It must be cast in order to be processed with different types, but due to type s
 
 Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators.
 
+::: tip
+The `==` and `!=` logical operators can be used for compatible types for enum's type. It's safe.
+:::
+
 ### Maps
 
 Maps doen't support enums for type safety. You can use enums for key type, but not for value type.
