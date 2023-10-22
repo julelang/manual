@@ -60,15 +60,9 @@ fn main() {
 ```
 
 ## Type Safety
-Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type.
+Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments should always be of their own type.
 
-It must be cast in order to be processed with different types, but due to type safety. However, you also cannot cast an integer value to an enum that uses the integer type. Assignments should always be of their own type.
-
-Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators.
-
-::: tip
-The `==` and `!=` logical operators can be used for compatible types for enum's type. It's safe.
-:::
+Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators. The `==` and `!=` logical operators can be used for compatible types for enum's type. It's safe. But others needs casting or it's own type.
 
 ### Maps
 
