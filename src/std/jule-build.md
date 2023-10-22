@@ -471,6 +471,7 @@ Compiler log messages with formatting.
 - `AutoSizedArrFilled`
 - `AssignInExpr`
 - `UsingDeprecated`
+- `TraitImplDeprecated`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
