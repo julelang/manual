@@ -472,6 +472,7 @@ Compiler log messages with formatting.
 - `AssignInExpr`
 - `UsingDeprecated`
 - `TraitImplDeprecated`
+- `AssertNonBool`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

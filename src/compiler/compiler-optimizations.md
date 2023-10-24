@@ -109,6 +109,7 @@ Production compilation may have an impact on IR rendering, but in addition it ha
 When you enable production compilation, it provides improvements that optimization options cannot provide. It can cause some changes to the IR and additionally prompts your backend compiler to compile the IR code more efficiently. In this way, significantly optimized faster programs can be obtained by using optimization options and production compilation together.
 
 Pros of enabling production compilation:
+- Remove assert calls.
 - Disable assertions of backend compiler.
 - Use maximum optimization level of backend compiler.
 - Additional optimizations that vary by backend compiler.

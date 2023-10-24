@@ -32,6 +32,13 @@ This panics are not recoverable.
 ---
 
 ```jule
+fn assert(expr: bool)
+```
+Call panic function if expression is evaluated false at runtime.
+
+---
+
+```jule
 fn new(T): &T
 ```
 Returns new reference-type for T initialized with default.

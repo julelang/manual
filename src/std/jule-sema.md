@@ -412,6 +412,16 @@ Expression model for built-in panic function calls.
 ---
 
 ```jule
+struct BuiltinAssertCallExprModel {
+    token: Token
+    expr:  ExprModel
+}
+```
+Expression model for built-in assert function calls.
+
+---
+
+```jule
 struct BuiltinMakeCallExprModel {
     kind: &TypeKind
     size: ExprModel
