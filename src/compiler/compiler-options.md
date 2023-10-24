@@ -44,6 +44,11 @@ See more about [cross-transpilation](/compiler/cross-transpilation).
 `--shadowing`\
 Enable variable shadowing.
 
+---
+
+`-p` `--production`\
+Enable production compilation.
+
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).

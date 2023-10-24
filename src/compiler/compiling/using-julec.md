@@ -25,6 +25,10 @@ By default, JuleC sets your backend compiler's optimizations to the lowest possi
 
 If you want to compile your code with backend-compiler optimizations, there are several ways you can do it.
 
+### Production Compilation
+
+Enable production compilation. This is the widely recommended and safest way. Your compiler compiles the code for you by applying the best standard optimizations according to the backend compiler you use. To get more detailed information about what improvements production compilation makes, you can look at the [compiler optimizations](/compiler/compiler-optimizations#production-compilation) section.
+
 ### Set Backend Compiler Optimizations via `pass` Directive
 
 You can add the `pass` directive to a suitable place in the main package of your program and adjust the optimizations of your backend-compiler. This method works most of the time.
