@@ -15,5 +15,5 @@ Defines these macros by condition:
 - `ARCH_ARM`: if architecture is ARM.
 - `ARCH_ARM64`: if architecture is ARM64.
 - `ARCH_I386`: if architecture is intel 386.
-- `ARCH_64BIT`: if architecture is AMD64 or ARM64.
-- `ARCH_32BIT`: if architecture is ARM or intel 386.
+- `ARCH_X64`: if architecture is AMD64 or ARM64.
+- `ARCH_X32`: if architecture is ARM or intel 386.
