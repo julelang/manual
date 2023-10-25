@@ -167,6 +167,37 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Types',
+          link: '/types/',
+          items: [
+            { text: 'Aliasing', link: '/types/aliasing' },
+            { text: 'Casting', link: '/types/casting' },
+            { text: 'Generics', link: '/types/generics' },
+            { text: 'Strings', link: '/types/strings' },
+            { text: 'Arrays', link: '/types/arrays' },
+            { text: 'Slices', link: '/types/slices' },
+            { text: 'Maps', link: '/types/maps' },
+          ],
+        },
+        {
+          text: 'Type Statics',
+          link: '/type-statics/',
+          items: [
+            { text: 'i8', link: '/type-statics/i8' },
+            { text: 'i16', link: '/type-statics/i16' },
+            { text: 'i32', link: '/type-statics/i32' },
+            { text: 'i64', link: '/type-statics/i64' },
+            { text: 'u8', link: '/type-statics/u8' },
+            { text: 'u16', link: '/type-statics/u16' },
+            { text: 'u32', link: '/type-statics/u32' },
+            { text: 'u64', link: '/type-statics/u64' },
+            { text: 'f32', link: '/type-statics/f32' },
+            { text: 'f64', link: '/type-statics/f64' },
+            { text: 'int', link: '/type-statics/int' },
+            { text: 'uint', link: '/type-statics/uint' },
+          ],
+        },
+        {
           text: 'Traits',
           link: '/traits/',
           items: [
@@ -210,43 +241,12 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Types',
-          link: '/types/',
-          items: [
-            { text: 'Aliasing', link: '/types/aliasing' },
-            { text: 'Casting', link: '/types/casting' },
-            { text: 'Generics', link: '/types/generics' },
-            { text: 'Strings', link: '/types/strings' },
-            { text: 'Arrays', link: '/types/arrays' },
-            { text: 'Slices', link: '/types/slices' },
-            { text: 'Maps', link: '/types/maps' },
-          ],
-        },
-        {
           text: 'Concurrency',
           link: "/concurrency/",
           items: [
             { text: 'Synchronization', link: '/concurrency/synchronization' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Threads', link: '/concurrency/threads' },
-          ],
-        },
-        {
-          text: 'Type Statics',
-          link: '/type-statics/',
-          items: [
-            { text: 'i8', link: '/type-statics/i8' },
-            { text: 'i16', link: '/type-statics/i16' },
-            { text: 'i32', link: '/type-statics/i32' },
-            { text: 'i64', link: '/type-statics/i64' },
-            { text: 'u8', link: '/type-statics/u8' },
-            { text: 'u16', link: '/type-statics/u16' },
-            { text: 'u32', link: '/type-statics/u32' },
-            { text: 'u64', link: '/type-statics/u64' },
-            { text: 'f32', link: '/type-statics/f32' },
-            { text: 'f64', link: '/type-statics/f64' },
-            { text: 'int', link: '/type-statics/int' },
-            { text: 'uint', link: '/type-statics/uint' },
           ],
         },
         {
@@ -287,11 +287,39 @@ export default defineConfig({
                 { text: 'Deprecation', link: '/packages/3rd-party-packages/deprecation', },
               ],
             },
+            { text: 'Standard Library', link: '/std/' },
+          ],
+        },
+        {
+          text: 'Debugging',
+          link: '/debugging/',
+          items: [
+            {
+              text: 'Reasoning',
+              link: '/debugging/reasoning/',
+              items: [
+                { text: 'Jule Runtime', link: '/debugging/reasoning/jule-runtime' },
+                { text: 'C++ Runtime', link: '/debugging/reasoning/cpp-runtime' },
+              ],
+            },
+            {
+              text: 'Testing',
+              link: '/debugging/testing/',
+              items: [
+                { text: 'Assertion', link: '/debugging/testing/assertion' },
+              ],
+            },
+            {
+              text: 'Backend Compiler Tools',
+              link: '/debugging/backend-compiler-tools/',
+              items: [
+                { text: 'LLDB and GDB', link: '/debugging/backend-compiler-tools/lldb-and-gdb' },
+              ],
+            },
           ],
         },
         {
           items: [
-            { text: 'Standard Library', link: '/std/' },
             { text: 'End', link: '/end' },
           ]
         },
