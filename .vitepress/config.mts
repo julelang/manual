@@ -300,6 +300,7 @@ export default defineConfig({
               items: [
                 { text: 'Jule Runtime', link: '/debugging/reasoning/jule-runtime' },
                 { text: 'C++ Runtime', link: '/debugging/reasoning/cpp-runtime' },
+                { text: 'Debugging Outputs', link: '/debugging/reasoning/debugging-outputs' },
               ],
             },
             {
@@ -403,6 +404,7 @@ export default defineConfig({
           items: [
             { text: 'builtin', link: '/std/builtin' },
             { text: 'std::conv', link: '/std/conv' },
+            { text: 'std::debug', link: '/std/debug' },
             {
               text: 'std::encoding',
               link: '/std/encoding',
