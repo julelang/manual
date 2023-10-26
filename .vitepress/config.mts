@@ -300,7 +300,7 @@ export default defineConfig({
               items: [
                 { text: 'Jule Runtime', link: '/debugging/reasoning/jule-runtime' },
                 { text: 'C++ Runtime', link: '/debugging/reasoning/cpp-runtime' },
-                { text: 'Debugging Outputs', link: '/debugging/reasoning/debugging-outputs' },
+                { text: 'Debugging Special Code', link: '/debugging/reasoning/debugging-special-code' },
               ],
             },
             {
