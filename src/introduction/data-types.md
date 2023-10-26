@@ -25,9 +25,9 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 | Type | Compatible Types |
 | ---- | ---------------- |
 | i8 | i8 |
-| i16 | i8, i16, u8 |
-| i32 | i8, i16, i32, u8, u16 |
-| i64 | i8, i16, i32, i64, u8, u16, u32 |
+| i16 | i8, i16 |
+| i32 | i8, i16, i32 |
+| i64 | i8, i16, i32, i64 |
 | int | Platform dependent (signed) |
 | u8 | u8 |
 | u16 | u8, u16 |
@@ -35,8 +35,8 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 | u64 | u8, u16, u32, u64 |
 | uint | Platform dependent (unsigned) |
 | uintptr | Platform dependent (unsigned) |
-| f32 | f32, i8, i16, i32, i64, u8, u16, u32, u64 |
-| f64 | f32, f64, i8, i16, i32, i64, u8, u16, u32, u64 |
+| f32 | f32 |
+| f64 | f64 |
 | bool | bool |
 | str | str |
 | any | Any type. |
@@ -110,6 +110,20 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 ```
 ```jule
 0x15e-2
+```
+
+## Byte and Rune Literals
+
+A byte or rune literal is represented by a single character between single quotes. Since it is typically a string element, it supports the same escape sequences. Literal can be evaluated in two ways, these are byte literal and rune literal. If your character is small enough to be a byte (0 <= b <= 255) it is treated as a byte, otherwise it is treated as a rune.
+
+For example:
+
+```jule
+'a' // byte
+```
+
+```jule
+'ç' // rune
 ```
 
 ## String

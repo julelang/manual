@@ -11,8 +11,8 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | `*` | Multiplication | integer, floats |
 | `/` | Division | integer, floats |
 | `%` | Modulus | integers |
-| `<<` | Left shift | integer << unsigned integer |
-| `>>` | Right shift | integer >> unsigned integer |
+| `<<` | Left shift | integer << integer |
+| `>>` | Right shift | integer >> integer |
 | `++` | Equals to += 1 as suffix | lvalue arithmetic++ |
 | `--` | Equals to -= 1 as suffix | lvalue arithmetic-- |
 
@@ -49,3 +49,8 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | 3 | `==` `!=` `<` `<=` `>` `>=` |
 | 2 | `&&` |
 | 1 | `\|\|` |
+
+
+## Integer Overflow
+
+Integer overflow is not checked in any way in Jule. This can be a significant cost in runtime and can significantly impact performance. To detect an integer overflow, Jule developers must place mechanisms such as assert in suspicious locations or implement the necessary runtime checks themselves.
