@@ -440,7 +440,6 @@ Compiler log messages with formatting.
 - `ConcurrenctCallWithRefParam`
 - `UsedRefInAnonFnFromParentScope`
 - `EnumCastedFromAny`
-- `UseAliasUsedForSelection`
 - `DuplicatedUseAlias`
 - `MissedTernaryElse`
 - `TernaryCompatiblity`
