@@ -59,22 +59,6 @@ fn main() {
 }
 ```
 
-### Aliases
-
-You may need to write quite long expressions to access the packages used, you can use alias to prevent this. It is recommended that aliases be used whenever possible and should be the primary choice.
-
-Alias ​​is represented by the `for` keyword and must be unique to the use declaration. Even if you have defined an alias, you can still access it with the full expression of the relevant package.
-
-For example:
-```jule
-use afb for awesome::foo::bar
-
-fn main() {
-    awesome::foo::bar::my_function()
-    afb::my_function()
-}
-```
-
 ## Full Use Declarations
 It is sufficient to add `::*` to the end of the use declaration that you want to import fully. The definitions of packages imported in this way can be used directly or optionally accessed with the classic namespace notation.
 
@@ -97,6 +81,26 @@ use std::pkg::{a_function}
 
 fn main() {
     a_function()
+}
+```
+
+## Aliased Use Declarations
+
+You may need to write quite long expressions to access the packages used, you can use alias to prevent this. It is recommended that aliases be used whenever possible and should be the primary choice. Alias ​​is represented by the `for` keyword and must be unique to the use declaration.
+
+Aliases can be combined with other uses. When you use an alias select `self` so you can also use it with the full name of package. If you will generally use the alias but want to access some definitions directly, use selection for the relevant definitions.
+
+For example:
+```jule
+use math for std::math::{
+    self, // for accessing via full name of package
+    pow,  // direct access to pow function
+}
+
+fn main() {
+    outln(math::pow(5, 31))
+    outln(std::math::pow(5, 31))
+    outln(pow(5, 31))
 }
 ```
 
