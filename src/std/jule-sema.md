@@ -606,6 +606,7 @@ struct FnIns {
     result:     &TypeKind
     scope:      &Scope
     references: &ReferenceStack
+    anon:       bool
 
     // Stores all referenced definitions.
     // Only stores for initializer functions.
