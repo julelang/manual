@@ -48,6 +48,7 @@ Here is the list of variables and their existence:
 - `amd64`: cpu architecture is AMD64
 - `x32`: 32-bit cpu architecture
 - `x64`: 64-bit cpu architecture
+- `production`: production compilation enabled
 
 ### Examples
 
