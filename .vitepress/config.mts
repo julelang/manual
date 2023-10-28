@@ -459,7 +459,6 @@ export default defineConfig({
               items: [],
             },
             { text: 'std::process', link: '/std/process' },
-            { text: 'std::runtime', link: '/std/runtime' },
             {
               text: 'std::sync',
               link: '/std/sync',
