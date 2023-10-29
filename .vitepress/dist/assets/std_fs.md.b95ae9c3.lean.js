@@ -1,1 +1,0 @@
-import{_ as e,o,c as s,Q as t}from"./chunks/framework.7cd3ab18.js";const m=JSON.parse('{"title":"std::fs","description":"","frontmatter":{},"headers":[],"relativePath":"std/fs.md","filePath":"std/fs.md"}'),c={name:"std/fs.md"},d=t("",57),n=[d];function r(i,a,l,p,f,u){return o(),s("div",null,n)}const b=e(c,[["render",r]]);export{m as __pageData,b as default};

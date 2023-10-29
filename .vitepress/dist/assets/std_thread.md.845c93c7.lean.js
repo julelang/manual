@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a,Q as s}from"./chunks/framework.7cd3ab18.js";const m=JSON.parse('{"title":"std::thread","description":"","frontmatter":{},"headers":[],"relativePath":"std/thread.md","filePath":"std/thread.md"}'),o={name:"std/thread.md"},r=s("",12),n=[r];function i(c,d,l,h,p,u){return t(),a("div",null,n)}const _=e(o,[["render",i]]);export{m as __pageData,_ as default};

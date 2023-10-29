@@ -1,1 +1,0 @@
-import{_ as s,o as e,c as a,Q as n}from"./chunks/framework.7cd3ab18.js";const h=JSON.parse('{"title":"builtin","description":"","frontmatter":{},"headers":[],"relativePath":"std/builtin.md","filePath":"std/builtin.md"}'),l={name:"std/builtin.md"},t=n("",46),p=[t];function o(i,r,c,d,u,y){return e(),a("div",null,p)}const E=s(l,[["render",o]]);export{h as __pageData,E as default};
