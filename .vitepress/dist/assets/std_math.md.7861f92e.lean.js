@@ -1,0 +1,1 @@
+import{_ as s,o as n,c as a,Q as e}from"./chunks/framework.7cd3ab18.js";const f=JSON.parse('{"title":"std::math","description":"","frontmatter":{},"headers":[],"relativePath":"std/math.md","filePath":"std/math.md"}'),l={name:"std/math.md"},o=e("",332),p=[o];function c(i,r,t,d,u,y){return n(),a("div",null,p)}const b=s(l,[["render",c]]);export{f as __pageData,b as default};

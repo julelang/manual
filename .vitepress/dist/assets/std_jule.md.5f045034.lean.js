@@ -1,0 +1,1 @@
+import{_ as e,o as a,c as t,Q as s}from"./chunks/framework.7cd3ab18.js";const b=JSON.parse('{"title":"std::jule","description":"","frontmatter":{},"headers":[],"relativePath":"std/jule.md","filePath":"std/jule.md"}'),o={name:"std/jule.md"},r=s("",4),l=[r];function n(c,d,i,_,h,u){return a(),t("div",null,l)}const f=e(o,[["render",n]]);export{b as __pageData,f as default};

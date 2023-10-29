@@ -37,6 +37,21 @@ Evaluation results in `false` on any syntax errors and empty expressions.
 
 The syntax is simple and easy to learn. The logical and operator is `&&` and the logical or operator is `||`. These are exactly the same as Jule. The precedence of these operators is also the same. First, the logical or (`||`) operator is evaluated, then the logical and (`&&`) operator is evaluated. You also have parentheses. The parentheses, of course, are evaluated first. In addition to these, logical not (`!`) operator is also available.
 
+### Variables
+
+Here is the list of variables and their existence:
+
+- `windows`: operating system is windows
+- `darwin`: operating system is darwin
+- `linux`: operating system is linux
+- `unix`: operating system is UNIX, or UNIX-like
+- `i386`: cpu architecture is intel 386
+- `amd64`: cpu architecture is AMD64
+- `x32`: 32-bit cpu architecture
+- `x64`: 64-bit cpu architecture
+- `production`: production compilation enabled
+- `test`: compiling for testing
+
 ### Examples
 
 Here is an example code via `build` directive:
@@ -75,9 +90,9 @@ fn main() {
 
 ## Directive: `build`
 
-The `build` directive is a top directive. Different way of platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
+The `build` directive is a top directive. Different way of specific programming such as platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
 
-Plese look at the [platform specific programming](/compiler/platform-specific-programming) page for information.
+Plese look at the [specific programming](/compiler/specific-programming) section for more information.
 
 ## Directive: `typedef`
 In C++-linked structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
@@ -90,3 +105,6 @@ Adds namesapce selection for supported C++-linked types. Uses string literal as 
 
 ## Directive: `deprecated`
 Definitions qualify as deprecated.
+
+## Directive: `test`
+Declares test function.

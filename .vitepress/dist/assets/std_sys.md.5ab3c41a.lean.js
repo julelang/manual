@@ -1,0 +1,1 @@
+import{_ as o,o as e,c as a,Q as c}from"./chunks/framework.7cd3ab18.js";const b=JSON.parse('{"title":"std::sys","description":"","frontmatter":{},"headers":[],"relativePath":"std/sys.md","filePath":"std/sys.md"}'),n={name:"std/sys.md"},s=c("",892),d=[s];function l(r,i,t,p,u,m){return e(),a("div",null,d)}const _=o(n,[["render",l]]);export{b as __pageData,_ as default};

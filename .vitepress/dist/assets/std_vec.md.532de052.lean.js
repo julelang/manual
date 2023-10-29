@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as s,Q as n}from"./chunks/framework.7cd3ab18.js";const h=JSON.parse('{"title":"std::vec","description":"","frontmatter":{},"headers":[],"relativePath":"std/vec.md","filePath":"std/vec.md"}'),o={name:"std/vec.md"},c=n("",22),a=[c];function r(p,d,i,l,u,f){return t(),s("div",null,a)}const b=e(o,[["render",r]]);export{h as __pageData,b as default};

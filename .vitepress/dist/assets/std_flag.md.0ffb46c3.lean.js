@@ -1,0 +1,1 @@
+import{_ as s,o as a,c as e,Q as n}from"./chunks/framework.7cd3ab18.js";const m=JSON.parse('{"title":"std::flag","description":"","frontmatter":{},"headers":[],"relativePath":"std/flag.md","filePath":"std/flag.md"}'),l={name:"std/flag.md"},o=n("",20),t=[o];function r(p,c,i,d,u,f){return a(),e("div",null,t)}const y=s(l,[["render",r]]);export{m as __pageData,y as default};

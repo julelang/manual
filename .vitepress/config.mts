@@ -86,7 +86,7 @@ export default defineConfig({
           items: [
             { text: 'Platform Support', link: '/compiler/platform-support' },
             { text: 'Directives', link: '/compiler/directives' },
-            { text: 'Platform Specific Programming', link: '/compiler/platform-specific-programming' },
+            { text: 'Specific Programming', link: '/compiler/specific-programming' },
             { text: 'Deriving', link: '/compiler/deriving' },
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
@@ -308,6 +308,7 @@ export default defineConfig({
               link: '/debugging/testing/',
               items: [
                 { text: 'Assertion', link: '/debugging/testing/assertion' },
+                { text: 'Writing Tests', link: '/debugging/testing/writing-tests' },
               ],
             },
             {
@@ -468,6 +469,7 @@ export default defineConfig({
             },
             { text: 'std::sys', link: '/std/sys' },
             { text: 'std::thread', link: '/std/thread', },
+            { text: 'std::testing', link: '/std/testing', },
             { text: 'std::time', link: '/std/time', },
             {
               text: 'std::unicode',

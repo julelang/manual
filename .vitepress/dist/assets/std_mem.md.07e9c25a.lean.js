@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as n,Q as a}from"./chunks/framework.7cd3ab18.js";const h=JSON.parse('{"title":"std::mem","description":"","frontmatter":{},"headers":[],"relativePath":"std/mem.md","filePath":"std/mem.md"}'),t={name:"std/mem.md"},o=a("",20),r=[o];function l(i,p,c,d,u,m){return s(),n("div",null,r)}const b=e(t,[["render",l]]);export{h as __pageData,b as default};
