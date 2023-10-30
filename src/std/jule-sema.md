@@ -415,6 +415,7 @@ Expression model for built-in panic function calls.
 struct BuiltinAssertCallExprModel {
     token: Token
     expr:  ExprModel
+    log:   str
 }
 ```
 Expression model for built-in assert function calls.

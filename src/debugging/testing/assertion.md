@@ -11,7 +11,7 @@ An assertion is made with the built-in `assert` function.
 For example:
 ```jule
 fn get_slice(): []int {
-    ret [1,2,3,4,5]
+    ret [1, 2, 3, 4, 5]
 }
 
 fn main() {
@@ -27,3 +27,26 @@ fn main() {
 ```
 
 The so-called practical program above is just about calculating the average of a slice of 10 elements. The assert statement therefore wants to ensure that the length of the slice is 10. The condition must be `true`. If the assertion fails, your program panics and tells you which assertion failed and shows its location. This will give you an idea of ​​which assertion is failing and where it needs to be addressed.
+
+## Custom Assertion Log Messages
+
+To override the assertion functions' default log message and specify a custom one, you can give your message as a second argument. The message must be of string type and must be constant.
+
+For example:
+
+```jule
+fn get_slice(): []int {
+    ret [1, 2, 3, 4, 5]
+}
+
+fn main() {
+    let s = get_slice()
+    assert(s.len == 10, "slice length should be 10")
+
+    let mut sum = 0
+    for _, x in s {
+        sum += x
+    }
+    outln(sum/10)
+}
+```

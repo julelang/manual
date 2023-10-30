@@ -32,9 +32,9 @@ This panics are not recoverable.
 ---
 
 ```jule
-fn assert(expr: bool)
+fn assert(expr: bool, ...)
 ```
-Call panic function if expression is evaluated false at runtime.
+Call panic function if expression is evaluated false at runtime. You can also give custom assertion fail log message with second argument. The log message should be constant string.
 
 ---
 
