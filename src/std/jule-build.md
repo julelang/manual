@@ -287,13 +287,10 @@ Compiler log messages with formatting.
 - `InvalidSyntax`
 - `InvalidType`
 - `InvalidNumericRange`
-- `InvalidOperator`
 - `InvalidExprForUnary `
 - `InvalidEscapeSeq`
 - `InvalidTypeSource`
-- `InvalidPragmaDirective`
 - `InvalidTypeForConst`
-- `InvalidValueForKey`
 - `InvalidExpr`
 - `InvalidCppExt`
 - `InvalidLabel`
@@ -308,7 +305,6 @@ Compiler log messages with formatting.
 - `MissingMultiRet`
 - `MissingMultiAssignIdents`
 - `MissingUsePath`
-- `MissingPragmaDirective`
 - `MissingGotoLabel`
 - `MissingExprFor`
 - `MissingGenerics`
@@ -348,7 +344,6 @@ Compiler log messages with formatting.
 - `ObjHaveNotIdent`
 - `TypeNotSupportSubFields`
 - `TypeHaveNotIdent`
-- `DocCouldntGenerated`
 - `DeclaredButNotUsed`
 - `ExprNotFnCall`
 - `LabelExist`
