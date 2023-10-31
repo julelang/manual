@@ -21,7 +21,7 @@ Skip test. Does not breaks scope execution.
 `fn skipped(self): bool`\
 Reports whether test is skipped.
 
-`fn assert(self, expr: bool): bool`\
+`fn assert(self, expr: bool, message: str): bool`\
 Set status of test as failure if expression is evaluated false at runtime.
 
 `fn errorf(self, fmt: str, args: ...any)`\
