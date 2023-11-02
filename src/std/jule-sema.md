@@ -693,6 +693,9 @@ struct ImportInfo {
 
     // Nil if package is cpp header.
     package: &Package
+
+    // Module identity.
+    mod_id: int
 }
 ```
 Import information.\
@@ -1443,6 +1446,8 @@ trait Importer {
     // Path should be valid directory.
     // Returns empty string if module is not exist.
     pub fn get_mod_path(self): str
+    // Returns module path by identity.
+    pub fn mod_by_id(self, id: int): str
     // Returns &ImportInfo by path.
     // This function accepted as returns already imported and checked package.
     // If returns not-nil value, will be used instead of Import_package
@@ -1454,6 +1459,7 @@ trait Importer {
     // Updated module to package's module if exist when update_mod is true.
     pub fn import_package(mut self, path: str, update_mod: bool): ([]&Ast, []Log)
     // Invoked after the package is imported.
+    // Sets module identitity of imported package to current module.
     pub fn imported(mut self, mut &ImportInfo)
 }
 ```

@@ -472,6 +472,7 @@ Compiler log messages with formatting.
 - `UsingDeprecated`
 - `TraitImplDeprecated`
 - `AssertNonBool`
+- `UseDeclForInternal`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

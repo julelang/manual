@@ -278,7 +278,13 @@ export default defineConfig({
           text: 'Packages',
           link: '/packages/',
           items: [
-            { text: 'Modules', link: '/packages/modules' },
+            {
+              text: 'Modules',
+              link: '/packages/modules/',
+              items: [
+                { text: 'Internal Packages', link: '/packages/modules/internal-packages' },
+              ],
+            },
             { text: 'Using Packages', link: '/packages/using-packages' },
             {
               text: '3rd Party Packages',

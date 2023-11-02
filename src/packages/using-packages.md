@@ -21,7 +21,7 @@ use std::pkg::subpkg
 ## Use Declaration for Project
 Your own project may not consist of only one package, the main one. You may want to include different packages in your project. It is a useful action to use separate packages for the organization of the project. Jule recognizes subpackages in your project's main package and allows you to import those subpackages.
 
-For example, your main package is head directory. This package is your entry package for project. But for this, your main program must also be a module. For more information about modules, you can look at the [modules](/packages/modules) section.
+For example, your main package is head directory. This package is your entry package for project. But for this, your main program must also be a module. For more information about modules, you can look at the [modules](/packages/modules/) section.
 
 Your example project tree:
 ```

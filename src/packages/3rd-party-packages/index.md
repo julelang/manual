@@ -36,6 +36,6 @@ mymodule/
 └─ jule.mod
 ```
 
-The example project structure given above is the recommended structure. The main directory is the main content of the package. Subpackages are also positioned if necessary. The module file must be in the main directory of your project. Using a module will make your package more portable and easier to maintain. Please see [modules](/packages/modules) section to find out how modules contribute to portability and maintainability.
+The example project structure given above is the recommended structure. The main directory is the main content of the package. Subpackages are also positioned if necessary. The module file must be in the main directory of your project. Using a module will make your package more portable and easier to maintain. Please see [modules](/packages/modules/) section to find out how modules contribute to portability and maintainability.
 
 You can write test files to test your project and secure your changes by testing them this way. For more information about test functions, please see the [writing tests](/debugging/testing/writing-tests) section.
