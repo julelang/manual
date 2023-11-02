@@ -32,3 +32,10 @@ $ julec test <compile-command>
 ```
 Compiles for testing.\
 Read the [writing tests](/debugging/testing/writing-tests) section for more information.
+
+## mod
+```
+$ julec mod <command>
+```
+Module commands.\
+Read the [modules](/packages/modules) section for more information.

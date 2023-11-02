@@ -21,8 +21,7 @@ use std::pkg::subpkg
 ## Use Declaration for Project
 Your own project may not consist of only one package, the main one. You may want to include different packages in your project. It is a useful action to use separate packages for the organization of the project. Jule recognizes subpackages in your project's main package and allows you to import those subpackages.
 
-For example, your main package is head directory.
-This package is your entry package for project.
+For example, your main package is head directory. This package is your entry package for project. But for this, your main program must also be a module. For more information about modules, you can look at the [modules](/packages/modules) section.
 
 Your example project tree:
 ```
@@ -35,17 +34,18 @@ head/
 │  ├─ README.md
 │  └─ foo.jule
 │
+├─ jule.mod
 ├─ LICENSE
 └─ main.jule
 ```
-As you can see in your project tree, your main package `head` directory has `foo` directory. This directory is a subpackage accessible to you and it also has a subpackage called `bar`.
+As you can see in your project tree, your main package `head` directory has `foo` directory. This directory is a subpackage accessible to you and it also has a subpackage called `bar`. However, also check where your `jule.mod` file is located.
 
 Using your subpackages is simple, here is an example:
 ```jule
 use foo
 use foo::bar
 ```
-As you can see in the example above, each subpackage in your main package represents a chain of packages that you can use. This means that in your subpackages you will follow the same syntax when you try to use your other subpackages.
+As you can see in the example above, each subpackage in your main package represents a chain of packages that you can use. This means that in your subpackages you will follow the same syntax when you try to use your other subpackages. The packages you can import start from your main module, where your module file is located.
 
 ## Using Use Declarations
 The definitions that come with the use declaration are accessible with the namespaces. The namespace is same with use declaration.

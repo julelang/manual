@@ -1435,17 +1435,26 @@ Lookup.
 
 ```jule
 trait Importer {
+    // Set current module path.
+    // Path should be valid directory.
+    // Set to empty string if module is not exist.
+    pub fn set_mod_path(mut self, path: str)
+    // Returns current module path.
+    // Path should be valid directory.
+    // Returns empty string if module is not exist.
+    pub fn get_mod_path(self): str
     // Returns &ImportInfo by path.
     // This function accepted as returns already imported and checked package.
     // If returns not-nil value, will be used instead of Import_package
     // if possible and package content is not checked by Sema.
-    get_import(mut self, path: str): &ImportInfo
+    pub fn get_import(mut self, path: str): &ImportInfo
     // Path is the directory path of package to import.
     // Should return abstract syntax tree of package files.
     // Logs accepts as error.
-    import_package(mut self, path: str): ([]&Ast, []Log)
+    // Updated module to package's module if exist when update_mod is true.
+    pub fn import_package(mut self, path: str, update_mod: bool): ([]&Ast, []Log)
     // Invoked after the package is imported.
-    imported(mut self, mut &ImportInfo)
+    pub fn imported(mut self, mut &ImportInfo)
 }
 ```
 Importer.\

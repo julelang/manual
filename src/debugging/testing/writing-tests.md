@@ -71,3 +71,9 @@ julec test .
 ```
 
 The tests are not executed automatically, so the executable must be executed manually. Only tests that are included in your program's main package will be executed, not all tests contained in your program. All necessary `init` functions are called, but your program runs and terminates from an entry point specifically created for the compilation, not from your entry point.
+
+### Modules and Sub-Packages
+
+Modules are important for tests. Their most important contribution in this regard is to make it possible to test subpackages. It is difficult for you to test subpackages without modules. Because when you try to test a subpackage, if there is any import, you will have problems, your program does not know where your main package is. Therefore, having a module in your main package will make testing its sub-packages easier and more possible.
+
+Any sub-package does not have to contain entry points when testing. Test mode eliminates the need for an entry point, the program uses a unique testing entry point. Therefore, you can test subpackages in the same way. But pay attention to the module requirement.

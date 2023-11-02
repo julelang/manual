@@ -26,6 +26,11 @@ Identifier of initializer function.
 
 ---
 
+### `const MODULE_FILE: str`
+Filename of module file.
+
+---
+
 ### `static CPP_HEADER_EXTS: [...]str`
 Valid extensions of C++ headers.
 
