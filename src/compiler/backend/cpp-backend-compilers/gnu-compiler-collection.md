@@ -10,7 +10,6 @@ We only experienced this problem when we compiled JuleC (the official reference 
 
 However, Jule does not automatically interfere with the GCC build command to fix the `file too big` or `too many sections` problem. For this reason, you may experience a `file too big` problem in large projects. The problem is addressed [here](#file-too-big-or-too-many-sections).
 
-
 ## Known Problems
 
 ### File Too Big or Too Many Sections
