@@ -16,7 +16,7 @@ Equavalent of built-in outln function. But removed from IR if production compila
 
 ---
 
-```
+```jule
 fn call(f: fn())
 ```
 Calls function immediately. Removed from IR if production compilation is enabled.
