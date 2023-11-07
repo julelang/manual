@@ -30,6 +30,13 @@ Values: `gcc` `clang`
 
 ---
 
+`--cppstd` \
+Set the C++ standard.
+
+Values: `cpp14`, `cpp17`, `cpp20`
+
+---
+
 `-o <file>` `--out <file>` \
 Write output to `<file>`.
 
