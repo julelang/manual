@@ -114,6 +114,7 @@ Pros of enabling production compilation:
 - Use maximum optimization level of backend compiler.
 - Additional optimizations that vary by backend compiler.
 - Do not use frame pointer.
+- Remove debug information overhead of Jule runtime calls.
 
 Cons of enabling production compilation:
 - Harder debugging.

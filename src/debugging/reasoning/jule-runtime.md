@@ -10,6 +10,10 @@ When you encounter such a panic, it is likely that you will receive an informati
 
 Another common possibility is that an exception that you did not handle ends with an exception rather than completing its execution smoothly. In this context, since you are sure that there will be no problem, it may be useful for you to check the exceptions that you use without handling them. If it uses error coding as an exceptional exception, you will get its code and you can understand what the problem might be thanks to these codes. Even otherwise, since you will have location information, you can make a good start by identifying the relevant place.
 
+### Production Compilation
+
+Production compilations tell you the error due to optimizations, but they do not contain important information that will help debug file information and line information. This is one of the reasons why it is recommended to use the debug compilation for debugging.
+
 ## Common Runtime Panics
 
 `invalid memory address or nil pointer deference`\

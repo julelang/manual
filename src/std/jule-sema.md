@@ -152,7 +152,7 @@ Value.
 struct BinopExprModel {
     left:  ExprModel
     right: ExprModel
-    op:    str
+    op:    Token
 }
 ```
 Binary operation expression model. 
@@ -162,7 +162,7 @@ Binary operation expression model.
 ```jule
 struct UnaryExprModel {
     expr:  ExprModel
-    op:    str
+    op:    Token
 }
 ```
 Unary operation expression model. 
@@ -182,6 +182,7 @@ For example: `&MyStruct{10, false, "-"}`
 
 ```jule
 struct StructLitExprModel {
+    token: Token
     strct: &StructIns
     args:  []&StructArgExprModel
 }
@@ -202,6 +203,7 @@ For example: `&MyStruct{}`
 
 ```jule
 struct CastingExprModel {
+    token:     Token
     expr:      ExprModel
     kind:      &TypeKind
     expr_kind: &TypeKind
@@ -249,6 +251,7 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ```jule
 struct IndexingExprModel {
+    token: Token
     expr:  &Data
     index: &Data
 }
@@ -292,6 +295,7 @@ For example: `{0: false, 1: true}`
 
 ```jule
 struct SlicingExprModel {
+    token: Token
     expr:  ExprModel
     left:  ExprModel
     right: ExprModel
@@ -304,6 +308,7 @@ For example: `my_slice[2:my_slice.len-5]`
 
 ```jule
 struct TraitSubIdentExprModel {
+    token: Token
     expr:  ExprModel
     ident: str
 }
@@ -847,7 +852,7 @@ Postfix assignment.
 struct Assign {
     l:  ExprModel
     r:  ExprModel
-    op: str
+    op: Token
 }
 ```
 Assignment.
