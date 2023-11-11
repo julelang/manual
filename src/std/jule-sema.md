@@ -645,8 +645,8 @@ Reports whether instances are same. Returns true if declarations and generics ar
 
 ```jule
 struct Impl {
-    base:    Token
-    dest:    Token
+    base:    &TypeDecl
+    dest:    &TypeDecl
     methods: []&Fn
     statics: []&Var
 }

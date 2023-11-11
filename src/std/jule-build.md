@@ -396,8 +396,8 @@ Compiler log messages with formatting.
 - `UseDeclAtBody`
 - `ArrayAutoSized`
 - `NamespaceNotExist`
-- `ImplBaseNotExist`
-- `ImplDestNotExist`
+- `ImplInvalidBase`
+- `ImplInvalidDest`
 - `StructAlreadyHaveIdent`
 - `UnsafePtrIndexing`
 - `MethodHasGenericWithSameIdent`
@@ -473,6 +473,8 @@ Compiler log messages with formatting.
 - `TraitImplDeprecated`
 - `AssertNonBool`
 - `UseDeclForInternal`
+- `CppLinkedTypeNotAllowed`
+- `GenericsNotAllowed`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -508,3 +510,5 @@ Compiler log messages with formatting.
 - `JustIgnoreOrHandle`
 - `UseImperative`
 - `UseUnsafeForDeprecated`
+- `ExpectedStruct`
+- `ExpectedTrait`

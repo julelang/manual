@@ -874,13 +874,13 @@ Trait declaration.
 ```jule
 struct Impl {
     // This token available for these cases:
-    //  - Implementation trait to structure, represents trait's token.
-    base:    Token // Token from std::jule::lex
+    //  - Implementation trait to structure, represents trait's type.
+    base: &TypeDecl
 
     // This token available for these cases:
-    //  - Implementation trait to structure, represents structure's token.
-    //  - Implementation to structure, represents structure's token.
-    dest:    Token // Token from std::jule::lex
+    //  - Implementation trait to structure, represents structure's type.
+    //  - Implementation to structure, represents structure's type.
+    dest: &TypeDecl
 
     // Given methods to implement.
     methods: []&FnDecl
