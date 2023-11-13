@@ -965,6 +965,7 @@ struct Field {
     mutable: bool
     ident:   str
     kind:    &TypeSymbol
+    default: &Expr
 }
 ```
 
@@ -1020,6 +1021,7 @@ Reports whether structure has only reference-type-accessible defines.
 struct FieldIns {
     decl: &Field
     kind: &TypeKind
+    default: &Data
 }
 ```
 Field instance. 

@@ -836,6 +836,7 @@ struct FieldDecl {
     mutable: bool   // Interior mutability.
     ident:   str
     kind:    &TypeDecl
+    default: &Expr
 }
 ```
 Field declaration.

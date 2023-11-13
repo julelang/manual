@@ -12,6 +12,26 @@ struct Employee {
 ```
 Members of structures are the same as a variable definition except `const` keyword.
 
+## Assigning Default Value to Fields
+
+You may want to change the default values ​​assigned to fields of structures. To do this, simply assign an expression. When you do this, each time your structures are instantiated, it will initialize that field using the value given for that field.
+
+For example:
+```jule
+struct Employee {
+    name:   str = "anonymous"
+    age:    u8 = 18
+    title:  str = "NA"
+    salary: u32 = 100000
+}
+
+fn main() {
+    let emp = Employee{}
+    // emp: Employee{name:anonymous, age:18, title:NA, salary:100000}
+    outln(emp)
+}
+```
+
 ## Creating a Instances of Structures
 To instantiate structs, you can either give the values of the fields using braces after the struct name, or create them with their default values.
 
