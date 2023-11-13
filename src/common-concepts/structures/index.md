@@ -20,7 +20,7 @@ For example:
 ```jule
 struct Employee {
     name:   str = "anonymous"
-    age:    u8 = 18
+    age:    u8  = 18
     title:  str = "NA"
     salary: u32 = 100000
 }
