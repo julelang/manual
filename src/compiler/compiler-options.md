@@ -56,6 +56,11 @@ Enable variable shadowing.
 `-p` `--production`\
 Enable production compilation.
 
+---
+
+`--disable-rc`\
+Disable reference counting. All reference counted types does not performs reference counting, gives memory leak invulnerability.
+
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).
