@@ -59,7 +59,7 @@ Enable production compilation.
 ---
 
 `--disable-rc`\
-Disable reference counting. All reference counted types does not performs reference counting, prevents memory leaks.
+Disable reference counting. All reference counted types does not perform reference counting, prevents memory leaks. See [Disable Reference Counting](/memory/management/disable-reference-counting) section for more information.
 
 ### Optimization Options
 

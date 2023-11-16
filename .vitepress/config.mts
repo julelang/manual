@@ -216,7 +216,9 @@ export default defineConfig({
               text: 'Management',
               link: '/memory/management/',
               items: [
+                { text: 'Smart Pointers', link: '/memory/management/smart-pointers' },
                 { text: 'Manual', link: '/memory/management/manual' },
+                { text: 'Disable Reference Counting', link: '/memory/management/disable-reference-counting' },
               ],
             },
           ],
