@@ -31,7 +31,6 @@ export default defineConfig({
   description: 'Documentations of the Jule Programming Language.',
 
   markdown: {
-    theme: 'github-dark',
     lineNumbers: true,
     languages: [ jule ],
   },

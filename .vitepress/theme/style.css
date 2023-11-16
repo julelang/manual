@@ -23,7 +23,6 @@
   --vp-c-brand-dark: #7896b6;
   --vp-c-brand-darker: #3f556c;
   --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
-  --vp-code-block-bg: #161618;
   --vp-custom-block-info-bg: rgba(84, 110, 155, 0.1);
   --vp-custom-block-info-border: #3686b1;
   --vp-custom-block-info-text: #52b0e3;
@@ -43,6 +42,7 @@
 }
 
 .dark {
+  --vp-code-block-bg: #161618;
   --vp-c-bg: #000000;
   --vp-c-bg-alt: rgb(9, 9, 10);
 }
