@@ -508,6 +508,25 @@ Expression model for ternary operator.
 ---
 
 ```jule
+struct BackendEmitExprModel {
+    code: str
+}
+```
+Expression model for inline code emit to backend.
+
+---
+
+```jule
+struct FreeExprModel {
+    expr: ExprModel
+}
+```
+Expression model for free calls.\
+Function provided by: `std::mem`
+
+---
+
+```jule
 struct RetType {
     kind:   &TypeSymbol
     idents: []Token
@@ -1173,6 +1192,9 @@ Reports whether kind is mutable.
 
 `fn nil_compatible(self): bool`\
 Reports whether kind is nil compatible.
+
+`fn performs_rc(self): bool`\
+Reports whether kind performs reference-counting.
 
 `fn supports_cloning(self): bool`\
 Reports whether kind supports clonning via jule::Clone derive.

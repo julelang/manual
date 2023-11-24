@@ -12,6 +12,13 @@ fn align_of(TYPE || EXPRESSION): uint
 ```
 Returns the alignment, in bytes, required for any instance of the type indicated by type-id, which is either complete object type. If given expression, uses type of expression. 
 
+---
+
+```jule
+fn free(h: T)
+```
+Frees memory. If reference counting is enabled, just countdowns reference and sets to nil. If reference counting is disabled, frees memory allocation immediately. This is migh be unsafe, because your another shared pointers will have invalid memory address after freed. You can use this function for only rc-performed types.
+
 ## Structures
 
 ```jule
