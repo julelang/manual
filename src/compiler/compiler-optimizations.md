@@ -84,6 +84,13 @@ Enable optimizations for pointers.
 
 - Immediate pointer simplifies dereferencing statements. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
 
+---
+
+`--opt-cond` \
+Enable optimizations for conditional structures.
+
+- Remove unreachable if-else chain cases such as having constant false expressions.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -98,7 +105,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, and `--opt-ptr`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`
 
 ## Production Compilation
 
