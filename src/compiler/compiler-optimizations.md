@@ -89,9 +89,9 @@ Enable optimizations for pointers.
 `--opt-cond` \
 Enable optimizations for conditional structures.
 
-- Remove unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains.
-- Removes unnecessary trailing cases that comes after constant true case. Applied for if-else chains.
-- Removes condition eval overhead of constant true cases. Applied for if-else chains.
+- Remove unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
+- Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
+- Remove condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
 
 ## Optimization Levels
 
