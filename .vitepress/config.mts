@@ -461,6 +461,7 @@ export default defineConfig({
               link: '/std/math',
               items: [
                 { text: 'std::math::bits', link:'/std/math-bits' },
+                { text: 'std::math::cmplx', link:'/std/math-cmplx' },
                 { text: 'std::math::rand', link:'/std/math-rand' },
               ],
             },
