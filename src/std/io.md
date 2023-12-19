@@ -65,6 +65,7 @@ Derived from `Writer` trait.
 struct FileStream
 ```
 Stream implementation for file handles.
+Uses internally mutable buffer.
 ::: info
 **Implemented Traits**
 - Reader
@@ -103,3 +104,32 @@ Returns text from bytes of recent scan.
 
 `fn scan(self)!: bool`\
 Scans line from handle via read method. Scans bytes until line delimiter (`\n`) byte, delimiter not included. Reports whether readed byte into buffer.
+
+---
+
+```jule
+struct ByteStream
+```
+Stream implementation for bytes.
+Uses internally mutable buffer.
+Does not clearing internal buffer at all.
+Large buffers can be memory hungry.
+
+::: info
+**Implemented Traits**
+- Reader
+- Writer
+- Stream
+:::
+
+**Methods:**
+
+`static fn new(): &ByteStream`\
+Returns new ByteStream instance.
+
+`fn data(self): bool`\
+Reports whether buffer have readable data.
+
+`fn fit(mut self)`\
+Removes readed bytes from buffer.
+Maybe help to reduce memory usage for large buffers.
