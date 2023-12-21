@@ -471,6 +471,7 @@ export default defineConfig({
               items: [],
             },
             { text: 'std::process', link: '/std/process' },
+            { text: 'std::strings', link: '/std/strings' },
             {
               text: 'std::sync',
               link: '/std/sync',
