@@ -166,3 +166,11 @@ fn trim(s: str, cutset: str): str
 ```
 Trims string by specified runes at left and right.
 Cutset should include runes to trim.
+
+---
+
+```jule
+fn join(parts: []str, sep: str): str
+```
+Concatenates the parts of its first argument to create a single string.
+The separator sep is placed between parts in the resulting string.
