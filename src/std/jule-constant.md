@@ -115,6 +115,7 @@ Reports whether self less than x.\
 Returns false if type is unsupported by operation.
 
 Supported types are:
+- strings
 - 64-bit signed integer
 - 64-bit unsigned integer
 - 64-bit floating-point
@@ -124,6 +125,7 @@ Reports whether self greater than x.\
 Returns false if type is unsupported by operation.
 
 Supported types are:
+- strings
 - 64-bit signed integer
 - 64-bit unsigned integer
 - 64-bit floating-point
