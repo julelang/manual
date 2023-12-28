@@ -414,6 +414,7 @@ export default defineConfig({
           link: '/std/',
           items: [
             { text: 'builtin', link: '/std/builtin' },
+            { text: 'std::bytes', link: '/std/bytes' },
             { text: 'std::conv', link: '/std/conv' },
             { text: 'std::debug', link: '/std/debug' },
             {
