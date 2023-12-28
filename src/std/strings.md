@@ -54,6 +54,34 @@ Returns index of first matched item with specified substring, returns -1 if not 
 ---
 
 ```jule
+fn find_fn(s: str, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of string to right.
+
+---
+
+```jule
+fn find_fn_at(s: str, mut i: int, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of string to right. Starts searching s at given index. Returns -1, if i < 0.
+
+---
+
+```jule
+fn find_fn_last_at(s: str, mut i: int, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of string to left. Starts searching s at given index. Returns -1, if i < 0 || i >= s.len.
+
+---
+
+```jule
+fn find_fn_last(s: str, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of string to left.
+
+---
+
+```jule
 fn split(s: str, sub: str, mut n: int): []str
 ```
 Splits the string into the specified number of parts to the specified substring. Returns empty slice if n is equals to zero. Returns all parts if n less than zero.
