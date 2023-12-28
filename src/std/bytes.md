@@ -83,6 +83,34 @@ Returns index of first matched item with specified rune, returns -1 if not exist
 ---
 
 ```jule
+fn find_fn_at(s: []byte, mut i: int, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of slice to right. Starts searching s at given index. Returns -1, if i < 0.
+
+---
+
+```jule
+fn find_fn(s: []byte, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of slice to right.
+
+---
+
+```jule
+fn find_fn_last_at(s: []byte, mut i: int, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= s.len.
+
+---
+
+```jule
+fn find_fn_last(s: []byte, f: fn(mut rune): bool): int
+```
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left.
+
+---
+
+```jule
 fn split(mut s: []byte, sub: []byte, mut n: int): [][]byte
 ```
 Splits the slice into the specified number of parts to the specified sub-slice. Appends parts as immutable slice.
@@ -121,7 +149,7 @@ Counts the number of non-overlapping instances of sub-slice in s. Returns zero i
 ```jule
 fn replace(mut s: []byte, sub: []byte, new: []byte, mut n: int): []byte
 ```
-Replaces all sub-slices matching sub in the string with new. Returns same slice if n is equals to zero. Replaces all matches if n less than zero. This function may return mutable copy of s, of new slice allocation.
+Replaces all sub-slices matching sub in the slice with new. Returns same slice if n is equals to zero. Replaces all matches if n less than zero. This function may return mutable copy of s, of new slice allocation.
 
 ---
 
@@ -171,3 +199,10 @@ Trims slice by specified runes at left and right. Cutset should include runes to
 fn join(parts: [][]byte, sep: []byte): []byte
 ```
 Concatenates the parts of its first argument to create a single slice. The separator sep is placed between parts in the resulting slice.
+
+---
+
+```jule
+fn runes(s: []byte): []rune
+```
+Returns runes from UTF-8 encoded bytes.
