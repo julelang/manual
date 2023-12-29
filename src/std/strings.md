@@ -124,6 +124,13 @@ Reports whether string includes rune.
 ---
 
 ```jule
+fn contains_any(s: str, runes: str): bool
+```
+Reports whether string includes any of runes.
+
+---
+
+```jule
 fn count(s: str, sub: str): int
 ```
 Counts the number of non-overlapping instances of substring in s.
