@@ -82,6 +82,20 @@ Returns index of first matched item with finder function, returns -1 if not exis
 ---
 
 ```jule
+fn find_any(s: str, runes: str): int
+```
+Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at right of string to left.
+
+---
+
+```jule
+fn find_last_any(s: str, runes: str): int
+```
+Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at right of string to left.
+
+---
+
+```jule
 fn split(s: str, sub: str, mut n: int): []str
 ```
 Splits the string into the specified number of parts to the specified substring. Returns empty slice if n is equals to zero. Returns all parts if n less than zero.
