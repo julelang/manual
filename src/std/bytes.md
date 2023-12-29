@@ -111,6 +111,20 @@ Returns index of first matched item with finder function, returns -1 if not exis
 ---
 
 ```jule
+fn find_any(s: []byte, runes: []byte): int
+```
+Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at left of slice to right.
+
+---
+
+```jule
+fn find_last_any(s: []byte, runes: []byte): int
+```
+Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at right of slice to left.
+
+---
+
+```jule
 fn split(mut s: []byte, sub: []byte, mut n: int): [][]byte
 ```
 Splits the slice into the specified number of parts to the specified sub-slice. Appends parts as immutable slice.
@@ -136,6 +150,13 @@ Reports whether slice includes byte.
 fn contains_rune(b: []byte, r: rune): bool
 ```
 Reports whether slice includes rune.
+
+---
+
+```jule
+fn contains_any(s: []byte, runes: []byte): bool
+```
+Reports whether slice includes any of runes.
 
 ---
 
