@@ -424,6 +424,7 @@ export default defineConfig({
                 { text: 'std::encoding::base32', link: '/std/encoding-base32' },
                 { text: 'std::encoding::base64', link: '/std/encoding-base64' },
                 { text: 'std::encoding::binary', link: '/std/encoding-binary' },
+                { text: 'std::encoding::csv', link: '/std/encoding-csv' },
               ],
             },
             { text: 'std::env', link: '/std/env' },
