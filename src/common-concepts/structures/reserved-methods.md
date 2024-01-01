@@ -8,7 +8,7 @@ Patterns should only be followed so that the compiler implements the relevant fu
 
 ## `pub fn dispose(mut self)`
 
-The `dispose` reserved method implements destructor method for structure. Destructor methods called by compiler when destruction of structure which is implements destructor method pattern.
+The `dispose` reserved method implements destructor method for structure. Destructor methods are called by compiler when destruction of structure which is implements destructor method pattern.
 
 ### The Pattern
 
