@@ -97,11 +97,3 @@ Allowed types:
 ::: tip
 [See more cloning information.](/memory/immutability#cloning)
 :::
-
-## Traits
-```jule
-trait Dispose {
-    pub fn dispose(mut self)
-}
-```
-Implements destructor method.

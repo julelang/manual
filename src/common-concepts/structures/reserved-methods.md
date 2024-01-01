@@ -6,6 +6,28 @@ In order for the reserved method to be implemented by the compiler, the pattern 
 
 Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore they do not cause any compiler errors.
 
+## `pub fn dispose(mut self)`
+
+The `dispose` reserved method implements destructor method for structure. Destructor methods called by compiler when destruction of structure which is implements destructor method pattern.
+
+### The Pattern
+
+- Return type should be void
+- Method should be `pub`
+- Method should only have immutable non-reference `self` parameter
+- Method should do not have generics
+
+### Example
+```jule
+struct Test {}
+
+impl Test {
+    pub fn dispose(mut self) {
+        outln("I am destructed")
+    }
+}
+```
+
 ## `pub fn to_str(self): str`
 
 The `to_str` reserved method implements a special string conversion algorithm, replacing the structure's default string formatting applied by the compiler.
