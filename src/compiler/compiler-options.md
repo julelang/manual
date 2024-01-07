@@ -61,6 +61,11 @@ Enable production compilation.
 `--disable-rc`\
 Disable reference counting. All reference counted types does not perform reference counting, prevents memory leaks. See [Disable Reference Counting](/memory/management/disable-reference-counting) section for more information.
 
+---
+
+`--disable-safety`\
+Disable safety. All memory safety and similar measures will be disabled. This will be increase safety risks, but may improve runtime performance same time. It maybe hepful for debugging, see [Debugging](/debugging/) section for more information.
+
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).
