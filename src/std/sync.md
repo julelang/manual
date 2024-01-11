@@ -34,8 +34,8 @@ Muxtex is a primitive used to protect memory in multi-threading situations such 
 If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
 
 ::: info
-**Implemented Traits**
-- Dispose
+**Implemented Patterns**
+- **Destructor method pattern**: Dispose all resources. After this function called, mutex will be uninitialized.
 :::
 
 **Methods:**

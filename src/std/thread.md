@@ -12,8 +12,8 @@ It is experimental.
 :::
 
 ::: info
-**Implemented Traits**
-- Dispose
+**Implemented Patterns**
+- **Destructor method pattern**: Detaches thread if thread is still executing.
 :::
 
 **Methods:**

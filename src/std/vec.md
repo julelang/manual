@@ -15,6 +15,11 @@ Deallocates itself when destroyed.
 Vectors aren't use shared allocation between them.\
 Allocates new space and copies (not deep copy) items into space.
 
+::: info
+**Implemented Patterns**
+- **Destructor method pattern**: Deallocate heap.
+:::
+
 **Methods:**
 
 `static fn new(cap: int): Vec[T]` \
