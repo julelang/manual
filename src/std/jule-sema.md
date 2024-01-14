@@ -150,8 +150,8 @@ Value.
 
 ```jule
 struct BinopExprModel {
-    left:  ExprModel
-    right: ExprModel
+    left:  &Data
+    right: &Data
     op:    Token
 }
 ```

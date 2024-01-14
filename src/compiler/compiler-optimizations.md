@@ -59,6 +59,7 @@ Enable optimizations for mathematical operations.
 
 - Skip the divide-by-zero check for division when operand is constant.
 - Skip the divide-by-zero check for modulo when operand is constant.
+- Converts multiplications to bit shifting if possible. Good conditions for this optimization: multiplier is constant and power of 2.
 
 ---
 
