@@ -869,8 +869,8 @@ Postfix assignment.
 
 ```jule
 struct Assign {
-    l:  ExprModel
-    r:  ExprModel
+    l:  &Data
+    r:  &Data
     op: Token
 }
 ```
