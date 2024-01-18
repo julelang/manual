@@ -149,9 +149,19 @@ Value.
 ---
 
 ```jule
+struct OperandExprModel {
+    kind:  &TypeKind
+    model: ExprModel
+}
+```
+Operand expression model.
+
+---
+
+```jule
 struct BinopExprModel {
-    left:  &Data
-    right: &Data
+    left:  &OperandExprModel
+    right: &OperandExprModel
     op:    Token
 }
 ```
@@ -869,8 +879,8 @@ Postfix assignment.
 
 ```jule
 struct Assign {
-    l:  &Data
-    r:  &Data
+    l:  &OperandExprModel
+    r:  &OperandExprModel
     op: Token
 }
 ```
