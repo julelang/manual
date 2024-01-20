@@ -227,14 +227,14 @@ Type alias for `bool` type.
 ## Functions
 
 ```jule
-unsafe fn inline(const code: str)
+unsafe fn emit(const code: str)
 ```
 Emit inline code for backend.
 
 ---
 
 ```jule
-unsafe fn inline[T](const code: str): T
+unsafe fn emit[T](const code: str): T
 ```
 Emit inline code for backend and read result.
 
