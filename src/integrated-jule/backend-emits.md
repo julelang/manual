@@ -28,8 +28,31 @@ For example:
 use integ for std::jule::integrated
 
 fn main() {
-    let x = unsafe { integ::emit[f64](`jule::MAX_F64`) }
+    let x = unsafe {
+        integ::emit[f64](`jule::MAX_F64`)
+    }
     outln(x)
     outln(x == f64.MAX)
 }
 ```
+
+## Emit from Jule Source Code
+
+You may also want to use the variables or types you wrote in the Jule code in the emit. In this context, pass what you want by using the variadic parameter. In such a case your code will be assumed to be a format, the same formatting rules provided by standard [`std::fmt`](/std/fmt) library will apply.
+
+The arguments you pass are evaluated by your compiler as they are in the backend, and placed in your emit code.
+
+For example:
+```jule
+use integ for std::jule::integrated
+
+fn main() {
+    let y = 40;
+    unsafe {
+        integ::emit("{} x = {};", int, 20)
+        integ::emit("std::cout << x + {} << std::endl;", y)
+    }
+}
+```
+
+In the example above, the variable `x` is defined in the backend. However, its type and value are evaluated by the compiler and placed in the backend. This is a more compatible example of code emitting. What follows is the use of a variable `y` defined in Jule source code in the backend.
