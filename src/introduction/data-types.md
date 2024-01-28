@@ -108,8 +108,27 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 ```jule
 0x1fffp-16
 ```
+
+## Underscore & Numeric Literals
+
+You can use underscore to separate digits. This might be helpful for big numbers. \
+There are some conditions:
+- Literal cannot starts with underscore
+- Precision of floating-point literals are cannot starts with underscore
+- Format specifier of floating-point literals are cannot separated with underscore from following digits
+
+Example to underscored literals:
 ```jule
-0x15e-2
+10_000_000
+```
+```jule
+0.5_000e+100
+```
+```jule
+.12_345E+6
+```
+```jule
+0b1100_1100_0110_1010
 ```
 
 ## Byte and Rune Literals
