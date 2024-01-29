@@ -475,6 +475,7 @@ Compiler log messages with formatting.
 - `UseDeclForInternal`
 - `CppLinkedTypeNotAllowed`
 - `GenericsNotAllowed`
+- `InitiationCycle`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

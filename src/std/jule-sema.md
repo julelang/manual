@@ -1162,6 +1162,7 @@ struct TypeAlias {
     kind:       &TypeSymbol
     doc:        str
     refers:     []any
+    generics:   []&TypeAlias
 }
 ```
 Type alias.
