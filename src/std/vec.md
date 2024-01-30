@@ -12,7 +12,7 @@ The elements are stored contiguously.
 
 Deallocates itself when destroyed.
 
-Vectors aren't use shared allocation between them.\
+Vectors aren't use shared allocation between themselves.\
 Allocates new space and copies (not deep copy) items into space.
 
 ::: info
@@ -24,6 +24,9 @@ Allocates new space and copies (not deep copy) items into space.
 
 `static fn new(cap: int): Vec[T]` \
 Allocate new vector with capacity. 
+
+`fn fit(mut self)`\
+Set capacity to length. Removes additional capacity that waiting to use. Allocates new memory to cut additional capacity.
 
 `fn len(self): int`\
 Returns length.
