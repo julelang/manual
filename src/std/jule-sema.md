@@ -1181,7 +1181,7 @@ struct TypeKind {
     kind:      Kind
 }
 ```
-Type alias.
+Evaluated type declaration.
 ::: info
 **Implemented Traits**
 - Kind
@@ -1505,6 +1505,16 @@ trait Importer {
 ```
 Importer.\
 Used by semantic analyzer for import use declarations. 
+
+---
+
+```jule
+trait Kind {
+    pub fn to_str(self): str
+    pub fn equals(&self, other: &TypeKind): bool
+}
+```
+Kind of type declaration.
 
 ## Enums
 
