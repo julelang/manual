@@ -66,5 +66,5 @@ Remove range from heap.
 `fn insert(mut self, i: int, mut item: T)`\
 Insert item by index.
 
-`fn insert(mut self, start: int, end: int): Vec[T]`\
-Slice between indexes except end position.
+`fn slice(mut self, start: int, end: int): Vec[T]`\
+Slice between indexes except end position. Not clones internal buffer, so slice vector can effect to internal buffer if type is mutable.
