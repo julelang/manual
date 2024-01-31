@@ -45,6 +45,10 @@ Returns item by index.
 `fn set(mut self, i: int, mut item: T)`\
 Set element by index.
 
+`fn clear(mut self)`
+Removes all elements.
+Does not deallocates buffer, keeps capacity.
+
 `fn dealloc(mut self)`\
 Deallocates heap.
 
