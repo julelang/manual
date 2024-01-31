@@ -473,6 +473,7 @@ export default defineConfig({
               items: [],
             },
             { text: 'std::process', link: '/std/process' },
+            { text: 'std::stack', link: '/std/stack' },
             { text: 'std::strings', link: '/std/strings' },
             {
               text: 'std::sync',
