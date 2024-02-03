@@ -4,7 +4,7 @@
 ```jule
 struct Stack[T]
 ```
-LIFO data structure wich is commonly called as stack.
+LIFO data structure which is commonly called as stack.
 
 Deallocates itself when destroyed.
 
@@ -18,7 +18,7 @@ Allocates new space and copies (not deep copy) items into space.
 
 **Methods:**
 
-`static fn new(cap: int): Stack`\
+`static fn new(cap: int): Stack[T]`\
 Returns new stack instance with capacity.
 
 `fn fit(mut self)`\
