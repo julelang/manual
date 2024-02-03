@@ -4,6 +4,12 @@
 ```jule
 struct Queue[T]
 ```
+FIFO data structure which is commonly called as queue.
+
+Deallocates itself when destroyed.
+
+Queues aren't use shared allocation between themselves.
+Allocates new space and copies (not deep copy) items into space.
 
 ::: info
 **Implemented Patterns**
