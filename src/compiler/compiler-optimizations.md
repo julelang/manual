@@ -119,13 +119,16 @@ Production compilation may have an impact on IR rendering, but in addition it ha
 
 When you enable production compilation, it provides improvements that optimization options cannot provide. It can cause some changes to the IR and additionally prompts your backend compiler to compile the IR code more efficiently. In this way, significantly optimized faster programs can be obtained by using optimization options and production compilation together.
 
+Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls ot etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `main_package_directory/`.
+
 Pros of enabling production compilation:
-- Remove assert calls.
+- Remove assertion calls.
 - Disable assertions of backend compiler.
 - Use maximum optimization level of backend compiler.
 - Additional optimizations that vary by backend compiler.
-- Do not use frame pointer.
+- Do not use frame pointer if possible.
 - Remove debug information overhead of Jule runtime calls.
+- Use production-ready informations.
 
 Cons of enabling production compilation:
 - Harder debugging.
@@ -147,3 +150,4 @@ Optimization options and production compilation focus on different things. Optim
 - Focus to faster executables as possible.
 - Optimize code generation for better IR if necessary.
 - Enable optimizations of backend compiler.
+- Generate production-ready IR.
