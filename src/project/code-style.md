@@ -21,6 +21,7 @@ These examples are the recommended style, not mandatory.
 | Static Method | snake_case | method, my_method |
 | Static Field | PascalCase | Field, MyField |
 | Field | snake_case | field, my_field |
+| Constant Field | PascalCase | Field, MyField |
 | Enum | PascalCase | Enum, MyEnum |
 | Enum Fields | PascalCase | Variant, MyVariant |
 | Type Alias | Full lowercase and not separated or PascalCase | mytype, Type, MyType |
