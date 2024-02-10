@@ -74,7 +74,7 @@ Writes data to the named file, creating it if necessary. If the file does not ex
 `static fn create(path: str)!: &File`\
 Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
 
-`fn seek(mut self, offset: i64, origin: Seek)!: i64`\
+`fn seek(mut self, offset: int, origin: Seek)!: int`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
 Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`

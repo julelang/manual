@@ -1790,7 +1790,7 @@ Available on: `windows`
 ---
 
 ```jule
-fn seek(handle: int, offset: i64, origin: int): i64
+fn seek(handle: int, offset: int, origin: int): int
 ```
 Wrapper for C's lseek function.
 
