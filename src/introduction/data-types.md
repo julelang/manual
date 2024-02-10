@@ -21,26 +21,6 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 | str | - | UTF-8 byte encoded character string. |
 | any | - | Any data. |
 
-## Type Compability
-| Type | Compatible Types |
-| ---- | ---------------- |
-| i8 | i8 |
-| i16 | i8, i16 |
-| i32 | i8, i16, i32 |
-| i64 | i8, i16, i32, i64 |
-| int | Platform dependent (signed) |
-| u8 | u8 |
-| u16 | u8, u16 |
-| u32 | u8, u16, u32 |
-| u64 | u8, u16, u32, u64 |
-| uint | Platform dependent (unsigned) |
-| uintptr | Platform dependent (unsigned) |
-| f32 | f32 |
-| f64 | f64 |
-| bool | bool |
-| str | str |
-| any | Any type. |
-
 ## Integer Literals
 ### Decimal
 ```jule

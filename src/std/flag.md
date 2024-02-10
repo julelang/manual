@@ -60,8 +60,8 @@ Resets all flags to default value.
 Adds new flag and returns allocated reference variable. Panics if name or short name is alreadys exist. Zero (0) short names will be ignored. Panics if used unsupported type.
 
 **Supported types are:**
-- `int`
-- `uint`
+- `i64`
+- `u64`
 - `f64`
 - `str`
 - `bool`
