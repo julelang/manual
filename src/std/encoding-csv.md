@@ -65,7 +65,7 @@ The Reader converts all \r\n sequences in its input to plain \n, including in mu
 `static fn new(mut r: io::Reader): &Reader`\
 Returns new Reader instance that reads r.
 
-`fn input_offset(self): i64`\
+`fn input_offset(self): int`\
 Returns the input stream byte offset of the current reader position. The offset gives the location of the end of the most recently read row and the beginning of the next row.
 
 `fn read(mut self)!: (record: []str)`\
