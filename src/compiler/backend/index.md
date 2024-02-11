@@ -8,8 +8,9 @@ Backend compiler refers to your compiler that you use to compile IR codes. This 
 
 ### Default C++ Backend Compiler
 
-| JuleC Version | Windows                 | macOS | Linux |
+| Jule Version  | Windows                 | macOS | Linux |
 | --------------|-------------------------|-------|-------|
+| Jule 0.0.8    | Clang                   | Clang | Clang |
 | Beta 0.0.7    | Clang                   | Clang | Clang |
 | Beta 0.0.6    | Clang                   | Clang | Clang |
 | Beta 0.0.5    | Clang                   | Clang | Clang |

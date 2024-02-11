@@ -1,6 +1,10 @@
 # Project Structure
 Recommended work pattern and use of project directories for Jule:
 
+::: info
+This structure recommended for program developers, not library/package developers. Packages are uses different approach. See [3rd Party Packages](/packages/3rd-party-packages/) for more information.
+:::
+
 ## Source files
 Nice names for source of your project:
 - `src`
