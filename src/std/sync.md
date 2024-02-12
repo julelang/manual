@@ -33,14 +33,11 @@ Muxtex is a primitive used to protect memory in multi-threading situations such 
 
 If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
 
-::: info
-**Implemented Patterns**
-- **Destructor method pattern**: Dispose all resources. After this function called, mutex will be uninitialized.
-:::
+Mutextes are uses internal mutability and internal allocations. Locking, unlocking and etc is not mutable operations. Mutex suitable for using without smart pointers thanks to internal allocations. The internal allocation automatically deallocated by smart pointer.
 
 **Methods:**
 
-`static fn new(): &Mutex`\
+`static fn new(): Mutex`\
 Returns new initialized ready-for-use Mutex.
 
 `fn lock(self)`\
