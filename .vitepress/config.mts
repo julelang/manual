@@ -246,7 +246,7 @@ export default defineConfig({
           text: 'Concurrency',
           link: "/concurrency/",
           items: [
-            { text: 'Synchronization', link: '/concurrency/synchronization' },
+            { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Threads', link: '/concurrency/threads' },
           ],

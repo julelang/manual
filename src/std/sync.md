@@ -59,6 +59,9 @@ A Once must not be copied after first use.
 
 **Methods:**
 
+`static fn new(): Once`\
+Returns new instance for Once.
+
 `fn do(self, f: fn())`\
 Calls the function f if and only if do is being called for the first time for this instance of Once. In other words, given `let once = Once{}`
 
