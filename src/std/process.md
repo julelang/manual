@@ -25,35 +25,14 @@ pub struct Cmd {
 ```
 Cmd runs a command in the operating system. There is no pipe for the output of the command, so any output will appear on the screen.
 
-After a cmd is spawned, the process must be terminated before it can be used again. Cmd does not follow this. That's why you need to let it know this with methods such as `kill` or `wait`.
-
-**Static Fields:**
-
-`const NPID: Pid`\
-Process id that not spawned.
-
 **Methods:**
 
-`static fn new(file: str): &Cmd`\
-Returns new instance of command for file descriptor.
-
-`fn pid(self): Pid`\
-Returns PID (process id). \
-Returns NPID if process not spawned.
-
-`fn file(self): str`\
-Returns file descriptor.
+`static fn new(path: str): &Cmd`\
+Returns Cmd instance for path.
 
 `fn spawn(mut self)!`\
-Spawns process.
-
-`fn kill(mut self)!`\
-Kills process. \
-Fails if process is not alive.
-
-`fn wait(mut self)!: int`\
-Waits complete for running of process. \
-Returns exit code of process.
+Spawns new child-process and executes command.
+Returns exist code of child-process.
 
 ## Enums
 
@@ -76,3 +55,4 @@ Process error codes.
 - `NotExec`: The new process image file has the appropriate access permission but is not in the proper format
 - `NoLink`: The path points to a remote machine and the link to that machine is no longer active
 - `Big`: The number of bytes in the new process's argument list is greater than the system-imposed limit of maximum argument bytes
+- `Fork`: Fork failed
