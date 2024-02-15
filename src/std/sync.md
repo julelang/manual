@@ -15,6 +15,9 @@ in each parallel job:\
 
 **Methods:**
 
+`static fn new(): &WaitGroup`\
+Returns new WaitGroup instance.
+
 `fn add(mut self, delta: int)` \
 Increments (+delta) or decrements (-delta) task count by delta and unblocks any wait() calls if task count becomes zero. Panics if task count reaches below zero.
 

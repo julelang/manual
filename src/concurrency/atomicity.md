@@ -36,18 +36,18 @@ use std::sync::atomic::{AtomicInt, MemoryOrder}
 
 static mut n: AtomicInt = AtomicInt.new(0)
 
-fn add_to_n(mut wg: *WaitGroup) {
-    unsafe defer { wg.done() }
+fn add_to_n(mut wg: &WaitGroup) {
+    defer { wg.done() }
     n.add(1, MemoryOrder.Relaxed)
 }
 
 fn main() {
-    let mut wg = WaitGroup{}
+    let mut wg = WaitGroup.new()
 
     let mut j = 0
     for j < 1000000; j++ {
         wg.add(1)
-        co add_to_n(&wg)
+        co add_to_n(wg)
     }
 
     wg.wait()

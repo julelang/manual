@@ -30,7 +30,6 @@ fn say_hello(mut wg: &WaitGroup) {
 
 fn main() {
     let mut wg = WaitGroup.new()
-
     wg.add(1)
     co say_hello(wg)
     wg.wait()

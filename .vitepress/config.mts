@@ -248,6 +248,7 @@ export default defineConfig({
           items: [
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
+            { text: 'Mutexes', link: '/concurrency/mutexes' },
             { text: 'Threads', link: '/concurrency/threads' },
           ],
         },
