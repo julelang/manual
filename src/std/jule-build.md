@@ -476,6 +476,7 @@ Compiler log messages with formatting.
 - `CppLinkedTypeNotAllowed`
 - `GenericsNotAllowed`
 - `InitiationCycle`
+- `DeclFoundInsteadExpr`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -513,3 +514,4 @@ Compiler log messages with formatting.
 - `UseUnsafeForDeprecated`
 - `ExpectedStruct`
 - `ExpectedTrait`
+- `UseTypeMatch`
