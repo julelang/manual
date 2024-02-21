@@ -455,6 +455,7 @@ export default defineConfig({
                 { text: 'std::jule::integrated', link: '/std/jule-integrated' },
                 { text: 'std::jule::lex', link: '/std/jule-lex' },
                 { text: 'std::jule::parser', link: '/std/jule-parser' },
+                { text: 'std::jule::pattern', link: '/std/jule-pattern' },
                 { text: 'std::jule::sema', link: '/std/jule-sema' },
                 { text: 'std::jule::types', link: '/std/jule-types' },
               ]
