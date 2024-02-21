@@ -1436,6 +1436,21 @@ Reports whether variable is initialized explicitly.
 `fn is_type_inferred(self): bool`\
 Reports whether variable is type inferred.
 
+---
+
+```jule
+struct FuncPattern {}
+```
+Pattern checker for functions and methods.
+
+**Methods:**
+
+`static fn dispose(f: &Fn): bool`\
+Reports whether function is the reserved dispose function.
+
+`static fn to_str(f: &Fn): bool`\
+Reports whether function is the reserved to_str function.
+
 ## Traits
 ```jule
 trait Lookup {
