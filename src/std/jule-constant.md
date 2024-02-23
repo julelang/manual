@@ -106,7 +106,7 @@ Returns false if type is not supported.
 Reports whether self or x is true.\
 Returns false if type is not supported.
 
-`fn eqs(self, x: Const): bool`\
+`fn eq(self, x: Const): bool`\
 Reports whether self and x are equals.\
 Returns false if type is not supported. 
 
@@ -120,8 +120,28 @@ Supported types are:
 - 64-bit unsigned integer
 - 64-bit floating-point
 
+`fn lt_eq(self, x: Const): bool`\
+Reports whether self less than or equals to x.\
+Returns false if type is unsupported by operation.
+
+Supported types are:
+- strings
+- 64-bit signed integer
+- 64-bit unsigned integer
+- 64-bit floating-point
+
 `fn gt(self, x: Const): bool`\
 Reports whether self greater than x.\
+Returns false if type is unsupported by operation.
+
+Supported types are:
+- strings
+- 64-bit signed integer
+- 64-bit unsigned integer
+- 64-bit floating-point
+
+`fn gt_eq(self, x: Const): bool`\
+Reports whether self greater than or equals to x.\
 Returns false if type is unsupported by operation.
 
 Supported types are:
