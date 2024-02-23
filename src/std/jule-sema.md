@@ -1001,6 +1001,79 @@ struct Field {
 ---
 
 ```jule
+struct OperatorMap {
+    eq:             &Fn
+    gt:             &Fn
+    gt_eq:          &Fn
+    lt:             &Fn
+    lt_eq:          &Fn
+    shl:            &Fn
+    shr:            &Fn
+    add:            &Fn
+    sub:            &Fn
+    div:            &Fn
+    mul:            &Fn
+    mod:            &Fn
+    bit_and:        &Fn
+    bit_or:         &Fn
+    bit_xor:        &Fn
+    neg:            &Fn
+    pos:            &Fn
+    bit_not:        &Fn
+    add_assign:     &Fn
+    sub_assign:     &Fn
+    div_assign:     &Fn
+    mul_assign:     &Fn
+    mod_assign:     &Fn
+    shl_assign:     &Fn
+    shr_assign:     &Fn
+    bit_or_assign:  &Fn
+    bit_and_assign: &Fn
+    bit_xor_assign: &Fn
+}
+```
+Map of overloaded operators. Just matched by identifier. Patterns are not checked.
+
+---
+
+```jule
+struct Operators {
+    eq:             &FnIns
+    gt:             &FnIns
+    gt_eq:          &FnIns
+    lt:             &FnIns
+    lt_eq:          &FnIns
+    shl:            &FnIns
+    shr:            &FnIns
+    add:            &FnIns
+    sub:            &FnIns
+    div:            &FnIns
+    mul:            &FnIns
+    mod:            &FnIns
+    bit_and:        &FnIns
+    bit_or:         &FnIns
+    bit_xor:        &FnIns
+    neg:            &FnIns
+    pos:            &FnIns
+    bit_not:        &FnIns
+    add_assign:     &FnIns
+    sub_assign:     &FnIns
+    div_assign:     &FnIns
+    mul_assign:     &FnIns
+    mod_assign:     &FnIns
+    shl_assign:     &FnIns
+    shr_assign:     &FnIns
+    bit_or_assign:  &FnIns
+    bit_and_assign: &FnIns
+    bit_xor_assign: &FnIns
+}
+```
+Overloaded operators for instance.
+Patterns are checked.
+
+---
+
+```jule
 struct Struct {
     depends:    []&Struct
     uses:       []&Struct
@@ -1014,6 +1087,7 @@ struct Struct {
     generics:   []&GenericDecl
     implements: []&Trait
     instances:  []&StructIns
+    operators: OperatorMap
 }
 ```
 Structure.
@@ -1066,6 +1140,7 @@ struct StructIns {
     methods:    []&Fn
     mutable:    bool
     references: &ReferenceStack
+    operators:  Operators
 }
 ```
 Structure instance.
@@ -1450,6 +1525,90 @@ Reports whether function is the reserved dispose function.
 
 `static fn to_str(f: &Fn): bool`\
 Reports whether function is the reserved to_str function.
+
+`static fn eq(f: &Fn): bool`\
+Reports whether function is the reserved eq function.
+
+`static fn gt(f: &Fn): bool`\
+Reports whether function is the reserved gt function.
+
+`static fn gt_eq(f: &Fn): bool`\
+Reports whether function is the reserved gt_eq function.
+
+`static fn lt(f: &Fn): bool`\
+Reports whether function is the reserved lt function.
+
+`static fn lt_eq(f: &Fn): bool`\
+Reports whether function is the reserved lt_eq function.
+
+`static fn shl(f: &Fn): bool`\
+Reports whether function is the reserved shl function.
+
+`static fn shr(f: &Fn): bool`\
+Reports whether function is the reserved shr function.
+
+`static fn add(f: &Fn): bool`\
+Reports whether function is the reserved add function.
+
+`static fn sub(f: &Fn): bool`\
+Reports whether function is the reserved sub function.
+
+`static fn div(f: &Fn): bool`\
+Reports whether function is the reserved div function.
+
+`static fn mul(f: &Fn): bool`\
+Reports whether function is the reserved mul function.
+
+`static fn mod(f: &Fn): bool`\
+Reports whether function is the reserved mod function.
+
+`static fn bit_and(f: &Fn): bool`\
+Reports whether function is the reserved bit_and function.
+
+`static fn bit_or(f: &Fn): bool`\
+Reports whether function is the reserved bit_or function.
+
+`static fn bit_xor(f: &Fn): bool`\
+Reports whether function is the reserved bit_xor function.
+
+`static fn neg(f: &Fn): bool`\
+Reports whether function is the reserved neg function.
+
+`static fn pos(f: &Fn): bool`\
+Reports whether function is the reserved pos function.
+
+`static fn bit_not(f: &Fn): bool`\
+Reports whether function is the reserved bit_not function.
+
+`static fn add_assign(f: &Fn): bool`\
+Reports whether function is the reserved add_assign function.
+
+`static fn sub_assign(f: &Fn): bool`\
+Reports whether function is the reserved sub_assign function.
+
+`static fn div_assign(f: &Fn): bool`\
+Reports whether function is the reserved div_assign function.
+
+`static fn mul_assign(f: &Fn): bool`\
+Reports whether function is the reserved mul_assign function.
+
+`static fn mod_assign(f: &Fn): bool`\
+Reports whether function is the reserved mod_assign function.
+
+`static fn shl_assign(f: &Fn): bool`\
+Reports whether function is the reserved shl_assign function.
+
+`static fn shr_assign(f: &Fn): bool`\
+Reports whether function is the reserved shr_assign function.
+
+`static fn bit_or_assign(f: &Fn): bool`\
+Reports whether function is the reserved bit_or_assign function.
+
+`static fn bit_and_assign(f: &Fn): bool`\
+Reports whether function is the reserved bit_and_assign function.
+
+`static fn bit_xor_assign(f: &Fn): bool`\
+Reports whether function is the reserved bit_xor_assign function.
 
 ## Traits
 ```jule
