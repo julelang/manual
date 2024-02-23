@@ -36,15 +36,34 @@ Returns conjugate of complex number.
 `fn add(self, c: Cmplx): Cmplx`\
 Returns addition of complex numbers.
 
+`fn add_assign(mut self, c: Cmplx)`\
+Add to complex number.
+
 `fn sub(self, c: Cmplx): Cmplx`\
 Returns subtraction of complex numbers.
+
+`fn sub_assign(mut self, c: Cmplx)`\
+Subtract from complex number.
 
 `fn mul(self, c: Cmplx): Cmplx`\
 Returns multiplication of complex numbers.
 
+`fn mul_assign(mut self, c: Cmplx)`\
+Multiply complex numbers.
+
 `fn div(self, c: Cmplx): Cmplx`\
 Returns division of complex numbers. \
 Returns NaN complex number if denominator is zero.
+
+`fn div_assign(mut self, c: Cmplx)`\
+Divide complex numbers. \
+Assigns NaN complex number if denominator is zero.
+
+`fn pos(self): Cmplx`\
+Unary plus operator.
+
+`fn neg(self): Cmplx`\
+Unary minus operator.
 
 `fn is_inf(self): bool`\
 Reports whether either real or imag is an infinity.
