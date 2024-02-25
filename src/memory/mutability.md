@@ -84,6 +84,8 @@ In this example, the mutability of the `y` field is fully responsive. However, t
 
 The point that should not be forgotten in this regard is that even if there is interior mutability, this field cannot be changed from outside the structure with an immutable instance. Interior mutability only applies inside the structure itself. 
 
+If a structure field uses interior mutability, there will be no problem in assigning it to mutable while it is immutable, even if it uses a mutable type. This means you can move it around in assignments and copies.
+
 ### Traits
 
 If there is a mutable `sel`f receiver in the trait's methods, it cannot be used mutably when the trait is immutable. The reason for this is clearly due to the risk of calling a mutable method of the structure it contains.
