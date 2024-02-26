@@ -23,10 +23,15 @@ Just transpile source code.
 
 ---
 
-`--compiler` `<value>` \
+`--compiler <value>` \
 Set the preferred compiler. Specify the compiler standard you will use for compilation from among the supported compilers.
 
 Values: `gcc` `clang`
+
+---
+
+`--compiler-path <path>`
+Set the path to the compiler to use to compile the IR. Might be useful when you have compiler name conflicts, mismatches or etc.
 
 ---
 
