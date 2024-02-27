@@ -17,6 +17,10 @@ Returns big integer that represents zero.
 `static fn one(): Int`\
 Returns big integer that represents one.
 
+`static new[T](i: T): Int`\
+Returns big integer that initialized by integer value.
+T can only be signed or unsigned integer types.
+
 `static fn from_bits(b: str, neg: bool)!: Int`\
 Parse big integer from bits that represented in string.
 Results with exceptional if bits are not in the format or empty.
