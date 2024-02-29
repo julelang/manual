@@ -78,6 +78,7 @@ The `eq` reserved method implements equals operator for structure. The operator 
 - Return type should be `bool`
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
+- Type of right operand should be `T`, which is structure's itself
 - Method should do not have generics
 
 ### Example
@@ -103,6 +104,7 @@ The `gt` reserved method implements greater operator for structure. The operator
 - Return type should be `bool`
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
+- Type of right operand should be `T`, which is structure's itself
 - Method should do not have generics
 
 ### Example
@@ -128,6 +130,7 @@ The `gt_eq` reserved method implements greater or equals operator for structure.
 - Return type should be `bool`
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
+- Type of right operand should be `T`, which is structure's itself
 - Method should do not have generics
 
 ### Example
@@ -153,6 +156,7 @@ The `lt` reserved method implements less operator for structure. The operator `<
 - Return type should be `bool`
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
+- Type of right operand should be `T`, which is structure's itself
 - Method should do not have generics
 
 ### Example
@@ -178,6 +182,7 @@ The `lt_eq` reserved method implements less or equals operator for structure. Th
 - Return type should be `bool`
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
+- Type of right operand should be `T`, which is structure's itself
 - Method should do not have generics
 
 ### Example
@@ -193,14 +198,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn shr(self, y: T): T`
+## `pub fn shr(self, y: T): S`
 
 The `shr` reserved method implements right shift operator for structure. The operator `>>` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -218,14 +224,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn shl(self, y: T): T`
+## `pub fn shl(self, y: T): S`
 
 The `shl` reserved method implements left shift operator for structure. The operator `<<` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -243,14 +250,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn add(self, y: T): T`
+## `pub fn add(self, y: T): S`
 
 The `add` reserved method implements add operator for structure. The operator `+` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -268,14 +276,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn sub(self, y: T): T`
+## `pub fn sub(self, y: T): S`
 
 The `sub` reserved method implements sub operator for structure. The operator `-` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -293,14 +302,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn div(self, y: T): T`
+## `pub fn div(self, y: T): S`
 
 The `div` reserved method implements division operator for structure. The operator `/` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -318,14 +328,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn mul(self, y: T): T`
+## `pub fn mul(self, y: T): S`
 
 The `mul` reserved method implements multiplication operator for structure. The operator `*` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -343,14 +354,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn mod(self, y: T): T`
+## `pub fn mod(self, y: T): S`
 
 The `mod` reserved method implements modulo operator for structure. The operator `%` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -368,14 +380,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn bit_and(self, y: T): T`
+## `pub fn bit_and(self, y: T): S`
 
 The `bit_and` reserved method implements bitwise and operator for structure. The operator `&` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -393,14 +406,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn bit_or(self, y: T): T`
+## `pub fn bit_or(self, y: T): S`
 
 The `bit_or` reserved method implements bitwise or operator for structure. The operator `|` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -418,14 +432,15 @@ impl MyNumber {
 }
 ```
 
-## `pub fn bit_xor(self, y: T): T`
+## `pub fn bit_xor(self, y: T): S`
 
 The `bit_xor` reserved method implements bitwise xor operator for structure. The operator `^` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Type of right operand should be `T`, which is adding support for operator
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self` and `y` parameters
 - Method should do not have generics
@@ -443,14 +458,14 @@ impl MyNumber {
 }
 ```
 
-## `pub fn neg(self): T`
+## `pub fn neg(self): S`
 
 The `neg` reserved method implements unary minus operator for structure. The unary operator `-` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self`
 - Method should do not have generics
@@ -468,14 +483,14 @@ impl MyNumber {
 }
 ```
 
-## `pub fn pos(self): T`
+## `pub fn pos(self): S`
 
 The `pos` reserved method implements unary plus operator for structure. The unary operator `+` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self`
 - Method should do not have generics
@@ -493,14 +508,14 @@ impl MyNumber {
 }
 ```
 
-## `pub fn bit_not(self): T`
+## `pub fn bit_not(self): S`
 
 The `bit_not` reserved method implements unary bit not operator for structure. The unary operator `^` can be used with structure which is implements pattern.
 
 ### The Pattern
 
 - Method should not be `unsafe` and `static`
-- Return type should be `T`
+- Return type should be `S`, which is type of structure's itself
 - Method should be `pub`
 - Method should only have immutable non-reference `self`
 - Method should do not have generics
@@ -528,6 +543,7 @@ The `add_assign` reserved method implements addition assign operator for structu
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -553,6 +569,7 @@ The `sub_assign` reserved method implements subtraction assign operator for stru
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -578,6 +595,7 @@ The `div_assign` reserved method implements division assign operator for structu
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -603,6 +621,7 @@ The `mul_assign` reserved method implements multiplication assign operator for s
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -628,6 +647,7 @@ The `mod_assign` reserved method implements modulo assign operator for structure
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -653,6 +673,7 @@ The `shl_assign` reserved method implements left shift assign operator for struc
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -678,6 +699,7 @@ The `shr_assign` reserved method implements right shift assign operator for stru
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -703,6 +725,7 @@ The `bit_or_assign` reserved method implements bitwise or assign operator for st
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -728,6 +751,7 @@ The `bit_and_assign` reserved method implements bitwise and assign operator for 
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example
@@ -753,6 +777,7 @@ The `bit_xor_assign` reserved method implements bitwise xor assign operator for 
 - Return type should be void
 - Method should be `pub`
 - Method should only have mutable non-reference `self` and mutable non-reference `y` parameters
+- Type of right operand should be `T`, which is adding support for operator
 - Method should do not have generics
 
 ### Example

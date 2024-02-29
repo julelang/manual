@@ -2,7 +2,7 @@
 
 Operator overloading has been added to Jule but has some restrictions. These restrictions are to reduce complexity and preserve simplicity. In Jule, constructs support operator overloading via reserved methods. Defined reserved methods can be used both as methods and implicitly when used with the corresponding operator.
 
-Operator overloading can only be implement for the structure itself. Concepts such as a different structure or a return type in a different structure type are not supported.
+Operators must always return the structure itself if they return a value. Method overloading is also not supported for binary operators, meaning a binary operator can only add support for a single data type.
 
 Comparison operators `==` and `!=` are applied to all structures by the compiler by default. This implementation is based on comparison of all areas of structures.
 
