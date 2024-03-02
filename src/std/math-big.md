@@ -42,6 +42,12 @@ Subtracts two Int and returns result.
 `fn sub_assign(mut self, y: Int)`\
 Subtracts Int.
 
+`fn shl(self, y: uint): Int`\
+Bitwise left shift.
+
+`fn shl_assign(mut self, y: uint)`\
+Bitwise left shift for assignment.
+
 `fn shr(self, y: uint): Int`\
 Bitwise right shift.
 
