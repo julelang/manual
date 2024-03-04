@@ -81,6 +81,12 @@ Reports whether integer greater than or equals to other.
 `fn eq(self, y: Int): Int`\
 Reports whether integers are equals.
 
+`fn odd(self): bool`\
+Reports whether number is odd.
+
+`fn even(self): bool`\
+Reports whether number is even.
+
 `fn to_i64(self)!: i64`\
 Returns integer in i64.
 Causes exception if nuber large than capacity of i64.
