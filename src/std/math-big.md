@@ -42,6 +42,12 @@ Subtracts two Int and returns result.
 `fn sub_assign(mut self, y: Int)`\
 Subtracts Int.
 
+`fn mul(self, y: Int): Int`\
+Multiplies two Int and returns result.
+
+`fn mul_assign(mut self, y: Int)`\
+Multiplies Int.
+
 `fn shl(self, y: uint): Int`\
 Bitwise left shift.
 
