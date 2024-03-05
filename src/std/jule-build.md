@@ -477,6 +477,7 @@ Compiler log messages with formatting.
 - `GenericsNotAllowed`
 - `InitiationCycle`
 - `DeclFoundInsteadExpr`
+- `CallingNonFn`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
