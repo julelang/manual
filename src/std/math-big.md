@@ -48,6 +48,12 @@ Multiplies two Int and returns result.
 `fn mul_assign(mut self, y: Int)`\
 Multiplies Int.
 
+`fn div(self, y: Int): Int`\
+Divides two Int and returns result.
+
+`fn div_assign(mut self, y: Int)`\
+Divides Int.
+
 `fn shl(self, y: uint): Int`\
 Bitwise left shift.
 
