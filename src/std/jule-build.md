@@ -31,6 +31,18 @@ Filename of module file.
 
 ---
 
+### `static mut OS: str`
+Target operating system.\
+Setted to runtime operating system by default.
+
+---
+
+### `static mut ARCH: str`
+Target architecture.\
+Setted to runtime architecture by default.
+
+---
+
 ### `static CPP_HEADER_EXTS: [...]str`
 Valid extensions of C++ headers.
 

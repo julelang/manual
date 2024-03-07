@@ -1,20 +1,20 @@
 # std::jule::types
 
 ## Globals
-### `const BIT_SIZE: int`
-Bit-size of runtime architecture.\
+### `static BIT_SIZE: int`
+Bit-size of target architecture.\
 Possible values are: 32, and 64.
 
 ---
 
-### `const SYS_INT: str`
-Signed integer kind of runtime architecture.\
+### `static SYS_INT: str`
+Signed integer kind of target architecture.\
 Is equavalent to `int`, but specific bit-sized integer kind.
 
 ---
 
-### `const SYS_UINT: str`
-Unsigned integer kind of runtime architecture.\
+### `static SYS_UINT: str`
+Unsigned integer kind of target architecture.\
 Is equavalent to `uint` and `uintptr`, but specific bit-sized integer kind.
 
 ---
@@ -98,7 +98,12 @@ Maximum value of 32-bit unsigned integers.
 Maximum value of 64-bit unsigned integers.
 
 ## Functions
+```jule
+fn update_target()
 ```
+Updates platform-specific informations by target. If you will update target configuration, you should call this function. In other words, new configurations is not applied for types.
+
+```jule
 fn real_kind_of(kind: str): str
 ```
 Returns kind's bit-specific kind if bit-specific like int, uint, and uintptr.\
@@ -107,7 +112,7 @@ Bit-size is determined by runtime.
 
 ---
 
-```
+```jule
 fn bitsize_of(k: str): int
 ```
 Returns kind's bit-size.\
@@ -115,7 +120,7 @@ Returns -1 if kind is not numeric.
 
 ---
 
-```
+```jule
 fn int_from_bits(bits: u64): str
 ```
 Returns signed integer kind by bit-size.\
@@ -124,7 +129,7 @@ Returns empty string if bits is invalid.
 
 ---
 
-```
+```jule
 fn uint_from_bits(bits: u64): str
 ```
 Returns unsigned integer kind by bit-size.\
@@ -133,7 +138,7 @@ Returns empty string if bits is invalid.
 
 ---
 
-```
+```jule
 fn float_from_bits(bits: u64): str
 ```
 Returns floating-point kind by bit-size.\
@@ -142,28 +147,28 @@ Returns empty string if bits is invalid.
 
 ---
 
-```
+```jule
 fn check_bit_int(v: str, bit: int): bool
 ```
 Reports whether signed integer literal is compatible given bit-size.
 
 ---
 
-```
+```jule
 fn check_bit_uint(v: str, bit: int): bool
 ```
 Reports whether unsigned integer literal is compatible given bit-size.
 
 ---
 
-```
+```jule
 fn check_bit_float(val: str, bit: int): bool
 ```
 Reports whether float literal is compatible given bit-size. 
 
 ---
 
-```
+```jule
 fn bitsize_of_float(x: f64): u64
 ```
 Reports minimum bit-size of given floating-point.
@@ -174,7 +179,7 @@ Possible values are:
 
 ---
 
-```
+```jule
 fn bitsize_of_int(x: i64): u64
 ```
 Reports minimum bit-size of given signed integer.
@@ -187,7 +192,7 @@ Possible values are:
 
 ---
 
-```
+```jule
 fn bitsize_of_uint(x: u64): u64
 ```
 Reports minimum bit-size of given unsigned integer.
@@ -200,7 +205,7 @@ Possible values are:
 
 ---
 
-```
+```jule
 fn min_of(mut k: str): f64
 ```
 Returns minimum value of signed/unsigned integer and floating-point kinds.\
@@ -208,7 +213,7 @@ Returns 0 if kind is invalid.
 
 ---
 
-```
+```jule
 fn max_of(mut k: str): f64
 ```
 Returns minimum value of signed/unsigned integer and floating-point kinds.\
@@ -216,119 +221,119 @@ Returns 0 if kind is invalid.
 
 ---
 
-```
+```jule
 fn is_sig_int(mut k: str): bool
 ```
 Reports whether kind is signed integer.
 
 ---
 
-```
+```jule
 fn is_unsig_int(mut k: str): bool
 ```
 Reports kind is unsigned integer.
 
 ---
 
-```
+```jule
 fn is_int(k: str): bool
 ```
 Reports whether kind is signed/unsigned integer.
 
 ---
 
-```
+```jule
 fn is_float(k: str): bool
 ```
 Reports whether kind is float.
 
 ---
 
-```
+```jule
 fn is_num(k: str): bool
 ```
 Reports whether kind is numeric.
 
 ---
 
-```
+```jule
 fn is_sig_num(k: str): bool
 ```
 Reports whether kind is signed numeric.
 
 ---
 
-```
+```jule
 fn is_i8_compatible(mut k: str): bool
 ```
 Reports whether i8 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_i16_compatible(mut k: str): bool
 ```
 Reports whether i16 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_i32_compatible(mut k: str): bool
 ```
 Reports whether i32 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_i64_compatible(mut k: str): bool
 ```
 Reports whether i64 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_u8_compatible(mut k: str): bool
 ```
 Reports whether u8 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_u16_compatible(mut k: str): bool
 ```
 Reports whether u16 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_u32_compatible(mut k: str): bool
 ```
 Reports whether u32 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_u64_compatible(mut k: str): bool
 ```
 Reports whether u64 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_f32_compatible(mut k: str): bool
 ```
 Reports whether f32 is compatible with kind.
 
 ---
 
-```
+```jule
 fn is_f64_compatible(mut k: str): bool
 ```
 Reports whether f64 is compatible with kind.
 
 ---
 
-```
+```jule
 fn types_are_compatible(mut k1: str, k2: str): bool
 ```
 Reports types are compatible.\
@@ -337,70 +342,70 @@ Return false if k2 is unsupported kind.
 
 ---
 
-```
+```jule
 fn is_i16_greater(mut k: str): bool
 ```
 Reports whether i16 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_i32_greater(mut k: str): bool
 ```
 Reports whether i32 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_i64_greater(mut k: str): bool
 ```
 Reports whether i64 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_u8_greater(mut k: str): bool
 ```
 Reports whether u8 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_u16_greater(mut k: str): bool
 ```
 Reports whether u16 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_u32_greater(mut k: str): bool
 ```
 Reports whether u32 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_u64_greater(mut k: str): bool
 ```
 Reports whether u64 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_f32_greater(k: str): bool
 ```
 Reports whether f32 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_f64_greater(k: str): bool
 ```
 Reports whether f64 is greater than given kind.
 
 ---
 
-```
+```jule
 fn is_greater(mut k1: str, k2: str): bool
 ```
 Reports whether k1 kind greater than k2 kind. 
