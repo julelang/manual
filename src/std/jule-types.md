@@ -121,7 +121,7 @@ Returns -1 if kind is not numeric.
 ---
 
 ```jule
-fn int_from_bits(bits: u64): str
+fn int_from_bits(bits: int): str
 ```
 Returns signed integer kind by bit-size.\
 Possible bit-sizes are: 8, 16, 32, and 64.\
@@ -130,7 +130,7 @@ Returns empty string if bits is invalid.
 ---
 
 ```jule
-fn uint_from_bits(bits: u64): str
+fn uint_from_bits(bits: int): str
 ```
 Returns unsigned integer kind by bit-size.\
 Possible bit-sizes are: 8, 16, 32, and 64.\
@@ -139,7 +139,7 @@ Returns empty string if bits is invalid.
 ---
 
 ```jule
-fn float_from_bits(bits: u64): str
+fn float_from_bits(bits: int): str
 ```
 Returns floating-point kind by bit-size.\
 Possible bit-sizes are: 32, and 64.\
@@ -169,7 +169,7 @@ Reports whether float literal is compatible given bit-size.
 ---
 
 ```jule
-fn bitsize_of_float(x: f64): u64
+fn bitsize_of_float(x: f64): int
 ```
 Reports minimum bit-size of given floating-point.
 
@@ -180,7 +180,7 @@ Possible values are:
 ---
 
 ```jule
-fn bitsize_of_int(x: i64): u64
+fn bitsize_of_int(x: i64): int
 ```
 Reports minimum bit-size of given signed integer.
 
@@ -193,7 +193,7 @@ Possible values are:
 ---
 
 ```jule
-fn bitsize_of_uint(x: u64): u64
+fn bitsize_of_uint(x: u64): int
 ```
 Reports minimum bit-size of given unsigned integer.
 
