@@ -46,6 +46,7 @@ Here is the list of variables and their existence:
 - `linux`: operating system is linux
 - `unix`: operating system is UNIX, or UNIX-like
 - `i386`: cpu architecture is intel 386
+- `arm64`: cpu architecture is ARM64
 - `amd64`: cpu architecture is AMD64
 - `x32`: 32-bit cpu architecture
 - `x64`: 64-bit cpu architecture
