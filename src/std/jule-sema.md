@@ -642,10 +642,6 @@ struct FnIns {
     scope:      &Scope
     references: &ReferenceStack
     anon:       bool
-
-    // Stores all referenced definitions.
-    // Only stores for initializer functions.
-    refers: &ReferenceStack
 }
 ```
 Function instance. 
