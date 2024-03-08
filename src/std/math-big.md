@@ -93,6 +93,10 @@ Reports whether number is odd.
 `fn even(self): bool`\
 Reports whether number is even.
 
+`fn big(self, i: int): int`\
+Returns bit by index.\
+The index zero means first bit at right.
+
 `fn to_i64(self)!: i64`\
 Returns integer in i64.
 Causes exception if nuber large than capacity of i64.
