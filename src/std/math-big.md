@@ -54,6 +54,12 @@ Divides two Int and returns result.
 `fn div_assign(mut self, y: Int)`\
 Divides Int.
 
+`fn mod(self, y: Int): Int`\
+Modulo two Int and returns result.
+
+`fn mod_assign(mut self, y: Int)`\
+Modulo Int.
+
 `fn shl(self, y: uint): Int`\
 Bitwise left shift.
 
