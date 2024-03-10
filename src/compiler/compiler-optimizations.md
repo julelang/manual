@@ -11,13 +11,13 @@ Optimizations are enabled with options in the build command.
 
 Some optimizations may be enabled by default and it may not be possible to disable them. These optimizations are mostly things that will not affect you if they are turned on even when you want to turn off all optimizations for your debugging.
 
-### Constant Optimization
+### Constant Evaluation
 
-Constant optimization, in short, is the processing of constant expressions that can be evaluated at runtime. Since processed constant values ​​represent the direct result, it helps to create code that creates less load at runtime.
+Constant evaluation, in short, is the processing of constant expressions that can be evaluated at runtime. Since processed constant values ​​represent the direct result, it helps to create code that creates less load at runtime.
 
-Constant optimization does the following:
+Constant evaluation does the following:
 
-- Values ​​that can be evaluated at compile-time, such as literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
+- Values ​​that can be evaluated at compile-time, such as constant literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
 - May choose the ternary operator result whenever possible.
 - Indexing of constant strings, and slice literals are evaluated if the indexing is done with a constant expression.
 - Slicing of constant strings is evaluated if the indexes are done with a constant expression.
