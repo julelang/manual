@@ -72,6 +72,12 @@ Bitwise right shift.
 `fn shr_assign(mut self, y: uint)`\
 Bitwise right shift for assignment.
 
+`fn bit_or(self, y: Int): Int`\
+Bitwise or.
+
+`fn bit_or_assign(mut self, y: Int)`\
+Bitwise or for assignment.
+
 `fn cmp(self, y: Int): int`\
 Compares bits. \
 Returns +1 if self > y. \
@@ -92,6 +98,9 @@ Reports whether integer greater than or equals to other.
 
 `fn eq(self, y: Int): Int`\
 Reports whether integers are equals.
+
+`fn bit_not(self): Int`\
+Bitwise not.
 
 `fn odd(self): bool`\
 Reports whether number is odd.
