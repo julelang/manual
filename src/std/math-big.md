@@ -84,6 +84,12 @@ Bitwise and.
 `fn bit_and_assign(mut self, y: Int)`\
 Bitwise and for assignment.
 
+`fn bit_xor(self, y: Int): Int`\
+Bitwise xor.
+
+`fn bit_xor_assign(mut self, y: Int)`\
+Bitwise xor for assignment.
+
 `fn cmp(self, y: Int): int`\
 Compares bits. \
 Returns +1 if self > y. \
