@@ -118,6 +118,15 @@ Reports whether integers are equals.
 `fn bit_not(self): Int`\
 Bitwise not.
 
+`fn sign(self): int`\
+Returns +1 if integer is positive or zero, -1 otherwise.
+
+`fn neg(self): Int`\
+Unary minus.
+
+`fn pos(self): Int`\
+Unary plus.
+
 `fn odd(self): bool`\
 Reports whether number is odd.
 
@@ -127,6 +136,12 @@ Reports whether number is even.
 `fn bit(self, i: int): int`\
 Returns bit by index.\
 The index zero means first bit at right.
+
+`fn bits(self): []byte`\
+Returns immutable copy of internal little-endian bits.
+
+`fn abs(self): Int`\
+Returns absolute value of integer.
 
 `fn format(fmt: int)!: str`\
 Format number into string. Fmt is the format of number. Results with exceptional if fmt is not valid. Exceptional is always BigError.Format.
