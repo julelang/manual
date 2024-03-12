@@ -74,6 +74,13 @@ The exception errors that parse_int throws have concrete type ConvError. If s is
 ---
 
 ```jule
+fn atoi(s: str)!: int
+```
+Is equivalent to `parse_int(s, 10, 0)`, converted to int.
+
+---
+
+```jule
 fn parse_uint(mut s: str, mut base: int, mut bit_size: int)!: u64
 ```
 Is like parse_int but for unsigned numbers. A sign prefix is not permitted. 
