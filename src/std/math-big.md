@@ -21,10 +21,14 @@ Returns big integer that represents one.
 Returns big integer that initialized by integer value.
 T can only be signed or unsigned integer types.
 
-`static fn from_bits(b: str, neg: bool)!: Int`\
-Parse big integer from bits that represented in string.
-Results with exceptional if bits are not in the format or empty.
-Exceptional is always BigError.Format.
+`static fn parse(s: str, fmt: int)!: Int`\
+Parse big integer from string. Fmt is the format of string. Results with exceptional if bits are not in the format or empty. Results with exceptional if fmt is not valid. Exceptional is always BigError.Format.
+
+Valid fmt values are;
+- 2 for binary.
+- 8 for octal.
+- 10 for decimal.
+- 16 for hexadecimal.
 
 `fn len(self): int`\
 Returns count of bits except sign-bit.
@@ -120,9 +124,18 @@ Reports whether number is odd.
 `fn even(self): bool`\
 Reports whether number is even.
 
-`fn big(self, i: int): int`\
+`fn bit(self, i: int): int`\
 Returns bit by index.\
 The index zero means first bit at right.
+
+`fn format(fmt: int)!: str`\
+Format number into string. Fmt is the format of number. Results with exceptional if fmt is not valid. Exceptional is always BigError.Format.
+
+Valid fmt values are;
+- 2 for binary.
+- 8 for octal.
+- 10 for decimal.
+- 16 for hexadecimal.
 
 `fn to_i64(self)!: i64`\
 Returns integer in i64.
@@ -133,6 +146,9 @@ Exception is equals to i64.MIN constant if integer is negative, else i64.MAX.
 Returns integer in u64.
 Causes exception if nuber large than capacity of u64.
 Exception is always equals to u64.MAX constant.
+
+`fn to_str(self): str`\
+Formats number with self.format(10) by default.
 
 ## Enums
 
