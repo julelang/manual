@@ -8,16 +8,18 @@ Backend compiler refers to your compiler that you use to compile IR codes. This 
 
 ### Default C++ Backend Compiler
 
-| Jule Version  | Windows                 | macOS | Linux |
-| --------------|-------------------------|-------|-------|
-| Jule 0.0.8    | Clang                   | Clang | Clang |
-| Beta 0.0.7    | Clang                   | Clang | Clang |
-| Beta 0.0.6    | Clang                   | Clang | Clang |
-| Beta 0.0.5    | Clang                   | Clang | Clang |
-| Beta 0.0.4    | Clang                   | Clang | Clang |
-| Beta 0.0.3    | Clang                   | Clang | Clang |
-| Beta 0.0.2    | GNU Compiler Collection | Clang | Clang |
-| Beta 0.0.1    | GNU Compiler Collection | Clang | Clang |
+| Jule Version | Windows                 | macOS | Linux |
+| -------------|-------------------------|-------|-------|
+| Jule 0.0.10  | Clang                   | Clang | Clang |
+| Jule 0.0.9   | Clang                   | Clang | Clang |
+| Jule 0.0.8   | Clang                   | Clang | Clang |
+| Beta 0.0.7   | Clang                   | Clang | Clang |
+| Beta 0.0.6   | Clang                   | Clang | Clang |
+| Beta 0.0.5   | Clang                   | Clang | Clang |
+| Beta 0.0.4   | Clang                   | Clang | Clang |
+| Beta 0.0.3   | Clang                   | Clang | Clang |
+| Beta 0.0.2   | GNU Compiler Collection | Clang | Clang |
+| Beta 0.0.1   | GNU Compiler Collection | Clang | Clang |
 
 ## Intermediate Representation (IR)
 
