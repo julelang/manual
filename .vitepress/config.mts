@@ -33,6 +33,7 @@ export default defineConfig({
   markdown: {
     lineNumbers: true,
     languages: [ jule ],
+    theme: "dracula-soft",
   },
 
   head: [
@@ -45,7 +46,7 @@ export default defineConfig({
     logo: 'https://raw.githubusercontent.com/julelang/resources/master/jule_icon.svg',
 
     search: {
-      provider: 'local'
+      provider: 'local',
     },
 
     nav: [

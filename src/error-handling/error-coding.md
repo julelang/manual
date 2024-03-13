@@ -20,7 +20,6 @@ fn main() {
     match err {
     | DivError.DividedByZero:
         outln("error: divided by zero")
-
     |:
         outln(result)
     }

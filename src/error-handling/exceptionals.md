@@ -50,7 +50,7 @@ If things don't go as expected and an exception occurs, your program will panic.
 
 ### Handling Errors
 
-`else` scopes are used to handle errors for exceptional calls. These scopes are considered a sub-scope of the same scope. The special `error` keyword still exists here. In this context, he represents the exception. So if you want to get the exception, you use the `error` keyword as a variable.
+`else` scopes are used to handle errors for exceptional calls. These scopes are considered a sub-scope of the same scope. The special `error` keyword still exists here. In this context, it represents the exception. So if you want to get the exception, you use the `error` keyword as a variable.
 
 For example:
 ```jule
@@ -114,7 +114,6 @@ fn main() {
         match error {
         | DivError.ByZero:
             outln("divided by zero")
-
         | DivError.Overflow:
             outln("denominator higher than 100")
         }
@@ -167,6 +166,8 @@ fn my_exceptional()! {
 }
 
 fn main() {
-    co fn() { my_exceptional()! }()
+    co fn() {
+        my_exceptional()!
+    }()
 }
 ```

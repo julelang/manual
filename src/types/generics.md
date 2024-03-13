@@ -98,11 +98,16 @@ For example:
 ```jule
 fn println[T](x: T) {
     match type T {
-    | str:  out("Str: ")
-    | bool: out("Bool: ")
-    | f64:  out("64-bit float: ")
-    | int:  out("Integer: ")
-    |:      out("Unkown: ")
+    | str:
+        out("Str: ")
+    | bool:
+        out("Bool: ")
+    | f64:
+        out("64-bit float: ")
+    | int:
+        out("Integer: ")
+    |:
+        out("Unkown: ")
     }
     outln(x)
 }
@@ -125,11 +130,16 @@ For example:
 ```jule
 fn print_kind[T]() {
     match type T {
-    | bool: outln("type is boolean")
-    | int:  outln("type is integer")
-    | f64:  outln("type is floating-point")
-    | str:  outln("type is string")
-    |:      panic("print_kind[T]: unsupported type")
+    | bool:
+        outln("type is boolean")
+    | int:
+        outln("type is integer")
+    | f64:
+        outln("type is floating-point")
+    | str:
+        outln("type is string")
+    |:
+        panic("print_kind[T]: unsupported type")
     }
 }
 

@@ -19,9 +19,12 @@ match EXPRESSION {
 For example:
 ```jule
 match my_integer {
-| MY_INTEGER_MIN: outln("Minimum")
-| MY_INTEGER_MAX: outln("Maximum")
-|:                outln("Between or not")
+| MY_INTEGER_MIN:
+    outln("Minimum")
+| MY_INTEGER_MAX:
+    outln("Maximum")
+|:
+    outln("Between or not")
 }
 ```
 
