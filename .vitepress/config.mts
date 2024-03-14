@@ -454,6 +454,7 @@ export default defineConfig({
                     { text: 'std::jule::constant::lit', link: '/std/jule-constant-lit' }
                   ]
                 },
+                { text: 'std::jule::importer', link: '/std/jule-importer' },
                 { text: 'std::jule::integrated', link: '/std/jule-integrated' },
                 { text: 'std::jule::lex', link: '/std/jule-lex' },
                 { text: 'std::jule::parser', link: '/std/jule-parser' },
