@@ -29,6 +29,9 @@ It reduces copying operations whenever possible.
 
 - Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
+- Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
+- Inserts to beginning of the string instead of allocation and assignment if string gets assignment like `expr + itself`.
+- Converts empty string comparisons to faster way such as length-is-zero checking.
 
 ---
 
@@ -61,6 +64,7 @@ Enable optimizations for mathematical operations.
 - Skip the divide-by-zero check for modulo when operand is constant.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
 - Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
+- Converts modulo by 2 expressions to equavalent bitwise operation.
 
 ---
 
