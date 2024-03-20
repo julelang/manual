@@ -47,7 +47,7 @@ Writes bytes to stream and returns writed byte count. The number of bytes writte
 ---
 
 ```jule
-trait Writer
+trait Stream
 ```
 Stream trait mask for R/W streams.
 
@@ -58,6 +58,21 @@ Derived from `Reader` trait.
 
 `pub fn write(mut self, buff: []byte)!: (n: int)`\
 Derived from `Writer` trait.
+
+---
+
+```jule
+trait WriterCloser
+```
+Reader and closer trait mask for read/close streams.
+
+**Methods:**
+
+`pub fn read(mut self, mut buff: []byte)!: (n: int)`\
+Derived from `Reader` trait.
+
+`pub fn close(mut self)!`\
+Close buffer.
 
 ## Structures
 
