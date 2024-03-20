@@ -44,3 +44,14 @@ Decodes src into dest, returning both the number of bytes written to dest and th
 If flush is true, decode assumes that src represents the end of the input stream and processes it completely rather than wait for the completion of another 32-bit block.
 
 new_decoder wraps an std::io::Reader trait around decode.
+
+## Enums
+
+```jule
+enum DecodeError
+```
+Error codes of decode operations.
+
+**Fields:**
+
+- `Format`
