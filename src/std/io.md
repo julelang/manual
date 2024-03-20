@@ -29,8 +29,7 @@ Reader trait mask for stream reader.
 
 **Methods:**
 
-`pub fn read(mut self, mut buff: []byte)!: (n: int)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+`pub fn read(mut self, mut buff: []byte)!: (n: int)`
 
 ---
 
@@ -41,8 +40,7 @@ Reader trait mask for stream writer.
 
 **Methods:**
 
-`pub fn write(mut self, buff: []byte)!: (n: int)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+`pub fn write(mut self, buff: []byte)!: (n: int)`
 
 ---
 
@@ -54,10 +52,7 @@ Stream trait mask for R/W streams.
 **Methods:**
 
 `pub fn read(mut self, mut buff: []byte)!: (n: int)`\
-Derived from `Reader` trait.
-
-`pub fn write(mut self, buff: []byte)!: (n: int)`\
-Derived from `Writer` trait.
+`pub fn write(mut self, buff: []byte)!: (n: int)`
 
 ---
 
@@ -69,10 +64,7 @@ Reader and closer trait mask for read/close streams.
 **Methods:**
 
 `pub fn read(mut self, mut buff: []byte)!: (n: int)`\
-Derived from `Reader` trait.
-
-`pub fn close(mut self)!`\
-Close buffer.
+`pub fn close(mut self)!`
 
 ## Structures
 
@@ -89,6 +81,12 @@ Uses internally mutable buffer.
 :::
 
 **Methods:**
+
+`fn read(mut self, mut buff: []byte)!: (n: int)`\
+Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+
+`fn write(mut self, buff: []byte)!: (n: int)`\
+Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
 `fn read_line(mut self)!: []byte`\
 Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice when reached EOF.
@@ -148,3 +146,9 @@ Reports whether buffer have readable data.
 `fn fit(mut self)`\
 Removes readed bytes from buffer.
 Maybe help to reduce memory usage for large buffers.
+
+`fn read(mut self, mut buff: []byte)!: (n: int)`\
+Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+
+`fn write(mut self, buff: []byte)!: (n: int)`\
+Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
