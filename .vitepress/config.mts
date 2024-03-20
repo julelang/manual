@@ -424,6 +424,7 @@ export default defineConfig({
               text: 'std::encoding',
               link: '/std/encoding',
               items: [
+                { text: 'std::encoding::ascii85', link: '/std/encoding-ascii85' },
                 { text: 'std::encoding::base32', link: '/std/encoding-base32' },
                 { text: 'std::encoding::base64', link: '/std/encoding-base64' },
                 { text: 'std::encoding::binary', link: '/std/encoding-binary' },
