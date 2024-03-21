@@ -25,8 +25,6 @@ struct Ast {
     file:           &File // From std::jule::lex
     top_directives: []&Directive
     use_decls:      []&UseDecl
-    impls:          []&Impl
-    comments:       []&Comment
 
     // Possible types:
     //  &EnumDecl
@@ -35,7 +33,8 @@ struct Ast {
     //  &TraitDecl
     //  &TypeAliasDecl
     //  &VarDecl
-    decls: []Node
+    //  &Impl
+    nodes: []Node
 }
 ```
 Abstract syntax tree.
