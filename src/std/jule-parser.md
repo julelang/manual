@@ -5,7 +5,8 @@
 fn parse_file(mut f: &File): &FileInfo
 ```
 Parses fileset's tokens and builds AST.\
-Returns nil if f is not real. 
+Returns nil if f is not real. \
+File should not contain comment tokens.
 
 ---
 
@@ -14,7 +15,8 @@ fn parse_package(mut filesets: []&File): &PackageInfo
 ```
 Parses fileset's tokens and builds AST.\
 Returns nil if filesets is nil.\
-Skip fileset if nil.
+Skip fileset if nil. \
+Files should not contain comment tokens.
 
 ## Structs
 ```jule

@@ -273,13 +273,23 @@ Returns tokens of file.\
 Tokens are mutable. 
 
 ## Enums
+`enum LexMode`
+
+Lexer mode.
+
+**Fields:**
+- `Standard`: Standard mode.
+- `Comment`: Standard mode + comments.
+
+---
+
 `enum Idenet: str`
 
 Special identifiers.
 
 **Fields:**
-- Ignore: Ignore
-- Anon: Anonymous
+- `Ignore`: Ignore
+- `Anon`: Anonymous
 
 ---
 
