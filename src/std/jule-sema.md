@@ -76,7 +76,6 @@ struct Enum {
     ident:  str
     kind:   &TypeSymbol
     items:  []&EnumItem
-    doc:    str
 }
 ```
 Enum.
@@ -579,7 +578,6 @@ struct Fn {
     exceptional: bool
     ident:       str
     directives:  []&Directive
-    doc:         str
     scope:       &ScopeTree
     generics:    []&GenericDecl
     result:      &RetType
@@ -1079,7 +1077,6 @@ struct Struct {
     methods:    []&Fn
     cpp_linked: bool
     directives: []&Directive
-    doc:        str
     generics:   []&GenericDecl
     implements: []&Trait
     instances:  []&StructIns
@@ -1199,7 +1196,6 @@ struct Trait {
     ident:       str
     public:      bool
     mutable:     bool
-    doc:         str
     methods:     []&Fn
     implemented: []&Struct
 }
@@ -1231,7 +1227,6 @@ struct TypeAlias {
     token:      Token
     ident:      str
     kind:       &TypeSymbol
-    doc:        str
     refers:     []any
     generics:   []&TypeAlias
 }
@@ -1486,7 +1481,6 @@ struct Var {
     statically:    bool
     reference:     bool
     directives:    []&Directive
-    doc:           str
     kind:          &TypeSymbol
     value:         &Value
     references:    &ReferenceStack

@@ -54,9 +54,6 @@ AST Node.
 `fn is_decl(self): bool`\
 Reports whether node data is declaration.
 
-`fn is_comment(self): bool`\
-Reports whether node data is comment or comment group.
-
 `fn is_directive(self): bool`\
 Reports whether node data is directive.
 
@@ -65,30 +62,6 @@ Reports whether node data is impl.
 
 `fn is_use_decl(self): bool`\
 Reports whether node data is use declaration. 
-
----
-
-```jule
-struct CommentGorup {
-    comments: []&Comment
-}
-```
-Comment group.
-
----
-
-```jule
-struct Comment {
-    token: Token // From std::jule::lex
-    text:  str
-}
-```
-Comment line.
-
-**Methods:**
-
-`fn is_directive(self): bool`\
-Reports whether comment is directive.
 
 ---
 
@@ -589,20 +562,19 @@ Reports whether self (receivers) parameter is reference.
 
 ```jule
 struct FnDecl {
-    token:        Token // From std::jule::lex
-    global:       bool
-    unsafety:     bool
-    public:       bool
-    cpp_linked:   bool
-    statically:   bool
-    exceptional:  bool
-    ident:        str
-    directives:   []&Directive
-    doc_comments: &CommentGroup
-    scope:        &ScopeTree
-    generics:     []&GenericDecl
-    result:       &RetTypeDecl
-    params:       []&ParamDecl
+    token:       Token // From std::jule::lex
+    global:      bool
+    unsafety:    bool
+    public:      bool
+    cpp_linked:  bool
+    statically:  bool
+    exceptional: bool
+    ident:       str
+    directives:  []&Directive
+    scope:       &ScopeTree
+    generics:    []&GenericDecl
+    result:      &RetTypeDecl
+    params:      []&ParamDecl
 }
 ```
 Function declaration.\
@@ -617,18 +589,17 @@ Reports whether function is anonymous.
 
 ```jule
 struct VarDecl {
-    scope:        &ScopeTree    // nil for global scopes
-    token:        Token // From std::jule::lex
-    ident:        str
-    cpp_linked:   bool
-    public:       bool
-    mutable:      bool
-    constant:     bool
-    statically:   bool
-    directives:   []&Directive
-    doc_comments: &CommentGroup
-    kind:         &TypeDecl     // nil for auto-typed
-    expr:         &Expr
+    scope:      &ScopeTree    // nil for global scopes
+    token:      Token // From std::jule::lex
+    ident:      str
+    cpp_linked: bool
+    public:     bool
+    mutable:    bool
+    constant:   bool
+    statically: bool
+    directives: []&Directive
+    kind:       &TypeDecl     // nil for auto-typed
+    expr:       &Expr
 }
 ```
 Variable declaration. 
@@ -741,13 +712,12 @@ Condition chain.
 
 ```jule
 struct TypeAliasDecl {
-    scope:        &ScopeTree
-    public:       bool
-    cpp_linked:   bool
-    token:        Token // From std::jule::lex
-    ident:        str
-    kind:         &TypeDecl
-    doc_comments: &CommentGroup
+    scope:      &ScopeTree
+    public:     bool
+    cpp_linked: bool
+    token:      Token // From std::jule::lex
+    ident:      str
+    kind:       &TypeDecl
 }
 ```
 Type alias declaration.
@@ -811,12 +781,11 @@ Reports whether item has auto expression.
 
 ```jule
 struct EnumDecl {
-    token:        Token  // From std::jule::lex
-    public:       bool
-    ident:        str
-    kind:         &TypeDecl
-    items:        []&EnumItemDecl
-    doc_comments: &CommentGroup
+    token:  Token  // From std::jule::lex
+    public: bool
+    ident:  str
+    kind:   &TypeDecl
+    items:  []&EnumItemDecl
 }
 ```
 Enum declaration.
@@ -844,14 +813,13 @@ Field declaration.
 
 ```jule
 struct StructDecl {
-    token:        Token // From std::jule::lex
-    ident:        str
-    fields:       []&FieldDecl
-    public:       bool
-    cpp_linked:   bool
-    directives:   []&Directive
-    doc_comments: &CommentGroup
-    generics:     []&GenericDecl
+    token:      Token // From std::jule::lex
+    ident:      str
+    fields:     []&FieldDecl
+    public:     bool
+    cpp_linked: bool
+    directives: []&Directive
+    generics:   []&GenericDecl
 }
 ```
 Structure declaration.
@@ -860,11 +828,10 @@ Structure declaration.
 
 ```jule
 struct TraitDecl {
-    token:        Token // From std::jule::lex
-    ident:        str
-    public:       bool
-    doc_comments: &CommentGroup
-    methods:      []&FnDecl
+    token:   Token // From std::jule::lex
+    ident:   str
+    public:  bool
+    methods: []&FnDecl
 }
 ```
 Trait declaration.
