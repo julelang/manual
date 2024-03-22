@@ -201,7 +201,9 @@ Reports whether byte is hexadecimal sequence.
 ## Structs
 ```jule
 struct File {
-    data: []byte
+    path:   str
+    data:   []byte
+    tokens: []Token
 }
 ```
 Fileset for lexing.
@@ -210,9 +212,6 @@ Fileset for lexing.
 
 `fn is_ok(self): bool`\
 Reports whether file path is exist and accessible.
-
-`fn path(self): str`\
-Returns path.
 
 `fn dir(self): str`\
 Returns directory of file's path.
