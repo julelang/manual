@@ -415,7 +415,7 @@ Key-value pair expression.
 ```jule
 struct SliceExpr {
     token: Token // From std::jule::lex
-    elems: []&Expr
+    exprs: []&Expr
 }
 ```
 Slice initiating expression.\
