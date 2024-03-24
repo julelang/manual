@@ -531,7 +531,7 @@ struct ScopeTree {
     parent:   &ScopeTree
     unsafety: bool
     deferred: bool
-    stmts:    []&Node
+    stmts:    []Node
 }
 ```
 Scope tree.
