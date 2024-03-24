@@ -202,6 +202,7 @@ Kind and idents is nil for void type.
 ```jule
 struct Expr {
     token: Token // From std::jule::lex
+    range: bool  // Packaged in parentheses.
     kind:  ExprData
 }
 ```
@@ -246,7 +247,7 @@ Reports whether literal is nil value.
 ```jule
 struct UnsafeExpr {
     token: Token // From std::jule::lex
-    expr:   ExprData
+    expr:  &Expr
 }
 ```
 Unsafe expression.
@@ -281,7 +282,7 @@ Reports whether identifier is self keyword.
 ```jule
 struct UnaryExpr {
     op:   Token // From std::jule::lex
-    expr: ExprData
+    expr: &Expr
 }
 ```
 
@@ -290,7 +291,7 @@ struct UnaryExpr {
 ```jule
 struct VariadicExpr {
     token: Token // From std::jule::lex
-    expr:  ExprData
+    expr:  &Expr
 }
 ```
 Variadiced expression.
@@ -300,7 +301,7 @@ Variadiced expression.
 ```jule
 struct CastExpr {
     kind: &TypeDecl
-    expr: ExprData
+    expr: &Expr
 }
 ```
 Casting expression.
@@ -320,7 +321,7 @@ Namespace identifier selection expression.
 ```jule
 struct SubIdentExpr {
     is_self: bool
-    expr:    ExprData
+    expr:    &Expr
     ident:   Token // From std::jule::lex
 }
 ```
@@ -330,8 +331,8 @@ Object sub identifier selection expression.
 
 ```jule
 struct BinopExpr {
-    left:  ExprData
-    right: ExprData
+    left:  &Expr
+    right: &Expr
     op:    Token // From std::jule::lex
 }
 ```
@@ -363,7 +364,7 @@ Reports whether exception is ignored.
 ```jule
 struct FieldExprPair {
     field: Token // From std::jule::lex
-    expr:  ExprData
+    expr:  &Expr
 }
 ```
 Field-Expression pair.
@@ -402,8 +403,8 @@ Reports whether literal is empty.
 
 ```jule
 struct KeyValPair {
-    key:   ExprData
-    val:   ExprData
+    key:   &Expr
+    val:   &Expr
     colon: Token // From std::jule::lex
 }
 ```
@@ -414,7 +415,7 @@ Key-value pair expression.
 ```jule
 struct SliceExpr {
     token: Token // From std::jule::lex
-    elems: []ExprData
+    elems: []&Expr
 }
 ```
 Slice initiating expression.\
@@ -430,8 +431,8 @@ Reports whether slice is empty.
 ```jule
 struct IndexingExpr {
     token: Token
-    expr:  ExprData
-    index: ExprData
+    expr:  &Expr
+    index: &Expr
 }
 ```
 Indexing expression. 
@@ -441,9 +442,9 @@ Indexing expression.
 ```jule
 struct SlicingExpr {
     token: Token // From std::jule::lex
-    expr:  ExprData
-    start: ExprData
-    to:    ExprData
+    expr:  &Expr
+    start: &Expr
+    to:    &Expr
 }
 ```
 Slicing expression.
@@ -453,9 +454,9 @@ Slicing expression.
 ```jule
 struct TernaryExpr {
     token:      Token
-    condition:  ExprData
-    true_expr:  ExprData
-    false_expr: ExprData
+    condition:  &Expr
+    true_expr:  &Expr
+    false_expr: &Expr
 }
 ```
 Ternary expression.
