@@ -317,9 +317,10 @@ For example: `my_slice[2:my_slice.len-5]`
 
 ```jule
 struct TraitSubIdentExprModel {
-    token: Token
-    expr:  ExprModel
-    ident: str
+    token:  Token
+    expr:   ExprModel
+    method: &Fn
+    trt:    &Trait
 }
 ```
 Trait sub-ident expression model.
@@ -329,7 +330,8 @@ For example: `my_trait.my_sub_ident`
 
 ```jule
 struct StructSubIdentExprModel {
-    expr:      ExprModel
+    token:     Token
+    expr:      &Data
     expr_kind: &TypeKind
     method:    &FnIns
     field:     &FieldIns
@@ -361,8 +363,10 @@ Common ident expression model.
 
 ```jule
 struct CommonSubIdentExprModel {
-    expr:  ExprModel
-    ident: str
+    expr_kind: &TypeKind
+    expr:      ExprModel
+    token:     Token
+    ident:     str
 }
 ```
 Common sub-ident expression model.
