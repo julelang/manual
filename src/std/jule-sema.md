@@ -999,42 +999,6 @@ struct Field {
 ---
 
 ```jule
-struct OperatorMap {
-    eq:             &Fn
-    gt:             &Fn
-    gt_eq:          &Fn
-    lt:             &Fn
-    lt_eq:          &Fn
-    shl:            &Fn
-    shr:            &Fn
-    add:            &Fn
-    sub:            &Fn
-    div:            &Fn
-    mul:            &Fn
-    mod:            &Fn
-    bit_and:        &Fn
-    bit_or:         &Fn
-    bit_xor:        &Fn
-    neg:            &Fn
-    pos:            &Fn
-    bit_not:        &Fn
-    add_assign:     &Fn
-    sub_assign:     &Fn
-    div_assign:     &Fn
-    mul_assign:     &Fn
-    mod_assign:     &Fn
-    shl_assign:     &Fn
-    shr_assign:     &Fn
-    bit_or_assign:  &Fn
-    bit_and_assign: &Fn
-    bit_xor_assign: &Fn
-}
-```
-Map of overloaded operators. Just matched by identifier. Patterns are not checked.
-
----
-
-```jule
 struct Operators {
     eq:             &FnIns
     gt:             &FnIns
@@ -1084,7 +1048,6 @@ struct Struct {
     generics:   []&GenericDecl
     implements: []&Trait
     instances:  []&StructIns
-    operators: OperatorMap
 }
 ```
 Structure.
