@@ -160,7 +160,7 @@ Cloning supported types and copy methods:
   Clones struct if derives `Clone`.\
   Returns new independent mutable struct.
 
-- Anonymous Functions
+- Anonymous Functions\
   Returns copy of value.
   Does not creates new anonymous function, juts copies reference to existing function.
 
