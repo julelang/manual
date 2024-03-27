@@ -431,8 +431,7 @@ Compiler log messages with formatting.
 - `NoFileInEntryPackage`
 - `NoMemberInEnum`
 - `TypeIsNotDerives`
-- `CloneNonLvalue`
-- `CloneImmutStruct`
+- `TypeNotSupportsClone`
 - `InternalTypeNotSupportsClone`
 - `TypeNotCompatibleForDerive`
 - `DeriveIllegalCycleRefersItself`

@@ -158,7 +158,11 @@ Cloning supported types and copy methods:
 
 - `jule:derive Clone`\
   Clones struct if derives `Clone`.\
-  Returns new independent mutable struct. 
+  Returns new independent mutable struct.
+
+- Anonymous Functions
+  Returns copy of value.
+  Does not creates new anonymous function, juts copies reference to existing function.
 
 ### Cloning Cycles
 Clone cycles are a kind of illegal cycle. In cases where you risk an endless cloning cycle at runtime, the compiler will give you an illegal cycle error. Cloning cycles usually occur in nested types, in which it will try to clone itself forever, which somehow attaches to itself.

@@ -87,13 +87,6 @@ fn clone(expr: T): T
 ```
 Returns mutable deep-clone of expression.
 
-Allowed types:
-- `[]T`
-- `[...]T`
-- `[K:V]`
-- `&T`
-- `*T:`
-- `jule:derive Clone`
 ::: tip
 [See more cloning information.](/memory/immutability#cloning)
 :::
