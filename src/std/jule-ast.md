@@ -533,6 +533,7 @@ struct ScopeTree {
     unsafety: bool
     deferred: bool
     stmts:    []Node
+    end:      Token
 }
 ```
 Scope tree.
@@ -787,6 +788,7 @@ struct EnumDecl {
     ident:  str
     kind:   &TypeDecl
     items:  []&EnumItemDecl
+    end:    Token
 }
 ```
 Enum declaration.
@@ -815,6 +817,7 @@ Field declaration.
 ```jule
 struct StructDecl {
     token:      Token // From std::jule::lex
+    end:        Token
     ident:      str
     fields:     []&FieldDecl
     public:     bool
@@ -830,6 +833,7 @@ Structure declaration.
 ```jule
 struct TraitDecl {
     token:   Token // From std::jule::lex
+    end:     Token
     ident:   str
     public:  bool
     methods: []&FnDecl
@@ -841,6 +845,8 @@ Trait declaration.
 
 ```jule
 struct Impl {
+    end: Token
+
     // This token available for these cases:
     //  - Implementation trait to structure, represents trait's type.
     base: &TypeDecl
