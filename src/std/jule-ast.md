@@ -202,6 +202,7 @@ Kind and idents is nil for void type.
 ```jule
 struct Expr {
     token: Token // From std::jule::lex
+    end:   Token
     range: bool  // Packaged in parentheses.
     kind:  ExprData
 }
