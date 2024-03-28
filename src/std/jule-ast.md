@@ -740,6 +740,7 @@ Case of match-case.
 ```jule
 struct MatchCase {
     token:      Token // From std::jule::lex
+    end:        Token
     type_match: bool
     expr:       &Expr
     cases:      []&Case
