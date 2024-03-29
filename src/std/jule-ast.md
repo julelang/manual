@@ -379,6 +379,7 @@ Reports whether pair targeted field.
 
 ```jule
 struct StructLit {
+    end:   Token
     kind:  &TypeDecl
     exprs: []ExprData
 }
@@ -390,6 +391,7 @@ Struct literal instiating expression.
 ```jule
 struct BraceLit {
     token: Token // From std::jule::lex
+    end:   Token
     exprs: []ExprData
 }
 ```
@@ -416,6 +418,7 @@ Key-value pair expression.
 ```jule
 struct SliceExpr {
     token: Token // From std::jule::lex
+    end:   Token
     exprs: []&Expr
 }
 ```
@@ -432,6 +435,7 @@ Reports whether slice is empty.
 ```jule
 struct IndexingExpr {
     token: Token
+    end:   Token
     expr:  &Expr
     index: &Expr
 }
@@ -443,6 +447,7 @@ Indexing expression.
 ```jule
 struct SlicingExpr {
     token: Token // From std::jule::lex
+    end:   Token
     expr:  &Expr
     start: &Expr
     to:    &Expr
