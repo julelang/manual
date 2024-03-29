@@ -452,9 +452,6 @@ Compiler log messages with formatting.
 - `UsedRefInAnonFnFromParentScope`
 - `EnumCastedFromAny`
 - `DuplicatedUseAlias`
-- `MissedTernaryElse`
-- `TernaryCompatiblity`
-- `VoidUsedForTernary`
 - `BuiltinUsedForRef`
 - `RefPointsToInvalidType`
 - `DefaultNotLast`
@@ -516,8 +513,6 @@ Compiler log messages with formatting.
 - `CastToEnumTypeInsteadOfEnum`
 - `TryFloatingPoint`
 - `ExpectedEqualsForAssign`
-- `ExpectedElseKeywordForTernary`
-- `UseCompatibleValuesForTernary`
 - `DeclareExceptional`
 - `HandleExceptional`
 - `HandleInFn`

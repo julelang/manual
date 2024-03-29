@@ -510,17 +510,6 @@ Expression model for to_str function of std::jule::integrated library.
 ---
 
 ```jule
-struct TernaryExprModel {
-    condition:  ExprModel
-    true_expr:  ExprModel
-    false_expr: ExprModel
-}
-```
-Expression model for ternary operator.
-
----
-
-```jule
 struct BackendEmitExprModel {
     code: str
 }

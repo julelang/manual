@@ -457,18 +457,6 @@ Slicing expression.
 
 ---
 
-```jule
-struct TernaryExpr {
-    token:      Token
-    condition:  &Expr
-    true_expr:  &Expr
-    false_expr: &Expr
-}
-```
-Ternary expression.
-
----
-
 ```
 struct GenericDecl {
     token: Token // From std::jule::lex

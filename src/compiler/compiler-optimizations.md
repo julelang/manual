@@ -18,7 +18,6 @@ Constant evaluation, in short, is the processing of constant expressions that ca
 Constant evaluation does the following:
 
 - Values ​​that can be evaluated at compile-time, such as constant literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
-- May choose the ternary operator result whenever possible.
 - Indexing of constant strings, and slice literals are evaluated if the indexing is done with a constant expression.
 - Slicing of constant strings is evaluated if the indexes are done with a constant expression.
 
