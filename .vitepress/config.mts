@@ -53,6 +53,7 @@ export default defineConfig({
       { text: 'Manual', link: '/' },
       { text: 'Standard Library', link: '/std/' },
       { text: 'API', link: '/api/' },
+      { text: 'Tools', link: '/tools/' },
     ],
 
     sidebar: {
@@ -504,7 +505,22 @@ export default defineConfig({
             { text: 'std::vec', link: '/std/vec' },
           ],
         },
-      ]
+      ],
+
+      '/tools/': [
+        {
+          text: 'Tools',
+          link: '/tools/',
+          items: [
+            {
+              items: [
+                { text: 'JuleC', link: '/tools/julec' },
+                { text: 'JuleFmt', link: '/tools/julefmt' },
+              ],
+            },
+          ],
+        },
+      ],
     },
 
     socialLinks: [
