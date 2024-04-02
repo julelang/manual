@@ -643,6 +643,11 @@ Function instance.
 
 **Methods:**
 
+`fn types(mut self): []&TypeKind`\
+Returns all types of result.\
+Returns nil if result is nil.\
+Returns mutable slice if returns internal slice.
+
 `fn is_builtin(self): bool`\
 Reports whether instance is built-in.
 
