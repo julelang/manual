@@ -55,7 +55,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ## Structs
 ```jule
 struct EnumItem {
-    token: Token
+    token: &Token
     ident: str
     value: &Value
 }
@@ -71,7 +71,7 @@ Reports whether item has auto expression.
 
 ```jule
 struct Enum {
-    token:  Token
+    token:  &Token
     public: bool
     ident:  str
     kind:   &TypeSymbol
@@ -161,7 +161,7 @@ Operand expression model.
 struct BinopExprModel {
     left:  &OperandExprModel
     right: &OperandExprModel
-    op:    Token
+    op:    &Token
 }
 ```
 Binary operation expression model. 
@@ -171,7 +171,7 @@ Binary operation expression model.
 ```jule
 struct UnaryExprModel {
     expr:  ExprModel
-    op:    Token
+    op:    &Token
 }
 ```
 Unary operation expression model. 
@@ -191,7 +191,7 @@ For example: `&MyStruct{10, false, "-"}`
 
 ```jule
 struct StructLitExprModel {
-    token: Token
+    token: &Token
     strct: &StructIns
     args:  []&StructArgExprModel
 }
@@ -212,7 +212,7 @@ For example: `&MyStruct{}`
 
 ```jule
 struct CastingExprModel {
-    token:     Token
+    token:     &Token
     expr:      ExprModel
     kind:      &TypeKind
     expr_kind: &TypeKind
@@ -224,7 +224,7 @@ Casting expression model. For example: `(int)(my_float)`
 
 ```jule
 struct FnCallExprModel {
-    token:    Token
+    token:    &Token
     func:     &FnIns
     is_co:    bool
     expr:     ExprModel
@@ -260,7 +260,7 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ```jule
 struct IndexingExprModel {
-    token: Token
+    token: &Token
     expr:  &Data
     index: &Data
 }
@@ -304,7 +304,7 @@ For example: `{0: false, 1: true}`
 
 ```jule
 struct SlicingExprModel {
-    token: Token
+    token: &Token
     expr:  ExprModel
     left:  ExprModel
     right: ExprModel
@@ -317,7 +317,7 @@ For example: `my_slice[2:my_slice.len-5]`
 
 ```jule
 struct TraitSubIdentExprModel {
-    token:  Token
+    token:  &Token
     expr:   ExprModel
     method: &Fn
     trt:    &Trait
@@ -330,7 +330,7 @@ For example: `my_trait.my_sub_ident`
 
 ```jule
 struct StructSubIdentExprModel {
-    token:     Token
+    token:     &Token
     expr:      &Data
     expr_kind: &TypeKind
     method:    &FnIns
@@ -365,7 +365,7 @@ Common ident expression model.
 struct CommonSubIdentExprModel {
     expr_kind: &TypeKind
     expr:      ExprModel
-    token:     Token
+    token:     &Token
     ident:     str
 }
 ```
@@ -421,7 +421,7 @@ Expression model for built-in new function calls.
 
 ```jule
 struct BuiltinPanicCallExprModel {
-    token: Token
+    token: &Token
     expr:  ExprModel
 }
 ```
@@ -431,7 +431,7 @@ Expression model for built-in panic function calls.
 
 ```jule
 struct BuiltinAssertCallExprModel {
-    token: Token
+    token: &Token
     expr:  ExprModel
     log:   str
 }
@@ -531,7 +531,7 @@ Function provided by: `std::mem`
 ```jule
 struct RetType {
     kind:   &TypeSymbol
-    idents: []Token
+    idents: []&Token
 }
 ```
 Return type.
@@ -540,7 +540,7 @@ Return type.
 
 ```jule
 struct Param {
-    token:     Token
+    token:     &Token
     mutable:   bool
     variadic:  bool
     reference: bool
@@ -562,7 +562,7 @@ Reports whether self (receiver) parameter is reference.
 
 ```jule
 struct Fn {
-    token:       Token
+    token:       &Token
     global:      bool
     unsafety:    bool
     public:      bool
@@ -687,7 +687,7 @@ Reports whether implementation type is append to destination structure.
 ```jule
 struct ImportInfo {
     // Use declaration token.
-    token: Token
+    token: &Token
 
     // Absolute path.
     path: str
@@ -715,7 +715,7 @@ struct ImportInfo {
     import_all: bool
 
     // Identifiers of selected definition.
-    selected: []Token
+    selected: []&Token
 
     // Nil if package is cpp header.
     package: &Package
@@ -873,7 +873,7 @@ Postfix assignment.
 struct Assign {
     l:  &OperandExprModel
     r:  &OperandExprModel
-    op: Token
+    op: &Token
 }
 ```
 Assignment.
@@ -981,7 +981,7 @@ Reports whether reference is exist.
 ```jule
 struct Field {
     owner:   &Struct
-    token:   Token
+    token:   &Token
     public:  bool
     mutable: bool
     ident:   str
@@ -1033,7 +1033,7 @@ Patterns are checked.
 struct Struct {
     depends:    []&Struct
     uses:       []&Struct
-    token:      Token
+    token:      &Token
     ident:      str
     fields:     []&Field
     methods:    []&Fn
@@ -1121,7 +1121,7 @@ Returns true if declarations and generics are same.
 
 ```jule
 struct Pass {
-    token: Token
+    token: &Token
     text:  str
 }
 ```
@@ -1153,7 +1153,7 @@ Structure instance.
 
 ```jule
 struct Trait {
-    token:       Token
+    token:       &Token
     ident:       str
     public:      bool
     mutable:     bool
@@ -1185,7 +1185,7 @@ struct TypeAlias {
     cpp_linked: bool
     used:       bool
     generic:    bool
-    token:      Token
+    token:      &Token
     ident:      str
     kind:       &TypeSymbol
     refers:     []any
@@ -1432,7 +1432,7 @@ Stored only for indexing variable and ranged by variable.
 ```jule
 struct Var {
     scope:         &ScopeTree
-    token:         Token
+    token:         &Token
     ident:         str
     cpp_linked:    bool
     constant:      bool

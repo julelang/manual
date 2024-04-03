@@ -203,7 +203,7 @@ Reports whether byte is hexadecimal sequence.
 struct File {
     path:   str
     data:   []byte
-    tokens: []Token
+    tokens: []&Token
 }
 ```
 Fileset for lexing.
@@ -221,10 +221,6 @@ Returns filename.
 
 `fn addr(self): uintptr`\
 Returns self as uintptr.
-
-`fn tokens(mut self): []Token`\
-Returns tokens of file.\
-Tokens are mutable.
 
 `fn fill(mut self, mut data: []byte)`\
 Fill data.
@@ -266,10 +262,6 @@ Returns filename.
 
 `fn addr(self): uintptr`\
 Returns self as uintptr.
-
-`fn tokens(mut self): []Token`\
-Returns tokens of file.\
-Tokens are mutable. 
 
 ## Enums
 `enum LexMode`

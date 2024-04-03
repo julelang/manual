@@ -43,7 +43,7 @@ Abstract syntax tree.
 
 ```jule
 struct Node {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     data:  NodeData
 }
 ```
@@ -67,8 +67,8 @@ Reports whether node data is use declaration.
 
 ```jule
 struct Directive {
-    tag:  Token
-    args: []Token
+    tag:  &Token
+    args: []&Token
 }
 ```
 Directive.
@@ -77,7 +77,7 @@ Directive.
 
 ```jule
 struct TypeDecl {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     kind:  TypeDeclKind
 }
 ```
@@ -96,7 +96,7 @@ For function types:
 
 ```jule
 struct IdentTypeDecl {
-    token:      Token // From std::jule::lex
+    token:      &Token // From std::jule::lex
     ident:      str
     cpp_linked: bool
     generics:   []&TypeDecl
@@ -113,7 +113,7 @@ Reports whether identifier is primitive type.
 
 ```jule
 struct NamespaceTypeDecl {
-    idents: []Token    // Token from std::jule::lex
+    idents: []&Token    // Token from std::jule::lex
     kind:   &IdentTypeDecl
 }
 ```
@@ -191,7 +191,7 @@ Map type.
 ```jule
 struct RetTypeDecl {
     kind:   &TypeDecl
-    idents: []Token // Token from std::jule::lex
+    idents: []&Token // Token from std::jule::lex
 }
 ```
 Return type.\
@@ -201,8 +201,8 @@ Kind and idents is nil for void type.
 
 ```jule
 struct Expr {
-    token: Token // From std::jule::lex
-    end:   Token
+    token: &Token // From std::jule::lex
+    end:   &Token
     range: bool  // Packaged in parentheses.
     kind:  ExprData
 }
@@ -213,7 +213,7 @@ Expression.
 
 ```jule
 struct UseExpr {
-    token: Token
+    token: &Token
     expr:  &Expr
 }
 ```
@@ -232,7 +232,7 @@ Tuple expression.
 
 ```jule
 struct LitExpr {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     value: str
 }
 ```
@@ -247,7 +247,7 @@ Reports whether literal is nil value.
 
 ```jule
 struct UnsafeExpr {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     expr:  &Expr
 }
 ```
@@ -257,7 +257,7 @@ Unsafe expression.
 
 ```jule
 struct CoExpr {
-    token: Token
+    token: &Token
     expr:  &Expr
 }
 ```
@@ -267,7 +267,7 @@ Co expression.
 
 ```jule
 struct IdentExpr {
-    token:      Token // From std::jule::lex
+    token:      &Token // From std::jule::lex
     ident:      str
     cpp_linked: bool
 }
@@ -282,7 +282,7 @@ Reports whether identifier is self keyword.
 
 ```jule
 struct UnaryExpr {
-    op:   Token // From std::jule::lex
+    op:   &Token // From std::jule::lex
     expr: &Expr
 }
 ```
@@ -291,7 +291,7 @@ struct UnaryExpr {
 
 ```jule
 struct VariadicExpr {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     expr:  &Expr
 }
 ```
@@ -311,8 +311,8 @@ Casting expression.
 
 ```jule
 struct NsSelectionExpr {
-    ns:    []Token // Token from std::jule::lex
-    ident: Token
+    ns:    []&Token // Token from std::jule::lex
+    ident: &Token
 }
 ```
 Namespace identifier selection expression.
@@ -323,7 +323,7 @@ Namespace identifier selection expression.
 struct SubIdentExpr {
     is_self: bool
     expr:    &Expr
-    ident:   Token // From std::jule::lex
+    ident:   &Token // From std::jule::lex
 }
 ```
 Object sub identifier selection expression.
@@ -334,7 +334,7 @@ Object sub identifier selection expression.
 struct BinopExpr {
     left:  &Expr
     right: &Expr
-    op:    Token // From std::jule::lex
+    op:    &Token // From std::jule::lex
 }
 ```
 Binary operation.
@@ -343,7 +343,7 @@ Binary operation.
 
 ```jule
 struct FnCallExpr {
-    token:     Token // From std::jule::lex
+    token:     &Token // From std::jule::lex
     expr:      &Expr
     generics:  []&TypeDecl
     args:      []&Expr
@@ -364,7 +364,7 @@ Reports whether exception is ignored.
 
 ```jule
 struct FieldExprPair {
-    field: Token // From std::jule::lex
+    field: &Token // From std::jule::lex
     expr:  &Expr
 }
 ```
@@ -379,7 +379,7 @@ Reports whether pair targeted field.
 
 ```jule
 struct StructLit {
-    end:   Token
+    end:   &Token
     kind:  &TypeDecl
     exprs: []ExprData
 }
@@ -390,8 +390,8 @@ Struct literal instiating expression.
 
 ```jule
 struct BraceLit {
-    token: Token // From std::jule::lex
-    end:   Token
+    token: &Token // From std::jule::lex
+    end:   &Token
     exprs: []ExprData
 }
 ```
@@ -408,7 +408,7 @@ Reports whether literal is empty.
 struct KeyValPair {
     key:   &Expr
     val:   &Expr
-    colon: Token // From std::jule::lex
+    colon: &Token // From std::jule::lex
 }
 ```
 Key-value pair expression.
@@ -417,8 +417,8 @@ Key-value pair expression.
 
 ```jule
 struct SliceExpr {
-    token: Token // From std::jule::lex
-    end:   Token
+    token: &Token // From std::jule::lex
+    end:   &Token
     exprs: []&Expr
 }
 ```
@@ -434,8 +434,8 @@ Reports whether slice is empty.
 
 ```jule
 struct IndexingExpr {
-    token: Token
-    end:   Token
+    token: &Token
+    end:   &Token
     expr:  &Expr
     index: &Expr
 }
@@ -459,7 +459,7 @@ Slicing expression.
 
 ```
 struct GenericDecl {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     ident: str
 }
 ```
@@ -469,7 +469,7 @@ Generic type declaration.
 
 ```jule
 struct LabelSt {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     ident: str
 }
 ```
@@ -479,8 +479,8 @@ Label statement.
 
 ```jule
 struct GotoSt {
-    token: Token // From std::jule::lex
-    label: Token
+    token: &Token // From std::jule::lex
+    label: &Token
 }
 ```
 Goto statement.
@@ -489,7 +489,7 @@ Goto statement.
 
 ```jule
 struct FallSt {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
 }
 ```
 Fall statement.
@@ -498,7 +498,7 @@ Fall statement.
 
 ```jule
 struct AssignLeft {
-    token:     Token // From std::jule::lex
+    token:     &Token // From std::jule::lex
     mutable:   bool
     reference: bool
     ident:     str
@@ -512,7 +512,7 @@ Left expression of assign statement.
 ```jule
 struct AssignSt {
     declarative: bool
-    setter:      Token
+    setter:      &Token
     left:        []&AssignLeft
     right:       &Expr
 }
@@ -527,7 +527,7 @@ struct ScopeTree {
     unsafety: bool
     deferred: bool
     stmts:    []Node
-    end:      Token
+    end:      &Token
 }
 ```
 Scope tree.
@@ -536,7 +536,7 @@ Scope tree.
 
 ```jule
 struct ParamDecl {
-    token:     Token // From std::jule::lex
+    token:     &Token // From std::jule::lex
     mutable:   bool
     variadic:  bool
     reference: bool
@@ -558,7 +558,7 @@ Reports whether self (receivers) parameter is reference.
 
 ```jule
 struct FnDecl {
-    token:       Token // From std::jule::lex
+    token:       &Token // From std::jule::lex
     global:      bool
     unsafety:    bool
     public:      bool
@@ -586,7 +586,7 @@ Reports whether function is anonymous.
 ```jule
 struct VarDecl {
     scope:      &ScopeTree    // nil for global scopes
-    token:      Token // From std::jule::lex
+    token:      &Token // From std::jule::lex
     ident:      str
     cpp_linked: bool
     public:     bool
@@ -604,7 +604,7 @@ Variable declaration.
 
 ```jule
 struct RetSt {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     expr:  &Expr
 }
 ```
@@ -614,7 +614,7 @@ Return statement.
 
 ```jule
 struct Iter {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     kind:  IterKind
     scope: &ScopeTree
 }
@@ -646,7 +646,7 @@ Reports whether kind is while-next iteration.
 
 ```jule
 struct RangeKind {
-    in_token: Token     // Token of "in" keyword, from std::jule::lex
+    in_token: &Token     // Token of "in" keyword, from std::jule::lex
     expr:     &Expr
     key_a:    &VarDecl  // first key of range
     key_b:    &VarDecl  // second key of range
@@ -658,8 +658,8 @@ Range iteration kind.
 
 ```jule
 struct BreakSt {
-    token: Token // From std::jule::lex
-    label: Token
+    token: &Token // From std::jule::lex
+    label: &Token
 }
 ```
 Break statement.
@@ -668,8 +668,8 @@ Break statement.
 
 ```jule
 struct ContSt {
-    token: Token // From std::jule::lex
-    label: Token
+    token: &Token // From std::jule::lex
+    label: &Token
 }
 ```
 Continue statement.
@@ -678,7 +678,7 @@ Continue statement.
 
 ```jule
 struct If {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     expr:  &Expr
     scope: &ScopeTree
 }
@@ -689,7 +689,7 @@ If condition.
 
 ```jule
 struct Else {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     scope: &ScopeTree
 }
 ```
@@ -722,7 +722,7 @@ Type alias declaration.
 
 ```jule
 struct Case {
-    token: Token // From std::jule::lex
+    token: &Token // From std::jule::lex
     scope: &ScopeTree
     exprs: []&Expr
 }
@@ -733,8 +733,8 @@ Case of match-case.
 
 ```jule
 struct MatchCase {
-    token:      Token // From std::jule::lex
-    end:        Token
+    token:      &Token // From std::jule::lex
+    end:        &Token
     type_match: bool
     expr:       &Expr
     cases:      []&Case
@@ -747,11 +747,11 @@ Match-Case.
 
 ```jule
 struct UseDecl {
-    token:      Token       // From std::jule::lex
+    token:      &Token       // From std::jule::lex
     link_path:  str         // Use declaration path string.
     alias:      str
     full:       bool        // Full implicit import.
-    selected:   []Token
+    selected:   []&Token
     cpp_linked: bool        // Cpp header use declaration.
     std:        bool        // Standard package use declaration.
 }
@@ -762,7 +762,7 @@ Use declaration statement.
 
 ```jule
 struct EnumItemDecl {
-    token: Token  // From std::jule::lex
+    token: &Token  // From std::jule::lex
     ident: str
     expr:  &Expr   // Nil for auto expression.
 }
@@ -778,12 +778,12 @@ Reports whether item has auto expression.
 
 ```jule
 struct EnumDecl {
-    token:  Token  // From std::jule::lex
+    token:  &Token  // From std::jule::lex
     public: bool
     ident:  str
     kind:   &TypeDecl
     items:  []&EnumItemDecl
-    end:    Token
+    end:    &Token
 }
 ```
 Enum declaration.
@@ -797,7 +797,7 @@ Reports whether enum's type is defualt.
 
 ```jule
 struct FieldDecl {
-    token:   Token  // From std::jule::lex
+    token:   &Token  // From std::jule::lex
     public:  bool
     mutable: bool   // Interior mutability.
     ident:   str
@@ -811,8 +811,8 @@ Field declaration.
 
 ```jule
 struct StructDecl {
-    token:      Token // From std::jule::lex
-    end:        Token
+    token:      &Token // From std::jule::lex
+    end:        &Token
     ident:      str
     fields:     []&FieldDecl
     public:     bool
@@ -827,8 +827,8 @@ Structure declaration.
 
 ```jule
 struct TraitDecl {
-    token:   Token // From std::jule::lex
-    end:     Token
+    token:   &Token // From std::jule::lex
+    end:     &Token
     ident:   str
     public:  bool
     methods: []&FnDecl
@@ -840,7 +840,7 @@ Trait declaration.
 
 ```jule
 struct Impl {
-    end: Token
+    end: &Token
 
     // This token available for these cases:
     //  - Implementation trait to structure, represents trait's type.
