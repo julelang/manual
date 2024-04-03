@@ -25,7 +25,7 @@ jule::Ptr<int> my_int;
 
 Recommended way:
 ```cpp
-jule::Ptr<int> my_int = jule::new_ref<int>(900);
+jule::Ptr<int> my_int = jule::new_ptr<int>(900);
 std::cout << *my_int << std::endl;
 ```
 
@@ -43,7 +43,7 @@ std::cout << *my_int << std::endl;
 
 Change data via assignment:
 ```cpp
-jule::Ptr<int> my_int = jule::new_ref<int>(900);
+jule::Ptr<int> my_int = jule::new_ptr<int>(900);
 std::cout << *my_int << std::endl;
 *my_int += 1000; // my_int's data is now 1900
 std::cout << *my_int << std::endl;
@@ -58,7 +58,7 @@ struct Person {
     jule::Str surname;
 };
 
-jule::Ptr<Person> p = jule::new_ref<Person>(Person{
+jule::Ptr<Person> p = jule::new_ptr<Person>(Person{
     .name="Anonymous",
     .surname="Julenour",
 });

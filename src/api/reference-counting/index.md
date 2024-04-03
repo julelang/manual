@@ -13,7 +13,7 @@ The reference counting data delta value that must occur per each reference count
 
 ```cpp
 template<typename T>
-jule::Ptr<T> new_ref(void);
+jule::Ptr<T> new_ptr(void);
 ```
 Equavelent of Jule's `new(T)` call.
 
@@ -21,7 +21,7 @@ Equavelent of Jule's `new(T)` call.
 
 ```cpp
 template<typename T>
-jule::Ptr<T> new_ref(const T &init);
+jule::Ptr<T> new_ptr(const T &init);
 ```
 
 Equavelent of Jule's `new(T, EXPR)` call.
