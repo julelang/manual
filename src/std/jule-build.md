@@ -486,6 +486,7 @@ Compiler log messages with formatting.
 - `InitiationCycle`
 - `DeclFoundInsteadExpr`
 - `CallingNonFn`
+- `ExceptionalAtGlobalScope`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -522,3 +523,4 @@ Compiler log messages with formatting.
 - `ExpectedStruct`
 - `ExpectedTrait`
 - `UseTypeMatch`
+- `WrapExceptional`
