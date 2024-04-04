@@ -350,11 +350,3 @@ unsafe fn delete_array[T](heap: *T)
 ```
 Deallocates array memory allocation.
 Equavalent to: `delete[] heap` in C++
-
----
-
-```jule
-fn type_id(a: any): str
-```
-Returns C++ type-id of any type.
-Returns empty string if a is nil.
