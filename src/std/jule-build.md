@@ -487,6 +487,7 @@ Compiler log messages with formatting.
 - `DeclFoundInsteadExpr`
 - `CallingNonFn`
 - `ExceptionalAtGlobalScope`
+- `StructureLitWithPrivFields`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -524,3 +525,4 @@ Compiler log messages with formatting.
 - `ExpectedTrait`
 - `UseTypeMatch`
 - `WrapExceptional`
+- `UseFieldPairToInstantiate`
