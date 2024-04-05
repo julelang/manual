@@ -2,23 +2,23 @@
 ## Functions
 
 ```jule
-fn stdin(): &File
+fn stdin(): &FileStream
 ```
-Returns File handler for stdin.
+Returns FileStream for stdin.
 
 ---
 
 ```jule
-fn stdout(): &File
+fn stdout(): &FileStream
 ```
-Returns File handler for stdout.
+Returns FileStream for stdout.
 
 ---
 
 ```jule
-fn stderr(): &File
+fn stderr(): &FileStream
 ```
-Returns File handler for stderr.
+Returns FileStream for stderr.
 
 ## Traits
 
@@ -82,11 +82,18 @@ Uses internally mutable buffer.
 
 **Methods:**
 
+`fn file(mut self): &File`\
+Returns internal file buffer.
+
 `fn read(mut self, mut buff: []byte)!: (n: int)`\
 Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
 `fn write(mut self, buff: []byte)!: (n: int)`\
 Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+
+`fn write_str(mut self, buff: []byte)!: (n: int)`\
+Same as write, but writes string.
+This method is more efficient than write method for strings.
 
 `fn read_line(mut self)!: []byte`\
 Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice when reached EOF.
@@ -152,3 +159,7 @@ Read bytes to buffer from stream and returns readed byte count. The number of by
 
 `fn write(mut self, buff: []byte)!: (n: int)`\
 Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+
+`fn write_str(mut self, buff: []byte)!: (n: int)`\
+Same as write, but writes string.
+This method is more efficient than write method for strings.
