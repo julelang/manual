@@ -95,8 +95,13 @@ Writes bytes to stream and returns writed byte count. The number of bytes writte
 Same as write, but writes string.
 This method is more efficient than write method for strings.
 
+`fn read_line_bytes(mut self)!: []byte`\
+Same as read_line method, but returns in bytes.
+
 `fn read_line(mut self)!: []byte`\
-Reads line from file handle via &File.read method. Returns bytes until line delimiter (`\n`) byte. Returns zero-length byte slice when reached EOF.
+Reads line from file handle via &File.read method.
+Returns bytes until line delimiter (\n) byte.
+Returns zero-length string when reached EOF.
 
 ---
 
