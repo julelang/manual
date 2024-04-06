@@ -40,12 +40,9 @@ It eliminates dead codes (unused) from object code.
 - Eliminates dead globals.
 - Eliminates dead functions.
 - Eliminates followed statements of the return statement.
+- Eliminates followed statements of the goto statement if possible.
 - Eliminates followed statements of the built-in `panic` function calls.
 - Eliminates followed statements of the built-in `error` function calls.
-
-::: warning
-Experimental optimization, compilation problems may occur.
-:::
 
 ---
 
