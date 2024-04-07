@@ -23,6 +23,10 @@ Constant evaluation does the following:
 
 ## Optimization Options
 
+::: info
+Some optimizations will not be applied for global static variables.
+:::
+
 `--opt-copy` \
 It reduces copying operations whenever possible.
 
