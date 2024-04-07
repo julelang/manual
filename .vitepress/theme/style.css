@@ -119,3 +119,14 @@ li {
   color: orange;
   font-weight: bold;
 }
+
+.warning-badge {
+  color: white;
+  border-radius: 999999999999999999px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: rgb(188, 118, 25);
+  width: fit-content;
+  text-align: center;
+  display: inline;
+}

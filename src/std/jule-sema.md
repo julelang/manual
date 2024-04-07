@@ -625,14 +625,14 @@ Parameter instance.
 
 ```jule
 struct FnIns {
-    owner:      &StructIns
-    decl:       &Fn
-    generics:   []&TypeKind
-    params:     []&ParamIns
-    result:     &TypeKind
-    scope:      &Scope
-    references: &ReferenceStack
-    anon:       bool
+    owner:    &StructIns
+    decl:     &Fn
+    generics: []&TypeKind
+    params:   []&ParamIns
+    result:   &TypeKind
+    scope:    &Scope
+    refers:   &ReferenceStack
+    anon:     bool
 }
 ```
 Function instance. 
@@ -1087,14 +1087,14 @@ Field instance.
 
 ```jule
 struct StructIns {
-    checked:    bool
-    decl:       &Struct
-    generics:   []&TypeKind
-    fields:     []&FieldIns
-    methods:    []&Fn
-    mutable:    bool
-    references: &ReferenceStack
-    operators:  Operators
+    checked:   bool
+    decl:      &Struct
+    generics:  []&TypeKind
+    fields:    []&FieldIns
+    methods:   []&Fn
+    mutable:   bool
+    refers:    &ReferenceStack
+    operators: Operators
 }
 ```
 Structure instance.
@@ -1444,7 +1444,7 @@ struct Var {
     directives:    []&Directive
     kind:          &TypeSymbol
     value:         &Value
-    references:    &ReferenceStack
+    refers:        &ReferenceStack
     iter_relation: &IterRelation
 
     // This variable depended to these variables for initialization expression.
