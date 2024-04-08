@@ -601,12 +601,6 @@ Reports whether function is anonymous funuction.
 `fn any_var(self): bool`\
 Reports whether function has return variable(s).
 
-`fn parameters_uses_generics(self): bool`\
-Reports whether any parameter uses generic types.
-
-`fn result_uses_generics(self): bool`\
-Reports whether result type uses generic types. 
-
 ---
 
 ```jule
