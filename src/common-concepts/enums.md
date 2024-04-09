@@ -4,8 +4,8 @@ Enumerations are a structure that allows to collect numeric constant values toge
 For example:
 ```jule
 enum FileMode {
-    Read  = 35,
-    Write = 89,
+    Read:  35,
+    Write: 89,
     Both,
 }
 
@@ -50,7 +50,7 @@ You may want to cast your enum for various reasons. Normal casting rules apply h
 
 ```jule
 enum MyEnum {
-    MyVal = 10
+    MyVal: 10
 }
 
 fn main() {
