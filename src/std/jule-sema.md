@@ -951,7 +951,15 @@ Built-in recover function call statement.
 ```jule
 struct ReferenceStack {}
 ```
-Stack for symbol references.
+Stack for symbol references.\
+It used by Sema to store necessary references.
+
+List of necessary references;
+- `&FnIns`
+- `&StructIns`
+- `&Trait`
+- `&Var` -> Only global ones.
+
 
 **Methods:**
 
