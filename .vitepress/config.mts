@@ -174,6 +174,7 @@ export default defineConfig({
           link: '/types/',
           items: [
             { text: 'Aliasing', link: '/types/aliasing' },
+            { text: 'Type Enums', link: '/types/type-enums' },
             { text: 'Casting', link: '/types/casting' },
             { text: 'Generics', link: '/types/generics' },
             { text: 'Strings', link: '/types/strings' },

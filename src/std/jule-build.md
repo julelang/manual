@@ -488,6 +488,7 @@ Compiler log messages with formatting.
 - `CallingNonFn`
 - `ExceptionalAtGlobalScope`
 - `StructureLitWithPrivFields`
+- `AnyWithTypeEnum`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

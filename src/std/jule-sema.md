@@ -93,6 +93,39 @@ Returns nil reference if not exist any item in this identifier.
 ---
 
 ```jule
+struct TypeEnumItem {
+    token: &Token
+    ident: str
+    kind: &TypeSymbol
+}
+```
+TypeEnum item.
+
+---
+
+```jule
+struct TypeEnum {
+    token:  &Token
+    public: bool
+    ident:  str
+    items:  []&TypeEnumItem
+}
+```
+TypeEnum.
+::: info
+**Implemented Traits**\
+- Kind
+:::
+
+**Methods:**
+
+`fn find_item(mut self, ident: str): &TypeEnumItem`\
+Returns item by identifier.\
+Returns nil reference if not exist any item in this identifier. 
+
+---
+
+```jule
 struct Data {
     kind:      &TypeKind
     cast_kind: &TypeKind // This expression should be cast to this kind.
@@ -1142,6 +1175,7 @@ struct SymbolTable {
     funcs:        []&Fn         // Functions.
     traits:       []&Trait      // Traits.
     enums:        []&Enum       // Enums.
+    type_enums:   []&TypeEnum   // Type enums.
     impls:        []&Impl       // Implementations.
 }
 ```
@@ -1246,34 +1280,37 @@ Reports whether kind is variadicable.
 Returns primitive type if kind is primitive type, nil reference if not.
 
 `fn sptr(self): &Sptr`\
-Returns primitive type if kind is smart pointer, nil reference if not.
+Returns reference type if kind is smart pointer, nil reference if not.
 
 `fn ptr(self): &Ptr`\
-Returns primitive type if kind is pointer, nil reference if not.
+Returns pointer type if kind is pointer, nil reference if not.
 
 `fn enm(self): &Enum`\
-Returns primitive type if kind is enum, nil reference if not.
+Returns enum type if kind is enum, nil reference if not.
+
+`fn tenm(self): &TypeEnum`\
+Returns type enum if kind is type enum, nil reference if not.
 
 `fn arr(self): &Arr`\
-Returns primitive type if kind is array, nil reference if not.
+Returns array type if kind is array, nil reference if not.
 
 `fn slc(self): &Slc`\
-Returns primitive type if kind is slice, nil reference if not.
+Returns slice type if kind is slice, nil reference if not.
 
 `fn fnc(self): &FnIns`\
-Returns primitive type if kind is function, nil reference if not.
+Returns function type if kind is function, nil reference if not.
 
 `fn strct(self): &Struct`\
-Returns primitive type if kind is structure, nil reference if not.
+Returns struct type if kind is structure, nil reference if not.
 
 `fn trt(self): &Trait`\
-Returns primitive type if kind is trait, nil reference if not.
+Returns trait type if kind is trait, nil reference if not.
 
 `fn map(self): &Map`\
-Returns primitive type if kind is map, nil reference if not.
+Returns map type if kind is map, nil reference if not.
 
 `fn tup(self): &Tuple`\
-Returns primitive type if kind is tuple, nil reference if not. 
+Returns tuple type if kind is tuple, nil reference if not. 
 
 ---
 
@@ -1597,6 +1634,10 @@ trait Lookup {
     // Find enum by identifier.
     // Returns nil reference if did not found any match.
     pub fn find_enum(mut self, ident: str): &Enum
+
+    // Find type enum by identifier.
+    // Returns nil reference if did not found any match.
+    pub fn find_type_enum(mut self, ident: str): &TypeEnum
 }
 ```
 Lookup.

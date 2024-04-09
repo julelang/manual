@@ -28,6 +28,7 @@ struct Ast {
 
     // Possible types:
     //  &EnumDecl
+    //  &TypeEnumDecl
     //  &FnDecl
     //  &StructDecl
     //  &TraitDecl
@@ -112,12 +113,21 @@ Reports whether identifier is primitive type.
 ---
 
 ```jule
-struct NamespaceTypeDecl {
-    idents: []&Token    // Token from std::jule::lex
-    kind:   &IdentTypeDecl
+struct SubIdentTypeDecl {
+    idents: []&IdentTypeDecl
 }
 ```
-Namespace chain type. 
+Sub-identifier type.
+
+---
+
+```jule
+struct NamespaceTypeDecl {
+    idents: []&Token  // Token from std::jule::lex
+    kind:   &TypeDecl // Type of identifier.
+}
+```
+Namespace chain type.
 
 ---
 
@@ -792,6 +802,31 @@ Enum declaration.
 
 `fn default_typed(self): bool`\
 Reports whether enum's type is defualt.
+
+---
+
+```jule
+struct TypeEnumItemDecl {
+    token: &Token
+    ident: str
+    kind:  &TypeDecl
+}
+```
+TypeEnum item.
+
+---
+
+```jule
+// TypeEnum declaration.
+struct TypeEnumDecl {
+    token:  &Token
+    public: bool
+    ident:  str
+    items:  []&TypeEnumItemDecl
+    end:    &Token
+}
+```
+TypeEnum declaration.
 
 ---
 
