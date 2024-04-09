@@ -1,7 +1,7 @@
 # std::math::rand
 ## Type Aliases
 ```jule
-type Seed: uint
+type Seed: u64
 ```
 Integer type of random seeds.
 
