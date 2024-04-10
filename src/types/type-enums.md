@@ -14,6 +14,18 @@ enum Signed: type {
 }
 ```
 
+You can also write only the types you want for the sum type without using a named field.
+
+For example:
+```jule
+enum Signed: type {
+    i8,
+    i16,
+    i32,
+    i64,
+}
+```
+
 There must always be at least one field. Other fields can point to the enum itself (which is bad practice but allowed) but there is one exception; If there is only one field and it points to its own type-enum declaration, this will lead to a pointless loop, so your compiler won't allow it.
 
 Each field must have an explicit type declaration. For type safety, any of the fields are not allowed to point to type `any`. 
