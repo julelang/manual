@@ -1,41 +1,12 @@
 # std::jule::ast
 
-## Type Aliases
-### `type NodeData: any`
-Type of AST Node's data.
-
----
-
-### `type TypeDeclKind: any`
-Kind type of type declarations. 
-
----
-
-### `type ExprData: any`
-Type of Expr's data.
-
----
-
-### `type IterKind: any`
-Type of Iter's kind. 
-
 ## Structs
 ```jule
 struct Ast {
     file:           &File // From std::jule::lex
     top_directives: []&Directive
     use_decls:      []&UseDecl
-
-    // Possible types:
-    //  &EnumDecl
-    //  &TypeEnumDecl
-    //  &FnDecl
-    //  &StructDecl
-    //  &TraitDecl
-    //  &TypeAliasDecl
-    //  &VarDecl
-    //  &Impl
-    nodes: []Node
+    nodes:          []Node
 }
 ```
 Abstract syntax tree.
@@ -49,20 +20,6 @@ struct Node {
 }
 ```
 AST Node.
-
-**Methods:**
-
-`fn is_decl(self): bool`\
-Reports whether node data is declaration.
-
-`fn is_directive(self): bool`\
-Reports whether node data is directive.
-
-`fn is_impl(self): bool`\
-Reports whether node data is impl.
-
-`fn is_use_decl(self): bool`\
-Reports whether node data is use declaration. 
 
 ---
 
@@ -213,11 +170,19 @@ Kind and idents is nil for void type.
 struct Expr {
     token: &Token // From std::jule::lex
     end:   &Token
-    range: bool  // Packaged in parentheses.
     kind:  ExprData
 }
 ```
 Expression. 
+
+---
+
+```jule
+struct RangeExpr {
+    expr: &Expr
+}
+```
+Range expression between parentheses.
 
 ---
 
@@ -532,11 +497,20 @@ Assign statement.
 ---
 
 ```jule
+struct Stmt {
+    token: &Token
+    data:  StmtData
+}
+```
+
+---
+
+```jule
 struct ScopeTree {
     parent:   &ScopeTree
     unsafety: bool
     deferred: bool
-    stmts:    []Node
+    stmts:    []Stmt
     end:      &Token
 }
 ```
@@ -641,7 +615,7 @@ Reports whether iteration is infinity.
 ```jule
 struct WhileKind {
     expr:       &Expr
-    next:       NodeData
+    next:       StmtData
     next_token: Token // From std::jule::lex
 }
 ```
@@ -902,3 +876,106 @@ Reports whether implementation type is trait to structure.
 
 `fn is_struct_impl(self): bool`\
 Reports whether implementation type is append to destination structure.
+
+---
+
+## Enums
+`enum NodeData: type`
+
+Type of AST Node's data.
+
+**Fields:**
+
+- `&EnumDecl`
+- `&TypeEnumDecl`
+- `&FnDecl`
+- `&StructDecl`
+- `&TraitDecl`
+- `&TypeAliasDecl`
+- `&VarDecl`
+- `&Impl`
+
+---
+
+`enum ExprData: type`
+
+Type of Expr's data.
+
+**Fields:**
+
+- `&RangeExpr`
+- `&TupleExpr`
+- `&LitExpr`
+- `&TypeDecl`
+- `&IdentExpr`
+- `&UnaryExpr`
+- `&SubIdentExpr`
+- `&NsSelectionExpr`
+- `&VariadicExpr`
+- `&CastExpr`
+- `&FnCallExpr`
+- `&StructLit`
+- `&BraceLit`
+- `&SlicingExpr`
+- `&SliceExpr`
+- `&BinopExpr`
+- `&UnsafeExpr`
+- `&IndexingExpr`
+- `&FnDecl`
+- `&FieldExprPair`
+- `&KeyValPair`
+
+---
+
+`enum StmtData: type`
+
+Type of Stmt's data.
+
+**Fields:**
+
+- `&VarDecl`
+- `&RetSt`
+- `&GotoSt`
+- `&BreakSt`
+- `&ContSt`
+- `&Expr`
+- `&Conditional`
+- `&MatchCase`
+- `&Iter`
+- `&AssignSt`
+- `&FallSt`
+- `&LabelSt`
+- `&ScopeTree`
+- `&TypeAliasDecl`
+- `&CoExpr`
+- `&UseExpr`
+
+---
+
+`emum IterKind: type`
+
+Type of Iter's kind.
+
+**Fields:**
+
+- `&WhileKind`
+- `&RangeKind`
+
+---
+
+`enum TypeDeclKind: type`
+
+Kind type of type declarations.
+
+**Fields:**
+
+- `&IdentTypeDecl`
+- `&SubIdentTypeDecl`
+- `&SptrTypeDecl`
+- `&PtrTypeDecl`
+- `&SlcTypeDecl`
+- `&ArrTypeDecl`
+- `&MapTypeDecl`
+- `&TupleTypeDecl`
+- `&FnDecl`
+- `&NamespaceTypeDecl`
