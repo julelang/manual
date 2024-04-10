@@ -143,6 +143,7 @@ List of all types which is performs internal reference counting:
 - Smart Pointers
 - Slice
 - Trait
+- Any
 
 ## Using Smart Pointers with Reference-Counted Types
 Data types that already perform reference counting can be used with references if supported. This does not pose any problem. References perform a reference counting in themselves, if the data they carry has a reference counting, it does not interfere with them.
