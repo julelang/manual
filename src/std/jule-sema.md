@@ -4,9 +4,6 @@
 ### `type ExprModel: any`
 Expression model.
 
-### `type St: any`
-Statement type. 
-
 ## Functions
 ```jule
 fn analyze_package(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
@@ -778,7 +775,7 @@ struct Scope {
     parent:   &Scope
     unsafety: bool
     deferred: bool
-    stmts:    []St
+    stmts:    []Stmt
 }
 ```
 Scope.
@@ -826,7 +823,7 @@ Infinity iteration.
 ```jule
 struct WhileIter {
     expr:  ExprModel
-    next:  St
+    next:  Stmt
     scope: &Scope
 }
 ```
@@ -1694,3 +1691,30 @@ Flags for semantic analysis.
 **Fields:**
 - `Default`: Default semantic analysis of Jule.
 - `Shadowing`: Default + enable shadowing.
+
+---
+
+```jule
+enum Stmt: type
+```
+
+Statement type.
+
+**Fields:**
+- `&Scope`
+- `&Var`
+- `&Data`
+- `&Conditional`
+- `&InfIter`
+- `&WhileIter`
+- `&RangeIter`
+- `&ContSt`
+- `&Label`
+- `&GotoSt`
+- `&Postfix`
+- `&Assign`
+- `&MultiAssign`
+- `&Match`
+- `&FallSt`
+- `&BreakSt`
+- `&RetSt`
