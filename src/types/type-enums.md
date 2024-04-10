@@ -52,3 +52,30 @@ fn main() {
 ```
 
 At example above, the variable `x` is `Types`, so it's type is `Types.Bool` or `Types.String` and handled as `any` at runtime. But the variable `y` is actual `str` type and handled as `str` at compile-time and runtime. 
+
+## Type Inheritance
+
+Type enums can inherit each other. To do this, give a type enum a different type enum as a field. From this point on, the other type enum will be supported directly and all fields of the other type enum will also be supported by inheriting.
+
+For example:
+```jule
+enum Signed: type {
+    int,
+}
+
+enum Unsigned: type {
+    uint,
+}
+
+enum Int: type {
+    Signed,
+    Unsigned,
+}
+
+fn main() {
+    let a: Int = 20
+    outln(a)
+}
+```
+
+In the example above, `Int` does not directly support the `int` type. However, the `Signed` enum it supports includes support for `int`. So `Int` supports the `int` type which it inherits from.
