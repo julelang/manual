@@ -1,9 +1,5 @@
 # std::jule::sema
 
-## Type Aliases
-### `type ExprModel: any`
-Expression model.
-
 ## Functions
 ```jule
 fn analyze_package(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
@@ -1718,3 +1714,54 @@ Statement type.
 - `&FallSt`
 - `&BreakSt`
 - `&RetSt`
+
+---
+
+```jule
+enum ExprModel: type
+```
+Expression model.
+
+**Fields:**
+- `&TypeKind`
+- `&Const`
+- `&Var`
+- `&FnIns`
+- `&StructIns`
+- `&OperandExprModel`
+- `&BinopExprModel`
+- `&UnaryExprModel`
+- `&StructArgExprModel`
+- `&StructLitExprModel`
+- `&AllocStructLitExprModel`
+- `&CastingExprModel`
+- `&FnCallExprModel`
+- `&SliceExprModel`
+- `&IndexingExprModel`
+- `&AnonFnExprModel`
+- `&KeyValPairExprModel`
+- `&MapExprModel`
+- `&SlicingExprModel`
+- `&TraitSubIdentExprModel`
+- `&StructSubIdentExprModel`
+- `&StructStaticIdentExprModel`
+- `&ArrayExprModel`
+- `&CommonIdentExprModel`
+- `&CommonSubIdentExprModel`
+- `&TupleExprModel`
+- `&BuiltinOutCallExprModel`
+- `&BuiltinOutlnCallExprModel`
+- `&BuiltinCloneCallExprModel`
+- `&BuiltinNewCallExprModel`
+- `&BuiltinPanicCallExprModel`
+- `&BuiltinAssertCallExprModel`
+- `&BuiltinMakeCallExprModel`
+- `&BuiltinAppendCallExprModel`
+- `&BuiltinCopyCallExprModel`
+- `&BuiltinErrorCallExprModel`
+- `&SizeofExprModel`
+- `&AlignofExprModel`
+- `&RuneExprModel`
+- `&IntegratedToStrExprModel`
+- `&BackendEmitExprModel`
+- `&FreeExprModel`
