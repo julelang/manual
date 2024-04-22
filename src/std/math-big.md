@@ -143,6 +143,9 @@ Returns immutable copy of internal little-endian bits.
 `fn abs(self): Int`\
 Returns absolute value of integer.
 
+`fn trailing_zeros(self): int`\
+Returns count of absolute's trailing zeros.
+
 `fn format(fmt: int)!: str`\
 Format number into string. Fmt is the format of number. Results with exceptional if fmt is not valid. Exceptional is always BigError.Format.
 
