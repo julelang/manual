@@ -29,6 +29,10 @@ Jule does not support MSVC. This is why you won't have an official MSVC support.
 
 C++ support and support status of the Jule release standards.
 
+### Jule 0.0.11
+
+Supports compilation for C++14, C++17, C++20 standards. As for the standard, it uses C++17 by default and additionally allows the standard to be set between the three as a compiler option.
+
 ### Jule 0.0.10
 
 It fixes compilation errors that caused by API when using C++14 standard.
