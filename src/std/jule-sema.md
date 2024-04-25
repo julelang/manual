@@ -647,7 +647,7 @@ Parameter instance.
 struct FnIns {
     owner:    &StructIns
     decl:     &Fn
-    generics: []&TypeKind
+    generics: []&InsGeneric
     params:   []&ParamIns
     result:   &TypeKind
     scope:    &Scope
@@ -1117,7 +1117,7 @@ Field instance.
 struct StructIns {
     checked:   bool
     decl:      &Struct
-    generics:  []&TypeKind
+    generics:  []&InsGeneric
     fields:    []&FieldIns
     methods:   []&Fn
     mutable:   bool
@@ -1204,6 +1204,16 @@ Returns whether Trait is built-in
 `fn find_method(mut self, ident: str): &Fn`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier. 
+
+---
+
+```jule
+struct InsGeneric {
+    kind:       &TypeKind
+    constraint: []&TypeKind
+}
+```
+Generic type for instance types.
 
 ---
 
@@ -1329,6 +1339,9 @@ Primitive type.
 :::
 
 **Methods:**
+
+`fn is_constraint(self): bool`\
+Reports whether type is built-in constraint.
 
 `fn is_i8(self): bool`\
 Reports whether type is primitive i8.

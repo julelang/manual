@@ -432,10 +432,20 @@ Slicing expression.
 
 ---
 
+```jule
+struct Constraint {
+    mask: []&TypeDecl
+}
 ```
+Constraint.
+
+---
+
+```jule
 struct GenericDecl {
-    token: &Token // From std::jule::lex
-    ident: str
+    token:      &Token // From std::jule::lex
+    ident:      str
+    constraint: &Constraint
 }
 ```
 Generic type declaration. 

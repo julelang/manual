@@ -14,7 +14,7 @@ class Jule implements ILanguageRegistration {
     this.id = "jule";
     this.scopeName = "source.jule";
     this.path = "";
-    this.aliases = [ "jule" ];
+    this.aliases = ["jule"];
     this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json"));
   }
 }
@@ -32,7 +32,7 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
-    languages: [ jule ],
+    languages: [jule],
     theme: "dracula-soft",
   },
 
@@ -176,7 +176,13 @@ export default defineConfig({
             { text: 'Aliasing', link: '/types/aliasing' },
             { text: 'Type Enums', link: '/types/type-enums' },
             { text: 'Casting', link: '/types/casting' },
-            { text: 'Generics', link: '/types/generics' },
+            {
+              text: 'Generics',
+              link: '/types/generics/',
+              items: [
+                { text: 'Constraints', link: '/types/generics/constraints' },
+              ],
+            },
             { text: 'Strings', link: '/types/strings' },
             { text: 'Arrays', link: '/types/arrays' },
             { text: 'Slices', link: '/types/slices' },
@@ -470,10 +476,10 @@ export default defineConfig({
               text: 'std::math',
               link: '/std/math',
               items: [
-                { text: 'std::math::big', link:'/std/math-big' },
-                { text: 'std::math::bits', link:'/std/math-bits' },
-                { text: 'std::math::cmplx', link:'/std/math-cmplx' },
-                { text: 'std::math::rand', link:'/std/math-rand' },
+                { text: 'std::math::big', link: '/std/math-big' },
+                { text: 'std::math::bits', link: '/std/math-bits' },
+                { text: 'std::math::cmplx', link: '/std/math-cmplx' },
+                { text: 'std::math::rand', link: '/std/math-rand' },
               ],
             },
             {
@@ -489,7 +495,7 @@ export default defineConfig({
               text: 'std::sync',
               link: '/std/sync',
               items: [
-                { text: 'std::sync::atomic', link:'/std/sync-atomic' }
+                { text: 'std::sync::atomic', link: '/std/sync-atomic' }
               ],
             },
             { text: 'std::sys', link: '/std/sys' },
@@ -500,8 +506,8 @@ export default defineConfig({
               text: 'std::unicode',
               link: '/std/unicode',
               items: [
-                { text: 'std::unicode::utf16', link:'/std/unicode-utf16' },
-                { text: 'std::unicode::utf8', link:'/std/unicode-utf8' },
+                { text: 'std::unicode::utf16', link: '/std/unicode-utf16' },
+                { text: 'std::unicode::utf8', link: '/std/unicode-utf8' },
               ],
             },
             { text: 'std::vec', link: '/std/vec' },

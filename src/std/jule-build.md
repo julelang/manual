@@ -489,6 +489,7 @@ Compiler log messages with formatting.
 - `ExceptionalAtGlobalScope`
 - `StructureLitWithPrivFields`
 - `AnyWithTypeEnum`
+- `ConstraintFailed`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
