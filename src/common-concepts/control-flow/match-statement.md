@@ -125,4 +125,4 @@ fn main() {
 ### Generic Matching
 
 Type-Math is also used to map generics.
-See the [Generic Type Matching](/types/generics#generic-type-matching) section for more information about this.
+See the [Generic Type Matching](/types/generics/#generic-type-matching) section for more information about this.
