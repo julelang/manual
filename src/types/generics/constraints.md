@@ -49,5 +49,5 @@ Your compiler has some built-in constraint statements to make things easier. The
 | `numeric`    | All numeric types                                              |
 | `mutable`    | Mutable types                                                  |
 | `immutable`  | Immutable types                                                |
-| `comparable` | All types which is supports the `==`, !=` operators            |
+| `comparable` | All types which is supports the `==`, `!=` operators           |
 | `ordered`    | All types which is supports the `<`, `<=`, `>=`, `>` operators |
