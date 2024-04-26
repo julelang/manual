@@ -489,6 +489,7 @@ export default defineConfig({
             },
             { text: 'std::process', link: '/std/process' },
             { text: 'std::queue', link: '/std/queue' },
+            { text: 'std::slices', link: '/std/slices' },
             { text: 'std::stack', link: '/std/stack' },
             { text: 'std::strings', link: '/std/strings' },
             {
