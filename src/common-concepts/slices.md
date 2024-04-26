@@ -20,6 +20,17 @@ Output of program:
 [Hello Jule slices!]
 ```
 
+## Slice Literals with Explicit Type
+
+You can combine casting and slice literals for explicit typed slice literals.
+
+For example:
+```jule
+let x = []f64([1, 2, 3, 4, 5])
+```
+
+At example above, the variable `x` has the `[]f64` type.
+
 ## Passing Slices to Variadic Parameter
 We know that `...` is used for Variadic parameters. We also know that each variadic parameter is actually a slice.
 So can we pass an slice to a variadic parameter? Yes. Again, the `...` operator is used for this.
