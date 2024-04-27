@@ -100,7 +100,7 @@ Same as read_line method, but returns in bytes.
 
 `fn read_line(mut self)!: str`\
 Reads line from file handle via &File.read method.
-Returns bytes until line delimiter (\n) byte.
+Returns bytes until end of the line, line delimiter is not included.
 Returns zero-length string when reached EOF.
 
 ---
@@ -128,7 +128,7 @@ Returned slice is mutable copy of buffer.
 Returns text from bytes of recent scan.
 
 `fn scan(self)!: bool`\
-Scans line from handle via read method. Scans bytes until line delimiter (`\n`) byte, delimiter not included. Reports whether readed byte into buffer.
+Scans line from handle via read method. Scans bytes until end of the line, line delimiter is not included. Reports whether readed byte into buffer.
 
 ---
 
