@@ -320,7 +320,6 @@ Binary operation.
 struct FnCallExpr {
     token:     &Token // From std::jule::lex
     expr:      &Expr
-    generics:  []&TypeDecl
     args:      []&Expr
     exception: &ScopeTree
 }
