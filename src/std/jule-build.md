@@ -58,11 +58,6 @@ Valid extensions of Objective-C++ source files.
 
 ---
 
-### `static ERRORS: [str:str]`
-Error messages.
-
----
-
 ### `static DISTOS: [...]Os`
 List of supported operating systems.
 

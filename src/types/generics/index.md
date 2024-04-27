@@ -68,7 +68,7 @@ Dynamic generic annotation can be used if all generic types are detectable by th
 
 For example:
 ```jule
-fn print_map[Key, Value](map: [Key:Value]) {
+fn print_map[Key, Value](map: [Key]:Value) {
     for key, value in map {
         out(key)
         out(": ")
@@ -77,7 +77,7 @@ fn print_map[Key, Value](map: [Key:Value]) {
 }
 
 fn main() {
-    let mymap: [int:str] = {
+    let mymap: [int]:str = {
         0: "A",
         1: "B",
         2: "C",

@@ -7,7 +7,7 @@ Map values ​​are not kept in the inserted order. Hence iterations etc. It's 
 Example to maps:
 ```jule
 fn main() {
-    let mut mymap: [i8:str] = {
+    let mut mymap: [i8]:str = {
         0: "CPU",
         1: "RAM",
         2: "GPU"
