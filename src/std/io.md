@@ -98,7 +98,7 @@ This method is more efficient than write method for strings.
 `fn read_line_bytes(mut self)!: []byte`\
 Same as read_line method, but returns in bytes.
 
-`fn read_line(mut self)!: []byte`\
+`fn read_line(mut self)!: str`\
 Reads line from file handle via &File.read method.
 Returns bytes until line delimiter (\n) byte.
 Returns zero-length string when reached EOF.
