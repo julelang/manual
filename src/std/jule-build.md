@@ -523,3 +523,4 @@ Compiler log messages with formatting.
 - `UseTypeMatch`
 - `WrapExceptional`
 - `UseFieldPairToInstantiate`
+- `InstantiateGenericFnToUseAsAnon`
