@@ -6,13 +6,13 @@ C++ links are stored separately. So to access C++ definitions it is necessary to
 
 For example:
 ```jule
-cpp.my_variable
+cpp.myVariable
 ```
 ```jule
-cpp.my_struct{}
+cpp.myStruct{}
 ```
 ```jule
-cpp.my_function(x, y, z)
+cpp.myFunction(x, y, z)
 ```
 
 ## Example to Interoperability

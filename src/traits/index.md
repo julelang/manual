@@ -13,17 +13,5 @@ trait Person {
 ```
 All constructs that implement the trait above, must have the methods `name() str` and `age() u8`.
 
-## Access Modifiers
-
-Traits supports access modifiers for definitions. And access modifier of relevant define, should implemented as same.
-
-For example:
-```jule
-trait Person {
-    pub fn name(): str
-    pub fn age(): u8
-}
-```
-
 ## Comparing Traits
 During a comparison of traits: equal traits return true if two traits use the same allocation (both have the same pointer address), false if not. 

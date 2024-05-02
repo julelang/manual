@@ -1,19 +1,19 @@
 # std::env
 ## Globals
-### `const ARCH: str`
+### `const Arch: str`
 The running program's architecture target: one of i386, amd64 and so on.\
 To view possible combinations of OS, run `julec tool distarch`
 
 ---
 
-### `const OS: str`
+### `const Os: str`
 The running program's operating system target: one of darwin, linux and so on.\
 To view possible combinations of OS, run `julec tool distos`
 
 ## Functions
 
 ```jule
-fn args(): []str
+fn Args(): []str
 ```
 Returns command-line arguments.
 Starts with the program name.
@@ -21,14 +21,14 @@ Starts with the program name.
 ---
 
 ```jule
-fn env(): []str
+fn Env(): []str
 ```
 Returns envrionment variables.
 
 ---
 
 ```jule
-fn working_dir()!: str
+fn WorkingDir()!: str
 ```
 Returns an absolute path name of the current working directory of the calling process.
 
@@ -37,7 +37,7 @@ Possible errors: `Denied`
 ---
 
 ```jule
-fn set_working_dir(path: str)!
+fn SetWorkingDir(path: str)!
 ```
 Changes the current working directory to the given directory.
 
@@ -46,7 +46,7 @@ Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Insufficie
 ---
 
 ```jule
-fn executable(): str
+fn Executable(): str
 ```
 Returns executable path.\
 Returns empty string if any error occurs. 

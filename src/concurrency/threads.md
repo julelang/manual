@@ -9,11 +9,11 @@ use std::thread::{Thread}
 use std::sync::{WaitGroup}
 use std::sync::atomic::{AtomicInt, MemoryOrder}
 
-static mut n: AtomicInt = AtomicInt.new(0)
+static mut n: AtomicInt = AtomicInt.New(0)
 
-fn add_to_n(mut &wg: &WaitGroup) {
-    defer { wg.done() }
-    n.add(1, MemoryOrder.Relaxed)
+fn addToN(mut &wg: &WaitGroup) {
+    defer { wg.Done() }
+    n.Add(1, MemoryOrder.Relaxed)
 }
 
 fn main() {
@@ -21,14 +21,14 @@ fn main() {
 
     let mut j = 0
     for j < 1000000; j++ {
-        wg.add(1)
-        Thread.spawn(fn() {
-            add_to_n(wg)
-        }).detach()
+        wg.Add(1)
+        Thread.Spawn(fn() {
+            addToN(wg)
+        }).Detach()
     }
 
-    wg.wait()
-    outln(n.load(MemoryOrder.Relaxed))
+    wg.Wait()
+    outln(n.Load(MemoryOrder.Relaxed))
 }
 ```
 

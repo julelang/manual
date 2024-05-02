@@ -7,7 +7,7 @@ Panics are not recoverable.
 
 For example:
 ```jule
-fn add_to_ref(rate: int, mut i: &int) {
+fn addToRef(rate: int, mut i: &int) {
     if i == nil {
         panic("i is nil reference")
     }
@@ -15,7 +15,7 @@ fn add_to_ref(rate: int, mut i: &int) {
 }
 
 fn main() {
-    add_to_ref(10, nil)
+    addToRef(10, nil)
 }
 ```
 The code above is an example of panicking.

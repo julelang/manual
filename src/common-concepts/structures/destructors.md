@@ -6,12 +6,12 @@ Destructor methods are called automatically even on immutable instances. There i
 
 ## The Dispose Method
 
-Jule has a reserved `dispose` method for structures. To obtain a destructor method, it is necessary to implement the [pattern](/common-concepts/structures/reserved-methods.html#pub-fn-dispose-mut-self). This method is the destructor method and is called automatically when the build instances are destroyed.
+Jule has a reserved `Dispose` method for structures. To obtain a destructor method, it is necessary to implement the [pattern](/common-concepts/structures/reserved-methods.html#pub-fn-dispose-mut-self). This method is the destructor method and is called automatically when the build instances are destroyed.
 
 For example:
 ```jule
 impl MyStruct {
-    pub fn dispose(mut self) {
+    fn Dispose(mut self) {
         // ...
     }
 }

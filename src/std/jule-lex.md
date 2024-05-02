@@ -1,43 +1,43 @@
 # std::jule:lex
 
 ## Globals
-### `static PUNCTS: [...]rune`
+### `static Puncts: [...]rune`
 Punctuations.
 
 ---
 
-### `static SPACES: [...]rune`
+### `static Spaces: [...]rune`
 Space characters.
 
 ---
 
-### `static UNARY_OPS: [...]TokenKind`
+### `static UnaryOps: [...]TokenKind`
 Kind list of unary operators.
 
 ---
 
-### `static BIN_OPS: [...]TokenKind`
+### `static BinOps: [...]TokenKind`
 Kind list of binary operators.
 
 ---
 
-### `static WEAK_OPS: [...]TokenKind`
+### `static WeakOps: [...]TokenKind`
 Kind list of weak operators.\
 These operators are weak, can used as part of expression.
 
 ---
 
-### `static POSTFIX_OPS: [...]TokenKind`
+### `static PostfixOps: [...]TokenKind`
 List of postfix operators.
 
 ---
 
-### `static ASSIGN_OPS: [...]TokenKind`
+### `static AssignOps: [...]TokenKind`
 List of assign operators.
 
 ## Functions
 ```jule
-fn lex(mut f: &File, text: []byte): bool
+fn Lex(mut f: &File, text: []byte): bool
 ```
 Lex source code into fileset.\
 Returns nil if `f == nil`.\
@@ -46,49 +46,49 @@ Returns nil slice for errors if no any error.
 ---
 
 ```jule
-fn new_file_set(path: str): &File
+fn NewFileSet(path: str): &File
 ```
 Returns new File points to Jule file.
 
 ---
 
 ```jule
-fn is_unary_op(kind: str): bool
+fn IsUnaryOp(kind: str): bool
 ```
 Reports whether kind is unary operator.
 
 ---
 
 ```jule
-fn is_bin_op(kind: str): bool
+fn IsBinOp(kind: str): bool
 ```
 Reports whether kind is binary operator.
 
 ---
 
 ```jule
-fn is_weak_op(kind: str): bool
+fn IsWeakOp(kind: str): bool
 ```
 Reports whether kind is weak operator.
 
 ---
 
 ```jule
-fn is_str(k: str): bool
+fn IsStr(k: str): bool
 ```
 Reports whether kind is string literal.
 
 ---
 
 ```jule
-fn is_raw_str(k: str): bool
+fn IsRawStr(k: str): bool
 ```
 Reports whether kind is raw string literal.
 
 ---
 
 ```jule
-fn is_rune(k: str): bool
+fn IsRune(k: str): bool
 ```
 Reports whether kind is rune literal.
 Literal value can be byte or rune.
@@ -96,136 +96,136 @@ Literal value can be byte or rune.
 ---
 
 ```jule
-fn is_nil(k: str): bool
+fn IsNil(k: str): bool
 ```
 Reports whether kind is nil literal.
 
 ---
 
 ```jule
-fn is_bool(k: str): bool
+fn IsBool(k: str): bool
 ```
 Reports whether kind is boolean literal.
 
 ---
 
 ```jule
-fn is_float(k: str): bool
+fn IsFloat(k: str): bool
 ```
 Reports whether kind is float.
 
 ---
 
 ```jule
-fn is_num(k: str): bool
+fn IsNum(k: str): bool
 ```
 Reports whether kind is numeric.
 
 ---
 
 ```jule
-fn is_lit(k: str): bool
+fn IsLit(k: str): bool
 ```
 Reports whether kind is literal.
 
 ---
 
 ```jule
-fn is_ignore_ident(ident: str): bool
+fn IsIgnoreIdent(ident: str): bool
 ```
 Reports whether identifier is ignore.
 
 ---
 
 ```jule
-fn is_anon_ident(ident: str): bool
+fn IsAnonIdent(ident: str): bool
 ```
 Reports whether identifier is anonymous.
 
 ---
 
 ```jule
-fn is_punct(r: rune): bool
+fn IsPunct(r: rune): bool
 ```
 Reports whether rune is punctuation.
 
 ---
 
 ```jule
-fn is_space(r: rune): bool
+fn IsSpace(r: rune): bool
 ```
 Reports wheter byte is whitespace.
 
 ---
 
 ```jule
-fn is_letter(r: rune): bool
+fn IsLetter(r: rune): bool
 ```
 Reports whether rune is letter.
 
 ---
 
 ```jule
-fn is_ident_rune(s: str): bool
+fn IsIdentRune(s: str): bool
 ```
 Reports whether firs rune of string is allowed to first rune for identifier.
 
 ---
 
 ```jule
-fn is_decimal(b: byte): bool
+fn IsDecimal(b: byte): bool
 ```
 Reports whether byte is decimal sequence.
 
 ---
 
 ```jule
-fn is_binary(b: byte): bool
+fn IsBinary(b: byte): bool
 ```
 Reports whether byte is binary sequence.
 
 ---
 
 ```jule
-fn is_octal(b: byte): bool
+fn IsOctal(b: byte): bool
 ```
 Reports whether byte is octal sequence.
 
 ---
 
 ```jule
-fn is_hex(b: byte): bool
+fn IsHex(b: byte): bool
 ```
 Reports whether byte is hexadecimal sequence.
 
 ## Structs
 ```jule
 struct File {
-    path:   str
-    data:   []byte
-    tokens: []&Token
+    Path:   str
+    Data:   []byte
+    Tokens: []&Token
 }
 ```
 Fileset for lexing.
 
 **Methods:**
 
-`fn is_ok(self): bool`\
+`fn IsOk(self): bool`\
 Reports whether file path is exist and accessible.
 
-`fn dir(self): str`\
+`fn Dir(self): str`\
 Returns directory of file's path.
 
-`fn name(self): str`\
+`fn Name(self): str`\
 Returns filename.
 
-`fn addr(self): uintptr`\
+`fn Addr(self): uintptr`\
 Returns self as uintptr.
 
-`fn fill(mut self, mut data: []byte)`\
+`fn Fill(mut self, mut data: []byte)`\
 Fill data.
 
-`fn get_row(self, row: int): str`\
+`fn GetRow(self, row: int): str`\
 Return line (not include new-line char) by row. \
 Returns empty string if line is not exist in buffer.
 
@@ -233,34 +233,34 @@ Returns empty string if line is not exist in buffer.
 
 ```jule
 struct Token {
-    file:   &File
-    row:    int
-    column: int
-    kind:   str
-    id:     TokenId
+    File:   &File
+    Row:    int
+    Column: int
+    Kind:   str
+    Id:     TokenId
 }
 ```
 Token is lexer token.
 
 **Methods:**
 
-`fn prec(self): byte`\
+`fn Prec(self): byte`\
 Returns operator precedence of token.\
 Returns `0` if token is not operator or\
 invalid operator for operator precedence.
 
 Accepts assignment tokens (like equals [=]) as precedenced operator to handle expression assignments.
 
-`fn path(self): str`\
+`fn Path(self): str`\
 Returns path.
 
-`fn dir(self): str`\
+`fn Dir(self): str`\
 Returns directory of file's path.
 
-`fn name(self): str`\
+`fn Name(self): str`\
 Returns filename.
 
-`fn addr(self): uintptr`\
+`fn Addr(self): uintptr`\
 Returns self as uintptr.
 
 ## Enums

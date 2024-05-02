@@ -8,7 +8,7 @@ Comparison operators `==` and `!=` are applied to all structures by the compiler
 
 ## Overloading `==` Operator
 
-To overload the `==` operator, the reserved `eq` method must be defined. 
+To overload the `==` operator, the reserved `Eq` method must be defined. 
 
 ## Overloading `!=` Operator
 
@@ -16,108 +16,108 @@ You cannot able to overload the `!=` operator. This operator always will be imle
 
 ## Overloading `>` Operator
 
-To overload the `>` operator, the reserved `gt` method must be defined. 
+To overload the `>` operator, the reserved `Gt` method must be defined. 
 
 ## Overloading `>=` Operator
 
-To overload the `>=` operator, the reserved `gt_eq` method must be defined. 
+To overload the `>=` operator, the reserved `GtEq` method must be defined. 
 
 ## Overloading `<` Operator
 
-To overload the `<` operator, the reserved `lt` method must be defined. 
+To overload the `<` operator, the reserved `Lt` method must be defined. 
 
 ## Overloading `<=` Operator
 
-To overload the `<=` operator, the reserved `lt_eq` method must be defined. 
+To overload the `<=` operator, the reserved `LtEq` method must be defined. 
 
 ## Overloading `>>` Operator
 
-To overload the `>>` operator, the reserved `shr` method must be defined. 
+To overload the `>>` operator, the reserved `Shr` method must be defined. 
 
 ## Overloading `<<` Operator
 
-To overload the `<<` operator, the reserved `shl` method must be defined. 
+To overload the `<<` operator, the reserved `Shl` method must be defined. 
 
 ## Overloading `+` Operator
 
-To overload the `+` operator, the reserved `add` method must be defined. 
+To overload the `+` operator, the reserved `Add` method must be defined. 
 
 ## Overloading `-` Operator
 
-To overload the `-` operator, the reserved `sub` method must be defined. 
+To overload the `-` operator, the reserved `Sub` method must be defined. 
 
 ## Overloading `/` Operator
 
-To overload the `/` operator, the reserved `div` method must be defined. 
+To overload the `/` operator, the reserved `Div` method must be defined. 
 
 ## Overloading `*` Operator
 
-To overload the `*` operator, the reserved `mul` method must be defined. 
+To overload the `*` operator, the reserved `Mul` method must be defined. 
 
 ## Overloading `%` Operator
 
-To overload the `%` operator, the reserved `mod` method must be defined. 
+To overload the `%` operator, the reserved `Mod` method must be defined. 
 
 ## Overloading `&` Operator
 
-To overload the `&` operator, the reserved `bit_and` method must be defined. 
+To overload the `&` operator, the reserved `BitAnd` method must be defined. 
 
 ## Overloading `|` Operator
 
-To overload the `|` operator, the reserved `bit_or` method must be defined. 
+To overload the `|` operator, the reserved `BitOr` method must be defined. 
 
 ## Overloading `^` Operator
 
-To overload the `^` operator, the reserved `bit_xor` method must be defined. 
+To overload the `^` operator, the reserved `BitXor` method must be defined. 
 
 ## Overloading Unary `-` Operator
 
-To overload the unary `-` operator, the reserved `neg` method must be defined. 
+To overload the unary `-` operator, the reserved `Neg` method must be defined. 
 
 ## Overloading Unary `+` Operator
 
-To overload the unary `+` operator, the reserved `pos` method must be defined. 
+To overload the unary `+` operator, the reserved `Pos` method must be defined. 
 
 ## Overloading Unary `^` Operator
 
-To overload the unary `^` operator, the reserved `bit_not` method must be defined. 
+To overload the unary `^` operator, the reserved `BitNot` method must be defined. 
 
 ## Overloading `+=` Operator
 
-To overload the `+=` operator, the reserved `add_assign` method must be defined. 
+To overload the `+=` operator, the reserved `AddAssign` method must be defined. 
 
 ## Overloading `-=` Operator
 
-To overload the `-=` operator, the reserved `sub_assign` method must be defined. 
+To overload the `-=` operator, the reserved `SubAssign` method must be defined. 
 
 ## Overloading `/=` Operator
 
-To overload the `/=` operator, the reserved `div_assign` method must be defined. 
+To overload the `/=` operator, the reserved `DivAssign` method must be defined. 
 
 ## Overloading `*=` Operator
 
-To overload the `*=` operator, the reserved `mul_assign` method must be defined. 
+To overload the `*=` operator, the reserved `MulAssign` method must be defined. 
 
 ## Overloading `%=` Operator
 
-To overload the `%=` operator, the reserved `mod_assign` method must be defined. 
+To overload the `%=` operator, the reserved `ModAssign` method must be defined. 
 
 ## Overloading `<<=` Operator
 
-To overload the `<<=` operator, the reserved `shl_assign` method must be defined. 
+To overload the `<<=` operator, the reserved `ShlAssign` method must be defined. 
 
 ## Overloading `>>=` Operator
 
-To overload the `>>=` operator, the reserved `shr_assign` method must be defined. 
+To overload the `>>=` operator, the reserved `ShrAssign` method must be defined. 
 
 ## Overloading `|=` Operator
 
-To overload the `|=` operator, the reserved `bit_or_assign` method must be defined. 
+To overload the `|=` operator, the reserved `BitOrAssign` method must be defined. 
 
 ## Overloading `&=` Operator
 
-To overload the `&=` operator, the reserved `bit_and_assign` method must be defined. 
+To overload the `&=` operator, the reserved `BitAndAssign` method must be defined. 
 
 ## Overloading `^=` Operator
 
-To overload the `^=` operator, the reserved `bit_xor_assign` method must be defined. 
+To overload the `^=` operator, the reserved `BitXorAssign` method must be defined. 

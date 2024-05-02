@@ -21,7 +21,6 @@ For example:
 cpp fn exit(code: int)
 
 fn main() {
-    const EXIT_CODE = 1
     cpp.exit(1)
 }
 ```
@@ -37,8 +36,8 @@ For example:
 cpp fn max(): int
 
 fn main() {
-    let int_max = cpp.max()
-    outln(int_max)
+    let intMax = cpp.max()
+    outln(intMax)
 }
 ```
 

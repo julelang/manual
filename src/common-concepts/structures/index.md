@@ -116,12 +116,12 @@ fn method(mut self): str { /* Body */ }
 For example to implementing method to structure:
 ```jule
 impl Position {
-    fn is_origin(self): bool {
+    fn isOrigin(self): bool {
         ret self.x == 0 && self.y == 0
     }
 }
 ```
-He example at above, implements `is_origin(): bool` method to `Position` structure.
+He example at above, implements `isOrigin(): bool` method to `Position` structure.
 
 ### The `self` Keyword
 The `self` keyword represents the receiver a receiver function has. It is used to access and use the members of the structure. The data type is the same as the data type of the receiver.
@@ -129,7 +129,7 @@ The `self` keyword represents the receiver a receiver function has. It is used t
 For example:
 ```jule
 impl Person {
-    fn get_name(self): str {
+    fn getName(self): str {
         ret self.name
     }
 }
@@ -187,12 +187,12 @@ For example:
 struct Number {}
 
 impl Number {
-    const PI = 3.14159
+    const Pi = 3.14159
     const E  = 2.71828
 }
 
 fn main() {
-    outln(Number.PI)
+    outln(Number.Pi)
     outln(Number.E)
 }
 ```

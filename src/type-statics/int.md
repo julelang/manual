@@ -1,10 +1,10 @@
 # int
 
 ## Constants
-`const MAX: int`\
+`const Max: int`\
 Maximum value of type.
 
 ---
 
-`const MIN: int`\
+`const Min: int`\
 Minimum value of type. 

@@ -7,6 +7,6 @@ To declare a C++ function, it must be stated that it is a C++ declaration. Then 
 
 For example:
 ```jule
-cpp fn my_function(int, int): f64
+cpp fn myFunction(int, int): f64
 ```
 Linked functions can only be used within the respective package and can't overload. 

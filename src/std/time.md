@@ -25,21 +25,21 @@ Integer type of durations.
 
 ```jule
 struct AbsTime {
-    day:      TimeData
-    week_day: TimeData
-    year_day: TimeData
-    month:    TimeData
-    year:     TimeData
-    second:   TimeData
-    minute:   TimeData
-    hour:     TimeData
+    Day:     TimeData
+    WeekDay: TimeData
+    YearDay: TimeData
+    Month:   TimeData
+    Year:    TimeData
+    Second:  TimeData
+    Minute:  TimeData
+    Hour:    TimeData
 }
 ```
 Abstract time.
 
 **Methods:**
 
-`fn unix(self): UnixTime`\
+`fn Unix(self): UnixTime`\
 Returns abstract time as unix-time seconds.
 
 ---
@@ -48,38 +48,38 @@ Returns abstract time as unix-time seconds.
 struct Time
 ```
 Timestamp.
-If you are going to use this structure to process data of a time, you can obtain an 'AbsTime' instance by using the `abs()` method to be more efficient. Each function of this structure, such as `day` or `year`, uses an `abs()` call in the background. Back-to-back calls may cause you to make the same calculation over and over again.
+If you are going to use this structure to process data of a time, you can obtain an 'AbsTime' instance by using the `Abs()` method to be more efficient. Each function of this structure, such as `day` or `year`, uses an `Abs()` call in the background. Back-to-back calls may cause you to make the same calculation over and over again.
 
 **Methods:**
 
-`static fn unix(sec: UnixTime): Time`\
+`static fn Unix(sec: UnixTime): Time`\
 Returns new time instance from unix-time.
 
-`static fn now(): Time`\
+`static fn Now(): Time`\
 Returns time instance of the moment.
 
-`fn unix(self): UnixTime`\
+`fn Unix(self): UnixTime`\
 Returns time as unix-time.
 
-`fn day(self): TimeData`\
+`fn Day(self): TimeData`\
 Returns day of month.
 
-`fn month(self): TimeData`\
+`fn Month(self): TimeData`\
 Returns month.
 
-`fn year(self): TimeData`\
+`fn Year(self): TimeData`\
 Returns year.
 
-`fn second(self): TimeData`\
+`fn Second(self): TimeData`\
 Returns second.
 
-`fn minute(self): TimeData`\
+`fn Minute(self): TimeData`\
 Returns minute.
 
-`fn hour(self): TimeData`\
+`fn Hour(self): TimeData`\
 Returns hour.
 
-`fn abs(self): AbsTime`\
+`fn Abs(self): AbsTime`\
 Returns time as abstract time.
 
 ---
@@ -116,20 +116,20 @@ How many nanoseconds are in hour.
 
 **Methods:**
 
-`static fn nanoseconds(d: DurInt): DurInt`\
+`static fn Nanoseconds(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given nanoseconds.
 
-`static fn microseconds(d: DurInt): DurInt`\
+`static fn Microseconds(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given microseconds.
 
-`static fn milliseconds(d: DurInt): DurInt`\
+`static fn Milliseconds(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given milliseconds.
 
-`static fn seconds(d: DurInt): DurInt`\
+`static fn Seconds(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given seconds.
 
-`static fn minutes(d: DurInt): DurInt`\
+`static fn Minutes(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given minutes.
 
-`static fn hours(d: DurInt): DurInt`\
+`static fn Hours(d: DurInt): DurInt`\
 Returns how many nanoseconds are in given hours.

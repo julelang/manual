@@ -8,23 +8,23 @@ use std::sync::{WaitGroup}
 
 static mut n = 0
 
-fn add_to_n(mut wg: &WaitGroup) {
-    defer { wg.done() }
+fn addToN(mut wg: &WaitGroup) {
+    defer { wg.Done() }
     outln("incrementing")
     n++
     outln("incremented")
 }
 
 fn main() {
-    let mut wg = WaitGroup.new()
+    let mut wg = WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {
-        wg.add(1)
-        co add_to_n(wg)
+        wg.Add(1)
+        co addToN(wg)
     }
 
-    wg.wait()
+    wg.Wait()
     outln(n)
 }
 ```
@@ -39,27 +39,27 @@ For example:
 use std::sync::{WaitGroup, Mutex} // [!code ++]
 
 static mut n = 0
-static mtx = Mutex.new() // [!code ++]
+static mtx = Mutex.New() // [!code ++]
 
-fn add_to_n(mut wg: &WaitGroup) {
-    defer { wg.done() }
-    mtx.lock() // [!code ++]
+fn addToN(mut wg: &WaitGroup) {
+    defer { wg.Done() }
+    mtx.Lock() // [!code ++]
     outln("incrementing")
     n++
     outln("incremented")
-    mtx.unlock() // [!code ++]
+    mtx.Unlock() // [!code ++]
 }
 
 fn main() {
-    let mut wg = WaitGroup.new()
+    let mut wg = WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {
-        wg.add(1)
-        co add_to_n(wg)
+        wg.Add(1)
+        co addToN(wg)
     }
 
-    wg.wait()
+    wg.Wait()
     outln(n)
 }
 ```

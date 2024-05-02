@@ -8,7 +8,7 @@ enum DivError {
     DividedByZero,
 }
 
-fn my_div(a: f64, b: f64): (f64, DivError) {
+fn myDiv(a: f64, b: f64): (f64, DivError) {
     if b == 0 {
         ret 0, DivError.DividedByZero
     }
@@ -16,7 +16,7 @@ fn my_div(a: f64, b: f64): (f64, DivError) {
 }
 
 fn main() {
-    let (result, err) = my_div(5, 0)
+    let (result, err) = myDiv(5, 0)
     match err {
     | DivError.DividedByZero:
         outln("error: divided by zero")

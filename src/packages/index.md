@@ -5,7 +5,7 @@ For example:
 ```jule
 // file: ./hello_print.jule
 
-fn hello_print(name: str) {
+fn helloPrint(name: str) {
     outln("Hello " + name)
 }
 ```
@@ -13,7 +13,7 @@ fn hello_print(name: str) {
 // file: ./main.jule
 
 fn main() {
-    hello_print("Packages")
+    helloPrint("Packages")
 }
 ```
 As shown in the example above, since both files are located in the same directory, they are considered the same package and therefore have access to each other's definitions.

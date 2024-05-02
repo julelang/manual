@@ -1,59 +1,59 @@
 # std::unicode
 ## Globals
 ```jule
-const MAX_RUNE
+const MaxRune
 ```
 Maximum valid Unicode code point.
 
 ---
 
 ```jule
-const REPLACEMENT_CHAR
+const ReplacementChar
 ```
 Represents invalid code points.
 
 ---
 
 ```jule
-const MAX_ASCII
+const MaxAscii
 ```
-Maximum ASCII value.
+Maximum Ascii value.
 
 ---
 
 ```jule
-const MAX_LATIN1
+const MaxLatin1
 ```
 Maximum Latin-1 value. 
 
 ---
 
 ```jule
-const UPPER_CASE
+const UpperCase
 ```
 
 ---
 
 ```jule
-const LOWER_CASE
+const LowerCase
 ```
 
 ---
 
 ```jule
-const TITLE_CASE
+const TitleCase
 ```
 
 ---
 
 ```jule
-const MAX_CASE
+const MaxCase
 ```
 
 ---
 
 ```jule
-static CATEGORIES: [str]:&RangeTable
+static Categories: [str]:&RangeTable
 ```
 The set of Unicode category tables.
 
@@ -88,21 +88,21 @@ The set of Unicode characters in category CS (Other, surrogate).
 ---
 
 ```jule
-static DIGIT: &RangeTable
+static Digit: &RangeTable
 ```
-The set of Unicode characters with the "decimal DIGIT" property.
+The set of Unicode characters with the "decimal Digit" property.
 
 ---
 
 ```jule
 static ND: &RangeTable
 ```
-The set of Unicode characters in category ND (NUMBER, decimal DIGIT).
+The set of Unicode characters in category ND (Number, decimal Digit).
 
 ---
 
 ```jule
-static LETTER: &RangeTable
+static Letter: &RangeTable
 ```
 The set of Unicode letters, category L.
 
@@ -118,96 +118,96 @@ The set of Unicode letters, category L.
 ```jule
 static LM: &RangeTable
 ```
-The set of Unicode characters in category LM (LETTER, modifier).
+The set of Unicode characters in category LM (Letter, modifier).
 
 ---
 
 ```jule
 static LO: &RangeTable
 ```
-The set of Unicode characters in category LO (LETTER, other).
+The set of Unicode characters in category LO (Letter, other).
 
 ---
 
 ```jule
-static LOWER: &RangeTable
+static Lower: &RangeTable
 ```
-The set of Unicode LOWER case letters.
+The set of Unicode Lower case letters.
 
 ---
 
 ```jule
 static LL: &RangeTable
 ```
-The set of Unicode characters in category LL (LETTER, lowercase).
+The set of Unicode characters in category LL (Letter, lowercase).
 
 ---
 
 ```jule
-static MARK: &RangeTable
+static Mark: &RangeTable
 ```
-The set of Unicode MARK characters, category M.
+The set of Unicode Mark characters, category M.
 
 ---
 
 ```jule
 static M: &RangeTable
 ```
-The set of Unicode MARK characters, category M.
+The set of Unicode Mark characters, category M.
 
 ---
 
 ```jule
 static MC: &RangeTable
 ```
-The set of Unicode characters in category MC (MARK, spacing combining).
+The set of Unicode characters in category MC (Mark, spacing combining).
 
 ---
 
 ```jule
 static ME: &RangeTable
 ```
-The set of Unicode characters in category ME (MARK, enclosing).
+The set of Unicode characters in category ME (Mark, enclosing).
 
 ---
 
 ```jule
 static MN: &RangeTable
 ```
-The set of Unicode characters in category MN (MARK, nonspacing).
+The set of Unicode characters in category MN (Mark, nonspacing).
 
 ---
 
 ```jule
 static NL: &RangeTable
 ```
-The set of Unicode characters in category NL (NUMBER, LETTER).
+The set of Unicode characters in category NL (Number, Letter).
 
 ---
 
 ```jule
 static NO: &RangeTable
 ```
-The set of Unicode characters in category NO (NUMBER, other).
+The set of Unicode characters in category NO (Number, other).
 
 ---
 
 ```jule
-static NUMBER: &RangeTable
+static Number: &RangeTable
 ```
-The set of Unicode NUMBER characters, category N.
+The set of Unicode Number characters, category N.
 
 ---
 
 ```jule
 static N: &RangeTable
 ```
-The set of Unicode NUMBER characters, category N.
+The set of Unicode Number characters, category N.
 
 ---
 
 ```jule
-static OTHER: &RangeTable
+static Other: &RangeTable
 ```
 The set of Unicode control and special characters, category C.
 
@@ -230,7 +230,7 @@ The set of Unicode characters in category PC (Punctuation, connector).
 ```jule
 static PD: &RangeTable
 ```
-The set of Unicode characters in category PD (Punctuation, DASH).
+The set of Unicode characters in category PD (Punctuation, Dash).
 
 ---
 
@@ -258,7 +258,7 @@ The set of Unicode characters in category PI (Punctuation, initial quote).
 ```jule
 static PO: &RangeTable
 ```
-The set of Unicode characters in category PO (Punctuation, otger).
+The set of Unicode characters in category PO (Punctuation, other).
 
 ---
 
@@ -270,7 +270,7 @@ The set of Unicode characters in category PS (Punctuation, open).
 ---
 
 ```jule
-static PUNCT: &RangeTable
+static Punct: &RangeTable
 ```
 The set of Unicode punctuation characters, category P.
 
@@ -312,21 +312,21 @@ The set of Unicode characters in category SO (Symbol, other).
 ---
 
 ```jule
-static SPACE: &RangeTable
+static Space: &RangeTable
 ```
-The set of Unicode SPACE characters, category Z.
+The set of Unicode Space characters, category Z.
 
 ---
 
 ```jule
 static Z: &RangeTable
 ```
-The set of Unicode SPACE characters, category Z.
+The set of Unicode Space characters, category Z.
 
 ---
 
 ```jule
-static SYMBOL: &RangeTable
+static Symbol: &RangeTable
 ```
 The set of Unicode symbol characters, category S.
 
@@ -340,30 +340,30 @@ The set of Unicode symbol characters, category S.
 ---
 
 ```jule
-static TITLE: &RangeTable
+static Title: &RangeTable
 ```
-The set of Unicode TITLE case letters.
+The set of Unicode Title case letters.
 
 ---
 
 ```jule
 static LT: &RangeTable
 ```
-The set of Unicode characters in category LT (LETTER, titlecase).
+The set of Unicode characters in category LT (Letter, TitleCase).
 
 ---
 
 ```jule
-static UPPER: &RangeTable
+static Upper: &RangeTable
 ```
-The set of Unicode UPPER case letters.
+The set of Unicode Upper case letters.
 
 ---
 
 ```jule
 static LU: &RangeTable
 ```
-The set of Unicode characters in category LU (LETTER, uppercase).
+The set of Unicode characters in category LU (Letter, uppercase).
 
 ---
 
@@ -384,1487 +384,1487 @@ The set of Unicode characters in category ZP (Separator, paragraph).
 ```jule
 static ZS: &RangeTable
 ```
-The set of Unicode characters in category ZS (Separator, SPACE).
+The set of Unicode characters in category ZS (Separator, Space).
 
 ---
 
 ```jule
-static SCRIPTS: [str]:&RangeTable
+static Scripts: [str]:&RangeTable
 ```
 The set of Unicode script tables.
 
 ---
 
 ```jule
-static ADLAM: &RangeTable
+static Adlam: &RangeTable
 ```
 The set of Unicode characters in script Adlam.
 
 ---
 
 ```jule
-static AHOM: &RangeTable
+static Ahom: &RangeTable
 ```
 The set of Unicode characters in script Ahom.
 
 ---
 
 ```jule
-static ANATOLIAN_HIEROGLYPHS: &RangeTable
+static AnatolianHieroglyphs: &RangeTable
 ```
-The set of Unicode characters in script Anatolian_Hieroglyphs.
+The set of Unicode characters in script AnatolianHieroglyphs.
 
 ---
 
 ```jule
-static ARABIC: &RangeTable
+static Arabic: &RangeTable
 ```
 The set of Unicode characters in script Arabic.
 
 ---
 
 ```jule
-static ARMENIAN: &RangeTable
+static Armenian: &RangeTable
 ```
 The set of Unicode characters in script Armenian.
 
 ---
 
 ```jule
-static AVESTAN: &RangeTable
+static Avestan: &RangeTable
 ```
 The set of Unicode characters in script Avestan.
 
 ---
 
 ```jule
-static BALINESE: &RangeTable
+static Balinese: &RangeTable
 ```
 The set of Unicode characters in script Balinese.
 
 ---
 
 ```jule
-static BAMUM: &RangeTable
+static Bamum: &RangeTable
 ```
 The set of Unicode characters in script Bamum.
 
 ---
 
 ```jule
-static BASSA_VAH: &RangeTable
+static BassaVah: &RangeTable
 ```
-The set of Unicode characters in script Bassa_Vah.
+The set of Unicode characters in script BassaVah.
 
 ---
 
 ```jule
-static BATAK: &RangeTable
+static Batak: &RangeTable
 ```
 The set of Unicode characters in script Batak.
 
 ---
 
 ```jule
-static BENGALI: &RangeTable
+static Bengali: &RangeTable
 ```
 The set of Unicode characters in script Bengali.
 
 ---
 
 ```jule
-static BHAIKSUKI: &RangeTable
+static Bhaiksuki: &RangeTable
 ```
 The set of Unicode characters in script Bhaiksuki.
 
 ---
 
 ```jule
-static BOPOMOFO: &RangeTable
+static Bopomofo: &RangeTable
 ```
 The set of Unicode characters in script Bopomofo.
 
 ---
 
 ```jule
-static BRAHMI: &RangeTable
+static Brahmi: &RangeTable
 ```
 The set of Unicode characters in script Brahmi.
 
 ---
 
 ```jule
-static BRAILLE: &RangeTable
+static Braille: &RangeTable
 ```
 The set of Unicode characters in script Braille.
 
 ---
 
 ```jule
-static BUGINESE: &RangeTable
+static Buginese: &RangeTable
 ```
 The set of Unicode characters in script Buginese.
 
 ---
 
 ```jule
-static BUHID: &RangeTable
+static Buhid: &RangeTable
 ```
 The set of Unicode characters in script Buhid.
 
 ---
 
 ```jule
-static CANADIAN_ABORIGINAL: &RangeTable
+static CanadianAboriginal: &RangeTable
 ```
-The set of Unicode characters in script Canadian_Aboriginal.
+The set of Unicode characters in script CanadianAboriginal.
 
 ---
 
 ```jule
-static CARIAN: &RangeTable
+static Carian: &RangeTable
 ```
 The set of Unicode characters in script Carian.
 
 ---
 
 ```jule
-static CAUCASIAN_ALBANIAN: &RangeTable
+static CaucasianAlbanian: &RangeTable
 ```
-The set of Unicode characters in script Caucasian_Albanian.
+The set of Unicode characters in script CaucasianAlbanian.
 
 ---
 
 ```jule
-static CHAKMA: &RangeTable
+static Chakma: &RangeTable
 ```
 The set of Unicode characters in script Chakma.
 
 ---
 
 ```jule
-static CHAM: &RangeTable
+static Cham: &RangeTable
 ```
 The set of Unicode characters in script Cham.
 
 ---
 
 ```jule
-static CHEROKEE: &RangeTable
+static Cherokee: &RangeTable
 ```
 The set of Unicode characters in script Cherokee.
 
 ---
 
 ```jule
-static CHORASMIAN: &RangeTable
+static Chorasmian: &RangeTable
 ```
 The set of Unicode characters in script Chorasmian.
 
 ---
 
 ```jule
-static COMMON: &RangeTable
+static Common: &RangeTable
 ```
 The set of Unicode characters in script Common.
 
 ---
 
 ```jule
-static COPTIC: &RangeTable
+static Coptic: &RangeTable
 ```
 The set of Unicode characters in script Coptic.
 
 ---
 
 ```jule
-static CUNEIFORM: &RangeTable
+static Cuneiform: &RangeTable
 ```
 The set of Unicode characters in script Cuneiform.
 
 ---
 
 ```jule
-static CYPRIOT: &RangeTable
+static Cypriot: &RangeTable
 ```
 The set of Unicode characters in script Cypriot.
 
 ---
 
 ```jule
-static CYPRO_MINOAN: &RangeTable
+static CyproMinoan: &RangeTable
 ```
-The set of Unicode characters in script Cypro_Minoan.
+The set of Unicode characters in script CyproMinoan.
 
 ---
 
 ```jule
-static CYRILLIC: &RangeTable
+static Cyrillic: &RangeTable
 ```
 The set of Unicode characters in script Cyrillic.
 
 ---
 
 ```jule
-static DESERET: &RangeTable
+static Deseret: &RangeTable
 ```
 The set of Unicode characters in script Deseret.
 
 ---
 
 ```jule
-static DEVANAGARI: &RangeTable
+static Devanagari: &RangeTable
 ```
 The set of Unicode characters in script Devanagari.
 
 ---
 
 ```jule
-static DIVES_AKURU: &RangeTable
+static DivesAkuru: &RangeTable
 ```
-The set of Unicode characters in script Dives_Akuru.
+The set of Unicode characters in script DivesAkuru.
 
 ---
 
 ```jule
-static DOGRA: &RangeTable
+static Dogra: &RangeTable
 ```
 The set of Unicode characters in script Dogra.
 
 ---
 
 ```jule
-static DUPLOYAN: &RangeTable
+static Duployan: &RangeTable
 ```
 The set of Unicode characters in script Duployan.
 
 ---
 
 ```jule
-static EGYPTIAN_HIEROGLYPHS: &RangeTable
+static EgyptianHieroglyphs: &RangeTable
 ```
-The set of Unicode characters in script Egyptian_Hieroglyphs.
+The set of Unicode characters in script EgyptianHieroglyphs.
 
 ---
 
 ```jule
-static ELBASAN: &RangeTable
+static Elbasan: &RangeTable
 ```
 The set of Unicode characters in script Elbasan.
 
 ---
 
 ```jule
-static ELYMAIC: &RangeTable
+static Elymaic: &RangeTable
 ```
 The set of Unicode characters in script Elymaic.
 
 ---
 
 ```jule
-static ETHIOPIC: &RangeTable
+static Ethiopic: &RangeTable
 ```
 The set of Unicode characters in script Ethiopic.
 
 ---
 
 ```jule
-static GEORGIAN: &RangeTable
+static Georgian: &RangeTable
 ```
 The set of Unicode characters in script Georgian.
 
 ---
 
 ```jule
-static GLAGOLITIC: &RangeTable
+static Glagolitic: &RangeTable
 ```
 The set of Unicode characters in script Glagolitic.
 
 ---
 
 ```jule
-static GOTHIC: &RangeTable
+static Gothic: &RangeTable
 ```
 The set of Unicode characters in script Gothic.
 
 ---
 
 ```jule
-static GRANTHA: &RangeTable
+static Grantha: &RangeTable
 ```
 The set of Unicode characters in script Grantha.
 
 ---
 
 ```jule
-static GREEK: &RangeTable
+static Greek: &RangeTable
 ```
 The set of Unicode characters in script Greek.
 
 ---
 
 ```jule
-static GUJARATI: &RangeTable
+static Gujarati: &RangeTable
 ```
 The set of Unicode characters in script Gujarati.
 
 ---
 
 ```jule
-static GUNJALA_GONDI: &RangeTable
+static GunjalaGondi: &RangeTable
 ```
-The set of Unicode characters in script Gunjala_Gondi.
+The set of Unicode characters in script GunjalaGondi.
 
 ---
 
 ```jule
-static GURMUKHI: &RangeTable
+static Gurmukhi: &RangeTable
 ```
 The set of Unicode characters in script Gurmukhi.
 
 ---
 
 ```jule
-static HAN: &RangeTable
+static Han: &RangeTable
 ```
 The set of Unicode characters in script Han.
 
 ---
 
 ```jule
-static HANGUL: &RangeTable
+static Hangul: &RangeTable
 ```
 The set of Unicode characters in script Hangul.
 
 ---
 
 ```jule
-static HANIFI_ROHINGYA: &RangeTable
+static HanifiRohingya: &RangeTable
 ```
-The set of Unicode characters in script Hanifi_Rohingya.
+The set of Unicode characters in script HanifiRohingya.
 
 ---
 
 ```jule
-static HANUNOO: &RangeTable
+static Hanunoo: &RangeTable
 ```
 The set of Unicode characters in script Hanunoo.
 
 ---
 
 ```jule
-static HATRAN: &RangeTable
+static Hatran: &RangeTable
 ```
 The set of Unicode characters in script Hatran.
 
 ---
 
 ```jule
-static HEBREW: &RangeTable
+static Hebrew: &RangeTable
 ```
 The set of Unicode characters in script Hebrew.
 
 ---
 
 ```jule
-static HIRAGANA: &RangeTable
+static Hiragana: &RangeTable
 ```
 The set of Unicode characters in script Hiragana.
 
 ---
 
 ```jule
-static IMPERIAL_ARAMAIC: &RangeTable
+static ImperialAramaic: &RangeTable
 ```
-The set of Unicode characters in script Imperial_Aramaic.
+The set of Unicode characters in script ImperialAramaic.
 
 ---
 
 ```jule
-static INHERITED: &RangeTable
+static Inherited: &RangeTable
 ```
 The set of Unicode characters in script Inherited.
 
 ---
 
 ```jule
-static INSCRIPTIONAL_PAHLAVI: &RangeTable
+static InscriptionalPahlavi: &RangeTable
 ```
-The set of Unicode characters in script Inscriptional_Pahlavi.
+The set of Unicode characters in script InscriptionalPahlavi.
 
 ---
 
 ```jule
-static INSCRIPTIONAL_PARTHIAN: &RangeTable
+static InscriptionalParthian: &RangeTable
 ```
-The set of Unicode characters in script Inscriptional_Parthian.
+The set of Unicode characters in script InscriptionalParthian.
 
 ---
 
 ```jule
-static JAVANESE: &RangeTable
+static Javanese: &RangeTable
 ```
 The set of Unicode characters in script Javanese.
 
 ---
 
 ```jule
-static KAITHI: &RangeTable
+static Kaithi: &RangeTable
 ```
 The set of Unicode characters in script Kaithi.
 
 ---
 
 ```jule
-static KANNADA: &RangeTable
+static Kannada: &RangeTable
 ```
 The set of Unicode characters in script Kannada.
 
 ---
 
 ```jule
-static KATAKANA: &RangeTable
+static Katakana: &RangeTable
 ```
 The set of Unicode characters in script Katakana.
 
 ---
 
 ```jule
-static KAWI: &RangeTable
+static Kawi: &RangeTable
 ```
 The set of Unicode characters in script Kawi.
 
 ---
 
 ```jule
-static KAYAH_LI: &RangeTable
+static KayahLi: &RangeTable
 ```
-The set of Unicode characters in script Kayah_Li.
+The set of Unicode characters in script KayahLi.
 
 ---
 
 ```jule
-static KHAROSHTHI: &RangeTable
+static Kharoshthi: &RangeTable
 ```
 The set of Unicode characters in script Kharoshthi.
 
 ---
 
 ```jule
-static KHITAN_SMALL_SCRIPT: &RangeTable
+static KhitanSmallScript: &RangeTable
 ```
-The set of Unicode characters in script Khitan_Small_Script.
+The set of Unicode characters in script KhitanSmallScript.
 
 ---
 
 ```jule
-static KHMER: &RangeTable
+static Khmer: &RangeTable
 ```
 The set of Unicode characters in script Khmer.
 
 ---
 
 ```jule
-static KHOJKI: &RangeTable
+static Khojki: &RangeTable
 ```
 The set of Unicode characters in script Khojki.
 
 ---
 
 ```jule
-static KHUDAWADI: &RangeTable
+static Khudawadi: &RangeTable
 ```
 The set of Unicode characters in script Khudawadi.
 
 ---
 
 ```jule
-static LAO: &RangeTable
+static Lao: &RangeTable
 ```
 The set of Unicode characters in script Lao.
 
 ---
 
 ```jule
-static LATIN: &RangeTable
+static Latin: &RangeTable
 ```
 The set of Unicode characters in script Latin.
 
 ---
 
 ```jule
-static LEPCHA: &RangeTable
+static Lepcha: &RangeTable
 ```
 The set of Unicode characters in script Lepcha.
 
 ---
 
 ```jule
-static LIMBU: &RangeTable
+static Limbu: &RangeTable
 ```
 The set of Unicode characters in script Limbu.
 
 ---
 
 ```jule
-static LINEAR_A: &RangeTable
+static LinearA: &RangeTable
 ```
-The set of Unicode characters in script Linear_A.
+The set of Unicode characters in script LinearA.
 
 ---
 
 ```jule
-static LINEAR_B: &RangeTable
+static LinearB: &RangeTable
 ```
-The set of Unicode characters in script Linear_B.
+The set of Unicode characters in script LinearB.
 
 ---
 
 ```jule
-static LISU: &RangeTable
+static Lisu: &RangeTable
 ```
 The set of Unicode characters in script Lisu.
 
 ---
 
 ```jule
-static LYCIAN: &RangeTable
+static Lycian: &RangeTable
 ```
 The set of Unicode characters in script Lycian.
 
 ---
 
 ```jule
-static LYDIAN: &RangeTable
+static Lydian: &RangeTable
 ```
 The set of Unicode characters in script Lydian.
 
 ---
 
 ```jule
-static MAHAJANI: &RangeTable
+static Mahajani: &RangeTable
 ```
 The set of Unicode characters in script Mahajani.
 
 ---
 
 ```jule
-static MAKASAR: &RangeTable
+static Makasar: &RangeTable
 ```
 The set of Unicode characters in script Makasar.
 
 ---
 
 ```jule
-static MALAYALAM: &RangeTable
+static Malayalam: &RangeTable
 ```
 The set of Unicode characters in script Malayalam.
 
 ---
 
 ```jule
-static MANDAIC: &RangeTable
+static Mandaic: &RangeTable
 ```
 The set of Unicode characters in script Mandaic.
 
 ---
 
 ```jule
-static MANICHAEAN: &RangeTable
+static Manichaean: &RangeTable
 ```
 The set of Unicode characters in script Manichaean.
 
 ---
 
 ```jule
-static MARCHEN: &RangeTable
+static Marchen: &RangeTable
 ```
 The set of Unicode characters in script Marchen.
 
 ---
 
 ```jule
-static MASARAM_GONDI: &RangeTable
+static MasaramGondi: &RangeTable
 ```
-The set of Unicode characters in script Masaram_Gondi.
+The set of Unicode characters in script MasaramGondi.
 
 ---
 
 ```jule
-static MEDEFAIDRIN: &RangeTable
+static Medefaidrin: &RangeTable
 ```
 The set of Unicode characters in script Medefaidrin.
 
 ---
 
 ```jule
-static MEETEI_MAYEK: &RangeTable
+static MeeteiMayek: &RangeTable
 ```
-The set of Unicode characters in script Meetei_Mayek.
+The set of Unicode characters in script MeeteiMayek.
 
 ---
 
 ```jule
-static MENDE_KIKAKUI: &RangeTable
+static MendeKikakui: &RangeTable
 ```
-The set of Unicode characters in script Mende_Kikakui.
+The set of Unicode characters in script MendeKikakui.
 
 ---
 
 ```jule
-static MEROITIC_CURSIVE: &RangeTable
+static MeroiticCursive: &RangeTable
 ```
-The set of Unicode characters in script Meroitic_Cursive.
+The set of Unicode characters in script MeroiticCursive.
 
 ---
 
 ```jule
-static MEROITIC_HIEROGLYPHS: &RangeTable
+static MeroiticHieroglyphs: &RangeTable
 ```
-The set of Unicode characters in script Meroitic_Hieroglyphs.
+The set of Unicode characters in script MeroiticHieroglyphs.
 
 ---
 
 ```jule
-static MIAO: &RangeTable
+static Miao: &RangeTable
 ```
 The set of Unicode characters in script Miao.
 
 ---
 
 ```jule
-static MODI: &RangeTable
+static Modi: &RangeTable
 ```
 The set of Unicode characters in script Modi.
 
 ---
 
 ```jule
-static MONGOLIAN: &RangeTable
+static Mongolian: &RangeTable
 ```
 The set of Unicode characters in script Mongolian.
 
 ---
 
 ```jule
-static MRO: &RangeTable
+static Mro: &RangeTable
 ```
 The set of Unicode characters in script Mro.
 
 ---
 
 ```jule
-static MULTANI: &RangeTable
+static Multani: &RangeTable
 ```
 The set of Unicode characters in script Multani.
 
 ---
 
 ```jule
-static MYANMAR: &RangeTable
+static Myanmar: &RangeTable
 ```
 The set of Unicode characters in script Myanmar.
 
 ---
 
 ```jule
-static NABATAEAN: &RangeTable
+static Nabataean: &RangeTable
 ```
 The set of Unicode characters in script Nabataean.
 
 ---
 
 ```jule
-static NAG_MUNDARI: &RangeTable
+static NagMundari: &RangeTable
 ```
-The set of Unicode characters in script Nag_Mundari.
+The set of Unicode characters in script NagMundari.
 
 ---
 
 ```jule
-static NANDINAGARI: &RangeTable
+static Nandinagari: &RangeTable
 ```
 The set of Unicode characters in script Nandinagari.
 
 ---
 
 ```jule
-static NEW_TAI_LUE: &RangeTable
+static NewTaiLue: &RangeTable
 ```
-The set of Unicode characters in script New_Tai_Lue.
+The set of Unicode characters in script NewTaiLue.
 
 ---
 
 ```jule
-static NEWA: &RangeTable
+static Newa: &RangeTable
 ```
 The set of Unicode characters in script Newa.
 
 ---
 
 ```jule
-static NKO: &RangeTable
+static Nko: &RangeTable
 ```
 The set of Unicode characters in script Nko.
 
 ---
 
 ```jule
-static NUSHU: &RangeTable
+static Nushu: &RangeTable
 ```
 The set of Unicode characters in script Nushu.
 
 ---
 
 ```jule
-static NYIAKENG_PUACHUE_HMONG: &RangeTable
+static NyiakengPuachueHmong: &RangeTable
 ```
-The set of Unicode characters in script Nyiakeng_Puachue_Hmong.
+The set of Unicode characters in script NyiakengPuachueHmong.
 
 ---
 
 ```jule
-static OGHAM: &RangeTable
+static Ogham: &RangeTable
 ```
 The set of Unicode characters in script Ogham.
 
 ---
 
 ```jule
-static OL_CHIKI: &RangeTable
+static OlChiki: &RangeTable
 ```
-The set of Unicode characters in script Ol_Chiki.
+The set of Unicode characters in script OlChiki.
 
 ---
 
 ```jule
-static OLD_HUNGARIAN: &RangeTable
+static OldHungarian: &RangeTable
 ```
-The set of Unicode characters in script Old_Hungarian.
+The set of Unicode characters in script OldHungarian.
 
 ---
 
 ```jule
-static OLD_ITALIC: &RangeTable
+static OldItalic: &RangeTable
 ```
-The set of Unicode characters in script Old_Italic.
+The set of Unicode characters in script OldItalic.
 
 ---
 
 ```jule
-static OLD_NORTH_ARABIAN: &RangeTable
+static OldNorthArabian: &RangeTable
 ```
-The set of Unicode characters in script Old_North_Arabian.
+The set of Unicode characters in script OldNorthArabian.
 
 ---
 
 ```jule
-static OLD_PERMIC: &RangeTable
+static OldPermic: &RangeTable
 ```
-The set of Unicode characters in script Old_Permic.
+The set of Unicode characters in script OldPermic.
 
 ---
 
 ```jule
-static OLD_PERSIAN: &RangeTable
+static OldPersian: &RangeTable
 ```
-The set of Unicode characters in script Old_Persian.
+The set of Unicode characters in script OldPersian.
 
 ---
 
 ```jule
-static OLD_SOGDIAN: &RangeTable
+static OldSogdian: &RangeTable
 ```
-The set of Unicode characters in script Old_Sogdian.
+The set of Unicode characters in script OldSogdian.
 
 ---
 
 ```jule
-static OLD_SOUTH_ARABIAN: &RangeTable
+static OldSouthArabian: &RangeTable
 ```
-The set of Unicode characters in script Old_South_Arabian.
+The set of Unicode characters in script OldSouthArabian.
 
 ---
 
 ```jule
-static OLD_TURKIC: &RangeTable
+static OldTurkic: &RangeTable
 ```
-The set of Unicode characters in script Old_Turkic.
+The set of Unicode characters in script OldTurkic.
 
 ---
 
 ```jule
-static OLD_UYGHUR: &RangeTable
+static OldUyghur: &RangeTable
 ```
-The set of Unicode characters in script Old_Uyghur.
+The set of Unicode characters in script OldUyghur.
 
 ---
 
 ```jule
-static ORIYA: &RangeTable
+static Oriya: &RangeTable
 ```
 The set of Unicode characters in script Oriya.
 
 ---
 
 ```jule
-static OSAGE: &RangeTable
+static Osage: &RangeTable
 ```
 The set of Unicode characters in script Osage.
 
 ---
 
 ```jule
-static OSMANYA: &RangeTable
+static Osmanya: &RangeTable
 ```
 The set of Unicode characters in script Osmanya.
 
 ---
 
 ```jule
-static PAHAWH_HMONG: &RangeTable
+static PahawhHmong: &RangeTable
 ```
-The set of Unicode characters in script Pahawh_Hmong.
+The set of Unicode characters in script PahawhHmong.
 
 ---
 
 ```jule
-static PALMYRENE: &RangeTable
+static Palmyrene: &RangeTable
 ```
 The set of Unicode characters in script Palmyrene.
 
 ---
 
 ```jule
-static PAU_CIN_HAU: &RangeTable
+static PauCinHau: &RangeTable
 ```
-The set of Unicode characters in script Pau_Cin_Hau.
+The set of Unicode characters in script PauCinHau.
 
 ---
 
 ```jule
-static PHAGS_PA: &RangeTable
+static PhagsPa: &RangeTable
 ```
-The set of Unicode characters in script Phags_Pa.
+The set of Unicode characters in script PhagsPa.
 
 ---
 
 ```jule
-static PHOENICIAN: &RangeTable
+static Phoenician: &RangeTable
 ```
 The set of Unicode characters in script Phoenician.
 
 ---
 
 ```jule
-static PSALTER_PAHLAVI: &RangeTable
+static PsalterPahlavi: &RangeTable
 ```
-The set of Unicode characters in script Psalter_Pahlavi.
+The set of Unicode characters in script PsalterPahlavi.
 
 ---
 
 ```jule
-static REJANG: &RangeTable
+static Rejang: &RangeTable
 ```
 The set of Unicode characters in script Rejang.
 
 ---
 
 ```jule
-static RUNIC: &RangeTable
+static Runic: &RangeTable
 ```
 The set of Unicode characters in script Runic.
 
 ---
 
 ```jule
-static SAMARITAN: &RangeTable
+static Samaritan: &RangeTable
 ```
 The set of Unicode characters in script Samaritan.
 
 ---
 
 ```jule
-static SAURASHTRA: &RangeTable
+static Saurashtra: &RangeTable
 ```
 The set of Unicode characters in script Saurashtra.
 
 ---
 
 ```jule
-static SHARADA: &RangeTable
+static Sharada: &RangeTable
 ```
 The set of Unicode characters in script Sharada.
 
 ---
 
 ```jule
-static SHAVIAN: &RangeTable
+static Shavian: &RangeTable
 ```
 The set of Unicode characters in script Shavian.
 
 ---
 
 ```jule
-static SIDDHAM: &RangeTable
+static Siddham: &RangeTable
 ```
 The set of Unicode characters in script Siddham.
 
 ---
 
 ```jule
-static SIGN_WRITING: &RangeTable
+static SignWriting: &RangeTable
 ```
 The set of Unicode characters in script SignWriting.
 
 ---
 
 ```jule
-static SINHALA: &RangeTable
+static Sinhala: &RangeTable
 ```
 The set of Unicode characters in script Sinhala.
 
 ---
 
 ```jule
-static SOGDIAN: &RangeTable
+static Sogdian: &RangeTable
 ```
 The set of Unicode characters in script Sogdian.
 
 ---
 
 ```jule
-static SORA_SOMPENG: &RangeTable
+static SoraSompeng: &RangeTable
 ```
-The set of Unicode characters in script Sora_Sompeng.
+The set of Unicode characters in script SoraSompeng.
 
 ---
 
 ```jule
-static SOYOMBO: &RangeTable
+static Soyombo: &RangeTable
 ```
 The set of Unicode characters in script Soyombo.
 
 ---
 
 ```jule
-static SUNDANESE: &RangeTable
+static Sundanese: &RangeTable
 ```
 The set of Unicode characters in script Sundanese.
 
 ---
 
 ```jule
-static SYLOTI_NAGRI: &RangeTable
+static SylotiNagri: &RangeTable
 ```
-The set of Unicode characters in script Syloti_Nagri.
+The set of Unicode characters in script SylotiNagri.
 
 ---
 
 ```jule
-static SYRIAC: &RangeTable
+static Syriac: &RangeTable
 ```
 The set of Unicode characters in script Syriac.
 
 ---
 
 ```jule
-static TAGALOG: &RangeTable
+static Tagalog: &RangeTable
 ```
 The set of Unicode characters in script Tagalog.
 
 ---
 
 ```jule
-static TAGBANWA: &RangeTable
+static Tagbanwa: &RangeTable
 ```
 The set of Unicode characters in script Tagbanwa.
 
 ---
 
 ```jule
-static TAI_LE: &RangeTable
+static TaiLe: &RangeTable
 ```
-The set of Unicode characters in script Tai_Le.
+The set of Unicode characters in script TaiLe.
 
 ---
 
 ```jule
-static TAI_THAM: &RangeTable
+static TaiTham: &RangeTable
 ```
-The set of Unicode characters in script Tai_Tham.
+The set of Unicode characters in script TaiTham.
 
 ---
 
 ```jule
-static TAI_VIET: &RangeTable
+static TaiViet: &RangeTable
 ```
-The set of Unicode characters in script Tai_Viet.
+The set of Unicode characters in script TaiViet.
 
 ---
 
 ```jule
-static TAKRI: &RangeTable
+static Takri: &RangeTable
 ```
 The set of Unicode characters in script Takri.
 
 ---
 
 ```jule
-static TAMIL: &RangeTable
+static Tamil: &RangeTable
 ```
 The set of Unicode characters in script Tamil.
 
 ---
 
 ```jule
-static TANGSA: &RangeTable
+static Tangsa: &RangeTable
 ```
 The set of Unicode characters in script Tangsa.
 
 ---
 
 ```jule
-static TANGUT: &RangeTable
+static Tangut: &RangeTable
 ```
 The set of Unicode characters in script Tangut.
 
 ---
 
 ```jule
-static TELUGU: &RangeTable
+static Telugu: &RangeTable
 ```
 The set of Unicode characters in script Telugu.
 
 ---
 
 ```jule
-static THAANA: &RangeTable
+static Thaana: &RangeTable
 ```
 The set of Unicode characters in script Thaana.
 
 ---
 
 ```jule
-static THAI: &RangeTable
+static Thai: &RangeTable
 ```
 The set of Unicode characters in script Thai.
 
 ---
 
 ```jule
-static TIBETAN: &RangeTable
+static Tibetan: &RangeTable
 ```
 The set of Unicode characters in script Tibetan.
 
 ---
 
 ```jule
-static TIFINAGH: &RangeTable
+static Tifinagh: &RangeTable
 ```
 The set of Unicode characters in script Tifinagh.
 
 ---
 
 ```jule
-static TIRHUTA: &RangeTable
+static Tirhuta: &RangeTable
 ```
 The set of Unicode characters in script Tirhuta.
 
 ---
 
 ```jule
-static TOTO: &RangeTable
+static Toto: &RangeTable
 ```
 The set of Unicode characters in script Toto.
 
 ---
 
 ```jule
-static UGARITIC: &RangeTable
+static Ugaritic: &RangeTable
 ```
 The set of Unicode characters in script Ugaritic.
 
 ---
 
 ```jule
-static VAI: &RangeTable
+static Vai: &RangeTable
 ```
 The set of Unicode characters in script Vai.
 
 ---
 
 ```jule
-static VITHKUQI: &RangeTable
+static Vithkuqi: &RangeTable
 ```
 The set of Unicode characters in script Vithkuqi.
 
 ---
 
 ```jule
-static WANCHO: &RangeTable
+static Wancho: &RangeTable
 ```
 The set of Unicode characters in script Wancho.
 
 ---
 
 ```jule
-static WARANG_CITI: &RangeTable
+static WarangCiti: &RangeTable
 ```
-The set of Unicode characters in script Warang_Citi.
+The set of Unicode characters in script WarangCiti.
 
 ---
 
 ```jule
-static YEZIDI: &RangeTable
+static Yezidi: &RangeTable
 ```
 The set of Unicode characters in script Yezidi.
 
 ---
 
 ```jule
-static YI: &RangeTable
+static Yi: &RangeTable
 ```
 The set of Unicode characters in script Yi.
 
 ---
 
 ```jule
-static ZANABAZAR_SQUARE: &RangeTable
+static ZanabazarSquare: &RangeTable
 ```
-The set of Unicode characters in script Zanabazar_Square.
+The set of Unicode characters in script ZanabazarSquare.
 
 ---
 
 ```jule
-static PROPERTIES: [str]:&RangeTable
+static Properties: [str]:&RangeTable
 ```
 The set of Unicode property tables.
 
 ---
 
 ```jule
-static ASCII_HEX_DIGIT: &RangeTable
+static AsciiHexDigit: &RangeTable
 ```
 
 ---
 
 ```jule
-static BIDI_CONTROL: &RangeTable
+static BidiControl: &RangeTable
 ```
 
 ---
 
 ```jule
-static DASH: &RangeTable
+static Dash: &RangeTable
 ```
 
 ---
 
 ```jule
-static DEPRECATED: &RangeTable
+static Deprecated: &RangeTable
 ```
 
 ---
 
 ```jule
-static DIACRITIC: &RangeTable
+static Diacritic: &RangeTable
 ```
 
 ---
 
 ```jule
-static EXTENDER: &RangeTable
+static Extender: &RangeTable
 ```
 
 ---
 
 ```jule
-static HEX_DIGIT: &RangeTable
+static HexDigit: &RangeTable
 ```
 
 ---
 
 ```jule
-static HYPHEN: &RangeTable
+static Hyphen: &RangeTable
 ```
 
 ---
 
 ```jule
-static IDS_BINARY_OPERATOR: &RangeTable
+static IdsBinaryOperator: &RangeTable
 ```
 
 ---
 
 ```jule
-static IDS_TRINARY_OPERATOR: &RangeTable
+static IdsTrinaryOperator: &RangeTable
 ```
 
 ---
 
 ```jule
-static IDEOGRAPHIC: &RangeTable
+static Ideographic: &RangeTable
 ```
 
 ---
 
 ```jule
-static JOIN_CONTROL: &RangeTable
+static JoinControl: &RangeTable
 ```
 
 ---
 
 ```jule
-static LOGICAL_ORDER_EXCEPTION: &RangeTable
+static LogicalOrderException: &RangeTable
 ```
 
 ---
 
 ```jule
-static NONCHARACTER_CODE_POINT: &RangeTable
+static NoncharacterCodePoint: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_ALPHABETIC: &RangeTable
+static OtherAlphabetic: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_DEFAULT_IGNORABLE_CODE_POINT: &RangeTable
+static OtherDefaultIgnorableCodePoint: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_GRAPHEME_EXTEND: &RangeTable
+static OtherGraphemeExtend: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_ID_CONTINUE: &RangeTable
+static OtherIdContinue: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_ID_START: &RangeTable
+static OtherIdStart: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_LOWERCASE: &RangeTable
+static OtherLowercase: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_MATH: &RangeTable
+static OtherMath: &RangeTable
 ```
 
 ---
 
 ```jule
-static OTHER_UPPERCASE: &RangeTable
+static OtherUppercase: &RangeTable
 ```
 
 ---
 
 ```jule
-static PATTERN_SYNTAX: &RangeTable
+static PatternSyntax: &RangeTable
 ```
 
 ---
 
 ```jule
-static PATTERN_WHITE_SPACE: &RangeTable
+static PatternWhiteSpace: &RangeTable
 ```
 
 ---
 
 ```jule
-static PREPENDED_CONCATENATION_MARK: &RangeTable
+static PrependedConcatenationMark: &RangeTable
 ```
 
 ---
 
 ```jule
-static QUOTATION_MARK: &RangeTable
+static QuotationMark: &RangeTable
 ```
 
 ---
 
 ```jule
-static RADICAL: &RangeTable
+static Radical: &RangeTable
 ```
 
 ---
 
 ```jule
-static REGIONAL_INDICATOR: &RangeTable
+static RegionalIndicator: &RangeTable
 ```
 
 ---
 
 ```jule
-static SENTENCE_TERMINAL: &RangeTable
+static SentenceTerminal: &RangeTable
 ```
 
 ---
 
 ```jule
-static SOFT_DOTTED: &RangeTable
+static SoftDotted: &RangeTable
 ```
 
 ---
 
 ```jule
-static TERMINAL_PUNCTUATION: &RangeTable
+static TerminalPunctuation: &RangeTable
 ```
 
 ---
 
 ```jule
-static UNIFIED_IDEOGRAPH: &RangeTable
+static UnifiedIdeograph: &RangeTable
 ```
 
 ---
 
 ```jule
-static VARIATION_SELECTOR: &RangeTable
+static VariationSelector: &RangeTable
 ```
 
 ---
 
 ```jule
-static WHITE_SPACE: &RangeTable
+static WhiteSpace: &RangeTable
 ```
 
 ---
 
 ```jule
-static CASE_RANGES: []CaseRange
+static CaseRanges: []CaseRange
 ```
 The table describing case mappings for all letters with non-self mappings.
 
 ---
 
 ```jule
-static FOLD_CATEGORY: [str]:&RangeTable
+static FoldCategory: [str]:&RangeTable
 ```
 Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category. If there is NO entry for a category name, there are NO such points.
 
 ---
 
 ```jule
-static FOLD_SCRIPT: [str]:&RangeTable
+static FoldScript: [str]:&RangeTable
 ```
 Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script. If there is NO entry for a script name, there are NO such points.
 
 ---
 
 ```jule
-static GRAPHIC_RANGES: []&RangeTable
+static GraphicRanges: []&RangeTable
 ```
 Defines the set of graphic characters according to Unicode.
 
 ## Functions
 
 ```jule
-fn to(case: int, mut r: rune): rune
+fn To(case: int, mut r: rune): rune
 ```
 Maps the rune to the specified case: UpperCase, LowerCase, or TitleCase.
 
 ---
 
 ```jule
-fn to_upper(mut r: rune): rune
+fn ToUpper(mut r: rune): rune
 ```
 Maps the rune to upper case.
 
 ---
 
 ```jule
-fn to_lower(mut r: rune): rune
+fn ToLower(mut r: rune): rune
 ```
 Maps the rune to lower case.
 
 ---
 
 ```jule
-fn is(range_tab: &RangeTable, r: rune): bool
+fn Is(range_tab: &RangeTable, r: rune): bool
 ```
 Reports whether the rune is in the specified table of ranges.
 
 ---
 
 ```jule
-fn is_upper(r: rune): bool
+fn IsUpper(r: rune): bool
 ```
 Reports whether the rune is an upper case letter.
 
 ---
 
 ```jule
-fn is_lower(r: rune): bool
+fn IsLower(r: rune): bool
 ```
 Reports whether the rune is a lower case letter.
 
 ---
 
 ```jule
-fn is_digit(r: rune): bool
+fn IsDigit(r: rune): bool
 ```
 Reports whether the rune is a decimal digit.
 
 ---
 
 ```jule
-fn is_letter(r: rune): bool
+fn IsLetter(r: rune): bool
 ```
 Reports whether the rune is a letter (category L).
 
 ---
 
 ```jule
-fn is_number(r: rune): bool
+fn IsNumber(r: rune): bool
 ```
 Reports whether the rune is a number (category N).
 
 ---
 
 ```jule
-fn is_punct(r: rune): bool
+fn IsPunct(r: rune): bool
 ```
 Reports whether the rune is a Unicode punctuation character (category P).
 
 ---
 
 ```jule
-fn is_space(r: rune): bool
+fn IsSpace(r: rune): bool
 ```
 Reports whether the rune is a space character as defined by Unicode's White Space property; in the Latin-1 space this is
 
 `'\t'`, `'\n'`, `'\v'`, `'\f'`, `'\r'`, `' '`, `U+0085` (NEL), `U+00A0` (NBSP).
 
-Other definitions of spacing characters are set by category Z and property PATTERN_WHITE_SPACE.
+Other definitions of spacing characters are set by category Z and property PatternWhiteSpace.
 
 ---
 
 ```jule
-fn is_graphic(r: rune): bool
+fn IsGraphic(r: rune): bool
 ```
 Such characters include letters, marks, numbers punctuation, symbols, and spaces, from categories L, M, N, P, S, ZS.
 
 ---
 
 ```jule
-fn is_in(r: rune, ranges: ...&RangeTable): bool
+fn IsIn(r: rune, ranges: ...&RangeTable): bool
 ```
 Reports whether the rune is a member of one of the ranges.
 
@@ -1896,7 +1896,7 @@ Represents of a range of Unicode code points and is used when one or more of the
 struct RangeTable {
     r16:          []Range16
     r32:          []Range32
-    latin_offset: int
+    LatinOffset: int
 }
 ```
 Defines a set of Unicode code points by listing the ranges of code points within the set. The ranges are listed in two slices to save space: a slice of 16-bit ranges and a slice of 32-bit ranges. The two slices must be in sorted order and non-overlapping. Also, r32 should contain only values >= 0x10000 (1<<16).

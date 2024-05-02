@@ -18,7 +18,7 @@ match EXPRESSION {
 
 For example:
 ```jule
-match my_integer {
+match myInteger {
 | MY_INTEGER_MIN:
     outln("Minimum")
 | MY_INTEGER_MAX:

@@ -68,7 +68,7 @@ Static variables are initialized once, they are living allocations over the life
 
 For example:
 ```jule
-static my_int: int = 20
+static myInt: int = 20
 ```
 
 ::: info
@@ -105,7 +105,7 @@ Global variables are in the main scope of the program and are static variables b
 
 For example:
 ```jule
-static my_int: int = 20
+static myInt: int = 20
 
 fn main() {
     // ...

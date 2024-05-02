@@ -5,12 +5,12 @@ Synchronization is something you might want for concurrency. It has been mention
 For example:
 
 ```jule
-fn say_hello() {
+fn sayHello() {
     outln("Hello World")
 }
 
 fn main() {
-    co say_hello()
+    co sayHello()
 }
 ```
 
@@ -23,16 +23,16 @@ For example:
 ```jule
 use std::sync::{WaitGroup}
 
-fn say_hello(mut wg: &WaitGroup) {
+fn sayHello(mut wg: &WaitGroup) {
     outln("Hello World")
-    wg.done()
+    wg.Done()
 }
 
 fn main() {
     let mut wg = WaitGroup.new()
-    wg.add(1)
-    co say_hello(wg)
-    wg.wait()
+    wg.Add(1)
+    co sayHello(wg)
+    wg.Wait()
 }
 ```
 
@@ -40,10 +40,10 @@ The above example is the first example using `WaitGroup`. Since this code watche
 
 As can be seen in the example, the `WaitGroup` used with reference type. This is because counting needs to act on the original `WaitGroup`. To achieve this, you can also follow a different method such as using pointers.
 
-Calling `wg.add(1)` increments the counter of `WaitGroup` by one. In other words, it means we have a new thread. If there is an important point here, it is that the counting must be done correctly. For example, you have 1 thread but you are trying to count 10 threads, so if your counter never reaches 0, you may enter a continuous waiting loop.
+Calling `wg.Add(1)` increments the counter of `WaitGroup` by one. In other words, it means we have a new thread. If there is an important point here, it is that the counting must be done correctly. For example, you have 1 thread but you are trying to count 10 threads, so if your counter never reaches 0, you may enter a continuous waiting loop.
 
 Another important point is that the counter is incremented before the concurrent call. If the counter was even the first statement of the thread, problems with counting could occur. This might not be an accurate count. For this reason, counting should always be performed independently of the thread. Counting is also recommended before each thread is created.
 
-`wg.done` should be called when the thread terminates. If the thread is called before it terminates, you may still face a counting error. A call to `wg.done()` decrements the counter by one, ie thread's execution has been completed.
+`wg.Done` should be called when the thread terminates. If the thread is called before it terminates, you may still face a counting error. A call to `wg.Done()` decrements the counter by one, ie thread's execution has been completed.
 
-The `wg.wait()` call waits for all threads to terminate, in other words, for the counter to go down to zero, preventing the program from executing until then.
+The `wg.Wait()` call waits for all threads to terminate, in other words, for the counter to go down to zero, preventing the program from executing until then.

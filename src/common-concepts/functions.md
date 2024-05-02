@@ -21,12 +21,12 @@ Functions can have parameters. These parameters must be specified with arguments
 
 For example:
 ```jule
-fn print_int(i: int) {
+fn printInt(i: int) {
     outln(i)
 }
 
 fn main() {
-    print_int(50)
+    printInt(50)
 }
 ```
 It is similar to normal function definition. Parameters are written between parentheses If there is more than one parameter, they are separated by commas. The name of the parameter is written first, followed by the data-type.
@@ -38,7 +38,7 @@ Parameters are immutable by default. For mutability, use the `mut` keyword.
 
 For example:
 ```jule
-fn my_func(mut i: int) { /* ... */ }
+fn myFunc(mut i: int) { /* ... */ }
 ```
 
 ### Variadic Parameters
@@ -46,14 +46,14 @@ Variadic parameters can contain more than one value. The `...` operator is used 
 
 For example: 
 ```jule
-fn str_out(values: ...str) {
+fn strOut(values: ...str) {
     for _, s in values {
         out(s)
     }
 }
 
 fn main() {
-    str_out("Hello", "World", "Variadic")
+    strOut("Hello", "World", "Variadic")
 }
 ```
 As seen in the example above, many arguments could be given to the function even though it was a single parameter. This is a result of the variadic parameter. Putting the `...` operator before its type makes parameter variadic. 
@@ -86,7 +86,7 @@ Functions can be used as data type. It is similar to defining a function. Just p
 
 For example:
 ```jule
-let my_function: fn(int, int): int
+let myFunction: fn(int, int): int
 ```
 The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
 
@@ -96,10 +96,10 @@ Anonymous functions are like standard functions, but they are anonymous and are 
 For example:
 ```jule
 fn main() {
-    let make_hello = fn(name: str): str {
+    let makeHello = fn(name: str): str {
         ret "Hello " + name + "!"
     };
-    outln(make_hello("Jule"))
+    outln(makeHello("Jule"))
 }
 ```
 
@@ -122,7 +122,7 @@ Functions can returns more then one values. For that, specify return data-type w
 
 For example:
 ```jule
-my_func(): (int, int) { ret 18, 96 }
+myFunc(): (int, int) { ret 18, 96 }
 ```
 Parentheses are used to specify multiple data types, seen as example at above. This option, only valid for function returns.
 
@@ -132,7 +132,7 @@ What happens when specified single data type with parentheses? Nothing, you not 
 
 For example:
 ```jule
-fn less_than(x: int, y: int): (bool) { ret x < y }
+fn lessThan(x: int, y: int): (bool) { ret x < y }
 ```
 The example at above, accepted as one type return. 
 
@@ -179,10 +179,10 @@ It's too similar to normal assignment. Give much identifier same count with func
 
 For example:
 ```jule
-fn compare_int(x: int, y: int): (bool, bool) { ret x < y, x == y }
+fn compareInt(x: int, y: int): (bool, bool) { ret x < y, x == y }
 
 fn main() {
-    let (less, equals) = compare_int(10, 20)
+    let (less, equals) = compareInt(10, 20)
     outln(less)
     outln(equals)
 }
@@ -198,10 +198,10 @@ The keyword `co` is used to do a concurrent call.
 
 For example:
 ```jule
-fn hello_world() { outln("Hello World") }
+fn helloWorld() { outln("Hello World") }
 
 fn main() {
-    co hello_world()
+    co helloWorld()
 }
 ```
 ::: warning
@@ -215,7 +215,7 @@ A return expression need not always be specified in the main scope of the functi
 
 For example:
 ```jule
-fn get_rate(x: int): int {
+fn getRate(x: int): int {
     match {
     | x <= 30:
         ret 0

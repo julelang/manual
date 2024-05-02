@@ -55,7 +55,7 @@ For example:
 use std::pkg
 
 fn main() {
-    std::pkg::a_function()
+    std::pkg::aFunction()
 }
 ```
 
@@ -67,8 +67,8 @@ For example:
 use std::pkg::*
 
 fn main() {
-    a_function()
-    std::pkg::a_function()
+    aFunction()
+    std::pkg::aFunction()
 }
 ```
 
@@ -77,10 +77,10 @@ You can only import identifiers for the definitions you want imported. If you do
 
 For example:
 ```jule
-use std::pkg::{a_function}
+use std::pkg::{aFunction}
 
 fn main() {
-    a_function()
+    aFunction()
 }
 ```
 
@@ -94,13 +94,13 @@ For example:
 ```jule
 use math for std::math::{
     self, // for accessing via full name of package
-    pow,  // direct access to pow function
+    Pow,  // direct access to the Pow function
 }
 
 fn main() {
-    outln(math::pow(5, 31))
-    outln(std::math::pow(5, 31))
-    outln(pow(5, 31))
+    outln(math::Pow(5, 31))
+    outln(std::math::Pow(5, 31))
+    outln(Pow(5, 31))
 }
 ```
 
@@ -108,11 +108,11 @@ fn main() {
 
 If you want to import with Namespace but want to make some definitions directly available, use the `self` keyword.
 ```jule
-use std::pkg::{self, a_function}
+use std::pkg::{self, aFunction}
 
 fn main() {
-    a_function()
-    std::pkg::a_function()
+    aFunction()
+    std::pkg::aFunction()
 }
 ```
 ::: warning

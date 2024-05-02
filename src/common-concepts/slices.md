@@ -6,9 +6,9 @@ Slices are defined using `[ ]`. Actually, you might remember this from the array
 Example to slices:
 ```jule
 fn main() {
-    let mut my_slice: []str = nil
-    my_slice = ["Hello", "Jule", "slices!"]
-    outln(my_slice)
+    let mut mySlice: []str = nil
+    mySlice = ["Hello", "Jule", "slices!"]
+    outln(mySlice)
 }
 ```
 Nil is the default value of slices.
@@ -65,7 +65,7 @@ EXPRESSION[START_EXPRESSION:TO_EXPRESSION]
 ```
 For example:
 ```jule
-my_slice[2:10]
+mySlice[2:10]
 ```
 At the example above, slice items start at `2` to `10` The `10` index is not included. So if you want to slice all components of a slice after the index `2`, the length of the slice needs to be given.
 
@@ -76,11 +76,11 @@ If you don't give the 'to index' expression, the whole length is assumed.
 For example:
 ```jule
 fn main() {
-    let my_slice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(my_slice[2:5]) // [3, 4, 5]
-    outln(my_slice[:])   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(my_slice[:10]) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(my_slice[4:])  // [5, 6, 7, 8, 9, 10]
+    let mySlice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    outln(mySlice[2:5]) // [3, 4, 5]
+    outln(mySlice[:])   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    outln(mySlice[:10]) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    outln(mySlice[4:])  // [5, 6, 7, 8, 9, 10]
 }
 ```
 
@@ -98,9 +98,9 @@ For copy slices, here is the built-in `copy` function. The built-in `copy` funct
 
 For example:
 ```jule
-let mut slice_1 = [1, 2, 3, 4, 5]
-let mut slice_2 = make([]int, 5)
-copy(slice_2, slice_1)
+let mut slice1 = [1, 2, 3, 4, 5]
+let mut slice2 = make([]int, 5)
+copy(slice2, slice1)
 ```
 
 ## Append Elements into Slices

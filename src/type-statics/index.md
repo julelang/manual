@@ -4,5 +4,5 @@ They can be accessed by double colons.
 
 For example:
 ```jule
-int.MAX
+int.Max
 ```

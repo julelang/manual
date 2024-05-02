@@ -4,34 +4,34 @@
 ```jule
 struct Status {
     // Type and mode.
-    mode: uint
+    Mode: uint
 
     // Total size in bytes of regular file or symbolic link.
-    size: uint
+    Size: uint
 }
 ```
 Status information. 
 
 **Methods:**
 
-`static fn of(path: str)!: &Status`\
+`static fn Of(path: str)!: &Status`\
 Returns a Status describing the path.\
 Returns nil reference if error occurs.
 
 Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 
-`fn is_dir(self): bool`\
+`fn IsDir(self): bool`\
 Reports path is directory or not.
 
-`fn is_reg(self): bool`\
+`fn IsReg(self): bool`\
 Reports path is regular file or not.
 
 ---
 
 ```jule
 struct DirEntry {
-    name: str
-    stat: &Status
+    Name: str
+    Stat: &Status
 }
 ```
 Directory entry.
@@ -49,49 +49,49 @@ There may be system call differences and performance differences for console han
 
 **Methods:**
 
-`static fn new(handle: uintptr): &File`\
+`static fn New(handle: uintptr): &File`\
 Returns new `&File` by handle.
 If hadle <= 0, returns nil reference.
 
-`static fn open(path: str, flag: OFlag, mode: int)!: &File`\
+`static fn Open(path: str, flag: OFlag, mode: int)!: &File`\
 Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
-`static fn remove(path: str)!`\
+`static fn Remove(path: str)!`\
 Removes named file.
 
 Possible errors: `Denined` `Busy` `LongPath` `NotExist` `InsufficientMemory` `NotDir`
 
-`static fn read(path: str)!: []byte`\
+`static fn Read(path: str)!: []byte`\
 Reads bytes of file. First, learns byte-size of file. Then reads bytes and returns buffer.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
 
-`static fn write(path: str, data: []byte, perm: int)!`\
+`static fn Write(path: str, data: []byte, perm: int)!`\
 Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
 
-`static fn create(path: str)!: &File`\
+`static fn Create(path: str)!: &File`\
 Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
 
-`fn seek(mut self, offset: int, origin: Seek)!: int`\
+`fn Seek(mut self, offset: int, origin: Seek)!: int`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
 Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 
-`fn read(mut self, mut buff: []byte)!: (n: int)`\
+`fn Read(mut self, mut buff: []byte)!: (n: int)`\
 Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
 
 Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
 \
-`fn write(mut self, buff: []byte)!: (n: int)`\
+`fn Write(mut self, buff: []byte)!: (n: int)`\
 Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
 Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
 
 \
-`fn close(mut self)!`\
+`fn Close(mut self)!`\
 Closes file handle. 
 
 Possible errors: `InvalidDescriptor` `Signal` `IO`
@@ -105,17 +105,17 @@ Directory.
 
 **Methods:**
 
-`static fn read(path: str)!: []&DirEntry`\
+`static fn Read(path: str)!: []&DirEntry`\
 Reads the named directory and returs all its directory entries can read.
 
 Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
 
-`static fn create(path: str)!`\
+`static fn Create(path: str)!`\
 Creates directory.
 
 Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
 
-`static fn remove(path: str)!`\
+`static fn Remove(path: str)!`\
 Removes empty directory.
 
 Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
@@ -179,4 +179,3 @@ Exactly one of Rdonly, Wronly, or Rdwr must be specified.
 - `Excl`: Used with OFlag.Create, file must not exist
 - `Sync`: Open for synchronous I/O
 - `Trunc`: Truncate regular writable file when opened
-

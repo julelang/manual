@@ -1,17 +1,17 @@
 # std::sys
 ## Type Aliases
-### `type handle: uintptr`
+### `type Handle: uintptr`
 ::: warning
 Available on: `windows`
 :::
 
 ---
 
-### `type errno: int`
+### `type Errno: int`
 Type of error numbers.
 
 ## Globals
-### `const INVALID_HANDLE: handle`
+### `const InvalidHandle: Handle`
 ::: warning
 Available on: `windows`
 :::
@@ -51,1057 +51,1057 @@ Available on: `windows`
 
 ---
 
-### `const E2BIG: errno`
+### `const E2BIG: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EACCES: errno`
+### `const EACCES: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EADDRINUSE: errno`
+### `const EADDRINUSE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EADDRNOTAVAIL: errno`
+### `const EADDRNOTAVAIL: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EAFNOSUPPORT: errno`
+### `const EAFNOSUPPORT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EAGAIN: errno`
+### `const EAGAIN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EALREADY: errno`
+### `const EALREADY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EAUTH: errno`
+### `const EAUTH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EBADARCH: errno`
+### `const EBADARCH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EBADEXEC: errno`
+### `const EBADEXEC: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EBADF: errno`
+### `const EBADF: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EBADMACHO: errno`
+### `const EBADMACHO: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EBADMSG: errno`
+### `const EBADMSG: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EBADRPC: errno`
+### `const EBADRPC: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EBUSY: errno`
+### `const EBUSY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ECANCELED: errno`
+### `const ECANCELED: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ECHILD: errno`
+### `const ECHILD: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ECONNABORTED: errno`
+### `const ECONNABORTED: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ECONNREFUSED: errno`
+### `const ECONNREFUSED: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ECONNRESET: errno`
+### `const ECONNRESET: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EDEADLK: errno`
+### `const EDEADLK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EDESTADDRREQ: errno`
+### `const EDESTADDRREQ: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EDEVERR: errno`
+### `const EDEVERR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EDQUOT: errno`
+### `const EDQUOT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EEXIST: errno`
+### `const EEXIST: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EFAULT: errno`
+### `const EFAULT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EFBIG: errno`
+### `const EFBIG: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EFTYPE: errno`
+### `const EFTYPE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EHOSTDOWN: errno`
+### `const EHOSTDOWN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EHOSTUNREACH: errno`
+### `const EHOSTUNREACH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EIDRM: errno`
+### `const EIDRM: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EILSEQ: errno`
+### `const EILSEQ: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EINPROGRESS: errno`
+### `const EINPROGRESS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EINTR: errno`
+### `const EINTR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EINVAL: errno`
+### `const EINVAL: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EIO: errno`
+### `const EIO: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EISCONN: errno`
+### `const EISCONN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EISDIR: errno`
+### `const EISDIR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ELAST: errno`
+### `const ELAST: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ELOOP: errno`
+### `const ELOOP: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EMFILE: errno`
+### `const EMFILE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EMLINK: errno`
+### `const EMLINK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EMSGSIZE: errno`
+### `const EMSGSIZE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EMULTIHOP: errno`
+### `const EMULTIHOP: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENAMETOOLONG: errno`
+### `const ENAMETOOLONG: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENEEDAUTH: errno`
+### `const ENEEDAUTH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ENETDOWN: errno`
+### `const ENETDOWN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENETRESET: errno`
+### `const ENETRESET: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENETUNREACH: errno`
+### `const ENETUNREACH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENFILE: errno`
+### `const ENFILE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOATTR: errno`
+### `const ENOATTR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ENOBUFS: errno`
+### `const ENOBUFS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENODATA: errno`
+### `const ENODATA: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENODEV: errno`
+### `const ENODEV: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOENT: errno`
+### `const ENOENT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOEXEC: errno`
+### `const ENOEXEC: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOLCK: errno`
+### `const ENOLCK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOLINK: errno`
+### `const ENOLINK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOMEM: errno`
+### `const ENOMEM: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOMSG: errno`
+### `const ENOMSG: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOPOLICY: errno`
+### `const ENOPOLICY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ENOPROTOOPT: errno`
+### `const ENOPROTOOPT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOSPC: errno`
+### `const ENOSPC: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOSR: errno`
+### `const ENOSR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOSTR: errno`
+### `const ENOSTR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOSYS: errno`
+### `const ENOSYS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTBLK: errno`
+### `const ENOTBLK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOTCONN: errno`
+### `const ENOTCONN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTDIR: errno`
+### `const ENOTDIR: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTEMPTY: errno`
+### `const ENOTEMPTY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTRECOVERABLE: errno`
+### `const ENOTRECOVERABLE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTSOCK: errno`
+### `const ENOTSOCK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTSUP: errno`
+### `const ENOTSUP: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENOTTY: errno`
+### `const ENOTTY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ENXIO: errno`
+### `const ENXIO: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EOPNOTSUPP: errno`
+### `const EOPNOTSUPP: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EOVERFLOW: errno`
+### `const EOVERFLOW: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EOWNERDEAD: errno`
+### `const EOWNERDEAD: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPERM: errno`
+### `const EPERM: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPFNOSUPPORT: errno`
+### `const EPFNOSUPPORT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EPIPE: errno`
+### `const EPIPE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPROCLIM: errno`
+### `const EPROCLIM: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EPROCUNAVAIL: errno`
+### `const EPROCUNAVAIL: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EPROGMISMATCH: errno`
+### `const EPROGMISMATCH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EPROGUNAVAIL: errno`
+### `const EPROGUNAVAIL: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const EPROTO: errno`
+### `const EPROTO: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPROTONOSUPPORT: errno`
+### `const EPROTONOSUPPORT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPROTOTYPE: errno`
+### `const EPROTOTYPE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EPWROFF: errno`
+### `const EPWROFF: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ERANGE: errno`
+### `const ERANGE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EREMOTE: errno`
+### `const EREMOTE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EROFS: errno`
+### `const EROFS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ERPCMISMATCH: errno`
+### `const ERPCMISMATCH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ESHLIBVERS: errno`
+### `const ESHLIBVERS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64`
 :::
 
 ---
 
-### `const ESHUTDOWN: errno`
+### `const ESHUTDOWN: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ESOCKTNOSUPPORT: errno`
+### `const ESOCKTNOSUPPORT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ESPIPE: errno`
+### `const ESPIPE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ESRCH: errno`
+### `const ESRCH: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ESTALE: errno`
+### `const ESTALE: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ETIME: errno`
+### `const ETIME: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ETIMEDOUT: errno`
+### `const ETIMEDOUT: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const ETOOMANYREFS: errno`
+### `const ETOOMANYREFS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ETXTBSY: errno`
+### `const ETXTBSY: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EUSERS: errno`
+### `const EUSERS: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EWOULDBLOCK: errno`
+### `const EWOULDBLOCK: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EXDEV: errno`
+### `const EXDEV: Errno`
 ::: warning
 Available on: `darwin_amd64` `darwin_arm64` `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EDEADLOCK: errno`
+### `const EDEADLOCK: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386` `windows`
 :::
 
 ---
 
-### `const EQFULL: errno`
+### `const EQFULL: Errno`
 ::: warning
 Available on: `darwin_arm64`
 :::
 
 ---
 
-### `const EADV: errno`
+### `const EADV: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBADE: errno`
+### `const EBADE: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBADFD: errno`
+### `const EBADFD: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBADR: errno`
+### `const EBADR: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBADRQC: errno`
+### `const EBADRQC: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBADSLT: errno`
+### `const EBADSLT: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EBFONT: errno`
+### `const EBFONT: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ECHRNG: errno`
+### `const ECHRNG: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ECOMM: errno`
+### `const ECOMM: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EISNAM: errno`
+### `const EISNAM: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EKEYEXPIRED: errno`
+### `const EKEYEXPIRED: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EKEYREJECTED: errno`
+### `const EKEYREJECTED: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EKEYREVOKED: errno`
+### `const EKEYREVOKED: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EL2HLT: errno`
+### `const EL2HLT: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EL2NSYNC: errno`
+### `const EL2NSYNC: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EL3HLT: errno`
+### `const EL3HLT: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EL3RST: errno`
+### `const EL3RST: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELIBACC: errno`
+### `const ELIBACC: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELIBBAD: errno`
+### `const ELIBBAD: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELIBEXEC: errno`
+### `const ELIBEXEC: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELIBMAX: errno`
+### `const ELIBMAX: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELIBSCN: errno`
+### `const ELIBSCN: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ELNRNG: errno`
+### `const ELNRNG: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EMEDIUMTYPE: errno`
+### `const EMEDIUMTYPE: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENAVAIL: errno`
+### `const ENAVAIL: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOANO: errno`
+### `const ENOANO: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOCSI: errno`
+### `const ENOCSI: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOKEY: errno`
+### `const ENOKEY: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOMEDIUM: errno`
+### `const ENOMEDIUM: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENONET: errno`
+### `const ENONET: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOPKG: errno`
+### `const ENOPKG: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOTNAM: errno`
+### `const ENOTNAM: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ENOTUNIQ: errno`
+### `const ENOTUNIQ: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EREMCHG: errno`
+### `const EREMCHG: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EREMOTEIO: errno`
+### `const EREMOTEIO: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ERESTART: errno`
+### `const ERESTART: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ERFKILL: errno`
+### `const ERFKILL: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ESRMNT: errno`
+### `const ESRMNT: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const ESTRPIPE: errno`
+### `const ESTRPIPE: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EUCLEAN: errno`
+### `const EUCLEAN: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EUNATCH: errno`
+### `const EUNATCH: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EXFULL: errno`
+### `const EXFULL: Errno`
 ::: warning
 Available on: `linux_amd64` `linux_arm` `linux_arm64` `linux_i386`
 :::
 
 ---
 
-### `const EHWPOISON: errno`
+### `const EHWPOISON: Errno`
 ::: warning
 Available on: `linux_arm` `linux_arm64`
 :::
@@ -1725,7 +1725,7 @@ Available on: `windows`
 ## Functions
 
 ```jule
-fn get_std_handle(stdh: uintptr): handle
+fn GetStdHandle(stdh: uintptr): Handle
 ```
 ::: warning
 Available on: `windows`
@@ -1734,7 +1734,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn close_handle(stdh: handle): bool
+unsafe fn CloseHandle(stdh: Handle): bool
 ```
 ::: warning
 Available on: `windows`
@@ -1743,14 +1743,14 @@ Available on: `windows`
 ---
 
 ```jule
-fn get_last_errno(): errno
+fn GetLastErrno(): Errno
 ```
 Returns number of last error.
 
 ---
 
 ```jule
-unsafe fn stat(path: *byte, mut stat: *Stat): int
+unsafe fn Stat(path: *byte, mut stat: *Stat): int
 ```
 Calls C's stat function.
 ::: warning
@@ -1760,7 +1760,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn wstat(path: *u16, mut stat: *Stat): int
+unsafe fn Wstat(path: *u16, mut stat: *Stat): int
 ```
 Calls C's wstat function.
 ::: warning
@@ -1770,7 +1770,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn open(path: *byte, flag: int, mode: int): int
+unsafe fn Open(path: *byte, flag: int, mode: int): int
 ```
 Wrapper for C's open function.
 ::: warning
@@ -1780,7 +1780,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn _wopen(path: *u16, flag: int, mode: int): int
+unsafe fn Wopen(path: *u16, flag: int, mode: int): int
 ```
 Wrapper for C's _wopen function.
 ::: warning
@@ -1790,35 +1790,35 @@ Available on: `windows`
 ---
 
 ```jule
-fn seek(handle: int, offset: int, origin: int): int
+fn Seek(handle: int, offset: int, origin: int): int
 ```
 Wrapper for C's lseek function.
 
 ---
 
 ```jule
-unsafe fn read(handle: int, mut buff: *unsafe, n: uint): int
+unsafe fn Read(handle: int, mut buff: *unsafe, n: uint): int
 ```
 Wrapper for C's read function.
 
 ---
 
 ```jule
-fn close(handle: int): int
+fn Close(handle: int): int
 ```
 Wrapper for C's close function.
 
 ---
 
 ```jule
-unsafe fn write(handle: int, buff: *unsafe, n: uint): int 
+unsafe fn Write(handle: int, buff: *unsafe, n: uint): int 
 ```
 Wrapper for C's write function.
 
 ---
 
 ```jule
-fn get_last_error(): u32
+fn GetLastError(): u32
 ```
 ::: warning
 Available on: `windows`
@@ -1827,7 +1827,7 @@ Available on: `windows`
 ---
 
 ```jule
-fn get_console_mode(handle: handle, mut &mode: int): bool
+fn GetConsoleMode(handle: Handle, mut &mode: int): bool
 ```
 Calls Windows's GetConsoleMode function.
 
@@ -1838,7 +1838,7 @@ Available on: `windows`
 ---
 
 ```jule
-fn set_console_mode(handle: handle, mode: int): bool
+fn SetConsoleMode(handle: Handle, mode: int): bool
 ```
 Calls Windows's SetConsoleMode function.
 
@@ -1849,7 +1849,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn write_console(handle: handle, buffer: *u16, to_write: int, mut &written: int, reserved: *unsafe): bool
+unsafe fn WriteConsole(handle: Handle, buffer: *u16, to_write: int, mut &written: int, reserved: *unsafe): bool
 ```
 Calls Windows's WriteConsoleW function.
 
@@ -1860,7 +1860,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn read_console(handle: handle, mut buffer: *u16, to_read: int, mut &readed: int, input_control: *unsafe): bool
+unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, to_read: int, mut &readed: int, input_control: *unsafe): bool
 ```
 Calls Windows's ReadConsoleW function.
 
@@ -1871,7 +1871,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn get_current_directory(bufflen: u32, mut buff: *u16): u32
+unsafe fn GetCurrentDirectory(bufflen: u32, mut buff: *u16): u32
 ```
 Reads working directory into buff and returns readed rune count of current process. Returns 0 if fail.
 ::: warning
@@ -1881,7 +1881,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn set_current_directory(path: *u16): bool
+unsafe fn SetCurrentDirectory(path: *u16): bool
 ```
 Sets working directory to path. Reports operation is success.
 ::: warning
@@ -1891,7 +1891,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn getcwd(buff: *byte, bufflen: uint): *byte
+unsafe fn Getcwd(buff: *byte, bufflen: uint): *byte
 ```
 Reads current working directory into buff. Returns pointer to buff if success, nil pointer if error occurs.
 ::: warning
@@ -1901,7 +1901,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn opendir(path: *byte): *Dir
+unsafe fn Opendir(path: *byte): *Dir
 ```
 Calls C's opendir function.
 ::: warning
@@ -1911,7 +1911,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn _wopendir(path: *u16): *Wdir
+unsafe fn Wopendir(path: *u16): *Wdir
 ```
 Calls C's _wopendir function.
 ::: warning
@@ -1921,7 +1921,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn readdir(mut dir: *Dir): *Dirent
+unsafe fn Readdir(mut dir: *Dir): *Dirent
 ```
 Calls C's readdir function.
 ::: warning
@@ -1931,7 +1931,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn _wreaddir(mut dir: *Wdir): *Wdirent
+unsafe fn Wreaddir(mut dir: *Wdir): *Wdirent
 ```
 Calls C's _wreaddir function.
 ::: warning
@@ -1941,7 +1941,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn remove(path: *byte): int
+unsafe fn Remove(path: *byte): int
 ```
 Wrapper for C's remove function.
 ::: warning
@@ -1951,7 +1951,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn closedir(mut dir: *Dir): int
+unsafe fn Closedir(mut dir: *Dir): int
 ```
 Calls C's closedir function.
 ::: warning
@@ -1961,7 +1961,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn _wclosedir(mut dir: *Wdir): int
+unsafe fn Wclosedir(mut dir: *Wdir): int
 ```
 Calls C's _wclosedir function.
 ::: warning
@@ -1971,14 +1971,14 @@ Available on: `windows`
 ---
 
 ```jule
-fn exit(code: int)
+fn Exit(code: int)
 ```
 Wrapper for C's exit.
 
 ---
 
 ```jule
-unsafe fn chdir(path: *byte): int
+unsafe fn Chdir(path: *byte): int
 ```
 Calls C's chdir function.
 ::: warning
@@ -1988,7 +1988,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn mkdir(path: *byte, mode: int): int
+unsafe fn Mkdir(path: *byte, mode: int): int
 ```
 Wrapper for C's mkdir function.
 ::: warning
@@ -1998,7 +1998,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn rmdir(path: *byte): int
+unsafe fn Rmdir(path: *byte): int
 ```
 Wrapper for C's rmdir function.
 ::: warning
@@ -2008,7 +2008,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn unlink(path: *byte): int
+unsafe fn Unlink(path: *byte): int
 ```
 Wrapper for C's unlink function.
 ::: warning
@@ -2018,7 +2018,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn delete_file(path: *u16): bool
+unsafe fn DeleteFile(path: *u16): bool
 ```
 Delete file.
 ::: warning
@@ -2028,7 +2028,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn create_directory(path: *u16): bool
+unsafe fn CreateDirectory(path: *u16): bool
 ```
 Creates directory.
 ::: warning
@@ -2038,7 +2038,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn remove_directory(path: *u16): bool
+unsafe fn RemoveDirectory(path: *u16): bool
 ```
 Remove empty directory.
 ::: warning
@@ -2048,7 +2048,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn get_full_path_name(path: *u16, bufflen: u32, buff: *u16, fname: **u16): u32
+unsafe fn GetFullPathName(path: *u16, bufflen: u32, buff: *u16, fname: **u16): u32
 ```
 Calls Windows's GetFullPathNameW function.
 ::: warning
@@ -2057,7 +2057,7 @@ Available on: `windows`
 
 ## Structs
 ```jule
-struct Stat {
+struct SysStat {
     st_mode: uint // _mode_t
     st_size: uint // _off_t
 }

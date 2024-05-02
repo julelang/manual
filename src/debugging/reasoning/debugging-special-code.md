@@ -15,7 +15,7 @@ use debug for std::debug
 
 fn main() {
     outln("I am always here")
-    debug::outln("I will not be here in production builds")
+    debug::Outln("I will not be here in production builds")
 }
 ```
 
@@ -31,11 +31,11 @@ For example:
 ```jule
 use debug for std::debug
 
-fn get_magic_number(): int { ret 20 }
+fn getMagicNumber(): int { ret 42 }
 
 fn main() {
-    let x = get_magic_number()
-    debug::call(fn() {
+    let x = getMagicNumber()
+    debug::Call(fn() {
         if x == 20 {
             panic("Magic number is 20, and I do not like this")
         }

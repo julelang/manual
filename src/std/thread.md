@@ -18,17 +18,17 @@ It is experimental.
 
 **Methods:**
 
-`static fn spawn(routine: fn()): &Thread`\
+`static fn Spawn(routine: fn()): &Thread`\
 Spawns new thread by routine. Panics if routine is nil. Thread starts execution of routine when spawned.
 
-`static fn sleep(ns: u64)`\
+`static fn Sleep(ns: u64)`\
 Stop execution of caller thread by nanoseconds. This functions only affects execution of caller thread, not process.
 
-`fn wait(self)`\
+`fn Wait(self)`\
 Wait for complete execution of thread if active. Returns when the thread execution has completed. So program stops execution until thread's execution has completed. Panics if thread is not active.
 
-`fn detach(self)`\
+`fn Detach(self)`\
 Detach thread and make it independent. After this, this thread object can no longer identify thread.
 
-`fn active(self): bool`\
+`fn Active(self): bool`\
 Reports whether thread object identifies an active thread of execution.

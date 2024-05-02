@@ -28,10 +28,10 @@ use integrated for std::jule::integrated
 
 fn main() {
     unsafe {
-        let mut i = integrated::new[int]()
+        let mut i = integrated::New[int]()
         *i = 20
         outln(*i)
-        integrated::delete[int](i)
+        integrated::Delete[int](i)
         i = nil
     }
 }
@@ -46,7 +46,7 @@ Please read relevant section about [disabling reference counting](/memory/manage
 
 You can use manual memory management method with disable reference counting. Advantage of that, Jule has allocation functions for smart pointers, so reference counted types, and when you disable reference counting, you have smart pointers that must be freed manually. So you can use primitive smart pointers with manual memory management. This approach migh be more flexible and readable. Also easy to return reference counting.
 
-The `free` function of `std::mem` library, provides deallocation functionality types which is performs reference counting internally. The `free` function just assigns to nil and decrases rereference counting data when reference counting enabled. In other words, assigns to nil and deallocates allocation.
+The `Free` function of `std::mem` library, provides deallocation functionality types which is performs reference counting internally. The `Free` function just assigns to nil and decrases rereference counting data when reference counting enabled. In other words, assigns to nil and deallocates allocation.
 
 Risk of that, you should trace dependencies of allocations befıre deallocating. Because dependencies cannot traced by automatically because of reference counting disabled. So you will have invalid memory addresses when you deallocates in-use allocations.
 
@@ -70,9 +70,9 @@ fn main() {
     {
         let mut x = [1, 2, 3, 4, 5]
         outln(x)
-        mem::free(x)
+        mem::Free(x)
     }
 }
 ```
 
-In this updated example above, calls `free` function from `std::mem` library for variable `x`. So, allocation freed, there is no leak.
+In this updated example above, calls `Free` function from `std::mem` library for variable `x`. So, allocation freed, there is no leak.

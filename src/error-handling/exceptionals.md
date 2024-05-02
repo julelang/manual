@@ -14,14 +14,14 @@ The operator `!` is used to define an exceptional function.
 
 For example:
 ```jule
-fn my_exceptional()! { /* ... */ }
+fn myExceptional()! { /* ... */ }
 ```
 
 If you want to give a return value, the syntax is not much different. Just define an exceptional function and give it the result type as if it were a normal function.
 
 For example:
 ```jule
-fn my_exceptional()!: int { /* ... */ }
+fn myExceptional()!: int { /* ... */ }
 ```
 
 ## Exceptions
@@ -30,7 +30,7 @@ An exceptional has a special `error` keyword designed for lifetime use. The `err
 
 For example:
 ```jule
-fn my_exceptional()!: int {
+fn myExceptional()!: int {
     error("my error")
 }
 ```
@@ -45,7 +45,7 @@ In some cases, you are sure that your exceptional access will return without any
 
 For example:
 ```jule
-my_exceptional()!
+myExceptional()!
 ```
 
 ::: info
@@ -58,12 +58,12 @@ If things don't go as expected and an exception occurs, your program will panic.
 
 For example:
 ```jule
-fn my_exceptional()! {
+fn myExceptional()! {
     error("my error")
 }
 
 fn main() {
-    my_exceptional() else {
+    myExceptional() else {
         outln(error)
     }
 }
@@ -75,12 +75,12 @@ Regarding the handling of return values of exceptional calls, it is necessary to
 
 For example:
 ```jule
-fn my_exceptional()!: int {
+fn myExceptional()!: int {
     error("my error")
 }
 
 fn main() {
-    let x = my_exceptional() else {
+    let x = myExceptional() else {
         outln(error)
         use 10
     }
@@ -103,7 +103,7 @@ enum DivError {
     Overflow,
 }
 
-fn magic_div(a: int, b: int)!: int {
+fn magicDiv(a: int, b: int)!: int {
     if b == 0 {
         error(DivError.ByZero)
     }
@@ -114,7 +114,7 @@ fn magic_div(a: int, b: int)!: int {
 }
 
 fn main() {
-    let x = magic_div(5, 200) else {
+    let x = magicDiv(5, 200) else {
         match error {
         | DivError.ByZero:
             outln("divided by zero")
@@ -165,13 +165,13 @@ Exceptions cannot be used in concurrent calls. It is recommended to use an anony
 For example:
 
 ```jule
-fn my_exceptional()! {
+fn myExceptional()! {
     error("my error")
 }
 
 fn main() {
     co fn() {
-        my_exceptional()!
+        myExceptional()!
     }()
 }
 ```

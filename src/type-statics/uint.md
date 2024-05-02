@@ -1,5 +1,5 @@
 # uint
 
 ## Constants
-`const MAX: uint`\
+`const Max: uint`\
 Maximum value of type.

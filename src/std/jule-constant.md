@@ -5,112 +5,112 @@
 struct Const
 ```
 Constant data.\
-Use `Const.new_nil` function istead of `Const{}` for nil literal.
+Use `Const.NewNil` function istead of `Const{}` for nil literal.
 
 **Methods:**
 
-`static fn new_i64(x: i64): &Const`\
+`static fn NewI64(x: i64): &Const`\
 Returns new constant value instance from 64-bit signed integer.
 
-`static fn new_u64(x: u64): &Const`\
+`static fn NewU64(x: u64): &Const`\
 Returns new constant value instance from 64-bit unsigned integer.
 
-`static fn new_bool(x: bool): &Const`\
+`static fn NewBool(x: bool): &Const`\
 Returns new constant value instance from boolean.
 
-`static fn new_str(x: str): &Const`\
+`static fn NewStr(x: str): &Const`\
 Returns new constant value instance from string.
 
-`static fn new_f64(x: f64): &Const`\
+`static fn NewF64(x: f64): &Const`\
 Returns new constant value instance from 64-bit floating-point.
 
-`static fn new_nil(): &Const`\
+`static fn NewNil(): &Const`\
 Returns new constant value instance with nil. 
 
-`fn read_i64(self): i64`\
+`fn ReadI64(self): i64`\
 Reads 64-bit signed integer data.\
 Returns 0 if data is not 64-bit signed integer.
 
-`fn read_u64(self): u64`\
+`fn ReadU64(self): u64`\
 Reads 64-bit unsigned integer data.\
 Returns 0 if data is not 64-bit unsigned integer.
 
-`fn read_bool(self): bool`\
+`fn ReadBool(self): bool`\
 Reads boolean data.\
 Returns false if data is not boolean.
 
-`fn read_str(self): str`\
+`fn ReadStr(self): str`\
 `Reads string data.`\
 Returns empty string if data is not string.
 
-`fn read_f64(self): f64`\
+`fn ReadF64(self): f64`\
 Reads 64-bit floating-point data.\
 Returns 0 if data is not 64-bit floating-point.
 
-`fn as_i64(self): i64`\
+`fn AsI64(self): i64`\
 Reads data as 64-bit signed integer.\
 Returns 0 if data is string, bool or which is not numeric.
 
-`fn as_u64(self): u64`\
+`fn AsU64(self): u64`\
 Reads data as 64-bit unsigned integer.\
 Returns 0 if data is string, bool or which is not numeric.
 
-`fn as_f64(self): f64`\
+`fn AsF64(self): f64`\
 Reads data as 64-bit floating-point.\
 Returns 0 if data is string, bool or which is not numeric.
 
-`fn set_i64(mut self, x: i64)`\
+`fn SetI64(mut self, x: i64)`\
 Sets constant value from 64-bit signed integer.
 
-`fn set_u64(mut self, x: u64)`\
+`fn SetU64(mut self, x: u64)`\
 Sets constant value from 64-bit unsigned integer.
 
-`fn set_bool(mut self, x: bool)`\
+`fn SetBool(mut self, x: bool)`\
 Sets constant value from boolean.
 
-`fn set_str(mut self, x: str)`\
+`fn SetStr(mut self, x: str)`\
 Sets constant value from string.
 
-`fn set_f64(mut self, x: f64)`\
+`fn SetF64(mut self, x: f64)`\
 Sets constant value from 64-bit floating-point.
 
-`fn set_nil(mut self)`\
+`fn SetNil(mut self)`\
 Sets constant value to nil.
 
-`fn is_i64(self): bool`\
+`fn IsI64(self): bool`\
 Reports whether data is 64-bit signed integer.
 
-`fn is_u64(self): bool`\
+`fn IsU64(self): bool`\
 Reports whether data is 64-bit unsigned integer.
 
-`fn is_bool(self): bool`\
+`fn IsBool(self): bool`\
 Reports whether data is boolean.
 
-`fn is_str(self): bool`\
+`fn IsStr(self): bool`\
 Reports whether data is string.
 
-`fn is_f64(self): bool`\
+`fn IsF64(self): bool`\
 Reports whether data is 64-bit floating-point.
 
-`fn is_nil(self): bool`\
+`fn IsNil(self): bool`\
 Reports whether data is nil.
 
-`fn are_same_types(self, x: Const): bool`\
+`fn AreSameTypes(self, x: Const): bool`\
 Reports whether self and x has same type.
 
-`fn and(self, x: Const): bool`\
+`fn And(self, x: Const): bool`\
 Reports whether self and x are true.\
 Returns false if type is not supported.
 
-`fn or(self, x: Const): bool`\
+`fn Or(self, x: Const): bool`\
 Reports whether self or x is true.\
 Returns false if type is not supported.
 
-`fn eq(self, x: Const): bool`\
+`fn Eq(self, x: Const): bool`\
 Reports whether self and x are equals.\
 Returns false if type is not supported. 
 
-`fn lt(self, x: Const): bool`\
+`fn Lt(self, x: Const): bool`\
 Reports whether self less than x.\
 Returns false if type is unsupported by operation.
 
@@ -120,7 +120,7 @@ Supported types are:
 - 64-bit unsigned integer
 - 64-bit floating-point
 
-`fn lt_eq(self, x: Const): bool`\
+`fn LtEq(self, x: Const): bool`\
 Reports whether self less than or equals to x.\
 Returns false if type is unsupported by operation.
 
@@ -130,7 +130,7 @@ Supported types are:
 - 64-bit unsigned integer
 - 64-bit floating-point
 
-`fn gt(self, x: Const): bool`\
+`fn Gt(self, x: Const): bool`\
 Reports whether self greater than x.\
 Returns false if type is unsupported by operation.
 
@@ -140,7 +140,7 @@ Supported types are:
 - 64-bit unsigned integer
 - 64-bit floating-point
 
-`fn gt_eq(self, x: Const): bool`\
+`fn GtEq(self, x: Const): bool`\
 Reports whether self greater than or equals to x.\
 Returns false if type is unsupported by operation.
 
@@ -150,19 +150,19 @@ Supported types are:
 - 64-bit unsigned integer
 - 64-bit floating-point
 
-`fn add(mut self, x: Const): bool`\
+`fn Add(mut self, x: Const): bool`\
 Adds x's value to itself value.\
 Reports whether operation is success.
 
-`fn sub(mut self, x: Const): bool`\
+`fn Sub(mut self, x: Const): bool`\
 Subs x's value from itself value.\
 Reports whether operation is success.
 
-`fn mul(mut self, x: Const): bool`\
+`fn Mul(mut self, x: Const): bool`\
 Multiplies x's value to c's value.\
 Reports whether operation is success.
 
-`fn div(mut self, x: Const): bool`\
+`fn Div(mut self, x: Const): bool`\
 Divides itself value to x's value.\
 Reports whether operation is success.\
 Reports false if divided-by-zero.
@@ -170,27 +170,27 @@ Reports false if divided-by-zero.
 This operation makes constant value is floating-point.
 :::
 
-`fn mod(mut self, x: Const): bool`\
+`fn Mod(mut self, x: Const): bool`\
 Mods itself value to x's value.\
 Reports whether operation is success.\
 Reports false if divided-by-zero.
 
-`fn bitwise_and(mut self, x: Const): bool`\
+`fn BitwiseAnd(mut self, x: Const): bool`\
 Bitwise and itself value to x's value.\
 Reports whether operation is success.
 
-`fn bitwise_or(mut self, x: Const): bool`\
+`fn BitwiseOr(mut self, x: Const): bool`\
 Bitwise or itself value to x's value.\
 Reports whether operation is success.
 
-`fn xor(mut self, x: Const): bool`\
+`fn Xor(mut self, x: Const): bool`\
 Bitwise xor itself value to x's value.\
 Reports whether operation is success.
 
-`fn lshift(mut self, x: Const): bool`\
+`fn Lshift(mut self, x: Const): bool`\
 Left shifts itself value to x's value.\
 Reports whether operation is success.\
 
-`fn rshift(mut self, x: Const): bool`\
+`fn Rshift(mut self, x: Const): bool`\
 Right shifts itself value to x's value.\
 Reports whether operation is success. 

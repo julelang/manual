@@ -96,7 +96,7 @@ Trait ensures that only the methods it provides directly are used according to t
 
 For example:
 ```jule
-const PI = 3.14159
+const Pi = 3.14159
 
 trait Shape {
     fn area(self): f64
@@ -108,7 +108,7 @@ struct Circle {
 
 impl Shape for Circle {
     fn area(self): f64 {
-        ret PI * self.r * self.r
+        ret Pi * self.r * self.r
     }
 }
 

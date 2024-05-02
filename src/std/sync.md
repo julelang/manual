@@ -8,23 +8,23 @@ Do not copy an instance of WaitGroup, use a ref or pointer instead.
 
 usage: in main thread: wg: std::sync::WaitGroup\
 "wg.add(delta)" before starting tasks with "co ..."\
-"wg.wait()" to wait for all tasks to have finished
+"wg.Wait()" to wait for all tasks to have finished
 
 in each parallel job:\
-"wg.done()" when finished
+"wg.Done()" when finished
 
 **Methods:**
 
-`static fn new(): &WaitGroup`\
+`static fn New(): &WaitGroup`\
 Returns new WaitGroup instance.
 
-`fn add(mut self, delta: int)` \
-Increments (+delta) or decrements (-delta) task count by delta and unblocks any wait() calls if task count becomes zero. Panics if task count reaches below zero.
+`fn Add(mut self, delta: int)` \
+Increments (+delta) or decrements (-delta) task count by delta and unblocks any Wait() calls if task count becomes zero. Panics if task count reaches below zero.
 
-`fn done(mut self)` \
+`fn Done(mut self)` \
 Decrements the WaitGroup counter by one.
 
-`fn wait(mut self)` \
+`fn Wait(mut self)` \
 Blocks until all tasks are done (task count becomes zero) 
 
 ---
@@ -40,16 +40,16 @@ Mutextes are uses internal mutability and internal allocations. Locking, unlocki
 
 **Methods:**
 
-`static fn new(): Mutex`\
+`static fn New(): Mutex`\
 Returns new initialized ready-for-use Mutex.
 
-`fn lock(self)`\
+`fn Lock(self)`\
 Locks the mutex. If the mutex is locked by another thread, it stops the execution of the algorithm to seize it and waits to lock the mutex.
 
-`fn unlock(self)`\
+`fn Unlock(self)`\
 Unlock the mutex you locked and make it open to locking by the thread.
 
-`fn try_lock(self): bool`\
+`fn TryLock(self): bool`\
 Try locking the mutex. But unlike the lock method, it just tries to lock instead of waiting to lock. Returns true if the locking was successful, false otherwise.
 
 ---
@@ -62,17 +62,17 @@ A Once must not be copied after first use.
 
 **Methods:**
 
-`static fn new(): Once`\
+`static fn New(): Once`\
 Returns new instance for Once.
 
-`fn do(self, f: fn())`\
+`fn Do(self, f: fn())`\
 Calls the function f if and only if do is being called for the first time for this instance of Once. In other words, given `let once = Once{}`
 
-if `once.do(f)` is called multiple times, only the first call will invoke f, even if f has a different value in each invocation. A new instance of Once is required for each function to execute.
+if `once.Do(f)` is called multiple times, only the first call will invoke f, even if f has a different value in each invocation. A new instance of Once is required for each function to execute.
 
 do is intended for initialization that must be run exactly once. Since f is niladic, it may be necessary to use a function literal to capture the arguments to a function to be invoked by do:
 
-`config.once.do(func() { config.init(filename) })`
+`config.once.Do(Func() { config.Init(filename) })`
 
 Because no call to do returns until the one call to f returns, if f causes do to be called, it will deadlock.
 

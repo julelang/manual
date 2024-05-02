@@ -9,20 +9,20 @@ A test utility also used by the Jule runtime. It provides functionalities that f
 
 **Methods:**
 
-`fn fail(self)`\
+`fn Fail(self)`\
 Fails test. Does not breaks scope execution.
 
-`fn failed(self): bool`\
+`fn Failed(self): bool`\
 Reports whether test is failed.
 
-`fn skip(self)`\
+`fn Skip(self)`\
 Skip test. Does not breaks scope execution.
 
-`fn skipped(self): bool`\
+`fn Skipped(self): bool`\
 Reports whether test is skipped.
 
-`fn assert(self, expr: bool, message: str): bool`\
+`fn Assert(self, expr: bool, message: str): bool`\
 Set status of test as failure if expression is evaluated false at runtime.
 
-`fn errorf(self, fmt: str, args: ...any)`\
+`fn Errorf(self, fmt: str, args: ...any)`\
 Set status of test as failure and print message by formatting. Prints new-line after formatted text. Uses `std::fmt` internally.

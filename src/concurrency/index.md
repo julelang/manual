@@ -11,10 +11,10 @@ Concurrent calls are made with the `co` keyword.
 
 For example:
 ```jule
-co my_function()
+co myFunction()
 ```
 
-Now your call to "my_function" is running concurrently.
+Now your call to "myFunction" is running concurrently.
 You can call any function for concurrency with some safety constraints.
 
 ## References
@@ -23,5 +23,5 @@ You cannot use any function that has reference parameters for concurrency. At le
 
 For example:
 ```jule
-unsafe { co my_function(my_var) }
+unsafe { co myFunction(my_var) }
 ```

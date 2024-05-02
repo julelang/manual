@@ -22,56 +22,56 @@ Allocates new space and copies (not deep copy) items into space.
 
 **Methods:**
 
-`static fn new(cap: int): Vec[T]` \
+`static fn New(cap: int): Vec[T]` \
 Allocate new vector with capacity. 
 
-`fn fit(mut self)`\
+`fn Fit(mut self)`\
 Set capacity to length. Removes additional capacity that waiting to use. Allocates new memory to cut additional capacity.
 
-`fn len(self): int`\
+`fn Len(self): int`\
 Returns length.
 
-`fn cap(self): int`\
+`fn Cap(self): int`\
 Returns capacity.
 
-`set_len(mut self, n: int)`\
+`fn SetLen(mut self, n: int)`\
 Sets length.\
 Sets length to zero if n < 0.\
 Don't set length if n >= length of vector.
 
-`fn at(mut self, i: int): T`\
+`fn At(mut self, i: int): T`\
 Returns item by index.
 
-`fn set(mut self, i: int, mut item: T)`\
+`fn Set(mut self, i: int, mut item: T)`\
 Set element by index.
 
-`fn clear(mut self)`
+`fn Clear(mut self)`
 Removes all elements.
 Does not deallocates buffer, keeps capacity.
 
-`fn dealloc(mut self)`\
+`fn Dealloc(mut self)`\
 Deallocates heap.
 
-`fn push(mut self, mut item: T)`\
+`fn Push(mut self, mut item: T)`\
 Push item to end of heap.
 
-`fn push(mut self, mut items: ...T)`\
+`fn Push(mut self, mut items: ...T)`\
 Push items to end of heap.
 
-`fn push_front(mut self, mut item: T)`\
+`fn PushFront(mut self, mut item: T)`\
 Push item to front of heap.
 
-`fn merge(mut self, mut vec: Vec[T])`\
+`fn Merge(mut self, mut vec: Vec[T])`\
 Merge items to end of heap.
 
-`fn merge_front(mut self, mut vec: Vec[T])`\
+`fn MergeFront(mut self, mut vec: Vec[T])`\
 Merge items to front of heap.
 
-`fn remove_range(mut self, start: int, n: int)`\
+`fn RemoveRange(mut self, start: int, n: int)`\
 Remove range from heap.
 
-`fn insert(mut self, i: int, mut item: T)`\
+`fn Insert(mut self, i: int, mut item: T)`\
 Insert item by index.
 
-`fn slice(mut self, start: int, end: int): Vec[T]`\
+`fn Slice(mut self, start: int, end: int): Vec[T]`\
 Slice between indexes except end position. Not clones internal buffer, so slice vector can effect to internal buffer if type is mutable.

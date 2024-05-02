@@ -31,7 +31,7 @@ It makes sense to write a function as a wrapper, especially if it has dependenci
 
 An example C++ function:
 ```cpp
-void say_hello(const char *name) {
+void sayHello(const char *name) {
     std::cout << "Hello, " << name << std::endl;
 }
 ```
@@ -39,14 +39,14 @@ void say_hello(const char *name) {
 Our Jule code:
 ```jule
 cpp type char: byte
-cpp unsafe fn say_hello(name: *cpp.char)
+cpp unsafe fn sayHello(name: *cpp.char)
 
-fn say_hello(name: str) {
-    unsafe { cpp.say_hello((*cpp.char)(&name[0])) }
+fn sayHello(name: str) {
+    unsafe { cpp.sayHello((*cpp.char)(&name[0])) }
 }
 
 fn main() {
-    say_hello("Julenour")
+    sayHello("Julenour")
 }
 ```
 
@@ -154,14 +154,14 @@ impl Person {
     fn name(self): str { ret self.buffer.name }
     fn surname(self): str { ret self.buffer.surname }
 
-    fn get_full_name(self): str {
+    fn getFullName(self): str {
         ret self.name() + " " + self.surname()
     }
 }
 
 fn main() {
     let p = Person.new("Anonymous", "Julenour")
-    outln(p.get_full_name())
+    outln(p.getFullName())
 }
 ```
 
@@ -188,7 +188,7 @@ cpp struct Person {
 
 In this context, the `Person` wrapper structure could have such a method to wrap relevant method:
 ```jule
-fn say_hi(self) {
+fn sayHi(self) {
     self.buffer.say_hi()
 }
 ```

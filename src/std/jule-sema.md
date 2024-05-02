@@ -2,7 +2,7 @@
 
 ## Functions
 ```jule
-fn analyze_package(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
+fn AnalyzePackage(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -25,7 +25,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ---
 
 ```jule
-fn analyze_file(mut f: &Ast, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
+fn AnalyzeFile(mut f: &Ast, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -48,27 +48,27 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ## Structs
 ```jule
 struct EnumItem {
-    token: &Token
-    ident: str
-    value: &Value
+    Token: &Token
+    Ident: str
+    Value: &Value
 }
 ```
 Enum item.
 
 **Methods:**
 
-`fn auto_expr(self): bool`\
+`fn AutoExpr(self): bool`\
 Reports whether item has auto expression.
 
 ---
 
 ```jule
 struct Enum {
-    token:  &Token
-    public: bool
-    ident:  str
-    kind:   &TypeSymbol
-    items:  []&EnumItem
+    Token:  &Token
+    Public: bool
+    Ident:  str
+    Kind:   &TypeSymbol
+    Items:  []&EnumItem
 }
 ```
 Enum.
@@ -79,7 +79,7 @@ Enum.
 
 **Methods:**
 
-`fn find_item(mut self, ident: str): &EnumItem`\
+`fn FindItem(mut self, ident: str): &EnumItem`\
 Returns item by identifier.\
 Returns nil reference if not exist any item in this identifier. 
 
@@ -87,9 +87,9 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct TypeEnumItem {
-    token: &Token
-    ident: str
-    kind: &TypeSymbol
+    Token: &Token
+    Ident: str
+    Kind:  &TypeSymbol
 }
 ```
 TypeEnum item.
@@ -98,10 +98,10 @@ TypeEnum item.
 
 ```jule
 struct TypeEnum {
-    token:  &Token
-    public: bool
-    ident:  str
-    items:  []&TypeEnumItem
+    Token:  &Token
+    Public: bool
+    Ident:  str
+    Items:  []&TypeEnumItem
 }
 ```
 TypeEnum.
@@ -112,7 +112,7 @@ TypeEnum.
 
 **Methods:**
 
-`fn find_item(mut self, ident: str): &TypeEnumItem`\
+`fn FindItem(mut self, ident: str): &TypeEnumItem`\
 Returns item by identifier.\
 Returns nil reference if not exist any item in this identifier. 
 
@@ -120,23 +120,23 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct Data {
-    kind:      &TypeKind
-    cast_kind: &TypeKind // This expression should be cast to this kind.
-    mutable:   bool
-    reference: bool
-    lvalue:    bool
-    is_rune:   bool
-    model:     ExprModel
+    Kind:      &TypeKind
+    CastKind:  &TypeKind // This expression should be cast to this kind.
+    Mutable:   bool
+    Reference: bool
+    Lvalue:    bool
+    IsRune:    bool
+    Model:     ExprModel
 
     // True if kind is declaration such as:
     //  - &Enum
     //  - &Struct
     //  - int type
     //  - bool type
-    decl: bool
+    Decl: bool
 
     // Constant expression data.
-    constant: &Const
+    Constant: &Const
 }
 ```
 Value data.
@@ -147,16 +147,16 @@ Value data.
 
 **Methods:**
 
-`fn is_nil(self): bool`\
+`fn IsNil(self): bool`\
 Reports whether Data is nil literal.
 
-`fn is_void(self): bool`\
+`fn IsVoid(self): bool`\
 Reports whether Data is void.
 
-`fn is_const(self): bool`\
+`fn IsConst(self): bool`\
 Reports whether Data is constant expression. 
 
-`fn good_operand(self, mut &other: &Data): bool`\
+`fn GoodOperand(self, mut &other: &Data): bool`\
 Reports left and right operand is good order.
 If reports false, left and right operand should be swapped.
 Accepts itself as left operand.
@@ -165,8 +165,8 @@ Accepts itself as left operand.
 
 ```jule
 struct Value {
-    expr: &Expr
-    data: &Data
+    Expr: &Expr
+    Data: &Data
 }
 ```
 Value. 
@@ -175,8 +175,8 @@ Value.
 
 ```jule
 struct OperandExprModel {
-    kind:  &TypeKind
-    model: ExprModel
+    Kind:  &TypeKind
+    Model: ExprModel
 }
 ```
 Operand expression model.
@@ -185,9 +185,9 @@ Operand expression model.
 
 ```jule
 struct BinopExprModel {
-    left:  &OperandExprModel
-    right: &OperandExprModel
-    op:    &Token
+    Left:  &OperandExprModel
+    Right: &OperandExprModel
+    Op:    &Token
 }
 ```
 Binary operation expression model. 
@@ -196,8 +196,8 @@ Binary operation expression model.
 
 ```jule
 struct UnaryExprModel {
-    expr:  ExprModel
-    op:    &Token
+    Expr:  ExprModel
+    Op:    &Token
 }
 ```
 Unary operation expression model. 
@@ -206,8 +206,8 @@ Unary operation expression model.
 
 ```jule
 struct StructArgExprModel {
-    field: &FieldIns
-    expr:  ExprModel
+    Field: &FieldIns
+    Expr:  ExprModel
 }
 ```
 Structure field argument expression model for constructors.\
@@ -217,9 +217,9 @@ For example: `&MyStruct{10, false, "-"}`
 
 ```jule
 struct StructLitExprModel {
-    token: &Token
-    strct: &StructIns
-    args:  []&StructArgExprModel
+    Token: &Token
+    Strct: &StructIns
+    Args:  []&StructArgExprModel
 }
 ```
 Structure literal. 
@@ -228,7 +228,7 @@ Structure literal.
 
 ```jule
 struct AllocStructLitExprModel {
-    lit: &StructLitExprModel
+    Lit: &StructLitExprModel
 }
 ```
 Heap allocated structure litral expression.\
@@ -238,25 +238,25 @@ For example: `&MyStruct{}`
 
 ```jule
 struct CastingExprModel {
-    token:     &Token
-    expr:      ExprModel
-    kind:      &TypeKind
-    expr_kind: &TypeKind
+    Token:    &Token
+    Expr:     ExprModel
+    Kind:     &TypeKind
+    ExprKind: &TypeKind
 }
 ```
-Casting expression model. For example: `(int)(my_float)`
+Casting expression model. For example: `(int)(myFloat)`
 
 ---
 
 ```jule
 struct FnCallExprModel {
-    token:    &Token
-    func:     &FnIns
-    is_co:    bool
-    expr:     ExprModel
-    args:     []ExprModel
-    except:   &Scope
-    assigned: bool
+    Token:    &Token
+    Func:     &FnIns
+    IsCo:     bool
+    Expr:     ExprModel
+    Args:     []ExprModel
+    Except:   &Scope
+    Assigned: bool
 }
 ```
 Function call expression model. 
@@ -265,8 +265,8 @@ Function call expression model.
 
 ```jule
 struct BuiltinErrorCallExprModel {
-    func: &FnIns
-    err:  ExprModel
+    Func: &FnIns
+    Err:  ExprModel
 }
 ```
 Expression model for built-in error function calls.
@@ -275,8 +275,8 @@ Expression model for built-in error function calls.
 
 ```jule
 struct SliceExprModel {
-    elem_kind: &TypeKind
-    elems:     []ExprModel
+    ElemKind: &TypeKind
+    Elems:    []ExprModel
 }
 ```
 Slice expression model.\
@@ -286,20 +286,20 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ```jule
 struct IndexingExprModel {
-    token: &Token
-    expr:  &Data
-    index: &Data
+    Token: &Token
+    Expr:  &Data
+    Index: &Data
 }
 ```
 Indexing expression model.\
-For example: `my_slice[my_index]`
+For example: `mySlice[myIndex]`
 
 ---
 
 ```jule
 struct AnonFnExprModel {
-    func:   &FnIns
-    global: bool
+    Func:   &FnIns
+    Global: bool
 }
 ```
 Anonymous function expression model. 
@@ -308,8 +308,8 @@ Anonymous function expression model.
 
 ```jule
 struct KeyValPairExprModel {
-    key: ExprModel
-    val: ExprModel
+    Key: ExprModel
+    Val: ExprModel
 }
 ```
 Key-value expression pair model.
@@ -318,9 +318,9 @@ Key-value expression pair model.
 
 ```jule
 struct MapExprModel {
-    key_kind: &TypeKind
-    val_kind: &TypeKind
-    entries:  []&KeyValPairExprModel
+    KeyKind: &TypeKind
+    ValKind: &TypeKind
+    Entries: []&KeyValPairExprModel
 }
 ```
 Map expression model.
@@ -330,48 +330,48 @@ For example: `{0: false, 1: true}`
 
 ```jule
 struct SlicingExprModel {
-    token: &Token
-    expr:  ExprModel
-    left:  ExprModel
-    right: ExprModel
+    Token: &Token
+    Expr:  ExprModel
+    Left:  ExprModel
+    Right: ExprModel
 }
 ```
 Slicing expression model.
-For example: `my_slice[2:my_slice.len-5]`
+For example: `mySlice[2:mySlice.len-5]`
 
 ---
 
 ```jule
 struct TraitSubIdentExprModel {
-    token:  &Token
-    expr:   ExprModel
-    method: &Fn
-    trt:    &Trait
+    Token:  &Token
+    Expr:   ExprModel
+    Method: &Fn
+    Trt:    &Trait
 }
 ```
 Trait sub-ident expression model.
-For example: `my_trait.my_sub_ident`
+For example: `myTrait.mySubIdent`
 
 ---
 
 ```jule
 struct StructSubIdentExprModel {
-    token:     &Token
-    expr:      &Data
-    expr_kind: &TypeKind
-    method:    &FnIns
-    field:     &FieldIns
+    Token:    &Token
+    Expr:     &Data
+    ExprKind: &TypeKind
+    Method:   &FnIns
+    Field:    &FieldIns
 }
 ```
 Structure sub-ident expression model.
-For example: `my_struct.my_sub_ident`
+For example: `myStruct.mySubIdent`
 
 ---
 
 ```jule
 struct ArrayExprModel {
-    kind:  &Arr
-    elems: []ExprModel
+    Kind:  &Arr
+    Elems: []ExprModel
 }
 ```
 Array expression model.  If array filled, elems field holds 2 data. First data is expression, second is nil, kind of mark to that array filled.
@@ -380,7 +380,7 @@ Array expression model.  If array filled, elems field holds 2 data. First data i
 
 ```jule
 struct CommonIdentExprModel {
-    ident: str
+    Ident: str
 }
 ```
 Common ident expression model.
@@ -389,10 +389,10 @@ Common ident expression model.
 
 ```jule
 struct CommonSubIdentExprModel {
-    expr_kind: &TypeKind
-    expr:      ExprModel
-    token:     &Token
-    ident:     str
+    ExprKind: &TypeKind
+    Expr:     ExprModel
+    Token:    &Token
+    Ident:    str
 }
 ```
 Common sub-ident expression model.
@@ -401,7 +401,7 @@ Common sub-ident expression model.
 
 ```jule
 struct TupleExprModel {
-    datas: []&Data
+    Datas: []&Data
 }
 ```
 Tuple expression model.
@@ -410,7 +410,7 @@ Tuple expression model.
 
 ```jule
 struct BuiltinOutCallExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for built-in out function calls.
@@ -419,7 +419,7 @@ Expression model for built-in out function calls.
 
 ```jule
 struct BuiltinOutlnCallExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for built-in outln function calls.
@@ -428,7 +428,7 @@ Expression model for built-in outln function calls.
 
 ```jule
 struct BuiltinCloneCallExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for built-in clone function calls.
@@ -437,8 +437,8 @@ Expression model for built-in clone function calls.
 
 ```jule
 struct BuiltinCloneNewExprModel {
-    kind: &TypeKind
-    init: ExprModel
+    Kind: &TypeKind
+    Init: ExprModel
 }
 ```
 Expression model for built-in new function calls.
@@ -447,8 +447,8 @@ Expression model for built-in new function calls.
 
 ```jule
 struct BuiltinPanicCallExprModel {
-    token: &Token
-    expr:  ExprModel
+    Token: &Token
+    Expr:  ExprModel
 }
 ```
 Expression model for built-in panic function calls.
@@ -457,9 +457,9 @@ Expression model for built-in panic function calls.
 
 ```jule
 struct BuiltinAssertCallExprModel {
-    token: &Token
-    expr:  ExprModel
-    log:   str
+    Token: &Token
+    Expr:  ExprModel
+    Log:   str
 }
 ```
 Expression model for built-in assert function calls.
@@ -468,8 +468,8 @@ Expression model for built-in assert function calls.
 
 ```jule
 struct BuiltinMakeCallExprModel {
-    kind: &TypeKind
-    size: ExprModel
+    Kind: &TypeKind
+    Size: ExprModel
 }
 ```
 Expression model for built-in make function calls.
@@ -478,8 +478,8 @@ Expression model for built-in make function calls.
 
 ```jule
 struct BuiltinAppendCallExprModel {
-    dest:     ExprModel
-    elements: ExprModel
+    Dest:     ExprModel
+    Elements: ExprModel
 }
 ```
 Expression model for built-in append function calls.
@@ -488,7 +488,7 @@ Expression model for built-in append function calls.
 
 ```jule
 struct SizeofExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for sizeof expressions.\
@@ -498,7 +498,7 @@ For exmaple, in C++: `sizeof(int)`
 
 ```jule
 struct AlignofExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for alignof expressions.\
@@ -508,17 +508,17 @@ For exmaple, in C++: `alignof(int)`
 
 ```jule
 struct StrConstructorCallExprModel {
-    expr:  ExprModel
+    Expr:  ExprModel
 }
 ```
 Expression model for constructor call of str type.\
-For exmaple: `str(my_expr)`
+For exmaple: `str(myExpr)`
 
 ---
 
 ```jule
 struct RuneExprModel {
-    code: rune
+    Code: rune
 }
 ```
 Rune literal expression model.
@@ -528,16 +528,16 @@ For exmaple: `'a'`
 
 ```jule
 struct IntegratedToStrExprModel {
-    pexpr: ExprModel
+    Pexpr: ExprModel
 }
 ```
-Expression model for to_str function of std::jule::integrated library.
+Expression model for ToStr function of std::jule::integrated library.
 
 ---
 
 ```jule
 struct BackendEmitExprModel {
-    code: str
+    Code: str
 }
 ```
 Expression model for inline code emit to backend.
@@ -546,7 +546,7 @@ Expression model for inline code emit to backend.
 
 ```jule
 struct FreeExprModel {
-    expr: ExprModel
+    Expr: ExprModel
 }
 ```
 Expression model for free calls.\
@@ -556,8 +556,8 @@ Function provided by: `std::mem`
 
 ```jule
 struct RetType {
-    kind:   &TypeSymbol
-    idents: []&Token
+    Kind:   &TypeSymbol
+    Idents: []&Token
 }
 ```
 Return type.
@@ -566,73 +566,73 @@ Return type.
 
 ```jule
 struct Param {
-    token:     &Token
-    mutable:   bool
-    variadic:  bool
-    reference: bool
-    kind:      &TypeSymbol
-    ident:     str
+    Token:     &Token
+    Mutable:   bool
+    Variadic:  bool
+    Reference: bool
+    Kind:      &TypeSymbol
+    Ident:     str
 }
 ```
 Parameter.
 
 **Methods:**
 
-`fn is_self(self): bool`\
+`fn IsSelf(self): bool`\
 Reports whether parameter is self (receiver) parameter.
 
-`fn is_ref(self): bool`\
+`fn IsRef(self): bool`\
 Reports whether self (receiver) parameter is reference. 
 
 ---
 
 ```jule
 struct Fn {
-    token:       &Token
-    global:      bool
-    unsafety:    bool
-    public:      bool
-    cpp_linked:  bool
-    statically:  bool
-    exceptional: bool
-    ident:       str
-    directives:  []&Directive
-    scope:       &ScopeTree
-    generics:    []&GenericDecl
-    result:      &RetType
-    params:      []&Param
-    owner:       &Struct
+    Token:       &Token
+    Global:      bool
+    Unsafety:    bool
+    Public:      bool
+    CppLinked:   bool
+    Statically:  bool
+    Exceptional: bool
+    Ident:       str
+    Directives:  []&Directive
+    Scope:       &ScopeTree
+    Generics:    []&GenericDecl
+    Result:      &RetType
+    Params:      []&Param
+    Owner:       &Struct
 
     // Function instances for each unique type combination of function call.
     // Nil if function is never used.
-    instances: []&FnIns
+    Instances: []&FnIns
 }
 ```
 Function.
 
 **Methods:**
 
-`fn is_void(self): bool`\
+`fn IsVoid(self): bool`\
 Reports whether return type is void.
 
-`fn is_method(self): bool`\
+`fn IsMethod(self): bool`\
 Reports whether function is method.
 
-`fn is_entry_point(self): bool`\
+`fn IsEntryPoint(self): bool`\
 Reports whether function is entry point.
 
-`fn is_anon(self): bool`\
+`fn IsAnon(self): bool`\
 Reports whether function is anonymous funuction.
 
-`fn any_var(self): bool`\
+`fn AnyVar(self): bool`\
 Reports whether function has return variable(s).
 
 ---
 
 ```jule
 struct ParamIns {
-    decl: &Param
-    kind: &TypeKind
+    Decl: &Param
+    Kind: &TypeKind
 }
 ```
 Parameter instance.
@@ -645,14 +645,14 @@ Parameter instance.
 
 ```jule
 struct FnIns {
-    owner:    &StructIns
-    decl:     &Fn
-    generics: []&InsGeneric
-    params:   []&ParamIns
-    result:   &TypeKind
-    scope:    &Scope
-    refers:   &ReferenceStack
-    anon:     bool
+    Owner:    &StructIns
+    Decl:     &Fn
+    Generics: []&InsGeneric
+    Params:   []&ParamIns
+    Result:   &TypeKind
+    Scope:    &Scope
+    Refers:   &ReferenceStack
+    Anon:     bool
 }
 ```
 Function instance. 
@@ -663,43 +663,43 @@ Function instance.
 
 **Methods:**
 
-`fn types(mut self): []&TypeKind`\
+`fn Types(mut self): []&TypeKind`\
 Returns all types of result.\
 Returns nil if result is nil.\
 Returns mutable slice if returns internal slice.
 
-`fn is_builtin(self): bool`\
+`fn IsBuiltin(self): bool`\
 Reports whether instance is built-in.
 
-`fn is_anon(self): bool`\
+`fn IsAnon(self): bool`\
 Reports whether instance is anonymous function.
 
-`fn get_kind_str(self, ident: bool): str` \
+`fn GetKindStr(self, ident: bool): str` \
 Returns kind string of function instance.
 Appends identifier to kind of this instance.
 Does not appends identifier of this instance to kind if self.decl is nil reference.
 
-`fn same(self, f: &FnIns): bool`\
+`fn Same(self, f: &FnIns): bool`\
 Reports whether instances are same. Returns true if declarations and generics are same.
 
 ---
 
 ```jule
 struct Impl {
-    base:    &TypeDecl
-    dest:    &TypeDecl
-    methods: []&Fn
-    statics: []&Var
+    Base:    &TypeDecl
+    Dest:    &TypeDecl
+    Methods: []&Fn
+    Statics: []&Var
 }
 ```
 Implementation. 
 
 **Methods:**
 
-`fn is_trait_impl(self): bool`\
+`fn IsTraitImpl(self): bool`\
 Reports whether implementation type is trait to structure.
 
-`fn is_struct_impl(self): bool`\
+`fn IsStructImpl(self): bool`\
 Reports whether implementation type is append to destination structure. 
 
 ---
@@ -707,41 +707,41 @@ Reports whether implementation type is append to destination structure.
 ```jule
 struct ImportInfo {
     // Use declaration token.
-    token: &Token
+    Token: &Token
 
     // Absolute path.
-    path: str
+    Path: str
 
     // Use declaration path string.
-    link_path: str
+    LinkPath: str
 
     // Package identifier (aka package name).
     // Empty if package is cpp header.
-    ident: str
+    Ident: str
 
     // Package alias identifier.
-    alias: str
+    Alias: str
 
-    // True if imported with Importer.Get_import function.
-    duplicate: bool
+    // True if imported with Importer.GetImport function.
+    Duplicate: bool
 
     // Is cpp use declaration.
-    cpp_linked: bool
+    CppLinked: bool
 
     // Is standard library package.
-    std: bool
+    Std: bool
 
     // Is imported all defines implicitly.
-    import_all: bool
+    ImportAll: bool
 
     // Identifiers of selected definition.
-    selected: []&Token
+    Selected: []&Token
 
     // Nil if package is cpp header.
-    package: &Package
+    Package: &Package
 
     // Module identity.
-    mod_id: int
+    ModId: int
 }
 ```
 Import information.\
@@ -755,7 +755,7 @@ Represents imported package by use declaration.
 
 ```jule
 struct Package {
-    files: []&SymbolTable
+    Files: []&SymbolTable
 }
 ```
 Package.
@@ -768,10 +768,10 @@ Package.
 
 ```jule
 struct Scope {
-    parent:   &Scope
-    unsafety: bool
-    deferred: bool
-    stmts:    []Stmt
+    Parent:   &Scope
+    Unsafety: bool
+    Deferred: bool
+    Stmts:    []Stmt
 }
 ```
 Scope.
@@ -780,8 +780,8 @@ Scope.
 
 ```jule
 struct If {
-    expr:  ExprModel
-    scope: &Scope
+    Expr:  ExprModel
+    Scope: &Scope
 }
 ```
 Cain conditional node.
@@ -790,7 +790,7 @@ Cain conditional node.
 
 ```jule
 struct Else {
-    scope: &Scope
+    Scope: &Scope
 }
 ```
 Default scope of conditional chain.
@@ -799,8 +799,8 @@ Default scope of conditional chain.
 
 ```jule
 struct Conditional {
-    elifs:  []&If
-    default: &Else
+    Elifs:   []&If
+    Default: &Else
 }
 ```
 Conditional chain.
@@ -809,7 +809,7 @@ Conditional chain.
 
 ```jule
 struct InfIter {
-    scope: &Scope
+    Scope: &Scope
 }
 ```
 Infinity iteration.
@@ -818,26 +818,26 @@ Infinity iteration.
 
 ```jule
 struct WhileIter {
-    expr:  ExprModel
-    next:  Stmt
-    scope: &Scope
+    Expr:  ExprModel
+    Next:  Stmt
+    Scope: &Scope
 }
 ```
 While iteration. 
 
 **Methods:**
 
-`fn is_while_next(self): bool`\
+`fn IsWhileNext(self): bool`\
 Reports whether iteration is while-next. 
 
 ---
 
 ```jule
 struct RangeIter {
-    expr:  ExprModel
-    scope: &Scope
-    key_a: &Var
-    key_b: &Var
+    Expr:  ExprModel
+    Scope: &Scope
+    KeyA:  &Var
+    KeyB:  &Var
 }
 ```
 Range iteration.
@@ -846,7 +846,7 @@ Range iteration.
 
 ```jule
 struct Contst {
-    it: uintptr
+    It: uintptr
 }
 ```
 Continue statement.
@@ -855,8 +855,8 @@ Continue statement.
 
 ```jule
 struct Breakst {
-    it:   uintptr
-    mtch: uintptr
+    It:   uintptr
+    Mtch: uintptr
 }
 ```
 Break statement.
@@ -865,7 +865,7 @@ Break statement.
 
 ```jule
 struct Label {
-    ident: str
+    Ident: str
 }
 ```
 
@@ -873,7 +873,7 @@ struct Label {
 
 ```jule
 struct GotoSt {
-    ident: str
+    Ident: str
 }
 ```
 
@@ -881,8 +881,8 @@ struct GotoSt {
 
 ```jule
 struct Postfix {
-    expr: ExprModel
-    op:   str
+    Expr: ExprModel
+    Op:   str
 }
 ```
 Postfix assignment.
@@ -891,9 +891,9 @@ Postfix assignment.
 
 ```jule
 struct Assign {
-    l:  &OperandExprModel
-    r:  &OperandExprModel
-    op: &Token
+    L:  &OperandExprModel
+    R:  &OperandExprModel
+    Op: &Token
 }
 ```
 Assignment.
@@ -902,8 +902,8 @@ Assignment.
 
 ```jule
 struct MultiAssign {
-    l: []ExprModel
-    r: ExprModel
+    L: []ExprModel
+    R: ExprModel
 }
 ```
 Multi-declarative assignment.
@@ -912,40 +912,40 @@ Multi-declarative assignment.
 
 ```jule
 struct Match {
-    expr:       &Data
-    type_match: bool
-    cases:      []&Case
-    default:    &Case
+    Expr:      &Data
+    TypeMatch: bool
+    Cases:     []&Case
+    Default:   &Case
 }
 ```
 Match-Case.
 
 **Methods:**
 
-`fn is_generic_type_match(self): bool`\
+`fn IsGenericTypeMatch(self): bool`\
 Reports whether match is type-match for generic type.
 
 ---
 
 ```jule
 struct Case {
-    owner: &Match
-    scope: &Scope
-    exprs: []&Data
-    next:  &Case
+    Owner: &Match
+    Scope: &Scope
+    Exprs: []&Data
+    Next:  &Case
 }
 ```
 
 **Methods:**
 
-`fn is_default(self): bool`\
+`fn IsDefault(self): bool`\
 Reports whether case is default. 
 
 ---
 
 ```jule
 struct FallSt {
-    dest_case: uintptr
+    DestCase: uintptr
 }
 ```
 
@@ -953,9 +953,9 @@ struct FallSt {
 
 ```jule
 struct RetSt {
-    func: &FnIns
-    vars: []&Var
-    expr: ExprModel
+    Func: &FnIns
+    Vars: []&Var
+    Expr: ExprModel
 }
 ```
 Return statement. 
@@ -964,10 +964,10 @@ Return statement.
 
 ```jule
 struct Recover {
-    handler:      &FnIns
-    handler_expr: ExprModel
-    scope:        &Scope
-    scope_owner:  &FnIns
+    Handler:     &FnIns
+    HandlerExpr: ExprModel
+    Scope:       &Scope
+    ScopeOwner:  &FnIns
 }
 ```
 Built-in recover function call statement.
@@ -989,32 +989,32 @@ List of necessary references;
 
 **Methods:**
 
-`fn len(self): int`\
+`fn Len(self): int`\
 Returns count of references.
 
-`fn at(mut self, i: int): any`\
+`fn At(mut self, i: int): any`\
 Returns reference by index.
 
-`fn push(mut self, mut ref: any)`\
+`fn Push(mut self, mut ref: any)`\
 Push new reference to stack.
 
-`fn remove(mut self, i: int)`\
+`fn Remove(mut self, i: int)`\
 Removes reference by index.
 
-`fn exist[T](self, t: &T): bool`\
+`fn Exist[T](self, t: &T): bool`\
 Reports whether reference is exist.
 
 ---
 
 ```jule
 struct Field {
-    owner:   &Struct
-    token:   &Token
-    public:  bool
-    mutable: bool
-    ident:   str
-    kind:    &TypeSymbol
-    default: &Expr
+    Owner:   &Struct
+    Token:   &Token
+    Public:  bool
+    Mutable: bool
+    Ident:   str
+    Kind:    &TypeSymbol
+    Default: &Expr
 }
 ```
 
@@ -1022,34 +1022,34 @@ struct Field {
 
 ```jule
 struct Operators {
-    eq:             &FnIns
-    gt:             &FnIns
-    gt_eq:          &FnIns
-    lt:             &FnIns
-    lt_eq:          &FnIns
-    shl:            &FnIns
-    shr:            &FnIns
-    add:            &FnIns
-    sub:            &FnIns
-    div:            &FnIns
-    mul:            &FnIns
-    mod:            &FnIns
-    bit_and:        &FnIns
-    bit_or:         &FnIns
-    bit_xor:        &FnIns
-    neg:            &FnIns
-    pos:            &FnIns
-    bit_not:        &FnIns
-    add_assign:     &FnIns
-    sub_assign:     &FnIns
-    div_assign:     &FnIns
-    mul_assign:     &FnIns
-    mod_assign:     &FnIns
-    shl_assign:     &FnIns
-    shr_assign:     &FnIns
-    bit_or_assign:  &FnIns
-    bit_and_assign: &FnIns
-    bit_xor_assign: &FnIns
+    Eq:            &FnIns
+    Gt:            &FnIns
+    GtEq:          &FnIns
+    Lt:            &FnIns
+    LtEq:          &FnIns
+    Shl:           &FnIns
+    Shr:           &FnIns
+    Add:           &FnIns
+    Sub:           &FnIns
+    Div:           &FnIns
+    Mul:           &FnIns
+    Mod:           &FnIns
+    BitAnd:        &FnIns
+    BitOr:         &FnIns
+    BitXor:        &FnIns
+    Neg:           &FnIns
+    Pos:           &FnIns
+    BitNot:        &FnIns
+    AddAssign:     &FnIns
+    SubAssign:     &FnIns
+    DivAssign:     &FnIns
+    MulAssign:     &FnIns
+    ModAssign:     &FnIns
+    ShlAssign:     &FnIns
+    ShrAssign:     &FnIns
+    BitOrAssign:   &FnIns
+    BitAndAssign:  &FnIns
+    BitXorAssign:  &FnIns
 }
 ```
 Overloaded operators for instance.
@@ -1059,54 +1059,54 @@ Patterns are checked.
 
 ```jule
 struct Struct {
-    depends:    []&Struct
-    uses:       []&Struct
-    token:      &Token
-    ident:      str
-    fields:     []&Field
-    methods:    []&Fn
-    cpp_linked: bool
-    directives: []&Directive
-    generics:   []&GenericDecl
-    implements: []&Trait
-    instances:  []&StructIns
+    Depends:    []&Struct
+    Uses:       []&Struct
+    Token:      &Token
+    Ident:      str
+    Fields:     []&Field
+    Methods:    []&Fn
+    CppLinked:  bool
+    Directives: []&Directive
+    Generics:   []&GenericDecl
+    Implements: []&Trait
+    Instances:  []&StructIns
 }
 ```
 Structure.
 
 **Methods:**
 
-`fn find_method(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Fn`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier.
 
-`fn find_static(mut self, ident: str): &Var`\
+`fn FindStatic(mut self, ident: str): &Var`\
 Returns static field by identifier.
 Returns nil reference if not exist any static field in this identifier.
 
-`fn find_field(mut self, ident: str): &Field`\
+`fn FindField(mut self, ident: str): &Field`\
 Returns field by identifier.\
 Returns nil reference if not exist any field in this identifier.
 
-`fn is_implements(self, t: &Trait): bool`\
+`fn IsImplements(self, t: &Trait): bool`\
 Reports whether structure implements given trait.
 
-`fn is_derives(self, ident: str): bool`\
+`fn IsDerives(self, ident: str): bool`\
 Reports whether structure is derives given derive.
 
-`fn is_uses(self, s: &Struct): bool`\
+`fn IsUses(self, s: &Struct): bool`\
 Reports whether structure is uses given structure. 
 
-`fn has_ref_accessible(self): bool`\
+`fn HasRefAccessible(self): bool`\
 Reports whether structure has only reference-type-accessible defines.
 
 ---
 
 ```jule
 struct FieldIns {
-    decl: &Field
-    kind: &TypeKind
-    default: &Data
+    Decl:    &Field
+    Kind:    &TypeKind
+    Default: &Data
 }
 ```
 Field instance. 
@@ -1115,14 +1115,14 @@ Field instance.
 
 ```jule
 struct StructIns {
-    checked:   bool
-    decl:      &Struct
-    generics:  []&InsGeneric
-    fields:    []&FieldIns
-    methods:   []&Fn
-    mutable:   bool
-    refers:    &ReferenceStack
-    operators: Operators
+    Checked:   bool
+    Decl:      &Struct
+    Generics:  []&InsGeneric
+    Fields:    []&FieldIns
+    Methods:   []&Fn
+    Mutable:   bool
+    Refers:    &ReferenceStack
+    Operators: Operators
 }
 ```
 Structure instance.
@@ -1133,15 +1133,15 @@ Structure instance.
 
 **Methods:**
 
-`fn find_method(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Fn`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier.
 
-`fn find_field(mut self, ident: str): &FieldIns`\
+`fn FindField(mut self, ident: str): &FieldIns`\
 Returns field by identifier.\
 Returns nil reference if not exist any field in this identifier. 
 
-`fn same(self, s: &StructIns): bool`\
+`fn Same(self, s: &StructIns): bool`\
 Reports whether instances are same.\
 Returns true if declarations and generics are same.
 
@@ -1149,8 +1149,8 @@ Returns true if declarations and generics are same.
 
 ```jule
 struct Pass {
-    token: &Token
-    text:  str
+    Token: &Token
+    Text:  str
 }
 ```
 Directive pass. 
@@ -1159,17 +1159,17 @@ Directive pass.
 
 ```jule
 struct SymbolTable {
-    file:         &File         // Owner fileset of this symbol table.
-    passes:       []Pass        // All passed flags with jule:pass directive.
-    imports:      []&ImportInfo // Imported packages.
-    vars:         []&Var        // Variables.
-    type_aliases: []&TypeAlias  // Type aliases.
-    structs:      []&Struct     // Structures.
-    funcs:        []&Fn         // Functions.
-    traits:       []&Trait      // Traits.
-    enums:        []&Enum       // Enums.
-    type_enums:   []&TypeEnum   // Type enums.
-    impls:        []&Impl       // Implementations.
+    File:         &File         // Owner fileset of this symbol table.
+    Passes:       []Pass        // All passed flags with jule:pass directive.
+    Imports:      []&ImportInfo // Imported packages.
+    Vars:         []&Var        // Variables.
+    TypeAliases:  []&TypeAlias  // Type aliases.
+    Structs:      []&Struct     // Structures.
+    Funcs:        []&Fn         // Functions.
+    Traits:       []&Trait      // Traits.
+    Enums:        []&Enum       // Enums.
+    TypeEnums:    []&TypeEnum   // Type enums.
+    Impls:        []&Impl       // Implementations.
 }
 ```
 Structure instance.
@@ -1182,12 +1182,12 @@ Structure instance.
 
 ```jule
 struct Trait {
-    token:       &Token
-    ident:       str
-    public:      bool
-    mutable:     bool
-    methods:     []&Fn
-    implemented: []&Struct
+    Token:       &Token
+    Ident:       str
+    Public:      bool
+    Mutable:     bool
+    Methods:     []&Fn
+    Implemented: []&Struct
 }
 ```
 Trait.
@@ -1198,10 +1198,10 @@ Trait.
 
 **Methods:**
 
-`fn is_builtin(self): bool`\
+`fn IsBuiltin(self): bool`\
 Returns whether Trait is built-in
 
-`fn find_method(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Fn`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier. 
 
@@ -1209,8 +1209,8 @@ Returns nil reference if not exist any method in this identifier.
 
 ```jule
 struct InsGeneric {
-    kind:       &TypeKind
-    constraint: []&TypeKind
+    Kind:       &TypeKind
+    Constraint: []&TypeKind
 }
 ```
 Generic type for instance types.
@@ -1219,16 +1219,16 @@ Generic type for instance types.
 
 ```jule
 struct TypeAlias {
-    scope:      &ScopeTree
-    public:     bool
-    cpp_linked: bool
-    used:       bool
-    generic:    bool
-    token:      &Token
-    ident:      str
-    kind:       &TypeSymbol
-    refers:     []any
-    generics:   []&TypeAlias
+    Scope:      &ScopeTree
+    Public:     bool
+    CppLinked:  bool
+    Used:       bool
+    Generic:    bool
+    Token:      &Token
+    Ident:      str
+    Kind:       &TypeSymbol
+    Refers:     []any
+    Generics:   []&TypeAlias
 }
 ```
 Type alias.
@@ -1241,10 +1241,10 @@ Type alias.
 
 ```jule
 struct TypeKind {
-    cpp_ident: str
-    generic:   bool
-    variadic:  bool
-    kind:      Kind
+    CppIdent:  str
+    Generic:   bool
+    Variadic:  bool
+    Kind:      Kind
 }
 ```
 Evaluated type declaration.
@@ -1255,72 +1255,72 @@ Evaluated type declaration.
 
 **Methods:**
 
-`fn cpp_linked(self): bool`\
+`fn CppLinked(self): bool`\
 Reports whether type is cpp-linked kind.
 
-`fn is_nil(self): bool`\
+`fn IsNil(self): bool`\
 Reports whether kind is nil.
 
-`fn void(self): bool`\
+`fn Void(self): bool`\
 Reports whether kind is void.
 
-`fn mut(self): bool`\
+`fn Mut(self): bool`\
 Reports whether kind is mutable.
 
-`fn nil_compatible(self): bool`\
+`fn NilCompatible(self): bool`\
 Reports whether kind is nil compatible.
 
-`fn performs_rc(self): bool`\
+`fn PerformsRc(self): bool`\
 Reports whether kind performs reference-counting.
 
-`fn supports_cloning(self): bool`\
+`fn SupportsCloning(self): bool`\
 Reports whether kind supports clonning via jule::Clone derive.
 
-`fn variadicable(self): bool`\
+`fn Variadicable(self): bool`\
 Reports whether kind is variadicable.
 
-`fn prim(self): &Prim`\
+`fn Prim(self): &Prim`\
 Returns primitive type if kind is primitive type, nil reference if not.
 
-`fn sptr(self): &Sptr`\
+`fn Sptr(self): &Sptr`\
 Returns reference type if kind is smart pointer, nil reference if not.
 
-`fn ptr(self): &Ptr`\
+`fn Ptr(self): &Ptr`\
 Returns pointer type if kind is pointer, nil reference if not.
 
-`fn enm(self): &Enum`\
+`fn Enm(self): &Enum`\
 Returns enum type if kind is enum, nil reference if not.
 
-`fn tenm(self): &TypeEnum`\
+`fn Tenm(self): &TypeEnum`\
 Returns type enum if kind is type enum, nil reference if not.
 
-`fn arr(self): &Arr`\
+`fn Arr(self): &Arr`\
 Returns array type if kind is array, nil reference if not.
 
-`fn slc(self): &Slc`\
+`fn Slc(self): &Slc`\
 Returns slice type if kind is slice, nil reference if not.
 
-`fn fnc(self): &FnIns`\
+`fn Fnc(self): &FnIns`\
 Returns function type if kind is function, nil reference if not.
 
-`fn strct(self): &Struct`\
+`fn Strct(self): &Struct`\
 Returns struct type if kind is structure, nil reference if not.
 
-`fn trt(self): &Trait`\
+`fn Trt(self): &Trait`\
 Returns trait type if kind is trait, nil reference if not.
 
-`fn map(self): &Map`\
+`fn Map(self): &Map`\
 Returns map type if kind is map, nil reference if not.
 
-`fn tup(self): &Tuple`\
+`fn Tup(self): &Tuple`\
 Returns tuple type if kind is tuple, nil reference if not. 
 
 ---
 
 ```jule
 struct TypeSymbol {
-    decl: &TypeDecl
-    kind: &TypeDecl
+    Decl: &TypeDecl
+    Kind: &TypeDecl
 }
 ```
 Type. 
@@ -1329,7 +1329,7 @@ Type.
 
 ```jule
 struct Prim {
-    kind: str
+    Kind: str
 }
 ```
 Primitive type. 
@@ -1340,62 +1340,62 @@ Primitive type.
 
 **Methods:**
 
-`fn is_constraint(self): bool`\
+`fn IsConstraint(self): bool`\
 Reports whether type is built-in constraint.
 
-`fn is_i8(self): bool`\
+`fn IsI8(self): bool`\
 Reports whether type is primitive i8.
 
-`fn is_i16(self): bool`\
+`fn IsI16(self): bool`\
 Reports whether type is primitive i16.
 
-`fn is_i32(self): bool`\
+`fn IsI32(self): bool`\
 Reports whether type is primitive i32.
 
-`fn is_i64(self): bool`\
+`fn IsI64(self): bool`\
 Reports whether type is primitive i64.
 
-`fn is_u8(self): bool`\
+`fn IsU8(self): bool`\
 Reports whether type is primitive u8.
 
-`fn is_u16(self): bool`\
+`fn IsU16(self): bool`\
 Reports whether type is primitive u16.
 
-`fn is_u32(self): bool`\
+`fn IsU32(self): bool`\
 Reports whether type is primitive u32.
 
-`fn is_u64(self): bool`\
+`fn IsU64(self): bool`\
 Reports whether type is primitive u64.
 
-`fn is_f32(self): bool`\
+`fn IsF32(self): bool`\
 Reports whether type is primitive f32.
 
-`fn is_f64(self): bool`\
+`fn IsF64(self): bool`\
 Reports whether type is primitive f64.
 
-`fn is_int(self): bool`\
+`fn IsInt(self): bool`\
 Reports whether type is primitive int.
 
-`fn is_uint(self): bool`\
+`fn IsUint(self): bool`\
 Reports whether type is primitive uint.
 
-`fn is_uintptr(self): bool`\
+`fn IsUintptr(self): bool`\
 Reports whether type is primitive uintptr.
 
-`fn is_bool(self): bool`\
+`fn IsBool(self): bool`\
 Reports whether type is primitive bool.
 
-`fn is_str(self): bool`\
+`fn IsStr(self): bool`\
 Reports whether type is primitive str.
 
-`fn is_any(self): bool`\
+`fn IsAny(self): bool`\
 Reports whether type is primitive any. 
 
 ---
 
 ```jule
 struct Slc {
-    elem: &TypeKind
+    Elem: &TypeKind
 }
 ```
 Slice type.
@@ -1408,7 +1408,7 @@ Slice type.
 
 ```jule
 struct Tuple {
-    types: []&TypeKind
+    Types: []&TypeKind
 }
 ```
 Tuple type.
@@ -1421,8 +1421,8 @@ Tuple type.
 
 ```jule
 struct Map {
-    key: &TypeKind
-    val: &TypeKind
+    Key: &TypeKind
+    Val: &TypeKind
 }
 ```
 Map type.
@@ -1435,7 +1435,7 @@ Map type.
 
 ```jule
 struct Arr {
-    elem: &TypeKind
+    Elem: &TypeKind
 }
 ```
 Array type. 
@@ -1448,7 +1448,7 @@ Array type.
 
 ```jule
 struct Ptr {
-    elem: &TypeKind
+    Elem: &TypeKind
 }
 ```
 Pointer type. 
@@ -1459,14 +1459,14 @@ Pointer type.
 
 **Methods:**
 
-`fn is_unsafe(self): bool`\
+`fn IsUnsafe(self): bool`\
 Reports whether pointer is unsafe pointer (*unsafe). 
 
 ---
 
 ```jule
 struct IterRelation {
-    range: &Var
+    Range: &Var
 }
 ```
 Iteration relationship of variables.
@@ -1476,35 +1476,35 @@ Stored only for indexing variable and ranged by variable.
 
 ```jule
 struct Var {
-    scope:         &ScopeTree
-    token:         &Token
-    ident:         str
-    cpp_linked:    bool
-    constant:      bool
-    mutable:       bool
-    public:        bool
-    used:          bool
-    statically:    bool
-    reference:     bool
-    directives:    []&Directive
-    kind:          &TypeSymbol
-    value:         &Value
-    refers:        &ReferenceStack
-    iter_relation: &IterRelation
+    Scope:         &ScopeTree
+    Token:         &Token
+    Ident:         str
+    CppLinked:     bool
+    Constant:      bool
+    Mutable:       bool
+    Public:        bool
+    Used:          bool
+    Statically:    bool
+    Reference:     bool
+    Directives:    []&Directive
+    Kind:          &TypeSymbol
+    Value:         &Value
+    Refers:        &ReferenceStack
+    IterRelation:  &IterRelation
 
     // This variable depended to these variables for initialization expression.
     // Nil if not global variable.
-    depends:    []&Var
+    Depends:    []&Var
 }
 ```
 Variable.
 
 **Methods:**
 
-`fn is_initialized(self): bool`\
+`fn IsInitialized(self): bool`\
 Reports whether variable is initialized explicitly.
 
-`fn is_type_inferred(self): bool`\
+`fn IsTypeInferred(self): bool`\
 Reports whether variable is type inferred.
 
 ---
@@ -1516,134 +1516,134 @@ Pattern checker for functions and methods.
 
 **Methods:**
 
-`static fn dispose(f: &Fn): bool`\
-Reports whether function is the reserved dispose function.
+`static fn Dispose(f: &Fn): bool`\
+Reports whether function is the reserved Dispose function.
 
-`static fn to_str(f: &Fn): bool`\
-Reports whether function is the reserved to_str function.
+`static fn ToStr(f: &Fn): bool`\
+Reports whether function is the reserved ToStr function.
 
-`static fn eq(f: &Fn): bool`\
-Reports whether function is the reserved eq function.
+`static fn Eq(f: &Fn): bool`\
+Reports whether function is the reserved Eq function.
 
-`static fn gt(f: &Fn): bool`\
-Reports whether function is the reserved gt function.
+`static fn Gt(f: &Fn): bool`\
+Reports whether function is the reserved Gt function.
 
-`static fn gt_eq(f: &Fn): bool`\
-Reports whether function is the reserved gt_eq function.
+`static fn GtEq(f: &Fn): bool`\
+Reports whether function is the reserved GtEq function.
 
-`static fn lt(f: &Fn): bool`\
-Reports whether function is the reserved lt function.
+`static fn Lt(f: &Fn): bool`\
+Reports whether function is the reserved Lt function.
 
-`static fn lt_eq(f: &Fn): bool`\
-Reports whether function is the reserved lt_eq function.
+`static fn LtEq(f: &Fn): bool`\
+Reports whether function is the reserved LtEq function.
 
-`static fn shl(f: &Fn): bool`\
-Reports whether function is the reserved shl function.
+`static fn Shl(f: &Fn): bool`\
+Reports whether function is the reserved Shl function.
 
-`static fn shr(f: &Fn): bool`\
-Reports whether function is the reserved shr function.
+`static fn Shr(f: &Fn): bool`\
+Reports whether function is the reserved Shr function.
 
-`static fn add(f: &Fn): bool`\
-Reports whether function is the reserved add function.
+`static fn Add(f: &Fn): bool`\
+Reports whether function is the reserved Add function.
 
-`static fn sub(f: &Fn): bool`\
-Reports whether function is the reserved sub function.
+`static fn Sub(f: &Fn): bool`\
+Reports whether function is the reserved Sub function.
 
-`static fn div(f: &Fn): bool`\
-Reports whether function is the reserved div function.
+`static fn Div(f: &Fn): bool`\
+Reports whether function is the reserved Div function.
 
-`static fn mul(f: &Fn): bool`\
-Reports whether function is the reserved mul function.
+`static fn Mul(f: &Fn): bool`\
+Reports whether function is the reserved Mul function.
 
-`static fn mod(f: &Fn): bool`\
-Reports whether function is the reserved mod function.
+`static fn Mod(f: &Fn): bool`\
+Reports whether function is the reserved Mod function.
 
-`static fn bit_and(f: &Fn): bool`\
-Reports whether function is the reserved bit_and function.
+`static fn BitAnd(f: &Fn): bool`\
+Reports whether function is the reserved BitAnd function.
 
-`static fn bit_or(f: &Fn): bool`\
-Reports whether function is the reserved bit_or function.
+`static fn BitOr(f: &Fn): bool`\
+Reports whether function is the reserved BitOr function.
 
-`static fn bit_xor(f: &Fn): bool`\
-Reports whether function is the reserved bit_xor function.
+`static fn BitXor(f: &Fn): bool`\
+Reports whether function is the reserved BitXor function.
 
-`static fn neg(f: &Fn): bool`\
-Reports whether function is the reserved neg function.
+`static fn Neg(f: &Fn): bool`\
+Reports whether function is the reserved Neg function.
 
-`static fn pos(f: &Fn): bool`\
-Reports whether function is the reserved pos function.
+`static fn Pos(f: &Fn): bool`\
+Reports whether function is the reserved Pos function.
 
-`static fn bit_not(f: &Fn): bool`\
-Reports whether function is the reserved bit_not function.
+`static fn BitNot(f: &Fn): bool`\
+Reports whether function is the reserved BitNot function.
 
-`static fn add_assign(f: &Fn): bool`\
-Reports whether function is the reserved add_assign function.
+`static fn AddAssign(f: &Fn): bool`\
+Reports whether function is the reserved AddAssign function.
 
-`static fn sub_assign(f: &Fn): bool`\
-Reports whether function is the reserved sub_assign function.
+`static fn SubAssign(f: &Fn): bool`\
+Reports whether function is the reserved SubAssign function.
 
-`static fn div_assign(f: &Fn): bool`\
-Reports whether function is the reserved div_assign function.
+`static fn DivAssign(f: &Fn): bool`\
+Reports whether function is the reserved DivAssign function.
 
-`static fn mul_assign(f: &Fn): bool`\
-Reports whether function is the reserved mul_assign function.
+`static fn MulAssign(f: &Fn): bool`\
+Reports whether function is the reserved MulAssign function.
 
-`static fn mod_assign(f: &Fn): bool`\
-Reports whether function is the reserved mod_assign function.
+`static fn ModAssign(f: &Fn): bool`\
+Reports whether function is the reserved ModAssign function.
 
-`static fn shl_assign(f: &Fn): bool`\
-Reports whether function is the reserved shl_assign function.
+`static fn ShlAssign(f: &Fn): bool`\
+Reports whether function is the reserved ShlAssign function.
 
-`static fn shr_assign(f: &Fn): bool`\
-Reports whether function is the reserved shr_assign function.
+`static fn ShrAssign(f: &Fn): bool`\
+Reports whether function is the reserved ShrAssign function.
 
-`static fn bit_or_assign(f: &Fn): bool`\
-Reports whether function is the reserved bit_or_assign function.
+`static fn BitOrAssign(f: &Fn): bool`\
+Reports whether function is the reserved BitOrAssign function.
 
-`static fn bit_and_assign(f: &Fn): bool`\
-Reports whether function is the reserved bit_and_assign function.
+`static fn BitAndAssign(f: &Fn): bool`\
+Reports whether function is the reserved BitAndAssign function.
 
-`static fn bit_xor_assign(f: &Fn): bool`\
-Reports whether function is the reserved bit_xor_assign function.
+`static fn BitXorAssign(f: &Fn): bool`\
+Reports whether function is the reserved BitXorAssign function.
 
 ## Traits
 ```jule
 trait Lookup {
     // Find imported package.
     // Returns nil reference if did not found any match.
-    pub fn find_package(mut self, ident: str): &ImportInfo
+    fn FindPackage(mut self, ident: str): &ImportInfo
 
     // Select imported package.
     // Returns nil reference if did not found any match.
-    pub fn select_package(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
+    fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
 
     // Find variable by identifier and cpp-linked state.
     // Returns nil reference if did not found any match.
-    pub fn find_var(mut self, ident: str, cpp_linked: bool): &Var
+    fn FindVar(mut self, ident: str, CppLinked: bool): &Var
 
     // Find type alias by identifier and cpp-linked state.
     // Returns nil reference if did not found any match.
-    pub fn find_type_alias(mut self, ident: str, cpp_linked: bool): &TypeAlias
+    fn FindTypeAlias(mut self, ident: str, CppLinked: bool): &TypeAlias
 
     // Find structure by identifier and cpp-linked state.
     // Returns nil reference if did not found any match.
-    pub fn find_struct(mut self, ident: str, cpp_linked: bool): &Struct
+    fn FindStruct(mut self, ident: str, CppLinked: bool): &Struct
 
     // Find function by identifier and cpp-linked state.
     // Returns nil reference if did not found any match.
-    pub fn find_fn(mut self, ident: str, cpp_linked: bool): &Fn
+    fn FindFn(mut self, ident: str, CppLinked: bool): &Fn
 
     // Find trait by identifier.
     // Returns nil reference if did not found any match.
-    pub fn find_trait(mut self, ident: str): &Trait
+    fn FindTrait(mut self, ident: str): &Trait
 
     // Find enum by identifier.
     // Returns nil reference if did not found any match.
-    pub fn find_enum(mut self, ident: str): &Enum
+    fn FindEnum(mut self, ident: str): &Enum
 
     // Find type enum by identifier.
     // Returns nil reference if did not found any match.
-    pub fn find_type_enum(mut self, ident: str): &TypeEnum
+    fn FindTypeEnum(mut self, ident: str): &TypeEnum
 }
 ```
 Lookup.
@@ -1655,26 +1655,26 @@ trait Importer {
     // Set current module path.
     // Path should be valid directory.
     // Set to empty string if module is not exist.
-    pub fn set_mod_path(mut self, path: str)
+    fn SetModPath(mut self, path: str)
     // Returns current module path.
     // Path should be valid directory.
     // Returns empty string if module is not exist.
-    pub fn get_mod_path(self): str
+    fn GetModPath(self): str
     // Returns module path by identity.
-    pub fn mod_by_id(self, id: int): str
+    fn ModById(self, id: int): str
     // Returns &ImportInfo by path.
     // This function accepted as returns already imported and checked package.
-    // If returns not-nil value, will be used instead of Import_package
+    // If returns not-nil value, will be used instead of ImportPackage
     // if possible and package content is not checked by Sema.
-    pub fn get_import(mut self, path: str): &ImportInfo
+    fn GetImport(mut self, path: str): &ImportInfo
     // Path is the directory path of package to import.
     // Should return abstract syntax tree of package files.
     // Logs accepts as error.
-    // Updated module to package's module if exist when update_mod is true.
-    pub fn import_package(mut self, path: str, update_mod: bool): ([]&Ast, []Log)
+    // Updated module to package's module if exist when UpdateMod is true.
+    fn ImportPackage(mut self, path: str, UpdateMod: bool): ([]&Ast, []Log)
     // Invoked after the package is imported.
     // Sets module identitity of imported package to current module.
-    pub fn imported(mut self, mut &ImportInfo)
+    fn imported(mut self, mut &ImportInfo)
 }
 ```
 Importer.\
@@ -1684,8 +1684,8 @@ Used by semantic analyzer for import use declarations.
 
 ```jule
 trait Kind {
-    pub fn to_str(self): str
-    pub fn equals(&self, other: &TypeKind): bool
+    fn Str(self): str
+    fn Equals(&self, other: &TypeKind): bool
 }
 ```
 Kind of type declaration.

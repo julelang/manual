@@ -13,7 +13,7 @@ Additionally, a test function must be declared unambiguously with the `test` dir
 For example to write test function:
 ```jule
 #test
-fn my_test(t: &T) {
+fn myTest(t: &T) {
     // ...
 }
 ```
@@ -26,22 +26,22 @@ The `T` structure allows you to set whether the test fails or is skipped while r
 
 For example:
 ```jule
-use std::math::{PI}
+use std::math::{Pi}
 use std::testing::{T}
 
-fn get_pi(): f64 {
+fn getPi(): f64 {
     ret 3.14
 }
 
 #test
-fn test_pi(t: &T) {
-    if get_pi() != PI {
+fn testPi(t: &T) {
+    if getPi() != Pi {
         t.errorf("PI is not precise enough")
     }
 }
 
 fn main() {
-    outln(get_pi())
+    outln(getPi())
 }
 ```
 

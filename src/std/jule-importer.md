@@ -4,13 +4,13 @@
 ```jule
 struct CompileInfo {
     // Production compilation.
-    prod: bool
+    Prod: bool
     // Test compilation.
-    test: bool
+    Test: bool
     // Back-end compiler to use.
-    compiler: Compiler
+    Compiler: Compiler
     // C++ standard to use.
-    cpp_std:  CppStd
+    CppStd: CppStd
 }
 ```
 Compile information.
@@ -29,10 +29,10 @@ Default importer for the reference Jule compiler.
 
 **Methods:**
 
-`static fn new(info: CompileInfo): &JuleImporter`\
+`static fn New(info: CompileInfo): &JuleImporter`\
 Returns new importer instance by compile information.
 
-`fn all_packages(mut self): []&ImportInfo`\
+`fn AllPackages(mut self): []&ImportInfo`\
 Returns all imported packages. The return value is mutable reference to internal buffer. You should be care about using that copy.
 
 ## Enums

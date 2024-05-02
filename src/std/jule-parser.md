@@ -2,7 +2,7 @@
 
 ## Functions
 ```jule
-fn parse_file(mut f: &File): &FileInfo
+fn ParseFile(mut f: &File): &FileInfo
 ```
 Parses fileset's tokens and builds AST.\
 Returns nil if f is not real. \
@@ -11,7 +11,7 @@ File should not contain comment tokens.
 ---
 
 ```jule
-fn parse_package(mut filesets: []&File): &PackageInfo
+fn ParsePackage(mut filesets: []&File): &PackageInfo
 ```
 Parses fileset's tokens and builds AST.\
 Returns nil if filesets is nil.\
@@ -21,8 +21,8 @@ Files should not contain comment tokens.
 ## Structs
 ```jule
 struct FileInfo {
-    ast:    &Ast  // Ast from std::jule::ast
-    errors: []Log // Log from std::jule::build
+    Ast:    &Ast  // Ast from std::jule::ast
+    Errors: []Log // Log from std::jule::build
 }
 ```
 Stores information about file parsing.
@@ -31,7 +31,7 @@ Stores information about file parsing.
 
 ```jule
 struct PackageInfo {
-    files: []&FileInfo
+    Files: []&FileInfo
 }
 ```
 Stores information about package parsing. 

@@ -10,134 +10,134 @@ Complex number.
 
 **Methods:**
 
-`static fn new(real: f64, imag: f64): Cmplx`\
+`static fn New(real: f64, imag: f64): Cmplx`\
 Returns new complex number.
 
-`static fn nan(): Cmplx`\
+`static fn Nan(): Cmplx`\
 Returns complex number that assigned to NaN.
 
-`static fn inf(sign: int): Cmplx`\
+`static fn Inf(sign: int): Cmplx`\
 Returns Inf complex number. Uses positive infinity if sign >= 0, negative infinity if !sign < 0.
 
-`static fn zero(): Cmplx`\
+`static fn Zero(): Cmplx`\
 Returns zero complex number.
 
-`static fn rect(r: f64, theta: f64): Cmplx`\
+`static fn Rect(r: f64, theta: f64): Cmplx`\
 Returns the complex number with polar coordinates r, θ.
 
-`fn real(self): f64`\
+`fn Real(self): f64`\
 Returns real part of complex number.
 
-`fn imag(self): f64`\
+`fn Imag(self): f64`\
 Returns imag part of complex number.
 
-`fn conj(self): Cmplx`\
+`fn Conj(self): Cmplx`\
 Returns conjugate of complex number.
 
-`fn add(self, c: Cmplx): Cmplx`\
+`fn Add(self, c: Cmplx): Cmplx`\
 Returns addition of complex numbers.
 
-`fn add_assign(mut self, c: Cmplx)`\
+`fn AddAssign(mut self, c: Cmplx)`\
 Add to complex number.
 
-`fn sub(self, c: Cmplx): Cmplx`\
+`fn Sub(self, c: Cmplx): Cmplx`\
 Returns subtraction of complex numbers.
 
-`fn sub_assign(mut self, c: Cmplx)`\
+`fn SubAssign(mut self, c: Cmplx)`\
 Subtract from complex number.
 
-`fn mul(self, c: Cmplx): Cmplx`\
+`fn Mul(self, c: Cmplx): Cmplx`\
 Returns multiplication of complex numbers.
 
-`fn mul_assign(mut self, c: Cmplx)`\
+`fn MulAssign(mut self, c: Cmplx)`\
 Multiply complex numbers.
 
-`fn div(self, c: Cmplx): Cmplx`\
+`fn Div(self, c: Cmplx): Cmplx`\
 Returns division of complex numbers. \
 Returns NaN complex number if denominator is zero.
 
-`fn div_assign(mut self, c: Cmplx)`\
+`fn DivAssign(mut self, c: Cmplx)`\
 Divide complex numbers. \
 Assigns NaN complex number if denominator is zero.
 
-`fn pos(self): Cmplx`\
+`fn Pos(self): Cmplx`\
 Unary plus operator.
 
-`fn neg(self): Cmplx`\
+`fn Neg(self): Cmplx`\
 Unary minus operator.
 
-`fn is_inf(self): bool`\
+`fn IsInf(self): bool`\
 Reports whether either real or imag is an infinity.
 
-`fn is_nan(self): bool`\
+`fn IsNan(self): bool`\
 Reports whether either real or imag is NaN and neither is an infinity.
 
-`fn is_zero(self): bool`\
+`fn IsZero(self): bool`\
 Reports whether real and imag is zero.
 
-`fn abs(self): f64`\
+`fn Abs(self): f64`\
 Returns the absolute value (also called the modulus) of x.
 
-`fn sqrt(self): Cmplx`\
+`fn Sqrt(self): Cmplx`\
 Returns the square root of complex number. The result r is chosen so that r.real() ≥ 0 and r.imag() has the same sign as self.imag().
 
-`fn phase(self): f64`\
-Phase returns the phase (also called the argument) of x. The returned value is in the range [-PI, PI].
+`fn Phase(self): f64`\
+Phase returns the phase (also called the argument) of x. The returned value is in the range [-Pi, Pi].
 
-`fn polar(self): (r: f64, theta: f64)`\
-Polar returns the absolute value r and phase θ of x, such that x = r * e**θi. The phase is in the range [-PI, PI].
+`fn Polar(self): (r: f64, theta: f64)`\
+Polar returns the absolute value r and phase θ of x, such that x = r * e**θi. The phase is in the range [-Pi, Pi].
 
-`fn log(self): Cmplx`\
+`fn Log(self): Cmplx`\
 Returns the natural logarithm of complex number.
 
-`fn log10(self): Cmplx`\
+`fn Log10(self): Cmplx`\
 Returns the decimal logarithm of complex number.
 
-`fn exp(self): Cmplx`\
+`fn Exp(self): Cmplx`\
 Returns e**x, the base-e exponential of x.
 
-`fn pow(self, y: Cmplx): Cmplx`\
+`fn Pow(self, y: Cmplx): Cmplx`\
 Returns x**y, the base-x (self) exponential of y.
-For generalized compatibility with [math::pow]:
+For generalized compatibility with [math::Pow]:
 
-pow(0, ±0) returns 1+0i\
-pow(0, c) for c.real()<0 returns inf+0i if c.imag() is zero, otherwise inf+inf i.
+Pow(0, ±0) returns 1+0i\
+Pow(0, c) for c.real()<0 returns Inf+0i if c.imag() is zero, otherwise Inf+Inf i.
 
-`fn sin(self): Cmplx`\
+`fn Sin(self): Cmplx`\
 Returns the sine of complex number.
 
-`fn sinh(self): Cmplx`\
+`fn Sinh(self): Cmplx`\
 Returns the hyperbolic sine of complex number.
 
-`fn cos(self): Cmplx`\
+`fn Cos(self): Cmplx`\
 Returns the cosine of complex number.
 
-`fn cosh(self): Cmplx`\
+`fn Cosh(self): Cmplx`\
 Returns the hyperbolic cosine of complex number.
 
-`fn tan(self): Cmplx`\
+`fn Tan(self): Cmplx`\
 Returns the tangent of complex number.
 
-`fn tanh(self): Cmplx`\
+`fn Tanh(self): Cmplx`\
 Returns the hyperbolic tangent of complex number.
 
-`fn cot(self): Cmplx`\
+`fn Cot(self): Cmplx`\
 Returns the cotangent of complex number.
 
-`fn asin(self): Cmplx`\
+`fn Asin(self): Cmplx`\
 Returns the inverse sine of complex number.
 
-`fn asinh(self): Cmplx`\
+`fn Asinh(self): Cmplx`\
 Returns the inverse hyperbolic sine of complex number.
 
-`fn acos(self): Cmplx`\
+`fn Acos(self): Cmplx`\
 Returns the inverse cosine of complex number.
 
-`fn acosh(self): Cmplx`\
+`fn Acosh(self): Cmplx`\
 Returns the inverse hyperbolic cosine of complex number.
 
-`fn atan(self): Cmplx`\
+`fn Atan(self): Cmplx`\
 Returns the inverse tangent of complex number.
 
-`fn atanh(self): Cmplx`\
+`fn Atanh(self): Cmplx`\
 Returns the inverse hyperbolic tangent of complex number.

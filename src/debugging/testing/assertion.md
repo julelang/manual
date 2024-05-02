@@ -10,12 +10,12 @@ An assertion is made with the built-in `assert` function.
 
 For example:
 ```jule
-fn get_slice(): []int {
+fn getSlice(): []int {
     ret [1, 2, 3, 4, 5]
 }
 
 fn main() {
-    let s = get_slice()
+    let s = getSlice()
     assert(s.len == 10)
 
     let mut sum = 0
@@ -35,12 +35,12 @@ To override the assertion functions' default log message and specify a custom on
 For example:
 
 ```jule
-fn get_slice(): []int {
+fn getSlice(): []int {
     ret [1, 2, 3, 4, 5]
 }
 
 fn main() {
-    let s = get_slice()
+    let s = getSlice()
     assert(s.len == 10, "slice length should be 10")
 
     let mut sum = 0

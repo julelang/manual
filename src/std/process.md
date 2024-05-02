@@ -10,7 +10,7 @@ Type of a process id.
 ## Functions
 
 ```jule
-exit(code: int)
+fn Exit(code: int)
 ```
 Causes the current program to exit with the given status code.\
 Conventionally, code zero indicates success, non-zero an error.
@@ -18,19 +18,19 @@ Conventionally, code zero indicates success, non-zero an error.
 ## Structs
 
 ```jule
-pub struct Cmd {
-    args: []str
-    env:  []str
+struct Cmd {
+    Args: []str
+    Env:  []str
 }
 ```
 Cmd runs a command in the operating system. There is no pipe for the output of the command, so any output will appear on the screen.
 
 **Methods:**
 
-`static fn new(path: str): &Cmd`\
+`static fn New(path: str): &Cmd`\
 Returns Cmd instance for path.
 
-`fn spawn(mut self)!`\
+`fn Spawn(mut self)!`\
 Spawns new child-process and executes command.
 Returns exist code of child-process.
 

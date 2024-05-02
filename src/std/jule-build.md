@@ -1,79 +1,79 @@
 # std::jule::build
 
 ## Globals
-### `const EXT: str`
+### `const Ext: str`
 Extension (includes dot) of Jule source code files.
 
 ---
 
-### `const API: str`
+### `const Api: str`
 Directory name of JuleC++ API.
 
 ---
 
-### `const STDLIB: str`
+### `const Stdlib: str`
 Directory name of standard library.
 
 ---
 
-### `const ENTRY_POINT: str`
+### `const EntryPoint: str`
 Identifier of entry point function.
 
 ---
 
-### `const INIT_FN: str`
+### `const InitFn: str`
 Identifier of initializer function.
 
 ---
 
-### `const MODULE_FILE: str`
+### `const ModuleFile: str`
 Filename of module file.
 
 ---
 
-### `static mut OS: str`
+### `static mut Os: str`
 Target operating system.\
 Setted to runtime operating system by default.
 
 ---
 
-### `static mut ARCH: str`
+### `static mut Arch: str`
 Target architecture.\
 Setted to runtime architecture by default.
 
 ---
 
-### `static CPP_HEADER_EXTS: [...]str`
+### `static CppHeaderExts: [...]str`
 Valid extensions of C++ headers.
 
 ---
 
-### `static CPP_EXTS: [...]str`
+### `static CppExts: [...]str`
 Valid extensions of C++ source files. 
 
 ---
 
-### `static OBJECTIVE_CPP_EXTS: [...]str`
+### `static ObjectiveCppExts: [...]str`
 Valid extensions of Objective-C++ source files.
 
 ---
 
-### `static DISTOS: [...]Os`
+### `static Distos: [...]Os`
 List of supported operating systems.
 
 ---
 
-### `static DISTARCH: [...]Arch`
+### `static Distarch: [...]Arch`
 List of supported architectures.
 
 ---
 
-### `const DIRECTIVE_PREFIX: str`
+### `const DirectivePrefix: str`
 Prefix of directive comments.
 
 ---
 
-### `static PATH_STDLIB: str`
+### `static PathStdlib: str`
 Path of standard library.
 ::: warning
 Initialized by initializer function.
@@ -81,7 +81,7 @@ Initialized by initializer function.
 
 ---
 
-### `static PATH_EXEC: str`
+### `static PathExec: str`
 Path of executable file's directory.
 ::: warning
 Initialized by initializer function.
@@ -89,7 +89,7 @@ Initialized by initializer function.
 
 ---
 
-### `static PATH_WD: str`
+### `static PathWd: str`
 Path of working directory.
 ::: warning
 Initialized by initializer function.
@@ -97,7 +97,7 @@ Initialized by initializer function.
 
 ---
 
-### `static PATH_API: str`
+### `static PathApi: str`
 Path of main API header file.
 ::: warning
 Initialized by initializer function.
@@ -105,89 +105,89 @@ Initialized by initializer function.
 
 ## Functions
 
-`fn is_top_directive(directive: str): bool`\
+`fn IsTopDirective(directive: str): bool`\
 Reports whether directive is top-directive.
 
 ---
 
-`fn is_std_header_path(p: str): bool`\
+`fn IsStdHeaderPath(p: str): bool`\
 Reports whether path is C++ std library path.
 
 ---
 
-`fn is_valid_cpp_ext(p: str): bool`\
+`fn IsValidCppExt(p: str): bool`\
 Reports whether C++ extension is valid.
 
 ---
 
-`fn is_valid_header_ext(ext: str): bool`\
+`fn IsValidHeaderExt(ext: str): bool`\
 Reports whether C++ header extension is valid.
 
 ---
 
-`fn is_jule(path: str): bool`\
+`fn IsJule(path: str): bool`\
 Reports whether file path is Jule source code.
 
 ---
 
-`fn logf(key: str, args: ...any): str`\
+`fn Logf(key: str, args: ...any): str`\
 Returns formatted error message by fmt and args.
 
 ---
 
-`fn is_windows(os: str): bool`\
+`fn IsWindows(os: str): bool`\
 Reports whether os is windows.
 
 ---
 
-`fn is_darwin(os: str): bool`\
+`fn IsDarwin(os: str): bool`\
 Reports whether os is darwin.
 
 ---
 
-`fn is_linux(os: str): bool`\
+`fn IsLinux(os: str): bool`\
 Reports whether os is linux.
 
 ---
 
-`fn is_i386(arch: str): bool`\
+`fn IsI386(arch: str): bool`\
 Reports whether architecture is intel 386.
 
 ---
 
-`fn is_amd64(arch: str): bool`\
+`fn IsAmd64(arch: str): bool`\
 Reports whether architecture is amd64.
 
 ---
 
-`fn is_arm64(arch: str): bool`\
+`fn IsArm64(arch: str): bool`\
 Reports whether architecture is arm64.
 
 ---
 
-`fn is_unix(os: str): bool`\
+`fn IsUnix(os: str): bool`\
 Reports whether os is unix.
 
 ---
 
-`fn is_32bit(arch: str): bool`\
+`fn Is32Bit(arch: str): bool`\
 Reports whether architecture is 32-bit.
 
 ---
 
-`fn is_64bit(arch: str): bool`\
+`fn Is64Bit(arch: str): bool`\
 Reports whether architecture is 64-bit.
 
 ## Structs
 ```jule
 struct Log {
-    kind:       LogKind
-    row:        int
-    column:     int
-    path:       str
-    text:       str
-    line:       str
-    suggestion: str
+    Kind:       LogKind
+    Row:        int
+    Column:     int
+    Path:       str
+    Text:       str
+    Line:       str
+    Suggestion: str
 }
 ```
 Compiler log.

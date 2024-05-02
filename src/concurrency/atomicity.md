@@ -7,14 +7,14 @@ Here is an example code:
 ```jule
 static mut n: int = 0
 
-fn add_to_n() {
+fn addToN() {
     n++
 }
 
 fn main() {
     let mut j = 0
     for j < 1000000; j++ {
-        co add_to_n()
+        co addToN()
     }
     outln(n)
 }
@@ -34,23 +34,23 @@ Jule provides the `std::sync::atomic` package for atomicity as standard. Now let
 use std::sync::{WaitGroup}
 use std::sync::atomic::{AtomicInt, MemoryOrder}
 
-static mut n: AtomicInt = AtomicInt.new(0)
+static mut n: AtomicInt = AtomicInt.New(0)
 
-fn add_to_n(mut wg: &WaitGroup) {
-    defer { wg.done() }
+fn addToN(mut wg: &WaitGroup) {
+    defer { wg.Done() }
     n.add(1, MemoryOrder.Relaxed)
 }
 
 fn main() {
-    let mut wg = WaitGroup.new()
+    let mut wg = WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {
-        wg.add(1)
-        co add_to_n(wg)
+        wg.Add(1)
+        co addToN(wg)
     }
 
-    wg.wait()
+    wg.Wait()
 
     outln(n.load(MemoryOrder.Relaxed))
 }

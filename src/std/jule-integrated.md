@@ -227,7 +227,7 @@ Type alias for `bool` type.
 ## Functions
 
 ```jule
-unsafe fn emit(const code: str, args: ...any)
+unsafe fn Emit(const code: str, args: ...any)
 ```
 Emit inline code for backend.\
 [See more information about back-end emits](/integrated-jule/backend-emits)
@@ -235,7 +235,7 @@ Emit inline code for backend.\
 ---
 
 ```jule
-unsafe fn emit[T](const code: str, args: ...any): T
+unsafe fn Emit[T](const code: str, args: ...any): T
 ```
 Emit inline code for backend and read result.\
 [See more information about back-end emits](/integrated-jule/backend-emits)
@@ -243,42 +243,42 @@ Emit inline code for backend and read result.\
 ---
 
 ```jule
-fn to_str(expr: any): str
+fn ToStr(expr: any): str
 ```
 Returns string converted from of expression.
 
 ---
 
 ```jule
-fn utf16_from_str(s: str): []u16
+fn Utf16FromStr(s: str): []u16
 ```
 Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.
 
 ---
 
 ```jule
-fn utf16_to_str(s: []u16): str
+fn Utf16ToStr(s: []u16): str
 ```
 Returns the UTF-8 encoding of the UTF-16 sequence s, with a terminating NULL removed. Returns empty string if s is nil.
 
 ---
 
 ```jule
-unsafe fn u16_ptr_to_str(s: *u16): str
+unsafe fn U16PtrToStr(s: *u16): str
 ```
 Returns the UTF-8 encoding of the UTF-16 sequence s in *u16 form, with a terminating NULL removed. Returns empty string if s is nil.
 
 ---
 
 ```jule
-unsafe fn char_ptr_to_str(s: *cpp.char): str
+unsafe fn CharPtrToStr(s: *cpp.char): str
 ```
 Returns the string of s, with a terminating NULL removed. Returns empty string if pointer is nil.
 
 ---
 
 ```jule
-fn malloc(size: uint): *unsafe
+fn Malloc(size: uint): *unsafe
 ```
 Allocates size bytes of memory. Memory does not initialize. Returns pointer to allocation if success, nil if not.
 
@@ -289,7 +289,7 @@ This function is part of the C-style memory management. It can be very dangerous
 ---
 
 ```jule
-fn calloc(size: uint, n: uint): *unsafe
+fn Calloc(size: uint, n: uint): *unsafe
 ```
 Allocates n elements of size bytes each, all initialized to zero. Returns pointer to allocation if success, nil if not.
 
@@ -300,7 +300,7 @@ This function is part of the C-style memory management. It can be very dangerous
 ---
 
 ```jule
-unsafe fn realloc(mut ptr: *unsafe, size: uint): *unsafe
+unsafe fn Realloc(mut ptr: *unsafe, size: uint): *unsafe
 ```
 Re-allocates the previously allocated block in ptr, making the new block size bytes long. Returns pointer to allocation if success, nil if not.
 
@@ -311,7 +311,7 @@ This function is part of the C-style memory management. It can be very dangerous
 ---
 
 ```jule
-unsafe fn free(mut ptr: *unsafe)
+unsafe fn Free(mut ptr: *unsafe)
 ```
 Free a block allocated by malloc, realloc or calloc. ptr is not setted as nil by function, therefore ptr is dangling after free. Set ptr as nil after free for more safety. 
 
@@ -322,7 +322,7 @@ This function is part of the C-style memory management. It can be very dangerous
 ---
 
 ```jule
-fn new[T](): *T
+fn New[T](): *T
 ```
 Allocates new memory.
 Equavalent to: `new T` in C++
@@ -330,7 +330,7 @@ Equavalent to: `new T` in C++
 ---
 
 ```jule
-fn new_array[T](size: int): *T
+fn NewArray[T](size: int): *T
 ```
 Allocates new array memory.
 Equavalent to: `new T[size]` in C++
@@ -338,7 +338,7 @@ Equavalent to: `new T[size]` in C++
 ---
 
 ```jule
-unsafe fn delete[T](heap: *T)
+unsafe fn Delete[T](heap: *T)
 ```
 Deallocates memory allocation.
 Equavalent to: `delete heap` in C++
@@ -346,7 +346,7 @@ Equavalent to: `delete heap` in C++
 ---
 
 ```jule
-unsafe fn delete_array[T](heap: *T)
+unsafe fn DeleteArray[T](heap: *T)
 ```
 Deallocates array memory allocation.
 Equavalent to: `delete[] heap` in C++

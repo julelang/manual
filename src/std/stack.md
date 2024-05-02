@@ -18,39 +18,39 @@ Allocates new space and copies (not deep copy) items into space.
 
 **Methods:**
 
-`static fn new(cap: int): Stack[T]`\
+`static fn New(cap: int): Stack[T]`\
 Returns new stack instance with capacity.
 
-`fn fit(mut self)`\
+`fn Fit(mut self)`\
 Set capacity to length.
 Removes additional capacity that waiting to use.
 Allocates new memory to cut additional capacity.
 
-`fn len(self): int`\
+`fn Len(self): int`\
 Returns length of stack.
 Another meaning is count of elements.
 
-`fn cap(self): int`\
+`fn Cap(self): int`\
 Returns capacity of stack.
 Another meaning is additional redy-to-use allocation size.
 
-`fn empty(self): bool`\
+`fn Empty(self): bool`\
 Reports whether stack is empty.
 
-`fn clear(mut self)`\
+`fn Clear(mut self)`\
 Removes all elements.
 Does not deallocates buffer, keeps capacity.
 
-`fn push(mut self, mut t: T)`\
+`fn Push(mut self, mut t: T)`\
 Pushes element to top of the stack.
 
-`fn pop(mut self): T`\
+`fn Pop(mut self): T`\
 Returns top element of stack, then removes top element.
 Panics if stack is empty.
 
-`fn top(mut self): T`\
+`fn Top(mut self): T`\
 Returns top element of stack.
 Panics if stack is empty.
 
-`fn slice(mut self): []T`\
+`fn Slice(mut self): []T`\
 Returns slice that contains elements of stack. Slice is not mutable reference to internal buffer, but can effect internal buffer if T is mutable type. Appends elements in top-to-bottom order.

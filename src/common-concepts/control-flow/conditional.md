@@ -7,9 +7,9 @@ If the provided condition is `true` the block is executed, otherwise it is not e
 For example:
 ```jule
 fn main() {
-    let x: Error
+    let x: any
     if x == nil {
-        outln("error is not initialized")
+        outln("x is not initialized")
     }
 }
 ```
@@ -38,14 +38,12 @@ It is the block that will be executed unconditionally if the previous `if` and `
 
 For example:
 ```jule
-use std::errors
-
 fn main() {
-    let x: Error = std::errors::new("my error message")
-    if x == nil {
-        outln("error is not initialized")
+    let x = 20
+    if x == 20 {
+        outln("x is 20")
     } else {
-        outln("error is initialized")
+        outln("x is not 20")
     }
 }
 ```
