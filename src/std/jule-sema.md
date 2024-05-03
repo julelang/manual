@@ -1119,6 +1119,7 @@ struct StructIns {
     Decl:      &Struct
     Generics:  []&InsGeneric
     Fields:    []&FieldIns
+    Statics:   []&Var
     Methods:   []&Fn
     Mutable:   bool
     Refers:    &ReferenceStack
@@ -1140,6 +1141,10 @@ Returns nil reference if not exist any method in this identifier.
 `fn FindField(mut self, ident: str): &FieldIns`\
 Returns field by identifier.\
 Returns nil reference if not exist any field in this identifier. 
+
+`fn FindStatic(mut self, ident: str): &Var`\
+Returns static field by identifier.
+Returns nil reference if not exist any static field in this identifier.
 
 `fn Same(self, s: &StructIns): bool`\
 Reports whether instances are same.\
