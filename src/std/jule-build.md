@@ -485,6 +485,7 @@ Compiler log messages with formatting.
 - `StructureLitWithPrivFields`
 - `AnyWithTypeEnum`
 - `ConstraintFailed`
+- `SelectedImportExistInPackage`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
