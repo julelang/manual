@@ -361,6 +361,7 @@ struct StructSubIdentExprModel {
     ExprKind: &TypeKind
     Method:   &FnIns
     Field:    &FieldIns
+    Owner:    &StructIns
 }
 ```
 Structure sub-ident expression model.
