@@ -487,6 +487,7 @@ export default defineConfig({
               link: '/std/mem',
               items: [],
             },
+            { text: 'std::net', link: '/std/net' },
             { text: 'std::process', link: '/std/process' },
             { text: 'std::queue', link: '/std/queue' },
             { text: 'std::slices', link: '/std/slices' },
