@@ -1722,6 +1722,111 @@ Available on: `windows`
 Available on: `windows`
 :::
 
+---
+
+### `const SOCK_STREAM`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SOCK_DGRAM`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SOCK_RAW`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SOCK_RDM`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SOCK_SEQPACKET`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const AF_UNSPEC`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const AF_UNIX`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const AF_INET`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const AF_INET6`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const IPPROTO_IP`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const IPPROTO_TCP`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const IPPROTO_UDP`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const INADDR_ANY`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const INVALID_SOCKET`
+::: warning
+Available on: `windows`, `unix`
+:::
+
+---
+
+### `const SOCKET_ERROR`
+::: warning
+Available on: `windows`
+:::
+
 ## Functions
 
 ```jule
@@ -2055,6 +2160,190 @@ Calls Windows's GetFullPathNameW function.
 Available on: `windows`
 :::
 
+---
+
+```jule
+fn Socket(domain: int, t: int, protocol: int): uint
+```
+Calls Windows's socket function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn Socket(domain: int, t: int, protocol: int): int
+```
+Calls C's socket function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Bind(handle: uint, addr: *Sockaddr, len: uint): int
+```
+Calls Windows's bind function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Bind(handle: int, addr: *Sockaddr, len: uint): int
+```
+Calls C's bind function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Connect(handle: uint, addr: *Sockaddr, len: uint): int
+```
+Calls Windows's connect function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Connect(handle: int, addr: *Sockaddr, len: uint): int
+```
+Calls C's connect function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+fn Listen(handle: uint, backlog: int): int
+```
+Calls Windows's listen function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn Listen(handle: int, backlog: int): int
+```
+Calls C's listen function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Accept(handle: uint, addr: *Sockaddr, len: *Int): uint
+```
+Calls Windows's accept function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Accept(handle: int, addr: *Sockaddr, len: *u32): int
+```
+Calls C's accept function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Recv(handle: uint, mut buf: *byte, len: uint, flags: int): int
+```
+Calls Windows's recv function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Recv(handle: int, mut buf: *unsafe, len: uint, flags: int): int
+```
+Calls C's recv function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Send(handle: uint, mut buf: *byte, len: uint, flags: int): int
+```
+Calls Windows's send function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Send(handle: int, mut buf: *unsafe, len: uint, flags: int): int
+```
+Calls C's send function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+fn CloseSocket(handle: uint): int
+```
+Calls Windows's closesocket function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn WSAStartup(verReq: u16, mut data: *WsaData): int
+```
+Calls Windows's WSAStartup function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn MakeWord(a: int, b: int): u16
+```
+Calls Windows's MAKEWORD macro.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn Htons(x: int): u16
+```
+Calls C's htons macro.
+
+---
+
+```jule
+fn Ntohs(x: int): u16
+```
+Calls C's ntohs macro.
+
 ## Structs
 ```jule
 struct SysStat {
@@ -2075,6 +2364,48 @@ C's _wdirent.
 ::: warning
 Available on: `windows`
 :::
+
+---
+
+```jule
+struct WsaData
+```
+C's WSADATA.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+struct Sockaddr
+```
+C's sockaddr.
+
+---
+
+```jule
+struct SockaddrIn {
+    sin_len:    byte
+    sin_family: byte
+    sin_port:   u16
+    sin_addr:   cpp.in_addr
+    sin_zero:   [8]Char
+}
+```
+C's sockaddr_in.
+
+---
+
+```jule
+struct SockaddrIn6 {
+    sin6_len:    byte
+    sin6_family: byte
+    sin6_port:   u16
+    sin6_addr:   cpp.in6_addr
+}
+```
+C's sockaddr_in6.
 
 ---
 
