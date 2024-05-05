@@ -68,7 +68,7 @@ Dynamic generic annotation can be used if all generic types are detectable by th
 
 For example:
 ```jule
-fn print_map[Key, Value](map: [Key]:Value) {
+fn printMap[Key, Value](map: map[Key]Value) {
     for key, value in map {
         out(key)
         out(": ")
@@ -77,12 +77,12 @@ fn print_map[Key, Value](map: [Key]:Value) {
 }
 
 fn main() {
-    let mymap: [int]:str = {
+    let myMap: map[int]str = {
         0: "A",
         1: "B",
         2: "C",
     }
-    print_map(mymap)
+    printMap(myMap)
 }
 ```
 Dynamic generic annotation is used in the above example. Generic types are automatically detected from the data type of argument by compiler.
@@ -128,7 +128,7 @@ Generic type matching statements provides compile-time panic calls. You can issu
 For example:
 
 ```jule
-fn print_kind[T]() {
+fn printKind[T]() {
     match type T {
     | bool:
         outln("type is boolean")
@@ -139,15 +139,15 @@ fn print_kind[T]() {
     | str:
         outln("type is string")
     |:
-        panic("print_kind[T]: unsupported type")
+        panic("printKind[T]: unsupported type")
     }
 }
 
 fn main() {
-    print_kind[bool]()
-    print_kind[int]()
-    print_kind[f64]()
-    print_kind[any]()
+    printKind[bool]()
+    printKind[int]()
+    printKind[f64]()
+    printKind[any]()
 }
 ```
 

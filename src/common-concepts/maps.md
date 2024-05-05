@@ -1,5 +1,5 @@
 # Maps
-Maps is a hashmap. Maps a unique key value to a value.
+Maps are hashmap. Maps a unique key value to a value.
 ::: info
 Map values ​​are not kept in the inserted order. Hence iterations etc. It's very likely that you don't get a sequential output in actions.
 :::
@@ -7,7 +7,7 @@ Map values ​​are not kept in the inserted order. Hence iterations etc. It's 
 Example to maps:
 ```jule
 fn main() {
-    let mut mymap: [i8]:str = {
+    let mut mymap: map[i8]str = {
         0: "CPU",
         1: "RAM",
         2: "GPU"

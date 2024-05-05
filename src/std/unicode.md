@@ -53,7 +53,7 @@ const MaxCase
 ---
 
 ```jule
-static Categories: [str]:&RangeTable
+static Categories: map[str]&RangeTable
 ```
 The set of Unicode category tables.
 
@@ -389,7 +389,7 @@ The set of Unicode characters in category ZS (Separator, Space).
 ---
 
 ```jule
-static Scripts: [str]:&RangeTable
+static Scripts: map[str]&RangeTable
 ```
 The set of Unicode script tables.
 
@@ -1537,7 +1537,7 @@ The set of Unicode characters in script ZanabazarSquare.
 ---
 
 ```jule
-static Properties: [str]:&RangeTable
+static Properties: map[str]&RangeTable
 ```
 The set of Unicode property tables.
 
@@ -1755,14 +1755,14 @@ The table describing case mappings for all letters with non-self mappings.
 ---
 
 ```jule
-static FoldCategory: [str]:&RangeTable
+static FoldCategory: map[str]&RangeTable
 ```
 Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category. If there is NO entry for a category name, there are NO such points.
 
 ---
 
 ```jule
-static FoldScript: [str]:&RangeTable
+static FoldScript: map[str]&RangeTable
 ```
 Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script. If there is NO entry for a script name, there are NO such points.
 

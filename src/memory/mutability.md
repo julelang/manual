@@ -143,7 +143,7 @@ Cloning supported types and copy methods:
   Clones array with elements.\
   Returns new independent mutable array.
 
-- `[K]:V`\
+- `map[K]V`\
   Clones map's keys and values.\
   Returns new independent mutable map.
   
