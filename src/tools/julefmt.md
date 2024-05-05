@@ -33,6 +33,7 @@ $ julefmt src
 	- If they are next to each other without a comment, no spaces can be added.
 - In Structure declarations, comments are moved above the declaration.
 - In impl declarations, comments are moved above the declaration.
+	- If the impl declaration is empty and has no comments, it will be grouped contiguously with subsequent impl declarations that have the same conditions.
 - In enum declarations, comments are moved above the declaration.
 - An expression in parentheses is combined into a single line, even if it is on a new line.
 - Even if there are spaces after the comments between the use declarations, they will be ignored and merged with the following use declaration.
