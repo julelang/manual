@@ -19,6 +19,8 @@ Connects to the address on the named network. Network should be one of the field
 For TCP:\
 The address has the form `host:port`. The host must be a literal IP address, or a host name that can be resolved to IP addresses such as `localhost`. The port must be a literal port number or a service name. If the host is a literal IPv6 address it must be enclosed in brackets, as in `[2001:db8::1]:80` or `[fe80::1%zone]:80`. The zone specifies the scope of the literal IPv6 address as defined in RFC 4007. The functions `JoinHostPort` and `SplitHostPort` manipulate a pair of host and port in this form.
 
+If network is Tcp4, it will accept only IPv4 addresses and if address is IPv6, will try to convert IPv4. If network is Tcp6, it will accept only IPv6 address and address is IPv4, will not try to convert IPv6. If network is Tcp, it will use Tcp4 for empty addresses and try for IPv4 if possible. If address is IPv4 or IPv6 which is converted to IPv4 successfully, will use Tcp4, otherwise IPv6 and Tcp6 preferred.
+
 It will forward any exceptional from network connectors.
 
 ---
@@ -230,6 +232,9 @@ Same as `TcpListener.Connect`, but uses timeout.
 `fn Accept(self)!: Conn`\
 Accepts incoming connection, returns `&TcpConn`. All exceptionals are error code of implementation. Panics if connection is closed.
 
+`fn Network(self): Network`\
+Returns network name which is listening. If connection closed, returns `Network.Tcp` as a general network.
+
 `fn Close(self)!`\
 Closes connection. All exceptionals are error code of implementation. Panics if connection is already closed.
 
@@ -278,6 +283,7 @@ Common connection behavior.
 ```jule
 trait Listener {
     fn Accept(self)!: Conn
+    fn Network(self): Network
     fn Close(self)!
 }
 ```
