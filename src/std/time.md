@@ -21,6 +21,11 @@ type DurInt: i64
 ```
 Integer type of durations.
 
+## Functions
+
+`fn Sleep(mut dur: DurInt)`\
+Stops execution of caller thread by absolute duration. This function only affects execution of caller thread, not process.
+
 ## Structures
 
 ```jule
@@ -117,19 +122,25 @@ How many nanoseconds are in hour.
 **Methods:**
 
 `static fn Nanoseconds(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given nanoseconds.
+Returns duration as nanoseconds.
 
 `static fn Microseconds(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given microseconds.
+Returns duration as microseconds.
 
 `static fn Milliseconds(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given milliseconds.
+Returns duration as milliseconds.
 
-`static fn Seconds(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given seconds.
+`static fn Seconds(d: DurInt): f64`\
+Returns duration as floating-point seconds.
 
-`static fn Minutes(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given minutes.
+`static fn Minutes(d: DurInt): f64`\
+Returns duration as floating-point minutes.
 
-`static fn Hours(d: DurInt): DurInt`\
-Returns how many nanoseconds are in given hours.
+`static fn Hours(d: DurInt): f64`\
+Returns duration as floating-point hours.
+
+`static fn Abs(d: DurInt): DurInt`\
+Returns absolute value of duration.
+
+`static fn Str(d: DurInt): str`\
+Returns a string representing the duration in the form `72h3m0.5s`. Leading zero units are omitted. As a special case, durations less than one second format use a smaller unit (milli-, micro-, or nanoseconds) to ensure that the leading digit is non-zero. The zero duration formats as 0s.
