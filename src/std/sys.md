@@ -2510,6 +2510,26 @@ C's setsockopt function.
 Available on: `unix`
 :::
 
+---
+
+```jule
+unsafe fn Getsockname(handle: uint, addr: *Sockaddr, len: *Int): int
+```
+C's getsockname function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Getsockname(handle: int, addr: *Sockaddr, len: *u32): int
+```
+C's getsockname function.
+::: warning
+Available on: `unix`
+:::
+
 ## Structs
 ```jule
 struct SysStat {
