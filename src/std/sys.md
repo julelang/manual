@@ -1710,6 +1710,13 @@ Available on: `windows`
 
 ---
 
+### `const WSAEWOULDBLOCK`
+::: warning
+Available on: `windows`
+:::
+
+---
+
 ### `const MAX_PATH`
 ::: warning
 Available on: `windows`
@@ -1815,6 +1822,34 @@ Available on: `windows`, `linux`, `darwin`
 
 ---
 
+### `const SOL_SOCKET`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SO_ERROR`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SO_RCVTIMEO`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
+### `const SO_SNDTIMEO`
+::: warning
+Available on: `windows`, `linux`, `darwin`
+:::
+
+---
+
 ### `const INVALID_SOCKET`
 ::: warning
 Available on: `windows`, `unix`
@@ -1825,6 +1860,20 @@ Available on: `windows`, `unix`
 ### `const SOCKET_ERROR`
 ::: warning
 Available on: `windows`
+:::
+
+---
+
+### `const F_GETFL`
+::: warning
+Available on: `unix`
+:::
+
+---
+
+### `const F_SETFL`
+::: warning
+Available on: `unix`
 :::
 
 ## Functions
@@ -1851,6 +1900,26 @@ Available on: `windows`
 fn GetLastErrno(): Errno
 ```
 Returns number of last error.
+
+---
+
+```jule
+fn WSAGetLastError(): Errno
+```
+Calls Windows's WSAGetLastError function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn fcntl(handle: int, cmd: int, arg: int): int
+```
+Calls C's fcntl function.
+::: warning
+Available on: `windows`
+:::
 
 ---
 
@@ -2344,6 +2413,103 @@ fn Ntohs(x: int): u16
 ```
 Calls C's ntohs macro.
 
+---
+
+```jule
+unsafe fn Select(nfds: int, mut read: *Fd, mut write: *Fd, mut err: *Fd, mut timeout: *Timeval): int
+```
+C's select function.
+
+---
+
+```jule
+unsafe fn FdZero(mut fd: *Fd)
+```
+C's FD_ZERO macro.
+::: warning
+Available on: `windows`, `unix`
+:::
+
+---
+
+```jule
+unsafe fn FdSet(handle: uint, mut fd: *Fd)
+```
+C's FD_SET macro.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn FdSet(handle: int, mut fd: *Fd)
+```
+C's FD_SET macro.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn FdIsset(handle: uint, mut fd: *Fd): int
+```
+C's FD_ISSET macro.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Ioctlsocket(handle: uint, cmd: Long, arg: *UnsignedLong): int
+```
+C's ioctlsocket function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Getsockopt(handle: uint, level: int, option: int, buf: *Char, len: *Int): int
+```
+C's getsockopt function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Getsockopt(handle: int, level: int, option: int, buf: *unsafe, len: *UnsignedInt): int
+```
+C's getsockopt function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Setsockopt(handle: uint, level: int, option: int, buf: *Char, len: int): int
+```
+C's setsockopt function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Setsockopt(handle: int, level: int, option: int, buf: *Char, len: int): int
+```
+C's setsockopt function.
+::: warning
+Available on: `unix`
+:::
+
 ## Structs
 ```jule
 struct SysStat {
@@ -2406,6 +2572,23 @@ struct SockaddrIn6 {
 }
 ```
 C's sockaddr_in6.
+
+---
+
+```jule
+struct Fd
+```
+C's fd_set structure.
+
+---
+
+```jule
+struct Timeval {
+    tv_sec:  i64
+    tv_usec: i64
+}
+```
+C's timeval structure.
 
 ---
 

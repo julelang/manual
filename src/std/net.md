@@ -24,6 +24,13 @@ It will forward any exceptional from network connectors.
 ---
 
 ```jule
+fn ConnectTimeout(network: Network, addr: str, timeout: time::DurInt)!: Conn
+```
+Same as `Connect`, but uses timeout.
+
+---
+
+```jule
 fn JoinHostPort(host: str, port: str): str
 ```
 Combines host and port into a network address of the form `host:port`. If host contains a colon, as found in literal
@@ -216,6 +223,9 @@ See the `Connect` function for a description of the addr parameter.
 Connects to TCP Listener by given address. Returns relevant created &TcpConn if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
 
 See the `Connect` function for a description of the addr parameter.
+
+`static fn ConnectTimeout(addr: str, timeout: time::DurInt)!: &TcpConn`\
+Same as `TcpListener.Connect`, but uses timeout.
 
 `fn Accept(self)!: Conn`\
 Accepts incoming connection, returns `&TcpConn`. All exceptionals are error code of implementation. Panics if connection is closed.
