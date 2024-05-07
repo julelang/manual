@@ -72,8 +72,8 @@ Returns number of copied elements.\
 Source can be any data type that supported by destination type. 
 
 Special cases are:
-- `copy(dest, src) = length accepts as src.len if dest.len > src.len`
-- `copy(dest, src) = length accepts as dest.len if src.len > dest.len`
+- `copy(dest, src) = length accepts as len(src) if len(dest) > len(src)`
+- `copy(dest, src) = length accepts as len(dest) if len(src) > len(dest)`
 
 Slice destination:\
 &nbsp;&nbsp;&nbsp;&nbsp;In slice destinations, source should be compatible type slice.\
@@ -89,6 +89,38 @@ Str destination:\
 fn append(mut src: []T, mut items: ...T): []T
 ```
 If there is enough capacity, it adds to the target slice. If there is not enough capacity, it creates a copy of the target slice with enough capacity and adds the new elements and returns the new allocation.
+
+---
+
+```jule
+fn len(T): int
+```
+Return length of T.
+
+For slices:\
+Returns length of slice, aka count of slice elements. If slice is nil, returns zero.
+
+For strings:\
+Returns length of string, aka count of string's bytes.
+
+For arrays:\
+Returns length of array, also means total capacity of array.
+
+For maps:\
+Returns count of key-value pairs of map. If map is nil, returns zero.
+
+---
+
+```jule
+fn cap(T): int
+```
+Returns capacity of T.
+
+For slices:\
+Returns capacity of slice, aka possible maximum count of slice elements without expanding buffer.
+
+For strings:\
+Returns capacity of string, aka possible maximum count of bytes without expanding buffer.
 
 ---
 

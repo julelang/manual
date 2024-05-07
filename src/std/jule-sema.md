@@ -337,7 +337,7 @@ struct SlicingExprModel {
 }
 ```
 Slicing expression model.
-For example: `mySlice[2:mySlice.len-5]`
+For example: `mySlice[2:len(mySlice)-5]`
 
 ---
 

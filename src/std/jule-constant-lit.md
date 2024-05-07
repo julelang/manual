@@ -13,7 +13,7 @@ fn ToRune(bytes: []byte): rune
 ```
 Returns rune value string from bytes, not includes quotes.\
 Bytes are represents rune literal, allows escape sequences.\
-Returns empty string if bytes.len == 0
+Returns empty string if len(bytes) == 0
 
 ---
 
@@ -22,7 +22,7 @@ fn ToRawStr(bytes: []byte): str
 ```
 Returns raw-string value string from bytes, not includes quotes.\
 Bytes are represents string characters.\
-Returns empty string if bytes.len == 0
+Returns empty string if len(bytes) == 0
 
 ---
 
@@ -31,4 +31,4 @@ fn ToStr(bytes: []byte): str
 ```
 Returns string value string from bytes, not includes quotes.\
 Bytes are represents string characters, allows escape sequences.\
-Returns empty string if bytes.len == 0 
+Returns empty string if len(bytes) == 0 

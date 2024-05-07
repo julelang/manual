@@ -28,7 +28,7 @@ Decoder forwards any exception.
 ```jule
 fn Encode(mut dest: []byte, src: []byte): int
 ```
-Encodes src into at most MaxEncodedLen(src.len) bytes of dest, returning the actual number of bytes written.
+Encodes src into at most MaxEncodedLen(len(src)) bytes of dest, returning the actual number of bytes written.
 
 The encoding handles 4-byte chunks, using a special encoding for the last fragment, so encode is not appropriate for use on individual blocks of a large data stream. Use NewEncoder() instead.
 

@@ -16,7 +16,7 @@ fn getSlice(): []int {
 
 fn main() {
     let s = getSlice()
-    assert(s.len == 10)
+    assert(len(s) == 10)
 
     let mut sum = 0
     for _, x in s {
@@ -41,7 +41,7 @@ fn getSlice(): []int {
 
 fn main() {
     let s = getSlice()
-    assert(s.len == 10, "slice length should be 10")
+    assert(len(s) == 10, "slice length should be 10")
 
     let mut sum = 0
     for _, x in s {

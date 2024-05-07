@@ -1,9 +1,5 @@
 # Maps
 
-## Fields
-`len: int`\
-Length of key-value pairs.
-
 ## Methods
 `fn clear(mut self)`\
 Removes all key-value pairs. 

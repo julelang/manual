@@ -29,7 +29,7 @@ Reports slice has suffix as specified sub-slice or not.
 ```jule
 fn FindAt(s: []byte, sub: []byte, mut i: int): int
 ```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at left of slice to right. Starts searching s at given index. Returns -1, if i < 0 || i >= s.len.
+Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at left of slice to right. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
 
 ---
 
@@ -43,7 +43,7 @@ Returns index of first matched item with specified sub-slice, returns -1 if not 
 ```jule
 fn FindLastAt(s: []byte, sub: []byte, i: int): int
 ```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= s.len.
+Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
 
 ---
 
@@ -99,7 +99,7 @@ Returns index of first matched item with finder function, returns -1 if not exis
 ```jule
 fn FindFnLastAt(s: []byte, mut i: int, f: fn(mut rune): bool): int
 ```
-Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= s.len.
+Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
 
 ---
 

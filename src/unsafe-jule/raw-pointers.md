@@ -21,7 +21,7 @@ For example:
 fn print_slice_components_with_unsafe(slc: []int) {
     unsafe {
         let mut ptr = &slc[0]
-        let mut end = &slc[slc.len-1]
+        let mut end = &slc[len(slc)-1]
         end++
         for ptr < end {
             outln(*ptr)
