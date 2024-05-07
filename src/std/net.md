@@ -267,6 +267,33 @@ Writes bytes to connection and returns writed byte count. The number of bytes wr
 `fn Close(mut self)!`\
 Closes connection. All exceptionals are error code of implementation. Panics if connection is already closed.
 
+---
+
+```jule
+struct HardwareAddr {
+    Addr: []byte
+}
+```
+Physical hardware address.
+
+**Methods:**\
+`static fn Parse(addr: str)! HardwareAddr`\
+Parses s as an IEEE 802 MAC-48, EUI-48, EUI-64, or a 20-octet IP over InfiniBand link-layer address using one of the following formats:
+- 00:00:5e:00:53:01
+- 02:00:5e:10:00:00:00:01
+- 00:00:00:00:fe:80:00:00:00:00:00:00:02:00:5e:10:00:00:00:01
+- 00-00-5e-00-53-01
+- 02-00-5e-10-00-00-00-01
+- 00-00-00-00-fe-80-00-00-00-00-00-00-02-00-5e-10-00-00-00-01
+- 0000.5e00.5301
+- 0200.5e10.0000.0001
+- 0000.0000.fe80.0000.0000.0000.0200.5e10.0000.0001
+
+Exceptional is always will be `AddrError.Unable`.
+
+`fn Str(self): str`\
+Return address in string form.
+
 ## Traits
 
 ```jule
@@ -319,7 +346,7 @@ Address errors.
 
 **Fields:**
 - `NoSuitable`: No suitable address.
-- `Unable`: Unable to parse IP.
+- `Unable`: Unable to parse address.
 - `MissingIPv6`: IPv6 address is missing.
 - `UnexpectedToken`: Address have unexpected token(s).
 - `TooShort`: Address is too short.
