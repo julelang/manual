@@ -60,7 +60,7 @@ Returns new instance of data type for supported types.
     Allocates slices dynamically.
     In addition to the slice type, it can take two more arguments. The first argument is mandatory. The first argument specifies the length of the slice. The second argument specifies the capacity of the slice and is optional. The slice is returned with its length, and the field within its length is initialized with the default value.
 - Strings:\
-    Allocates buffered strings. In addition to the str type, it can one more argument. This additional argument is the capacity of the string's buffer.
+    Allocates buffered strings. In addition to the str type, it can two more argument. This first additional argument is the length of the string's buffer. The second argument is the capacity of the strings's buffer capacity. The string is returned with its length, and the fiedld within its length is initialized with the nil byte (aka '\0').
 
 ---
 

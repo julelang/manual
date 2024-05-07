@@ -34,7 +34,7 @@ Jule strings are mutable and have a buffer. String literal can be used to create
 For example:
 ```jule
 fn main() {
-    let mut s = make(str, 20)
+    let mut s = make(str, 0, 20)
     s += "hello"
     s += " "
     s += "julenour"
@@ -42,4 +42,4 @@ fn main() {
 }
 ```
 
-At the example above, `s` will not allocate new buffer for two concatenation. Because buffer is pre-allocated and already have enough size to store complete value.
+At the example above, `s` will not allocate new buffer for concatenations. Because buffer is pre-allocated and already have enough size to store complete value. The first argument is zero because the first argument is length of the buffer (like slices) which is initialized with nil byte (aka \0).
