@@ -47,13 +47,13 @@
 	],
 	"repository": {
 		"directives": {
-			"match": "^#\\p{L}+\\b",
+			"match": "#\\p{L}+\\b",
 			"name": "variable.language"
 		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.jule",
-				"match": "\\b(error|use|fn|pub|struct|byte|rune|enum|unsafe|const|let|static|mut|self|match|defer|if|else|for|in|impl|trait|break|continue|goto|cpp|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|str|int|uint|type|any|bool|ret|fall|uintptr|co)\\b"
+				"match": "\\b(map|error|use|fn|pub|struct|byte|rune|enum|unsafe|const|let|static|mut|self|match|defer|if|else|for|in|impl|trait|break|continue|goto|cpp|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|str|int|uint|type|any|bool|ret|fall|uintptr|co)\\b"
 			}]
 		},
 		"storage": {
