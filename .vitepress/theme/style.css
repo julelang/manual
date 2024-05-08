@@ -39,12 +39,18 @@
   --vp-custom-block-danger-border: rgba(127, 29, 29, 1);
   --vp-custom-block-danger-text: rgba(248, 113, 113, 1);
   --vp-custom-block-danger-text-deep: rgba(248, 113, 113, 1);
+  --vp-code-line-number-color: white;
+  --vp-code-block-divider-color: rgb(134, 134, 134);
+  --vp-code-lang-color: #7896b6;
+  --vp-code-block-bg: #363636;
 }
 
 .dark {
   --vp-code-block-bg: #161618;
   --vp-c-bg: #000000;
   --vp-c-bg-alt: rgb(9, 9, 10);
+  --vp-code-line-number-color: rgb(165, 165, 165);
+  --vp-code-block-divider-color: rgb(56, 56, 56);
 }
 
 table td {
