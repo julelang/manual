@@ -2,7 +2,9 @@
 
 ## Structs
 ```jule
-struct Const
+struct Const {
+    Kind: str
+}
 ```
 Constant data.\
 Use `Const.NewNil` function istead of `Const{}` for nil literal.
