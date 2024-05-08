@@ -46,3 +46,22 @@ For example:
 mymap[3] = "HDD"
 ```
 If the key does not exist when you assign it, the key is generated and matched with the value you assigned. 
+
+## Lookup Assignments
+
+Lookup assignments are efficient way to lookup in hashmaps. They lookups for key, and assign value of key to relevant expression if found. The second assignment is report of whether key is found.
+
+For example:
+```jule
+fn main() {
+    let mut myMap: map[int]str = {
+        0: "Foo",
+        1: "Bar",
+        2: "FooBar"
+    }
+    let (value, ok) = myMap[1]
+    outln(value)
+    outln(ok)
+}
+```
+At the example above, variable `value` will assign to value of key if key found, leaving initialized with default value if not. The variable `ok` assign to `true` if key found, `false` if not.

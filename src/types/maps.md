@@ -6,11 +6,6 @@ Removes all key-value pairs.
 
 ---
 
-`fn has(key: KEY_TYPE): bool`\
-Returns true if specified key value is exist in map, returns false if not.
-
----
-
 `fn del(mut self, key: KEY_TYPE)`\
 Deletes key if exist.
 
