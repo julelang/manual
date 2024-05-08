@@ -185,7 +185,6 @@ export default defineConfig({
             },
             { text: 'Arrays', link: '/types/arrays' },
             { text: 'Slices', link: '/types/slices' },
-            { text: 'Maps', link: '/types/maps' },
           ],
         },
         {

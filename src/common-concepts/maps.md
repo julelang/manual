@@ -47,6 +47,42 @@ mymap[3] = "HDD"
 ```
 If the key does not exist when you assign it, the key is generated and matched with the value you assigned. 
 
+## Delete Keys
+
+The built-in `delete` function deletes relevant key from map. Takes two argument, the first one is the map, second one is the key to delete.
+
+For example:
+```jule
+fn main() {
+    let mut myMap: map[int]str = {
+        0: "Foo",
+        1: "Bar",
+        2: "FooBar"
+    }
+    delete(myMap, 2)
+    outln(len(m))
+}
+```
+At the example above, the `delete` call will remove `2:"FooBar"` pair from the map.
+
+---
+
+If you want remove all keys without deallocating internal buffer memory, just give the map without key.
+
+For example:
+```jule
+fn main() {
+    let mut myMap: map[int]str = {
+        0: "Foo",
+        1: "Bar",
+        2: "FooBar"
+    }
+    delete(myMap, 2)
+    outln(len(m))
+}
+```
+At the example above, the `delete` call will remove all keys of the map without deallocating buffer. It is efficient way to clear map for make ready to reuse or something like that.
+
 ## Lookup Assignments
 
 Lookup assignments are efficient way to lookup in hashmaps. They lookups for key, and assign value of key to relevant expression if found. The second assignment is report of whether key is found.

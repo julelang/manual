@@ -125,6 +125,13 @@ Returns capacity of string, aka possible maximum count of bytes without expandin
 ---
 
 ```jule
+fn delete(mut Map, ...)
+```
+Deletes key from map. It takes two argument. The first one is map, second one is the key. If just given one argument, this one is a map, and clears all keys of map.
+
+---
+
+```jule
 fn clone(expr: T): T
 ```
 Returns mutable deep-clone of expression.

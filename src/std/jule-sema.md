@@ -488,6 +488,34 @@ Expression model for built-in append function calls.
 ---
 
 ```jule
+struct BuiltinLenCallExprModel {
+    Expr: &Data
+}
+```
+Expression Model: for built-in len function calls.
+
+---
+
+```jule
+struct BuiltinCapCallExprModel {
+    Expr: &Data
+}
+```
+Expression Model: for built-in cap function calls.
+
+---
+
+```jule
+struct BuiltinDeleteCallExprModel {
+    Dest: &Data
+    Key:  &Data
+}
+```
+Expression Model: for built-in delete function calls.
+
+---
+
+```jule
 struct SizeofExprModel {
     Expr:  ExprModel
 }
