@@ -92,7 +92,7 @@ export default defineConfig({
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
-            { text: 'Cross Transpilation', link: '/compiler/cross-transpilation' },
+            { text: 'Cross Compilation', link: '/compiler/cross-compilation' },
             {
               text: 'Backend',
               link: '/compiler/backend/',
@@ -382,6 +382,10 @@ export default defineConfig({
               items: [
                 { text: 'Primitive', link: '/api/types/primitive' },
                 { text: 'Limits', link: '/api/types/limits' },
+                { text: 'Strings', link: '/api/types/strings' },
+                { text: 'Maps', link: '/api/types/maps' },
+                { text: 'Slices', link: '/api/types/slices' },
+                { text: 'Any', link: '/api/types/any' },
               ],
             },
             { text: 'Atomicity', link: '/api/atomicity' },

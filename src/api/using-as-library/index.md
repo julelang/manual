@@ -22,9 +22,9 @@ Just include and use them:
 int main(int argc, char *argv[]) {
     jule::setup_argv(argc, argv);
 
-    std::cout << "Command line arguments:" << std::endl;
+    jule::outln("Command line arguments: ");
     for (jule::Str arg: jule::args())
-        std::cout << "  " << arg << std::endl;
+        jule::outln(arg);
 
     return 0;
 }

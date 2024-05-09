@@ -236,7 +236,7 @@ Accepts incoming connection, returns `&TcpConn`. All exceptionals are error code
 Returns network name which is listening. If connection closed, returns `Network.Tcp` as a general network.
 
 `fn Close(self)!`\
-Closes connection. All exceptionals are error code of implementation. Panics if connection is already closed.
+Closes connection. All exceptionals are error code of implementation.
 
 ---
 
@@ -259,13 +259,15 @@ TCP connection.
 `fn Read(mut self, mut buf: []byte)!: int`\
 Read bytes to buffer from connection and returns readed byte count. The number of bytes readed can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
+It will panic if connection is closed. If connection is closed by server, it returns zero and sets connection state as closed. So if you try read again, function will panic because of connection state is closed.
+
 All exceptionals are error code of implementation.
 
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
 `fn Close(mut self)!`\
-Closes connection. All exceptionals are error code of implementation. Panics if connection is already closed.
+Closes connection. All exceptionals are error code of implementation.
 
 ---
 
