@@ -48,8 +48,8 @@ Write output to `<file>`.
 ---
 
 `--target <target>` \
-Change transpilation target. \
-See more about [cross-transpilation](/compiler/cross-transpilation).
+Change target. \
+See more about [cross-compilation](/compiler/cross-compilation).
 
 ---
 
