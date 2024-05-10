@@ -79,8 +79,8 @@ Receivers indicate how instance the function will use. Receiver parameters must 
 
 There are two types of receiver parameters;
 
-**Reference Receiver Parameter**
-Reference receivers require the function to be a reference. The function can only be called from a reference instance of the structure.
+**Smart Pointer Receiver Parameter**
+Smart Pointer receivers require the function to be a reference. The function can only be called from a reference instance of the structure.
 
 **Receiver Parameter**
 Receivers, on the other hand, allow changes made within the function to be reflected in the structure if receiver is mutable. However, when the structure is given as arguments to different functions, or in a different state, it is copied. That is, it is only variable within itself.
@@ -97,11 +97,11 @@ fn IDENTIFIER([RECEIVER_PARAMETER], PARAMETERS...): RET_TYPE {
 
 For example to receiver parameters:
 ```jule
-// Immutable Reference Receiver
+// Immutable Smart Pointer Receiver
 fn method(&self): str { /* Body */ }
 ```
 ```jule
-// Mutable Reference Receiver
+// Mutable Smart Pointer Receiver
 fn method(mut &self): str { /* Body */ }
 ```
 ```jule

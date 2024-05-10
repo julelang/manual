@@ -4,8 +4,6 @@ Concurrency is something that is built into Jule. There is nothing to be afraid 
 
 Jule uses real threads. That is, threads scheduled by the kernel. Jule does not use any coroutine/green threads. And also concurrent calls are not traced or synchronized. Therefore, your program may terminate before all your concurrent calls have finished executing.
 
-## Concurrent Calls
-
 In Jule, concurrent calls spawn a new thread.
 Concurrent calls are made with the `co` keyword.
 
@@ -14,7 +12,7 @@ For example:
 co myFunction()
 ```
 
-Now your call to "myFunction" is running concurrently.
+Now your call to `myFunction` is running concurrently.
 You can call any function for concurrency with some safety constraints.
 
 ## References
@@ -25,3 +23,11 @@ For example:
 ```jule
 unsafe { co myFunction(my_var) }
 ```
+
+## Raw Pointers
+
+Although raw pointers run the risk of pointing to dangling values, Safe Jule allows concurrent calls using pointers. This is mainly because raw pointers are part of Unsafe Jule. A problematic use of the pointer can be made with Unsafe Jule only, so the compiler won't complain.
+
+## Self Receivers
+
+Methods can be used to make concurrent calls. But your compiler can only use smart pointer (`&self`) receiver or static methods. Otherwise, it is necessary to use Unsafe Jule to make a call.

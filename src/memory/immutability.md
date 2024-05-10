@@ -1,5 +1,5 @@
 # Immutability
-One approach of the compiler from its security obsessions is that by default variables are immutable. You've probably seen in the structure documentations that the compiler insists on using a reference to the reference receiver. This is just one of the compiler's security obsessions. But right now, we're taking a look at another similar obsession: immutability by default!
+One approach of the compiler from its security obsessions is that by default variables are immutable. You've probably seen in the structure documentations that the compiler insists on using a smart pointer to the smart pointer receiver. This is just one of the compiler's security obsessions. But right now, we're taking a look at another similar obsession: immutability by default!
 
 The fact that a variable is immutable by default requires that you do so consciously if you want to change it. Let's see why this is a security obsession for the compiler:
 

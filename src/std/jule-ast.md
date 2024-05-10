@@ -231,16 +231,6 @@ Unsafe expression.
 ---
 
 ```jule
-struct CoExpr {
-    Token: &Token
-    Expr:  &Expr
-}
-```
-Co expression.
-
----
-
-```jule
 struct IdentExpr {
     Token:     &Token // From std::jule::lex
     Ident:     str
@@ -322,6 +312,7 @@ struct FnCallExpr {
     Expr:      &Expr
     Args:      []&Expr
     Exception: &ScopeTree
+    IsCo:      bool
 }
 ```
 Function call expression kind.
@@ -956,7 +947,6 @@ Type of Stmt's data.
 - `&LabelSt`
 - `&ScopeTree`
 - `&TypeAliasDecl`
-- `&CoExpr`
 - `&UseExpr`
 
 ---

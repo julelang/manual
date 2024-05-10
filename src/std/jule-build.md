@@ -443,7 +443,8 @@ Compiler log messages with formatting.
 - `RefNotInited`
 - `ConstRef`
 - `RefIsDangling`
-- `ConcurrenctCallWithRefParam`
+- `ConcurrentCallWithRefParam`
+- `ConcurrenctCallWithSelfParam`
 - `UsedRefInAnonFnFromParentScope`
 - `EnumCastedFromAny`
 - `DuplicatedUseAlias`
@@ -462,6 +463,7 @@ Compiler log messages with formatting.
 - `UnhandledExceptional`
 - `MissingAssignRet`
 - `CoForExceptional`
+- `TypeCallWithExceptional`
 - `RetInDeferred`
 - `ErrorInDeferred`
 - `NilError`
@@ -486,6 +488,7 @@ Compiler log messages with formatting.
 - `AnyWithTypeEnum`
 - `ConstraintFailed`
 - `SelectedImportExistInPackage`
+- `CoForCastingCall`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -525,3 +528,5 @@ Compiler log messages with formatting.
 - `WrapExceptional`
 - `UseFieldPairToInstantiate`
 - `InstantiateGenericFnToUseAsAnon`
+- `UseUnsafeJuleToCallCo`
+- `UseUnsafeJuleToCallCoSelf`
