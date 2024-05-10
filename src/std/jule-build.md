@@ -444,7 +444,7 @@ Compiler log messages with formatting.
 - `ConstRef`
 - `RefIsDangling`
 - `ConcurrentCallWithRefParam`
-- `ConcurrenctCallWithSelfParam`
+- `ConcurrentCallWithSelfParam`
 - `UsedRefInAnonFnFromParentScope`
 - `EnumCastedFromAny`
 - `DuplicatedUseAlias`
