@@ -390,7 +390,6 @@ export default defineConfig({
             },
             { text: 'Atomicity', link: '/api/atomicity' },
             { text: 'Deferred Scopes', link: '/api/deferred-scopes' },
-            { text: 'Concurrency', link: '/api/concurrency' },
             {
               text: 'Unicode',
               link: '/api/unicode/',
