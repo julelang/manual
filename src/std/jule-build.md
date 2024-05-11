@@ -350,7 +350,6 @@ Compiler log messages with formatting.
 - `TypeNotSupportsCastingTo`
 - `UseAtContent`
 - `UseNotFound`
-- `UsedPackageHasErrors`
 - `DefNotSupportPub`
 - `ObjNotSupportSubFields`
 - `ObjHaveNotIdent`
