@@ -473,6 +473,7 @@ export default defineConfig({
                 { text: 'std::jule::types', link: '/std/jule-types' },
               ]
             },
+            { text: 'std::maps', link: '/std/maps' },
             {
               text: 'std::math',
               link: '/std/math',
