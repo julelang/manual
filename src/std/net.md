@@ -198,7 +198,7 @@ See the `Connect` function for a description of the network and addr parameters.
 Exceptionals are always will be `AddrError`.
 
 `fn Network(self): str`\
-Returns the address's netword name.
+Returns the address's network name.
 
 `fn Str(self): str`\
 Returns string form of address.
