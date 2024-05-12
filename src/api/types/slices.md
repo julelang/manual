@@ -37,3 +37,14 @@ auto s = jule::Slice<jule::Int>::alloc(len, cap);
 jule::outln(s.cap());
 jule::outln(s.len());
 ```
+
+The `alloc` method will not initialize memory. To do this, pass your initialize expression as a third argument.
+
+For example:
+```cpp
+jule::Int len = 10;
+jule::Int cap = 10;
+auto s = jule::Slice<jule::Int>::alloc(len, cap, 0);
+jule::outln(s.cap());
+jule::outln(s.len());
+```
