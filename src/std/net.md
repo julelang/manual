@@ -44,7 +44,7 @@ It will forward any exceptional from network connectors.
 ```jule
 fn ConnectTimeout(network: Network, addr: str, timeout: time::DurInt)!: Conn
 ```
-Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored.
+Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored. Timeout precision is microseconds. If the timeout is below one microsecond it will be ignored.
 
 ---
 
@@ -317,6 +317,12 @@ All exceptionals are error code of implementation.
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
+`fn SetReadTimeout(mut self, timeout: time::DurInt)!`\
+Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
+
+`fn SetWriteTimeout(mut self, timeout: time::DurInt)!`\
+Sets write timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
+
 `fn Network(self): Network`\
 Returns network name which is connected. If connection closed, returns Network.Tcp as a general network.
 
@@ -358,6 +364,12 @@ Read bytes to buffer from connection and returns readed byte count. The number o
 
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
+
+`fn SetReadTimeout(mut self, timeout: time::DurInt)!`\
+Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
+
+`fn SetWriteTimeout(mut self, timeout: time::DurInt)!`\
+Sets write timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
 
 `fn Network(self): Network`\
 Returns network name which is connected or listening. If connection closed, returns Network.Udp as a general network.
@@ -409,6 +421,8 @@ Common connection behavior.
 ```jule
 trait Listener {
     fn Accept(self)!: Conn
+    fn SetReadTimeout(mut self, timeout: time::DurInt)!
+    fn SetWriteTimeout(mut self, timeout: time::DurInt)!
     fn Network(self): Network
     fn Close(self)!
 }
