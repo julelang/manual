@@ -317,6 +317,9 @@ All exceptionals are error code of implementation.
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
+`fn Network(self): Network`\
+Returns network name which is connected. If connection closed, returns Network.Tcp as a general network.
+
 `fn Close(mut self)!`\
 Closes connection. All exceptionals are error code of implementation.
 
@@ -356,6 +359,9 @@ Read bytes to buffer from connection and returns readed byte count. The number o
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
+`fn Network(self): Network`\
+Returns network name which is connected or listening. If connection closed, returns Network.Udp as a general network.
+
 `fn Close(mut self)!`\
 Closes connection. All exceptionals are error code of implementation.
 
@@ -392,6 +398,7 @@ Return address in string form.
 trait Conn {
     fn Read(mut self, mut buf: []byte)!: int
     fn Write(mut self, buf: []byte)!: int
+    fn Network(self): Network
     fn Close(mut self)!
 }
 ```
