@@ -7,6 +7,17 @@ fn Listen(network: Network, addr: str)!: Listener
 ```
 Listens the address on the named network. It will forward any exceptional from network connectors.
 
+For UDP networks, the `ListenUDP` function should be used. If the network parameter is points udp network, function will panic.
+
+See the `Connect` function for a description of the network and addr parameters.
+
+---
+
+```jule
+fn ListenUDP(network: Network, addr: str)!: &UdpConn
+```
+Listens the address on the named network. It will forward any exceptional from network connectors. Just for UDP networks.
+
 See the `Connect` function for a description of the network and addr parameters.
 
 ---
@@ -21,6 +32,11 @@ The address has the form `host:port`. The host must be a literal IP address, or 
 
 If network is Tcp4, it will accept only IPv4 addresses and if address is IPv6, will try to convert IPv4. If network is Tcp6, it will accept only IPv6 address and address is IPv4, will not try to convert IPv6. If network is Tcp, it will use Tcp4 for empty addresses and try for IPv4 if possible. If address is IPv4 or IPv6 which is converted to IPv4 successfully, will use Tcp4, otherwise IPv6 and Tcp6 preferred.
 
+For UDP:\
+The address has the form `host:port`. The host must be a literal IP address, or a host name that can be resolved to IP addresses such as `localhost`. The port must be a literal port number or a service name. If the host is a literal IPv6 address it must be enclosed in brackets, as in `[2001:db8::1]:80` or `[fe80::1%zone]:80`. The zone specifies the scope of the literal IPv6 address as defined in RFC 4007. The functions `JoinHostPort` and `SplitHostPort` manipulate a pair of host and port in this form.
+
+If network is Udp4, it will accept only IPv4 addresses and if address is IPv6, will try to convert IPv4. If network is Udp6, it will accept only IPv6 address and address is IPv4, will not try to convert IPv6. If network is Udp, it will use Udp4 for empty addresses and try for IPv4 if possible. If address is IPv4 or IPv6 which is converted to IPv4 successfully, will use Udp4, otherwise IPv6 and Udp6 preferred.
+
 It will forward any exceptional from network connectors.
 
 ---
@@ -28,7 +44,7 @@ It will forward any exceptional from network connectors.
 ```jule
 fn ConnectTimeout(network: Network, addr: str, timeout: time::DurInt)!: Conn
 ```
-Same as `Connect`, but uses timeout.
+Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored.
 
 ---
 
@@ -206,8 +222,41 @@ Returns string form of address.
 ---
 
 ```jule
+struct UdpAddr {
+    Ip:   Ip
+    Port: int
+    Zone: str // IPv6 scoped addressing zone.
+}
+```
+Represents the address of a UDP end point.
+
+::: info
+**Implemented Traits**
+- Addr
+:::
+
+**Methods:**
+
+`static fn Resolve(mut network: Network, addr: str)!: &TcpAddr`\
+Returns an address of UDP end point.
+The network must be a UDP network name.
+
+See the `Connect` function for a description of the network and addr parameters.
+
+Exceptionals are always will be `AddrError`.
+
+`fn Network(self): str`\
+Returns the address's network name.
+
+`fn Str(self): str`\
+Returns string form of address.
+
+---
+
+```jule
 struct TcpListener
 ```
+TCP listener. In most cases, represents TCP server.
 
 ::: info
 **Implemented Traits**
@@ -217,12 +266,12 @@ struct TcpListener
 **Methods:**
 
 `static fn Bind(addr: str)!: &TcpListener`\
-Binds new TCP Listener and starts listening given address. Returns relevant created `&TcpListener` if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
+Binds new TCP listener and starts listening given address. Returns relevant created `&TcpListener` if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
 
 See the `Connect` function for a description of the addr parameter.
 
 `static fn Connect(addr: str)!: &TcpConn`\
-Connects to TCP Listener by given address. Returns relevant created &TcpConn if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
+Connects to TCP listener by given address. Returns relevant created &TcpConn if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
 
 See the `Connect` function for a description of the addr parameter.
 
@@ -241,9 +290,11 @@ Closes connection. All exceptionals are error code of implementation.
 ---
 
 ```jule
-struct TcpConn
+struct TcpConn {
+    Addr: &TcpAddr
+}
 ```
-TCP connection.
+TCP connection. In most cases, represents TCP client.
 
 ::: info
 **Implemented Traits**
@@ -262,6 +313,45 @@ Read bytes to buffer from connection and returns readed byte count. The number o
 It will panic if connection is closed. If connection is closed by server, it returns zero and sets connection state as closed. So if you try read again, function will panic because of connection state is closed.
 
 All exceptionals are error code of implementation.
+
+`fn Write(mut self, buf: []byte)!: int`\
+Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
+
+`fn Close(mut self)!`\
+Closes connection. All exceptionals are error code of implementation.
+
+---
+
+```jule
+struct UdpConn {
+    Addr: &UdpAddr
+}
+```
+UDP connection. This structure represents server and client connections.
+
+::: info
+**Implemented Traits**
+- Conn
+- io::Reader
+- io::Writer
+- io::Stream
+- io::WriterCloser
+:::
+
+**Methods:**
+
+`static fn Bind(addr: str)!: &UdpConn`\
+Binds new UDP listener and starts listening given address. Returns relevant created `&UdpConn` if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
+
+See the `Connect` function for a description of the addr parameter.
+
+`static fn Connect(addr: str)!: &UdpConn`\
+Connects to UDP listener by given address. Returns relevant created `&UdpConn` if success. If addr is not a valid address, it will forward relevant parse exceptionals. In addition, any bind and listening error will be return as exceptional.
+
+See the `Connect` function for a description of the addr parameter.
+
+`fn Read(mut self, mut buf: []byte)!: int`\
+Read bytes to buffer from connection and returns readed byte count. The number of bytes readed can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow. It will panic if connection is closed. All exceptionals are error code of implementation.
 
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
@@ -340,6 +430,9 @@ Network names.
 - `Tcp`
 - `Tcp4`
 - `Tcp6`
+- `Udp`
+- `Udp4`
+- `Udp6`
 
 ---
 

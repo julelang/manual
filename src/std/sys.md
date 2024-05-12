@@ -2352,6 +2352,26 @@ Available on: `unix`
 ---
 
 ```jule
+unsafe fn Recvfrom(handle: uint, mut buf: *byte, len: int, flags: int, from: *Sockaddr, fromLen: *Int): int
+```
+Calls Windows's recvfrom function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Recvfrom(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: *u32): uint
+```
+Calls C's recvfrom function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
 unsafe fn Send(handle: uint, mut buf: *byte, len: uint, flags: int): int
 ```
 Calls Windows's send function.
@@ -2365,6 +2385,26 @@ Available on: `windows`
 unsafe fn Send(handle: int, mut buf: *unsafe, len: uint, flags: int): int
 ```
 Calls C's send function.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Sendto(handle: uint, mut buf: *byte, len: int, flags: int, to: *Sockaddr, toLen: Int): int
+```
+Calls Windows's sendto function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Sendto(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: u32): uint
+```
+Calls C's sendto function.
 ::: warning
 Available on: `unix`
 :::
