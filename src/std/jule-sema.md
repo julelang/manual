@@ -931,7 +931,7 @@ Assignment.
 
 ```jule
 struct MultiAssign {
-    L: []ExprModel
+    L: []&Data
     R: ExprModel
 }
 ```
@@ -1144,15 +1144,16 @@ Field instance.
 
 ```jule
 struct StructIns {
-    Checked:   bool
-    Decl:      &Struct
-    Generics:  []&InsGeneric
-    Fields:    []&FieldIns
-    Statics:   []&Var
-    Methods:   []&Fn
-    Mutable:   bool
-    Refers:    &ReferenceStack
-    Operators: Operators
+    Checked:    bool
+    Decl:       &Struct
+    Generics:   []&InsGeneric
+    Fields:     []&FieldIns
+    Statics:    []&Var
+    Methods:    []&Fn
+    Mutable:    bool
+    Comparable: bool
+    Refers:     &ReferenceStack
+    Operators:  Operators
 }
 ```
 Structure instance.
@@ -1298,7 +1299,10 @@ Reports whether kind is nil.
 `fn Void(self): bool`\
 Reports whether kind is void.
 
-`fn Mut(self): bool`\
+`fn Comparable(self): bool`\
+Reports whether kind is comparable.
+
+`fn Mutable(self): bool`\
 Reports whether kind is mutable.
 
 `fn NilCompatible(self): bool`\
@@ -1526,9 +1530,14 @@ struct Var {
     Refers:        &ReferenceStack
     IterRelation:  &IterRelation
 
+    // The -2 means this variable is not one of the return variables.
+    // The -1 means this variable is just the single return variable one.
+    // The 0..n means this variable is the nth variable of the return variables.
+    RetOrder: int = -2
+
     // This variable depended to these variables for initialization expression.
     // Nil if not global variable.
-    Depends:    []&Var
+    Depends: []&Var
 }
 ```
 Variable.

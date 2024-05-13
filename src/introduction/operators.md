@@ -27,6 +27,8 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | `>=` | Greater than or equal to |
 | `<=` | Less than or equal to |
 
+For `==` and `!=` operators, the slice and map types are not supported. If a structure uses one of these types, it will be unsupported also. In this case, to make a comparable relevant structure, use operator overloading and overload the comparison operators.
+
 ## Bitwise Operators
 | Operator | Description |
 | -------- | ----------- |

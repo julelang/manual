@@ -488,6 +488,7 @@ Compiler log messages with formatting.
 - `ConstraintFailed`
 - `SelectedImportExistInPackage`
 - `CoForCastingCall`
+- `TypeIsNotComparable`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
