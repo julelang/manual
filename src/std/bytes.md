@@ -5,6 +5,13 @@ Package std::bytes implements functions for the manipulation of byte slices. It 
 ## Functions
 
 ```jule
+fn Equal(s1: []byte, s2: []byte): bool
+```
+Reports whether two byte slices are the same length and contains same bytes. The nil slice considered as zero-length empty slice.
+
+---
+
+```jule
 fn Repeat(s: []byte, mut n: int): []byte
 ```
 Returns bytes that equals to concatenation of n-count s.
