@@ -1,6 +1,13 @@
 # std::slices
 ## Functions
 ```jule
+fn Equal[S: []E, E: comparable](s1: S, s2: S): bool
+```
+Reports whether slices are the same length and contains same elements. The nil slices considered as zero-length slices. The floating-point NaNs are not considered equal.
+
+---
+
+```jule
 fn Find[S: []E, E: comparable](s: S, e: E): int
 ```
 Returns index of first matched element with specified element, returns -1 if not exist any match. Starts searching at left of slice to right.
