@@ -182,9 +182,9 @@ For example:
 fn compareInt(x: int, y: int): (bool, bool) { ret x < y, x == y }
 
 fn main() {
-    let (less, equals) = compareInt(10, 20)
+    let (less, equal) = compareInt(10, 20)
     outln(less)
-    outln(equals)
+    outln(equal)
 }
 ```
 ::: warning

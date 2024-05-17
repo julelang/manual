@@ -266,7 +266,7 @@ Function call expression model.
 ```jule
 struct BuiltinErrorCallExprModel {
     Func: &FnIns
-    Err:  ExprModel
+    Err:  &Data
 }
 ```
 Expression model for built-in error function calls.
@@ -1728,7 +1728,7 @@ Used by semantic analyzer for import use declarations.
 ```jule
 trait Kind {
     fn Str(self): str
-    fn Equals(&self, other: &TypeKind): bool
+    fn Equal(&self, other: &TypeKind): bool
 }
 ```
 Kind of type declaration.
