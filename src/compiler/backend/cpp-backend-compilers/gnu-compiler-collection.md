@@ -21,6 +21,12 @@ Our command looked like this:
 g++ -Wa,-mbig-obj -O0 --std=c++17 -w -o .\bin\julec.exe .\ir.cpp
 ```
 
-### Runtime
+## New Linker May Cause Problems (macOS Only)
+
+Apple released a new linker with Xcode 15. But the new linker sometimes causes compilation errors.
+
+Passing this argument to GCC might solve the problem: `-Wl,-ld_classic`. This argument means request to use old linker.
+
+## Unexpected Runtime (Windows Only)
 
 We were successful when we compiled JuleC itself on Windows with GCC. But we had some problems. For example, when we wanted to transpile the JuleC source code with JuleC, we couldn't do it. This can be an important indication that GCC may have some issues with its runtime. As far as we tested, we did not experience this issue on Linux and macOS operating systems. Everything was as expected.
