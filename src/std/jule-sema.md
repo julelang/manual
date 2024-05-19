@@ -356,12 +356,11 @@ For example: `myTrait.mySubIdent`
 
 ```jule
 struct StructSubIdentExprModel {
-    Token:    &Token
-    Expr:     &Data
-    ExprKind: &TypeKind
-    Method:   &FnIns
-    Field:    &FieldIns
-    Owner:    &StructIns
+    Token:  &Token
+    Expr:   &Data
+    Method: &FnIns
+    Field:  &FieldIns
+    Owner:  &StructIns
 }
 ```
 Structure sub-ident expression model.
