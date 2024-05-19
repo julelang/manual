@@ -127,3 +127,25 @@ outln(uintptr(&s[0]))
 ```
 
 This time, you can see there is no difference between addresses of first slice's element. Because slice `s` allocated with 10 capacity, so the `append` function just copies new elements to slice and returns same destination slice allocation.
+
+## Length and Capacity of Slices
+
+Slices are have two size in different concept: first one is the length and second one is the capacity.
+
+The length of slice means count of slice elements. Length is always in `0>= && <=capacity` range. The zero-length means the slice is not have any element.
+
+The capacity is the number of maximum elements before the rellocation automatically. If length reaches/overflows the capacity somehow, buffer will be reallocated with more capacity to store more elements.
+
+You can use the built-in `len` function to get length of the slice. And also there is the built-in `cap` function to get capacity of the slice.
+
+The `nil` slices are considered as zero-length and zero-capacity.
+
+For example:
+
+```jule
+len(mySlice)
+```
+
+```jule
+cap(mySlice)
+```

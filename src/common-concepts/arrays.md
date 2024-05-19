@@ -77,3 +77,13 @@ Output of program:
 ```
 [[Apple Banana] [Bred Cheese]]
 ```
+
+## Length of Arrays
+
+Arrays are always have compile-time evaluated fixed size. To get this fixed size, use the common built-in `len` function.
+
+For example:
+
+```jule
+len(myArray)
+```
