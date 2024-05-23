@@ -71,6 +71,9 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 `static fn Write(path: str, data: []byte, perm: int)!`\
 Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
 
+`static fn WriteStr(path: str, &data: str, perm: int)!`\
+Same as [`File.Write`], designed for strings.
+
 `static fn Create(path: str)!: &File`\
 Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
 
@@ -89,6 +92,10 @@ Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Ove
 Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
 Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
+
+\
+`fn WriteStr(mut self, &data: str)!: (n: int)`\
+Same as [`Write`], designed for strings.
 
 \
 `fn Close(mut self)!`\
