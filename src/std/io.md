@@ -91,9 +91,9 @@ Read bytes to buffer from stream and returns readed byte count. The number of by
 `fn Write(mut self, buff: []byte)!: (n: int)`\
 Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
-`fn WriteStr(mut self, buff: []byte)!: (n: int)`\
-Same as write, but writes string.
-This method is more efficient than write method for strings.
+`fn WriteStr(mut self, &buff: str)!: (n: int)`\
+Same as Write, but writes string.
+This method is more efficient than Write method for strings.
 
 `fn ReadLineBytes(mut self)!: []byte`\
 Same as ReadLine method, but returns in bytes.
@@ -165,6 +165,6 @@ Read bytes to buffer from stream and returns readed byte count. The number of by
 `fn Write(mut self, buff: []byte)!: (n: int)`\
 Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
 
-`fn WriteStr(mut self, buff: []byte)!: (n: int)`\
-Same as write, but writes string.
-This method is more efficient than write method for strings.
+`fn WriteStr(mut self, &buff: str)!: (n: int)`\
+Same as Write, but writes string.
+This method is more efficient than Write method for strings.
