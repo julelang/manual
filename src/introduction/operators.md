@@ -27,7 +27,9 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | `>=` | Greater than or equal to |
 | `<=` | Less than or equal to |
 
-For `==` and `!=` operators, the slices, maps, anonymous functions, and binded types are not supported. If a structure uses one of these types, it will be unsupported also. In this case, to make a comparable relevant structure, use operator overloading and overload the comparison operators.
+For `==` and `!=` operators, the slices, maps, anonymous functions, and some binded types are not supported. If a structure uses one of these types, it will be unsupported also. In this case, to make a comparable relevant structure, use operator overloading and overload the comparison operators.
+
+For binded types, all binded structures accepted as non-comparable. Other type aliases like binded as `int` or something like that, accepted as comparable.
 
 ## Bitwise Operators
 | Operator | Description |
