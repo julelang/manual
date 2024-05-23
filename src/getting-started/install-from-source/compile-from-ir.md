@@ -38,9 +38,14 @@ Of course you need a C++ compiler to compile the IR code. At this point it is re
 
 We recommend compiling JuleC's IR codes with Clang and C++17. The recommended build command below is built accordingly. You can change the optimization level as you wish. -O0 is recommended for debugging. If you're using it to get the most up-to-date compiler in the main branch, you can still use -O0 to get the fastest build time, but it may also result in a JuleC build with a higher transpilation time. But in the general scenario you wait less time than you would expect for the -O3 optimization level.
 
-Recommended compile command:
+Recommended compile command (Unix):
 ```sh
 clang++ -O3 -Wno-everything --std=c++17 ir.cpp
+```
+
+Recommended compile command (Windows):
+```sh
+clang++ -lshell32 -O3 -Wno-everything --std=c++17 ir.cpp
 ```
 
 ::: tip

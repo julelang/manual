@@ -1936,7 +1936,7 @@ Available on: `unix`
 ```jule
 unsafe fn Wstat(path: *u16, mut stat: *Stat): int
 ```
-Calls C's wstat function.
+Calls C's _wstat function.
 ::: warning
 Available on: `windows`
 :::
@@ -2034,9 +2034,10 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, to_read: int, mut &readed: int, input_control: *unsafe): bool
+unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, toRead: int, mut &readed: int): bool
 ```
-Calls Windows's ReadConsoleW function.
+Calls Windows's ReadConsoleW function. \
+Passes nil pointer for input control.
 
 ::: warning
 Available on: `windows`
@@ -2085,31 +2086,11 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn Wopendir(path: *u16): *Wdir
-```
-Calls C's _wopendir function.
-::: warning
-Available on: `windows`
-:::
-
----
-
-```jule
 unsafe fn Readdir(mut dir: *Dir): *Dirent
 ```
 Calls C's readdir function.
 ::: warning
 Available on: `unix`
-:::
-
----
-
-```jule
-unsafe fn Wreaddir(mut dir: *Wdir): *Wdirent
-```
-Calls C's _wreaddir function.
-::: warning
-Available on: `windows`
 :::
 
 ---
@@ -2130,16 +2111,6 @@ unsafe fn Closedir(mut dir: *Dir): int
 Calls C's closedir function.
 ::: warning
 Available on: `unix`
-:::
-
----
-
-```jule
-unsafe fn Wclosedir(mut dir: *Wdir): int
-```
-Calls C's _wclosedir function.
-::: warning
-Available on: `windows`
 :::
 
 ---
@@ -2570,6 +2541,36 @@ C's getsockname function.
 Available on: `unix`
 :::
 
+---
+
+```jule
+unsafe fn FindFirstFile(path: *u16, mut data: *Win32FindData): Handle
+```
+Call's Windows FindFirstFileW function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn FindNextFile(h: Handle, mut data: *Win32FindData): int
+```
+Call's Windows FindNextFileW function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+fn FindClose(h: Handle): int
+```
+Call's Windows FindClose function.
+::: warning
+Available on: `windows`
+:::
+
 ## Structs
 ```jule
 struct SysStat {
@@ -2578,18 +2579,6 @@ struct SysStat {
 }
 ```
 C's stat.
-
----
-
-```jule
-struct Wdirent {
-    d_name: *u16 // wchar_t*
-}
-```
-C's _wdirent.
-::: warning
-Available on: `windows`
-:::
 
 ---
 
@@ -2665,11 +2654,14 @@ Available on: unix
 ---
 
 ```jule
-struct Wdir
+struct Win32FindData {
+    cFileName: *Wchar
+}
 ```
-C's _WDIR.
+```jule
+C's WIN32_FIND_DATAW structure.
 ::: warning
-Available on: `windows`
+Available on: unix
 :::
 
 ---

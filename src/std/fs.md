@@ -2,13 +2,7 @@
 
 ## Structs
 ```jule
-struct Status {
-    // Type and mode.
-    Mode: uint
-
-    // Total size in bytes of regular file or symbolic link.
-    Size: uint
-}
+struct Status {}
 ```
 Status information. 
 
@@ -25,6 +19,9 @@ Reports path is directory or not.
 
 `fn IsReg(self): bool`\
 Reports path is regular file or not.
+
+`fn Size(): uint`\
+Total size in bytes of regular file or symbolic link.
 
 ---
 
