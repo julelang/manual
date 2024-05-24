@@ -489,6 +489,7 @@ Compiler log messages with formatting.
 - `SelectedImportExistInPackage`
 - `CoForCastingCall`
 - `TypeIsNotComparable`
+- `AmperOpForEnum`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -530,3 +531,4 @@ Compiler log messages with formatting.
 - `InstantiateGenericFnToUseAsAnon`
 - `UseUnsafeJuleToCallCo`
 - `UseUnsafeJuleToCallCoSelf`
+- `DefineZeroDefaultToUseAmper`

@@ -13,7 +13,7 @@ fn main() {
     outln(FileMode.Read)
 }
 ```
-As seen in the example above, there is an enumeration definition. If you do not assign a value to the enumeration elements, the index value is automatically assigned. In this case, the element `both` in the example above has the value `2`.
+As seen in the example above, there is an enumeration definition.
 ::: info
 - You can use an element before them as a value in enumerations.
 - Enumerations has `int` data type by default.
@@ -21,6 +21,33 @@ As seen in the example above, there is an enumeration definition. If you do not 
 ::: warning
 You can't use any global, function or etc. in custom value expressions.
 :::
+
+## Value Assignments
+
+The value assignments are based on previous field. The first element is assigned to zero by default. If you give an expression to a field, the next field is uses your expression after increased once.
+
+For example:
+```jule
+enum MyEnum: int {
+    A: -20,
+    B,
+    C,
+    D: 20,
+    E,
+    F: 1,
+    G,
+    H,
+}
+```
+The example above, here is list of the field values:
+- `A`: `-20`
+- `B`: `-19`
+- `C`: `-18`
+- `D`: `20`
+- `E`: `21`
+- `F`: `1`
+- `G`: `2`
+- `H`: `3`
 
 ## Custom Data Types
 If you want to give enums a data type other than the default, it is possible to do so.
@@ -63,6 +90,8 @@ fn main() {
 Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments should always be of their own type.
 
 Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators. The `==` and `!=` logical operators can be used for compatible types for enum's type. It's safe. But others needs casting or it's own type.
+
+For the amper operator, you can use only when you define a default enum field with a zero value. Otherwise, the amper (`&`) operator is not available for relevant enum.
 
 ### Maps
 

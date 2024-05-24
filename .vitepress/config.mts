@@ -158,7 +158,13 @@ export default defineConfig({
                 { text: 'Labels', link: '/common-concepts/control-flow/labels' },
               ],
             },
-            { text: 'Enums', link: '/common-concepts/enums' },
+            {
+              text: 'Enums',
+              link: '/common-concepts/enums/',
+              items: [
+                { text: 'Bit Flags', link: '/common-concepts/enums/bitflags' },
+              ],
+            },
             {
               text: 'Structures', link: '/common-concepts/structures/',
               items: [
