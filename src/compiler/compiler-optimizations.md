@@ -32,8 +32,6 @@ It reduces copying operations whenever possible.
 
 - Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
-- Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
-- Inserts to beginning of the string instead of allocation and assignment if string gets assignment like `expr + itself`.
 - Converts empty string comparisons to faster way such as length-is-zero checking.
 
 ---
@@ -101,6 +99,15 @@ Enable optimizations for conditional structures.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
 - Remove condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
 
+---
+
+`--opt-str` \
+Enables optimizations for string operations.
+
+- Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
+- Inserts to beginning of the string instead of allocation and assignment if string gets assignment like `expr + itself`.
+- Converts string concatenations with casted byte, rune, byte slices or rune slices to direct appendations. Avoids allocate to new string and then appending to destination, generates code to push into string buffer directly.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -115,7 +122,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`
 
 ## Production Compilation
 
