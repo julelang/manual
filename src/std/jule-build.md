@@ -490,6 +490,7 @@ Compiler log messages with formatting.
 - `CoForCastingCall`
 - `TypeIsNotComparable`
 - `AmperOpForEnum`
+- `MissingArgs`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
