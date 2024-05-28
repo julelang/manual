@@ -65,7 +65,7 @@ An encoding is invalid if it is incorrect UTF-8, encodes a rune that is out of r
 ---
 
 ```cpp
-std::vector<jule::U8>
-utf8_rune_to_bytes(const jule::I32 &r);
+template<typename Dest>
+void utf8_push_rune_bytes(const jule::I32 &r, Dest &dest);
 ```
-Returns byte slice for the UTF-8 encoding of the rune. If the rune is out of range, it writes the encoding of RUNE_ERROR. It returns bytes of rune.
+Pushes UTF-8 encoding bytes of the rune to the destination. If the rune is out of range, it writes the encoding of RUNE_ERROR. It returns bytes of rune. The destination should have the `push_back` method.
