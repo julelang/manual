@@ -32,7 +32,8 @@ It reduces copying operations whenever possible.
 
 - Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
-- Converts empty string comparisons to faster way such as length-is-zero checking.
+- Converts empty string comparisons to length-is-zero checking.
+- Avoids making allocation for strings when strings compared with literals.
 
 ---
 
@@ -107,6 +108,7 @@ Enables optimizations for string operations.
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
 - Inserts to beginning of the string instead of allocation and assignment if string gets assignment like `expr + itself`.
 - Converts string concatenations with casted byte, rune, byte slices or rune slices to direct appendations. Avoids allocate to new string and then appending to destination, generates code to push into string buffer directly.
+- Avoids making new string allocation when appending string literals.
 
 ## Optimization Levels
 
