@@ -206,18 +206,37 @@ Possible values are:
 ---
 
 ```jule
-fn MinOf(mut k: str): f64
+fn Min(mut k: str): f64
 ```
-Returns minimum value of signed/unsigned integer and floating-point kinds.\
-Returns 0 if kind is invalid.
+Returns minimum value of signed/unsigned integer and floating-point kinds. Returns 0 if kind is invalid.
 
 ---
 
 ```jule
-fn MaxOf(mut k: str): f64
+fn Max(mut k: str): f64
 ```
-Returns minimum value of signed/unsigned integer and floating-point kinds.\
-Returns 0 if kind is invalid.
+Returns maximum value of signed/unsigned integer and floating-point kinds. Returns 0 if kind is invalid.
+
+---
+
+```jule
+fn MaxU(mut k: str): u64
+```
+Returns maximum value of unsigned integer kinds. Returns 0 if kind is invalid.
+
+---
+
+```jule
+fn MaxI(mut k: str): i64
+```
+Returns minimum value of signed integer kinds. Returns 0 if kind is invalid.
+
+---
+
+```jule
+fn MinI(mut k: str): i64
+```
+Returns minimum value of signed integer kinds. Returns 0 if kind iss invalid.
 
 ---
 
