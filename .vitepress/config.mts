@@ -457,6 +457,13 @@ export default defineConfig({
                 { text: 'std::fs::path', link: '/std/fs-path' },
               ],
             },
+            {
+              text: 'std::hash',
+              link: '/std/hash',
+              items: [
+                { text: 'std::hash::adler32', link: '/std/hash-adler32' },
+              ],
+            },
             { text: 'std::io', link: '/std/io' },
             {
               text: 'std::jule',
