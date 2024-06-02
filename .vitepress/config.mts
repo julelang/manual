@@ -216,6 +216,7 @@ export default defineConfig({
           link: '/traits/',
           items: [
             { text: 'Implementing', link: '/traits/implementing' },
+            { text: 'Inheritance', link: '/traits/inheritance' },
           ],
         },
         {
