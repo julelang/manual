@@ -7,11 +7,11 @@ Functions in a trait should only exist as prototypes (declaration of a trait, no
 For example:
 ```jule
 trait Person {
-    fn name(): str
-    fn age(): u8
+    fn name(self): str
+    fn age(self): u8
 }
 ```
-All constructs that implement the trait above, must have the methods `name() str` and `age() u8`.
+All constructs that implement the trait above, must have the methods `name(self): str` and `age(self): u8`.
 
 ## Comparing Traits
 During a comparison of traits: equal traits return true if two traits use the same allocation (both have the same pointer address), false if not. 

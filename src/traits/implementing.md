@@ -44,3 +44,34 @@ fn main() {
     outln(circ.area())
 }
 ```
+
+## Partial Implementing
+
+The `impl` statements not have to implement methods in body. You can give empty body for implementations. You have to implement trait methods for structure, that's the point. So you can implement traits with empty bodies, then implement all of them in one implementation body.
+
+For example:
+
+```jule
+trait Foo {
+    fn Foo(self)
+}
+
+trait Bar {
+    fn Bar(self)
+}
+
+struct Baz {}
+
+impl Foo for Baz {}
+impl Bar for Baz {}
+
+impl Baz {
+    fn Foo(self) {
+        outln("foo")
+    }
+
+    fn Bar(self) {
+        outln("bar")
+    }
+}
+```
