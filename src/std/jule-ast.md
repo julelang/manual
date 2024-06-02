@@ -836,11 +836,12 @@ Structure declaration.
 
 ```jule
 struct TraitDecl {
-    Token:   &Token // From std::jule::lex
-    End:     &Token
-    Ident:   str
-    Public:  bool
-    Methods: []&FnDecl
+    Token:    &Token // From std::jule::lex
+    End:      &Token
+    Ident:    str
+    Public:   bool
+    Inherits: []&TypeDecl
+    Methods:  []&FnDecl
 }
 ```
 Trait declaration.

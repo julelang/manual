@@ -491,6 +491,8 @@ Compiler log messages with formatting.
 - `TypeIsNotComparable`
 - `AmperOpForEnum`
 - `MissingArgs`
+- `InheritedNonTrait`
+- `IncompatibleInherit`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

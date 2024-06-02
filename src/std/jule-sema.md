@@ -1221,6 +1221,7 @@ struct Trait {
     Public:      bool
     Mutable:     bool
     Methods:     []&Fn
+    Inherits:    []&TypeSymbol
     Implemented: []&Struct
 }
 ```
