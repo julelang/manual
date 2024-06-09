@@ -45,25 +45,24 @@ Reader trait mask for stream writer.
 ---
 
 ```jule
-trait Stream
+trait Stream {
+    Reader
+    Writer
+}
 ```
 Stream trait mask for R/W streams.
-
-**Methods:**
-
-`fn Read(mut self, mut buff: []byte)!: (n: int)`\
-`fn Write(mut self, buff: []byte)!: (n: int)`
 
 ---
 
 ```jule
-trait WriterCloser
+trait WriterCloser {
+    Reader
+}
 ```
 Reader and closer trait mask for read/close streams.
 
 **Methods:**
 
-`fn Read(mut self, mut buff: []byte)!: (n: int)`\
 `fn Close(mut self)!`
 
 ## Structures
