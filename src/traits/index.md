@@ -15,3 +15,40 @@ All constructs that implement the trait above, must have the methods `name(self)
 
 ## Comparing Traits
 During a comparison of traits: equal traits return true if two traits use the same allocation (both have the same pointer address), false if not. 
+
+## Compatibility
+
+A trait may be eligible to be cast into another trait, but there are some conditions. Most importantly, they exhibit the same behavior. In other words, the same definitions must be present in both. And they must be applied to the same structures. If these conditions are met, one trait can be cast into another.
+
+For example:
+```jule
+trait Foo {
+    fn foo(self)
+}
+
+trait Bar {
+    fn bar(self)
+}
+
+trait FooBar {
+    Foo
+    Bar
+}
+
+struct Baz {}
+
+impl FooBar for Baz {
+    fn foo(self) { outln("foo") }
+    fn bar(self) { outln("bar") }
+}
+
+fn main() {
+    let a: FooBar = Baz{}
+    a.foo()
+    a.bar()
+    let b: Foo = a
+    b.foo()
+    let c: Bar = a
+    c.bar()
+}
+```
