@@ -463,6 +463,7 @@ export default defineConfig({
               link: '/std/hash',
               items: [
                 { text: 'std::hash::adler32', link: '/std/hash-adler32' },
+                { text: 'std::hash::fnv', link: '/std/hash-fnv' },
               ],
             },
             { text: 'std::io', link: '/std/io' },
