@@ -76,11 +76,11 @@ See more information about [deriving](/compiler/deriving).
 
 ## Directive: `pass`
 Directive pass is a top directive.
-Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
+Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals. Pass directives adds to command-lines after source files
 
 ::: info
 There are no issue if you are using same passes.
-The compiler eliminates duplicate passes.
+The compiler will eliminate duplicate passes.
 :::
 
 \
