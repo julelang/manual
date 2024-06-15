@@ -1,6 +1,20 @@
 # std::slices
 ## Functions
 ```jule
+fn Sort[S: []E, E: ordered](mut s: S)
+```
+Sorts a slice of any ordered type in ascending order. When sorting floating-point numbers, NaNs are ordered before other values.
+
+---
+
+```jule
+fn IsSorted[S: []E, E: ordered](mut s: S): bool
+```
+Reports whether x is sorted in ascending order.
+
+---
+
+```jule
 fn Equal[S: []E, E: comparable](s1: S, s2: S): bool
 ```
 Reports whether slices are the same length and contains same elements. The nil slices considered as zero-length slices. The floating-point NaNs are not considered equal.
