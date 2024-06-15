@@ -493,6 +493,7 @@ Compiler log messages with formatting.
 - `MissingArgs`
 - `InheritedNonTrait`
 - `IncompatibleInherit`
+- `ArraySizeOverflow`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
