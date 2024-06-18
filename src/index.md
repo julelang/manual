@@ -32,6 +32,7 @@ This version of the text assumes you're using the latest version of the JuleC co
 If you want to see the current manual version for the release, you can select the relevant version from the list below. But for this you will be redirected to the source code on GitHub and you will need to read the content from markdown.
 
 List of manual version for each Jule releases:
+- [Jule 0.0.13](https://github.com/julelang/manual/tree/jule0.0.13/src)
 - [Jule 0.0.12](https://github.com/julelang/manual/tree/jule0.0.12/src)
 - [Jule 0.0.11](https://github.com/julelang/manual/tree/jule0.0.11/src)
 - [Jule 0.0.10](https://github.com/julelang/manual/tree/jule0.0.10/src)
