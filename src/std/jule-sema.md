@@ -1652,10 +1652,6 @@ Reports whether function is the reserved BitXorAssign function.
 ## Traits
 ```jule
 trait Lookup {
-    // Find imported package.
-    // Returns nil reference if did not found any match.
-    fn FindPackage(mut self, ident: str): &ImportInfo
-
     // Select imported package.
     // Returns nil reference if did not found any match.
     fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
