@@ -953,6 +953,9 @@ Match-Case.
 `fn IsGenericTypeMatch(self): bool`\
 Reports whether match is type-match for generic type.
 
+`fn IsComptime(self): bool`\
+Reports whether match is compile-time matching.
+
 ---
 
 ```jule

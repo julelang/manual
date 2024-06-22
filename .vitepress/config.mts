@@ -271,6 +271,9 @@ export default defineConfig({
         {
           text: 'Comptime',
           link: "/comptime/",
+          items: [
+            { text: 'Comptime Matching', link: '/comptime/comptime-matching' },
+          ],
         },
         {
           text: 'Integrated Jule',

@@ -372,7 +372,7 @@ Compiler log messages with formatting.
 - `TraitHaveNotIdent`
 - `NotImplTraitDef`
 - `DynamicTypeAnnotationFailed`
-- `FalltroughWrongUse`
+- `FallthroughWrongUse`
 - `FallthroughIntoFinalCase`
 - `UnsafeBehaviorAtOutOfUnsafeScope`
 - `RefMethodUsedWithNotRefInstance`
@@ -497,6 +497,8 @@ Compiler log messages with formatting.
 - `InvalidTypeForTypeOf`
 - `ComptimeAsExpr`
 - `InvalidTypeForFn`
+- `InvalidExprForConstMatch`
+- `ComptimeFallthrough`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
