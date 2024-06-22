@@ -494,6 +494,8 @@ Compiler log messages with formatting.
 - `InheritedNonTrait`
 - `IncompatibleInherit`
 - `ArraySizeOverflow`
+- `InvalidTypeForTypeOf`
+- `ComptimeAsExpr`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

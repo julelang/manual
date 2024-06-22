@@ -269,6 +269,10 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Comptime',
+          link: "/comptime/",
+        },
+        {
           text: 'Integrated Jule',
           link: '/integrated-jule/',
           items: [
@@ -435,6 +439,7 @@ export default defineConfig({
           items: [
             { text: 'builtin', link: '/std/builtin' },
             { text: 'std::bytes', link: '/std/bytes' },
+            { text: 'std::comptime', link: '/std/comptime' },
             { text: 'std::conv', link: '/std/conv' },
             { text: 'std::debug', link: '/std/debug' },
             {
