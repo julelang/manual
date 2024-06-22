@@ -496,6 +496,7 @@ Compiler log messages with formatting.
 - `ArraySizeOverflow`
 - `InvalidTypeForTypeOf`
 - `ComptimeAsExpr`
+- `InvalidTypeForFn`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
