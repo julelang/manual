@@ -18,6 +18,16 @@ Private compile-time type information wrapper.
 
 `fn Kind(self): Kind`\
 Returns Kind of type.
+Returns as constant expression.
+
+`fn Str(self): str`\
+Returns string value of type.
+Returns as constant expression.
+
+`fn Bits(self): int`\
+Returns bitsize of type.
+Supports only primitive integer and floating-point types.
+Returns as constant expression.
 
 ## Enums
 
