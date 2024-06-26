@@ -499,6 +499,7 @@ Compiler log messages with formatting.
 - `InvalidTypeForFn`
 - `InvalidExprForConstMatch`
 - `ComptimeFallthrough`
+- `CannotBeMut`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
