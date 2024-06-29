@@ -19,6 +19,15 @@ struct comptimeRange
 ```
 Private compile-time wrapper for compile-time iterations.
 
+---
+
+```jule
+struct comptimeTypeInfos {}
+```
+Private compile-time information wrapper for type infos. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+
+---
+
 ```jule
 struct comptimeTypeInfo
 ```
@@ -40,7 +49,7 @@ Supports only primitive integer and floating-point types.
 Returns as constant expression.
 
 `fn Elem(self): comptimeTypeInfo`\
-Returns comptimeTypeInfo for element type. Supports only pointers (except unsafe pointer), smart pointers, arrays, and slices.
+Returns comptimeTypeInfo for element type. Supports only pointers (except unsafe pointer), smart pointers, arrays, slices and enums.
 
 `fn Size(self): int`\
 Returns size of array. Returns as constant expression.
@@ -54,31 +63,54 @@ Supports only map types.
 Returns type information for value type.
 Supports only map types.
 
-`fn Fields(self): comptimeFields`\
+`fn Fields(self): comptimeStructFields | comptimeEnumFields`\
 Returns field informations for type.
-Supports only structure types.
+Supports only structure and enum types.
 Using with built-in len function returns count of fields as constant expression.
+
+`fn Params(self): comptimeParams`\
+Returns parameter information for function's parameters. Supports only function types.
+
+`fn Types(self): comptimeTypeInfos`\
+Returns comptime-type information datas for tuple types.
+Supports only tuple types.
+
+`fn Result(self): comptimeTypeInfo`\
+Returns compile-time information data for result type of function. Only supports function types.
 
 `fn Public(self): bool`\
 Reports whether type is public as constant expression. Supports only structures, enums, type enums, and traits.
 
 `fn Binded(self): bool`\
-Reports whether type is binded as constant expression. Supports only structures.
+Reports whether type is binded as constant expression.
+
+`fn Ordered(self): bool`\
+Reports whether kind supports ordered constrait as constant expression.
+
+`fn Comparable(self): bool`\
+Reports whether kind supports comparable constrait as constant expression.
+
+`fn Mutable(self): bool`\
+Reports whether kind is mutable as constant expression.
+
+`fn Exceptional(self): bool`\
+Reports whether function type is exceptional as constant expression. Only supports function types.
 
 ---
 
 ```jule
-struct comptileFields
+struct comptileStructFields
 ```
-Private compile-time information wrapper for field.
+Private compile-time information wrapper for struct fields.
 Supports iterable implementations.
+Using with built-in len function returns count of fields as constant expression.
 
 ---
 
 ```jule
-struct comptileField
+struct comptileStructaField
 ```
-Private compile-time field information wrapper.
+Private compile-time struct field information wrapper.
 
 **Methods:**
 
@@ -91,6 +123,57 @@ Reports whether field is public as constant expression.
 
 `fn Type(self): comptimeTypeInfo`\
 Returns type information for field.
+
+---
+
+```jule
+struct comptileEnumFields
+```
+Private compile-time information wrapper for enum fields.
+Supports iterable implementations.
+Using with built-in len function returns count of fields as constant expression.
+
+---
+
+```jule
+struct comptileEnumField
+```
+Private compile-time enum field information wrapper.
+
+**Methods:**
+
+`fn Name(self): str`\
+Returns name of field.
+Returns as constant expression.
+
+---
+
+```jule
+struct comptimeParams
+```
+Private compile-time information wrapper for function parameters. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+
+---
+
+```jule
+struct comptimeParam
+```
+Private compile-time function parameter information wrapper.
+
+**Methods:**
+
+`fn Name(self): str`\
+Returns name of parameter.
+Returns as constant expression.
+
+`fn Variadic(self): bool`\
+Reports whether parameter is variadic as constant expression.
+
+`fn Reference(self): bool`\
+Reports whether parameter is reference as constant expression.
+
+`fn Type(self): comptimeTypeInfo`\
+Returns type information for parameter.
 
 ## Enums
 
@@ -127,3 +210,4 @@ Type kinds.
 - `UnsafePtr`: Unsafe raw pointer
 - `Ref`: Smart pointer
 - `Func`: Function
+- `Tuple`: Tuple
