@@ -21,7 +21,7 @@ The generated code is created specifically for each generic combination, and eac
 
 ## Generics for Functions
 ::: warning
-Genericed functions never can used as anonymous function or type annotation.
+Genericed functions never can used as type annotation.
 :::
 ```jule
 fn sum[T](a: T, b: T) T {
@@ -42,6 +42,24 @@ There is a use for a generic type annotation, as seen in the example above. Use 
 To specify multiple different generic types, comma-separation syntax are available:
 ```jule
 fn example_func[T1, T2](a: T1, b: T2) {}
+```
+
+### Using Generic Functions as Anonymous Function
+
+To use genericed functions as anonymous function, you should instantiate. Since instantiated genericed functions have an implemented algorithm for relevant types, you can use them like anonymous functions.
+
+For example:
+```jule
+fn foo[T1, T2, T3](t1: T1, t2: T2, t3: T3) {
+    outln(t1)
+    outln(t2)
+    outln(t3)
+}
+
+fn main() {
+    let func: fn(int, bool, str) = foo[int, bool, str]
+    func(20, false, "hello")
+}
 ```
 
 ## Generics for Structure
