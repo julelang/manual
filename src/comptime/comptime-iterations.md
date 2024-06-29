@@ -1,5 +1,7 @@
 # Comptime Iterations
 
+<div class="warning-badge">experimental</div>
+
 Comptime iterations are compile-time repeated iterations. To iterate in compile-time you should use iterable compile-time expressions.
 
 To make iterable any comptime expression, you should call the `Range` function which is provided by [`std::comptime`](/std/comptime) library. In fact this is a design preference for readability and maintainability. This function only useable for iterations, you cannot store it with constant variable.
