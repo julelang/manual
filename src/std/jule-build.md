@@ -346,6 +346,7 @@ Compiler log messages with formatting.
 - `VariadicParamNotLast`
 - `VariadicWithNonVariadicable`
 - `MoreArgsWithVariadiced`
+- `VariadicReference`
 - `TypeNotSupportsCasting`
 - `TypeNotSupportsCastingTo`
 - `UseAtContent`
