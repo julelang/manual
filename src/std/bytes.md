@@ -234,3 +234,14 @@ Concatenates the parts of its first argument to create a single slice. The separ
 fn Runes(s: []byte): []rune
 ```
 Returns runes from UTF-8 encoded bytes.
+
+---
+
+```jule
+fn Cut(mut s: []byte, sep: []byte): (before: []byte, after: []byte, found: bool)
+```
+Cut slices s around the first instance of sep, returning the text before and after sep.
+The found result reports whether sep appears in s.
+If sep does not appear in s, cut returns s, nil, false.
+
+Cut returns slices of the original slice s, not copies.
