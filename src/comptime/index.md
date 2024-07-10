@@ -26,7 +26,7 @@ For example:
 - Evaluates slicing expressions as constant data of supported literals such as strings
 - Compiler checks boundaries for indexing expressions with supported literals such as strings or slices
 - Compiler checks boundaries for indexing expressions with supported fixed-size types such as arrays
-- The built-in `len` function returns constant length data for constant strings
+- The built-in `len` function returns constant length data for constant strings and arrays
 - The built-in `cap` function returns constant length data for constant strings
 
 ## Constant Variables

@@ -8,6 +8,11 @@ fn TypeOf(TYPE || EXPRESSION): comptimeTypeInfo
 Returns compile-time type information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
 ```jule
+fn ValueOf(EXPRESSION): comptimeValue
+```
+Returns compile-time value information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine and handle value in compile-time and will not executed at runtime.
+
+```jule
 fn Range(EXPR): comptimeRange
 ```
 Returns compile-time wrapper for compile-time iterations. Supports only iterable compile-time expressions.
@@ -32,6 +37,7 @@ Private compile-time information wrapper for type infos. Supports iterable imple
 struct comptimeTypeInfo
 ```
 Private compile-time type information wrapper.
+Supports the `==` and `!=` operators to compare types.
 
 **Methods:**
 
@@ -67,6 +73,10 @@ Supports only map types.
 Returns field informations for type.
 Supports only structure and enum types.
 Using with built-in len function returns count of fields as constant expression.
+
+`fn Statics(self): comptimeStatics`\
+Returns static fields of type.
+Supports only structure types.
 
 `fn Params(self): comptimeParams`\
 Returns parameter information for function's parameters. Supports only function types.
@@ -174,6 +184,62 @@ Reports whether parameter is reference as constant expression.
 
 `fn Type(self): comptimeTypeInfo`\
 Returns type information for parameter.
+
+---
+
+```jule
+struct comptimeStatics
+```
+Private compile-time information wrapper for static fields. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+
+---
+
+```jule
+struct comptimeStatic
+```
+Private compile-time static field information wrapper.
+
+**Methods:**
+
+`fn Name(self): str`\
+Returns name of field.
+Returns as constant expression.
+
+`fn Public(self): bool`\
+Reports whether field is public as constant expression.
+
+`fn Type(self): comptimeTypeInfo`\
+Returns type information for parameter.
+
+---
+
+```jule
+struct comptimeValue
+```
+Private compile-time vaue information wrapper.
+Only supports classic expressions.
+
+**Methods:**
+
+`fn Type(self): comptimeTypeInfo`\
+Returns type information for value.
+
+`fn Lvalue(self): bool`\
+Reports whether value is lvalue as constant expression.
+
+`fn Mutable(self): bool`\
+Reports whether value is mutable as constant expression.
+
+`fn Const(self): bool`\
+Reports whether value is constant as constant expression.
+
+`fn Field(self, ident: str): comptimeValue`\
+Returns comptimeValue for field access expression.
+Supports only structure types.
+Parameter ident should be constant.
+
+`fn Unwrap(self)`\
+Unwraps expression for runtime execution.
 
 ## Enums
 

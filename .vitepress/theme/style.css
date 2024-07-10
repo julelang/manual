@@ -62,8 +62,7 @@ table td {
 }
 
 ::-moz-selection,
-::selection
-{
+::selection {
   background-color: var(--vp-c-brand);
   color: white;
 }
@@ -135,4 +134,18 @@ li {
   width: fit-content;
   text-align: center;
   display: inline;
+}
+
+summary {
+  font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+summary:hover {
+  cursor: pointer;
 }
