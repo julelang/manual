@@ -223,3 +223,12 @@ fn Join(parts: []str, sep: str): str
 ```
 Concatenates the parts of its first argument to create a single string.
 The separator sep is placed between parts in the resulting string.
+
+---
+
+```jule
+fn Cut(s: str, sep: str): (before: str, after: str, found: bool)
+```
+Cut slices s around the first instance of sep, returning the text before and after sep.
+The found result reports whether sep appears in s.
+If sep does not appear in s, cut returns s, "", false.
