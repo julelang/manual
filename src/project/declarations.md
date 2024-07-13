@@ -8,3 +8,7 @@ fn main() {
 }
 ```
 The variable `a` seen is declared but unused. This will cause you to get an error by the compiler and not be able to compile the code. 
+
+::: info
+Constant variables are not considered as "unsused" in any case.
+:::
