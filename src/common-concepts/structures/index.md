@@ -1,5 +1,5 @@
 # Structures
-Structures (aka structs) are a good way to collect many variables in one spot. Every declaration within the structure is called a member (aka field). The difference from a slice or aray is that contain values of the same data-type, while each of the struct fields can have a different data type. Also, the fields of structures are accessed with an identifier.
+Structures (aka structs) are a good way to collect many variables in one spot. Every declaration within the structure is called a member (aka field). The difference from a slice or array is that they contain values of the same data-type, while each of the struct fields can have a different data type. Also, the fields of structures are accessed with an identifier.
 
 For example to declaration a struct:
 ```jule
@@ -58,7 +58,7 @@ fn main() {
 ```
 
 ## Methods for Structures
-Structures can have special functions for themselves. Similar to class methods of object oriented programming. You can use structure generics in function and have generics for your function.
+Structures can have special functions (methods). Similar to class methods of object oriented programming. You can use structure generics in function and have generics for your function.
 ::: warning
 You can't shadow generics.
 :::
@@ -75,7 +75,7 @@ Just give structure identifier as receiver. Not generics or type alias.
 :::
 
 ### Receiver Parameters
-Receivers indicate how instance the function will use. Receiver parameters must be the first parameter of each method. Receiver parameters are also a [reference](/memory/references) by default.
+Receivers indicate which instance the function will use. Receiver parameters must be the first parameter of each method. Receiver parameters are also a [reference](/memory/references) by default.
 
 There are two types of receiver parameters;
 
@@ -83,7 +83,7 @@ There are two types of receiver parameters;
 Smart Pointer receivers require the function to be a reference. The function can only be called from a reference instance of the structure.
 
 **Receiver Parameter**
-Receivers, on the other hand, allow changes made within the function to be reflected in the structure if receiver is mutable. However, when the structure is given as arguments to different functions, or in a different state, it is copied. That is, it is only variable within itself.
+Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. However, when the structure is given as arguments to different functions, or in a different state, it is copied. That is, it is only variable within itself.
 ::: warning
 Not deep copy.
 :::
@@ -137,15 +137,15 @@ impl Person {
 In the example above, the `name` field of the `Employee` structure instance is accessed with the `self` keyword.
 
 ## Reference Literal Instances
-You can heap-allocated structure instancing. The unary `&` operator returns reference to if you use at instancing.
+You can heap-allocate structure instancing. The unary `&` operator returns reference to if you use at instancing.
 
 For example:
 ```jule
 let pos = &Position{x: 10, y: 20}
 ```
-`pos` variable is the reference points to heap-allocated `Position` structure instance.
+`pos` variable is the reference and points to the heap-allocated `Position` structure instance.
 ::: warning
-If you not have any idea about references, check the [memory management documentations](/memory/management/). 
+If you are not sure how references work, check the [memory management documentations](/memory/management/). 
 :::
 
 
@@ -179,7 +179,7 @@ fn main() {
 
 ## Static Fields
 
-Static fields can be accessed without any instance, like static methods. All fields used statically must be constant and are implemented with the `impl` statement.
+Static fields can be accessed without any instance, like static methods. All fields used statically are constant and are implemented with the `impl` statement.
 
 For example:
 
