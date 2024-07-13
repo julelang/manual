@@ -237,6 +237,7 @@ Reports whether value is constant as constant expression.
 Returns comptimeValue for field access expression.
 Supports only structure types.
 Parameter ident should be constant.
+It allows access to private fields.
 
 `fn Unwrap(self)`\
 Unwraps expression for runtime execution.
