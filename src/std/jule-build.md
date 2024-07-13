@@ -501,6 +501,7 @@ Compiler log messages with formatting.
 - `InvalidExprForConstMatch`
 - `ComptimeFallthrough`
 - `CannotBeMut`
+- `AnonFn`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
