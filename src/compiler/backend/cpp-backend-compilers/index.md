@@ -23,6 +23,12 @@ Partial support may not be available for all platforms and is broad in scope. Th
 
 ## MSVC Compatibility
 
+### Jule 0.0.14
+
+MSVC is supported by Jule. Our GitHub Action workflows use MSVC Clang on Windows machines to compile Jule programs. Hovewer, MSVC support is not guaranteed to work as expected. When using MSVC your program may able to compile successfully, but may need to additional actions like linking missing libraries. If you encounter issues like that, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
+
+### Jule 0.0.13 and Before
+
 Jule does not support MSVC. This is why you won't have an official MSVC support. We ran into issues when we tried IR's support of MSVC experimentally. Our standard libraries such as `std::sys` contain code that is not compatible with MSVC. We had a problem when we tried to compile JuleC IR with MSVC Clang. So even if you want to do that, you're probably going to have to put effort into MSVC.
 
 ## C++ Standards
