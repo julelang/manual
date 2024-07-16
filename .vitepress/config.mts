@@ -132,6 +132,7 @@ export default defineConfig({
           link: '/introduction/',
           items: [
             { text: 'Comments', link: '/introduction/comments' },
+            { text: 'Keywords', link: '/introduction/keywords' },
             { text: 'Reserved Functions', link: '/introduction/reserved-functions' },
             { text: 'Data Types', link: '/introduction/data-types' },
             { text: 'Operators', link: '/introduction/operators' },
