@@ -106,6 +106,9 @@ Reports whether kind is mutable as constant expression.
 `fn Exceptional(self): bool`\
 Reports whether function type is exceptional as constant expression. Only supports function types.
 
+`fn CanNil(self): bool`\
+Reports whether kind is nil-compatible as constant expression.
+
 ---
 
 ```jule
@@ -216,7 +219,7 @@ Returns type information for parameter.
 ```jule
 struct comptimeValue
 ```
-Private compile-time vaue information wrapper.
+Private compile-time value information wrapper.
 Only supports classic expressions.
 
 **Methods:**
