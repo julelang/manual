@@ -17,6 +17,17 @@ fn Range(EXPR): comptimeRange
 ```
 Returns compile-time wrapper for compile-time iterations. Supports only iterable compile-time expressions.
 
+```jule
+fn Line(): int
+```
+Returns line number of statement which is this function called.
+Returns as constant expression.
+
+```jule
+fn File(): comptimeFile
+```
+Returns file wrapper of source file which is this function called.
+
 ## Structures
 
 ```jule
@@ -244,6 +255,24 @@ It allows access to private fields.
 
 `fn Unwrap(self)`\
 Unwraps expression for runtime execution.
+
+---
+
+```jule
+struct comptimeFile
+```
+Private compile-time file information wrapper. Provides interface for source file representation of compiler analysis.
+
+**Methods:**
+
+`fn Path(self): str`\
+Returns path of file as constant expression.
+
+`fn Name(self): str`\
+Returns name of file as constant expression.
+
+`fn Dir(self): str`\
+Returns directory of file as constant expression.
 
 ## Enums
 
