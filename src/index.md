@@ -24,7 +24,6 @@ To be safe, Jule should adopt approaches that serve the purpose in a balanced wa
 
 - **Brand-New**: Jule should be like a truly brand-new language. For example, it should have UTF-8 strings, support Unicode and type inference, and a cross-platform portable standard library. Unless the developer really wants to do platform specific programming, shouldn't worry about the portability of the standard library, should have Unicode support and a common standard like UTF-8 should be easy to handle.
 
-
 ## Version Specific
 
 This version of the text assumes you're using the latest version of the JuleC compiler (compiled from source).
@@ -32,6 +31,7 @@ This version of the text assumes you're using the latest version of the JuleC co
 If you want to see the current manual version for the release, you can select the relevant version from the list below. But for this you will be redirected to the source code on GitHub and you will need to read the content from markdown.
 
 List of manual version for each Jule releases:
+- [Jule 0.0.14](https://github.com/julelang/manual/tree/jule0.0.14/src)
 - [Jule 0.0.13](https://github.com/julelang/manual/tree/jule0.0.13/src)
 - [Jule 0.0.12](https://github.com/julelang/manual/tree/jule0.0.12/src)
 - [Jule 0.0.11](https://github.com/julelang/manual/tree/jule0.0.11/src)
