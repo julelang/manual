@@ -210,9 +210,6 @@ Fileset for lexing.
 
 **Methods:**
 
-`fn IsOk(self): bool`\
-Reports whether file path is exist and accessible.
-
 `fn Dir(self): str`\
 Returns directory of file's path.
 
