@@ -287,7 +287,6 @@ Token identities.
 
 **Fields:**
 - `Na`
-- `Prim`
 - `Ident`
 - `Range`
 - `Ret`
@@ -381,20 +380,6 @@ Token kinds.
 - `RBracket`
 - `LBrace`
 - `RBrace`
-- `I8`
-- `I16`
-- `I32`
-- `I64`
-- `U8`
-- `U16`
-- `U32`
-- `U64`
-- `Uint`
-- `Int`
-- `Uintptr`
-- `Bool`
-- `Str`
-- `Any`
 - `True`
 - `False`
 - `Nil`
