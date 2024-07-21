@@ -54,10 +54,10 @@ For function types:
 
 ```jule
 struct IdentTypeDecl {
-    Token:     &Token // From std::jule::lex
-    Ident:     str
-    CppLinked: bool
-    Generics:  []&TypeDecl
+    Token:    &Token // From std::jule::lex
+    Ident:    str
+    Binded:   bool
+    Generics: []&TypeDecl
 }
 ```
 Identifier type.
@@ -232,9 +232,9 @@ Unsafe expression.
 
 ```jule
 struct IdentExpr {
-    Token:     &Token // From std::jule::lex
-    Ident:     str
-    CppLinked: bool
+    Token:  &Token // From std::jule::lex
+    Ident:  str
+    Binded: bool
 }
 ```
 
@@ -546,7 +546,7 @@ struct FnDecl {
     Global:      bool
     Unsafety:    bool
     Public:      bool
-    CppLinked:   bool
+    Binded:      bool
     Statically:  bool
     Exceptional: bool
     Ident:       str
@@ -572,7 +572,7 @@ struct VarDecl {
     Scope:      &ScopeTree    // nil for global scopes
     Token:      &Token // From std::jule::lex
     Ident:      str
-    CppLinked:  bool
+    Binded:     bool
     Public:     bool
     Mutable:    bool
     Constant:   bool
@@ -692,12 +692,12 @@ Condition chain.
 
 ```jule
 struct TypeAliasDecl {
-    Scope:      &ScopeTree
-    Public:     bool
-    CppLinked:  bool
-    Token:      Token // From std::jule::lex
-    Ident:      str
-    Kind:       &TypeDecl
+    Scope:  &ScopeTree
+    Public: bool
+    Binded: bool
+    Token:  Token // From std::jule::lex
+    Ident:  str
+    Kind:   &TypeDecl
 }
 ```
 Type alias declaration.
@@ -731,13 +731,13 @@ Match-Case.
 
 ```jule
 struct UseDecl {
-    Token:      &Token       // From std::jule::lex
-    LinkPath:   str         // Use declaration path string.
-    Alias:      str
-    Full:       bool        // Full implicit import.
-    Selected:   []&Token
-    CppLinked:  bool        // Cpp header use declaration.
-    Std:        bool        // Standard package use declaration.
+    Token:    &Token       // From std::jule::lex
+    LinkPath: str         // Use declaration path string.
+    Alias:    str
+    Full:     bool        // Full implicit import.
+    Selected: []&Token
+    Binded:   bool        // Cpp header use declaration.
+    Std:      bool        // Standard package use declaration.
 }
 ```
 Use declaration statement.
@@ -825,7 +825,7 @@ struct StructDecl {
     Ident:      str
     Fields:     []&FieldDecl
     Public:     bool
-    CppLinked:  bool
+    Binded:     bool
     Directives: []&Directive
     Generics:   []&GenericDecl
 }

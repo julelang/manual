@@ -54,5 +54,5 @@ fn main() {
 ```
 
 ::: tip
-The above code also has wrapper in a Jule for linked function. This increases safety and makes it easier to maintain the relevant function.
+The above code also has wrapper in a Jule for binded function. This increases safety and makes it easier to maintain the relevant function.
 :::

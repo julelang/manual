@@ -72,7 +72,7 @@ static myInt: int = 20
 ```
 
 ::: info
-C++ linked variables can't be static.
+Binded variables can't be static.
 :::
 
 ### Static Local Scope Variables
@@ -113,7 +113,7 @@ fn main() {
 ```
 
 ::: info
-C++ linked globals can be declare via `let` keyword.
+Binded globals can be declare via `let` keyword.
 :::
 
 ## Shadowing

@@ -3,9 +3,9 @@
 Jule wrappers are a recommended approach for linking C/C++ definitions. This approach has several advantages and disadvantages. In this section, these will be discussed.
 
 **Jule wrappers are highly recommended when:**
-- Unsimple usage: for example you linked a function but the arguments given when calling it are too much casting etc. requires
-- Type dependency: You have definitions that depend on C/C++ linked types
-- High usage: The linked definition is used in various and many places in your Jule code
+- Unsimple usage: for example you binded a function but the arguments given when calling it are too much casting etc. requires
+- Type dependency: You have definitions that depend on binded types
+- High usage: The binded definition is used in various and many places in your Jule code
 
 ## Pros & Cons
 
@@ -14,7 +14,7 @@ Jule wrappers are a recommended approach for linking C/C++ definitions. This app
 - Easy maintenance
 - Safer
 - Avoid the `cpp` keyword for access
-- Use Jule types instead of C/C++ linked types
+- Use Jule types instead of binded types
 - Additional functionality can be added
 
 **Cons:**
@@ -27,7 +27,7 @@ Jule wrappers are a recommended approach for linking C/C++ definitions. This app
 
 ### Functions
 
-It makes sense to write a function as a wrapper, especially if it has dependencies on C/C++ linked definitions. Thanks to the Wrapper, it is easier to update or troubleshoot any type change than update each call.
+It makes sense to write a function as a wrapper, especially if it has dependencies on binded definitions. Thanks to the Wrapper, it is easier to update or troubleshoot any type change than update each call.
 
 An example C++ function:
 ```cpp
@@ -176,7 +176,7 @@ void say_hi(void) {
 }
 ```
 
-And this method is linked to the link of `Person` in Jule like this:
+And this method is binded to the link of `Person` in Jule like this:
 ```jule
 #typedef
 cpp struct Person {

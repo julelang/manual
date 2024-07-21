@@ -3,8 +3,8 @@ Packages have access to any definition they have. But this does not apply to pac
 
 To define as public, use an identifier which is starts with capital letter. Otherwise, all definitions are private by default.
 
-Linked definitions are not supported. All linked definitions will be private by default all time.\
-Some linked definitions might be exception, these exceptions will be described at relevant sections.
+Binded definitions are not supported. All binded definitions will be private by default all time.\
+Some binded definitions might be exception, these exceptions will be described at relevant sections.
 
 Exportion supported definitions:
 - Global

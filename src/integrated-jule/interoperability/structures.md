@@ -15,9 +15,9 @@ cpp struct my_struct {
 ```
 
 ::: warning
-- Linked structure's fields are public by default all time. So if you want export your linked structure, use type alias. No worry, fields will be available. It is useful for write low-level APIs.
-- Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for C++ linked structs.
-- If the linked structures have a constructor, the generated IR may have compilation errors.
+- Binded structure's fields are public by default all time. So if you want export your binded structure, use type alias. No worry, fields will be available. It is useful for write low-level APIs.
+- Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for binded structs.
+- If the binded structures have a constructor, the generated IR may have compilation errors.
 :::
 
 ### C++ Structures and Typedef C Structures

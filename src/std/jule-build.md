@@ -389,8 +389,8 @@ Compiler log messages with formatting.
 - `TraitHasRefParamFn`
 - `EnumHaveNotField`
 - `DuplicateMatchType`
-- `CppLinkedVarHasExpr`
-- `CppLinkedVarIsConst`
+- `BindedVarHasExpr`
+- `BindedVarIsConst`
 - `ConstVarNotHaveExpr`
 - `RefRefsRef`
 - `RefRefsPtr`
@@ -432,7 +432,7 @@ Compiler log messages with formatting.
 - `DeriveIllegalCycleRefersItself`
 - `DeriveIllegalCrossCycle`
 - `InvalidExprForBinop`
-- `CppLinkedStructForRef`
+- `BindedStructForRef`
 - `TraitMethodHasGenerics`
 - `EnumAsMapVal`
 - `GlobalNotStatic`
@@ -458,7 +458,7 @@ Compiler log messages with formatting.
 - `UnusedDirective`
 - `UnsupportedDirective`
 - `ErrorWithNonExceptional`
-- `CDefineExceptional`
+- `BindedExceptional`
 - `HandledUnexceptional`
 - `UnhandledExceptional`
 - `MissingAssignRet`
@@ -478,7 +478,7 @@ Compiler log messages with formatting.
 - `TraitImplDeprecated`
 - `AssertNonBool`
 - `UseDeclForInternal`
-- `CppLinkedTypeNotAllowed`
+- `BindedTypeNotAllowed`
 - `GenericsNotAllowed`
 - `InitiationCycle`
 - `DeclFoundInsteadExpr`

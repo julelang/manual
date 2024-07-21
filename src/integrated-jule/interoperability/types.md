@@ -24,7 +24,7 @@ cpp type CPTR: *cpp.char
 
 ## Type Safety
 
-For type safety reasons, linked types are only compatible with linked types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a linked `char` type, or vice versa, even if you have linked the `char` type as `byte`. To do this, if you have linked with a compatible type, you can cast it.
+For type safety reasons, binded types are only compatible with binded types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a binded `char` type, or vice versa, even if you have binded the `char` type as `byte`. To do this, if you have binded with a compatible type, you can cast it.
 
 For example:
 ```jule
@@ -100,7 +100,7 @@ fn main() {
 }
 ```
 
-In the above example, your compiler does not detect the types of fields of the linked class and generates code accordingly, your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
+In the above example, your compiler does not detect the types of fields of the binded class and generates code accordingly, your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
 
 While this type compatibility may work well with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes or etc.
 

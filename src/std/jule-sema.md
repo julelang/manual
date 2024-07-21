@@ -620,7 +620,7 @@ struct Fn {
     Global:      bool
     Unsafety:    bool
     Public:      bool
-    CppLinked:   bool
+    Binded:      bool
     Statically:  bool
     Exceptional: bool
     Ident:       str
@@ -753,8 +753,8 @@ struct ImportInfo {
     // True if imported with Importer.GetImport function.
     Duplicate: bool
 
-    // Is cpp use declaration.
-    CppLinked: bool
+    // Is binded use declaration.
+    Binded: bool
 
     // Is standard library package.
     Std: bool
@@ -1094,7 +1094,7 @@ struct Struct {
     Ident:      str
     Fields:     []&Field
     Methods:    []&Fn
-    CppLinked:  bool
+    Binded:     bool
     Directives: []&Directive
     Generics:   []&GenericDecl
     Implements: []&Trait
@@ -1255,16 +1255,16 @@ Generic type for instance types.
 
 ```jule
 struct TypeAlias {
-    Scope:      &ScopeTree
-    Public:     bool
-    CppLinked:  bool
-    Used:       bool
-    Generic:    bool
-    Token:      &Token
-    Ident:      str
-    Kind:       &TypeSymbol
-    Refers:     []any
-    Generics:   []&TypeAlias
+    Scope:    &ScopeTree
+    Public:   bool
+    Binded:   bool
+    Used:     bool
+    Generic:  bool
+    Token:    &Token
+    Ident:    str
+    Kind:     &TypeSymbol
+    Refers:   []any
+    Generics: []&TypeAlias
 }
 ```
 Type alias.
@@ -1291,8 +1291,8 @@ Evaluated type declaration.
 
 **Methods:**
 
-`fn CppLinked(self): bool`\
-Reports whether type is cpp-linked kind.
+`fn Binded(self): bool`\
+Reports whether type is binded kind.
 
 `fn IsNil(self): bool`\
 Reports whether kind is nil.
@@ -1521,7 +1521,7 @@ struct Var {
     Scope:         &ScopeTree
     Token:         &Token
     Ident:         str
-    CppLinked:     bool
+    Binded:        bool
     Constant:      bool
     Mutable:       bool
     Public:        bool
@@ -1660,21 +1660,21 @@ trait Lookup {
     // Returns nil reference if did not found any match.
     fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
 
-    // Find variable by identifier and cpp-linked state.
+    // Find variable by identifier and binded state.
     // Returns nil reference if did not found any match.
-    fn FindVar(mut self, ident: str, CppLinked: bool): &Var
+    fn FindVar(mut self, ident: str, binded: bool): &Var
 
-    // Find type alias by identifier and cpp-linked state.
+    // Find type alias by identifier and binded state.
     // Returns nil reference if did not found any match.
-    fn FindTypeAlias(mut self, ident: str, CppLinked: bool): &TypeAlias
+    fn FindTypeAlias(mut self, ident: str, binded: bool): &TypeAlias
 
-    // Find structure by identifier and cpp-linked state.
+    // Find structure by identifier and binded state.
     // Returns nil reference if did not found any match.
-    fn FindStruct(mut self, ident: str, CppLinked: bool): &Struct
+    fn FindStruct(mut self, ident: str, binded: bool): &Struct
 
-    // Find function by identifier and cpp-linked state.
+    // Find function by identifier and binded state.
     // Returns nil reference if did not found any match.
-    fn FindFn(mut self, ident: str, CppLinked: bool): &Fn
+    fn FindFn(mut self, ident: str, binded: bool): &Fn
 
     // Find trait by identifier.
     // Returns nil reference if did not found any match.
