@@ -15,6 +15,73 @@ Some things you can do with compile-time reflection:
 - Convert data types to string
 - Check if data types are the same
 
+## Introduction to Reflection for Types
+
+To start examine any type, use `comptime::TypeOf` function. This function provided by the [`std::comptime`](/std/comptime) library and it's essential for type examination.
+
+For example:
+
+```jule
+use comptime for std::comptime
+
+fn FooBar[T](x: T) {
+    const t = comptime::TypeOf(T)
+    // ...
+}
+```
+
+The `comptime::TypeOf` function will return type information wrapper for the type. This wrapper provides some functionalities according the type.
+
+The type information wrapper provides only functionalities for the type. Not declaration, generic instances and other analysis-related informations.
+
+## Introduction to Reflection for Values
+
+To start examine any value, use `comptime:ValueOf` function. This function provided by the [`std::comptime`](/std/comptime) library and it's essential for value examination.
+
+For example:
+
+```jule
+use comptime for std::comptime
+
+fn FooBar[T](x: T) {
+    const v = comptime::ValueOf(x)
+    // ...
+}
+```
+
+The `comptime::ValueOf` function will return value information wrapper for the value. This wrapper provides some functionalities according the value.
+
+The value information wrapper provides functionalities only for the value. Not declaration, generic instances and other analysis-related informations.
+
+### Unwrap Expression of Wrapper
+
+Since the function designed for comptime, expressions of `comptime::ValueOf` will not be executed at runtime by default. To do this, you should call the `Unwrap` method of the value information wrapper. The `Unwrap` method is unwraps expression of value information wrapper to called statement, so expression will be executed ad runtime.
+
+This unwrap functionality provides additional benifits for value reflection such as dynamic access to struct fields. Thus, not just examination, we have dynamic handled expressions at comptime.
+
+For example:
+
+```jule
+use comptime for std::comptime
+
+fn PrintFields[T](s: T) {
+    const t = comptime::TypeOf(T)
+    match true {
+    | t.Kind() != comptime::Kind.Struct:
+        panic("PrintFields[T]: T is not struct")
+    }
+    const v = comptime::ValueOf(s)
+    const fields = t.Fields()
+    for _, field in comptime::Range(fields) {
+        outln(v.Field(field.Name()).Unwrap())
+    }
+}
+```
+
+The example above, defines the `PrintFields` function with generic type which is prints value of struct's fields. Therefore The parameter `s` should be structure, so the type `T` is structure.
+
+Function implementation checks whether type `T` is struct and then prints values of struct fields using dynamic access with power of the `comptime::ValueOf` function. Thus, the `PrintFields` function can print fields of all structures without runtime reflection cost.
+
 ## Example Programs
 
 <details>
@@ -62,7 +129,7 @@ fn main() {
 </details>
 
 <details>
-<summary>Basic Generic Type Examine</summary>
+<summary>Basic Generic Type Examination</summary>
 
 ```jule
 use comptime for std::comptime
