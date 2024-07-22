@@ -62,11 +62,6 @@ struct IdentTypeDecl {
 ```
 Identifier type.
 
-**Methods:**
-
-`fn IsPrim(self): bool`\
-Reports whether identifier is primitive type. 
-
 ---
 
 ```jule
