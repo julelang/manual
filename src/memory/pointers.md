@@ -25,6 +25,10 @@ The `y` variable is now store memory address of `x` variable.
 Pointers are taken as each mutable.
 :::
 
+#### Getting Pointer of Self Variables
+
+The `self` variables implemented as raw pointer that points to the receiver by compiler. If you trying to get pointer of `&self` variable, since the variable is smart pointer, you will get raw pointer to the `&self` variable. If you trying to get pointer to `self` variable, since implemented as raw pointer, you will copy value of variable `self` directly.
+
 ---
 
 ::: warning
