@@ -26,8 +26,10 @@ For example:
 - Evaluates slicing expressions as constant data of supported literals such as strings
 - Compiler checks boundaries for indexing expressions with supported literals such as strings or slices
 - Compiler checks boundaries for indexing expressions with supported fixed-size types such as arrays
+- Compiler casts basic constant expressions like int to uint casting
 - The built-in `len` function returns constant length data for constant strings and arrays
 - The built-in `cap` function returns constant length data for constant strings
+- Compiler converts constant-string to byte slice, constant string to rune slice, constant-rune to string, constant-byte to string castings at compile-time
 
 ## Constant Variables
 
