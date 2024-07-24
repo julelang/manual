@@ -15,7 +15,7 @@ Maximum valid Unicode code point.
 
 ---
 
-### `const UtfMax`
+### `const UTFMax`
 Maximum number of bytes of a UTF-8 encoded Unicode character. 
 
 ## Functions
