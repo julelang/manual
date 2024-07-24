@@ -28,6 +28,11 @@ fn File(): comptimeFile
 ```
 Returns file wrapper of source file which is this function called.
 
+```jule
+fn Files(): comptimeFiles
+```
+Returns file wrappers for source files of package which is this function called.
+
 ## Structures
 
 ```jule
@@ -255,6 +260,15 @@ It allows access to private fields.
 
 `fn Unwrap(self)`\
 Unwraps expression for runtime execution.
+
+---
+
+```jule
+struct comptimeFiles
+```
+Private compile-time information wrapper for source files.
+Supports iterable implementations.
+Using with built-in len function returns count of files as constant expression.
 
 ---
 
