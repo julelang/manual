@@ -39,7 +39,7 @@ For example:
 ```jule
 struct Character {
     name: str
-    age: u8
+    age: u64
     title: str
 }
 
