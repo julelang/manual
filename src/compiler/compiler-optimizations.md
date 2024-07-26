@@ -55,6 +55,7 @@ It eliminates dead codes (unused) from object code.
 Enable special optimizations for built-in `append` function.
 
 - It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement.
+- If an l-value memory appends to itself, compiler will use special self-append algorithm for slices. L-value detection has limited proficiency, the best way is using variables and structure fields to enable optimization.
 
 ---
 
