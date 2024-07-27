@@ -3,7 +3,7 @@
 ## Functions
 
 ```jule
-fn MaxEncodedLen(n: int): int
+fn MaxEncodeLen(n: int): int
 ```
 Returns the maximum length of an encoding of n source bytes.
 
