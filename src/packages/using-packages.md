@@ -84,6 +84,20 @@ fn main() {
 }
 ```
 
+---
+
+If you want to import with namespace but want to make some definitions directly available, use the `self` keyword.
+
+For example:
+```jule
+use std::pkg::{self, aFunction}
+
+fn main() {
+    aFunction()
+    std::pkg::aFunction()
+}
+```
+
 ## Aliased Use Declarations
 
 You may need to write quite long expressions to access the packages used, you can use alias to prevent this. It is recommended that aliases be used whenever possible and should be the primary choice. Alias ​​is represented by the `for` keyword and must be unique to the use declaration.
@@ -104,17 +118,6 @@ fn main() {
 }
 ```
 
----
-
-If you want to import with Namespace but want to make some definitions directly available, use the `self` keyword.
-```jule
-use std::pkg::{self, aFunction}
-
-fn main() {
-    aFunction()
-    std::pkg::aFunction()
-}
-```
 ::: warning
 You can't select same identifier with other use declarations.
 :::
