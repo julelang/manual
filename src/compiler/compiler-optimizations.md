@@ -111,6 +111,13 @@ Enables optimizations for string operations.
 - Converts string concatenations with casted byte, rune, byte slices or rune slices to direct appendations. Avoids allocate to new string and then appending to destination, generates code to push into string buffer directly.
 - Avoids making new string allocation when appending string literals.
 
+---
+
+`--opt-internal-nosafe`\
+Enables special optimizatins for the `std::internal::nosafe` standard library package.
+
+- Inlining calls to the `stobs` function.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -126,6 +133,7 @@ The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
 - `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`
+- `L2`: passes all `L1` flags and `--opt-internal-nosafe`
 
 ## Production Compilation
 
