@@ -46,46 +46,37 @@ fn sum(values: ...int) int {
 }
 
 fn main() {
-    let my_slice = [90, 32, 6, 53]
-    let result = sum(my_slice...)
+    let mySlice = [90, 32, 6, 53]
+    let result = sum(mySlice...)
     outln(result)
 }
 ```
-As seen in the example above, the owned variable `my_slice` holds a slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
+As seen in the example above, the owned variable `mySlice` holds a slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
 ::: warning
 If you pass slice to variadic parameter, you can't pass more value.
 :::
 
-## Slicing
-You can slice compatible types with indexing. As a result of slicing a slice, no new allocation is created, no copying is performed. The relevant memory section of the sliced slice is referenced and its length is limited by the length of the slice. 
+## Length and Capacity of Slices
 
-### Syntax
-```
-EXPRESSION[START_EXPRESSION:TO_EXPRESSION]
-```
-For example:
-```jule
-mySlice[2:10]
-```
-At the example above, slice items start at `2` to `10` The `10` index is not included. So if you want to slice all components of a slice after the index `2`, the length of the slice needs to be given.
+Slices are have two size in different concept: first one is the length and second one is the capacity.
 
-### Auto Indexing
-If you don't give the start index expression, `0` is assumed.
-If you don't give the 'to index' expression, the whole length is assumed.
+The length of slice means count of slice elements. Length is always in `0>= && <=capacity` range. The zero-length means the slice is not have any element.
+
+The capacity is the number of maximum elements before the rellocation automatically. If length reaches/overflows the capacity somehow, buffer will be reallocated with more capacity to store more elements.
+
+You can use the built-in `len` function to get length of the slice. And also there is the built-in `cap` function to get capacity of the slice.
+
+The `nil` slices are considered as zero-length and zero-capacity.
 
 For example:
+
 ```jule
-fn main() {
-    let mySlice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[2:5]) // [3, 4, 5]
-    outln(mySlice[:])   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[:10]) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[4:])  // [5, 6, 7, 8, 9, 10]
-}
+len(mySlice)
 ```
 
-### Supported Types
-Arrays, slices and strings.
+```jule
+cap(mySlice)
+```
 
 ## Allocating Slices
 
@@ -127,25 +118,3 @@ outln(uintptr(&s[0]))
 ```
 
 This time, you can see there is no difference between addresses of first slice's element. Because slice `s` allocated with 10 capacity, so the `append` function just copies new elements to slice and returns same destination slice allocation.
-
-## Length and Capacity of Slices
-
-Slices are have two size in different concept: first one is the length and second one is the capacity.
-
-The length of slice means count of slice elements. Length is always in `0>= && <=capacity` range. The zero-length means the slice is not have any element.
-
-The capacity is the number of maximum elements before the rellocation automatically. If length reaches/overflows the capacity somehow, buffer will be reallocated with more capacity to store more elements.
-
-You can use the built-in `len` function to get length of the slice. And also there is the built-in `cap` function to get capacity of the slice.
-
-The `nil` slices are considered as zero-length and zero-capacity.
-
-For example:
-
-```jule
-len(mySlice)
-```
-
-```jule
-cap(mySlice)
-```
