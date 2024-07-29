@@ -43,11 +43,11 @@ It eliminates dead codes (unused) from object code.
 - Eliminates dead globals.
 - Eliminates dead functions.
 - Eliminates dead structures. <div class="warning-badge">experimental</div>
+- Eliminates dead methods of living structures. <div class="warning-badge">experimental</div>
 - Eliminates dead traits. <div class="warning-badge">experimental</div>
 - Eliminates followed statements of the return statement.
 - Eliminates followed statements of the goto statement if possible.
-- Eliminates followed statements of the built-in `panic` function calls.
-- Eliminates followed statements of the built-in `error` function calls.
+- Eliminates followed statements of the built-in `panic`, and `erorr` function calls.
 
 ---
 
