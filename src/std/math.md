@@ -339,9 +339,9 @@ Special cases are:
 ---
 
 ```jule
-fn Fma(x: f64, y: f64, z: f64): f64
+fn FMA(x: f64, y: f64, z: f64): f64
 ```
-Returns x * y + z, computed with only one rounding. (That is, Fma returns the fused multiply-add of x, y, and z.)
+Returns x * y + z, computed with only one rounding. (That is, FMA returns the fused multiply-add of x, y, and z.)
 
 ---
 
