@@ -139,6 +139,8 @@ The example at above, accepted as one type return.
 ### Return Type Identifiers
 To give an identifier to the return types, it's enough to make them look like multiple returns. The only addition is to give that return value an identifier before the return type.
 
+Each identifier is treated as a mutable variable declaration and is declared and initialized at the beginning of the function for the scope of the function. They are mutable variables because of some of compiler obsessions. Please refer to the [immutability documentations](/memory/immutability) if you don't know anything about it.
+
 For example:
 ```jule
 fn example(): (x: int, y: int) {
@@ -148,8 +150,6 @@ fn example(): (x: int, y: int) {
 }
 ```
 As in the example above. These identifiers also cause a variable to be created. For each identifier, the function has a variable initialized in its scope.
-
-As noticed, they are mutable variables by default. This is because of some of compiler obsessions. Please refer to the [immutability documentations](/memory/immutability) if you don't know anything about it.
 
 ---
 
