@@ -234,5 +234,36 @@ fn main() {
 }
 ```
 ::: warning
-This can make the statement very complex and impair readability. For this reason, it is recommended not to use too complex expressions. 
+This can make the statement very complex and impair readability. For this reason, it is recommended not to use too complex expressions.
+:::
+
+## Short Declarations
+
+Short declaration is a language feature that allows you to declare variables with a shorter and simpler syntax without using the `let` keyword.
+
+The syntax is almost the same as the `let` keyword and the same rules apply.
+
+The `:=` operator is used to define a short declaration statement. This operator means that it is a declarative assignment expression, not an assignment. That is, it is a semantic shortcut equivalent to `let (...) =` and and are handled in the same way.
+
+For example:
+```jule
+fn letKeyword() {
+    let mut a = 0
+    let b = false
+    let &c = a
+    let (x, mut y, &z, _, mut &k) = "foo", "bar", b, false, a
+    _ = x, y, z, c, k
+}
+
+fn shortcut() {
+    mut a := 0
+    b := false
+    &c := b
+    x, mut y, &z, _, mut &k := "foo", "bar", b, false, a
+    _ = x, y, z, c, k
+}
+```
+
+::: info
+You can use whichever method you find more useful/readable. Jule does not make any recommendations or set standards on this matter.
 :::
