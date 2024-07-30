@@ -11,28 +11,28 @@ Space characters.
 
 ---
 
-### `static UnaryOps: [...]TokenKind`
+### `static UnaryOps: [...]TokenId`
 Kind list of unary operators.
 
 ---
 
-### `static BinOps: [...]TokenKind`
+### `static BinOps: [...]TokenId`
 Kind list of binary operators.
 
 ---
 
-### `static WeakOps: [...]TokenKind`
+### `static WeakOps: [...]TokenId`
 Kind list of weak operators.\
 These operators are weak, can used as part of expression.
 
 ---
 
-### `static PostfixOps: [...]TokenKind`
+### `static PostfixOps: [...]TokenId`
 List of postfix operators.
 
 ---
 
-### `static AssignOps: [...]TokenKind`
+### `static AssignOps: [...]TokenId`
 List of assign operators.
 
 ## Functions
@@ -53,23 +53,44 @@ Returns new File points to Jule file.
 ---
 
 ```jule
-fn IsUnaryOp(kind: str): bool
+fn IsUnaryOp(id: TokenId): bool
 ```
 Reports whether kind is unary operator.
 
 ---
 
 ```jule
-fn IsBinOp(kind: str): bool
+fn IsBinOp(id: TokenId): bool
 ```
 Reports whether kind is binary operator.
 
 ---
 
 ```jule
-fn IsWeakOp(kind: str): bool
+fn IsWeakOp(id: TokenId): bool
 ```
 Reports whether kind is weak operator.
+
+---
+
+```jule
+fn IsAssign(id: TokenId): bool
+```
+Reports given token id is allow for assignment left-expression or not.
+
+---
+
+```jule
+fn IsAssignOp(id: TokenId): bool
+```
+Reports whether operator kind is assignment operator.
+
+---
+
+```jule
+fn IsPostfixOp(id: TokenId): bool
+```
+Reports whether operator kind is postfix operator.
 
 ---
 
@@ -292,7 +313,6 @@ Token identities.
 - `Ret`
 - `Semicolon`
 - `Lit`
-- `Op`
 - `Comma`
 - `Const`
 - `Type`
@@ -325,6 +345,41 @@ Token identities.
 - `Defer`
 - `Static`
 - `Error`
+- `Map`
+- `ColonEq`
+- `TripleDot`
+- `PlusEq`
+- `MinusEq`
+- `StarEq`
+- `SolidusEq`
+- `PercentEq`
+- `LshiftEq`
+- `RshiftEq`
+- `CaretEq`
+- `AmperEq`
+- `VlineEq`
+- `Eqs`
+- `NotEq`
+- `GreatEq`
+- `LessEq`
+- `DblAmper`
+- `DblVline`
+- `Lshift`
+- `Rshift`
+- `DblPlus`
+- `DblMinus`
+- `Plus`
+- `Minus`
+- `Star`
+- `Solidus`
+- `Percent`
+- `Amper`
+- `Vline`
+- `Caret`
+- `Excl`
+- `Lt`
+- `Gt`
+- `Eq`
 
 ---
 
