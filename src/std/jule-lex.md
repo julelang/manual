@@ -309,7 +309,6 @@ Token identities.
 **Fields:**
 - `Na`
 - `Ident`
-- `Range`
 - `Ret`
 - `Semicolon`
 - `Lit`
@@ -380,6 +379,12 @@ Token identities.
 - `Lt`
 - `Gt`
 - `Eq`
+- `LBrace`
+- `RBrace`
+- `LParent`
+- `RParent`
+- `LBracket`
+- `RBracket`
 
 ---
 
