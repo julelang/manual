@@ -166,7 +166,9 @@ x, y, z = true, 1, -400
 ```
 The logic remains the same. Let's not forget that these variables must already exist, of course, due to static type principles, the value you show to it must be compatible with the data type of the variable.
 
-Additionally, you can skip some values with ignore operator.
+### Ignore Identifier
+
+Additionally, you can skip some values with ignore identifier: `_`.
 For example:
 ```jule
 x, _, z = true, 1, -400
@@ -174,7 +176,17 @@ x, _, z = true, 1, -400
 ```jule
 let (x, _, z) = true, 1, -400
 ```
-This way you ignore some values. 
+This way you ignore some values.
+
+---
+
+Additionally, if you have a tuple expression and want to ignore all expressions with ignore identifier, you do not need to write ignore identifier for each expression individually. You can ignore the entire tuple expression by using a single ignore identifier.
+
+For example:
+```jule
+let (a, b, c) = 10, 20, false
+_ = a, b, c
+```
 
 ### Assignment and Definition Simultaneously
 Script: You have multiple assignments, but some of your variables need to be defined for the first time while some of your variables are assigned.
