@@ -36,7 +36,7 @@ fn getPi(): f64 {
 #test
 fn testPi(t: &T) {
     if getPi() != Pi {
-        t.errorf("PI is not precise enough")
+        t.Errorf("PI is not precise enough")
     }
 }
 
