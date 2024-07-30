@@ -371,6 +371,7 @@ Token kinds.
 - `Lt`
 - `Gt`
 - `Eq`
+- `ColonEq`
 - `LnComment`
 - `RangLComment`
 - `RangRComment`
