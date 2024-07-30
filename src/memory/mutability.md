@@ -86,42 +86,6 @@ The point that should not be forgotten in this regard is that even if there is i
 
 If a structure field uses interior mutability, there will be no problem in assigning it to mutable while it is immutable, even if it uses a mutable type. This means you can move it around in assignments and copies.
 
-### Traits
-
-If there is a mutable `self` receiver in the trait's methods, it cannot be used mutably when the trait is immutable. The reason for this is clearly due to the risk of calling a mutable method of the structure it contains.
-
-If a trait contains a mutable structure and you get it by casting, this is not considered a problem even if it is an immutable trait. The structure stored by the trait is within the scope of interior mutability for the trait. So, when you obtain that structure, you can take it as mutable and this will not cause any problems.
-
-Trait ensures that only the methods it provides directly are used according to the immutability rule.
-
-For example:
-```jule
-const Pi = 3.14159
-
-trait Shape {
-    fn area(self): f64
-}
-
-struct Circle {
-    r: f64
-}
-
-impl Shape for Circle {
-    fn area(self): f64 {
-        ret Pi * self.r * self.r
-    }
-}
-
-fn main() {
-    let s: Shape = &Circle{r: 12}
-    outln(s.area())
-    (&Circle)(s).r = 20
-    outln(s.area())
-}
-```
-
-In the example above, an immutable trait contains a mutable type `&Circle`. We can get this by casting and change the result of the `area` method by changing the `r` field. This is because the `&Circle` instance it stores has interior mutability.
-
 ## Cloning
 You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input.
 

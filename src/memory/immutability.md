@@ -5,9 +5,9 @@ The fact that a variable is immutable by default requires that you do so conscio
 
 Jule has data types in which it is mutable. These are:
 
-- Pointer
+- Raw and Smart Pointer
 - Slice
-- Reference
+- Traits
 - Array, structure or etc. which is has mutable type
 
 These are types that point to commonalities among the variables with which they are shared. You may want to ensure that one of these types has not changed. You are safe about this as variables are immutable by default. This is possible if you want it to be mutable. But before we get into how this is done, let's take a look at how obsessed the compiler is with immutability.
@@ -19,6 +19,12 @@ For the same reason, the compiler will force you to return a mutable variable if
 An immutable variable with mutable data type returned from the function then poses a unsafety. Because it is not possible to specify it as immutable in return data type. That's why the compiler assumes that the return value can change, and shows you one of its strict obsessions about it: if you're returning, please use a mutable variable. Even if you're just returning the variable, the compiler doesn't want to understand it. According to the compiler, if that variable is an immutable and is also used within the function, the immutable obtained instance obtained from the return value may break this immutability. Even if there is no such thing, the compiler will continue to insist on this.
 
 Okay, so why doesn't the compiler implement immutability by default only for those data types? This is a good question. The answer lies in the compiler wanting to be stable. It is a mental overhead during the development phase that the developer has to constantly consider these data types. This stability of the compiler ensures that the developer always knows that all variables are immutable by default. This also helps the developer to understand what it is changing and will change while developing and reading algorithms. It is more obvious which variables should be paid attention to, especially when using concurrency.
+
+## Traits and Immutability
+
+Traits are considered mutable types because the type of data they store can be mutable. It is not possible to trck this at runtime. Because, in its simplest explanation, an immutable trait data can be assigned to a mutable memory. However, it is not possible to understand at compile time whether the trait stores mutable data, so it's risky. The only way to check this is to add an additional unwanted runtime.
+
+However, there is one point for traits: they respect the concept of interior mutability. If the data stored by a trait implements interior mutability, this is allowed.
 
 ## Responsive Immutability
 
