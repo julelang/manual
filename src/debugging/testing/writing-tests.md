@@ -47,9 +47,13 @@ fn main() {
 
 The test in the code above will produce an error, it does this with a special error message. When there are more different situations, these logs may contain useful information for you.
 
-Successful completion of a test means that it is not failed or skipped. Any function of the `T` structure will not stop the execution of your test. Therefore, you can use `ret` to stop execution when you skip the test or in case of any failure.
+Successful completion of a test means that it is not failed or skipped. Any function of the `T` structure will not stop the execution of your test. Therefore, you can use `ret` statement to stop execution when you skip the test or in case of any failure.
 
-If you call the `skip` method, you have skipped the test. If you perform any action indicating an error, such as calling the `errorf` or `fail` methods, set the status of the test to fail.
+If you call the `Skip` method, you have skipped the test. If you perform any action indicating an error, such as calling the `Errorf` or `Fail` methods, set the status of the test to fail with calling the.
+
+If you make a call such as `Error` or `Fail` after the `Skip` call, the skip status will be canceled and the test will be evaluated as failed. If you call `Skip` after any error, the test is considered skipped.
+
+For assertions, using the built-in assert function may be fatal because of panics. To avoid panic crashes, use the `T` structure's `Assert` method instead.
 
 ## Test Files
 
