@@ -222,17 +222,17 @@ fn main() {
 ```
 In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement. The above example cannot be done by default, this requires allowing shadowing.
 
-Also if you want to perform an assignment, but not to a variable but to a pointer etc. If you want to do it, your statements must be in parentheses. Expressions enclosed in parentheses are clean assignment expressions, the brackets are evaluated and the value is assigned.
+Also if you want to perform an assignment, but not to a variable but to a pointer etc. You can do this.
 
 For example:
 ```jule
 fn main() {
     let mut a = [1, 2, 3, 4]
-    let ((a[0]), b) = 20, 30
+    let (a[0], b) = 20, 30
     outln(a) // [20 2 3 4]
     outln(b) // 30
 }
 ```
 ::: warning
-This can make the statement very complex and impair readability. For this reason, it is recommended not to use too complex expressions in parentheses. 
+This can make the statement very complex and impair readability. For this reason, it is recommended not to use too complex expressions. 
 :::
