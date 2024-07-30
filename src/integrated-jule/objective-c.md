@@ -4,7 +4,7 @@ Objective-C is an object-oriented programming language written on top of C. It c
 
 ## Using
 
-First of all, there's something you should know, Jule does not accept Objective-C source code lineages, ie `.m` extensions, for security reasons. That's why Objective-C++ source code files should use the extension `.mm`. This is because compilers can have trouble compiling Objective-C and C++ code together.
+First of all, there's something you should know, Jule does not accept Objective-C source code lineages, ie `.m` extensions, for safety reasons. That's why Objective-C++ source code files should use the extension `.mm`. This is because compilers can have trouble compiling Objective-C and C++ code together.
 
 You can create your header files with the extension `.h` in the standard way. This does not pose any compatibility issues as it is one of the standard extensions supported by Jule.
 

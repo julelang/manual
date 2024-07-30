@@ -23,3 +23,42 @@ Benefits of Unsafe Jule:
 - [Use deprecated code](/packages/3rd-party-packages/deprecation)
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
+
+## Using Unsafe Jule
+
+To use Unsafe Jule, you must define a scope with the help of the `unsafe` keyword. In this context, Unsafe Jule rules will apply.
+
+For example:
+```jule
+fn main() {
+    let x = 20
+    let mut p = &x
+    unsafe {
+        // Break immutability with mutable pointer.
+        // Dereference and update value of variable x.
+        *p += 40
+    }
+    outln(x)
+}
+```
+
+---
+
+Unsafe Jule scope can also be used within expressions. So if you need Unsafe Jule in part of an expression, you don't have to design your algorithm accordingly or create a new child-scope. You can only write the expression under Unsafe Jule.
+
+For example:
+```jule
+unsafe fn foo(mut x: *int): int {
+    outln(*x)
+    *x++
+    ret *x
+}
+
+fn main() {
+    const Offset = 8
+    let mut x = 0
+    x = unsafe { foo(&x) } + Offset
+    x = unsafe { foo(&x) } + Offset
+    x = unsafe { foo(&x) } + Offset
+}
+```

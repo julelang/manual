@@ -1,6 +1,6 @@
 # Concurrency
 
-Concurrency is something that is built into Jule. There is nothing to be afraid of, Jule safety tries to keep your security quite high in terms of concurrency due to its compiler, which is obsessed with it.
+Concurrency is something that is built into Jule. There is nothing to be afraid of, Jule safety tries to keep your safety quite high in terms of concurrency due to its compiler, which is obsessed with it.
 
 Jule uses real threads. That is, threads scheduled by the kernel. Jule does not use any coroutine/green threads. And also concurrent calls are not traced or synchronized. Therefore, your program may terminate before all your concurrent calls have finished executing.
 

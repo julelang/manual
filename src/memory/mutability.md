@@ -88,7 +88,7 @@ If a structure field uses interior mutability, there will be no problem in assig
 
 ### Traits
 
-If there is a mutable `sel`f receiver in the trait's methods, it cannot be used mutably when the trait is immutable. The reason for this is clearly due to the risk of calling a mutable method of the structure it contains.
+If there is a mutable `self` receiver in the trait's methods, it cannot be used mutably when the trait is immutable. The reason for this is clearly due to the risk of calling a mutable method of the structure it contains.
 
 If a trait contains a mutable structure and you get it by casting, this is not considered a problem even if it is an immutable trait. The structure stored by the trait is within the scope of interior mutability for the trait. So, when you obtain that structure, you can take it as mutable and this will not cause any problems.
 
@@ -123,7 +123,7 @@ fn main() {
 In the example above, an immutable trait contains a mutable type `&Circle`. We can get this by casting and change the result of the `area` method by changing the `r` field. This is because the `&Circle` instance it stores has interior mutability.
 
 ## Cloning
-You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input. To find out about them, you can refer to the [relevant documents](/std/builtin).
+You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input.
 
 Cloning supported types and copy methods:
 - Numeric Types\

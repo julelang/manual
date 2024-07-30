@@ -24,7 +24,7 @@ fn main() {
 
 The above program is clearly one in which we create problems for ourselves. At work time, Jule panics due to safety measures. But we may not be able to obtain enough information, such as location information. This example focuses on how such an error can be understood in practice with LLDB and GDB.
 
-First of all, we obtain the IR code by transpiling this Jule code, remember to pass the `--disable-safety` option. For manual method; We obtain the IR code by transpiling this Jule code. And then, we add `#define __JULE_DISABLE__SAFETY` at the top of the IR code to turn off Jule security measures. This will prevent the program from panicking at runtime and accessing the invalid memory address, making the error handleable and catchable. Otherwise, the program will panic and be terminated by the Jule runtime, and LLDB or GDB will not be able to understand the problem here.
+First of all, we obtain the IR code by transpiling this Jule code, remember to pass the `--disable-safety` option. For manual method; We obtain the IR code by transpiling this Jule code. And then, we add `#define __JULE_DISABLE__SAFETY` at the top of the IR code to turn off Jule safety measures. This will prevent the program from panicking at runtime and accessing the invalid memory address, making the error handleable and catchable. Otherwise, the program will panic and be terminated by the Jule runtime, and LLDB or GDB will not be able to understand the problem here.
 
 After making the necessary addition, we can find the recommended compilation command in the IR file for a quick start. Take it and compile your IR code with your backend compiler by adding the `-g` option.
 
