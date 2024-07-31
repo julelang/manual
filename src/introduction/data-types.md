@@ -186,8 +186,8 @@ Supports casting to any type.
 You can get type-safe value of `any` with casting.
 For example:
 ```jule
-let my_any: any = 10
-let x = (int)(my_any)
+let myAny: any = 10
+let x = (int)(myAny)
 ```
 
 `any` type protects itself against mutability if necessary.

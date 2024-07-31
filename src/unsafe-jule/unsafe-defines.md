@@ -5,7 +5,7 @@ You can call unsafe functions with Unsafe Jule. Functions or methods that qualif
 
 For example:
 ```jule
-unsafe fn my_unsafe_fn() { /* ... */ }
+unsafe fn myUnsafeFunc() { /* ... */ }
 ```
 ::: tip
 Before qualifying a function or method as unsafe, make sure that the function is not safe all time. Even if it performs unsafe operations, it is better for the function to act as a safe wrapper than to qualify as unsafe if safety is guaranteed.
