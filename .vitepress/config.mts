@@ -247,7 +247,7 @@ export default defineConfig({
           items: [
             { text: 'Immutability', link: '/unsafe-jule/immutability' },
             { text: 'Raw Pointers', link: '/unsafe-jule/raw-pointers' },
-            { text: 'Unsafe Defines', link: '/unsafe-jule/unsafe-defines' },
+            { text: 'Unsafe Functions', link: '/unsafe-jule/unsafe-functions' },
             { text: 'References', link: '/unsafe-jule/references' },
           ],
         },
