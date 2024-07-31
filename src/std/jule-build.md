@@ -502,6 +502,7 @@ Compiler log messages with formatting.
 - `ComptimeFallthrough`
 - `CannotBeMut`
 - `AnonFn`
+- `CopyWithMutableData`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
