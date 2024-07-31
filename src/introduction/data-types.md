@@ -168,6 +168,20 @@ new
     lines.`
 ```
 
+## Boolean
+
+Jule defines two constant values for booleans.
+
+For logical true:
+```jule
+true
+```
+
+For logical false:
+```jule
+false
+```
+
 ## Nil
 Zero value for pointers and function data typed defines. 
 ```jule
