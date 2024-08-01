@@ -13,12 +13,11 @@ for      in        break     continue
 goto     match     fall      if
 else     ret       error     use
 co       cpp       unsafe    defer
-true     false     nil
 ```
 
 ## Imaginary Keywords
 
-Imaginary keywords are words that are not keywords for Jule, but are recommended for developers to treat as if they were a keyword. These words are mostly aliases for built-in types or reserved names for some functions.
+Imaginary keywords are words that are not keywords for Jule, but are recommended for developers to treat as if they were a keyword. These words are mostly aliases for built-in types, reserved names for some functions or constant variables.
 
 Developers can use these words as identifiers to functions and other definitions if they wish, but this can lead to a variety of development issues and readability challenges. Because relevant word now points to a new definition defined by the developer instead of its commonly used built-in definition.
 
@@ -42,5 +41,6 @@ int       uint      uintptr    i8       i16       i32
 i64       u8        u16        u32      u64       f32
 f64       bool      str        any      new       make
 copy      append    out        outln    delete    clone
-assert    cap       len        panic
+assert    cap       len        panic    true      false
+nil
 ```
