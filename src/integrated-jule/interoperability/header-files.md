@@ -28,3 +28,7 @@ cpp use "implementation.cxx"
 ```
 The correctness and validity of the file path is checked by the compiler.
 Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.c`, `.mm`
+
+## Important Notes
+
+Header files are handled with absolute path at backend. Some compiler backends may not support include paths which is contains unicode characters. Jule will not handle that. So, your backend compiler may will not compile your IR.
