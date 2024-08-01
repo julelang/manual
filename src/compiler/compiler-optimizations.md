@@ -11,20 +11,13 @@ Optimizations are enabled with options in the build command.
 
 Some optimizations may be enabled by default and it may not be possible to disable them. These optimizations are mostly things that will not affect you if they are turned on even when you want to turn off all optimizations for your debugging.
 
-### Constant Evaluation
-
-Constant evaluation, in short, is the processing of constant expressions that can be evaluated at runtime. Since processed constant values ​​represent the direct result, it helps to create code that creates less load at runtime.
-
-Constant evaluation does the following:
-
-- Values ​​that can be evaluated at compile-time, such as constant literals and constant variables, are evaluated. For example, a `true == false` expression is evaluated at compile-time and handled as `false`. This is performed for all valid constant types such as integers, floating-points, and strings.
-- Indexing of constant strings, and slice literals are evaluated if the indexing is done with a constant expression.
-- Slicing of constant strings is evaluated if the indexes are done with a constant expression.
+**List of Always Enabled Optimizations**
+- [Basic Comptime Evaluation](/comptime/#basic-comptime-evaluation)
 
 ## Optimization Options
 
 ::: info
-Some optimizations will not be applied for global static variables.
+Some optimizations may not be applied for some scopes and expressions.
 :::
 
 `--opt-copy` \
@@ -90,7 +83,7 @@ Enable optimizatons for inlining.
 `--opt-ptr` \
 Enable optimizations for pointers.
 
-- Immediate pointer simplifies dereferencing statements. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
+- Simplifies immediate pointer dereferencings. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
 
 ---
 
