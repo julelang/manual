@@ -208,11 +208,6 @@ struct LitExpr {
 ```
 Literal expression.
 
-**Methods:**
-
-`fn IsNil(self): bool`\
-Reports whether literal is nil value.
-
 ---
 
 ```jule

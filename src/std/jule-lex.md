@@ -441,9 +441,6 @@ Token kinds.
 - `RBracket`
 - `LBrace`
 - `RBrace`
-- `True`
-- `False`
-- `Nil`
 - `Const`
 - `Ret`
 - `Type`
