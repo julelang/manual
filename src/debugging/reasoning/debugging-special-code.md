@@ -21,7 +21,7 @@ fn main() {
 
 ## Debugging Special Algorithms
 
-The `call` function provided by `std::debug` calls the given function immediately at no additional cost. This call is eliminated in production compilation. Using this call you can implement some of your algorithms required for debugging.
+The `Call` function provided by `std::debug` calls the given function immediately at no additional cost. This call is eliminated in production compilation. Using this call you can implement some of your algorithms required for debugging.
 
 ::: warning
 It is not recommended to use algorithms that interfere with the operation of your program. Doing so will cause your program's behavior to differ between debugging and production compilation and may cause you to have more bugs.
