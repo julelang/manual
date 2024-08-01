@@ -902,6 +902,7 @@ struct Label {
 ```jule
 struct GotoSt {
     Ident: str
+    Label: &Label
 }
 ```
 
