@@ -65,8 +65,6 @@ Returns new instance of data type for supported types.
 - Slices:\
     Allocates slices dynamically.
     In addition to the slice type, it can take two more arguments. The first argument is mandatory. The first argument specifies the length of the slice. The second argument specifies the capacity of the slice and is optional. The slice is returned with its length, and the field within its length is initialized with the default value.
-- Strings:\
-    Allocates buffered strings. In addition to the str type, it can two more argument. This first additional argument is the length of the string's buffer. The second argument is the capacity of the strings's buffer capacity. The string is returned with its length, and the fiedld within its length is initialized with the nil byte (aka '\0').
 
 ---
 
@@ -84,10 +82,6 @@ Special cases are:
 Slice destination:\
 &nbsp;&nbsp;&nbsp;&nbsp;In slice destinations, source should be compatible type slice.\
 &nbsp;&nbsp;&nbsp;&nbsp;If destination slice is `[]byte`, source might be `str` also.
-
-Str destination:\
-&nbsp;&nbsp;&nbsp;&nbsp;In `str` destinations, source should be `str`.\
-&nbsp;&nbsp;&nbsp;&nbsp;But source also might be a `[]byte`.
 
 ---
 

@@ -93,6 +93,8 @@ Enable optimizations for conditional structures.
 - Remove unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
 - Remove condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
+- Avoids using wrapper for strings if string compared with literal.
+- Converts string comparison with empty literal to `len(s) == 0` check.
 
 ---
 
@@ -100,9 +102,6 @@ Enable optimizations for conditional structures.
 Enables optimizations for string operations.
 
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
-- Inserts to beginning of the string instead of allocation and assignment if string gets assignment like `expr + itself`.
-- Converts string concatenations with casted byte, rune, byte slices or rune slices to direct appendations. Avoids allocate to new string and then appending to destination, generates code to push into string buffer directly.
-- Avoids making new string allocation when appending string literals.
 
 ---
 

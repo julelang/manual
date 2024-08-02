@@ -127,11 +127,13 @@ For example:
 
 ## String
 
-Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also mutable. So you don't need to use String Builder to compensate for the inefficiency of immutable strings as in some other languages, string concatenations are less of a performance concern. 
+Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also immutable, means you can't modify them.
 
 Strings support the `+` operator for concatenation, It's that easy to concatenate two strings. Additionally, using the `==` and `!=` operators, you can easily determine whether two strings are the same or not.
 
-It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares runes of strings.
+In most cases, any concatenation will result as heap allocation which is might be expensive. For higly-repeated concatenations use string builder utilities instead.
+
+It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares bytes/runes of strings.
 
 ### String Literals
 ```jule

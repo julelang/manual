@@ -224,7 +224,6 @@ export default defineConfig({
           text: 'Memory',
           link: '/memory/',
           items: [
-            { text: 'Buffering', link: '/memory/buffering' },
             { text: 'Slicing', link: '/memory/slicing' },
             { text: 'Immutability', link: '/memory/immutability' },
             { text: 'Mutability', link: '/memory/mutability' },

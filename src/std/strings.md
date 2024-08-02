@@ -232,3 +232,46 @@ fn Cut(s: str, sep: str): (before: str, after: str, found: bool)
 Cut slices s around the first instance of sep, returning the text before and after sep.
 The found result reports whether sep appears in s.
 If sep does not appear in s, cut returns s, "", false.
+
+## Structs
+
+```jule
+struct StrBuilder
+```
+String builder for efficient concatenation.
+
+**Methods:**
+
+`static fn New(cap: int): StrBuilder`\
+Returns new string builder with capacity.
+
+`fn Write(mut self, b: []byte)`\
+Writes bytes to buffer.
+
+`fn WriteStr(mut self, s: str)`\
+Writes bytes to buffer.
+
+`fn WriteByte(mut self, b: byte)`\
+Writes byte to buffer.
+
+`fn WriteRune(mut self, r: rune)`\
+Writes rune into buffer.
+
+`fn Str(self): str`\
+Returns as string.
+
+`fn Clear(mut self)`\
+Clears buffer.
+Capacity will not be changed.
+
+`fn Len(self): int`\
+Returns length of buffer.
+
+`fn Cap(self): int`\
+Returns capacity of buffer.
+
+`unsafe fn Buf(mut self): []byte`\
+Returns mutable buffer for low-level interactions.
+
+`unsafe fn SetBuf(mut self, mut buf: []byte)`\
+Sets mutable internal buffer for low-level interactions.
