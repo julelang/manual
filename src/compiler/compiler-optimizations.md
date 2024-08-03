@@ -106,6 +106,13 @@ Enables optimizations for string operations.
 
 ---
 
+`--opt-slice` \
+Enables optimizations for slice operations.
+
+- Erases relevant ranges of slice's itself instead of making allocation for subslice and assignment if slice gets assignment with subslice from itself.
+
+---
+
 `--opt-internal-nosafe`\
 Enables special optimizatins for the `std::internal::nosafe` standard library package.
 
@@ -125,7 +132,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`
 - `L2`: passes all `L1` flags and `--opt-internal-nosafe`
 
 ## Production Compilation
