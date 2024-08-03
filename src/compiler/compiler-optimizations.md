@@ -84,6 +84,7 @@ Enable optimizatons for inlining.
 Enable optimizations for pointers.
 
 - Simplifies immediate pointer dereferencings. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
+- Simplifies getting pointer of references. Since references implemented as pointers and dereferenced automatically, there is no need to dereferencing and getting pointer again. Compiler uses pointer of the reference directly.
 
 ---
 
