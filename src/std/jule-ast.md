@@ -276,9 +276,8 @@ Namespace identifier selection expression.
 
 ```jule
 struct SubIdentExpr {
-    IsSelf: bool
-    Expr:   &Expr
-    Ident:  &Token // From std::jule::lex
+    Expr:  &Expr
+    Ident: &Token // From std::jule::lex
 }
 ```
 Object sub identifier selection expression.
