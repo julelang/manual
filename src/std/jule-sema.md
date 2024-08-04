@@ -379,27 +379,6 @@ Array expression model.  If array filled, elems field holds 2 data. First data i
 ---
 
 ```jule
-struct CommonIdentExprModel {
-    Ident: str
-}
-```
-Common ident expression model.
-
----
-
-```jule
-struct CommonSubIdentExprModel {
-    ExprKind: &TypeKind
-    Expr:     ExprModel
-    Token:    &Token
-    Ident:    str
-}
-```
-Common sub-ident expression model.
-
----
-
-```jule
 struct TupleExprModel {
     Datas: []&Data
 }
@@ -1803,8 +1782,6 @@ Expression model.
 - `&StructSubIdentExprModel`
 - `&StructStaticIdentExprModel`
 - `&ArrayExprModel`
-- `&CommonIdentExprModel`
-- `&CommonSubIdentExprModel`
 - `&TupleExprModel`
 - `&BuiltinOutCallExprModel`
 - `&BuiltinOutlnCallExprModel`
