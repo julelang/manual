@@ -4,15 +4,6 @@ Smart pointers (aka reference types or references) are more safet pointers than 
 
 Smart pointers are can be nil, and act just like a pointer. By default, they store heap-allocated data and perform reference counting. To access the pointed value, the unary `*` operator is used, just like in raw pointers.
 
-The `&` operator always returns a raw pointer.
-Here are a few reasons why:
-
-- **Reducing Implicit Heap Allocations**\
-One of the main reasons is to reduce implicit heap allocations and encourage developers to do this more consciously.
-
-- **Efficiency**\
-This is an efficiency issue. Presumably, if you're getting a pointer to a smart pointer, you're doing so to share the address. The problem is that smart pointers already do this, and creating a smart pointer with an additional RC cost just because you will share the address is often not a good approach. Since you will be doing this mostly to reduce the RC cost or to share memory, it is suitable for a more general and efficient use when the "&" operator takes a raw pointer by default.
-
 Example to smart pointer declarations:
 ```jule
 &int
