@@ -503,6 +503,7 @@ Compiler log messages with formatting.
 - `CannotBeMut`
 - `AnonFn`
 - `CopyWithMutableData`
+- `CalledOutOfScope`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -517,6 +518,7 @@ Compiler log messages with formatting.
 - `ExpectedRightOperand`
 - `ExpectedColon`
 - `ExpectedBody`
+- `ExpectedType`
 - `MoveUseDeclToTopOfFile`
 - `RenameForAvoidDuplication`
 - `RemoveUseDeclAvoidDuplication`
