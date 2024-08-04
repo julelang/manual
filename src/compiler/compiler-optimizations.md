@@ -26,7 +26,7 @@ It reduces copying operations whenever possible.
 - Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
 - Converts empty string comparisons to length-is-zero checking.
-- Avoids making allocation for strings when strings compared with literals.
+- Avoids making literal wrapper for strings when strings compared with literals.
 
 ---
 
@@ -113,6 +113,16 @@ Enables optimizations for slice operations.
 
 ---
 
+`--opt-assign`\
+Enabled optimizations for assignments.
+
+It's will not check deeply whether expressions are same. So if you want take advantage of this optimization, keep simple your assignments.
+
+- Removes self assignments such as `a = a` or `a, b = a, b`.
+- Optimize swap assignments such as `a, b = b, a`.
+
+---
+
 `--opt-internal-nosafe`\
 Enables special optimizatins for the `std::internal::nosafe` standard library package.
 
@@ -132,7 +142,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`
 - `L2`: passes all `L1` flags and `--opt-internal-nosafe`
 
 ## Production Compilation
