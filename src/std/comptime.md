@@ -18,6 +18,11 @@ fn Range(EXPR): comptimeRange
 Returns compile-time wrapper for compile-time iterations. Supports only iterable compile-time expressions.
 
 ```jule
+fn TypeAlias(ident, t)
+```
+Emplaces a type alias declaration to statement which is this function called. Defines a type alias with ident which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
+
+```jule
 fn Line(): int
 ```
 Returns line number of statement which is this function called.
@@ -124,6 +129,9 @@ Reports whether function type is exceptional as constant expression. Only suppor
 
 `fn CanNil(self): bool`\
 Reports whether kind is nil-compatible as constant expression.
+
+`fn RC(self): bool`\
+Reports whether kind performs RC as constant expression.
 
 ---
 
