@@ -1,6 +1,6 @@
 # References
 
-References can be confused with the reference types (aka smart pointers) described in memory management, but they are completely different things. References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable. You can think of them as pointers but they are safer because of compiler's safety obsessions.
+References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable. You can think of them as pointers but they are safer because of compiler's safety obsessions. Actualy, references are raw pointers with safety mask.
 
 They are used with `&` operator in syntax. You can't have nested references, for example you can have a pointer pointing to a pointer but not a reference referencing to a reference.
 
@@ -34,6 +34,12 @@ fn main() {
 }
 ```
 
+### Static Variables
+
+Static variables cannot be reference due to safety reasons. After assigned to static storage, reference may be dangling, so pointer is dangling. Tracking lifetime of lvalues is expensive, therefore Jule is not allows reference static variables.
+
+If you need reference for static storage, use raw pointer istead. Raw pointers are part of the Unsafe Jule and references are safety masks for raw pointers.
+
 ### Anonymous Functions with References
 
 Anonymous functions copies instead of referencing the definitions of the scope in which they are defined, for safety reasons. Thus, a possible danger of dangling is prevented. But some copied things can be undsgr, one of them being references. Even if the references are copied, they will still continue to point to the same address as it is an address alias in nature. Therefore, there is a danger of dangling the reference if it goes out of scope. To avoid this, Safe Jule does not allow you to use references from parent scopes.
@@ -57,7 +63,7 @@ fn main() {
 }
 ```
 
-## Why References Accept Lvalues as Variable
+## Why References Accepts only Lvalue
 
 This is the result of the compiler trying to make sure things are safe. It always asks to reference a variable to keep a good watch on your reference and make sure it's safe. This is an effort to guarantee that your reference will never be dangling because the scope of your variable is traceable.
 
