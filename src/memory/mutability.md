@@ -47,25 +47,6 @@ This structure is a mutable structure because it has a field with a mutable type
 
 The variable `x` in the example shows the case of keeping the mutable structure in an immutable variable. Then the `x` variable is copied and assigned to the mutable `y` variable, but this is a risky and unsafe operation as explained.
 
-You can derive `Clone` to solve this problem.
-
-For example:
-```jule
-#derive Clone
-struct Wrapper {
-    slc: []int
-}
-
-fn main() {
-    let x = Wrapper{slc: [1,2,3]}
-    let mut y = clone(x)
-    y.slc[0] = 89
-    outln(x.slc[0])
-    outln(y.slc[0])
-}
-```
-See [deriving](/compiler/deriving) page for more information about `Clone` derive.
-
 ## Interior Mutability
 When an instance of a struct is immutable, you cannot use it with mutable methods because this compromises its immutability guarantee. However, you may still need to change the fields of an immutable structure. For this you need to use interior mutability. Since you cannot call a mutable method, your method will remain immutable, but thanks to interior mutability, you will be able to obtain the fields you want as mutable.
 
@@ -233,62 +214,3 @@ Within the scope of interior mutability, sharing mutable data between copies can
 Under the rule 3, the reason why areas within the scope of interior mutability are recommended to be private is more clear. If the field is public, developers may experience problems when creating new copies when accessing from external packages. Having the structure field private supports easier copies in external packages and easier data sharing.
 
 If you want mutable data to be shared between copies and want to make this data available, keep the data private and share it through methods with [Mutability Encapsulation](#mutability-encapsulation).
-
-## Cloning
-You may need to have deep copies for various reasons (for example assigning mutable struct in immutable variable to mutable variable). You can use the built-in `clone` function to do this. The `clone` function only supports some data types as input.
-
-Cloning supported types and copy methods:
-- Numeric Types\
-  Returns copy of value.
-
-- `str`\
-  Returns copy of value.
-
-- `bool`\
-  Returns copy of value.
-
-- `[]T`\
-  Clones slice with elements.\
-  Returns new independent mutable slice.
-
-- `[...]T`\
-  Clones array with elements.\
-  Returns new independent mutable array.
-
-- `map[K]V`\
-  Clones map's keys and values.\
-  Returns new independent mutable map.
-  
-- `&T`\
-  Clones reference and type.\
-  Returns new independent reference clone of expression.
-
-- `*T`\
-  Pointers are part of the Unsafe Jule.\
-  Always has risk of breaking immutability.\
-  The clone function just returns copy of pointer as mutable.
-
-- `jule:derive Clone`\
-  Clones struct if derives `Clone`.\
-  Returns new independent mutable struct.
-
-- Anonymous Functions\
-  Returns copy of value.
-  Does not creates new anonymous function, juts copies reference to existing function.
-
-### Cloning Cycles
-Clone cycles are a kind of illegal cycle. In cases where you risk an endless cloning cycle at runtime, the compiler will give you an illegal cycle error. Cloning cycles usually occur in nested types, in which it will try to clone itself forever, which somehow attaches to itself.
-
-For example:
-```jule
-#derive Clone
-struct A {
-    b: []B
-}
-
-#derive Clone
-struct B {
-    a: []A
-}
-```
-The `A` struct and `B` struct in the example above have fields that reference each other. They both derive `Clone`. But this poses a risk at runtime. Because if you try to clone struct `A` and it points to a struct `B` pointing to itself, an endless cycle of cloning occurs. This is clearly a runtime risk. Therefore the compiler will not compile your code.

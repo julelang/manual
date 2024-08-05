@@ -403,19 +403,8 @@ struct BuiltinOutlnCallExprModel {
 ```
 Expression model for built-in outln function calls.
 
----
-
 ```jule
-struct BuiltinCloneCallExprModel {
-    Expr:  ExprModel
-}
-```
-Expression model for built-in clone function calls.
-
----
-
-```jule
-struct BuiltinCloneNewExprModel {
+struct BuiltinNewExprModel {
     Kind: &TypeKind
     Init: ExprModel
 }
@@ -1295,9 +1284,6 @@ Reports whether kind is nil compatible.
 `fn PerformsRc(self): bool`\
 Reports whether kind performs reference-counting.
 
-`fn SupportsCloning(self): bool`\
-Reports whether kind supports clonning via jule::Clone derive.
-
 `fn Variadicable(self): bool`\
 Reports whether kind is variadicable.
 
@@ -1785,7 +1771,6 @@ Expression model.
 - `&TupleExprModel`
 - `&BuiltinOutCallExprModel`
 - `&BuiltinOutlnCallExprModel`
-- `&BuiltinCloneCallExprModel`
 - `&BuiltinNewCallExprModel`
 - `&BuiltinPanicCallExprModel`
 - `&BuiltinAssertCallExprModel`

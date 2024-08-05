@@ -211,7 +211,3 @@ For example, you have slice value holds by any-typed variable.
 And your variable is immutable.
 So, if you cast your value to slice for assign to mutable variable, you will get error.
 Because of slice is mutable type, so it's breaking immutability.
-::: warning
-This is is very unsafe, also blocks deriving `Clone`.
-Avoid using any whenever possible.
-:::

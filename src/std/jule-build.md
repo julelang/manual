@@ -235,15 +235,6 @@ Architectures for file annotation kind.
 
 ---
 
-`enum Derive: str`
-
-All built-in derive defines.
-
-**Fields:**
-- `Clone`
-
----
-
 `enum LogKind`
 
 Log kinds.
@@ -426,12 +417,7 @@ Compiler log messages with formatting.
 - `RefersTo`
 - `NoFileInEntryPackage`
 - `NoMemberInEnum`
-- `TypeIsNotDerives`
-- `TypeNotSupportsClone`
 - `InternalTypeNotSupportsClone`
-- `TypeNotCompatibleForDerive`
-- `DeriveIllegalCycleRefersItself`
-- `DeriveIllegalCrossCycle`
 - `InvalidExprForBinop`
 - `BindedStructForRef`
 - `TraitMethodHasGenerics`

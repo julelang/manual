@@ -3,7 +3,6 @@
 ## Structures
 
 ```jule
-#derive Clone
 struct Int
 ```
 Big arbitrary-precision signed integer.

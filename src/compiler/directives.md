@@ -19,8 +19,8 @@ The arguments of the directives are separated by spaces. The directive must be f
 \
 For example:
 ```jule
-#derive Clone
-struct MyStruct {}
+#deprecated "my reason"
+fn myFunc() {}
 ```
 
 ## Directive Expressions

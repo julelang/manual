@@ -3,7 +3,6 @@
 ## Structures
 
 ```jule
-#derive Clone
 struct Cmplx
 ```
 Complex number.
