@@ -332,6 +332,7 @@ Compiler log messages with formatting.
 - `AlreadyConst`
 - `AlreadyVariadic`
 - `AlreadyReference`
+- `StaticReference`
 - `DuplicateUseDecl`
 - `IgnoreIdent`
 - `OverflowMultiAssignIdents`
