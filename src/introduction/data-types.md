@@ -127,7 +127,7 @@ For example:
 
 ## String
 
-Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also immutable, means you can't modify them.
+Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also immutable, means you can't modify them. For literals, strings will not heap allocated. Strings only performs heap allocation for runtime concats and other runtime stuffs. If string performs a heap allocation, it will use smart pointer to track allocation.
 
 Strings support the `+` operator for concatenation, It's that easy to concatenate two strings. Additionally, using the `==` and `!=` operators, you can easily determine whether two strings are the same or not.
 
