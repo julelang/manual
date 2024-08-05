@@ -443,7 +443,6 @@ Compiler log messages with formatting.
 - `MutRefPointsImmut`
 - `RefNotInited`
 - `ConstRef`
-- `RefIsDangling`
 - `ConcurrentCallWithRefParam`
 - `ConcurrentCallWithSelfParam`
 - `UsedRefInAnonFnFromParentScope`
