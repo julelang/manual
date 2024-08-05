@@ -72,12 +72,3 @@ fn main() {
     outln(x)
 }
 ```
-
-## Pass Pointer to Reference
-
-If you want to send your pointers to a reference parameter, you can do so with a simple pointer dereferencing. You are aware of the unsafety as this is already an action you would take using Unsafe Jule.
-
-For example:
-```jule
-my_function(unsafe { *my_pointer })
-```

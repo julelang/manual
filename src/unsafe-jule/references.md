@@ -8,7 +8,7 @@ If you are confident and aware that this concurrent call you make will be safe, 
 
 For example:
 ```jule
-unsafe { co my_function(my_var) }
+unsafe { co myFunction(myVar) }
 ```
 
 ## Access Reference from Parent Scope
@@ -24,4 +24,13 @@ fn main() {
         unsafe { outln(y) }
     }()
 }
+```
+
+## Pass Raw Pointer to Reference
+
+If you want to pass your pointers to a reference variable, you can do so with a simple pointer dereferencing. You are aware of the unsafety as this is already an action you would take using Unsafe Jule. It also allows skip variable-based expression requirement of references.
+
+For example:
+```jule
+myMunction(unsafe { *myPointer })
 ```
