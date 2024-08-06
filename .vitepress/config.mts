@@ -248,6 +248,7 @@ export default defineConfig({
             { text: 'Raw Pointers', link: '/unsafe-jule/raw-pointers' },
             { text: 'Unsafe Functions', link: '/unsafe-jule/unsafe-functions' },
             { text: 'References', link: '/unsafe-jule/references' },
+            { text: 'Unsafe Package', link: '/unsafe-jule/unsafe-package' },
           ],
         },
         {
@@ -540,6 +541,7 @@ export default defineConfig({
                 { text: 'std::unicode::utf8', link: '/std/unicode-utf8' },
               ],
             },
+            { text: 'std::unsafe', link: '/std/unsafe' },
             { text: 'std::vec', link: '/std/vec' },
           ],
         },
