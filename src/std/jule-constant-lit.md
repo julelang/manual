@@ -9,26 +9,29 @@ Reports whether rune is byte actually. In other words, whether rune is ASCII.
 ---
 
 ```jule
-fn ToRune(bytes: []byte): rune
+fn ToRune(lit: str): rune
 ```
-Returns rune value string from bytes, not includes quotes.\
-Bytes are represents rune literal, allows escape sequences.\
-Returns empty string if len(bytes) == 0
+Returns rune value string from literal, includes quotes.
+Bytes are represents rune literal, allows escape sequences.
+Returns zero rune if `len(lit) == 0`.
+Assumes lit is syntaticaly and semantically correct.
 
 ---
 
 ```jule
-fn ToRawStr(bytes: []byte): str
+fn ToRawStr(lit: str): str
 ```
-Returns raw-string value string from bytes, not includes quotes.\
-Bytes are represents string characters.\
-Returns empty string if len(bytes) == 0
+Returns raw-string value string from literal, includes quotes.
+Bytes are represents string characters.
+Returns empty string if `len(lit) == 0`.
+Assumes lit is syntaticaly and semantically correct.
 
 ---
 
 ```jule
-fn ToStr(bytes: []byte): str
+fn ToStr(lit: str): str
 ```
-Returns string value string from bytes, not includes quotes.\
-Bytes are represents string characters, allows escape sequences.\
-Returns empty string if len(bytes) == 0 
+Returns string value string from literal, includes quotes.
+Bytes are represents string characters, allows escape sequences.
+Returns empty string if `len(lit) == 0`.
+Assumes lit is syntaticaly and semantically correct.
