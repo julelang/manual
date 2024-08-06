@@ -26,11 +26,11 @@ Alias for `Slice(b, n)`.
 ```jule
 fn StrBytes(s: str): []byte
 ```
-Alias for `Slice(&s[0], len(s))`.
+Alias for `Slice(&s[0], len(s))`. Returns `nil` if `len(s) == 0`.
 
 ---
 
 ```jule
 fn BytesStr(b: []byte): str
 ```
-Alias for `Str(&b[0], len(b))`.
+Alias for `Str(&b[0], len(b))`. Returns empty string if `len(b) == 0`.
