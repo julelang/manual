@@ -34,3 +34,17 @@ Alias for `Slice(&s[0], len(s))`. Returns `nil` if `len(s) == 0`.
 fn BytesStr(b: []byte): str
 ```
 Alias for `Str(&b[0], len(b))`. Returns empty string if `len(b) == 0`.
+
+---
+
+```jule
+fn StrFromBytes(b: []byte): str
+```
+Same as `BytesStr` but keeps garbage collection.
+
+---
+
+```jule
+fn BytesFromStr(s: str): []byte
+```
+Same as `StrBytes` but keeps garbage collection.
