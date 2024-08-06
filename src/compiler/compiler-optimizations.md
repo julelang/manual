@@ -121,13 +121,6 @@ It's will not check deeply whether expressions are same. So if you want take adv
 - Removes self assignments such as `a = a` or `a, b = a, b`.
 - Optimize swap assignments such as `a, b = b, a`.
 
----
-
-`--opt-internal-nosafe`\
-Enables special optimizatins for the `std::internal::nosafe` standard library package.
-
-- Inlining calls to the `stobs` function.
-
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -143,7 +136,6 @@ The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
 - `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`
-- `L2`: passes all `L1` flags and `--opt-internal-nosafe`
 
 ## Production Compilation
 
