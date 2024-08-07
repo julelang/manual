@@ -56,7 +56,7 @@ Octal values are represented by starts with 0o or `0` prefix. Hexadecimal values
 `fn Reset(mut self)`\
 Resets all flags to default value.
 
-`fn Add[T](mut self, name: str, short: rune, default: T, what: str): &T`\
+`fn Add[T: i64 | u64 | f64 | bool | str](mut self, name: str, short: rune, default: T, what: str): &T`\
 Adds new flag and returns allocated reference variable. Panics if name or short name is alreadys exist. Zero (0) short names will be ignored. Panics if used unsupported type.
 
 **Supported types are:**
@@ -66,5 +66,5 @@ Adds new flag and returns allocated reference variable. Panics if name or short 
 - `str`
 - `bool`
 
-`fn AddVar[T](mut self, mut var: &T, name: str, short: rune, what: str)`\
+`fn AddVar[T: i64 | u64 | f64 | bool | str](mut self, mut var: &T, name: str, short: rune, what: str)`\
 Same with add method but do not allocates new reference, uses existing.
