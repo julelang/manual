@@ -16,7 +16,7 @@ Returns big integer that represents zero.
 `static fn One(): Int`\
 Returns big integer that represents one.
 
-`static New[T](i: T): Int`\
+`static New[T: Int | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | int | uint](i: T): Int`\
 Returns big integer that initialized by integer value.
 T can only be signed or unsigned integer types.
 
