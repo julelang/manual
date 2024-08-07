@@ -489,6 +489,7 @@ Compiler log messages with formatting.
 - `AnonFn`
 - `CopyWithMutableData`
 - `CalledOutOfScope`
+- `BlankIdentInUseDecl`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
