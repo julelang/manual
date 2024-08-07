@@ -14,7 +14,7 @@ Like runtime matching statements, comptime matching statements behave the same w
 
 Any case whose statement is not accepted as correct is not checked.
 
-You can match any constant expression with comptime matching, including `comptimeTypeInfo`. A `comptimeTypeInfo` mapping is treated roughly like `a == b`.
+You can match any constant expression with comptime matching, including `comptimeTypeInfo`. A `comptimeTypeInfo` matching is treated roughly like `a == b`.
 
 For example:
 ```jule
