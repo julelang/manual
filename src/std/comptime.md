@@ -7,20 +7,36 @@ fn TypeOf(TYPE || EXPRESSION): comptimeTypeInfo
 ```
 Returns compile-time type information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
+---
+
 ```jule
 fn ValueOf(EXPRESSION): comptimeValue
 ```
 Returns compile-time value information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine and handle value in compile-time and will not executed at runtime.
+
+---
+
+```jule
+fn Match(EXPR|TYPE): comptimeMatch
+```
+Returns compile-time wrapper for compile-time matching.
+Supports only expressions and `comptimeTypeInfo`.
+
+---
 
 ```jule
 fn Range(EXPR): comptimeRange
 ```
 Returns compile-time wrapper for compile-time iterations. Supports only iterable compile-time expressions.
 
+---
+
 ```jule
 fn TypeAlias(ident, t)
 ```
 Emplaces a type alias declaration to statement which is this function called. Defines a type alias with ident which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
+
+---
 
 ```jule
 fn Line(): int
@@ -28,10 +44,14 @@ fn Line(): int
 Returns line number of statement which is this function called.
 Returns as constant expression.
 
+---
+
 ```jule
 fn File(): comptimeFile
 ```
 Returns file wrapper of source file which is this function called.
+
+---
 
 ```jule
 fn Files(): comptimeFiles
@@ -39,6 +59,13 @@ fn Files(): comptimeFiles
 Returns file wrappers for source files of package which is this function called.
 
 ## Structures
+
+```jule
+struct comptimeMatch
+```
+Private compile-time wrapper for compile-time matching.
+
+---
 
 ```jule
 struct comptimeRange

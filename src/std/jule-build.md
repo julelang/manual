@@ -484,7 +484,6 @@ Compiler log messages with formatting.
 - `InvalidTypeForTypeOf`
 - `ComptimeAsExpr`
 - `InvalidTypeForFn`
-- `InvalidExprForConstMatch`
 - `ComptimeFallthrough`
 - `CannotBeMut`
 - `AnonFn`
@@ -533,3 +532,4 @@ Compiler log messages with formatting.
 - `UseUnsafeJuleToCallCo`
 - `UseUnsafeJuleToCallCoSelf`
 - `DefineZeroDefaultToUseAmper`
+- `InvalidExprForConstMatch`

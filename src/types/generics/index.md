@@ -104,8 +104,3 @@ fn main() {
 }
 ```
 Dynamic generic annotation is used in the above example. Generic types are automatically detected from the data type of argument by compiler.
-
-## Generic Type Matching
-
-You can match types in compile-time.\
-See [Comptime Matching](/comptime/comptime-matching#generic-type-matching) for more information.

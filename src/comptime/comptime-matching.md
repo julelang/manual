@@ -2,69 +2,80 @@
 
 Comptime matching refers to matching at compile time using match statements without runtime costs. The first matching case will be placed in the code and the rest will be ignored. In this way, special algorithms can be placed in the code according to certain situations.
 
+To make comptime-matching , you should call the `Match` function which is provided by [`std::comptime`](/std/comptime) library. In fact this is a design preference for readability and maintainability. This function only useable for match statements, you cannot store it with constant variables.
+
 The `fall` keyword cannot be used during any comptime matching.
+
+The expression taken by the `Match` function is handled according to the matching type in which it is used. So, there may be some behavioral differences or restrictions.
 
 ## Conditional Matching
 
-An ordinary match statement can also be used to check conditions. The way to do this is to not give any statements and write conditions in cases. This is an elegant way to do condition matching at runtime. Comptime matching is done in the same way. To enable comptime matching only, the constant `true` expression must be given.
-
-When the expression is constant `true`, your compiler will treat it as comptime matching. In this context, all case expressions must be constant boolean.
-
-Providing any different constant expression does not activate comptime matching. Only the literal `true` ensures this. The main reason for this is that the distinction between runtime and comptime can be made cleanly, the same is not true for other expressions.
+Like runtime matching statements, comptime matching statements behave the same way. All it does is match, i.e. equality check. 
 
 Any case whose statement is not accepted as correct is not checked.
 
+You can match any constant expression with comptime matching, including `comptimeTypeInfo`. A `comptimeTypeInfo` mapping is treated roughly like `a == b`.
+
 For example:
 ```jule
-const Foo = false
-const Bar = true
-const Baz = true
+use comptime for std::comptime
 
-fn main() {
-    match true {
-    | Foo && Bar:
-        outln("FooBar")
-    | Bar && !Baz:
-        outln("Bar")
-    | Baz:
-        outln("Baz")
+fn match1() {
+    match comptime::Match(comptime::TypeOf(int)) {
+    | comptime::TypeOf(int):
+        outln("foo")
+    | comptime::TypeOf(bool):
+        outln("bar")
     |:
-        panic("not implemented")
+        outln("baz")
+    }
+}
+
+fn match2() {
+    match comptime::Match(20) {
+    | 20:
+        outln("foo")
+    | 40:
+        outln("bar")
+    |:
+        outln("baz")
     }
 }
 ```
 
-## Generic Type Matching
+## Type Matching
 
-Comptime matching statements can be used to implement different algorithms for generic types. There is no runtime cost, matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches and you will prevent semantic analysis errors for mismatched cases.
+Comptime type-matching statements can be used to implement different algorithms for types. There is no runtime cost, matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches and you will prevent semantic analysis errors for mismatched cases.
 
 Types must always match exactly. For example, when checking a trait, not all types that implement the trait are accepted. Matching is always done with exactly the same types.
+
+If the argument taken by the `comptime::Match` function is an expression, the type of the expression is matched. For example, the value `20` is considered as type `int`. If the argument is a type declaration, that type is matched. If `comptimeTypeInfo` is matched, the type it carries information about is used for matching.
 
 For example:
 
 ```jule
-fn println[T](x: T) {
-    match type T {
-    | str:
-        out("Str: ")
-    | bool:
-        out("Bool: ")
-    | f64:
-        out("64-bit float: ")
+use comptime for std::comptime
+
+fn typeMatch1() {
+    match type comptime::Match(20) {
     | int:
-        out("Integer: ")
+        outln("foo")
+    | bool:
+        outln("bar")
     |:
-        out("Unkown: ")
+        outln("baz")
     }
-    outln(x)
 }
 
-fn main() {
-    println(10)
-    println(true)
-    println(20.5)
-    println("MyString")
-    println(any(nil))
+fn typeMatch2() {
+    match type comptime::Match(comptime::TypeOf(int)) {
+    | int:
+        outln("foo")
+    | bool:
+        outln("bar")
+    |:
+        outln("baz")
+    }
 }
 ```
 
@@ -75,8 +86,10 @@ Comptime matching statements provides compile-time panic calls. You can issue a 
 For example:
 
 ```jule
+use comptime for std::comptime
+
 fn printKind[T]() {
-    match type T {
+    match type comptime::Match(T) {
     | bool:
         outln("type is boolean")
     | int:
