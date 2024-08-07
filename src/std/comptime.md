@@ -329,6 +329,6 @@ Type kinds.
 - `Enum`: Enum
 - `Ptr`: Raw pointer
 - `UnsafePtr`: Unsafe raw pointer
-- `Ref`: Smart pointer
+- `SmartPtr`: Smart pointer
 - `Func`: Function
 - `Tuple`: Tuple
