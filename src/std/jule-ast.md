@@ -587,9 +587,10 @@ Return statement.
 
 ```jule
 struct Iter {
-    Token: &Token // From std::jule::lex
-    Kind:  IterKind
-    Scope: &ScopeTree
+    Comptime: bool
+    Token:    &Token // From std::jule::lex
+    Kind:     IterKind
+    Scope:    &ScopeTree
 }
 ```
 Iteration.
