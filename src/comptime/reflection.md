@@ -66,13 +66,13 @@ use comptime for std::comptime
 
 fn PrintFields[T](s: T) {
     const t = comptime::TypeOf(T)
-    match true {
+    const match {
     | t.Kind() != comptime::Kind.Struct:
         panic("PrintFields[T]: T is not struct")
     }
     const v = comptime::ValueOf(s)
     const fields = t.Fields()
-    for _, field in comptime::Range(fields) {
+    const for _, field in fields {
         outln(v.Field(field.Name()).Unwrap())
     }
 }
@@ -98,7 +98,7 @@ struct FooBarBaz {
 
 fn main() {
     const fields = comptime::TypeOf(FooBarBaz).Fields()
-    for _, field in comptime::Range(fields) {
+    const for _, field in fields {
         outln(field.Name())
     }
 }
@@ -120,7 +120,7 @@ struct FooBarBaz {
 
 fn main() {
     const fields = comptime::TypeOf(FooBarBaz).Fields()
-    for _, field in comptime::Range(fields) {
+    const for _, field in fields {
         outln(field.Type().Str())
     }
 }
@@ -156,11 +156,12 @@ fn IsNumeric[T](): bool {
 
 fn IsValidType[T](): bool {
     const t = comptime::TypeOf(T)
-    match true {
+    const match {
     | t.Binded():
         ret false
+    |:
+        ret IsNumeric[T]()
     }
-    ret IsNumeric[T]()
 }
 
 fn main() {
@@ -183,13 +184,13 @@ use comptime for std::comptime
 
 fn Fill[Arr, Elem](mut &arr: Arr, mut elem: Elem) {
     const t = comptime::TypeOf(Arr)
-    match true {
+    const match {
     | t.Kind() != comptime::Kind.Array:
         panic("type Arr is not an array")
     | t.Elem() != comptime::TypeOf(Elem):
         panic("type Elem is not same with type Arr's element type")
     }
-    let mut i = 0
+    mut i := 0
     for i < t.Size(); i++ {
         arr[i] = elem
     }
@@ -220,14 +221,14 @@ struct FooBarBaz {
 
 fn printPublicFields[T](x: T) {
     const t = comptime::TypeOf(T)
-    match true {
+    const match {
     | t.Kind() != comptime::Kind.Struct:
         panic("type T is not a struct")
     }
     const fields = t.Fields()
     const expr = comptime::ValueOf(x)
-    for _, field in comptime::Range(fields) {
-        match true {
+    const for _, field in fields {
+        const match {
         | field.Public():
             outln(expr.Field(field.Name()).Unwrap())
         }
@@ -235,7 +236,7 @@ fn printPublicFields[T](x: T) {
 }
 
 fn main() {
-    let fbz = FooBarBaz{
+    fbz := FooBarBaz{
         Foo: 89,
         Bar: "comptime",
         Baz: true,
