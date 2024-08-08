@@ -25,13 +25,6 @@ Supports only expressions and `comptimeTypeInfo`.
 ---
 
 ```jule
-fn Range(EXPR): comptimeRange
-```
-Returns compile-time wrapper for compile-time iterations. Supports only iterable compile-time expressions.
-
----
-
-```jule
 fn TypeAlias(ident, t)
 ```
 Emplaces a type alias declaration to statement which is this function called. Defines a type alias with ident which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
@@ -64,13 +57,6 @@ Returns file wrappers for source files of package which is this function called.
 struct comptimeMatch
 ```
 Private compile-time wrapper for compile-time matching.
-
----
-
-```jule
-struct comptimeRange
-```
-Private compile-time wrapper for compile-time iterations.
 
 ---
 
