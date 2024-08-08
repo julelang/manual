@@ -490,6 +490,9 @@ Compiler log messages with formatting.
 - `CopyWithMutableData`
 - `CalledOutOfScope`
 - `BlankIdentInUseDecl`
+- `ComptimeExprForRuntimeIteration`
+- `InvalidTypeForComptimeIter`
+- `InvalidComptimeIter`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -505,6 +508,8 @@ Compiler log messages with formatting.
 - `ExpectedColon`
 - `ExpectedBody`
 - `ExpectedType`
+- `ExpectedPlainUseDecl`
+- `DeclareComptimeForeach`
 - `MoveUseDeclToTopOfFile`
 - `RenameForAvoidDuplication`
 - `RemoveUseDeclAvoidDuplication`
