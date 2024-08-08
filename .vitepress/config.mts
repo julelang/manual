@@ -274,6 +274,7 @@ export default defineConfig({
           text: 'Comptime',
           link: "/comptime/",
           items: [
+            { text: 'Comptime Evaluation', link: '/comptime/comptime-evaluation' },
             { text: 'Comptime Matching', link: '/comptime/comptime-matching' },
             { text: 'Comptime Iterations', link: '/comptime/comptime-iterations' },
             { text: 'Reflection', link: '/comptime/reflection' },

@@ -6,46 +6,4 @@ Jule provides compile-time functionalites empowered by language design and the s
 
 Comptime statements do not have runtime equivalents because they are designed specifically for compile-time. Therefore any comptime statement that should result in runtime execution will cause a compile error.
 
-## Basic Comptime Evaluation
-
-Basic comptime expression are really basic feature of Jule's comptime. Means comptime evaluated expressions with primitive type literals and built-in functions.
-
-List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i32`, `i64`, `u8`, `u16`, `u32`, `u64`, `int`, `uint`, `uintptr`
-
-For example:
-| Expression                | Evaluation                             |
-|---------------------------|----------------------------------------|
-| `5 + 5`                   | `10`                                   |
-| `2 * (2 + 2)`             | `8`                                    |
-| `"hello" + " " + "world"` | `"hello world"`                        |
-
-### List of Some Effects of Basic Comptime Evaluation
-
-- Evaluates of supported primitive type literals
-- Evaluates indexing expressions as constant data of supported literals such as strings
-- Evaluates slicing expressions as constant data of supported literals such as strings
-- Compiler checks boundaries for indexing expressions with supported literals such as strings or slices
-- Compiler checks boundaries for indexing expressions with supported fixed-size types such as arrays
-- Compiler casts basic constant expressions like int to uint casting
-- The built-in `len` function returns constant length data for constant strings and arrays
-- The built-in `cap` function returns constant length data for constant strings
-- Compiler converts constant-string to byte slice, constant string to rune slice, constant-rune to string, constant-byte to string castings at compile-time
-
-## Constant Variables
-
-Constant variables are immutable, compile-time evaluated expression storage variables and one of the elementary features of the compile-time functionality of Jule.
-
-You can store and use any compile-time expression with constant variables. Your compiler allows you to use these expressions as if they were variables until the compilation process finishes.
-
-For example:
-```jule
-use comptime for std::comptime
-
-const MagicNumber = 20
-
-fn main() {
-    let x = MagicNumber
-    const xt = comptime::TypeOf(x)
-    outln(xt.Kind())
-}
-```
+Besides the [`std::comptime`](/std/comptime) package provided to empowering the comptime, Jule has the `const` keyword. This keyword stands for `constant` and represents constant computations that can be handled at comptime, and it is important part of the comptime.

@@ -2,13 +2,15 @@
 
 <div class="warning-badge">experimental</div>
 
-Comptime iterations are compile-time repeated iterations. To iterate in compile-time you should use iterable compile-time expressions.
-
-To make iterable any comptime expression, you should call the `Range` function which is provided by [`std::comptime`](/std/comptime) library. In fact this is a design preference for readability and maintainability. This function only useable for iterations, you cannot store it with constant variables.
+Comptime iterations are compile-time repeated and range-based iterations. To iterate in compile-time you should use iterable compile-time expressions. 
 
 Iteration variables are useable and they will be constant. You can use relevant variables to access iterated data.
 
-For example:
+A comptime iteration is defined like a typical range-based iteration. However, in addition, the `const` keyword must be included at the beginning of the definition. This declares that the iteration will be executed comptime. You cannot able to use `continue` or `break` keywords for compile-time iterations.
+
+The types provided by the [`std::comptime`](/std/comptime) package that can be used in iterations are explained in the package documentation.
+
+Example to comptime iterations:
 ```jule
 use comptime for std::comptime
 
@@ -20,14 +22,10 @@ struct MyStruct {
 
 fn main() {
     const t = comptime::TypeOf(MyStruct)
-    for _, field in comptime::Range(t.Fields()) {
+    const for _, field in t.Fields() {
         outln(field.Name())
     }
 }
 ```
 
 The example program above will prints names of `MyStruct`'s fields. In compile-time, fields are iterated and created new sub scope for each iteration. This may will increase your executable size because of code duplication, use it carefully.
-
-::: warning
-You cannot able to use `continue` or `break` keywords for compile-time iterations.
-:::

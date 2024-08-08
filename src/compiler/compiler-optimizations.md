@@ -12,7 +12,7 @@ Optimizations are enabled with options in the build command.
 Some optimizations may be enabled by default and it may not be possible to disable them. These optimizations are mostly things that will not affect you if they are turned on even when you want to turn off all optimizations for your debugging.
 
 **List of Always Enabled Optimizations**
-- [Basic Comptime Evaluation](/comptime/#basic-comptime-evaluation)
+- [Comptime Evaluation](/comptime/comptime-evaluation)
 
 ## Optimization Options
 

@@ -45,23 +45,6 @@ fn example() {
 Variables must be mutable in order for their values ​​to change. For this, the keyword 'mut' was used in the example above. For more information about mutability, you can refer to the [mutability](/memory/mutability) section.
 :::
 
-## Constant Variable
-Constant variables are declared same method, the only difference being that the keyword `const` is used when defining them.
-
-For example: 
-```jule
-const age = 18
-```
-```jule
-const age: int = 18
-```
-::: warning
-No matter which method the constant variables are defined by, initialize expression is mandatory. 
-:::
-
-### Differences Between Variables and Constants Variables
-The value of the variables can change (with mutability), then they can be updated with a different value to match the data type. Constants take a constant expressions and never change again. Constant expressions do not exist as a variable in memory at runtime. Constant expressions used are copied exactly where they are used. Constant expressions are all evaluated at compile time.
-
 ## Static Variables
 
 Static variables are initialized once, they are living allocations over the life of the program. They are declared with the `static` keyword and, like constant variables, an initialize expression is required.
@@ -115,6 +98,10 @@ fn main() {
 ::: info
 Binded globals can be declare via `let` keyword.
 :::
+
+## Constant Variables
+
+See relevant [comptime documentations](/comptime/comptime-evaluation) for information about constant variables.
 
 ## Shadowing
 

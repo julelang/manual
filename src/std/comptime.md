@@ -61,7 +61,7 @@ Private compile-time wrapper for compile-time matching.
 ---
 
 ```jule
-struct comptimeTypeInfos {}
+struct comptimeTypeInfos
 ```
 Private compile-time information wrapper for type infos. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
 
