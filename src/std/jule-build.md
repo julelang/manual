@@ -418,7 +418,7 @@ Compiler log messages with formatting.
 - `NoFileInEntryPackage`
 - `NoMemberInEnum`
 - `InternalTypeNotSupportsClone`
-- `InvalidExprForBinop`
+- `InvalidExprForBinary`
 - `BindedStructForRef`
 - `TraitMethodHasGenerics`
 - `EnumAsMapVal`

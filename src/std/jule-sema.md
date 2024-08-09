@@ -184,7 +184,7 @@ Operand expression model.
 ---
 
 ```jule
-struct BinopExprModel {
+struct BinaryExprModel {
     Left:  &OperandExprModel
     Right: &OperandExprModel
     Op:    &Token
@@ -1751,7 +1751,7 @@ Expression model.
 - `&FnIns`
 - `&StructIns`
 - `&OperandExprModel`
-- `&BinopExprModel`
+- `&BinaryExprModel`
 - `&UnaryExprModel`
 - `&StructArgExprModel`
 - `&StructLitExprModel`

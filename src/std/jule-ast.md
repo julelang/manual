@@ -285,7 +285,7 @@ Object sub identifier selection expression.
 ---
 
 ```jule
-struct BinopExpr {
+struct BinaryExpr {
     Left:  &Expr
     Right: &Expr
     Op:    &Token // From std::jule::lex
@@ -909,7 +909,7 @@ Type of Expr's data.
 - `&BraceLit`
 - `&SlicingExpr`
 - `&SliceExpr`
-- `&BinopExpr`
+- `&BinaryExpr`
 - `&UnsafeExpr`
 - `&IndexingExpr`
 - `&FnDecl`
