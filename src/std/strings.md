@@ -239,6 +239,7 @@ If sep does not appear in s, cut returns s, "", false.
 struct StrBuilder
 ```
 String builder for efficient concatenation.
+Optimized for single string building not for repeated use.
 
 **Methods:**
 
@@ -257,12 +258,12 @@ Writes byte to buffer.
 `fn WriteRune(mut self, r: rune)`\
 Writes rune into buffer.
 
-`fn Str(self): str`\
-Returns as string.
+`fn Str(mut self): str`\
+Returns as string, then calls the `Clear` method.
 
 `fn Clear(mut self)`\
 Clears buffer.
-Capacity will not be changed.
+After calling this function, write calls will allocate new buffer.
 
 `fn Len(self): int`\
 Returns length of buffer.
