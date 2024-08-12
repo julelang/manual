@@ -560,6 +560,7 @@ Reports whether function is anonymous.
 struct VarDecl {
     Scope:      &ScopeTree    // nil for global scopes
     Token:      &Token // From std::jule::lex
+    Setter:     &Token
     Ident:      str
     Binded:     bool
     Public:     bool
