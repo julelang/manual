@@ -60,6 +60,7 @@ Enable optimizations for mathematical operations.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
 - Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
 - Converts modulo by 2 expressions to equavalent bitwise operation.
+- Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 
 ---
 
@@ -103,6 +104,7 @@ Enable optimizations for conditional structures.
 Enables optimizations for string operations.
 
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
+- Eliminates neutral binary expressions such as concatenation with the empty string.
 
 ---
 
