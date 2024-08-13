@@ -63,7 +63,7 @@ The code above prevents you from passing the `*byte` type directly to `*cpp.char
 
 ## Type Compatibility
 
-There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types and therefore these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `jule::Str` i.e. `str` type in Jule can often be used with C++'s `std::string` type and C's `char*` type.
+There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types and therefore these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `jule::Str` i.e. `str` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
 
 For example:
 
@@ -102,6 +102,55 @@ fn main() {
 
 In the above example, your compiler does not detect the types of fields of the binded class and generates code accordingly, your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
 
-While this type compatibility may work well with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes or etc.
+While this type compatibility may work well (but risky for some types lile strings) with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes or etc.
 
 See [wrappers](/api/integrated-jule/wrappers) section of API manual.
+
+## Strings
+
+Strings may be one of the most used types for interoperability among primitive types, but they also require attention. If you have C/C++ knowledge, you know that strings are NULL terminated. In this way, the end of the strings is clear and you can perform many functions without requiring length data. But this causes some performance issues, so Jule does not use NULL terminated string logic.
+
+Jule strings are designed as length-based. This means that you are heavily dependent on the length data, so using strings as NULL terminated alone within the scope of interoperability may cause some problems. Conversion of types such as `std::string` should be safe, but when using C-string, that is, `char*` type, it is risky because it is not NULL-terminated.
+
+If you are going to use C strings, use length-based functions, such as `strncmp` instead of `strcmp`. For some functions the string must be NULL terminated. In this case, Jule provides you with the possibility for a safe conversion. Using the integrated Jule package you can convert a string to a null terminated byte slice and the `char*` type becomes safe for interoperability.
+
+For example:
+```jule
+use integ for std::jule::integrated
+
+cpp unsafe fn printf(s: *integ::Char)
+
+fn main() {
+    s := "hello world"
+    sb := integ::StrToBytes(s)
+    unsafe {
+        cpp.printf((*integ::Char)(&sb[0]))
+    }
+}
+```
+The above example includes a simple C-string compatibility conversion. The `StrToBytes` function returns the given string as a null terminated byte-slice. Since this is compatible with the `char*` type, it can be safely used as a C-string with a pointer.
+
+Considering that strings are UTF-8 byte encoded, you can also use string pointers directly if your strings are NULL-terminated to avoid unnecessary allocations.
+
+For example:
+```jule
+s := "hello world\x00"
+unsafe {
+    cpp.printf((*integ::Char)(&s[0]))
+}
+```
+The version of the above example using string. While this is not recommended, it is something that can be done for important reasons such as efficiency and performance concerns, but Jule does not guarantee this and the responsibility lies with the developer.
+
+### Why Stings are Length-Based
+
+Jule aims for high interoperability capabilities, but the primary goal is to have good language, not to serve interoperability. For this reason, some design choices are made without considering interoperability for important reasons such as performance and efficiency.
+
+Jule strings are designed to be immutable to prevent a new allocation on each copy. They become heap allocated only as a result of operations such as concatenation at run time. Jule's built-in memory management mechanisms are used for heap allocated strings.
+
+Accordingly, strings, like slices, can be moved very efficiently, sharing common memory areas and avoiding new allocations when slicing. However, this can only achieve the desired efficiency with a length-based design.
+
+**Here are a few reasons why:**
+- Jule algorithms work length-based, so NULL termination is unnecessary. NULL termination is just something that could be added to make C-string conversions safe regarding interoperability. This will reduce the performance and efficiency of Pure Jule code, even for developers who will not use interoperability at all.
+- Slicing can be done with NULL terminated strings without causing a new allocation if it preserves the last character of the string. However, if it does not, it is necessary to make a new allocation because null termination is lost and since the string memory is shared, it is not safe to replace the last character with NULL termination, so most cases will result in a new allocation, except for some optimizable cases.
+- With unsafe algorithms, strings can be converted into byte-slices and new allocations in operations such as slicing can be avoided. However, the Unsafe Jule in this code is very useful in encouraging and increasing its use. Many algorithms may require slicing of strings, which may require unsafe conversions in many places in the codebase. It is not a simple experience.
+- In some fields it may be necessary to return byte-slice allocations as strings. In this case, if you are sure it is safe, you may want to unsafely convert it to string to avoid new allocation. But before doing this, you need to make sure that there is a NULL termination every time. Besides this increasing the developer's considerations, perhaps that single NULL termination you add to the slice will in some cases exceed the capacity and result in new allocation, in which case it's not much different than converting to string.
