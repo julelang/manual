@@ -79,14 +79,14 @@ Sets offset to next Read/Write operation and returns the new offset. whence: 0 (
 
 Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 
-`fn Read(mut self, mut buff: []byte)!: (n: int)`\
-Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
+`fn Read(mut self, mut buf: []byte)!: (n: int)`\
+Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
 
 Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
 \
-`fn Write(mut self, buff: []byte)!: (n: int)`\
-Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+`fn Write(mut self, buf: []byte)!: (n: int)`\
+Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buf.
 
 Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
 

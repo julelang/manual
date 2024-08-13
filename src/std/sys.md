@@ -1971,7 +1971,7 @@ Wrapper for C's lseek function.
 ---
 
 ```jule
-unsafe fn Read(handle: int, mut buff: *unsafe, n: uint): int
+unsafe fn Read(handle: int, mut buf: *unsafe, n: uint): int
 ```
 Wrapper for C's read function.
 
@@ -1985,7 +1985,7 @@ Wrapper for C's close function.
 ---
 
 ```jule
-unsafe fn Write(handle: int, buff: *unsafe, n: uint): int 
+unsafe fn Write(handle: int, buf: *unsafe, n: uint): int 
 ```
 Wrapper for C's write function.
 
@@ -2046,9 +2046,9 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn GetCurrentDirectory(bufflen: u32, mut buff: *u16): u32
+unsafe fn GetCurrentDirectory(bufflen: u32, mut buf: *u16): u32
 ```
-Reads working directory into buff and returns readed rune count of current process. Returns 0 if fail.
+Reads working directory into buf and returns readed rune count of current process. Returns 0 if fail.
 ::: warning
 Available on: `windows`
 :::
@@ -2066,9 +2066,9 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Getcwd(buff: *byte, bufflen: uint): *byte
+unsafe fn Getcwd(buf: *byte, bufflen: uint): *byte
 ```
-Reads current working directory into buff. Returns pointer to buff if success, nil pointer if error occurs.
+Reads current working directory into buf. Returns pointer to buf if success, nil pointer if error occurs.
 ::: warning
 Available on: `unix`
 :::
@@ -2193,7 +2193,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn GetFullPathName(path: *u16, bufflen: u32, buff: *u16, fname: **u16): u32
+unsafe fn GetFullPathName(path: *u16, bufflen: u32, buf: *u16, fname: **u16): u32
 ```
 Calls Windows's GetFullPathNameW function.
 ::: warning

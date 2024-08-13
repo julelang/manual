@@ -29,7 +29,7 @@ Reader trait mask for stream reader.
 
 **Methods:**
 
-`fn Read(mut self, mut buff: []byte)!: (n: int)`
+`fn Read(mut self, mut buf: []byte)!: (n: int)`
 
 ---
 
@@ -40,7 +40,7 @@ Reader trait mask for stream writer.
 
 **Methods:**
 
-`fn Write(mut self, buff: []byte)!: (n: int)`
+`fn Write(mut self, buf: []byte)!: (n: int)`
 
 ---
 
@@ -84,13 +84,13 @@ Uses internally mutable buffer.
 `fn File(mut self): &File`\
 Returns internal file buffer.
 
-`fn Read(mut self, mut buff: []byte)!: (n: int)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+`fn Read(mut self, mut buf: []byte)!: (n: int)`\
+Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
-`fn Write(mut self, buff: []byte)!: (n: int)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+`fn Write(mut self, buf: []byte)!: (n: int)`\
+Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buf.
 
-`fn WriteStr(mut self, &buff: str)!: (n: int)`\
+`fn WriteStr(mut self, &buf: str)!: (n: int)`\
 Same as Write, but writes string.
 This method is more efficient than Write method for strings.
 
@@ -158,12 +158,12 @@ Reports whether buffer have readable data.
 Removes readed bytes from buffer.
 Maybe help to reduce memory usage for large buffers.
 
-`fn Read(mut self, mut buff: []byte)!: (n: int)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buff. If the buff is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+`fn Read(mut self, mut buf: []byte)!: (n: int)`\
+Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
-`fn Write(mut self, buff: []byte)!: (n: int)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buff.
+`fn Write(mut self, buf: []byte)!: (n: int)`\
+Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buf.
 
-`fn WriteStr(mut self, &buff: str)!: (n: int)`\
+`fn WriteStr(mut self, &buf: str)!: (n: int)`\
 Same as Write, but writes string.
 This method is more efficient than Write method for strings.

@@ -250,14 +250,14 @@ Returns string converted from of expression.
 ---
 
 ```jule
-fn Utf16FromStr(s: str): []u16
+fn UTF16FromStr(s: str): []u16
 ```
 Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.
 
 ---
 
 ```jule
-fn Utf16ToStr(s: []u16): str
+fn UTF16ToStr(s: []u16): str
 ```
 Returns the UTF-8 encoding of the UTF-16 sequence s, with a terminating NULL removed. Returns empty string if s is nil.
 
@@ -271,9 +271,17 @@ Returns the UTF-8 encoding of the UTF-16 sequence s in *u16 form, with a termina
 ---
 
 ```jule
-unsafe fn CharPtrToStr(s: *cpp.char): str
+unsafe fn BytePtrToStr(s: *byte): str
 ```
-Returns the string of s, with a terminating NULL removed. Returns empty string if pointer is nil.
+Returns the string of s, with a terminating NULL removed.
+Returns empty string if pointer is nil.
+
+---
+
+```jule
+fn StrToBytes(s: str): []byte
+```
+Returns s as NULL terminated byte slice which is able to be used safely as NULL terminated string pointer. If s contatins NULL termination at any location, accepts NULL termination is the end of s and skips following bytes.
 
 ---
 
