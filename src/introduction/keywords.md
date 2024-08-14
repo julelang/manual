@@ -41,5 +41,5 @@ int       uint      uintptr    i8       i16       i32
 i64       u8        u16        u32      u64       f32
 f64       bool      str        any      new       make
 copy      append    out        outln    delete    assert
-cap       len        panic    true      false     nil
+cap       len       panic      true     false     nil
 ```
