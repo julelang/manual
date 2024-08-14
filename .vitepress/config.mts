@@ -190,7 +190,6 @@ export default defineConfig({
                 { text: 'Constraints', link: '/types/generics/constraints' },
               ],
             },
-            { text: 'Arrays', link: '/types/arrays' },
           ],
         },
         {
