@@ -18,9 +18,6 @@ As seen in the example above, there is an enumeration definition.
 - You can use an element before them as a value in enumerations.
 - Enumerations has `int` data type by default.
 :::
-::: warning
-You can't use any global, function or etc. in custom value expressions.
-:::
 
 ## Value Assignments
 
@@ -66,23 +63,27 @@ fn main() {
 ```
 The above enumeration has the data type `u8`.
 ::: warning
-You can use only integer or str data types.
+You can use only signed/unsigned integer or str data types.
 :::
 
 ## Default Values
-The default values ​​of enums are always what is the default value of the data type they use. For example, `0` for `int` and empty string for `str`. If your enum definition should always define a default field, set its first field to the default value. In this way, your compiler-initiated enum value will be exist in fields. If you don't do this, the developers will not be able to match the enum value in code at all if the default value is not present in the fields. 
+Enums should always define a default value for security reasons. This default value is the first field of the enum. The first field always represents the default value, and your compiler will initialize an enum type with its default value when necessary.
+
+If you are using a numeric type, this default value is zero. If you are using a string, the default value will be directly the same as the identifier of the first field.
+
+Your compiler does not automatically define the default field. Therefore, every time you define an enum, it must have at least one field and this field will be used as the default field.
 
 ## Casting
-You may want to cast your enum for various reasons. Normal casting rules apply here. When casting an enum value, it is based on the enum value type.
+You may want to cast your enum for various reasons. Normal casting rules apply here. When casting an enum value, it is based on the enum value type. This means you can cast to all types supported by the base type. 
 
 ```jule
 enum MyEnum {
-    MyVal: 10
+    MyVal: 10,
 }
 
 fn main() {
-    _ = (int)(MyEnum.MyVal)
-    _ = (u8)(MyEnum.MyVal)
+    _ = int(MyEnum.MyVal)
+    _ = u8(MyEnum.MyVal)
 }
 ```
 
@@ -100,3 +101,56 @@ Maps doen't support enums for type safety. You can use enums for key type, but n
 ### Any Type
 
 The `any` type can store enums. You can use `==` and `!=` operators, it is safe. But you cannot cast an enum type from `any` type because this is unsafe and the type is lost at compile time. To get the value, you can try to cast it to the type pointed to by the enum, but if you are using a value such as an integer, it may be converted to different types at compile time because of enum items are constant literals actually. So, even though the enum is `i32`, `any` may be storing it as `i64` in compile time code generation, so casting may fail.
+
+### Comparing Enums
+
+It only allows you to use the base type for the `==` and `!=` operators when comparing enums. This means you can compare base types of enums for simple equality checks without having to constantly cast. But this is only true if the base type of comparison is being made. If you are trying to compare an enum in situations that require strict matching, such as a match statement, implicit casting is not done.
+
+For example:
+```jule
+enum MyEnum: str {
+    Foo: "foo",
+    Bar: "bar",
+    Baz: "baz",
+}
+```
+You will see the above enum definition used in the codes below.
+
+Below are examples of valid comparisons:
+```jule
+MyEnum.Foo == "FooBarBaz"
+"FooBarBaz" == MyEnum.Foo
+MyEnum.Foo != "FooBarBaz"
+"FooBarBaz" != MyEnum.Foo
+```
+In these comparisons, implicit casting is performed regardless of whether the enum is a right or left operator. However, having enums on both operands still doesn't change anything. If you are comparing two different enums and their base types are the same, implicit casting performed.
+
+If you are matching with a match statement, implicit casting occurs if the base type is the main type you are matching with.
+
+For example:
+```jule
+match "FooBarBaz" {
+| MyEnum.Foo:
+    outln("case1")
+| "bar":
+    outln("case2")
+| MyEnum.Baz:
+    outln("case3")
+}
+```
+In the example above, the base type being matched is the same as the base type of the enum type `MyEnum`. Therefore, implicit casting is applied for the enum.
+
+In the opposite case, you cannot achieve implicit casting. So if the main type you use to match is an enum, you can only match enum's itself.
+
+For example:
+```jule
+match MyEnum.Foo {
+| MyEnum.Foo:
+    outln("case1")
+| "bar":
+    outln("case2")
+| MyEnum.Baz:
+    outln("case3")
+}
+```
+In the example above, the type of the actual expression matched is enum. Therefore implicit conversion is not allowed. So the code above is incorrect, the expression `"bar"` is not a valid expression for matching.
