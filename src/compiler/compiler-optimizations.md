@@ -55,8 +55,8 @@ Enable special optimizations for built-in `append` function.
 `--opt-math` \
 Enable optimizations for mathematical operations.
 
-- Skip the divide-by-zero check for division when operand is constant.
-- Skip the divide-by-zero check for modulo when operand is constant.
+- Skips the divide-by-zero check for division when operand is constant.
+- Skips the divide-by-zero check for modulo when operand is constant.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
 - Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
 - Converts modulo by 2 expressions to equavalent bitwise operation.
@@ -67,7 +67,7 @@ Enable optimizations for mathematical operations.
 `--opt-access` \
 Enable optimizations for memory acessing.
 
-- Skip safety checkings such as boundary checking if accessed to array via constant index expression.
+- Skips safety checkings such as boundary checking if accessed to array via constant index expression.
 - If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed.\
 \
 This optimization is only enabled when the iterated varaible is: array, immutable slice, or immutable string.
@@ -92,11 +92,13 @@ Enable optimizations for pointers.
 `--opt-cond` \
 Enable optimizations for conditional structures.
 
-- Remove unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
+- Removes unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
-- Remove condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
+- Removes condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
 - Avoids using wrapper for strings if string compared with literal.
 - Converts string comparison with empty literal to `len(s) == 0` check.
+- Eliminates and simplifies predictible boolean expressions. Such as `if (x || true)` will be handled as `if (true)` or `if (x && false)` will be handled as `if (false)`.
+- Eliminates predictible comparison expressions. Such as `if (x > x)` will be handles ad `if (false)` or `if (x == x)` will be handled as `if (true)`.
 
 ---
 
