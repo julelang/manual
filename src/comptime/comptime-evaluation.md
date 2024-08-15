@@ -17,6 +17,29 @@ List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i3
 - Calls strict comptime functions that provided by the [`std::comptime`](/std/comptime) package.
 - Executes comptime algorithms such as comptime matching or comptime iterations.
 
+### Untyped Literals
+
+Untyped literals are constants that do not have an explicit type for numeric types. Since these values ​​do not have a definitive type, they can be used with any compatible type. These types only acquire an exact type through operations such as casting; when they lose an untyped state, they lose the advantage of being usable with compatible types and must pass compatibility checks with the exact type.
+
+For example:
+```jule
+x := uint(0)
+if x < -1 {
+    outln("impossible case")
+}
+```
+The example above has an if that checks that the unsigned integer is less than `-1`. The `-1` literal is untyped, but since it is incompatible with unsigned integer, the compiler will not use it appropriately and will give an error.
+
+But if it had an exact type, this error wouldn't exist.\
+For example:
+```jule
+x := uint(0)
+if x < uint(-1) {
+    outln("possible case")
+}
+```
+Since the cast was made in the example above, the `-1` literal now has the exact type `uint` and is cast and converted according to this type at comptime. The above code is not a problem for the compiler since it has the exact type and is cast.
+
 ### Example Evaluations
 
 | Expression                | Evaluation Result                      |
@@ -26,11 +49,9 @@ List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i3
 | `"hello" + " " + "world"` | `"hello world"`                        |
 | `uint(-1)`                | `uint.Max`                             |
 
+## Constant Variables
 
-
-## Comptime Variables
-
-> **aka Constant Variables**
+> **aka Comptime Variables**
 
 The value of the runtime variables can change (with mutability), then they can be updated with a different value to match the data type. Since comptime variables are constant, takes a constant expressions and never change again. Constant expressions do not exist as a variable in memory at runtime. Constant expressions used are copied exactly where they are used. Constant expressions are all evaluated at comptime.
 
