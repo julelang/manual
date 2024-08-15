@@ -21,6 +21,7 @@ Some optimizations may not be applied for some scopes and expressions.
 :::
 
 `--opt-copy` \
+Enables special optimizations for copy operations.\
 It reduces copying operations whenever possible.
 
 - Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
@@ -31,7 +32,8 @@ It reduces copying operations whenever possible.
 ---
 
 `--opt-deadcode` \
-It eliminates dead codes (unused) from object code.
+Enables special optimizations for dead code.\
+It eliminates dead (unused / unreachable) codes from object code.
 
 - Eliminates dead globals.
 - Eliminates dead functions.
@@ -45,7 +47,7 @@ It eliminates dead codes (unused) from object code.
 ---
 
 `--opt-append` \
-Enable special optimizations for built-in `append` function.
+Enables special optimizations for built-in `append` function.
 
 - It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement.
 - If an l-value memory appends to itself, compiler will use special self-append algorithm for slices. L-value detection has limited proficiency, the best way is using variables and structure fields to enable optimization.
@@ -53,7 +55,7 @@ Enable special optimizations for built-in `append` function.
 ---
 
 `--opt-math` \
-Enable optimizations for mathematical operations.
+Enables optimizations for mathematical operations.
 
 - Skips the divide-by-zero check for division when operand is constant.
 - Skips the divide-by-zero check for modulo when operand is constant.
@@ -65,7 +67,7 @@ Enable optimizations for mathematical operations.
 ---
 
 `--opt-access` \
-Enable optimizations for memory acessing.
+Enables optimizations for memory acessing.
 
 - Skips safety checkings such as boundary checking if accessed to array via constant index expression.
 - If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed.\
@@ -75,14 +77,14 @@ This optimization is only enabled when the iterated varaible is: array, immutabl
 ---
 
 `--opt-inline` \
-Enable optimizatons for inlining.
+Enables optimizatons for inlining.
 
 - The IR is generated includes encourage inline optimizations of the backend compiler.
 
 ---
 
 `--opt-ptr` \
-Enable optimizations for pointers.
+Enables optimizations for pointers.
 
 - Simplifies immediate pointer dereferencings. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
 - Simplifies getting pointer of references. Since references implemented as pointers and dereferenced automatically, there is no need to dereferencing and getting pointer again. Compiler uses pointer of the reference directly.
@@ -90,7 +92,7 @@ Enable optimizations for pointers.
 ---
 
 `--opt-cond` \
-Enable optimizations for conditional structures.
+Enables optimizations for conditional structures.
 
 - Removes unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
@@ -118,7 +120,7 @@ Enables optimizations for slice operations.
 ---
 
 `--opt-assign`\
-Enabled optimizations for assignments.
+Enables optimizations for assignments.
 
 It's will not check deeply whether expressions are same. So if you want take advantage of this optimization, keep simple your assignments.
 
