@@ -55,7 +55,7 @@ Enables special optimizations for built-in `append` function.
 ---
 
 `--opt-math` \
-Enables optimizations for mathematical operations.
+Enables special optimizations for mathematical operations.
 
 - Skips the divide-by-zero check for division when operand is constant.
 - Skips the divide-by-zero check for modulo when operand is constant.
@@ -67,7 +67,7 @@ Enables optimizations for mathematical operations.
 ---
 
 `--opt-access` \
-Enables optimizations for memory acessing.
+Enables special optimizations for memory acessing.
 
 - Skips safety checkings such as boundary checking if accessed to array via constant index expression.
 - If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed.\
@@ -77,14 +77,14 @@ This optimization is only enabled when the iterated varaible is: array, immutabl
 ---
 
 `--opt-inline` \
-Enables optimizatons for inlining.
+Enables special optimizatons for inlining.
 
 - The IR is generated includes encourage inline optimizations of the backend compiler.
 
 ---
 
 `--opt-ptr` \
-Enables optimizations for pointers.
+Enables special optimizations for pointers.
 
 - Simplifies immediate pointer dereferencings. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
 - Simplifies getting pointer of references. Since references implemented as pointers and dereferenced automatically, there is no need to dereferencing and getting pointer again. Compiler uses pointer of the reference directly.
@@ -92,7 +92,7 @@ Enables optimizations for pointers.
 ---
 
 `--opt-cond` \
-Enables optimizations for conditional structures.
+Enables special optimizations for conditional expressions and structures.
 
 - Removes unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
@@ -105,7 +105,7 @@ Enables optimizations for conditional structures.
 ---
 
 `--opt-str` \
-Enables optimizations for string operations.
+Enables special optimizations for string operations.
 
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
@@ -113,19 +113,27 @@ Enables optimizations for string operations.
 ---
 
 `--opt-slice` \
-Enables optimizations for slice operations.
+Enables special optimizations for slice operations.
 
 - Erases relevant ranges of slice's itself instead of making allocation for subslice and assignment if slice gets assignment with subslice from itself.
 
 ---
 
 `--opt-assign`\
-Enables optimizations for assignments.
+Enables special optimizations for assignments.
 
 It's will not check deeply whether expressions are same. So if you want take advantage of this optimization, keep simple your assignments.
 
 - Removes self assignments such as `a = a` or `a, b = a, b`.
 - Optimize swap assignments such as `a, b = b, a`.
+
+---
+
+`--opt-exceptional`\
+Enables special optimizations for exceptionals.
+
+- Removes the exceptional handling cost and forwards the return data with exceptional directly when an exceptional function calls another exceptional function in its return statement and forwards exceptional.
+- Removes the exceptional handling cost and forwards the exceptional data directly when an exceptional function calls another exceptional function and forwards exceptional. Since the relevant statements are not returns statements, this optimization only applied for the last statements of function algorithm.
 
 ## Optimization Levels
 
