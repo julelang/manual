@@ -22,7 +22,7 @@ Okay, so why doesn't the compiler implement immutability by default only for tho
 
 ## Traits and Immutability
 
-Traits are considered mutable types because the type of data they store can be mutable. It is not possible to trck this at runtime. Because, in its simplest explanation, an immutable trait data can be assigned to a mutable memory. However, it is not possible to understand at compile time whether the trait stores mutable data, so it's risky. The only way to check this is to add an additional unwanted runtime.
+Traits are considered mutable types because the type of data they store can be mutable. It is not possible to track this at runtime. Because, in its simplest explanation, an immutable trait data can be assigned to a mutable memory. However, it is not possible to understand at compile time whether the trait stores mutable data, so it's risky. The only way to check this is to add an additional unwanted runtime.
 
 However, there is one point for traits: they respect the concept of interior mutability. If the data stored by a trait implements interior mutability, this is allowed.
 
