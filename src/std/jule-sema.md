@@ -239,7 +239,7 @@ For example: `&MyStruct{}`
 ```jule
 struct CastingExprModel {
     Token:    &Token
-    Expr:     ExprModel
+    Expr:     &Data
     Kind:     &TypeKind
     ExprKind: &TypeKind
 }
