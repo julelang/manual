@@ -1473,16 +1473,6 @@ Reports whether pointer is unsafe pointer (*unsafe).
 ---
 
 ```jule
-struct IterRelation {
-    Range: &Var
-}
-```
-Iteration relationship of variables.
-Stored only for indexing variable and ranged by variable.
-
----
-
-```jule
 struct Var {
     Scope:         &ScopeTree
     Token:         &Token
@@ -1498,7 +1488,6 @@ struct Var {
     Kind:          &TypeSymbol
     Value:         &Value
     Refers:        &ReferenceStack
-    IterRelation:  &IterRelation
 
     // The -2 means this variable is not one of the return variables.
     // The -1 means this variable is just the single return variable one.
