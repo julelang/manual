@@ -135,6 +135,14 @@ Enables special optimizations for exceptionals.
 - Removes the exceptional handling cost and forwards the return data with exceptional directly when an exceptional function calls another exceptional function in its return statement and forwards exceptional.
 - Removes the exceptional handling cost and forwards the exceptional data directly when an exceptional function calls another exceptional function and forwards exceptional. Since the relevant statements are not returns statements, this optimization only applied for the last statements of function algorithm.
 
+---
+
+`--opt-iter`\
+Enabled special optimizations for iterations.
+
+- Removes casting if non-constant string casted to byte slice for range iteration. Uses string directly.
+- Removes casting if non-constant stringf cases to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -149,7 +157,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`
 
 ## Production Compilation
 
