@@ -41,7 +41,7 @@ fn main() {
 
 ::: warning
 This is not accepted as a standard, and too risky.
-Please read relevant section about [disabling reference counting](/memory/management/disable-reference-counting).
+Please read relevant section about [disabling reference counting](/memory/management/disable-reference-counting). It will also be removed in future versions.
 :::
 
 You can use manual memory management method with disable reference counting. Advantage of that, Jule has allocation functions for smart pointers, so reference counted types, and when you disable reference counting, you have smart pointers that must be freed manually. So you can use primitive smart pointers with manual memory management. This approach migh be more flexible and readable. Also easy to return reference counting.
