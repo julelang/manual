@@ -70,9 +70,8 @@ Enables special optimizations for mathematical operations.
 Enables special optimizations for memory acessing.
 
 - Skips safety checkings such as boundary checking if accessed to array via constant index expression.
-- If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed.\
-\
-This optimization is only enabled when the iterated varaible is: array, immutable slice, or immutable string.
+- If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
+- If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
 
 ---
 
