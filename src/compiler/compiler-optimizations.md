@@ -138,10 +138,17 @@ Enables special optimizations for exceptionals.
 ---
 
 `--opt-iter`\
-Enabled special optimizations for iterations.
+Enables special optimizations for iterations.
 
 - Removes casting if non-constant string casted to byte slice for range iteration. Uses string directly.
 - Removes casting if non-constant stringf cases to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
+
+---
+
+`--opt-dynamic`\
+Enables special optimizations for dynamic programming features.
+
+- If it can be understood that the `<any>` is the type `x` and not nil, it removes the cost of not-nil and type compatibiltiy checking for casting expressions with type `t`. <div class="warning-badge">experimental</div>
 
 ## Optimization Levels
 
@@ -157,7 +164,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`
 
 ## Production Compilation
 
