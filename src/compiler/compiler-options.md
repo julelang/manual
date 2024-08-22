@@ -69,7 +69,7 @@ Disable reference counting. All reference counted types does not perform referen
 ---
 
 `--disable-safety`\
-Disable safety. All memory safety and similar measures will be disabled. This will be increase safety risks, but may improve runtime performance same time. It maybe hepful for debugging, see [Debugging](/debugging/) section for more information.
+Disable safety. All memory safety and similar measures will be disabled. This will increase safety risks, but at the same time it might improve runtime performance. It may be helpful for debugging, see [Debugging](/debugging/) section for more information.
 
 ### Optimization Options
 
