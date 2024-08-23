@@ -63,16 +63,16 @@ Modulo two Int and returns result.
 `fn ModAssign(mut self, y: Int)`\
 Modulo Int.
 
-`fn Shl(self, y: uint): Int`\
+`fn Shl(self, y: int): Int`\
 Bitwise left shift.
 
-`fn ShlAssign(mut self, y: uint)`\
+`fn ShlAssign(mut self, y: int)`\
 Bitwise left shift for assignment.
 
-`fn Shr(self, y: uint): Int`\
+`fn Shr(self, y: int): Int`\
 Bitwise right shift.
 
-`fn ShrAssign(mut self, y: uint)`\
+`fn ShrAssign(mut self, y: int)`\
 Bitwise right shift for assignment.
 
 `fn BitOr(self, y: Int): Int`\
