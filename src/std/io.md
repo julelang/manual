@@ -122,6 +122,7 @@ Uses `&FileStream` for `Reader` trait compatibility.
 `fn Bytes(self): []byte`\
 Returns bytes of recent scan.
 Returned slice is mutable copy of buffer.
+The next `Scan` call will write into same internal allocation.
 
 `fn Text(self): str`\
 Returns text from bytes of recent scan.
