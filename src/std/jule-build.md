@@ -493,6 +493,7 @@ Compiler log messages with formatting.
 - `ComptimeExprForRuntimeIteration`
 - `InvalidTypeForComptimeIter`
 - `InvalidComptimeIter`
+- `WrongRetForward`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
