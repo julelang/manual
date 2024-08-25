@@ -128,7 +128,7 @@ The next `Scan` call will write into same internal allocation.
 Returns text from bytes of recent scan.
 
 `fn Scan(self)!: bool`\
-Scans line from handle via read method. Scans bytes until end of the line, line delimiter is not included. Reports whether readed byte into buffer.
+Scans line from handle via read method. Scans bytes until end of the line, line delimiter is not included. Reports whether readed byte into buffer. Forwards any exceptional.
 
 ---
 
