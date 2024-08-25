@@ -136,6 +136,22 @@ fn lessThan(x: int, y: int): (bool) { ret x < y }
 ```
 The example at above, accepted as one type return. 
 
+### Forwarding Returns Values
+
+If another function is doing multiple returns and wants to pass the return of a different function that returns the same types, it can do this by simply calling the function.
+
+For example:
+```jule
+fn foo(): (int, f64, str) {
+    ret 10, 3.14, "foo"
+}
+
+fn bar(): (int, f64, str) {
+    ret foo()
+}
+```
+In the example above, the functions `foo` and `bar` return the same types. Therefore, the `bar` function can forward the values ​​returned by the `foo` function with a simple `ret foo()` statement.
+
 ### Return Type Identifiers
 To give an identifier to the return types, it's enough to make them look like multiple returns. The only addition is to give that return value an identifier before the return type.
 
