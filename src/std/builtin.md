@@ -88,7 +88,7 @@ Slice destination:\
 ```jule
 fn append(mut dest: []T, mut items: ...T): []T
 ```
-If there is enough capacity, it adds to the target slice. If there is not enough capacity, it creates a copy of the target slice with enough capacity and adds the new elements and returns the new allocation. For `[]byte` types, variadic strings are allowed, such as: `append(bytes, "foo"...)`
+If there is enough capacity, it adds to the destination slice. If there is not enough capacity, it creates a copy of the destination slice with enough capacity and adds the new elements and returns the new allocation. For `[]byte` types, variadic strings are allowed, such as: `append(bytes, "foo"...)`
 
 ---
 
