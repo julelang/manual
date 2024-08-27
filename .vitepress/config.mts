@@ -60,9 +60,15 @@ export default defineConfig({
       '/': [
         {
           items: [
-            { text: 'The Jule Programming Language', link: '/' },
+            {
+              text: 'The Jule Programming Language',
+              link: '/',
+              items: [
+                { text: 'The Mission', link: '/the-mission' },
+                { text: 'Some Questions', link: '/some-questions' },
+              ],
+            },
             { text: 'Foreword', link: '/foreword' },
-            { text: 'Introduction', link: '/introduction' },
           ],
         },
         {
