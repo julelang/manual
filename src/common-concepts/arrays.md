@@ -87,3 +87,9 @@ For example:
 ```jule
 len(myArray)
 ```
+
+## Arrays and Memory
+
+Arrays are allocated on the stack and this is guaranteed. But they are not implemented with references and common allocations. So when an array is copied, a copy that shares the common allocation is not created. A new array is created on the stack.
+
+The copies are not deep copy. Just allocates new stack with size of array and copies all elements with default copy semantics, not deep copy semantics.
