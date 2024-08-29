@@ -888,9 +888,9 @@ Postfix assignment.
 
 ```jule
 struct Assign {
-    L:  &OperandExprModel
-    R:  &OperandExprModel
-    Op: &Token
+    Left:  &OperandExprModel
+    Right: &OperandExprModel
+    Op:    &Token
 }
 ```
 Assignment.
@@ -899,8 +899,8 @@ Assignment.
 
 ```jule
 struct MultiAssign {
-    L: []&Data
-    R: ExprModel
+    Left:  []&Data
+    Right: ExprModel
 }
 ```
 Multi-declarative assignment.
