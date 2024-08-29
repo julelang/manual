@@ -899,6 +899,7 @@ Assignment.
 
 ```jule
 struct MultiAssign {
+    Decls: []&Var
     Left:  []&Data
     Right: ExprModel
 }
