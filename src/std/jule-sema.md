@@ -298,8 +298,9 @@ For example: `mySlice[myIndex]`
 
 ```jule
 struct AnonFnExprModel {
-    Func:   &FnIns
-    Global: bool
+    Captured: []&Var
+    Func:     &FnIns
+    Global:   bool
 }
 ```
 Anonymous function expression model. 
