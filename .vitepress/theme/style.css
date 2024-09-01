@@ -3,12 +3,12 @@
  * -------------------------------------------------------------------------- */
 
 @font-face {
-  font-family: SourceCodePro;
-  src: url(fonts/SourceCodePro-Regular.ttf);
+  font-family: CascadiaMono;
+  src: url(fonts/CascadiaMono.ttf);
 }
 
 :root {
-  --vp-font-family-mono: SourceCodePro;
+  --vp-font-family-mono: CascadiaMono;
 }
 
 /**
@@ -47,8 +47,7 @@
 
 .dark {
   --vp-code-block-bg: #161618;
-  --vp-c-bg: #000000;
-  --vp-c-bg-alt: rgb(9, 9, 10);
+  --vp-c-bg: #19191e;
   --vp-code-line-number-color: rgb(165, 165, 165);
   --vp-code-block-divider-color: rgb(56, 56, 56);
 }
