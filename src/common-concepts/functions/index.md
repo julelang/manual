@@ -81,42 +81,6 @@ The `div` function divides the two parameters and returns the result as a value.
 
 Return values are written with the `ret` keyword. Although the keyword `return` is widely used, `ret` was considered as an alternative to this keyword, which is both shorter and without losing its meaning.
 
-## Using Function as Data Type
-Functions can be used as data type. It is similar to defining a function. Just parameters and return value are necessary.
-
-For example:
-```jule
-let myFunction: fn(int, int): int
-```
-The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
-
-## Anonymous Functions
-Anonymous functions are like standard functions, but they are anonymous and are usually defined as a value. Anonymous functions is not have any name. Defining anonymous function is like declaring a function as a value type. Just in addition, the block of the function must be written.
-
-For example:
-```jule
-fn main() {
-    let makeHello = fn(name: str): str {
-        ret "Hello " + name + "!"
-    };
-    outln(makeHello("Jule"))
-}
-```
-
----
-
-Anonymous functions can access the definitions of the block in which they are defined. But doesn't referring them, copies all definition for itself. Therefore, you can't affect to parent scope definitions in most case.
-
-For example: 
-```jule
-fn main() {
-    let message = "Hello, World!"
-    let func = fn() { outln(message) }
-    func()
-}
-```
-The anonymous function defined in the example above uses the message variable belonging to the block it is defined in. Definitions used from outer blocks can be shadowed within the anonymous function.
-
 ## Multiple Returnable Functions
 Functions can returns more then one values. For that, specify return data-type with multiple type.
 
@@ -245,3 +209,14 @@ fn getRate(x: int): int {
 }
 ```
 The function does not have to return in the main scope, as the match expression above returns a return for every condition. 
+
+## Using Function as Data Type
+Functions can be used as data type. It is similar to defining a function. Just parameters and return value are necessary.
+
+For example:
+```jule
+let myFunction: fn(int, int): int
+```
+The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
+
+The fact that functions can be used as data types makes it possible to use and store [anonymous functions and closures](/common-concepts/functions/anonymous-functions) with type safety.

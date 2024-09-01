@@ -151,7 +151,13 @@ export default defineConfig({
           link: '/common-concepts/',
           items: [
             { text: 'Variables', link: '/common-concepts/variables' },
-            { text: 'Functions', link: '/common-concepts/functions' },
+            {
+              text: 'Functions',
+              link: '/common-concepts/functions/',
+              items: [
+                { text: 'Anonymous Functions', link: '/common-concepts/functions/anonymous-functions' },
+              ],
+            },
             { text: 'Arrays', link: '/common-concepts/arrays' },
             { text: 'Slices', link: '/common-concepts/slices' },
             { text: 'Maps', link: '/common-concepts/maps' },
