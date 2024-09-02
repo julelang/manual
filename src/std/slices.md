@@ -8,6 +8,16 @@ Sorts a slice of any ordered type in ascending order. When sorting floating-poin
 ---
 
 ```jule
+fn SortFunc[S: []E, E](mut s: S, cmp: fn(a: E, b: E): int)
+```
+Sorts the slice s in ascending order as determined by the `cmp`
+function. This sort is not guaranteed to be stable. `cmp(a, b)` should return a negative number when `a < b`, a positive number when `a > b` and zero when `a == b`.
+
+`SortFunc` requires that `cmp` is a [strict weak ordering](https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings).
+
+---
+
+```jule
 fn IsSorted[S: []E, E: ordered](mut s: S): bool
 ```
 Reports whether x is sorted in ascending order.
