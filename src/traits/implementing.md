@@ -5,7 +5,7 @@ impl TRAIT for STRUCT {
     // Implementations...
 }
 ```
-`TRAIT`: Trait to implement
+`TRAIT`: Trait to implement\
 `STRUCT`: Structure implementing the trait
 
 For example:

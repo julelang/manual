@@ -86,7 +86,7 @@ fn main() {
 ```
 In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.
 
-## Technical Perspective
+## Technical Details
 
 Anonymous functions and closures are usually cheap. An anonymous function or closure is not much different from ordinary functions. They are implemented the same way in the background, only the name is automatically chosen by the compiler.
 
