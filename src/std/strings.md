@@ -3,6 +3,18 @@
 ## Functions
 
 ```jule
+fn Compare(a: str, b: str): int
+```
+Returns an integer comparing two strings lexicographically.
+The result will be `0` if `a == b`, `-1` if `a < b`, and `+1` if `a > b`.
+
+Use compare when you need to perform a three-way comparison (with
+`slices::SortFunc`, for example). It is usually clearer and always faster
+to use the built-in string comparison operators `==`, `<`, `>`, and so on.
+
+---
+
+```jule
 fn Repeat(s: str, mut n: int): str
 ```
 Returns string that equals to concatenation of n-count s.
