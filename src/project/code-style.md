@@ -19,4 +19,4 @@ Packages should use lowercase with no space.
 
 ## Indentions
 
-The recommended indentation character for Jule is space. And the recommended indentation size is 4. So it is recommended to make your indents with 4 spaces.
+The recommended indentation character for Jule is tab.
