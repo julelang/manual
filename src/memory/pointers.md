@@ -93,7 +93,7 @@ fn main() {
 
 ## Pointer Arithmetic
 
-Pointer arithmetic is available for typed pointers other than `*unsafe`. Thanks to pointer arithmetic, you can shift your pointers with the help of integers.
+Pointer arithmetic is available for typed pointers other than `*unsafe`. Thanks to pointer arithmetic, you can shift your pointers with the help of integers. It only supports `int` and `uint` types.
 
 For example, summing a pointer to the integer `1` means that it will be shifted forward by the size of the data type it points to in memory. This means that if you point to a block of memory, the pointer will point to the next block element.
 
