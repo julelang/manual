@@ -17,10 +17,6 @@ If there is no risk of your definition being exported, use PascalCase for consta
 
 Packages should use lowercase with no space.
 
-### Source File
-
-Source files should use snake_case.
-
 ## Indentions
 
-The recommended indentation character for Jule is space. And the recommended indentation size is 4. So it is recommended to make your indents with 4 spaces. Lexer of Jule accepts tab characters in 8-sized.
+The recommended indentation character for Jule is space. And the recommended indentation size is 4. So it is recommended to make your indents with 4 spaces.
