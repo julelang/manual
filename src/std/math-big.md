@@ -66,6 +66,9 @@ Modulo two Int and returns result.
 `fn ModAssign(mut self, y: Int)`\
 Modulo Int.
 
+`fn Sqrt(self): Int`\
+Returns square root `|√self|` of number. Panics if number is negative.
+
 `fn Shl(self, y: int): Int`\
 Bitwise left shift.
 
