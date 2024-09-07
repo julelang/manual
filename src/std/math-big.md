@@ -51,6 +51,9 @@ Multiplies two Int and returns result.
 `fn MulAssign(mut self, y: Int)`\
 Multiplies Int.
 
+`fn DivMod(mut self, y: Int): Int`\
+Sets `self` to quotient `self/y`, returns remainder `self%y`.
+
 `fn Div(self, y: Int): Int`\
 Divides two Int and returns result.
 
