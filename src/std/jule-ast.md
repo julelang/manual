@@ -2,7 +2,7 @@
 
 ## Structs
 ```jule
-struct Ast {
+struct AST {
     File:          &File // From std::jule::lex
     TopDirectives: []&Directive
     UseDecls:      []&UseDecl

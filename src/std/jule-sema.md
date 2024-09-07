@@ -2,7 +2,7 @@
 
 ## Functions
 ```jule
-fn AnalyzePackage(mut files: []&Ast, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
+fn AnalyzePackage(mut files: []&AST, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -25,7 +25,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ---
 
 ```jule
-fn AnalyzeFile(mut f: &Ast, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
+fn AnalyzeFile(mut f: &AST, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -1671,7 +1671,7 @@ trait Importer {
     // Should return abstract syntax tree of package files.
     // Logs accepts as error.
     // Updated module to package's module if exist when UpdateMod is true.
-    fn ImportPackage(mut self, path: str, UpdateMod: bool): ([]&Ast, []Log)
+    fn ImportPackage(mut self, path: str, UpdateMod: bool): ([]&AST, []Log)
     // Invoked after the package is imported.
     // Sets module identitity of imported package to current module.
     fn imported(mut self, mut &ImportInfo)

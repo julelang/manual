@@ -21,7 +21,7 @@ Files should not contain comment tokens.
 ## Structs
 ```jule
 struct FileInfo {
-    Ast:    &Ast  // Ast from std::jule::ast
+    Ast:    &AST  // Ast from std::jule::ast
     Errors: []Log // Log from std::jule::build
 }
 ```
