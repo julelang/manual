@@ -10,30 +10,30 @@ Returns string based on `b`, the parameter `b` means first byte of string. The r
 ---
 
 ```jule
-fn Slice[Elem](e: *Elem, n: int): []Elem
+fn Slice[Elem](e: *Elem, len: int, cap: int): []Elem
 ```
-Returns slice based on `e`, the parameter `e` means first element of slice. The returned slice uses `n` as length and capacity. Will not perform garbage collection.
+Returns slice based on `e`, the parameter `e` means first element of slice. Will not perform garbage collection.
 
 ---
 
 ```jule
 fn Bytes(b: *byte, n: int): []byte
 ```
-Alias for `Slice(b, n)`.
+Alias for `Slice(b, n, n)`.
 
 ---
 
 ```jule
 fn StrBytes(s: str): []byte
 ```
-Alias for `Slice(&s[0], len(s))`. Returns `nil` if `len(s) == 0`.
+Alias for `Slice(&s[0], len(s), len(s))`. Returns `nil` if `len(s) == 0`.
 
 ---
 
 ```jule
 fn BytesStr(b: []byte): str
 ```
-Alias for `Str(&b[0], len(b))`. Returns empty string if `len(b) == 0`.
+Alias for `Str(&b[0], len(b), len(b))`. Returns empty string if `len(b) == 0`.
 
 ---
 
