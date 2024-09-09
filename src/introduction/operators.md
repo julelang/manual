@@ -24,6 +24,8 @@ Unsigned integer values ​​are handled the same way in Go.\
 From Go Language Specification:
 > For unsigned integer values, the operations +, -, *, and << are computed modulo 2n, where n is the bit width of the unsigned integer's type. Loosely speaking, these unsigned integer operations discard high bits upon overflow, and programs may rely on "wrap around".
 
+For shifting operators, discards high and low bits upon overflow. If bitsize exceeds, integer always will be zero.
+
 ## Comparison Operators
 
 | Operator | Description |
