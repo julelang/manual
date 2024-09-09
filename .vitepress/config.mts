@@ -223,11 +223,18 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Traits',
-          link: '/traits/',
+          text: 'Dynamic Types',
+          link: '/dynamic-types/',
           items: [
-            { text: 'Implementing', link: '/traits/implementing' },
-            { text: 'Inheritance', link: '/traits/inheritance' },
+            { text: 'Any', link: '/dynamic-types/any' },
+            {
+              text: 'Traits',
+              link: '/dynamic-types/traits/',
+              items: [
+                { text: 'Implementing', link: '/dynamic-types/traits/implementing' },
+                { text: 'Inheritance', link: '/dynamic-types/traits/inheritance' },
+              ],
+            },
           ],
         },
         {
