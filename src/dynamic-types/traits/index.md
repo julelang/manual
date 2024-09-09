@@ -60,7 +60,9 @@ Using traits is relatively cheap. To meet dynamic typed programming requirements
 At runtime, a trait stores and uses 3 different data;
 
 - **Allocation**\
-Allocation is a pointer to the data itself that the trait stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the trait, for example a smart pointer, the trait uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.
+Allocation is a pointer to the data itself that the trait stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the trait, for example a smart pointer, the trait uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.\
+\
+If given smart pointer is `nil`, then the trait will be `nil`. Will not point to the smart pointer. Traits always tries to use smart pointers as base allocation and shares same memory.
 - **Pointer State**\
 Traits may take both a smart pointer or a normal instance for supported types. Accordingly, the deallocation method and type comparison also vary. If separate code was generated for both forms with and without smart pointers, this could significantly increase the size and compilation time of the executable. Since it does not contribute much to the runtime cost, it stores whether the stored data is a smart pointer or not with a simple boolean flag. In this way, it is sufficient to generate a single handler for each form of trait type.
 - **Type Pointer**\

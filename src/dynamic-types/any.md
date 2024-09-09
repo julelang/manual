@@ -29,7 +29,9 @@ The Any type always stores its data on the heap and is guaranteed to be released
 At runtime, an `any` stores and uses 2 different data;
 
 - **Allocation**\
-Allocation is a pointer to the data itself that the `any` stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the `any`, for example a smart pointer, the `any` uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.
+Allocation is a pointer to the data itself that the `any` stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the `any`, for example a smart pointer, the `any` uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.\
+\
+If given smart pointer is `nil`, then the `any` will be `nil`. Will not point to the smart pointer. Any type always tries to use smart pointers as base allocation and shares same memory.
 - **Type Pointer**\
 An `any` maintains a general pointer and this pointer is not traced by the GC because it is guaranteed to always will point to static memory that will be available for the lifetime of the program. This pointer points directly to the type handler structure automatically created by the compiler.\
 \
