@@ -1104,6 +1104,7 @@ Reports whether structure has only reference-type-accessible defines.
 
 ```jule
 struct FieldIns {
+    Owner:   &StructIns
     Decl:    &Field
     Kind:    &TypeKind
     Default: &Data
