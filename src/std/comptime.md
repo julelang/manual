@@ -216,11 +216,17 @@ Private compile-time function parameter information wrapper.
 Returns name of parameter.
 Returns as constant expression.
 
+`fn Mutable(self): bool`\
+Reports whether parameter is mutable as constant expression.
+
 `fn Variadic(self): bool`\
 Reports whether parameter is variadic as constant expression.
 
 `fn Reference(self): bool`\
 Reports whether parameter is reference as constant expression.
+
+`fn Recv(self): bool`\
+Reports whether parameter is receiver as constant expression.
 
 `fn Type(self): comptimeTypeInfo`\
 Returns type information for parameter.
