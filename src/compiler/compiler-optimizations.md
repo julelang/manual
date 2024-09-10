@@ -63,6 +63,7 @@ Enables special optimizations for mathematical operations.
 - Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
 - Converts modulo by 2 expressions to equavalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
+- Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
 
 ---
 
