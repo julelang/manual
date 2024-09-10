@@ -67,6 +67,8 @@ fn main() {
 
 This is the result of the compiler trying to make sure things are safe. It always asks to reference a variable to keep a good watch on your reference and make sure it's safe. This is an effort to guarantee that your reference will never be dangling because the scope of your variable is traceable.
 
+An expression which is pointed to always must be variable based. For example, variables, structure (stored in variable) field or arrays. Slices are not supported because they might deallocate internal buffer to grow, so references are not safe for slices. But arrays always supported because they are guaranteed to be fixed size at runtime always.
+
 ## Concurrency
 
 Concurrency imposes a number of process-intensive conditions that are difficult to trace at compile time and further increase compile times. Using references in a concurrent call means that the scope of the variable cannot be properly traced. Therefore, concurrent calls do not support functions with reference parameters.
