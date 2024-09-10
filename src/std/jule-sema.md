@@ -1284,8 +1284,8 @@ Reports whether kind supports ordered constrait.
 `fn NilCompatible(self): bool`\
 Reports whether kind is nil compatible.
 
-`fn PerformsRc(self): bool`\
-Reports whether kind performs reference-counting.
+`fn GC(self): bool`\
+Reports whether kind performs garbage collection.
 
 `fn Variadicable(self): bool`\
 Reports whether kind is variadicable.
