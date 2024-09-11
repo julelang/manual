@@ -71,7 +71,7 @@ fn PrintFields[T](s: T) {
         panic("PrintFields[T]: T is not struct")
     }
     const v = comptime::ValueOf(s)
-    const fields = t.Fields()
+    const fields = t.Decl().Fields()
     const for _, field in fields {
         outln(v.Field(field.Name()).Unwrap())
     }
@@ -97,7 +97,7 @@ struct FooBarBaz {
 }
 
 fn main() {
-    const fields = comptime::TypeOf(FooBarBaz).Fields()
+    const fields = comptime::TypeOf(FooBarBaz).Decl().Fields()
     const for _, field in fields {
         outln(field.Name())
     }
@@ -225,7 +225,7 @@ fn printPublicFields[T](x: T) {
     | t.Kind() != comptime::Kind.Struct:
         panic("type T is not a struct")
     }
-    const fields = t.Fields()
+    const fields = t.Decl().Fields()
     const expr = comptime::ValueOf(x)
     const for _, field in fields {
         const match {

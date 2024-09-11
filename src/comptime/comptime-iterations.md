@@ -22,7 +22,7 @@ struct MyStruct {
 
 fn main() {
     const t = comptime::TypeOf(MyStruct)
-    const for _, field in t.Fields() {
+    const for _, field in t.Decl().Fields() {
         outln(field.Name())
     }
 }
