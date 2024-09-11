@@ -264,6 +264,12 @@ Supports only structure types.
 Parameter ident should be constant.
 It allows access to private fields.
 
+`fn Method(self, ident: str): comptimeValue`\
+Returns comptimeValue for method access expression.
+Supports only structure types.
+Parameter ident should be constant.
+It allows access to private methods.
+
 `fn Unwrap(self)`\
 Unwraps expression for runtime execution.
 
