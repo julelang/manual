@@ -83,6 +83,10 @@ Returns as constant expression.
 Returns string value of type.
 Returns as constant expression.
 
+`fn Decl(self): comptimeDecl`\
+Returns declaration information for type.
+Supports only structs, traits, enums, type enums, and functions.
+
 `fn Bits(self): int`\
 Returns bitsize of type.
 Supports only primitive integer and floating-point types.
@@ -122,9 +126,6 @@ Supports only tuple types.
 `fn Result(self): comptimeTypeInfo`\
 Returns compile-time information data for result type of function. Only supports function types.
 
-`fn Public(self): bool`\
-Reports whether type is public as constant expression. Supports only structures, enums, type enums, and traits.
-
 `fn Binded(self): bool`\
 Reports whether type is binded as constant expression.
 
@@ -137,14 +138,11 @@ Reports whether kind supports comparable constrait as constant expression.
 `fn Mutable(self): bool`\
 Reports whether kind is mutable as constant expression.
 
-`fn Exceptional(self): bool`\
-Reports whether function type is exceptional as constant expression. Only supports function types.
-
 `fn CanNil(self): bool`\
 Reports whether kind is nil-compatible as constant expression.
 
-`fn RC(self): bool`\
-Reports whether kind performs RC as constant expression.
+`fn GC(self): bool`\
+Reports whether kind performs garbage collection as constant expression.
 
 ---
 
@@ -158,18 +156,14 @@ Using with built-in len function returns count of fields as constant expression.
 ---
 
 ```jule
-struct comptileStructaField
+struct comptileStructField
 ```
 Private compile-time struct field information wrapper.
 
 **Methods:**
 
-`fn Name(self): str`\
-Returns name of field.
-Returns as constant expression.
-
-`fn Public(self): bool`\
-Reports whether field is public as constant expression.
+`fn Decl(self): comptimeDecl`\
+Returns declaration information for field.
 
 `fn Type(self): comptimeTypeInfo`\
 Returns type information for field.
@@ -192,9 +186,8 @@ Private compile-time enum field information wrapper.
 
 **Methods:**
 
-`fn Name(self): str`\
-Returns name of field.
-Returns as constant expression.
+`fn Decl(self): comptimeDecl`\
+Returns declaration information for field.
 
 ---
 
@@ -212,18 +205,8 @@ Private compile-time function parameter information wrapper.
 
 **Methods:**
 
-`fn Name(self): str`\
-Returns name of parameter.
-Returns as constant expression.
-
-`fn Mutable(self): bool`\
-Reports whether parameter is mutable as constant expression.
-
-`fn Variadic(self): bool`\
-Reports whether parameter is variadic as constant expression.
-
-`fn Reference(self): bool`\
-Reports whether parameter is reference as constant expression.
+`fn Decl(self): comptimeDecl`\
+Returns declaration information for parameter.
 
 `fn Recv(self): bool`\
 Reports whether parameter is receiver as constant expression.
@@ -247,12 +230,8 @@ Private compile-time static field information wrapper.
 
 **Methods:**
 
-`fn Name(self): str`\
-Returns name of field.
-Returns as constant expression.
-
-`fn Public(self): bool`\
-Reports whether field is public as constant expression.
+`fn Decl(self): comptimeDecl`\
+Returns declaration information for parameter.
 
 `fn Type(self): comptimeTypeInfo`\
 Returns type information for parameter.
@@ -314,6 +293,66 @@ Returns name of file as constant expression.
 
 `fn Dir(self): str`\
 Returns directory of file as constant expression.
+
+---
+
+```jule
+struct comptimeDecls
+```
+Private compile-time information wrapper for `comptimeDecl`. Supports iterable implementations. Using with built-in len function returns count of files as constant expression.
+
+---
+
+```jule
+struct comptimeDecl
+```
+Private compile-time declaration information wrapper. Designed for general declarations, not for instantiated/analyzed types.
+
+List of supported types;
+- variables
+- functions (with parameters)
+- traits (with methods)
+- enums (with fields)
+- type enums
+- structs (with fields and methods)
+- type aliases
+
+**Methods:**
+
+`fn Name(self): str`\
+Returns name of declaration.
+Returns as constant expression.
+
+`fn Public(self): bool`\
+Reports whether type is public as constant expression.
+
+`fn Binded(self): bool`\
+Reports whether type is binded as constant expression.
+
+`fn Exceptional(self): bool`\
+Reports whether function type is exceptional as constant expression. Only supports function types.
+
+`fn Mutable(self): bool`\
+Reports whether declaration is mutable as constant expression.
+Supports variables, fields, and parameters.
+
+`fn Variadic(self): bool`\
+Reports whether declaration is variadic as constant expression. Supports parameters.
+
+`fn Reference(self): bool`\
+Reports whether declaration is reference as constant expression. Supports variables, and parameters.
+
+`fn Params(self): comptimeDecls`\
+Returns declaration information wrappers for function's parameters. Supports only function types.
+
+`fn Fields(self): comptimeDecls`\
+Returns declaration information wrappers for fields. Supports only structure and enum types.
+
+`fn Statics(self): comptimeDecls`\
+Returns declaration information wrappers for static fields. Supports only structure types.
+
+`fn Methods(self): comptimeDecls`\
+Returns declaration information wrappers for methods. Supports only structures and traits.
 
 ## Enums
 
