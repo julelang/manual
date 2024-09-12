@@ -769,6 +769,15 @@ struct Scope {
     Unsafety: bool
     Deferred: bool
     Stmts:    []Stmt
+
+    // Data of the child scope starting from the root scope.
+    // For the root scope, counting starts from 0. So the root scope will be 0.
+    // It increases by one for each child scope.
+    ChildIndex: int
+
+    // If the scope is a child scope,
+    // it contains the data of the statement in which it was appear.
+    StmtIndex: int
 }
 ```
 Scope.
@@ -863,6 +872,8 @@ Break statement.
 ```jule
 struct Label {
     Ident: str
+    Scope: &Scope // Owner scope.
+    Index: int    // Index of statement.
 }
 ```
 
@@ -871,7 +882,10 @@ struct Label {
 ```jule
 struct GotoSt {
     Ident: str
+    Token: &Token
     Label: &Label
+    Scope: &Scope // Owner scope.
+    Index: int    // Index of statement.
 }
 ```
 
@@ -911,6 +925,7 @@ Multi-declarative assignment.
 
 ```jule
 struct Match {
+    Scope:     &Scope // Owner scope.
     Expr:      &Data
     TypeMatch: bool
     Comptime:  bool
