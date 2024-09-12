@@ -391,6 +391,7 @@ Type kinds.
 - `Struct`: Structure
 - `Trait`: Trait
 - `Enum`: Enum
+- `TypeEnum`: Type Enum
 - `Ptr`: Raw pointer
 - `UnsafePtr`: Unsafe raw pointer
 - `SmartPtr`: Smart pointer
