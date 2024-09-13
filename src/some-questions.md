@@ -1,5 +1,21 @@
 # Some Questions
 
+**List of all questions:**
+- [Why an another language?](#why-an-another-language)
+- [What about future of Jule?](#what-about-future-of-jule)
+- [Is Jule the C++ successor?](#is-jule-the-c-successor)
+- [Is Jule experimental?](#is-jule-experimental)
+- [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
+- [Why exceptionals designed instead of using optional types?](#why-exceptionals-designed-instead-of-using-optional-types)
+- [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
+- [Why Jule have not built-in methods?](#why-jule-have-not-built-in-methods)
+- [Why are null values ​allowed?](#why-are-null-values-%E2%80%8Ballowed)
+- [Why is shadowing allowed for global scope?](#why-is-shadowing-allowed-for-global-scope)
+- [Will function overloading be added?](#will-function-overloading-be-added)
+- [Will different memory management methods be added?](#will-different-memory-management-methods-be-added)
+- [Will runtime reflection be added?](#will-runtime-reflection-be-added)
+- [Why Jule have an optimizing compiler?](#why-jule-have-an-optimizing-compiler)
+
 ### Why an another language?
 
 Please read [The Mission](/the-mission) section.\
