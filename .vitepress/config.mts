@@ -538,9 +538,7 @@ export default defineConfig({
             },
             { text: 'std::net', link: '/std/net' },
             { text: 'std::process', link: '/std/process' },
-            { text: 'std::queue', link: '/std/queue' },
             { text: 'std::slices', link: '/std/slices' },
-            { text: 'std::stack', link: '/std/stack' },
             { text: 'std::strings', link: '/std/strings' },
             {
               text: 'std::sync',
@@ -562,7 +560,6 @@ export default defineConfig({
               ],
             },
             { text: 'std::unsafe', link: '/std/unsafe' },
-            { text: 'std::vec', link: '/std/vec' },
           ],
         },
       ],
