@@ -207,6 +207,7 @@ Compiler directives.
 - `Build`
 - `Namespace`
 - `Deprecated`
+- `Export`
 
 ---
 
