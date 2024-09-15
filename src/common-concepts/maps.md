@@ -101,3 +101,7 @@ fn main() {
 }
 ```
 At the example above, variable `value` will assign to value of key if key found, leaving initialized with default value if not. The variable `ok` assign to `true` if key found, `false` if not.
+
+::: info
+The value variable always should be the exact same type with the map's value type.
+:::

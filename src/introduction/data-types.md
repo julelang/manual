@@ -184,12 +184,16 @@ For logical false:
 false
 ```
 
+## Maps
+
+See the [Maps](/common-concepts/maps) section for more information.
+
+## any
+
+See the [Any](/dynamic-types/any) section for more information.
+
 ## Nil
 Zero value for pointers and function data typed defines. 
 ```jule
 nil
 ```
-
-## any
-
-See the [Any](/dynamic-types/any) section for more information.
