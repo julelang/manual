@@ -94,7 +94,6 @@ export default defineConfig({
             { text: 'Platform Support', link: '/compiler/platform-support' },
             { text: 'Directives', link: '/compiler/directives' },
             { text: 'Specific Programming', link: '/compiler/specific-programming' },
-            { text: 'Deriving', link: '/compiler/deriving' },
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
@@ -299,31 +298,6 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Integrated Jule',
-          link: '/integrated-jule/',
-          items: [
-            { text: 'API', link: '/api/' },
-            { text: 'Backend Emits', link: '/integrated-jule/backend-emits' },
-            {
-              text: 'Interoperability',
-              link: '/integrated-jule/interoperability/',
-              items: [
-                { text: 'Headers', link: '/integrated-jule/interoperability/header-files' },
-                { text: 'Variables', link: '/integrated-jule/interoperability/variables' },
-                { text: 'Functions', link: '/integrated-jule/interoperability/functions' },
-                { text: 'Structures', link: '/integrated-jule/interoperability/structures' },
-                { text: 'Types', link: '/integrated-jule/interoperability/types' },
-                { text: 'Macros', link: '/integrated-jule/interoperability/macros' },
-                { text: 'Namespaces', link: '/integrated-jule/interoperability/namespaces' },
-                { text: 'Jule Wrappers', link: '/integrated-jule/interoperability/jule-wrappers' },
-              ],
-            },
-            { text: 'C', link: '/integrated-jule/c' },
-            { text: 'Objective-C', link: '/integrated-jule/objective-c' },
-            { text: 'Objective-C++', link: '/integrated-jule/objective-cpp' },
-          ],
-        },
-        {
           text: 'Packages',
           link: '/packages/',
           items: [
@@ -374,6 +348,36 @@ export default defineConfig({
                 { text: 'LLDB and GDB', link: '/debugging/backend-compiler-tools/lldb-and-gdb' },
               ],
             },
+          ],
+        },
+        {
+          text: 'Integrated Jule',
+          link: '/integrated-jule/',
+          items: [
+            {
+              text: 'API', link: '/api/',
+              items: [
+                { text: 'API Development', link: '/integrated-jule/api/api-development' },
+              ],
+            },
+            { text: 'Backend Emits', link: '/integrated-jule/backend-emits' },
+            {
+              text: 'Interoperability',
+              link: '/integrated-jule/interoperability/',
+              items: [
+                { text: 'Headers', link: '/integrated-jule/interoperability/header-files' },
+                { text: 'Variables', link: '/integrated-jule/interoperability/variables' },
+                { text: 'Functions', link: '/integrated-jule/interoperability/functions' },
+                { text: 'Structures', link: '/integrated-jule/interoperability/structures' },
+                { text: 'Types', link: '/integrated-jule/interoperability/types' },
+                { text: 'Macros', link: '/integrated-jule/interoperability/macros' },
+                { text: 'Namespaces', link: '/integrated-jule/interoperability/namespaces' },
+                { text: 'Jule Wrappers', link: '/integrated-jule/interoperability/jule-wrappers' },
+              ],
+            },
+            { text: 'C', link: '/integrated-jule/c' },
+            { text: 'Objective-C', link: '/integrated-jule/objective-c' },
+            { text: 'Objective-C++', link: '/integrated-jule/objective-cpp' },
           ],
         },
         {

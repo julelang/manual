@@ -110,7 +110,13 @@ In binded functions, if the function is a `#define`, it configures code generati
 Adds namesapce selection for supported binded types. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
 
 ## Directive: `deprecated`
-Definitions qualify as deprecated.
+Definitions qualify as deprecated. For more information, read the [Deprecation](/packages/3rd-party-packages/deprecation) section.
 
 ## Directive: `test`
-Declares test function.
+Declares test function. For more information, read the [Writing Tests](/debugging/testing/writing-tests) section.
+
+## Directive `export`
+
+The `export` directive is an important part of Integrated Jule. Determines how existing definitions are passed to the backend. This way you have a fixed identifier and can provide an API to the backend language for your Jule codes.
+
+For more information, read the [API development](/integrated-jule/api/api-development) section.

@@ -495,6 +495,7 @@ Compiler log messages with formatting.
 - `InvalidTypeForComptimeIter`
 - `InvalidComptimeIter`
 - `WrongRetForward`
+- `ExportedUsedAsAnonymous`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
