@@ -83,3 +83,14 @@ fn main() {
     outln(xt.Kind())
 }
 ```
+
+### Indexing Range Data
+
+You can use types treated as range at run time with constant index values. This is done similar to an ordinary indexing expression.
+
+For example:
+```jule
+const myRange = magic
+const myItem = myRange[0]
+```
+In this example, let's assume that the `myRange` variable stores data of type range. The `myItem` variable holds the data at index `0` of the `myRange` variable. The index expression must always be a constant and must be within a boundary.
