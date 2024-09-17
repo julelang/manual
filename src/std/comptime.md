@@ -63,7 +63,7 @@ Private compile-time wrapper for compile-time matching.
 ```jule
 struct comptimeTypeInfos
 ```
-Private compile-time information wrapper for type infos. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+Private compile-time information wrapper for type infos. Supports iterable and indexing implementations. Using with built-in len function returns count of fields as constant expression.
 
 ---
 
@@ -150,7 +150,7 @@ Reports whether kind performs garbage collection as constant expression.
 struct comptileStructFields
 ```
 Private compile-time information wrapper for struct fields.
-Supports iterable implementations.
+Supports iterable and indexing implementations.
 Using with built-in len function returns count of fields as constant expression.
 
 ---
@@ -174,7 +174,7 @@ Returns type information for field.
 struct comptileEnumFields
 ```
 Private compile-time information wrapper for enum fields.
-Supports iterable implementations.
+Supports iterable and indexing implementations.
 Using with built-in len function returns count of fields as constant expression.
 
 ---
@@ -194,7 +194,7 @@ Returns declaration information for field.
 ```jule
 struct comptimeParams
 ```
-Private compile-time information wrapper for function parameters. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+Private compile-time information wrapper for function parameters. Supports iterable and indexing implementations. Using with built-in len function returns count of fields as constant expression.
 
 ---
 
@@ -219,7 +219,7 @@ Returns type information for parameter.
 ```jule
 struct comptimeStatics
 ```
-Private compile-time information wrapper for static fields. Supports iterable implementations. Using with built-in len function returns count of fields as constant expression.
+Private compile-time information wrapper for static fields. Supports iterable and indexing implementations. Using with built-in len function returns count of fields as constant expression.
 
 ---
 
@@ -279,7 +279,7 @@ Unwraps expression for runtime execution.
 struct comptimeFiles
 ```
 Private compile-time information wrapper for source files.
-Supports iterable implementations.
+Supports iterable and indexing implementations.
 Using with built-in len function returns count of files as constant expression.
 
 ---
@@ -305,7 +305,7 @@ Returns directory of file as constant expression.
 ```jule
 struct comptimeDecls
 ```
-Private compile-time information wrapper for `comptimeDecl`. Supports iterable implementations. Using with built-in len function returns count of files as constant expression.
+Private compile-time information wrapper for `comptimeDecl`. Supports iterable and indexing implementations. Using with built-in len function returns count of files as constant expression.
 
 ---
 
