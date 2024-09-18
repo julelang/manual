@@ -319,8 +319,7 @@ Key-value expression pair model.
 
 ```jule
 struct MapExprModel {
-    KeyKind: &TypeKind
-    ValKind: &TypeKind
+    Kind:    &Map
     Entries: []&KeyValPairExprModel
 }
 ```
