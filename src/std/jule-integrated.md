@@ -243,13 +243,6 @@ Emit inline code for backend and read result.\
 ---
 
 ```jule
-fn ToStr(expr: any): str
-```
-Returns string converted from of expression.
-
----
-
-```jule
 fn UTF16FromStr(s: str): []u16
 ```
 Returns the UTF-16 encoding of the UTF-8 string s, with a terminating NULL added. If s includes NULL character at any location, ignores followed characters.

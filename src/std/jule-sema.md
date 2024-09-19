@@ -523,15 +523,6 @@ For exmaple: `'a'`
 ---
 
 ```jule
-struct IntegratedToStrExprModel {
-    Pexpr: ExprModel
-}
-```
-Expression model for ToStr function of std::jule::integrated library.
-
----
-
-```jule
 struct BackendEmitExprModel {
     Code: str
 }
