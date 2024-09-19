@@ -24,11 +24,21 @@ fn main() {
 
 The `magicheader.hpp`:
 ```cpp
+#ifndef MAGICHEADER_HPP
+#define MAGICHEADER_HPP
+
+#include <iostream>
+#include "api/jule.hpp"
+
+jule::Int magic_calculation(jule::Int, jule::Int);
+
 void printMagic() {
 	jule::Int x = 42;
 	jule::Int y = 89;
 	std::cout << magic_calculation(x, y) << std::endl;
 }
+
+#endif
 ```
 
 In the code example above, the Jule function with identifier `magicCalculation` is passed to the backend with identifier `magic_calculation`. It is called by a function in the backend with C++ interoperability. In this way, a bidirectional use can be achieved.

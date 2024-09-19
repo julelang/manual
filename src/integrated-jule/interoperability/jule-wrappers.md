@@ -19,7 +19,7 @@ Jule wrappers are a recommended approach for linking C/C++ definitions. This app
 
 **Cons:**
 
-- Can add significantly to the code base
+- May add significantly to the code base
 - Developing additional Jule Wrappers has a time cost
 - Wider IR
 
