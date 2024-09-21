@@ -52,6 +52,7 @@ Here is the list of variables and their existence:
 - `x64`: 64-bit cpu architecture
 - `production`: production compilation enabled
 - `test`: compiling for testing
+- `atomicrc`: atomic reference counting
 - `clang`: backend compiler is Clang
 - `gcc`: backend compiler is GCC
 - `cpp14`: using C++14 standard

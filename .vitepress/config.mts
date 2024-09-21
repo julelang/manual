@@ -351,6 +351,14 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Runtime',
+          link: '/runtime/',
+          items: [
+            { text: 'Public Functionalities', link: '/runtime/public-functionalities' },
+            { text: 'Runtime API', link: '/runtime/runtime-api' },
+          ],
+        },
+        {
           text: 'Integrated Jule',
           link: '/integrated-jule/',
           items: [
@@ -392,6 +400,7 @@ export default defineConfig({
           text: 'API',
           link: '/api/',
           items: [
+            { text: 'Runtime API', link: '/api/runtime-api' },
             {
               text: 'Implementation',
               link: '/api/implementation/',
@@ -399,21 +408,6 @@ export default defineConfig({
                 { text: 'Disable RC', link: '/api/implementation/disable-rc' },
                 { text: 'Disable Safety', link: '/api/implementation/disable-safety' },
                 { text: 'Production', link: '/api/implementation/production' },
-              ],
-            },
-            {
-              text: 'Environment',
-              link: '/api/environment/',
-              items: [
-                { text: 'Command-Line Arguments', link: '/api/environment/command-line-arguments' },
-                { text: 'Environment Variables', link: '/api/environment/environment-variables' },
-              ],
-            },
-            {
-              text: 'Process',
-              link: '/api/process/',
-              items: [
-                { text: 'Executable Path', link: '/api/process/executable-path' },
               ],
             },
             { text: 'Platform Specific', link: '/api/platform-specific' },
@@ -424,21 +418,11 @@ export default defineConfig({
                 { text: 'Primitive', link: '/api/types/primitive' },
                 { text: 'Limits', link: '/api/types/limits' },
                 { text: 'Strings', link: '/api/types/strings' },
-                { text: 'Maps', link: '/api/types/maps' },
                 { text: 'Slices', link: '/api/types/slices' },
                 { text: 'Any', link: '/api/types/any' },
               ],
             },
-            { text: 'Atomicity', link: '/api/atomicity' },
             { text: 'Deferred Scopes', link: '/api/deferred-scopes' },
-            {
-              text: 'Unicode',
-              link: '/api/unicode/',
-              items: [
-                { text: 'UTF-8', link: '/api/unicode/utf-8' },
-                { text: 'UTF-16', link: '/api/unicode/utf-16' },
-              ],
-            },
             {
               text: 'Reference Counting',
               link: '/api/reference-counting/',
@@ -452,11 +436,6 @@ export default defineConfig({
               items: [
                 { text: 'Wrappers', link: '/api/integrated-jule/wrappers' },
               ],
-            },
-            {
-              text: 'Using as Library',
-              link: '/api/using-as-library/',
-              items: [],
             },
           ],
         }
@@ -542,6 +521,7 @@ export default defineConfig({
             },
             { text: 'std::net', link: '/std/net' },
             { text: 'std::process', link: '/std/process' },
+            { text: 'std::runtime', link: '/runtime/' },
             { text: 'std::slices', link: '/std/slices' },
             { text: 'std::strings', link: '/std/strings' },
             {

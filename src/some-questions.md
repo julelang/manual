@@ -15,6 +15,7 @@
 - [Will different memory management methods be added?](#will-different-memory-management-methods-be-added)
 - [Will runtime reflection be added?](#will-runtime-reflection-be-added)
 - [Why Jule have an optimizing compiler?](#why-jule-have-an-optimizing-compiler)
+- [Jule have a runtime?](#jule-have-a-runtime)
 
 ### Why an another language?
 
@@ -141,3 +142,9 @@ Some optimizations are (based on Jule 0.0.15):
 - It is often not possible to know at compile time what type of data the `any` type stores. Therefore, it requires type checking at run time for operations such as casting. But there are some ways to know. In the example code, the algorithm already checks the type and then performs a casting. In this case there is no need to do type checking for casting. This is a different little optimization.
 
 The above two optimizations are also possible to be done by the Jule compiler. The Jule compiler has mastered understanding Jule, and that is undoubtedly its job. Of course the backend compiler cannot do this because it is not optimized for Jule like the Jule compiler and cannot think in terms of Jule at compile time. In this case it is not possible to have the optimizations applied.
+
+### Jule have a runtime?
+
+If we assume that the concept of "runtime" in this question is used in the sense of virtual machine, no. Jule is a language compiled entirely into machine code. But it has `std::runtime` package in the standard library. However, the main purpose of this package is to define special algorithms and some API functions that Jule programs will hear at run time.
+
+If you want to know more about this package, read the [Runtime](/runtime/) section.

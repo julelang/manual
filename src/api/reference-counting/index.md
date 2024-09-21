@@ -2,13 +2,6 @@
 
 Jule's reference counting functionality for allocations is provided in the API. The `ref.hpp` header contains the `Ptr` struct for reference counting.
 
-## Variables
-
-```cpp
-constexpr signed int REFERENCE_DELTA;
-```
-The reference counting data delta value that must occur per each reference counting operation.
-
 ## Functions
 
 ```cpp
@@ -49,11 +42,11 @@ Creates new reference from allocation and reference counting allocation. Referen
 static jule::Ptr<T>
 make(T *ptr);
 ```
-Creates new reference from allocation. Allocates new allocation for reference counting data and starts counting to `jule::REFERENCE_DELTA`.
+Creates new reference from allocation. Allocates new allocation for reference counting data and starts counting to reference counting delta of runtime.
 
 ### Methods
 
 ```cpp
-void drop(void);
+void dealloc(void);
 ```
 Drops reference. This function will destruct this instace for reference counting. Frees memory if reference counting reaches to zero.
