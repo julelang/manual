@@ -1868,6 +1868,26 @@ fn IsIn(r: rune, ranges: ...&RangeTable): bool
 ```
 Reports whether the rune is a member of one of the ranges.
 
+---
+
+```jule
+fn SimpleFold(r: rune): rune
+```
+Iterates over Unicode code points equivalent under the Unicode-defined simple case folding. Among the code points equivalent to rune (including rune itself), SimpleFold returns the smallest rune > r if one exists, or else the smallest rune >= 0. If r is not a valid Unicode code point, SimpleFold(r) returns r.
+
+For example:
+
+`SimpleFold('A') = 'a'`\
+`SimpleFold('a') = 'A'`
+
+`SimpleFold('K') = 'k'`\
+`SimpleFold('k') = '\u212A' (Kelvin symbol, K)`\
+`SimpleFold('\u212A') = 'K'`
+
+`SimpleFold('1') = '1'`
+
+`SimpleFold(-2) = -2`
+
 ## Structs
 
 ```jule
