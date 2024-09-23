@@ -34,14 +34,11 @@ struct Mutex
 ```
 Muxtex is a primitive used to protect memory in multi-threading situations such as concurrent access.
 
-If you try to lock an already locked mutex again in the same thread or exhibit similar behavior, a system signal is likely to occur.
+Mutextes are uses internal mutability and internal states. Locking, unlocking and etc is not mutable operations. But there is no internal mutable memory, so mutexes are not use shared memory. Therefore, for correct use, a mutex instance should not be copied. Otherwise internal state will be copied and not mutated by other instances.
 
-Mutextes are uses internal mutability and internal allocations. Locking, unlocking and etc is not mutable operations. Mutex suitable for using without smart pointers thanks to internal allocations. The internal allocation automatically deallocated by smart pointer.
+Mutexes are not implemented using API of operating system. Implemented in pure Jule. This mutex implementation is not fair and will not optimize starvations. Also it will not check ownership of the mutex, so another thread can unlock the mutex locked by another thread.
 
 **Methods:**
-
-`static fn New(): Mutex`\
-Returns new initialized ready-for-use Mutex.
 
 `fn Lock(self)`\
 Locks the mutex. If the mutex is locked by another thread, it stops the execution of the algorithm to seize it and waits to lock the mutex.
@@ -55,7 +52,7 @@ Try locking the mutex. But unlike the lock method, it just tries to lock instead
 ---
 
 ```jule
-struct once
+struct Once
 ```
 Once is an object that will perform exactly one action.
 A Once must not be copied after first use.

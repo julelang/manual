@@ -39,7 +39,7 @@ For example:
 use std::sync::{WaitGroup, Mutex} // [!code ++]
 
 static mut n = 0
-static mtx = Mutex.New() // [!code ++]
+static mtx = Mutex{} // [!code ++]
 
 fn addToN(mut wg: &WaitGroup) {
     defer { wg.Done() }
