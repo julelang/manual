@@ -470,7 +470,6 @@ Compiler log messages with formatting.
 - `InitiationCycle`
 - `DeclFoundInsteadExpr`
 - `CallingNonFn`
-- `ExceptionalAtGlobalScope`
 - `StructureLitWithPrivFields`
 - `AnyWithTypeEnum`
 - `ConstraintFailed`
