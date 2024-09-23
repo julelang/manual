@@ -178,7 +178,6 @@ When you enable production compilation, it provides improvements that optimizati
 Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls ot etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `main_package_directory/`.
 
 Pros of enabling production compilation:
-- Remove assertion calls.
 - Disable assertions of backend compiler.
 - Use maximum optimization level of backend compiler.
 - Additional optimizations that vary by backend compiler.

@@ -336,7 +336,6 @@ export default defineConfig({
               text: 'Testing',
               link: '/debugging/testing/',
               items: [
-                { text: 'Assertion', link: '/debugging/testing/assertion' },
                 { text: 'Writing Tests', link: '/debugging/testing/writing-tests' },
               ],
             },

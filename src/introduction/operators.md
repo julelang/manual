@@ -18,7 +18,7 @@ Arithmetic operators are used to perform common mathematical operations. And som
 
 ## Integer Overflow
 
-Integer overflow is not checked in any way in Jule. To detect an integer overflow, Jule developers must place mechanisms such as assert in suspicious locations or implement the necessary runtime checks themselves.
+Integer overflow is not checked in any way in Jule. To detect an integer overflow, Jule developers must place check mechanisms in suspicious locations or implement the necessary runtime checks themselves.
 
 Unsigned integer values ​​are handled the same way in Go.\
 From Go Language Specification:

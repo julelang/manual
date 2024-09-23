@@ -38,13 +38,6 @@ This panics are not recoverable.
 ---
 
 ```jule
-fn assert(expr: bool, ...)
-```
-Call panic function if expression is evaluated false at runtime. You can also give custom assertion fail log message with second argument. The log message should be constant string.
-
----
-
-```jule
 fn new(T): &T
 ```
 Returns new reference-type for T initialized with default.

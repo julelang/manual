@@ -53,8 +53,6 @@ If you call the `Skip` method, you have skipped the test. If you perform any act
 
 If you make a call such as `Error` or `Fail` after the `Skip` call, the skip status will be canceled and the test will be evaluated as failed. If you call `Skip` after any error, the test is considered skipped.
 
-For assertions, using the built-in assert function may be fatal because of panics. To avoid panic crashes, use the `T` structure's `Assert` method instead.
-
 ## Test Files
 
 It is recommended to write test functions in separate files. This makes it easier to maintain your code. In addition, since your test functions will not be included in the compilations other than your test compilations, your compilation costs will be reduced and you will achieve faster code compilation time and resource usage.
@@ -67,7 +65,7 @@ Just use your usual build command to run the tests. Just add `test` at the begin
 
 In test compilations, your code does not call the entry point. It executes test functions and runs your tests respectively when executed.
 
-Outputs appear in your test codes such as `out` or `outln` calls. Panics and built-in assert statements are not caught. In other words, in case of any panic, your tests will fail and the program will terminate as in every panic call.
+Outputs appear in your test codes such as `out` or `outln` calls. In case of any panic, your tests will fail and the program will terminate as in every panic call.
 
 For example to test compilation:
 ```

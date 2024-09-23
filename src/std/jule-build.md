@@ -463,7 +463,6 @@ Compiler log messages with formatting.
 - `AssignInExpr`
 - `UsingDeprecated`
 - `TraitImplDeprecated`
-- `AssertNonBool`
 - `UseDeclForInternal`
 - `BindedTypeNotAllowed`
 - `GenericsNotAllowed`
