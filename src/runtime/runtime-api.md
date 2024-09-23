@@ -135,3 +135,8 @@ Converts `rune` to `str`.
 unsafe fn runeStep(s: *byte, n: int, mut r: *rune, mut outLen: *int)
 ```
 Designed for `[]rune(s)` iterations. Takes pointer to string withl length and sets output pointers by first rune of string. Passing nil pointer for any parameter is not safe except `r`.
+
+```jule
+unsafe fn coSpawn(func: *unsafe, args: *unsafe)
+```
+A low level API function for threads. It doesn't provide much abstraction. It just creates and detaches a thread using API. Reports whether the thread created successfully. The created thread is a native-thread. The `func` parameter should point to the valid function for operating system thread API. The `args` parameter may be nil and should point to the argument data.

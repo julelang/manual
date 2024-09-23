@@ -135,3 +135,8 @@ Declaration of: `strFromRune`
 void __jule_runeStep(jule::U8 *s, jule::Int len, jule::I32 *r, jule::Int *outLen);
 ```
 Declaration of: `runeStep`
+
+```cpp
+jule::Bool __jule_coSpawn(void *func, void *args);
+```
+Declaration of: `coSpawn`
