@@ -284,7 +284,6 @@ export default defineConfig({
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Mutexes', link: '/concurrency/mutexes' },
-            { text: 'Threads', link: '/concurrency/threads' },
           ],
         },
         {
@@ -532,7 +531,6 @@ export default defineConfig({
               ],
             },
             { text: 'std::sys', link: '/std/sys' },
-            { text: 'std::thread', link: '/std/thread', },
             { text: 'std::testing', link: '/std/testing', },
             { text: 'std::time', link: '/std/time', },
             {
