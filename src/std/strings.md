@@ -3,6 +3,13 @@
 ## Functions
 
 ```jule
+fn EqualFold(mut s: str, mut t: str): bool
+```
+Reports whether s and t, interpreted as UTF-8 strings, are equal under simple Unicode case-folding, which is a more general form of case-insensitivity.
+
+---
+
+```jule
 fn Compare(a: str, b: str): int
 ```
 Returns an integer comparing two strings lexicographically.
