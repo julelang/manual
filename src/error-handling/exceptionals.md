@@ -4,10 +4,6 @@ Exceptions are a way of error handling for Jule. It can be considered as Optiona
 
 Exceptions must be handled. The runtime cost is until the end of the call. After the call, if there is an exception, your program will panic or the handler will be executed. All relevant exceptional data then goes out of memory.
 
-::: info
-Exceptionals are not allowed in global scope.
-:::
-
 ## Defining
 
 The operator `!` is used to define an exceptional function.
