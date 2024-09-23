@@ -2023,7 +2023,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn WriteConsole(handle: Handle, buffer: *u16, to_write: int, mut &written: int, reserved: *unsafe): bool
+unsafe fn WriteConsole(handle: Handle, buffer: *u16, to_write: u32, mut &written: u32, reserved: *unsafe): bool
 ```
 Calls Windows's WriteConsoleW function.
 
@@ -2034,7 +2034,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, toRead: int, mut &readed: int): bool
+unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, toRead: u32, mut &readed: u32): bool
 ```
 Calls Windows's ReadConsoleW function. \
 Passes nil pointer for input control.
