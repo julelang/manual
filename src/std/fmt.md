@@ -4,7 +4,7 @@
 ```jule
 fn Format(fmt: str, args: ...any): str
 ```
-It places the passes arguments in the string relative to the corresponding format string. The ToStr function provided by the API is used for string conversion. Returns format string if `len(args) == 0`. If the arguments have ended, the remaining part of format string is not processed and is returned as is.
+It places the passes arguments in the string relative to the corresponding format string. Returns format string if `len(args) == 0`. If the arguments have ended, the remaining part of format string is not processed and is returned as is. For supported types it uses custom functions for conversion, but for unusupported types it uses default runtime string conversion function of type.
 
 **Formatting:**
 
