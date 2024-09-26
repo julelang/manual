@@ -62,14 +62,29 @@ jule::Uint __jule_RCLoad(jule::Uint *p);
 Declaration of: `_RCLoad`
 
 ```cpp
+jule::Uint __jule_RCLoadAtomic(jule::Uint *p);
+```
+Declaration of: `_RCLoadAtomic`
+
+```cpp
 void __jule_RCAdd(jule::Uint *p);
 ```
 Declaration of: `_RCAdd`
 
 ```cpp
+void __jule_RCAddAtomic(jule::Uint *p);
+```
+Declaration of: `_RCAddAtomic`
+
+```cpp
 jule::Bool __jule_RCDrop(jule::Uint *p);
 ```
 Declaration of: `_RCDrop`
+
+```cpp
+jule::Bool __jule_RCDropAtomic(jule::Uint *p);
+```
+Declaration of: `_RCDropAtomic`
 
 ```cpp
 void __jule_RCFree(jule::Uint *p);

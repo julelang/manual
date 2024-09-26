@@ -71,11 +71,6 @@ Disable reference counting. All reference counted types does not perform referen
 `--disable-safety`\
 Disable safety. All memory safety and similar measures will be disabled. This will increase safety risks, but at the same time it might improve runtime performance. It may be helpful for debugging, see [Debugging](/debugging/) section for more information.
 
----
-
-`--atomic-rc`\
-Enables thread-safe atomic reference counting.
-
 ### Optimization Options
 
 Learn more about [compiler optimizations](/compiler/compiler-optimizations).

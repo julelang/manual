@@ -140,17 +140,3 @@ unsafe {
 }
 ```
 The version of the above example using string. While this is not recommended, it is something that can be done for important reasons such as efficiency and performance concerns, but Jule does not guarantee this and the responsibility lies with the developer.
-
-### Why Stings are Length-Based
-
-Jule aims for high interoperability capabilities, but the primary goal is to have good language, not to serve interoperability. For this reason, some design choices are made without considering interoperability for important reasons such as performance and efficiency.
-
-Jule strings are designed to be immutable to prevent a new allocation on each copy. They become heap allocated only as a result of operations such as concatenation at run time. Jule's built-in memory management mechanisms are used for heap allocated strings.
-
-Accordingly, strings, like slices, can be moved very efficiently, sharing common memory areas and avoiding new allocations when slicing. However, this can only achieve the desired efficiency with a length-based design.
-
-**Here are a few reasons why:**
-- Jule algorithms work length-based, so NULL termination is unnecessary. NULL termination is just something that could be added to make C-string conversions safe regarding interoperability. This will reduce the performance and efficiency of Pure Jule code, even for developers who will not use interoperability at all.
-- Slicing can be done with NULL terminated strings without causing a new allocation if it preserves the last character of the string. However, if it does not, it is necessary to make a new allocation because null termination is lost and since the string memory is shared, it is not safe to replace the last character with NULL termination, so most cases will result in a new allocation, except for some optimizable cases.
-- With unsafe algorithms, strings can be converted into byte-slices and new allocations in operations such as slicing can be avoided. However, the Unsafe Jule in this code is very useful in encouraging and increasing its use. Many algorithms may require slicing of strings, which may require unsafe conversions in many places in the codebase. It is not a simple experience.
-- In some fields it may be necessary to return byte-slice allocations as strings. In this case, if you are sure it is safe, you may want to unsafely convert it to string to avoid new allocation. But before doing this, you need to make sure that there is a NULL termination every time. Besides this increasing the developer's considerations, perhaps that single NULL termination you add to the slice will in some cases exceed the capacity and result in new allocation, in which case it's not much different than converting to string.

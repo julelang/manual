@@ -76,15 +76,36 @@ unsafe fn _RCLoad(p: _RCPtr): _RCType
 ```
 Reads reference counting data. Passing nil pointer is not safe.
 
+Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+
+```jule
+unsafe fn _RCLoadAtomic(p: _RCPtr): _RCType
+```
+Same as `_RCLoad` but have thread-safe implementation.
+
 ```jule
 unsafe fn _RCAdd(mut p: _RCPtr)
 ```
 Adds strong reference to reference pointer. Passing nil pointer is not safe.
 
+Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+
+```jule
+unsafe fn _RCAddAtomic(mut p: _RCPtr)
+```
+Same as `_RCAdd` but have thread-safe implementation.
+
 ```jule
 unsafe fn _RCDrop(mut p: _RCPtr): bool
 ```
 Drops strong reference from reference pointer. Passing nil pointer is not safe. Reports wheter allocation still alive.
+
+Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+
+```jule
+unsafe fn _RCDropAtomic(mut p: _RCPtr): bool
+```
+Same as `_RCDrop` but have thread-safe implementation.
 
 ```jule
 unsafe fn _RCFree(p: _RCPtr)

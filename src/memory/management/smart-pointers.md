@@ -115,26 +115,6 @@ fn main() {
 } // Frees allocation because ref count is 0, destroyed all references
 ```
 
-## Critical Points
-Jule has language-level concurrency and reference counting should be atomic for safe concurrency. Reference counting may not occur correctly if there is no atomicity in concurrency. That is, when a reference is referenced by a different reference, it must do so in an atomic way. But the fact that this happens all the time raises a problem: the critical impact on performance.
-
-Atomic operations are essential for references to be thread-safe, but in cases where this is not necessary? Atomicity means overhead, which means loss of performance. It is inherently unnecessary to have atomicity when atomicity is not required. Jule references works atomic because thread-safe must be guaranteed.
-
-This means that references will use atomicity for reference counting on each copy. This atomicity creates an atomicity overhead in memory with each copy operation. Obviously this shouldn't be a major cause of performance degradation in your runtime in most cases. However, references also contain a memory footprint. This memory footprint is the memory space allocated separately for the counter used in reference counting.
-
-All of these are minor overheads, but for performance-critical software, the developer may want to eliminate them. Smart pointers that do not do reference counting can be obtained with Unsafe Jule, so this burden can be alleviated up to a point, but there is no built-in feature to remove it completely.
-
----
-
-Some data types of Jule also use smart pointers in the background. This is because they reference each other the space they allocate. This is why some types use background smart pointers to minimize the amount of allocations. Therefore, they have additional overhead such as the additional atomicity of smart pointers and the memory space allocated for reference counting.
-
-List of all types which is performs internal reference counting:
-- Smart Pointers
-- Slice
-- Trait
-- Any
-- Str (for only heap allocated strings)
-
 ## Using Smart Pointers with Reference-Counted Types
 Data types that already perform reference counting can be used with smart pointers if supported. This does not pose any problem. Smart pointers perform a reference counting in themselves, if the data they carry has a reference counting, it does not interfere with them.
 

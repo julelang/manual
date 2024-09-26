@@ -85,17 +85,3 @@ fn main() {
 }
 ```
 In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.
-
-## Technical Details
-
-Anonymous functions and closures are usually cheap. An anonymous function or closure is not much different from ordinary functions. They are implemented the same way in the background, only the name is automatically chosen by the compiler.
-
-Anonymous functions and closures are stored and moved with pointers, just like ordinary functions. An anonymous function or closure has no additional cost to call. For anonymous functions, there is not additional execution cost, unlike closures.
-
-Closures impose some additional costs. One of these is captured variables. A heap allocation is created for captured variables and is guaranteed to be traced and deallocated by the GC. There is no risk of memory leak. A closure is automatically deallocated when it is no longer reachable. There are no other memory footprints.
-
-Captured variables are automatically detected by the compiler and captured by copy. More variables than necessary are not captured; the compiler captures only the variables used in the closure.
-
-Due to the use of closures, all anonymously used functions have an additional hidden parameter. This hidden parameter is a pointer with common type traced by the GC and is null for functions other than other closures. If a ordinary function is used as an anonymous function, the compiler adds this hidden parameter for it. This parameter is only required for closures and is handled only by closures, other functions will ignore it.
-
-A few additional instructions are added to the closure to handle this parameter. These instructions are usually cheap and do not impose significant runtime costs. The instructions usually include converting the hidden parameter to the closure's environment data.
