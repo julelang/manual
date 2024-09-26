@@ -69,11 +69,6 @@ Here is an example code via `build` directive:
 #build unix && !darwin
 ```
 
-## Directive: `derive`
-Specify what additions the compiler will make.
-Supported by only structures.
-See more information about [deriving](/compiler/deriving).
-
 ## Directive: `pass`
 Directive pass is a top directive.
 Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals. Pass directives adds to command-lines after source files
