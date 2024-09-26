@@ -1,4 +1,4 @@
-# Official Jule documentation/manual
+# Official Jule Manual
 
 The official manual for [the Jule programming language](https://github.com/julelang/jule).
 
@@ -39,4 +39,5 @@ npm run dev
 
 ## License
 
-See [`LICENSE`](LICENSE) for full information.
+The Jule Manual is distributed under the terms of the BSD 3-Clause license. <br>
+[See License Details](./LICENSE)
