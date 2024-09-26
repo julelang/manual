@@ -30,6 +30,8 @@ Since the types cannot be known with certainty regarding interoperability, binde
 
 ## Dynamic Types
 
+Dynamic types are types where it is not possible to know the data type at compile time and the type can change dynamically at run time. They can store any of the supported types and the data type changes accordingly.
+
 ### Any
 
 The `any` type always stores its data on the heap and is guaranteed to be released by the GC. Since the type is ambiguous, it has some additional costs on top of memory.
@@ -44,6 +46,10 @@ If given smart pointer is `nil`, then the `any` will be `nil`. Will not point to
 An `any` maintains a general pointer and this pointer is not traced by the GC because it is guaranteed to always will point to static memory that will be available for the lifetime of the program. This pointer points directly to the type handler structure automatically created by the compiler.\
 \
 The handler structure includes the deallocator function required for the type. The deallocator function is the first field of the structure. Also contains 2 function pointer for string conversion and comparison functions for stored type.
+
+### Type Enums
+
+It is exactly the same as the `any` type. They are implemented as `any` type by the compiler in the background. Type protection and restrictions are only at compile time. It doesn't have any additional cost at runtime, it's just an `any` type.
 
 ### Traits
 

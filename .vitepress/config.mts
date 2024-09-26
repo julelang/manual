@@ -192,7 +192,6 @@ export default defineConfig({
           link: '/types/',
           items: [
             { text: 'Aliasing', link: '/types/aliasing' },
-            { text: 'Type Enums', link: '/types/type-enums' },
             { text: 'Casting', link: '/types/casting' },
             {
               text: 'Generics',
@@ -226,6 +225,7 @@ export default defineConfig({
           link: '/dynamic-types/',
           items: [
             { text: 'Any', link: '/dynamic-types/any' },
+            { text: 'Type Enums', link: '/dynamic-types/type-enums' },
             {
               text: 'Traits',
               link: '/dynamic-types/traits/',
