@@ -100,7 +100,7 @@ fn lessThan(x: int, y: int): (bool) { ret x < y }
 ```
 The example at above, accepted as one type return. 
 
-### Forwarding Returns Values
+### Forwarding Return Values
 
 If another function is doing multiple returns and wants to pass the return of a different function that returns the same types, it can do this by simply calling the function.
 
