@@ -25,7 +25,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ---
 
 ```jule
-fn AnalyzeFile(mut f: &AST, mut importer: Importer, flags: SemaFlag): (&SymbolTable, []Log)
+fn AnalyzeFile(mut f: &AST, mut importer: Importer, flags: SemaFlag): (&SymTab, []Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -731,7 +731,7 @@ Represents imported package by use declaration.
 
 ```jule
 struct Package {
-    Files: []&SymbolTable
+    Files: []&SymTab
 }
 ```
 Package.
@@ -1159,7 +1159,7 @@ Directive pass.
 ---
 
 ```jule
-struct SymbolTable {
+struct SymTab {
     File:         &File         // Owner fileset of this symbol table.
     Passes:       []Pass        // All passed flags with jule:pass directive.
     Imports:      []&ImportInfo // Imported packages.
