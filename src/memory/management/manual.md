@@ -9,13 +9,13 @@ The `Heap` struct included in the standard library allows you to manually alloca
 For example:
 
 ```jule
-use std::mem::{Heap}
+use mem for std::mem
 
 fn main() {
-    let mut i = Heap[int].new()
-    i.set(20)
-    outln(i.get())
-    i.free()
+    let mut i = mem::Heap[int].New()
+    i.Set(20)
+    outln(i.Get())
+    i.Free()
 }
 ```
 

@@ -47,10 +47,10 @@ fn NewMyStruct(number: int): myStruct {
 ```
 Your code:
 ```jule
-use foo::{NewMyStruct}
+use foo
 
 fn main() {
-    let ms = NewMyStruct(20)
+    let ms = foo::NewMyStruct(20)
     outln(ms.Number)
 }
 ```

@@ -21,7 +21,7 @@ You cannot use any function that has reference parameters for concurrency. At le
 
 For example:
 ```jule
-unsafe { co myFunction(my_var) }
+unsafe { co myFunction(myVar) }
 ```
 
 ## Raw Pointers

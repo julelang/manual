@@ -31,18 +31,18 @@ Atomic accesses can be used to synchronize memory accesses. An atomic process lo
 Jule provides the `std::sync::atomic` package for atomicity as standard. Now let's take a look at the above code secured with `WaitGroup` and atomic operations:
 
 ```jule
-use std::sync::{WaitGroup}
-use std::sync::atomic::{AtomicInt, MemoryOrder}
+use sync for std::sync
+use atomic for std::sync::atomic
 
-static mut n: AtomicInt = AtomicInt.New(0)
+static mut n = atomic::AtomicInt.New(0)
 
-fn addToN(mut wg: &WaitGroup) {
+fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
-    n.Add(1, MemoryOrder.Relaxed)
+    n.Add(1, atomic::MemoryOrder.Relaxed)
 }
 
 fn main() {
-    let mut wg = WaitGroup.New()
+    let mut wg = sync::WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {
@@ -52,7 +52,7 @@ fn main() {
 
     wg.Wait()
 
-    outln(n.Load(MemoryOrder.Relaxed))
+    outln(n.Load(atomic::MemoryOrder.Relaxed))
 }
 ```
 

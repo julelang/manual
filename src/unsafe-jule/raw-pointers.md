@@ -18,7 +18,7 @@ Unsafe Jule supports postfixes for raw pointers.
 
 For example:
 ```jule
-fn print_slice_components_with_unsafe(slc: []int) {
+fn printSliceComponentsWithUnsafe(slc: []int) {
     unsafe {
         let mut ptr = &slc[0]
         let mut end = &slc[len(slc)-1]
@@ -54,7 +54,7 @@ You can cast a pointer to an integer with valid integer types or cast a raw poin
 For example:
 ```jule
 let ptr: int = 0
-let unsafe_ptr = unsafe { (*str)(ptr) }
+let unsafePtr = unsafe { (*str)(ptr) }
 ```
 
 ## Get Smart Pointer from Raw Pointer

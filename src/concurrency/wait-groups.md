@@ -21,15 +21,15 @@ Jule provides the `WaitGroup` struct in the `std::sync` standard library so that
 For example:
 
 ```jule
-use std::sync::{WaitGroup}
+use sync for std::sync
 
-fn sayHello(mut wg: &WaitGroup) {
+fn sayHello(mut wg: &sync::WaitGroup) {
     outln("Hello World")
     wg.Done()
 }
 
 fn main() {
-    let mut wg = WaitGroup.new()
+    let mut wg = sync::WaitGroup.New()
     wg.Add(1)
     co sayHello(wg)
     wg.Wait()

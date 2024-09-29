@@ -4,11 +4,11 @@ In the previous section, atomics were explained and when atomicity was required 
 
 For example:
 ```jule
-use std::sync::{WaitGroup}
+use sync for std::sync
 
 static mut n = 0
 
-fn addToN(mut wg: &WaitGroup) {
+fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
     outln("incrementing")
     n++
@@ -16,7 +16,7 @@ fn addToN(mut wg: &WaitGroup) {
 }
 
 fn main() {
-    let mut wg = WaitGroup.New()
+    let mut wg = sync::WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {
@@ -36,12 +36,12 @@ To solve this problem we can use a mutex. Mutexes are locking mechanisms that al
 For example:
 
 ```jule
-use std::sync::{WaitGroup, Mutex} // [!code ++]
+use sync for std::sync
 
 static mut n = 0
-static mtx = Mutex{} // [!code ++]
+static mtx = sync::Mutex{} // [!code ++]
 
-fn addToN(mut wg: &WaitGroup) {
+fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
     mtx.Lock() // [!code ++]
     outln("incrementing")
@@ -51,7 +51,7 @@ fn addToN(mut wg: &WaitGroup) {
 }
 
 fn main() {
-    let mut wg = WaitGroup.New()
+    let mut wg = sync::WaitGroup.New()
 
     let mut j = 0
     for j < 1000000; j++ {

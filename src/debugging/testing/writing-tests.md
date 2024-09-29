@@ -26,16 +26,16 @@ The `T` structure allows you to set whether the test fails or is skipped while r
 
 For example:
 ```jule
-use std::math::{Pi}
-use std::testing::{T}
+use math for std::math
+use testing for std::testing
 
 fn getPi(): f64 {
     ret 3.14
 }
 
 #test
-fn testPi(t: &T) {
-    if getPi() != Pi {
+fn testPi(t: &testing::T) {
+    if getPi() != math::Pi {
         t.Errorf("PI is not precise enough")
     }
 }

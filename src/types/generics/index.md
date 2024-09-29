@@ -41,7 +41,7 @@ There is a use for a generic type annotation, as seen in the example above. Use 
 
 To specify multiple different generic types, comma-separation syntax are available:
 ```jule
-fn example_func[T1, T2](a: T1, b: T2) {}
+fn exampleFunc[T1, T2](a: T1, b: T2) {}
 ```
 
 ### Using Generic Functions as Anonymous Function
