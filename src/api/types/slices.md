@@ -5,7 +5,7 @@ Slices are pure implementation of heap allocated arrays and equivalent to Jule's
 To allocate an slice, the `jule::Slice<Item>::make` method is useful and standard way to do this.
 
 For example:
-```jule
+```cpp
 int main(int argc, char *argv[]) {
     auto s = jule::Slice<jule::Int>::make({1, 2, 3, 4, 5});
 

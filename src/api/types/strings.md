@@ -17,7 +17,7 @@ jule::outln(s2);
 String is always heap allocated. However, if you want to use a literal that is not heap allocated, you can do this with `jule::Str::lit`. In case of any need, the string will be moved to the heap again, but until then heap allocation is not made.
 
 For example:
-```jule
+```cpp
 jule::Str s = jule::Str::lit("Hello World!", 12);
 jule::outln(s);
 ```
