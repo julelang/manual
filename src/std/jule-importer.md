@@ -1,4 +1,4 @@
-# std::jule::importer
+# std/jule/importer
 
 ## Structs
 ```jule
@@ -18,21 +18,21 @@ Compile information.
 ---
 
 ```jule
-struct JuleImporter
+struct Importer
 ```
 Default importer for the reference Jule compiler.
 
 ::: info
 **Implemented Traits**
-- `Importer` from `std::jule::sema`
+- `sema::Importer`
 :::
 
 **Methods:**
 
-`static fn New(info: CompileInfo): &JuleImporter`\
+`static fn New(info: CompileInfo): &Importer`\
 Returns new importer instance by compile information.
 
-`fn AllPackages(mut self): []&ImportInfo`\
+`fn AllPackages(mut self): []&sema::ImportInfo`\
 Returns all imported packages. The return value is mutable reference to internal buffer. You should be care about using that copy.
 
 ## Enums

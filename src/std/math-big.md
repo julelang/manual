@@ -1,4 +1,4 @@
-# std::math::big
+# std/math/big
 
 ## Structures
 

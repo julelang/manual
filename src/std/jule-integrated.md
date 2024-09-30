@@ -1,4 +1,4 @@
-# std::jule::integrated
+# std/jule/integrated
 
 ## Type Aliases
 

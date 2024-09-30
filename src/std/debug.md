@@ -1,4 +1,4 @@
-# std::debug
+# std/debug
 
 ## Functions
 

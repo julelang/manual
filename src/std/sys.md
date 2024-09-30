@@ -1,4 +1,4 @@
-# std::sys
+# std/sys
 ## Type Aliases
 ### `type Handle: uintptr`
 ::: warning
@@ -2283,7 +2283,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn Accept(handle: uint, addr: *Sockaddr, len: *Int): uint
+unsafe fn Accept(handle: uint, addr: *Sockaddr, len: *integ::Int): uint
 ```
 Calls Windows's accept function.
 ::: warning
@@ -2323,7 +2323,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn Recvfrom(handle: uint, mut buf: *byte, len: int, flags: int, from: *Sockaddr, fromLen: *Int): int
+unsafe fn Recvfrom(handle: uint, mut buf: *byte, len: int, flags: int, from: *Sockaddr, fromLen: *integ::Int): int
 ```
 Calls Windows's recvfrom function.
 ::: warning
@@ -2474,7 +2474,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Ioctlsocket(handle: uint, cmd: Long, arg: *UnsignedLong): int
+unsafe fn Ioctlsocket(handle: uint, cmd: Long, arg: *integ::UnsignedLong): int
 ```
 C's ioctlsocket function.
 ::: warning
@@ -2484,7 +2484,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Getsockopt(handle: uint, level: int, option: int, buf: *Char, len: *Int): int
+unsafe fn Getsockopt(handle: uint, level: int, option: int, buf: *integ::Char, len: *integ::Int): int
 ```
 C's getsockopt function.
 ::: warning
@@ -2494,7 +2494,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Getsockopt(handle: int, level: int, option: int, buf: *unsafe, len: *UnsignedInt): int
+unsafe fn Getsockopt(handle: int, level: int, option: int, buf: *unsafe, len: *integ::UnsignedInt): int
 ```
 C's getsockopt function.
 ::: warning
@@ -2504,7 +2504,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn Setsockopt(handle: uint, level: int, option: int, buf: *Char, len: int): int
+unsafe fn Setsockopt(handle: uint, level: int, option: int, buf: *integ::Char, len: int): int
 ```
 C's setsockopt function.
 ::: warning
@@ -2514,7 +2514,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Setsockopt(handle: int, level: int, option: int, buf: *Char, len: int): int
+unsafe fn Setsockopt(handle: int, level: int, option: int, buf: *integ::Char, len: int): int
 ```
 C's setsockopt function.
 ::: warning
@@ -2524,7 +2524,7 @@ Available on: `unix`
 ---
 
 ```jule
-unsafe fn Getsockname(handle: uint, addr: *Sockaddr, len: *Int): int
+unsafe fn Getsockname(handle: uint, addr: *Sockaddr, len: *integ::Int): int
 ```
 C's getsockname function.
 ::: warning
@@ -2655,7 +2655,7 @@ Available on: unix
 
 ```jule
 struct Win32FindData {
-    cFileName: *Wchar
+    cFileName: *integ::Wchar
 }
 ```
 ```jule

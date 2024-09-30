@@ -1,4 +1,4 @@
-# std::encoding::binary
+# std/encoding/binary
 
 ## Structures
 

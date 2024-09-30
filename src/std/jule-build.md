@@ -1,4 +1,4 @@
-# std::jule::build
+# std/jule/build
 
 ## Globals
 ### `const Ext: str`

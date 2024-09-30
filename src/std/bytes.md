@@ -1,6 +1,6 @@
-# std::bytes
+# std/bytes
 
-Package std::bytes implements functions for the manipulation of byte slices. It is analogous to the facilities of the std::strings package. But optimized for byte slices, may provide more efficient functions. If you have byte slice form of strings, this package is the best option for most cases.
+Package `std/bytes` implements functions for the manipulation of byte slices. It is analogous to the facilities of the `std/strings` package. But optimized for byte slices, may provide more efficient functions. If you have byte slice form of strings, this package is the best option for most cases.
 
 ## Functions
 

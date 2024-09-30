@@ -1,4 +1,4 @@
-# std::flag
+# std/flag
 
 ## Traits
 
@@ -46,7 +46,7 @@ Parse arguments and process flags. Returns non-flag content. Exceptional always 
 **Syntax:**
 
 <ul>
-Long names can be used with double dash (` -- `). Short names can be used with a single dash ( `-` ). When Boolean flags are used, they use the opposite of their default values. Floating-point values are the same as the `parse_float` function provided by `std::conv` package. Decimal, octal, binary and hexadecimal formats are supported for signed and unsigned integer types. String types accept values ​​directly.
+Long names can be used with double dash (` -- `). Short names can be used with a single dash ( `-` ). When Boolean flags are used, they use the opposite of their default values. Floating-point values are the same as the `parse_float` function provided by `std/conv` package. Decimal, octal, binary and hexadecimal formats are supported for signed and unsigned integer types. String types accept values ​​directly.
 
 Octal values are represented by starts with 0o or `0` prefix. Hexadecimal values are represented by starts with `0x` prefix. Binary values are represented by starts with `0b` prefix.
 

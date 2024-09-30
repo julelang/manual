@@ -61,7 +61,7 @@ Some languages ​​do this plausibly. For example, C# has methods of type `str
 
 Jule is not like C#, `str` is just a type, not an alias for a different implementation. In this case, the `myStr.bytes()` method or something similar that will be added to it is a method implemented in the background.
 
-We think it is more reasonable to do this by casting instead of doing it this way, for example: `[]byte(myStr)`. The standard library `std::strings` package designed for the remaining common algorithms. This is exactly what many other languages ​​do, see: Go, Nim, or Odin.
+We think it is more reasonable to do this by casting instead of doing it this way, for example: `[]byte(myStr)`. The standard library `std/strings` package designed for the remaining common algorithms. This is exactly what many other languages ​​do, see: Go, Nim, or Odin.
 
 ### Why are null values ​allowed?
 
@@ -115,7 +115,7 @@ There is a simple iteration in the simple code above. Typically, Jule needs to c
 
 Let's look at a different, more complex example;
 ```jule
-use utf8 for std::unicode::utf8
+use "std/unicode/utf8"
 
 fn Exist(s: str, c: any): bool {
     for _, r in []rune(s) {
@@ -145,6 +145,6 @@ The above two optimizations are also possible to be done by the Jule compiler. T
 
 ### Jule have a runtime?
 
-If we assume that the concept of "runtime" in this question is used in the sense of virtual machine, no. Jule is a language compiled entirely into machine code. But it has `std::runtime` package in the standard library. However, the main purpose of this package is to define special algorithms and some API functions that Jule programs will hear at run time.
+If we assume that the concept of "runtime" in this question is used in the sense of virtual machine, no. Jule is a language compiled entirely into machine code. But it has `std/runtime` package in the standard library. However, the main purpose of this package is to define special algorithms and some API functions that Jule programs will hear at run time.
 
 If you want to know more about this package, read the [Runtime](/runtime/) section.

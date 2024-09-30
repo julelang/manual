@@ -1,4 +1,4 @@
-# std::jule::constant
+# std/jule/constant
 
 ## Structs
 ```jule

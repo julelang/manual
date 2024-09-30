@@ -1,6 +1,6 @@
 # Backend Emits
 
-Your compiler allows you to emit backend code wherever you want. Integrated Jule should be used for this. The `std::jule::integrated` standard library included in Jule provides you with useful tools and functionalities for Integrated Jule. The `Emit` function in the library allows you to emit backend code with Unsafe Jule.
+Your compiler allows you to emit backend code wherever you want. Integrated Jule should be used for this. The `std/jule/integrated` standard library included in Jule provides you with useful tools and functionalities for Integrated Jule. The `Emit` function in the library allows you to emit backend code with Unsafe Jule.
 
 When working with Integrated Jule, sometimes using use declarations and linking definitions may not be useful, or you may want to write as much Jule code as possible, in which case emitting backend code with the `Emit` function can help you.
 
@@ -10,7 +10,7 @@ To emit backend code, use Unsafe Jule to call the `Emit` function as the code yo
 
 For example:
 ```jule
-use integ for std::jule::integrated
+use integ "std/jule/integrated"
 
 fn main() {
     unsafe {
@@ -25,7 +25,7 @@ To emit backend code and read result, use Unsafe Jule to call the `emit` functio
 
 For example:
 ```jule
-use integ for std::jule::integrated
+use integ "std/jule/integrated"
 
 fn main() {
     let x = unsafe {
@@ -38,13 +38,13 @@ fn main() {
 
 ## Emit from Jule Source Code
 
-You may also want to use the variables or types you wrote in the Jule code in the emit. In this context, pass what you want by using the variadic parameter. In such a case your code will be assumed to be a format, the same formatting rules provided by standard [`std::fmt`](/std/fmt) library will apply.
+You may also want to use the variables or types you wrote in the Jule code in the emit. In this context, pass what you want by using the variadic parameter. In such a case your code will be assumed to be a format, the same formatting rules provided by standard [`std/fmt`](/std/fmt) library will apply.
 
 The arguments you pass are evaluated by your compiler as they are in the backend, and placed in your emit code.
 
 For example:
 ```jule
-use integ for std::jule::integrated
+use integ "std/jule/integrated"
 
 fn main() {
     let y = 40;

@@ -1,4 +1,4 @@
-# std::testing
+# std/testing
 
 ## Structures
 
@@ -25,4 +25,4 @@ Reports whether test is skipped.
 Set status of test as failure if expression is evaluated false at runtime.
 
 `fn Errorf(self, fmt: str, args: ...any)`\
-Set status of test as failure and print message by formatting. Prints new-line after formatted text. Uses `std::fmt` internally.
+Set status of test as failure and print message by formatting. Prints new-line after formatted text. Uses `std/fmt` internally.

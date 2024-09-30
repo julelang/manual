@@ -1,4 +1,4 @@
-# std::jule::constant::lit
+# std/jule/constant/lit
 
 ## Functions
 ```jule

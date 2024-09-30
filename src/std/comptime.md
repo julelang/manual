@@ -1,4 +1,4 @@
-# std::comptime
+# std/comptime
 
 ## Functions
 

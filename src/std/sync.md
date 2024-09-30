@@ -1,4 +1,4 @@
-# std::sync
+# std/sync
 
 ## Structs
 ```jule
@@ -6,8 +6,8 @@ struct WaitGroup
 ```
 Do not copy an instance of WaitGroup, use a ref or pointer instead.
 
-usage: in main thread: wg: std::sync::WaitGroup\
-"wg.add(delta)" before starting tasks with "co ..."\
+usage: in main thread: wg: `sync::WaitGroup`\
+"wg.Add(delta)" before starting tasks with "co ..."\
 "wg.Wait()" to wait for all tasks to have finished
 
 in each parallel job:\

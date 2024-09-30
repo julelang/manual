@@ -1,8 +1,8 @@
-# std::jule::sema
+# std/jule/sema
 
 ## Functions
 ```jule
-fn AnalyzePackage(mut files: []&AST, mut importer: Importer, flags: SemaFlag): (&Package, []Log)
+fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: Flag): (&Package, []build::Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -25,7 +25,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ---
 
 ```jule
-fn AnalyzeFile(mut f: &AST, mut importer: Importer, flags: SemaFlag): (&SymTab, []Log)
+fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: Flag): (&SymTab, []build::Log)
 ```
 Builds symbol table of package's ASTs.\
 Returns nil if files is nil.\
@@ -48,7 +48,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 ## Structs
 ```jule
 struct EnumItem {
-    Token: &Token
+    Token: &token::Token
     Ident: str
     Value: &Value
 }
@@ -64,7 +64,7 @@ Reports whether item has auto expression.
 
 ```jule
 struct Enum {
-    Token:  &Token
+    Token:  &token::Token
     Public: bool
     Ident:  str
     Kind:   &TypeSymbol
@@ -87,7 +87,7 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct TypeEnumItem {
-    Token: &Token
+    Token: &token::Token
     Ident: str
     Kind:  &TypeSymbol
 }
@@ -98,7 +98,7 @@ TypeEnum item.
 
 ```jule
 struct TypeEnum {
-    Token:  &Token
+    Token:  &token::Token
     Public: bool
     Ident:  str
     Items:  []&TypeEnumItem
@@ -165,7 +165,7 @@ Accepts itself as left operand.
 
 ```jule
 struct Value {
-    Expr: &Expr
+    Expr: &ast::Expr
     Data: &Data
 }
 ```
@@ -187,7 +187,7 @@ Operand expression model.
 struct BinaryExprModel {
     Left:  &OperandExprModel
     Right: &OperandExprModel
-    Op:    &Token
+    Op:    &token::Token
 }
 ```
 Binary operation expression model. 
@@ -197,7 +197,7 @@ Binary operation expression model.
 ```jule
 struct UnaryExprModel {
     Expr:  ExprModel
-    Op:    &Token
+    Op:    &token::Token
 }
 ```
 Unary operation expression model. 
@@ -217,7 +217,7 @@ For example: `&MyStruct{10, false, "-"}`
 
 ```jule
 struct StructLitExprModel {
-    Token: &Token
+    Token: &token::Token
     Strct: &StructIns
     Args:  []&StructArgExprModel
 }
@@ -238,7 +238,7 @@ For example: `&MyStruct{}`
 
 ```jule
 struct CastingExprModel {
-    Token:    &Token
+    Token:    &token::Token
     Expr:     &Data
     Kind:     &TypeKind
     ExprKind: &TypeKind
@@ -250,7 +250,7 @@ Casting expression model. For example: `(int)(myFloat)`
 
 ```jule
 struct FnCallExprModel {
-    Token:    &Token
+    Token:    &token::Token
     Func:     &FnIns
     IsCo:     bool
     Expr:     ExprModel
@@ -286,7 +286,7 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 
 ```jule
 struct IndexingExprModel {
-    Token: &Token
+    Token: &token::Token
     Expr:  &Data
     Index: &Data
 }
@@ -330,7 +330,7 @@ For example: `{0: false, 1: true}`
 
 ```jule
 struct SlicingExprModel {
-    Token: &Token
+    Token: &token::Token
     Expr:  ExprModel
     Left:  ExprModel
     Right: ExprModel
@@ -343,7 +343,7 @@ For example: `mySlice[2:len(mySlice)-5]`
 
 ```jule
 struct TraitSubIdentExprModel {
-    Token:  &Token
+    Token:  &token::Token
     Expr:   ExprModel
     Method: &Fn
     Trt:    &Trait
@@ -356,7 +356,7 @@ For example: `myTrait.mySubIdent`
 
 ```jule
 struct StructSubIdentExprModel {
-    Token:  &Token
+    Token:  &token::Token
     Expr:   &Data
     Method: &FnIns
     Field:  &FieldIns
@@ -415,7 +415,7 @@ Expression model for built-in new function calls.
 
 ```jule
 struct BuiltinPanicCallExprModel {
-    Token: &Token
+    Token: &token::Token
     Expr:  ExprModel
 }
 ```
@@ -526,14 +526,14 @@ struct FreeExprModel {
 }
 ```
 Expression model for free calls.\
-Function provided by: `std::mem`
+Function provided by: `std/mem`
 
 ---
 
 ```jule
 struct RetType {
     Kind:   &TypeSymbol
-    Idents: []&Token
+    Idents: []&token::Token
 }
 ```
 Return type.
@@ -542,7 +542,7 @@ Return type.
 
 ```jule
 struct Param {
-    Token:     &Token
+    Token:     &token::Token
     Mutable:   bool
     Variadic:  bool
     Reference: bool
@@ -564,7 +564,7 @@ Reports whether self (receiver) parameter is reference.
 
 ```jule
 struct Fn {
-    Token:       &Token
+    Token:       &token::Token
     Global:      bool
     Unsafety:    bool
     Public:      bool
@@ -572,9 +572,9 @@ struct Fn {
     Statically:  bool
     Exceptional: bool
     Ident:       str
-    Directives:  []&Directive
-    Scope:       &ScopeTree
-    Generics:    []&GenericDecl
+    Directives:  []&ast::Directive
+    Scope:       &ast::ScopeTree
+    Generics:    []&ast::GenericDecl
     Result:      &RetType
     Params:      []&Param
     Owner:       &Struct
@@ -682,42 +682,33 @@ Reports whether implementation type is append to destination structure.
 
 ```jule
 struct ImportInfo {
-    // Use declaration token.
-    Token: &Token
+    // Declaration.
+	Decl: &ast::UseDecl
 
-    // Absolute path.
-    Path: str
+	// Absolute path.
+	Path: str
 
-    // Use declaration path string.
-    LinkPath: str
+	// Use declaration path string.
+	// Quotes are not included.
+	LinkPath: str
 
-    // Package identifier (aka package name).
-    // Empty if package is cpp header.
-    Ident: str
+	// Package alias identifier.
+	Alias: str
 
-    // Package alias identifier.
-    Alias: str
+	// True if imported with Importer.GetImport function.
+	Duplicate: bool
 
-    // True if imported with Importer.GetImport function.
-    Duplicate: bool
+	// Is binded use declaration.
+	Binded: bool
 
-    // Is binded use declaration.
-    Binded: bool
+	// Is standard library package.
+	Std: bool
 
-    // Is standard library package.
-    Std: bool
+	// Nil if package is cpp header.
+	Package: &Package
 
-    // Is imported all defines implicitly.
-    ImportAll: bool
-
-    // Identifiers of selected definition.
-    Selected: []&Token
-
-    // Nil if package is cpp header.
-    Package: &Package
-
-    // Module identity.
-    ModId: int
+	// Module identity.
+	ModId: int
 }
 ```
 Import information.\
@@ -861,7 +852,7 @@ struct Label {
 ```jule
 struct GotoSt {
     Ident: str
-    Token: &Token
+    Token: &token::Token
     Label: &Label
     Scope: &Scope // Owner scope.
     Index: int    // Index of statement.
@@ -884,7 +875,7 @@ Postfix assignment.
 struct Assign {
     Left:  &OperandExprModel
     Right: &OperandExprModel
-    Op:    &Token
+    Op:    &token::Token
 }
 ```
 Assignment.
@@ -1003,12 +994,12 @@ Reports whether reference is exist.
 ```jule
 struct Field {
     Owner:   &Struct
-    Token:   &Token
+    Token:   &token::Token
     Public:  bool
     Mutable: bool
     Ident:   str
     Kind:    &TypeSymbol
-    Default: &Expr
+    Default: &ast::Expr
 }
 ```
 
@@ -1055,13 +1046,13 @@ Patterns are checked.
 struct Struct {
     Depends:    []&Struct
     Uses:       []&Struct
-    Token:      &Token
+    Token:      &token::Token::Token
     Ident:      str
     Fields:     []&Field
     Methods:    []&Fn
     Binded:     bool
-    Directives: []&Directive
-    Generics:   []&GenericDecl
+    Directives: []&ast::Directive
+    Generics:   []&ast::GenericDecl
     Implements: []&Trait
     Instances:  []&StructIns
 }
@@ -1150,7 +1141,7 @@ Returns true if declarations and generics are same.
 
 ```jule
 struct Pass {
-    Token: &Token
+    Token: &token::Token::Token
     Text:  str
 }
 ```
@@ -1160,7 +1151,7 @@ Directive pass.
 
 ```jule
 struct SymTab {
-    File:         &File         // Owner fileset of this symbol table.
+    File:         &token::Token::Fileset         // Owner fileset of this symbol table.
     Passes:       []Pass        // All passed flags with jule:pass directive.
     Imports:      []&ImportInfo // Imported packages.
     Vars:         []&Var        // Variables.
@@ -1183,7 +1174,7 @@ Structure instance.
 
 ```jule
 struct Trait {
-    Token:       &Token
+    Token:       &token::Token
     Ident:       str
     Public:      bool
     Mutable:     bool
@@ -1221,12 +1212,12 @@ Generic type for instance types.
 
 ```jule
 struct TypeAlias {
-    Scope:    &ScopeTree
+    Scope:    &ast::ScopeTree
     Public:   bool
     Binded:   bool
     Used:     bool
     Generic:  bool
-    Token:    &Token
+    Token:    &token::Token
     Ident:    str
     Kind:     &TypeSymbol
     Refers:   []any
@@ -1471,8 +1462,8 @@ Reports whether pointer is unsafe pointer (*unsafe).
 
 ```jule
 struct Var {
-    Scope:         &ScopeTree
-    Token:         &Token
+    Scope:         &Scope
+    Token:         &token::Token
     Ident:         str
     Binded:        bool
     Constant:      bool
@@ -1481,7 +1472,7 @@ struct Var {
     Used:          bool
     Statically:    bool
     Reference:     bool
-    Directives:    []&Directive
+    Directives:    []&ast::Directive
     Kind:          &TypeSymbol
     Value:         &Value
     Refers:        &ReferenceStack
@@ -1665,8 +1656,8 @@ trait Importer {
     // Path is the directory path of package to import.
     // Should return abstract syntax tree of package files.
     // Logs accepts as error.
-    // Updated module to package's module if exist when UpdateMod is true.
-    fn ImportPackage(mut self, path: str, UpdateMod: bool): ([]&AST, []Log)
+    // Updated module to package's module if exist when updateMod is true.
+    fn ImportPackage(mut self, path: str, updateMod: bool): ([]&AST, []Log)
     // Invoked after the package is imported.
     // Sets module identitity of imported package to current module.
     fn imported(mut self, mut &ImportInfo)
@@ -1688,7 +1679,7 @@ Kind of type declaration.
 ## Enums
 
 ```jule
-enum SemaFlag
+enum Flag
 ```
 Flags for semantic analysis.
 

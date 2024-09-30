@@ -1,4 +1,4 @@
-# std::jule:lex
+# std/jule/token
 
 ## Globals
 ### `static Puncts: [...]rune`
@@ -11,33 +11,33 @@ Space characters.
 
 ---
 
-### `static UnaryOps: [...]TokenId`
+### `static UnaryOps: [...]Id`
 Kind list of unary operators.
 
 ---
 
-### `static BinOps: [...]TokenId`
+### `static BinOps: [...]Id`
 Kind list of binary operators.
 
 ---
 
-### `static WeakOps: [...]TokenId`
+### `static WeakOps: [...]Id`
 Kind list of weak operators.\
 These operators are weak, can used as part of expression.
 
 ---
 
-### `static PostfixOps: [...]TokenId`
+### `static PostfixOps: [...]Id`
 List of postfix operators.
 
 ---
 
-### `static AssignOps: [...]TokenId`
+### `static AssignOps: [...]Id`
 List of assign operators.
 
 ## Functions
 ```jule
-fn Lex(mut f: &File, text: []byte): bool
+fn Lex(mut f: &Fileset, mode: Mode): []build::Log
 ```
 Lex source code into fileset.\
 Returns nil if `f == nil`.\
@@ -46,49 +46,42 @@ Returns nil slice for errors if no any error.
 ---
 
 ```jule
-fn NewFileSet(path: str): &File
-```
-Returns new File points to Jule file.
-
----
-
-```jule
-fn IsUnaryOp(id: TokenId): bool
+fn IsUnaryOp(id: Id): bool
 ```
 Reports whether kind is unary operator.
 
 ---
 
 ```jule
-fn IsBinOp(id: TokenId): bool
+fn IsBinOp(id: Id): bool
 ```
 Reports whether kind is binary operator.
 
 ---
 
 ```jule
-fn IsWeakOp(id: TokenId): bool
+fn IsWeakOp(id: Id): bool
 ```
 Reports whether kind is weak operator.
 
 ---
 
 ```jule
-fn IsAssign(id: TokenId): bool
+fn IsAssign(id: Id): bool
 ```
 Reports given token id is allow for assignment left-expression or not.
 
 ---
 
 ```jule
-fn IsAssignOp(id: TokenId): bool
+fn IsAssignOp(id: Id): bool
 ```
 Reports whether operator kind is assignment operator.
 
 ---
 
 ```jule
-fn IsPostfixOp(id: TokenId): bool
+fn IsPostfixOp(id: Id): bool
 ```
 Reports whether operator kind is postfix operator.
 
@@ -201,6 +194,13 @@ Reports whether byte is decimal sequence.
 ---
 
 ```jule
+fn IsKeyword(s: str): bool
+```
+Reports whether s is keyword.
+
+---
+
+```jule
 fn IsBinary(b: byte): bool
 ```
 Reports whether byte is binary sequence.
@@ -221,15 +221,18 @@ Reports whether byte is hexadecimal sequence.
 
 ## Structs
 ```jule
-struct File {
+struct Fileset {
     Path:   str
     Data:   []byte
-    Tokens: []&Token
+    Tokens: []&token::Token
 }
 ```
 Fileset for lexing.
 
 **Methods:**
+
+`static fn New(path: str): &Fileset`\
+Returns new Fileset with path.
 
 `fn Dir(self): str`\
 Returns directory of file's path.
@@ -251,11 +254,11 @@ Returns empty string if line is not exist in buffer.
 
 ```jule
 struct Token {
-    File:   &File
+    File:   &Fileset
     Row:    int
     Column: int
     Kind:   str
-    Id:     TokenId
+    Id:     Id
 }
 ```
 Token is lexer token.
@@ -302,7 +305,7 @@ Special identifiers.
 
 ---
 
-`enum TokenId: uint`
+`enum Id: uint`
 
 Token identities.
 
@@ -388,7 +391,7 @@ Token identities.
 
 ---
 
-`enum TokenKind: str`
+`enum Kind: str`
 
 Token kinds.
 

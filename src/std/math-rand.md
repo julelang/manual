@@ -1,4 +1,4 @@
-# std::math::rand
+# std/math/rand
 ## Type Aliases
 ```jule
 type Seed: u64

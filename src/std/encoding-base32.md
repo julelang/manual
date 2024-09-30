@@ -1,4 +1,4 @@
-# std::encoding::base32
+# std/encoding/base32
 
 ## Functions
 

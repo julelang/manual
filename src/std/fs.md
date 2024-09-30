@@ -1,4 +1,4 @@
-# std::fs
+# std/fs
 
 ## Structs
 ```jule
@@ -125,7 +125,7 @@ Removes empty directory.
 Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ## Enums
-`enum FsError`
+`enum Error`
 
 **Fields:**
 - `Denied`: Search permission is denied for a component of the path prefix

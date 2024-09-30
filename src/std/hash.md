@@ -1,4 +1,4 @@
-# std::hash
+# std/hash
 
 ## Traits
 

@@ -6,28 +6,28 @@ Jule provides functionality for this in the compiler, language design and standa
 
 ## Test Functions
 
-Test functions are functions for testing your code. They must be declared a certain way, otherwise you will get a compilation error. You cannot call test functions and return values. The function must take as a parameter a smart pointer to the `T` structure provided by `std::testing`.
+Test functions are functions for testing your code. They must be declared a certain way, otherwise you will get a compilation error. You cannot call test functions and return values. The function must take as a parameter a smart pointer to the `T` structure provided by `std/testing`.
 
 Additionally, a test function must be declared unambiguously with the `test` directive. Without a directive, the function is not treated as a test function and is treated as a normal function. Test functions are only included in test compilations and are not included in the intermediate representation of the program in normal compilations.
 
 For example to write test function:
 ```jule
 #test
-fn myTest(t: &T) {
+fn myTest(t: &testing::T) {
     // ...
 }
 ```
 
 ### Using T Structure
 
-The `T` structure provided by [`std::testing`](/std/testing) is given as an argument to the function at runtime for each of your tests. You don't need to think anything about this. Using this structure effectively can help you write good, descriptive tests.
+The `T` structure provided by [`std/testing`](/std/testing) is given as an argument to the function at runtime for each of your tests. You don't need to think anything about this. Using this structure effectively can help you write good, descriptive tests.
 
 The `T` structure allows you to set whether the test fails or is skipped while running your test, and provides error logging if you wish.
 
 For example:
 ```jule
-use math for std::math
-use testing for std::testing
+use "std/math"
+use "std/testing"
 
 fn getPi(): f64 {
     ret 3.14

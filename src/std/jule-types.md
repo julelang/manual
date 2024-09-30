@@ -1,4 +1,4 @@
-# std::jule::types
+# std/jule/types
 
 ## Globals
 ### `static BitSize: int`
@@ -113,7 +113,7 @@ Bit-size is determined by runtime.
 ---
 
 ```jule
-fn BitsizeOf(k: str): int
+fn BitSizeOf(k: str): int
 ```
 Returns kind's bit-size.\
 Returns -1 if kind is not numeric.
@@ -169,7 +169,7 @@ Reports whether float literal is compatible given bit-size.
 ---
 
 ```jule
-fn BitsizeOfFloat(x: f64): int
+fn BitSizeOfFloat(x: f64): int
 ```
 Reports minimum bit-size of given floating-point.
 
@@ -180,7 +180,7 @@ Possible values are:
 ---
 
 ```jule
-fn BitsizeOfInt(x: i64): int
+fn BitSizeOfInt(x: i64): int
 ```
 Reports minimum bit-size of given signed integer.
 
@@ -193,7 +193,7 @@ Possible values are:
 ---
 
 ```jule
-fn BitsizeOfUint(x: u64): int
+fn BitSizeOfUint(x: u64): int
 ```
 Reports minimum bit-size of given unsigned integer.
 
@@ -280,157 +280,8 @@ fn IsSigNum(k: str): bool
 ```
 Reports whether kind is signed numeric.
 
----
-
-```jule
-fn IsI8Compatible(mut k: str): bool
-```
-Reports whether i8 is compatible with kind.
-
----
-
-```jule
-fn IsI16Compatible(mut k: str): bool
-```
-Reports whether i16 is compatible with kind.
-
----
-
-```jule
-fn IsI32Compatible(mut k: str): bool
-```
-Reports whether i32 is compatible with kind.
-
----
-
-```jule
-fn IsI64Compatible(mut k: str): bool
-```
-Reports whether i64 is compatible with kind.
-
----
-
-```jule
-fn IsU8Compatible(mut k: str): bool
-```
-Reports whether u8 is compatible with kind.
-
----
-
-```jule
-fn IsU16Compatible(mut k: str): bool
-```
-Reports whether u16 is compatible with kind.
-
----
-
-```jule
-fn IsU32Compatible(mut k: str): bool
-```
-Reports whether u32 is compatible with kind.
-
----
-
-```jule
-fn IsU64Compatible(mut k: str): bool
-```
-Reports whether u64 is compatible with kind.
-
----
-
-```jule
-fn IsF32Compatible(mut k: str): bool
-```
-Reports whether f32 is compatible with kind.
-
----
-
-```jule
-fn IsF64Compatible(mut k: str): bool
-```
-Reports whether f64 is compatible with kind.
-
----
-
-```jule
-fn TypesAreCompatible(mut k1: str, k2: str): bool
-```
-Reports types are compatible.\
-k1 is the destination type, k2 is the source type.\
-Return false if k2 is unsupported kind.
-
----
-
-```jule
-fn IsI16Greater(mut k: str): bool
-```
-Reports whether i16 is greater than given kind.
-
----
-
-```jule
-fn IsI32Greater(mut k: str): bool
-```
-Reports whether i32 is greater than given kind.
-
----
-
-```jule
-fn IsI64Greater(mut k: str): bool
-```
-Reports whether i64 is greater than given kind.
-
----
-
-```jule
-fn IsU8Greater(mut k: str): bool
-```
-Reports whether u8 is greater than given kind.
-
----
-
-```jule
-fn IsU16Greater(mut k: str): bool
-```
-Reports whether u16 is greater than given kind.
-
----
-
-```jule
-fn IsU32Greater(mut k: str): bool
-```
-Reports whether u32 is greater than given kind.
-
----
-
-```jule
-fn IsU64Greater(mut k: str): bool
-```
-Reports whether u64 is greater than given kind.
-
----
-
-```jule
-fn IsF32Greater(k: str): bool
-```
-Reports whether f32 is greater than given kind.
-
----
-
-```jule
-fn IsF64Greater(k: str): bool
-```
-Reports whether f64 is greater than given kind.
-
----
-
-```jule
-fn IsGreater(mut k1: str, k2: str): bool
-```
-Reports whether k1 kind greater than k2 kind. 
-
 ## Enums
-`enum TypeKind: str`
+`enum Kind: str`
 
 Type kinds of primitive types.
 These kinds are must match keyword form itself.

@@ -1,4 +1,4 @@
-# std::maps
+# std/maps
 
 ## Functions
 

@@ -1,4 +1,4 @@
-# std::mem
+# std/mem
 ## Functions
 ```jule
 fn SizeOf(TYPE || EXPRESSION): uint

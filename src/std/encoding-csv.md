@@ -1,13 +1,13 @@
-# std::encoding::csv
+# std/encoding/csv
 
 ## Structures
 
 ```jule
 struct ParseError {
-    StartLine:  int      // Line where the record starts
-    Line:       int      // Line where the error occurred
-    Column:     int      // Column (1-based byte index) where the error occurred
-    Err:        CsvError // The actual error
+    StartLine:  int    // Line where the record starts
+    Line:       int    // Line where the error occurred
+    Column:     int    // Column (1-based byte index) where the error occurred
+    Err:        Error  // The actual error
 }
 ```
 A ParseError is returned for parsing errors.
@@ -69,7 +69,7 @@ Returns new Reader instance that reads r.
 Returns the input stream byte offset of the current reader position. The offset gives the location of the end of the most recently read row and the beginning of the next row.
 
 `fn Read(mut self)!: (record: []str)`\
-Reads one record (a slice of fields) from r. If the record has an unexpected number of fields, read returns the [CsvError.FieldCount] as exception. If there is no data left to be read, read returns nil. If [self.reuse_record] is true, the returned slice may be shared between multiple calls to read. Exception can be CsvError or ParseError, and forwards reader's exceptions.
+Reads one record (a slice of fields) from r. If the record has an unexpected number of fields, read returns the [Error.FieldCount] as exception. If there is no data left to be read, read returns nil. If [self.ReuseRecord] is true, the returned slice may be shared between multiple calls to read. Exception can be Error or ParseError, and forwards reader's exceptions.
 
 `fn FieldPos(self, field: int): (line: int, column: int)`\
 Returns the line and column corresponding to the start of the field with the given index in the slice most recently returned by [Read]. Numbering of lines and columns starts at 1; columns are counted in bytes, not runes.
@@ -77,7 +77,7 @@ Returns the line and column corresponding to the start of the field with the giv
 If this is called with an out-of-bounds index, it panics.
 
 `fn ReadAll(mut self)!: (records: [][]str)`\
-Reads all the remaining records from r. Each record is a slice of fields. Exception can be CsvError or ParseError, and forwards reader errors.
+Reads all the remaining records from r. Each record is a slice of fields. Exception can be Error or ParseError, and forwards reader errors.
 
 ---
 
@@ -112,7 +112,7 @@ Writes multiple CSV records using [Writer.write] and forwording any exception.
 ## Enums
 
 ```jule
-enum CsvError
+enum Error
 ```
 CSV error codes.
 

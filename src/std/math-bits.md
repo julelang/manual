@@ -1,4 +1,4 @@
-# std::math::bits
+# std/math/bits
 ## Globals
 ### `const UintSize`
 Is the size of a uint in bits. 

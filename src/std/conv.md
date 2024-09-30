@@ -1,4 +1,4 @@
-# std::conv
+# std/conv
 ## Globals
 ### `const IntSize`
 Is the size in bits of an int or uint value.

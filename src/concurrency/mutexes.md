@@ -4,7 +4,7 @@ In the previous section, atomics were explained and when atomicity was required 
 
 For example:
 ```jule
-use sync for std::sync
+use "std/sync"
 
 static mut n = 0
 
@@ -36,7 +36,7 @@ To solve this problem we can use a mutex. Mutexes are locking mechanisms that al
 For example:
 
 ```jule
-use sync for std::sync
+use "std/sync"
 
 static mut n = 0
 static mtx = sync::Mutex{} // [!code ++]

@@ -1,4 +1,4 @@
-# std::sync::atomic
+# std/sync/atomic
 ## Functions
 
 ```jule
@@ -42,7 +42,7 @@ Only integer types are supported.
 ## Structures
 
 ```jule
-struct AtomicI8
+struct I8
 ```
 Type alias for private wrapper structure for i8 type.
 
@@ -69,7 +69,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicI16
+struct I16
 ```
 Type alias for private wrapper structure for i16 type.
 
@@ -96,7 +96,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicI32
+struct I32
 ```
 Type alias for private wrapper structure for i32 type.
 
@@ -123,7 +123,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicI64
+struct I64
 ```
 Type alias for private wrapper structure for i64 type.
 
@@ -150,7 +150,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicInt
+struct Int
 ```
 Type alias for private wrapper structure for int type.
 
@@ -177,7 +177,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicU8
+struct U8
 ```
 Type alias for private wrapper structure for u8 type.
 
@@ -204,7 +204,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicU16
+struct U16
 ```
 Type alias for private wrapper structure for u16 type.
 
@@ -231,7 +231,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicU32
+struct U32
 ```
 Type alias for private wrapper structure for u32 type.
 
@@ -258,7 +258,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicU64
+struct U64
 ```
 Type alias for private wrapper structure for u64 type.
 
@@ -285,7 +285,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicUint
+struct Uint
 ```
 Type alias for private wrapper structure for uint type.
 
@@ -312,7 +312,7 @@ Atomically assigns to value.
 ---
 
 ```jule
-struct AtomicUintptr
+struct Uintptr
 ```
 Type alias for private wrapper structure for uintptr type.
 

@@ -1,4 +1,4 @@
-# std::unsafe
+# std/unsafe
 
 ## Functions
 

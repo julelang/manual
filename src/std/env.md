@@ -1,4 +1,4 @@
-# std::env
+# std/env
 ## Globals
 ### `const Arch: str`
 The running program's architecture target: one of i386, amd64 and so on.\
@@ -52,7 +52,7 @@ Returns executable path.\
 Returns empty string if any error occurs. 
 
 ## Enums
-`enum EnvError`
+`enum Error`
 
 **Fields:**
 - `Denied`: Search permission is denied for a component of the path prefix

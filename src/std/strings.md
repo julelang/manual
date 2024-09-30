@@ -1,4 +1,4 @@
-# std::strings
+# std/strings
 
 ## Functions
 
@@ -255,14 +255,14 @@ If sep does not appear in s, cut returns s, "", false.
 ## Structs
 
 ```jule
-struct StrBuilder
+struct Builder
 ```
 String builder for efficient concatenation.
 Optimized for single string building not for repeated use.
 
 **Methods:**
 
-`static fn New(cap: int): StrBuilder`\
+`static fn New(cap: int): Builder`\
 Returns new string builder with capacity.
 
 `fn Write(mut self, b: []byte)`\

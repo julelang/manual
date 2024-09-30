@@ -1,4 +1,4 @@
-# std::unicode::utf8
+# std/unicode/utf8
 ## Globals
 ### `const RuneError`
 The "error" rune or "Unicode replacement character" 

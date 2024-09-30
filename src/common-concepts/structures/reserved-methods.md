@@ -41,7 +41,7 @@ The `Str` reserved method implements a special string conversion algorithm, repl
 
 ### Example
 ```jule
-use conv for std::conv
+use "std/conv"
 
 struct Num {
     x: int
@@ -53,7 +53,7 @@ struct SNum {
 
 impl SNum {
     fn Str(self): str {
-        ret conv::itoa(self.x)
+        ret conv::Itoa(self.x)
     }
 }
 

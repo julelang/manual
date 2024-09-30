@@ -1,4 +1,4 @@
-# std::unicode
+# std/unicode
 ## Globals
 ```jule
 const MaxRune

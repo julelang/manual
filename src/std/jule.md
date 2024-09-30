@@ -1,4 +1,4 @@
-# std::jule
+# std/jule
 ## Globals
 ### `const Version: str`
 Version of package and sub-packages.\

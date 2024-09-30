@@ -16,7 +16,7 @@ Prints value to command line.
 
 Before printing the value will be converted to string. For string conversion, Jule's runtime package will be used, always. For types that contain special string conversion functions, such as structures, those functions are called for conversion.
 
-String conversion implementation of runtime package may not be exact for some types compared to other conversion implementations which is provided by other standard library packages such as `std::conv`.
+String conversion implementation of runtime package may not be exact for some types compared to other conversion implementations which is provided by other standard library packages such as `std/conv`.
 
 ---
 

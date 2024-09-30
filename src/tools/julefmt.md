@@ -2,7 +2,7 @@
 
 The official source code formatter for the Jule programming language.
 
-JuleFmt is a source code formatter for Jule developed using the Jule programming language. It helps keep your Jule code in a consistent format. Except for the code formatting algorithms, it relies heavily on [`std::jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also.
+JuleFmt is a source code formatter for Jule developed using the Jule programming language. It helps keep your Jule code in a consistent format. Except for the code formatting algorithms, it relies heavily on [`std/jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also.
 
 ## Using
 

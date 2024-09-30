@@ -1,4 +1,4 @@
-# std::slices
+# std/slices
 ## Functions
 ```jule
 fn Sort[S: []E, E: ordered](mut s: S)

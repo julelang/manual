@@ -7,18 +7,28 @@ Declared with the `use` keyword.
 - You can't access to private (not-exported) definitions.
 :::
 
-## Use Declaration for Standard Library
-To use standard library, standard path is used. It is quite plain and simple. You write the name of a package you want to use, if you want to use a sub-package, you separate it with a doouble colon. A reference to the standard library must begin with `std::`.
+## Import Paths
+
+Import paths is data used to import packages. It is written between double quotes, but they are not a string literal. The path is handled by removing quotes.
+
+For a path to be valid, it must comply with some rules:
+- Cannot contain `_`. So `_/...`, `.../_/...` or `.../_` are invalid.
+- Each subpackage is separated from each other by the `/` character. There cannot be an empty distinction, so `//` is invalid. Cannot start or end with `/` also.
+
+Jule processes these import paths accordingly and reads the packages by converting them to the file system path.
+
+### Standard Library
+
+To import standard library packages, the import path must start with `std/...`. Any package that starts this way is considered a standard library package.
 
 For example:
-```jule
-use std::pkg
-```
-```jule
-use std::pkg::subpkg
-```
+- `std/conv`
+- `std/runtime`
+- `std/unicode/utf8`
 
-## Use Declaration for Project
+Having any native module package `std` will make it unreachable. Because there is no local module search after the standard library search. Therefore, avoid designing native module packages to start with `std`.
+
+### Module
 Your own project may not consist of only one package, the main one. You may want to include different packages in your project. It is a useful action to use separate packages for the organization of the project. Jule recognizes subpackages in your project's main package and allows you to import those subpackages.
 
 For example, your main package is head directory. This package is your entry package for project. But for this, your main program must also be a module. For more information about modules, you can look at the [modules](/packages/modules/) section.
@@ -42,134 +52,58 @@ As you can see in your project tree, your main package `head` directory has `foo
 
 Using your subpackages is simple, here is an example:
 ```jule
-use foo
-use foo::bar
+use "foo"
+use "foo/bar"
 ```
 As you can see in the example above, each subpackage in your main package represents a chain of packages that you can use. This means that in your subpackages you will follow the same syntax when you try to use your other subpackages. The packages you can import start from your main module, where your module file is located.
 
-## Using Use Declarations
-The definitions that come with the use declaration are accessible with the namespaces. The namespace is same with use declaration.
+## Namespaces
+
+Namespaces (aka aliases) are a unique name that must be present for each use declaration. Conflicts are only possible within the scope of the use declaration; these names do not conflict with other definitions within the general scope of the program.
+
+A namespace represents the package and enables access to package definitions. Double colon (`::`) is used to access the package definition using a namespace. This design choice was made to eliminate shading and minimize confusion.
+
+An example of usage is the following expression:
+```jule
+foo::Bar()
+```
+The above example calls the `Bar` function inside the package represented by the `foo` namespace.
+
+### Auto Alias
+
+Jule automatically assigns an alias to each use declaration if it can. This often saves the developer the trouble of specifying a namespace for packages.
+
+An automatic assignment is made based on the last identifier of the import path. This means that the last subpackage name is automatically considered for alias.
+
+For example, some import paths and their parts used as alias:
+- `foo`: `foo`
+- `bar/foo`: `foo`
+- `foo/bar/baz`: `baz`
+- `foo/_bar_`: `_bar_`
+- `foo/123`: `123`
+
+When processing an alias automatically, some rules are observed. For example, the namespace must be a valid identifier. Therefore, if the final package representation does not provide a valid alias identifier, your compiler will prompt you to manually assign a valid one.
+
+If the compiler is successful in assigning automatically, but the assigned alias has already been assigned to a different package, your compiler will request manual assignment.
+
+For example, some import paths and results:
+- `foo/bar/baz`: import path alias determined as `baz`
+- `foo/şçö`: import path alias determined as `sçö`
+- `foo`: import path alias determined as `foo`
+- `foo/bar/1baz`: no valid identifier, requires manual assignment
+
+### Custom Alias
+
+In cases where the compiler's automatic namespace assignment is insufficient or a different preference is required, an alias can be assigned to a package manually.
+
+To achiave this, there is no keyword for this. Just provide an identifier before the import path.
 
 For example:
 ```jule
-use std::pkg
-
-fn main() {
-    std::pkg::aFunction()
-}
+use foo "foo/123"
 ```
+In the above example, the `foo` namespace is assigned for the `foo/123` import path. So the package can be accessed as `foo::`.
 
-## Full Use Declarations
-It is sufficient to add `::*` to the end of the use declaration that you want to import fully. The definitions of packages imported in this way can be used directly or optionally accessed with the classic namespace notation.
-
-For example:
-```jule
-use std::pkg::*
-
-fn main() {
-    aFunction()
-    std::pkg::aFunction()
-}
-```
-
-## Selector Use Declarations
-You can only import identifiers for the definitions you want imported. If you don't provide an identifier, nothing is imported. Imported definitions can be used directly. By default, there is no namespace representation.
-
-For example:
-```jule
-use std::pkg::{aFunction}
-
-fn main() {
-    aFunction()
-}
-```
-
----
-
-If you want to import with namespace but want to make some definitions directly available, use the `self` keyword.
-
-For example:
-```jule
-use std::pkg::{self, aFunction}
-
-fn main() {
-    aFunction()
-    std::pkg::aFunction()
-}
-```
-
-## Aliased Use Declarations
-
-You may need to write quite long expressions to access the packages used, you can use alias to prevent this. It is recommended that aliases be used whenever possible and should be the primary choice. Alias ​​is represented by the `for` keyword and must be unique to the use declaration.
-
-Aliases can be combined with other uses. When you use an alias select `self` so you can also use it with the full name of package. If you will generally use the alias but want to access some definitions directly, use selection for the relevant definitions.
-
-For example:
-```jule
-use math for std::math::{
-    self, // for accessing via full name of package
-    Pow,  // direct access to the Pow function
-}
-
-fn main() {
-    outln(math::Pow(5, 31))
-    outln(std::math::Pow(5, 31))
-    outln(Pow(5, 31))
-}
-```
-
-::: warning
-You can't select same identifier with other use declarations.
-:::
-
-## Shadowing
-When you import, definitions using the same identifier are shaded. When there is a conflict, the compiler will use the first imported definition. One solution might be to use the namespace notation to access shaded definitions.
-
-For example:
-```jule
-use std::foo::* // Includes run function
-use std::bar::* // Includes run function
-
-fn main() {
-    run()           // Calls std::foo::run
-    std::foo::run() // Calls std::foo::run
-    std::bar::run() // Calls std::bar::run
-}
-```
-
----
-
-However, directly imported definitions can be shaded.
-
-For example:
-```jule
-use std::foo::* // Includes pow function
-
-fn pow() {}
-
-fn main() {
-    pow() // Calls pow, not std::foo:pow
-}
-```
-But, any definition you explicitly import is treated as a native definition. A definition with the same identifier cannot be included in your source code in that file.
-
-For example: 
-```jule
-use std::foo::{pow}
-
-fn pow() {} // Error: duplicated identifier
-
-fn main() {}
-```
-Likewise, you cannot shade definitions that you have explicitly imported before during import.
-
-For example:
-```jule
-use std::foo::{run}
-use std::bar::{run} // Error: duplicated identifier
-
-fn main() {}
-```
 
 ## Cycles
 Import cycles are dependency cycles that shouldn't be, they are dependencies that don't make sense technically. When one or more packages exhibit an infinite state of interdependence, this is indicated by a compiler message. The compiler captures and handles these cycles, allowing the developer to understand and remediate logic errors of package dependencies.

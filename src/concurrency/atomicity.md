@@ -28,13 +28,13 @@ The above code creates threads that increment the global `n` variable by 1. As a
 
 Atomic accesses can be used to synchronize memory accesses. An atomic process locks the corresponding memory space so that it can only be accessed by one thread at a time. This causes the increment and read operations to be performed safely. Because threads wait for the relevant memory area to be unlocked, and only one of them can take over this lock and perform operations at a time.
 
-Jule provides the `std::sync::atomic` package for atomicity as standard. Now let's take a look at the above code secured with `WaitGroup` and atomic operations:
+Jule provides the `std/sync/atomic` package for atomicity as standard. Now let's take a look at the above code secured with `WaitGroup` and atomic operations:
 
 ```jule
-use sync for std::sync
-use atomic for std::sync::atomic
+use "std/sync"
+use "std/sync/atomic"
 
-static mut n = atomic::AtomicInt.New(0)
+static mut n = atomic::Int.New(0)
 
 fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }

@@ -16,12 +16,12 @@ fn main() {
 
 In the code above there is a concurrent call to a function that writes `Hello World` on the command line. It is possible that you will not see the result when you execute this code. This is probably because your program terminates before your concurrent call has finished executing, as described above. Your program may terminate before your call can print `Hello World` to command line.
 
-Jule provides the `WaitGroup` struct in the `std::sync` standard library so that you can wait for your threads and trace their execution. The `WaitGroup` structure acts as a kind of counter for threads. It is simple to use. You basically use it for three tasks: increasing the counter for new threads, decreasing the counter for completed threads, and waiting for the counter to go down to zero, that is, for all threads to finish executing.
+Jule provides the `WaitGroup` struct in the `std/sync` standard library so that you can wait for your threads and trace their execution. The `WaitGroup` structure acts as a kind of counter for threads. It is simple to use. You basically use it for three tasks: increasing the counter for new threads, decreasing the counter for completed threads, and waiting for the counter to go down to zero, that is, for all threads to finish executing.
 
 For example:
 
 ```jule
-use sync for std::sync
+use "std/sync"
 
 fn sayHello(mut wg: &sync::WaitGroup) {
     outln("Hello World")

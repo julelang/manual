@@ -1,4 +1,4 @@
-# std::unicode::utf16
+# std/unicode/utf16
 ## Functions
 ```jule
 fn IsSurrogate(r: rune): bool

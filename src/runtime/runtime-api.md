@@ -120,7 +120,7 @@ The built-in panic call.
 ```jule
 fn compareStr(&a: str, &b: str): int
 ```
-See `std::strings::{Compare}` function for documentation.
+See `strings::{Compare}` function for documentation.
 
 ```jule
 fn bytesToStr(bytes: []byte): str

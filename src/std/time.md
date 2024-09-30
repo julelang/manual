@@ -1,4 +1,4 @@
-# std::time
+# std/time
 
 ## Type Aliases
 

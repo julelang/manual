@@ -1,4 +1,4 @@
-# std::math
+# std/math
 ## Globals
 ### `const E: f64`
 

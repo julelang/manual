@@ -6,12 +6,12 @@ In some cases it may be good to have special algorithms that exist only in debug
 
 Debugging outputs are calls that contain information to help you while debugging or provide some data for some reason. In fact, they are the equivalent of the built-in `out` and `outln` functions, but they are not included in the production compilation.
 
-They are defined in the `std::debug` standard library and must be imported to be used.
+They are defined in the `std/debug` standard library and must be imported to be used.
 
 For example:
 
 ```jule
-use debug for std::debug
+use "std/debug"
 
 fn main() {
     outln("I am always here")
@@ -21,7 +21,7 @@ fn main() {
 
 ## Debugging Special Algorithms
 
-The `Call` function provided by `std::debug` calls the given function immediately at no additional cost. This call is eliminated in production compilation. Using this call you can implement some of your algorithms required for debugging.
+The `Call` function provided by `std/debug` calls the given function immediately at no additional cost. This call is eliminated in production compilation. Using this call you can implement some of your algorithms required for debugging.
 
 ::: warning
 It is not recommended to use algorithms that interfere with the operation of your program. Doing so will cause your program's behavior to differ between debugging and production compilation and may cause you to have more bugs.
@@ -29,7 +29,7 @@ It is not recommended to use algorithms that interfere with the operation of you
 
 For example:
 ```jule
-use debug for std::debug
+use "std/debug"
 
 fn getMagicNumber(): int { ret 42 }
 

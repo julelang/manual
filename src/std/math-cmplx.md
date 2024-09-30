@@ -1,4 +1,4 @@
-# std::math::cmplx
+# std/math/cmplx
 
 ## Structures
 

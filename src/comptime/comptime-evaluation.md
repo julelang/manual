@@ -14,7 +14,7 @@ List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i3
 - Compiler casts basic constant expressions like `int` to `uint` casting.
 - The built-in `len` function returns constant length data for constant strings, arrays and other comptime supported types.
 - Compiler converts constant-string to byte-slice, constant-string to rune-slice, constant-rune to string, constant-byte to string castings.
-- Calls strict comptime functions that provided by the [`std::comptime`](/std/comptime) package.
+- Calls strict comptime functions that provided by the [`std/comptime`](/std/comptime) package.
 - Executes comptime algorithms such as comptime matching or comptime iterations.
 
 ### Untyped Literals
@@ -73,7 +73,7 @@ They can also be used to store primitive types as well as supported types provid
 
 For example:
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 const MagicNumber = 20
 

@@ -1,4 +1,4 @@
-# std::encoding::json
+# std/encoding/json
 
 ## Functions
 
@@ -19,7 +19,7 @@ The algorithm is optimized for efficiency, performance and minimum runtime. Uses
 Implementation supports only Jule types, excluding binded types.
 
 **Decoding details:**\
-Since this function designed for comptime type analysis, the type `T` should be valid type for comptime. The type `any`, which is stores dynamic type, is not valid. Any unsupported type causes exceptional with `JSONDecodeError.UnsupportedType`. Any incompatible value for type, invalid literal or something else causes exceptional with `JSONDecodeError.UnsupportedType`.
+Since this function designed for comptime type analysis, the type `T` should be valid type for comptime. The type `any`, which is stores dynamic type, is not valid. Any unsupported type causes exceptional with `DecodeError.UnsupportedType`. Any incompatible value for type, invalid literal or something else causes exceptional with `DecodeError.UnsupportedType`.
 
 **Signed/Unsigned Integers, Floating-Points:**\
 Decode as JSON numbers.
@@ -40,7 +40,7 @@ Decode as JSON array. If array size is larger than JSON array, algorithm will ch
 Decode as JSON array. For the `[]byte` type, decodes strings as a base64-encoded string if the input is string, otherwise decodes as JSON array.
 
 **Maps:**\
-Decode as JSON object. Map's key type only can be: signed integer, unsigned integer and string. Other types will cause exceptional with `JSONDecodeError.UnsupportedType`.
+Decode as JSON object. Map's key type only can be: signed integer, unsigned integer and string. Other types will cause exceptional with `DecodeError.UnsupportedType`.
 
 **Smart Pointers:**\
 If smart pointer is nil, will be allocated by the algorithm for decoding. Otherwise, will decode into dereferenced value.
@@ -59,10 +59,10 @@ The algorithm is optimized for efficiency, performance and minimum runtime. Uses
 Implementation supports only Jule types, excluding binded types.
 
 **Encoding details:**\
-Since this function designed for comptime type analysis, the type `T` should be valid type for comptime. The type `any`, which is stores dynamic type, is not valid. Any unsupported type causes exceptional with `JSONEncodeError.UnsupportedType`.
+Since this function designed for comptime type analysis, the type `T` should be valid type for comptime. The type `any`, which is stores dynamic type, is not valid. Any unsupported type causes exceptional with `EncodeError.UnsupportedType`.
 
 **Signed/Unsigned Integers, Floating-Points:**\
-Encode as JSON numbers. For floating-points, NaN or ±Inf will cause exceptional with `JSONEncodeError.UnsupportedFloatValue`.
+Encode as JSON numbers. For floating-points, NaN or ±Inf will cause exceptional with `EncodeError.UnsupportedFloatValue`.
 
 **Booleans:**
 Encode as JSON booleans.
@@ -80,7 +80,7 @@ Encode as JSON array.
 Encode as JSON array. If slice is nil, encode as null JSON value. For the `[]byte` type, encodes as a base64-encoded string.
 
 **Maps:**\
-Encode as JSON object. If map is nil, encode as null JSON value. The keys of the map always will be quoted. Also map's key type only can be: signed integer, unsigned integer and string. Other types will cause exceptional with `JSONEncodeError.UnsupportedType`.
+Encode as JSON object. If map is nil, encode as null JSON value. The keys of the map always will be quoted. Also map's key type only can be: signed integer, unsigned integer and string. Other types will cause exceptional with `EncodeError.UnsupportedType`.
 
 **Smart Pointers:**\
 If smart pointer is nil, encode as null JSON value. Otherwise, will encode dereferenced value.
@@ -97,7 +97,7 @@ Same as the `Encode[T]` function but enables identation.
 ## Enums
 
 ```jule
-enum JSONEncodeError
+enum EncodeError
 ```
 JSON encoding error codes.
 
@@ -108,7 +108,7 @@ JSON encoding error codes.
 ---
 
 ```jule
-enum JSONDecodeError
+enum DecodeError
 ```
 JSON decoding error codes.
 

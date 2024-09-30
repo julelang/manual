@@ -4,7 +4,7 @@ Jule does not store any metadata about the program at runtime. Therefore, it is 
 
 Compile-time reflection may not be as comprehensive as runtime reflection in some cases, but it is still useful and functional for many purposes. Also, it is less costly and more performant than runtime reflection.
 
-To access comptime reflection functions with Jule, the [`std::comptime`](/std/comptime) library must be used. This library is provided by Jule by default and provides some functionality to be used at compile time.
+To access comptime reflection functions with Jule, the [`std/comptime`](/std/comptime) library must be used. This library is provided by Jule by default and provides some functionality to be used at compile time.
 
 Some things you can do with compile-time reflection:
 - Examine the structures, process identifiers and types
@@ -17,12 +17,12 @@ Some things you can do with compile-time reflection:
 
 ## Introduction to Reflection for Types
 
-To start examine any type, use `comptime::TypeOf` function. This function provided by the [`std::comptime`](/std/comptime) library and it's essential for type examination.
+To start examine any type, use `comptime::TypeOf` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for type examination.
 
 For example:
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 fn FooBar[T](x: T) {
     const t = comptime::TypeOf(T)
@@ -36,12 +36,12 @@ The type information wrapper provides only functionalities for the type. Not dec
 
 ## Introduction to Reflection for Values
 
-To start examine any value, use `comptime:ValueOf` function. This function provided by the [`std::comptime`](/std/comptime) library and it's essential for value examination.
+To start examine any value, use `comptime:ValueOf` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for value examination.
 
 For example:
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 fn FooBar[T](x: T) {
     const v = comptime::ValueOf(x)
@@ -62,7 +62,7 @@ This unwrap functionality provides additional benifits for value reflection such
 For example:
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 fn PrintFields[T](s: T) {
     const t = comptime::TypeOf(T)
@@ -88,7 +88,7 @@ Function implementation checks whether type `T` is struct and then prints values
 <summary>Print Field Names of Struct</summary>
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 struct FooBarBaz {
     Foo: str
@@ -110,7 +110,7 @@ fn main() {
 <summary>Print Field Types of Struct</summary>
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 struct FooBarBaz {
     Foo: str
@@ -132,7 +132,7 @@ fn main() {
 <summary>Basic Generic Type Examination</summary>
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 cpp type Int: int
 
@@ -180,7 +180,7 @@ fn main() {
 <summary>Fill Arrays with Responsive Size</summary>
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 fn Fill[Arr, Elem](mut &arr: Arr, mut elem: Elem) {
     const t = comptime::TypeOf(Arr)
@@ -211,7 +211,7 @@ fn main() {
 <summary>Print All Public Fields of Struct Instance</summary>
 
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 struct FooBarBaz {
     Foo: int

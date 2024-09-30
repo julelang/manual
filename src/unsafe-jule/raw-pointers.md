@@ -32,7 +32,7 @@ fn printSliceComponentsWithUnsafe(slc: []int) {
 ```
 
 ## Indexing with Raw Pointers
-This is especially true if you have a pointer to an array (for example, an array pointer allocated with `std::mem::c` package), which allows you to use the pointer just like an array. Maybe you would prefer to use a wrapper to help with the length for the offset, as they are just raw pointers and don't have a way to get the lengths right away like in Jule's slice or array structures.
+This is especially true if you have a pointer to an array, which allows you to use the pointer just like an array. Maybe you would prefer to use a wrapper to help with the length for the offset, as they are just raw pointers and don't have a way to get the lengths right away like in Jule's slice or array structures.
 
 The fact that this operation is covered by Unsafe Jule is not only because it has widespread pointer unsafety, but also because there is a possibility of overflow and this is not checked. For example, slice and array are safe and controlled in this regard.
 

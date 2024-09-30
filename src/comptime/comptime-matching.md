@@ -69,7 +69,7 @@ If the `comptimeTypeInfo` (it usually returned by the `comptime::TypeOf` functio
 
 For example:
 ```jule
-use comptime for std::comptime
+use "std/comptime"
 
 fn printType[T]() {
     const match type comptime::TypeOf(T) {
