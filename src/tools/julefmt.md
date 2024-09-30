@@ -38,9 +38,12 @@ $ julefmt src
 - An expression in parentheses is combined into a single line, even if it is on a new line.
 - Even if there are spaces after the comments between the use declarations, they will be ignored and merged with the following use declaration.
 	- Spaces between use declarations are ignored and they are all listed one under the other.
-	- If there is a comment on the same line as the use declarations, it will be moved above the declaration.
-	- If there is selection in the use declaration, the comments inside are preserved provided that the lines are different from the declaration line. Each comment is moved to the right for its own line.
+	- Any encountered comment until the last use declaration will be moved above the all use declarations.
 	- If there is a comment left after the Use declaration, it is considered to belong to the general scope.
+	- Binded use declarations comes after ordinary use declarations and ordered with the path by the `strings::Compare` function of the `std/strings` package.
+	- Ordinary use declarations ordered by the path with the `strings::Compare` function as well as binded use declarations.
+	- In ordinary use declarations, standard library packages comes after other packages.
+	- In binded use declarations, standard headers comes before other headers.
 - The spaces between the top directives are ignored and they are all listed one under the other.
 - A single directive is written along a single line. Even if it is passed down to lower lines, it is combined into a single line.
 - The output is produced without using the statement terminator.
