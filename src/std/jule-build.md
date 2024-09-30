@@ -494,6 +494,8 @@ Compiler log messages with formatting.
 - `InvalidComptimeIter`
 - `WrongRetForward`
 - `ExportedUsedAsAnonymous`
+- `InvalidImportPath`
+- `AutoAliasFail`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -540,3 +542,4 @@ Compiler log messages with formatting.
 - `UseUnsafeJuleToCallCoSelf`
 - `DefineZeroDefaultToUseAmper`
 - `InvalidExprForConstMatch`
+- `GiveAnAliasManually`
