@@ -136,7 +136,7 @@ struct Data {
     Decl: bool
 
     // Constant expression data.
-    Constant: &Const
+    Constant: &constant::Const
 }
 ```
 Value data.
@@ -1723,7 +1723,7 @@ Expression model.
 
 **Fields:**
 - `&TypeKind`
-- `&Const`
+- `&constant::Const`
 - `&Var`
 - `&FnIns`
 - `&StructIns`
