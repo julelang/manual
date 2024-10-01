@@ -37,7 +37,7 @@ List of assign operators.
 
 ## Functions
 ```jule
-fn Lex(mut f: &Fileset, mode: Mode): []build::Log
+fn Lex(mut f: &Fileset, mode: LexMode): []build::Log
 ```
 Lex source code into fileset.\
 Returns nil if `f == nil`.\
