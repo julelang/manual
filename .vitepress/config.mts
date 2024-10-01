@@ -487,7 +487,7 @@ export default defineConfig({
                   text: 'std/jule/constant',
                   link: '/std/jule-constant',
                   items: [
-                    { text: 'std::jule::constant::lit', link: '/std/jule-constant-lit' }
+                    { text: 'std/jule/constant/lit', link: '/std/jule-constant-lit' }
                   ]
                 },
                 { text: 'std/jule/importer', link: '/std/jule-importer' },

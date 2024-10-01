@@ -116,7 +116,7 @@ If you are going to use C strings, use length-based functions, such as `strncmp`
 
 For example:
 ```jule
-use integ for std::jule::integrated
+use integ "std/jule/integrated"
 
 cpp unsafe fn printf(s: *integ::Char)
 
