@@ -6,10 +6,6 @@ In order for the reserved method to be implemented by the compiler, the pattern 
 
 Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore they do not cause any compiler errors.
 
-## `fn Dispose(mut self)`
-
-The `Dispose` reserved method implements destructor method for structure. Destructor methods are called by compiler when destruction of structure which is implements destructor method pattern.
-
 ### The Pattern
 
 - Method should not be `unsafe` and `static`

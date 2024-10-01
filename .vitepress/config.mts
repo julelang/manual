@@ -181,7 +181,6 @@ export default defineConfig({
               text: 'Structures', link: '/common-concepts/structures/',
               items: [
                 { text: 'Reserved Methods', link: '/common-concepts/structures/reserved-methods' },
-                { text: 'Destructors', link: '/common-concepts/structures/destructors' },
                 { text: 'Operator Overloading', link: '/common-concepts/structures/operator-overloading' },
               ],
             },
