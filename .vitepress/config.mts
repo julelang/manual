@@ -328,7 +328,6 @@ export default defineConfig({
               items: [
                 { text: 'Jule Runtime', link: '/debugging/reasoning/jule-runtime' },
                 { text: 'C++ Runtime', link: '/debugging/reasoning/cpp-runtime' },
-                { text: 'Debugging Special Code', link: '/debugging/reasoning/debugging-special-code' },
               ],
             },
             {
@@ -447,7 +446,6 @@ export default defineConfig({
             { text: 'std/bytes', link: '/std/bytes' },
             { text: 'std/comptime', link: '/std/comptime' },
             { text: 'std/conv', link: '/std/conv' },
-            { text: 'std/debug', link: '/std/debug' },
             {
               text: 'std/encoding',
               link: '/std/encoding',
