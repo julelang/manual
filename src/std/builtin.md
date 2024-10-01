@@ -10,7 +10,7 @@ Is an alias for i32. It is used, by convention, to distinguish character values 
 
 ## Functions
 ```jule
-fn out(v)
+fn print(v)
 ```
 Prints value to command line.
 
@@ -21,7 +21,7 @@ String conversion implementation of runtime package may not be exact for some ty
 ---
 
 ```jule
-fn outln(v)
+fn println(v)
 ```
 This function same with the `out` function. One difference, prints new line after print.
 

@@ -37,7 +37,7 @@ cpp fn max(): int
 
 fn main() {
     let intMax = cpp.max()
-    outln(intMax)
+    println(intMax)
 }
 ```
 

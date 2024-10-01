@@ -34,7 +34,7 @@ cpp fn get_char(): cpp.char
 
 fn main() {
 	let b: byte = byte(cpp.get_char())
-	outln(b)
+	println(b)
 }
 ```
 
@@ -94,9 +94,9 @@ fn main() {
         magic_data: "hello world",
         c_data: "hello c strings",
     }
-    outln(mc.data)
-    outln(mc.magic_data)
-    outln(mc.c_data)
+    println(mc.data)
+    println(mc.magic_data)
+    println(mc.c_data)
 }
 ```
 

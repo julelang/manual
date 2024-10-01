@@ -102,7 +102,7 @@ cpp struct Vector[T] {
 fn main() {
     let mut vec = cpp.Vector[int]{}
     vec.append([1,2,3,4,5,6,7,8,9,10])
-    outln(vec.size())
-    outln(vec.capacity())
+    println(vec.size())
+    println(vec.capacity())
 }
 ```

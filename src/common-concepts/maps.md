@@ -12,7 +12,7 @@ fn main() {
         1: "RAM",
         2: "GPU"
     }
-    outln(mymap)
+    println(mymap)
 }
 ```
 The example above shows how a map is defined and its data-type representation. To describe a map, curly braces are opened after the data type. Each key-value pair is separated by a comma. Keys and values are separated by colons, the key comes first, then the value.
@@ -60,7 +60,7 @@ fn main() {
         2: "FooBar"
     }
     delete(myMap, 2)
-    outln(len(m))
+    println(len(m))
 }
 ```
 At the example above, the `delete` call will remove `2:"FooBar"` pair from the map.
@@ -78,7 +78,7 @@ fn main() {
         2: "FooBar"
     }
     delete(myMap, 2)
-    outln(len(m))
+    println(len(m))
 }
 ```
 At the example above, the `delete` call will remove all keys of the map without deallocating buffer. It is efficient way to clear map for make ready to reuse or something like that.
@@ -96,8 +96,8 @@ fn main() {
         2: "FooBar"
     }
     let (value, ok) = myMap[1]
-    outln(value)
-    outln(ok)
+    println(value)
+    println(ok)
 }
 ```
 At the example above, variable `value` will assign to value of key if key found, leaving initialized with default value if not. The variable `ok` assign to `true` if key found, `false` if not.

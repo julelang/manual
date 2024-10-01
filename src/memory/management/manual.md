@@ -14,7 +14,7 @@ use "std/mem"
 fn main() {
     let mut i = mem::Heap[int].New()
     i.Set(20)
-    outln(i.Get())
+    println(i.Get())
     i.Free()
 }
 ```
@@ -30,7 +30,7 @@ fn main() {
     unsafe {
         let mut i = integrated::New[int]()
         *i = 20
-        outln(*i)
+        println(*i)
         integrated::Delete[int](i)
         i = nil
     }
@@ -56,7 +56,7 @@ For example:
 fn main() {
     {
         let mut x = [1, 2, 3, 4, 5]
-        outln(x)
+        println(x)
     } // x leaked
 }
 ```
@@ -69,7 +69,7 @@ use "std/mem"
 fn main() {
     {
         let mut x = [1, 2, 3, 4, 5]
-        outln(x)
+        println(x)
         mem::Free(x)
     }
 }

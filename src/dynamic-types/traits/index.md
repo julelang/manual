@@ -38,8 +38,8 @@ trait FooBar {
 struct Baz {}
 
 impl FooBar for Baz {
-    fn foo(self) { outln("foo") }
-    fn bar(self) { outln("bar") }
+    fn foo(self) { println("foo") }
+    fn bar(self) { println("bar") }
 }
 
 fn main() {

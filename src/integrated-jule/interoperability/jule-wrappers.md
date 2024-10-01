@@ -120,7 +120,7 @@ impl Person {
 
 fn main() {
     let p = Person.new("Anonymous", "Julenour")
-    outln(p.get_full_name())
+    println(p.get_full_name())
 }
 ```
 
@@ -161,7 +161,7 @@ impl Person {
 
 fn main() {
     let p = Person.new("Anonymous", "Julenour")
-    outln(p.getFullName())
+    println(p.getFullName())
 }
 ```
 

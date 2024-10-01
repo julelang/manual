@@ -20,11 +20,11 @@ For example:
 ```jule
 match myInteger {
 | MY_INTEGER_MIN:
-    outln("Minimum")
+    println("Minimum")
 | MY_INTEGER_MAX:
-    outln("Maximum")
+    println("Maximum")
 |:
-    outln("Between or not")
+    println("Between or not")
 }
 ```
 
@@ -85,15 +85,15 @@ For example:
 ```jule
 match {
 | false:
-    outln("Case1")
+    println("Case1")
 | true:
-    outln("Case2")
+    println("Case2")
     fall
 | false:
-    outln("Case3")
+    println("Case3")
     fall
 |:
-    outln("Default")
+    println("Default")
 }
 ```
 
@@ -113,11 +113,11 @@ fn main() {
     let x: any = 10
     match type x {
     | int:
-        outln("integer")
+        println("integer")
     | f32 | f64:
-        outln("floating-point")
+        println("floating-point")
     |:
-        outln("other")
+        println("other")
     }
 }
 ```

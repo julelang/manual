@@ -10,8 +10,8 @@ For example:
 ```cpp
 jule::Str s1 = "Hello World!";
 jule::Str s2("Hello World!", 12);
-jule::outln(s1);
-jule::outln(s2);
+jule::println(s1);
+jule::println(s2);
 ```
 
 String is always heap allocated. However, if you want to use a literal that is not heap allocated, you can do this with `jule::Str::lit`. In case of any need, the string will be moved to the heap again, but until then heap allocation is not made.
@@ -19,5 +19,5 @@ String is always heap allocated. However, if you want to use a literal that is n
 For example:
 ```cpp
 jule::Str s = jule::Str::lit("Hello World!", 12);
-jule::outln(s);
+jule::println(s);
 ```

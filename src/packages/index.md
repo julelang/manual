@@ -6,7 +6,7 @@ For example:
 // file: ./hello_print.jule
 
 fn helloPrint(name: str) {
-    outln("Hello " + name)
+    println("Hello " + name)
 }
 ```
 ```jule

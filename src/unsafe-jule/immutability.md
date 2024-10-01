@@ -10,6 +10,6 @@ fn main() {
     let x = 10
     let mut xp = &x
     unsafe { *xp += 20 }
-    outln(x) // 30
+    println(x) // 30
 }
 ```

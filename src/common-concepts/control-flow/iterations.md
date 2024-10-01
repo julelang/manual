@@ -8,7 +8,7 @@ For example:
 ```jule
 fn main() {
     for {
-        outln("Hello, iterations")
+        println("Hello, iterations")
     }
 }
 ```
@@ -22,7 +22,7 @@ For example:
 fn main() {
     let mut counter = 0
     for counter <= 5 {
-        outln(counter)
+        println(counter)
         counter += 10
     }
 }
@@ -39,7 +39,7 @@ For example:
 fn main() {
     let mut i = 1
     for i <= 5; i++ {
-        outln(i)
+        println(i)
     }
 }
 ```
@@ -55,7 +55,7 @@ For example:
 fn main() {
     let s = "Hello"
     for i in s {
-        outln(i)
+        println(i)
     }
 }
 
@@ -76,7 +76,7 @@ For example:
 fn main() {
     let s = "Hello"
     for _, b in s {
-        outln(b)
+        println(b)
     }
 }
 
@@ -101,7 +101,7 @@ For example:
 fn main() {
     let s = "Hello"
     for (_, mut b) in s {
-        outln(b)
+        println(b)
     }
 }
 ```
@@ -115,7 +115,7 @@ For example:
 ```jule
 fn main() {
     for {
-        outln("Hello, World")
+        println("Hello, World")
         break
     }
 }
@@ -131,7 +131,7 @@ For example:
 fn main() {
     for {
         continue
-        outln("Hello, World")
+        println("Hello, World")
     }
 }
 ```

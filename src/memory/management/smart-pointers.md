@@ -26,7 +26,7 @@ For example:
 ```jule
 fn main() {
     let x = new(int)
-    outln(x)
+    println(x)
 }
 ```
 The `x` variable is integer reference, and stores zero.
@@ -37,7 +37,7 @@ For example:
 ```jule
 fn main() {
     let x = new(int, 100)
-    outln(x)
+    println(x)
 }
 ```
 The `x` variable is a heap-allocated smart pointer initialized with `100`.
@@ -50,7 +50,7 @@ For example:
 ```jule
 fn main() {
     let x = make([]&int, 1)
-    outln(x[0] == nil) // true
+    println(x[0] == nil) // true
 }
 ```
 
@@ -64,7 +64,7 @@ For example:
 fn main() {
     let a = new(int, 10)
     let b = (*int)(a)
-    unsafe { outln(*b) }
+    unsafe { println(*b) }
 }
 ```
 
@@ -79,9 +79,9 @@ For example:
 ```jule
 fn main() {
     let mut x = new(int, 20)
-    outln(x != nil) // true
+    println(x != nil) // true
     x = nil
-    outln(x != nil) // false
+    println(x != nil) // false
 }
 ```
 
@@ -99,7 +99,7 @@ fn main() {
     let mut x = new(int, 100)
 
     // Prints 100
-    outln(*x)
+    println(*x)
 
     // Make new heap-allocation with 50, ref count is 1
     // Frees old allocation because ref count is 0 now
@@ -110,7 +110,7 @@ fn main() {
     let y = x
 
     // Prints 50
-    outln(*y)
+    println(*y)
 
 } // Frees allocation because ref count is 0, destroyed all references
 ```
@@ -126,7 +126,7 @@ fn main() {
     let mut ref = new([]int, [1, 2, 3, 4])
     let s = *ref
     ref = nil
-    outln(s)
+    println(s)
 }
 ```
 The `ref` variable holds a slice. Slices are data types that perform reference counting in themselves. The slice carried by the smart pointer is assigned to the variable `s` and then the smart pointer assigned as `nil`, then reference counting of smart pointer will reach zero and deallocated.

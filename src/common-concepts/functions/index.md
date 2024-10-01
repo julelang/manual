@@ -22,7 +22,7 @@ Functions can have parameters. These parameters must be specified with arguments
 For example:
 ```jule
 fn printInt(i: int) {
-    outln(i)
+    println(i)
 }
 
 fn main() {
@@ -48,7 +48,7 @@ For example:
 ```jule
 fn strOut(values: ...str) {
     for _, s in values {
-        out(s)
+        print(s)
     }
 }
 
@@ -72,7 +72,7 @@ Functions can return values.
 For example:
 ```jule
 fn main() {
-    outln(div(10, 2))
+    println(div(10, 2))
 }
 
 fn div(a: f64, b: f64): f64 { ret a / b }
@@ -163,8 +163,8 @@ fn compareInt(x: int, y: int): (bool, bool) { ret x < y, x == y }
 
 fn main() {
     let (less, equal) = compareInt(10, 20)
-    outln(less)
-    outln(equal)
+    println(less)
+    println(equal)
 }
 ```
 ::: warning
@@ -178,7 +178,7 @@ The keyword `co` is used to do a concurrent call.
 
 For example:
 ```jule
-fn helloWorld() { outln("Hello World") }
+fn helloWorld() { println("Hello World") }
 
 fn main() {
     co helloWorld()

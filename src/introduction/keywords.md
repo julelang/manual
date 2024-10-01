@@ -28,7 +28,7 @@ type int: str
 
 fn main() {
     let a: int = "hello world"
-    outln(a)
+    println(a)
 }
 ```
 As seen in the example above, the variable `a` is defined as `int` type. At first glance, the variable `a` may be thought to be an integer, but the identifier `int` has been redefined for an alias and corresponds to the type `str`. Therefore, the type `a` is `str`, not `int`.

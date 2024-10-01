@@ -41,7 +41,7 @@ fn testPi(t: &testing::T) {
 }
 
 fn main() {
-    outln(getPi())
+    println(getPi())
 }
 ```
 

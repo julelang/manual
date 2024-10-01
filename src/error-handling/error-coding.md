@@ -19,9 +19,9 @@ fn main() {
     let (result, err) = myDiv(5, 0)
     match err {
     | DivError.DividedByZero:
-        outln("error: divided by zero")
+        println("error: divided by zero")
     |:
-        outln(result)
+        println(result)
     }
 }
 ```

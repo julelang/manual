@@ -51,7 +51,7 @@ use foo
 
 fn main() {
     let ms = foo::NewMyStruct(20)
-    outln(ms.Number)
+    println(ms.Number)
 }
 ```
 As shown in the example above, your code accessed a private struct via a public function and used the public field. This means that that definition is implicitly exported. 

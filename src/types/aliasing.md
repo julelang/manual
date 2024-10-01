@@ -7,7 +7,7 @@ type int32: i32
 
 fn main() {
     let myInt: int32 = 100
-    outln(myInt)
+    println(myInt)
 }
 ```
 As seen in the example above, there is an alias definition of `int32` for the `i32` data type. The keyword `type` comes first to define an alias. Then comes the name you want to give and which type it will represent. This alias will now represent `i32` when used.

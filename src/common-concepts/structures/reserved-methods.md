@@ -19,7 +19,7 @@ struct Test {}
 
 impl Test {
     fn Dispose(mut self) {
-        outln("I am destructed")
+        println("I am destructed")
     }
 }
 ```
@@ -55,10 +55,10 @@ impl SNum {
 
 fn main() {
     // [Num{x:0} Num{x:0} Num{x:0} Num{x:0} Num{x:0}]
-    outln(make([]Num, 5))
+    println(make([]Num, 5))
 
     // [0 0 0 0 0]
-    outln(make([]SNum, 5))
+    println(make([]SNum, 5))
 }
 ```
 

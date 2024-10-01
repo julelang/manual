@@ -9,9 +9,9 @@ For example:
 fn example[T: int | uint]() {
     match type T {
     | int:
-        outln("int")
+        println("int")
     | uint:
-        outln("uint")
+        println("uint")
     }
 }
 ```

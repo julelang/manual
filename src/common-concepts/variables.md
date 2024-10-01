@@ -67,7 +67,7 @@ For example:
 fn count() {
     static mut a: int = 0
     a++
-    outln(a)
+    println(a)
 }
 
 fn main() {
@@ -118,9 +118,9 @@ fn main() {
     let a = 10
     {
         let a = 200
-        outln(a)
+        println(a)
     }
-    outln(a)
+    println(a)
 }
 ```
 In the above example, the main scope of the function has a child scope. This scope has a variable with the same identifier as the variable `a` in the main scope. This variable replaces and shadows the parent scope's variable `a` in it and its child scopes.
@@ -185,9 +185,9 @@ For example:
 fn main() {
     let (mut x, y) = 10, 20
     let (x, z) = 100, 30
-    outln(x) // 100
-    outln(y) // 20
-    outln(z) // 30
+    println(x) // 100
+    println(y) // 20
+    println(z) // 30
 }
 ```
 In the example above, the variable `x` is set to mutable. Since it is again in a multiple assignment within the same scope, it is treated according to the assignment rules, not the rebuild rules. While assigning to the `x` variable, the `z` variable does not exist, so it is newly created.
@@ -200,11 +200,11 @@ fn main() {
     let (x, y) = 100, 200
     {
         let (x, z) = 10, 20
-        outln(x) // 10
-        outln(y) // 200
-        outln(z) // 20
+        println(x) // 10
+        println(y) // 200
+        println(z) // 20
     }
-    outln(x) // 100
+    println(x) // 100
 }
 ```
 In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement. The above example cannot be done by default, this requires allowing shadowing.
@@ -216,8 +216,8 @@ For example:
 fn main() {
     let mut a = [1, 2, 3, 4]
     let (a[0], b) = 20, 30
-    outln(a) // [20 2 3 4]
-    outln(b) // 30
+    println(a) // [20 2 3 4]
+    println(b) // 30
 }
 ```
 ::: warning

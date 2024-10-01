@@ -17,7 +17,7 @@ fn main() {
     mut b := []byte("hello world")
     s := unsafe::BytesStr(b)
     b[0] = 'H'
-    outln(s) // Hello world
+    println(s) // Hello world
 }
 ```
 

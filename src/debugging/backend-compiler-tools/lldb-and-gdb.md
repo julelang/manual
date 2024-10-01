@@ -18,7 +18,7 @@ Here is our basic program:
 ```jule
 fn main() {
     let s: []int = nil
-    outln(s[0])
+    println(s[0])
 }
 ```
 

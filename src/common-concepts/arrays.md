@@ -46,9 +46,9 @@ For example:
 ```jule
 fn main() {
     let mut myArray: [3]str = ["Hello", "arrays", "indexes"]
-    outln(myArray[0])
+    println(myArray[0])
     myArray[0] = "Hi"
-    outln(myArray)
+    println(myArray)
 }
 ```
 For element access, index is written between brackets (`[]`). First statement declares our array. Second statement prints first element of our array. Next statement sets first element of our array as `"Hi"`. The last statement prints our array to console.
@@ -69,7 +69,7 @@ fn main() {
         ["Apple", "Banana"],
         ["Bred", "Cheese"],
     ]
-    outln(myArray)
+    println(myArray)
 }
 ```
 

@@ -21,9 +21,9 @@ For example:
 ```jule
 fn main() {
     defer {
-        outln("Hello Defer")
+        println("Hello Defer")
     }
-    outln("Hello World")
+    println("Hello World")
 }
 ```
 In the example above, the output `Hello World` appears before. This is because the deferred scope is defined in the scope of the function and its execution is deferred until the scope of the function exits.

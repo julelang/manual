@@ -14,7 +14,7 @@ For example:
 use "std/debug"
 
 fn main() {
-    outln("I am always here")
+    println("I am always here")
     debug::Outln("I will not be here in production builds")
 }
 ```
@@ -40,6 +40,6 @@ fn main() {
             panic("Magic number is 20, and I do not like this")
         }
     })
-    outln(x)
+    println(x)
 }
 ```

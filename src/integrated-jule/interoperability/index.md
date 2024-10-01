@@ -37,7 +37,7 @@ cpp fn sum([]int): int
 fn main() {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8]
     let total = cpp.sum(numbers)
-    outln(total)
+    println(total)
 }
 ```
 The above example demonstrates the interoperability of Jule with a C++ function that returns total of all values of an integer slice. The C++ header file is written entirely using the Jule API. The `Int`, and `Slice` types used are part of the API. The `Int` data type is equally sensitive to system architecture as in Jule. The Jule source code declares to use `sum.hpp` first and binds the C++ function in it to Jule accordingly. Then a call is made from Jule and the result of the function is written to the command line.

@@ -6,7 +6,7 @@ For example:
 
 ```jule
 fn sayHello() {
-    outln("Hello World")
+    println("Hello World")
 }
 
 fn main() {
@@ -24,7 +24,7 @@ For example:
 use "std/sync"
 
 fn sayHello(mut wg: &sync::WaitGroup) {
-    outln("Hello World")
+    println("Hello World")
     wg.Done()
 }
 

@@ -28,7 +28,7 @@ struct Employee {
 fn main() {
     let emp = Employee{}
     // emp: Employee{name:anonymous, age:18, title:NA, salary:100000}
-    outln(emp)
+    println(emp)
 }
 ```
 
@@ -51,9 +51,9 @@ fn main() {
         age: 24000,
         title: "Wizard",
     }
-    outln(anon)
-    outln(frodo)
-    outln(gandalf)
+    println(anon)
+    println(frodo)
+    println(gandalf)
 }
 ```
 
@@ -167,7 +167,7 @@ struct Dog {}
 
 impl Dog {
     static fn voice() {
-        outln("woof woof")
+        println("woof woof")
     }
 }
 
@@ -192,7 +192,7 @@ impl Number {
 }
 
 fn main() {
-    outln(Number.Pi)
-    outln(Number.E)
+    println(Number.Pi)
+    println(Number.E)
 }
 ```

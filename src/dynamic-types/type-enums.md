@@ -45,9 +45,9 @@ enum Types: type {
 
 fn main() {
     let x: Types = "hello world"
-    outln(x)
+    println(x)
     let y: Types.String = "hello world"
-    outln(y)
+    println(y)
 }
 ```
 
@@ -74,7 +74,7 @@ enum Int: type {
 
 fn main() {
     let a: Int = 20
-    outln(a)
+    println(a)
 }
 ```
 

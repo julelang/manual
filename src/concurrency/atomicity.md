@@ -16,7 +16,7 @@ fn main() {
     for j < 1000000; j++ {
         co addToN()
     }
-    outln(n)
+    println(n)
 }
 ```
 
@@ -52,7 +52,7 @@ fn main() {
 
     wg.Wait()
 
-    outln(n.Load(atomic::MemoryOrder.Relaxed))
+    println(n.Load(atomic::MemoryOrder.Relaxed))
 }
 ```
 

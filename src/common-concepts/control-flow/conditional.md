@@ -9,7 +9,7 @@ For example:
 fn main() {
     let x: any
     if x == nil {
-        outln("x is not initialized")
+        println("x is not initialized")
     }
 }
 ```
@@ -22,11 +22,11 @@ For example:
 fn main() {
     let x = 100
     if x > 1000 {
-        outln("greater than thousand")
+        println("greater than thousand")
     } else if x < 100 {
-        outln("less than hundred")
+        println("less than hundred")
     } else if x == 100 {
-        outln("equals to hundred")
+        println("equals to hundred")
     }
 }
 
@@ -41,9 +41,9 @@ For example:
 fn main() {
     let x = 20
     if x == 20 {
-        outln("x is 20")
+        println("x is 20")
     } else {
-        outln("x is not 20")
+        println("x is not 20")
     }
 }
 ```

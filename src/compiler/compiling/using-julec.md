@@ -4,7 +4,7 @@ Let's start with a simple hello world program and learn compiling from this prog
 We have a `main.jule` file:
 ```jule
 fn main() {
-    outln("Hello, World!")
+    println("Hello, World!")
 }
 ```
 

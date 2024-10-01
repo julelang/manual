@@ -26,9 +26,9 @@ struct Test {}
 impl Baz for Test {}
 
 impl Test {
-    fn Foo(self) { outln("foo") }
-    fn Bar(self) { outln("bar") }
-    fn Baz(self) { outln("baz") }
+    fn Foo(self) { println("foo") }
+    fn Bar(self) { println("bar") }
+    fn Baz(self) { println("baz") }
 }
 
 fn main() {

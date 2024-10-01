@@ -13,11 +13,11 @@ int main(int argc, char *argv[]) {
     s.push(7);
     s = jule::append(s, jule::Slice<jule::Int>::make({8, 9, 10}));
 
-    jule::outln(s.cap());
-    jule::outln(s.len());
+    std::cout << s.cap() << std::endl;
+    std::cout << s.len() << std::endl;
  
     for (auto &item: s)
-        jule::outln(item);
+        jule::pritln(item);
  
     return 0;
 }
@@ -34,8 +34,8 @@ For example:
 jule::Int len = 10;
 jule::Int cap = 10;
 auto s = jule::Slice<jule::Int>::alloc(len, cap);
-jule::outln(s.cap());
-jule::outln(s.len());
+std::cout << s.cap() << std::endl;
+std::cout << s.len() << std::endl;
 ```
 
 The `alloc` method will not initialize memory. To do this, pass your initialize expression as a third argument.
@@ -45,6 +45,6 @@ For example:
 jule::Int len = 10;
 jule::Int cap = 10;
 auto s = jule::Slice<jule::Int>::alloc(len, cap, 0);
-jule::outln(s.cap());
-jule::outln(s.len());
+std::cout << s.cap() << std::endl;
+std::cout << s.len() << std::endl;
 ```

@@ -60,7 +60,7 @@ fn myExceptional()! {
 
 fn main() {
     myExceptional() else {
-        outln(error)
+        println(error)
     }
 }
 ```
@@ -77,10 +77,10 @@ fn myExceptional()!: int {
 
 fn main() {
     let x = myExceptional() else {
-        outln(error)
+        println(error)
         use 10
     }
-    outln(x) // 10
+    println(x) // 10
 }
 ```
 
@@ -113,13 +113,13 @@ fn main() {
     let x = magicDiv(5, 200) else {
         match error {
         | DivError.ByZero:
-            outln("divided by zero")
+            println("divided by zero")
         | DivError.Overflow:
-            outln("denominator higher than 100")
+            println("denominator higher than 100")
         }
         use -1
     }
-    outln(x) // -1
+    println(x) // -1
 }
 ```
 
@@ -139,10 +139,10 @@ fn exceptional1()!: int {
 
 fn main() {
     let x = exceptional1() else {
-        outln(error)
+        println(error)
         use 20
     }
-    outln(x)
+    println(x)
 }
 ```
 

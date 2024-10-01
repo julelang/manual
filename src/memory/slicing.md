@@ -20,9 +20,9 @@ For example:
 ```jule
 fn main() {
     let mySlice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[2:5]) // [3, 4, 5]
-    outln(mySlice[:])   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[:10]) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    outln(mySlice[4:])  // [5, 6, 7, 8, 9, 10]
+    println(mySlice[2:5]) // [3, 4, 5]
+    println(mySlice[:])   // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    println(mySlice[:10]) // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    println(mySlice[4:])  // [5, 6, 7, 8, 9, 10]
 }
 ```

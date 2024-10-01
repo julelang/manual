@@ -51,6 +51,6 @@ cpp fn GetBitsPerPixel(index: int): int
 
 fn main() {
     let depth = cpp.GetBitsPerPixel(0)
-    outln(depth)
+    println(depth)
 }
 ```

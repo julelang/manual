@@ -40,8 +40,8 @@ impl Shape for Circle {
 fn main() {
     let rect: Shape = Rectangle{90, 5}
     let circ: Shape = Circle{90.5}
-    outln(rect.area())
-    outln(circ.area())
+    println(rect.area())
+    println(circ.area())
 }
 ```
 
@@ -67,11 +67,11 @@ impl Bar for Baz {}
 
 impl Baz {
     fn Foo(self) {
-        outln("foo")
+        println("foo")
     }
 
     fn Bar(self) {
-        outln("bar")
+        println("bar")
     }
 }
 ```

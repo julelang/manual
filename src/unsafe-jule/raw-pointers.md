@@ -8,7 +8,7 @@ For example:
 fn main() {
     let x = 200
     let ptr = &x
-    unsafe { outln(*ptr) }
+    unsafe { println(*ptr) }
 }
 ```
 Note that no safety is provided in this regard. Pointers can benefit you, but you have to provide safety yourself. You need to be wary of dangling pointers, buffer overflows, and similar memory issues.
@@ -24,7 +24,7 @@ fn printSliceComponentsWithUnsafe(slc: []int) {
         let mut end = &slc[len(slc)-1]
         end++
         for ptr < end {
-            outln(*ptr)
+            println(*ptr)
             ptr++
         }
     }
@@ -69,6 +69,6 @@ fn main() {
     let x: int = 0
     let mut y = unsafe { (&int)(&x) }
     *y = 20
-    outln(x)
+    println(x)
 }
 ```

@@ -10,7 +10,7 @@ But before that, let's make a deliberate mistake to better understand immutabili
 fn main() {
     let x = 20
     x++
-    outln(x)
+    println(x)
 }
 ```
 The example above is absolutely wrong. Because the variable `x` we have is an immutable variable. And the `x++` statement definitely breaks immutability. In this case, compiler will give error. Now let's repeat the same example using a mutable variable. 
@@ -18,7 +18,7 @@ The example above is absolutely wrong. Because the variable `x` we have is an im
 fn main() {
     let mut x = 20
     x++
-    outln(x)
+    println(x)
 }
 ```
 Currently we want our variable as mutable so the compiler doesn't object to anything.
@@ -39,8 +39,8 @@ fn main() {
     let x = Wrapper{slc: [1,2,3]}
     let mut y = x
     y.slc[0] = 89
-    outln(x.slc[0])
-    outln(y.slc[0])
+    println(x.slc[0])
+    println(y.slc[0])
 }
 ```
 This structure is a mutable structure because it has a field with a mutable type. The slice that the structure contains is mutable when the structure is copied, and if the main structure is immutable, it risks this immutability of the structure. This is because the mutable copy points to the same address and the changes will affect the other copy.
@@ -85,7 +85,7 @@ struct Foo {
 
 impl Foo {
     fn Print(self) {
-        outln("hello")
+        println("hello")
         self.n++
     }
 
@@ -99,7 +99,7 @@ fn main() {
     foo.Print()
     foo.Print()
     foo.Print()
-    outln(foo.Printed())
+    println(foo.Printed())
 }
 ```
 

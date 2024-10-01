@@ -11,11 +11,11 @@ fn main() {
     mut f := fn(a: int, b: int): int {
         ret a + b
     }
-    outln(f(x, y)) // 30
+    println(f(x, y)) // 30
     f = fn(a: int, b: int): int {
         ret a * b
     }
-    outln(f(x, y)) // 200
+    println(f(x, y)) // 200
 }
 ```
 As seen in the example above, two different anonymous functions are used for two different purposes. The syntax is very similar to function definitions, just don't give it a name. So you will have an anonymous function.
@@ -42,7 +42,7 @@ fn main() {
     f := fib()
     mut i := 0
     for i < 20; i++ {
-        outln(f())
+        println(f())
     }
 }
 ```
@@ -81,7 +81,7 @@ fn main() {
         mut &ri := i
         foo(fn() { unsafe { ri++ } })
     }
-    outln(i) // 2
+    println(i) // 2
 }
 ```
 In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.

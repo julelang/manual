@@ -17,7 +17,7 @@ For example:
 fn main() {
     let x: int = 10
     let y: *int = &x
-    outln(y)
+    println(y)
 }
 ```
 The `y` variable is now store memory address of `x` variable. 
@@ -43,8 +43,8 @@ For example:
 fn main() {
     let x: int = 10
     let y: *int = &x
-    outln(y)            // Prints stored address
-    unsafe { outln(*y) } // Prints value at address (so 10)
+    println(y)            // Prints stored address
+    unsafe { println(*y) } // Prints value at address (so 10)
 }
 ```
 
@@ -72,7 +72,7 @@ fn main() {
     let x: int = 10
     let y: *int = &x
     unsafe { *y = 59 } // Assign value
-    outln(x)          // Prints 59
+    println(x)          // Prints 59
 }
 ```
 
@@ -86,7 +86,7 @@ For example:
 fn main() {
     let a: int = 20
     let ptr: *unsafe = &a
-    unsafe { outln(*( (*int)(ptr) )) }
+    unsafe { println(*( (*int)(ptr) )) }
 }
 ```
  In this example, the variable `ptr` is an unsafe pointer and points to the variable `a`. Then we see that this pointer is cast to the `int` pointer and deferenced. As a result, we get the value the `20` because was done right. 
@@ -104,7 +104,7 @@ fn main() {
     let mut p = &s[0]
     let end = p + len(s)
     for p != end; p++ {
-        unsafe { outln(*p) }
+        unsafe { println(*p) }
     }
 }
 ```

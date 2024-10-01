@@ -10,7 +10,7 @@ enum FileMode {
 }
 
 fn main() {
-    outln(FileMode.Read)
+    println(FileMode.Read)
 }
 ```
 As seen in the example above, there is an enumeration definition.
@@ -58,7 +58,7 @@ enum FileMode: u8 {
 }
 
 fn main() {
-    outln(FileMode.Read)
+    println(FileMode.Read)
 }
 ```
 The above enumeration has the data type `u8`.
@@ -131,11 +131,11 @@ For example:
 ```jule
 match "FooBarBaz" {
 | MyEnum.Foo:
-    outln("case1")
+    println("case1")
 | "bar":
-    outln("case2")
+    println("case2")
 | MyEnum.Baz:
-    outln("case3")
+    println("case3")
 }
 ```
 In the example above, the base type being matched is the same as the base type of the enum type `MyEnum`. Therefore, implicit casting is applied for the enum.
@@ -146,11 +146,11 @@ For example:
 ```jule
 match MyEnum.Foo {
 | MyEnum.Foo:
-    outln("case1")
+    println("case1")
 | "bar":
-    outln("case2")
+    println("case2")
 | MyEnum.Baz:
-    outln("case3")
+    println("case3")
 }
 ```
 In the example above, the type of the actual expression matched is enum. Therefore implicit conversion is not allowed. So the code above is incorrect, the expression `"bar"` is not a valid expression for matching.

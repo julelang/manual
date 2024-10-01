@@ -38,7 +38,7 @@ fn main() {
         // Dereference and update value of variable x.
         *p += 40
     }
-    outln(x)
+    println(x)
 }
 ```
 
@@ -49,7 +49,7 @@ Unsafe Jule scope can also be used within expressions. So if you need Unsafe Jul
 For example:
 ```jule
 unsafe fn foo(mut x: *int): int {
-    outln(*x)
+    println(*x)
     *x++
     ret *x
 }

@@ -10,8 +10,8 @@ For code example:
 fn main() {
     let x: f32 = 3.14
     let y: int = (int)(x) // Casting
-    outln(x)              // Prints 3.14
-    outln(y)              // Prints 3
+    println(x)              // Prints 3.14
+    println(y)              // Prints 3
 }
 ```
 As you can see, the variable `x` is of type `f32` and the variable `y` is of type `int`. Normally, variable `y` cannot take variable `x` as a value. However, as seen for example, we can accept the value as `int` by explicitly casting. 

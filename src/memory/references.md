@@ -18,7 +18,7 @@ fn main() {
     let mut a = 20
     let mut &b = a
     b += 20
-    outln(a) // 40
+    println(a) // 40
 }
 ```
 
@@ -30,7 +30,7 @@ fn main() {
     let mut a = 20
     let (mut &x, mut y) = a, 20
     x += y
-    outln(a) // 40
+    println(a) // 40
 }
 ```
 
@@ -59,7 +59,7 @@ fn add_20(mut &a: int) {
 fn main() {
     let mut a = 20
     add_20(a)
-    outln(a) // 40
+    println(a) // 40
 }
 ```
 

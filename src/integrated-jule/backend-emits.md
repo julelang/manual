@@ -31,8 +31,8 @@ fn main() {
     let x = unsafe {
         integ::Emit[f64](`jule::MAX_F64`)
     }
-    outln(x)
-    outln(x == f64.Max)
+    println(x)
+    println(x == f64.Max)
 }
 ```
 

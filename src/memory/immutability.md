@@ -41,7 +41,7 @@ fn main() {
     let s = Test{
         slice: x,
     }
-    outln(s)
+    println(s)
 }
 ```
 

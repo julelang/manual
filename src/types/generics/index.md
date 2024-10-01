@@ -30,9 +30,9 @@ fn sum[T](a: T, b: T) T {
 }
 
 fn main() {
-    outln(sum[int](10, 20))  // 30
-    outln(sum[f32](10, 4.2)) // 14.2
-    outln(sum[f64](4.67, 2)) // 6.67
+    println(sum[int](10, 20))  // 30
+    println(sum[f32](10, 4.2)) // 14.2
+    println(sum[f64](4.67, 2)) // 6.67
 }
 ```
 There is a use for a generic type annotation, as seen in the example above. Use the brackets and write the identifier of the generic type. To specify a type for a generic type, you specify the data type in brackets.
@@ -51,9 +51,9 @@ To use genericed functions as anonymous function, you should instantiate. Since 
 For example:
 ```jule
 fn foo[T1, T2, T3](t1: T1, t2: T2, t3: T3) {
-    outln(t1)
-    outln(t2)
-    outln(t3)
+    println(t1)
+    println(t2)
+    println(t3)
 }
 
 fn main() {
@@ -88,9 +88,9 @@ For example:
 ```jule
 fn printMap[Key, Value](map: map[Key]Value) {
     for key, value in map {
-        out(key)
-        out(": ")
-        outln(value)
+        print(key)
+        print(": ")
+        println(value)
     }
 }
 

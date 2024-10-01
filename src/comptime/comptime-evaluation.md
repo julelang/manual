@@ -25,7 +25,7 @@ For example:
 ```jule
 x := uint(0)
 if x < -1 {
-    outln("impossible case")
+    println("impossible case")
 }
 ```
 The example above has an if that checks that the unsigned integer is less than `-1`. The `-1` literal is untyped, but since it is incompatible with unsigned integer, the compiler will not use it appropriately and will give an error.
@@ -35,7 +35,7 @@ For example:
 ```jule
 x := uint(0)
 if x < uint(-1) {
-    outln("possible case")
+    println("possible case")
 }
 ```
 Since the cast was made in the example above, the `-1` literal now has the exact type `uint` and is cast and converted according to this type at comptime. The above code is not a problem for the compiler since it has the exact type and is cast.
@@ -80,7 +80,7 @@ const MagicNumber = 20
 fn main() {
     let x = MagicNumber
     const xt = comptime::TypeOf(x)
-    outln(xt.Kind())
+    println(xt.Kind())
 }
 ```
 

@@ -10,9 +10,9 @@ static mut n = 0
 
 fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
-    outln("incrementing")
+    println("incrementing")
     n++
-    outln("incremented")
+    println("incremented")
 }
 
 fn main() {
@@ -25,7 +25,7 @@ fn main() {
     }
 
     wg.Wait()
-    outln(n)
+    println(n)
 }
 ```
 
@@ -44,9 +44,9 @@ static mtx = sync::Mutex{} // [!code ++]
 fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
     mtx.Lock() // [!code ++]
-    outln("incrementing")
+    println("incrementing")
     n++
-    outln("incremented")
+    println("incremented")
     mtx.Unlock() // [!code ++]
 }
 
@@ -60,7 +60,7 @@ fn main() {
     }
 
     wg.Wait()
-    outln(n)
+    println(n)
 }
 ```
 

@@ -8,7 +8,7 @@ Example to slices:
 fn main() {
     let mut mySlice: []str = nil
     mySlice = ["Hello", "Jule", "slices!"]
-    outln(mySlice)
+    println(mySlice)
 }
 ```
 Nil is the default value of slices.
@@ -48,7 +48,7 @@ fn sum(values: ...int) int {
 fn main() {
     let mySlice = [90, 32, 6, 53]
     let result = sum(mySlice...)
-    outln(result)
+    println(result)
 }
 ```
 As seen in the example above, the owned variable `mySlice` holds a slice. Its elements are compatible with the variadic parameter. To send, it is sufficient to follow the `...` operator.
@@ -90,7 +90,7 @@ For example:
 ```jule
 fn main() {
     let s = make([]int, 20)
-    outln(s)
+    println(s)
 }
 ```
 At the example above, the `s` variable is 20 sized slices and all elements initialized with default value.
@@ -101,7 +101,7 @@ For example:
 ```jule
 fn main() {
     let s = make([]int, 20, 100)
-    outln(s)
+    println(s)
 }
 ```
 At the example above, the `s` variable is 20 sized slices and first 20 elements initialized with default value. Slice capacity is `100`.
@@ -124,9 +124,9 @@ For append elements into slice, here is the built-in `append` function. The buil
 For example:
 ```jule
 let mut s = [1, 2, 3, 4, 5]
-outln(uintptr(&s[0]))
+println(uintptr(&s[0]))
 s = append(s, 6, 7, 8, 9)
-outln(uintptr(&s[0]))
+println(uintptr(&s[0]))
 ```
 
 The example above, shows basic append operation. The slice `s` has 5 element with 5 length and 5 capacity. Then we appending new elements into slice. The slice `s` has 9 elements with 9 length now. But remember capacity thing. In the beginning, slice `s` have not enough capacity for more 4 elements. Therefore, the `append` function returns new allocated slice, so you can see there is difference between addresses of slice's first element.
@@ -135,9 +135,9 @@ Same example with capacity:
 ```jule
 let mut s = make([]int, 0, 10)
 s = append(s, 1, 2, 3, 4, 5)
-outln(uintptr(&s[0]))
+println(uintptr(&s[0]))
 s = append(s, 6, 7, 8, 9)
-outln(uintptr(&s[0]))
+println(uintptr(&s[0]))
 ```
 
 This time, you can see there is no difference between addresses of first slice's element. Because slice `s` allocated with 10 capacity, so the `append` function just copies new elements to slice and returns same destination slice allocation.

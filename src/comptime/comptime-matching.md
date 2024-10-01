@@ -13,15 +13,15 @@ For example:
 fn main() {
     const match {
     | false | false:
-        outln("foo")
+        println("foo")
     | true | false:
-        outln("bar")
+        println("bar")
     |:
-        outln("baz")
+        println("baz")
     }
 }
 ```
-Since the expression is not given in the example above, it will be mapped to true. As a result of this matching, the case containing the `outln("bar")` call will be matched.
+Since the expression is not given in the example above, it will be mapped to true. As a result of this matching, the case containing the `println("bar")` call will be matched.
 
 If you give it an expression, it will match that expression. As said, this expression must be a type that supports equality checking, that is, the `==` operator.
 
@@ -31,17 +31,17 @@ fn main() {
     const MagicNumber = 30
     const match MagicNumber {
     | 10:
-        outln("foo")
+        println("foo")
     | 20:
-        outln("bar")
+        println("bar")
     | 30:
-        outln("baz")
+        println("baz")
     |:
-        outln("foobarbaz")
+        println("foobarbaz")
     }
 }
 ```
-In the example above, matched with the `MagicNumber` variable, since it's value is `30`, it is matched with `30`. As a result, the case containing the `outln("baz")` statement will be mapped.
+In the example above, matched with the `MagicNumber` variable, since it's value is `30`, it is matched with `30`. As a result, the case containing the `println("baz")` statement will be mapped.
 
 ## Type Matching
 
@@ -55,11 +55,11 @@ For example:
 fn printKind[T]() {
     const match type T {
     | int:
-        outln("type is int")
+        println("type is int")
     | uint:
-        outln("type is uint")
+        println("type is uint")
     |:
-        outln("unknown type")
+        println("unknown type")
     }
 }
 ```
@@ -74,11 +74,11 @@ use "std/comptime"
 fn printType[T]() {
     const match type comptime::TypeOf(T) {
     | int:
-        outln("type is int")
+        println("type is int")
     | uint:
-        outln("type is uint")
+        println("type is uint")
     |:
-        outln("unknown type")
+        println("unknown type")
     }
 }
 ```
@@ -94,13 +94,13 @@ For example:
 fn printKind[T]() {
     const match type T {
     | bool:
-        outln("type is boolean")
+        println("type is boolean")
     | int:
-        outln("type is integer")
+        println("type is integer")
     | f64:
-        outln("type is floating-point")
+        println("type is floating-point")
     | str:
-        outln("type is string")
+        println("type is string")
     |:
         panic("printKind[T]: unsupported type")
     }

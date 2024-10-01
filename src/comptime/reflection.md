@@ -73,7 +73,7 @@ fn PrintFields[T](s: T) {
     const v = comptime::ValueOf(s)
     const fields = t.Decl().Fields()
     const for _, field in fields {
-        outln(v.Field(field.Name()).Unwrap())
+        println(v.Field(field.Name()).Unwrap())
     }
 }
 ```
@@ -99,7 +99,7 @@ struct FooBarBaz {
 fn main() {
     const fields = comptime::TypeOf(FooBarBaz).Decl().Fields()
     const for _, field in fields {
-        outln(field.Name())
+        println(field.Name())
     }
 }
 ```
@@ -121,7 +121,7 @@ struct FooBarBaz {
 fn main() {
     const fields = comptime::TypeOf(FooBarBaz).Fields()
     const for _, field in fields {
-        outln(field.Type().Str())
+        println(field.Type().Str())
     }
 }
 ```
@@ -165,12 +165,12 @@ fn IsValidType[T](): bool {
 }
 
 fn main() {
-    outln(IsValidType[int]())
-    outln(IsValidType[bool]())
-    outln(IsValidType[uintptr]())
-    outln(IsValidType[u8]())
-    outln(IsValidType[i32]())
-    outln(IsValidType[cpp.Int]())
+    println(IsValidType[int]())
+    println(IsValidType[bool]())
+    println(IsValidType[uintptr]())
+    println(IsValidType[u8]())
+    println(IsValidType[i32]())
+    println(IsValidType[cpp.Int]())
 }
 ```
 
@@ -200,7 +200,7 @@ fn main() {
     let mut arr: [5]int
     Fill(arr, 10)
     for _, x in arr {
-        outln(x)
+        println(x)
     }
 }
 ```
@@ -230,7 +230,7 @@ fn printPublicFields[T](x: T) {
     const for _, field in fields {
         const match {
         | field.Public():
-            outln(expr.Field(field.Name()).Unwrap())
+            println(expr.Field(field.Name()).Unwrap())
         }
     }
 }

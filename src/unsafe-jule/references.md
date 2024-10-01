@@ -21,7 +21,7 @@ fn main() {
     let x = 10
     let &y = x
     fn() {
-        unsafe { outln(y) }
+        unsafe { println(y) }
     }()
 }
 ```
