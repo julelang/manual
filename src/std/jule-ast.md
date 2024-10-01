@@ -488,6 +488,7 @@ Assign statement.
 ```jule
 struct Stmt {
     Token: &token::Token
+    End:   &token::Token
     Data:  StmtData
 }
 ```
