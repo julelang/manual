@@ -81,7 +81,7 @@ Uses internally mutable buffer.
 
 **Methods:**
 
-`fn File(mut self): &fs::File`\
+`fn File(mut self): &os::File`\
 Returns internal file buffer.
 
 `fn Read(mut self, mut buf: []byte)!: (n: int)`\
@@ -115,7 +115,7 @@ Scans bytes line-by-line.
 `static fn New(mut r: Reader): &Scanner`\
 New `&Scanner` from `Reader`.
 
-`static fn Newf(mut f: &fs::File): &Scanner`\
+`static fn Newf(mut f: &os::File): &Scanner`\
 New `&Scanner` from `&File`.
 Uses `&FileStream` for `Reader` trait compatibility.
 

@@ -458,16 +458,8 @@ export default defineConfig({
                 { text: 'std/encoding/json', link: '/std/encoding-json' },
               ],
             },
-            { text: 'std/env', link: '/std/env' },
             { text: 'std/flag', link: '/std/flag' },
             { text: 'std/fmt', link: '/std/fmt' },
-            {
-              text: 'std/fs',
-              link: '/std/fs',
-              items: [
-                { text: 'std/fs/path', link: '/std/fs-path' },
-              ],
-            },
             {
               text: 'std/hash',
               link: '/std/hash',
@@ -515,7 +507,13 @@ export default defineConfig({
               items: [],
             },
             { text: 'std/net', link: '/std/net' },
-            { text: 'std/process', link: '/std/process' },
+            {
+              text: 'std/os',
+              link: '/std/os',
+              items: [
+                { text: 'std/os/path', link: '/std/os-filepath' },
+              ],
+            },
             { text: 'std/runtime', link: '/runtime/' },
             { text: 'std/slices', link: '/std/slices' },
             { text: 'std/strings', link: '/std/strings' },

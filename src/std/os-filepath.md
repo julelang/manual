@@ -1,4 +1,4 @@
-# std/fs/path
+# std/os/filepath
 
 ## Constants
 ```jule

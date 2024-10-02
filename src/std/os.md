@@ -1,18 +1,58 @@
-# std/fs
+# std/os
+
+## Functions
+
+```jule
+fn Exit(code: int)
+```
+Causes the current program to exit with the given status code.\
+Conventionally, code zero indicates success, non-zero an error.
+
+```jule
+fn Executable(): str
+```
+Returns executable path.\
+Returns empty string if any error occurs. 
+
+```jule
+fn Args(): []str
+```
+Returns command-line arguments.
+Starts with the program name.
+
+```jule
+fn Env(): []str
+```
+Returns envrionment variables.
+
+```jule
+fn Getwd()!: str
+```
+Returns an absolute path name of the current working directory of the calling process.
+
+Possible errors (`Error`): `Denied`
+
+```jule
+fn Chdir(path: str)!
+```
+Changes the current working directory to the given directory.
+
+Possible errors (`Error`): `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `InsufficientMemory`
 
 ## Structs
+
 ```jule
-struct Status {}
+struct Stat {}
 ```
 Status information. 
 
 **Methods:**
 
-`static fn Of(path: str)!: &Status`\
-Returns a Status describing the path.\
+`static fn Of(path: str)!: Stat`\
+Returns a Stat describing the path.\
 Returns nil reference if error occurs.
 
-Possible errors: `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
+Possible errors (`FSError`): `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 
 `fn IsDir(self): bool`\
 Reports path is directory or not.
@@ -20,18 +60,35 @@ Reports path is directory or not.
 `fn IsReg(self): bool`\
 Reports path is regular file or not.
 
-`fn Size(): uint`\
+`fn Size(self): uint`\
 Total size in bytes of regular file or symbolic link.
 
 ---
 
 ```jule
-struct DirEntry {
+struct Dir {
     Name: str
-    Stat: &Status
+    Stat: Stat
 }
 ```
 Directory entry.
+
+**Methods:**
+
+`static fn Read(path: str)!: []Dir`\
+Reads the named directory and returs all its directory entries can read.
+
+Possible errors (`FSError`): `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
+
+`static fn Create(path: str)!`\
+Creates directory.
+
+Possible errors (`FSError`): `Denied` `Exist` `ReadOnly` `NoSpace`
+
+`static fn Remove(path: str)!`\
+Removes empty directory.
+
+Possible errors (`FSError`): `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ---
 
@@ -66,66 +123,97 @@ Reads bytes of file. First, learns byte-size of file. Then reads bytes and retur
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy` `Device` `Seek` `InsufficientMemory` `Buffer`
 
 `static fn Write(path: str, data: []byte, perm: int)!`\
-Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state.
-
-`static fn WriteStr(path: str, &data: str, perm: int)!`\
-Same as [`File.Write`], designed for strings.
+Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state. Calls internally `File.Open`, `File.Write`, `File.Close` and forwards any exceptional.
 
 `static fn Create(path: str)!: &File`\
-Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr.
+Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr. Calls internally `File.Open` and forwards any exceptional.
 
 `fn Seek(mut self, offset: int, origin: Seek)!: int`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
-Possible errors: `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
+Possible errors (`FSError`): `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
 
 `fn Read(mut self, mut buf: []byte)!: (n: int)`\
 Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
 
-Possible errors: `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
+Possible errors (`FSError`): `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
-\
 `fn Write(mut self, buf: []byte)!: (n: int)`\
 Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buf.
 
-Possible errors: `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
+Possible errors (`FSError`): `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
 
-\
-`fn WriteStr(mut self, &data: str)!: (n: int)`\
-Same as [`Write`], designed for strings.
-
-\
 `fn Close(mut self)!`\
 Closes file handle. 
 
-Possible errors: `InvalidDescriptor` `Signal` `IO`
+Possible errors (`FSError`): `InvalidDescriptor` `Signal` `IO`
 
 ---
 
 ```jule
-struct Directory
+struct Cmd {
+    Args: []str
+    Env:  []str
+}
 ```
-Directory.
+Runs a command in the operating system. There is no pipe for the output of the command, so any output will appear on the standard output.
+
+The Args stores command-line arguments. The first argument is not should to be the path of the executable. Just pass necessary arguments.
+
+The Env stores environment variables. If Env is nil or `len(Env) == 0`, child process will use copy of the parent process's environment variables. Environment variables should be in the `"KEY=value"` format.
 
 **Methods:**
 
-`static fn Read(path: str)!: []&DirEntry`\
-Reads the named directory and returs all its directory entries can read.
+`static fn New(path: str): &Cmd`\
+Returns Cmd instance for path.
 
-Possible errors: `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
+`fn Spawn(self)!`\
+Spawns new child-process and executes command. Panics if command is already spawned. Use the [`Wait`] or [`Kill`] method to make respawnable. Exceptionals will always be `CmdError`.
 
-`static fn Create(path: str)!`\
-Creates directory.
+`fn Kill(self)!`\
+Kills process. Fails if process is not alive. Panics if command is not spawned. Exceptionals will always be `CmdError`.
 
-Possible errors: `Denied` `Exist` `ReadOnly` `NoSpace`
-
-`static fn Remove(path: str)!`\
-Removes empty directory.
-
-Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
+`fn Wait(self)!: int`\
+Waits complete for running of process. Returns exit code of process. Panics if command is not spawned. Exceptionals will always be `CmdError`.
 
 ## Enums
-`enum Error`
+
+```jule
+enum CmdError
+```
+Cmd error codes.
+
+**Fields:**
+
+- `Denied`: Permission is not enough.
+- `NotExist`: One or more components of the new process path name of the file do not exist or is a null pathname.
+- `Env`: Environment variables are represented in wrong format or an error occurred when assigning.
+- `Spawn`: An error occurred spawning.
+- `Other`: Other system error.
+
+---
+
+```jule
+enum Error
+```
+General OS error codes.
+
+**Fields:**
+- `Denied`: Search permission is denied for a component of the path prefix
+- `IO`: Input/Output error, an error occurred while reading from the file system
+- `Loop`: A loop exists in symbolic links encountered during resolution of the path argument
+- `LongPath`: The length of the path argument exceeds maxium path length or a pathname component is longer than maximum name length
+- `NotExist`: A component of path does not name an existing file or path is an empty string
+- `NotDir`: A component of the path prefix is not a directory
+- `InsufficientMemory`: Insufficient memory to complete the operation
+- `Device`: Device did not respond
+
+---
+
+```jule
+enum FSError
+```
+File system error codes.
 
 **Fields:**
 - `Denied`: Search permission is denied for a component of the path prefix
@@ -159,7 +247,9 @@ Possible errors: `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ---
 
-`enum Seek: int`\
+```jule
+enum Seek: int
+```
 Seek whence values.
 
 **Fields:**
@@ -169,7 +259,9 @@ Seek whence values.
 
 ---
 
-`enum OFlag: int`\
+```jule
+enum OFlag: int
+```
 Flags to open wrapping those of the underlying system.\
 Not all flags may be implemented on a given system.\
 Exactly one of Rdonly, Wronly, or Rdwr must be specified. 

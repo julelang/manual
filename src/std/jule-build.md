@@ -31,7 +31,7 @@ Filename of module file.
 
 ---
 
-### `static mut Os: str`
+### `static mut OS: str`
 Target operating system.\
 Setted to runtime operating system by default.
 
@@ -55,16 +55,6 @@ Valid extensions of C++ source files.
 
 ### `static ObjectiveCppExts: [...]str`
 Valid extensions of Objective-C++ source files.
-
----
-
-### `static Distos: [...]Os`
-List of supported operating systems.
-
----
-
-### `static Distarch: [...]Arch`
-List of supported architectures.
 
 ---
 
@@ -211,7 +201,7 @@ Compiler directives.
 
 ---
 
-`enum Os: str`
+`enum DistOS: str`
 
 Operating Systems for file annotation kind.
 
@@ -223,7 +213,7 @@ Operating Systems for file annotation kind.
 
 ---
 
-`enum Arch: str`
+`enum DistArch: str`
 
 Architectures for file annotation kind.
 
