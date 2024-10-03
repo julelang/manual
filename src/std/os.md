@@ -3,6 +3,21 @@
 ## Functions
 
 ```jule
+fn Stdin(): &Stdio
+```
+Returns Stdio for the standard input file descriptor.
+
+```jule
+fn Stdout(): &Stdio
+```
+Returns Stdio for the standard output file descriptor.
+
+```jule
+fn Stderr(): &Stdio
+```
+Returns Stdio for the standard error file descriptor.
+
+```jule
 fn Exit(code: int)
 ```
 Causes the current program to exit with the given status code.\
@@ -101,6 +116,16 @@ It works like a wrapper when it comes to console handle like stdin, stdout or st
 
 There may be system call differences and performance differences for console handlers depending on the operating system. For example, Windows has an overhead for UTF-16 processing.
 
+::: info
+**Implemented Traits**
+- io::Reader
+- io::ReadCloser
+- io::Writer
+- io::WriteCloser
+- io::ReadWriter
+- io::Stream
+:::
+
 **Methods:**
 
 `static fn New(handle: uintptr): &File`\
@@ -175,6 +200,50 @@ Kills process. Fails if process is not alive. Panics if command is not spawned. 
 
 `fn Wait(self)!: int`\
 Waits complete for running of process. Returns exit code of process. Panics if command is not spawned. Exceptionals will always be `CmdError`.
+
+---
+
+```jule
+struct Stdio
+```
+Safe file handler wrapper for the standard file descriptors. Implements safe and extended functionalities for the standard output, standard error and standard input file descriptors. In general, it is a File wrapper for the handle. Any exceptional will be `FsError` and forwarded from File's methods.
+
+::: info
+**Implemented Traits**
+- io::Reader
+- io::Writer
+- io::ReadWriter
+- io::ByteReader
+- io::RuneWriter
+- io::StrWriter
+:::
+
+**Methods:**
+
+`unsafe fn File(mut self): &File`\
+Returns File handle. It is unsafe because using File handle directly may be not safe. Stdio handlers use mutable internal handlers, so any mutation may will cause issues.
+
+`fn Read(mut self, mut buf: []byte)!: (n: int)`\
+Implements the `io::Reader` trait.
+Panics if file descriptor is not standard input.
+
+`fn Write(mut self, buf: []byte)!: (n: int)`\
+Implements the `io::Writer` trait. Panics if file descriptor is not standard output or standard error.
+
+`fn ReadByte(mut self)!: (b: byte, n: int)`\
+Implements the `io::ByteReader` trait. Panics if file descriptor is not standard input.
+
+`fn WriteByte(mut self, b: byte)!`\
+Implements the `io::ByteWriter` trait. Panics if file descriptor is not standard output or standard error.
+
+`fn WriteRune(mut self, r: rune)!: (n: int)`\
+Implements the `io::RuneWriter` trait. Panics if file descriptor is not standard output or standard error.
+
+`fn WriteStr(mut self, s: str)!: (n: int)`\
+Implements the `io::WriteStr` trait. Calls the `Stdio.Write` internally and forwards any exceptinal.
+
+`fn ReadLine(mut self)!: str`\
+Reads input until the end of the line and returns as string. Result string is not include newline. Panics if file descriptor is not standard input.
 
 ## Enums
 

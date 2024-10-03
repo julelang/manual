@@ -1,108 +1,166 @@
 # std/io
-## Functions
-
-```jule
-fn Stdin(): &FileStream
-```
-Returns FileStream for stdin.
-
----
-
-```jule
-fn Stdout(): &FileStream
-```
-Returns FileStream for stdout.
-
----
-
-```jule
-fn Stderr(): &FileStream
-```
-Returns FileStream for stderr.
 
 ## Traits
 
 ```jule
-trait Reader
+trait Reader {
+    fn Read(mut self, mut buf: []byte)!: (n: int)
+}
 ```
-Reader trait mask for stream reader.
+Implements the basic Read method.
 
-**Methods:**
+Reads up to `len(buf)` bytes into buf. It returns the number of bytes read `(0 <= n <= len(buf))`. Even if Read returns `n < len(buf)`, it may use all of buf as scratch space during the call. If some data is available but not `len(buf)` bytes, Read conventionally returns what is available instead of waiting for more.
 
-`fn Read(mut self, mut buf: []byte)!: (n: int)`
+If `len(buf) == 0`, Read should always return `n == 0`. Implementations of Read are should return zero byte count for EOF. If `len(buf) != 0` and and EOF reached, should return zero byte count to represent EOF.
+
+The Read method mutable because implementation may should do mutable operations, or this method may called needed from the mutable method, which is not cannot be internally mutable. Such a mutable behaviors should be documented by the implementation.
+
+Implementations must not retain buf. Exceptionals are not standardized. Should be documented by implementations.
 
 ---
 
 ```jule
-trait Writer
+trait Writer {
+    fn Write(mut self, buf: []byte)!: (n: int)
+}
 ```
-Reader trait mask for stream writer.
+Implements the basic Write method.
 
-**Methods:**
+Write writes `len(buf)` bytes from buf to the underlying data stream. It returns the number of bytes written from `buf (0 <= n <= len(buf))` and any error encountered that caused the write to stop early. Write must remain the slice data without any mutation after call.
 
-`fn Write(mut self, buf: []byte)!: (n: int)`
+Implementations must not retain buf. Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait StrWriter {
+    fn WriteStr(mut self, s: str)!: (n: int)
+}
+```
+Implements the basic WriteStr method.
+
+The WriteStr method similar to `Writer.Write` method but takes string. Behavior should be same as the `Writer.Write` method.
+
+Implementations must not retain s. Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait ByteReader {
+    fn ReadByte(mut self)!: (byte, n: int)
+}
+```
+Implements the basic ReadByte method.
+
+It should read byte and return one for n without throwing exceptional if success. Is should return zero for n for EOF. If read failed, should throw exceptional.
+
+The ReadByte method mutable because of same reasons of the `Writer` trait.
+
+Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait ByteWriter {
+    fn WriteByte(mut self, b: byte)!
+}
+```
+Implements the basic WriteByte method.
+
+It should write byte and return without throwing exceptional if success. If write failed, should throw exceptional.
+
+Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait RuneReader {
+    fn ReadRune(mut self)!: rune
+}
+```
+Implements the basic ReadRune method.
+
+It should read rune and return without throwing exceptional if success. If raed failed, should throw exceptional.
+
+The ReadRune method mutable because of same reasons of the `Writer` trait.
+
+Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait RuneWriter {
+    fn WriteRune(mut self, r: rune)!: (n: int)
+}
+```
+Implements the basic WriteRune method.
+
+It should write rune and return written count without throwing exceptional if success. If write failed, should throw exceptional.
+
+The return count may be based on bytes or runes by implementation. For example, for bytes, it may return count of written bytes, or for runes returns one for a single rune. It should be documented by the implementation.
+
+Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait Closer {
+    fn Close(mut self)!
+}
+```
+Implements the basic Close method.
+
+The behavior of the Close method is not standardized. Specific implementations should document their own behavior. After first call the Close method behavior may be undefined, but exceptional throw recommended if any error should be occur.
+
+The Close method mutable because of same reasons of the Writer trait.
+
+Exceptionals are not standardized. Should be documented by implementations.
+
+---
+
+```jule
+trait ReadCloser {
+    Reader
+    Closer
+}
+```
+Inheritance group for the `Reader` and `Closer` traits.
+
+---
+
+```jule
+trait WriteCloser {
+    Writer
+    Closer
+}
+```
+Inheritance group for the `Writer` and `Closer` traits.
+
+---
+
+```jule
+trait ReadWriter {
+    Reader
+    Writer
+}
+```
+Inheritance group for the `Reader` and `Writer` traits.
 
 ---
 
 ```jule
 trait Stream {
     Reader
+    ReadCloser
     Writer
+    WriteCloser
+    ReadWriter
+    Closer
 }
 ```
-Stream trait mask for R/W streams.
+Inheritance group for the `Reader`, `ReadCloser`, `Writer`, `WriteCloser`, `ReadWriter` and `Closer` traits.
 
----
-
-```jule
-trait WriterCloser {
-    Reader
-}
-```
-Reader and closer trait mask for read/close streams.
-
-**Methods:**
-
-`fn Close(mut self)!`
-
-## Structures
-
-```jule
-struct FileStream
-```
-Stream implementation for file handles.
-Uses internally mutable buffer.
-::: info
-**Implemented Traits**
-- Reader
-- Writer
-- Stream
-:::
-
-**Methods:**
-
-`fn File(mut self): &os::File`\
-Returns internal file buffer.
-
-`fn Read(mut self, mut buf: []byte)!: (n: int)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow.
-
-`fn Write(mut self, buf: []byte)!: (n: int)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buf.
-
-`fn WriteStr(mut self, &buf: str)!: (n: int)`\
-Same as Write, but writes string.
-This method is more efficient than Write method for strings.
-
-`fn ReadLineBytes(mut self)!: []byte`\
-Same as ReadLine method, but returns in bytes.
-
-`fn ReadLine(mut self)!: str`\
-Reads line from file handle via &File.read method.
-Returns bytes until end of the line, line delimiter is not included.
-Returns zero-length string when reached EOF.
-
----
+## Structs
 
 ```jule
 struct Scanner
@@ -129,42 +187,3 @@ Returns text from bytes of recent scan.
 
 `fn Scan(self)!: bool`\
 Scans line from handle via read method. Scans bytes until end of the line, line delimiter is not included. Reports whether readed byte into buffer. Forwards any exceptional.
-
----
-
-```jule
-struct ByteStream
-```
-Stream implementation for bytes.
-Uses internally mutable buffer.
-Does not clearing internal buffer at all.
-Large buffers can be memory hungry.
-
-::: info
-**Implemented Traits**
-- Reader
-- Writer
-- Stream
-:::
-
-**Methods:**
-
-`static fn New(): &ByteStream`\
-Returns new ByteStream instance.
-
-`fn Data(self): bool`\
-Reports whether buffer have readable data.
-
-`fn Fit(mut self)`\
-Removes readed bytes from buffer.
-Maybe help to reduce memory usage for large buffers.
-
-`fn Read(mut self, mut buf: []byte)!: (n: int)`\
-Read bytes to buffer from stream and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow.
-
-`fn Write(mut self, buf: []byte)!: (n: int)`\
-Writes bytes to stream and returns writed byte count. The number of bytes written can never exceed the length of the buf.
-
-`fn WriteStr(mut self, &buf: str)!: (n: int)`\
-Same as Write, but writes string.
-This method is more efficient than Write method for strings.

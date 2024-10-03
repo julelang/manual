@@ -260,22 +260,30 @@ struct Builder
 String builder for efficient concatenation.
 Optimized for single string building not for repeated use.
 
+::: info
+**Implemented Traits**
+- io::Writer
+- io::ByteWriter
+- io::RuneWriter
+- io::StrWriter
+:::
+
 **Methods:**
 
 `static fn New(cap: int): Builder`\
 Returns new string builder with capacity.
 
-`fn Write(mut self, b: []byte)`\
-Writes bytes to buffer.
+`fn Write(mut self, b: []byte)!: (n: int)`\
+Writes bytes to buffer. Never throws an exceptional.
 
-`fn WriteStr(mut self, s: str)`\
-Writes bytes to buffer.
+`fn WriteStr(mut self, s: str)!: (n: int)`\
+Writes bytes to buffer. Never throws an exceptional.
 
-`fn WriteByte(mut self, b: byte)`\
-Writes byte to buffer.
+`fn WriteByte(mut self, b: byte)!`\
+Writes byte to buffer. Never throws an exceptional.
 
-`fn WriteRune(mut self, r: rune)`\
-Writes rune into buffer.
+`fn WriteRune(mut self, r: rune)!: (n: int)`\
+Writes rune into buffer. Returns written byte count. Never throws an exceptional.
 
 `fn Str(mut self): str`\
 Returns as string, then calls the `Clear` method.

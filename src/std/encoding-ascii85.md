@@ -10,10 +10,12 @@ Returns the maximum length of an encoding of n source bytes.
 ----
 
 ```jule
-fn NewEncoder(mut w: io::Writer): io::WriterCloser
+fn NewEncoder(mut w: io::Writer): io::WriteCloser
 ```
 Returns new Ascii85 encoder for stream.
 Encoder forwards any exception.
+The `Close` method of the encoder flushes any pending output.
+It is an error to call write after calling close.
 
 ---
 

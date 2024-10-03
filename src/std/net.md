@@ -284,7 +284,7 @@ Accepts incoming connection, returns `&TcpConn`. All exceptionals are error code
 `fn Network(self): Network`\
 Returns network name which is listening. If connection closed, returns `Network.Tcp` as a general network.
 
-`fn Close(self)!`\
+`fn Close(mut self)!`\
 Closes connection. All exceptionals are error code of implementation.
 
 ---
@@ -302,7 +302,7 @@ TCP connection. In most cases, represents TCP client.
 - io::Reader
 - io::Writer
 - io::Stream
-- io::WriterCloser
+- io::WriteCloser
 :::
 
 **Methods:**
@@ -344,7 +344,7 @@ UDP connection. This structure represents server and client connections.
 - io::Reader
 - io::Writer
 - io::Stream
-- io::WriterCloser
+- io::WriteCloser
 :::
 
 **Methods:**
@@ -408,26 +408,28 @@ Return address in string form.
 
 ```jule
 trait Conn {
-    fn Read(mut self, mut buf: []byte)!: int
-    fn Write(mut self, buf: []byte)!: int
+    io::Reader
+    io::Writer
+    io::Closer
+    fn SetReadTimeout(mut self, timeout: time::DurInt)!
+    fn SetWriteTimeout(mut self, timeout: time::DurInt)!
     fn Network(self): Network
-    fn Close(mut self)!
 }
 ```
 Common connection behavior.
+Inherits the `io::Reader`, `io::Writer`, and `io::Closer` traits.
 
 ---
 
 ```jule
 trait Listener {
+    io::Closer
     fn Accept(self)!: Conn
-    fn SetReadTimeout(mut self, timeout: time::DurInt)!
-    fn SetWriteTimeout(mut self, timeout: time::DurInt)!
     fn Network(self): Network
-    fn Close(self)!
 }
 ```
 Common listener behavior.
+Inherits the `io::Closer` trait.
 
 ---
 
