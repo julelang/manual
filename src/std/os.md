@@ -136,12 +136,12 @@ There may be system call differences and performance differences for console han
 
 ::: info
 **Implemented Traits**
-- io::Reader
-- io::ReadCloser
-- io::Writer
-- io::WriteCloser
-- io::ReadWriter
-- io::Stream
+- `io::Reader`
+- `io::ReadCloser`
+- `io::Writer`
+- `io::WriteCloser`
+- `io::ReadWriter`
+- `io::Stream`
 :::
 
 **Methods:**
@@ -228,12 +228,12 @@ Safe file handler wrapper for the standard file descriptors. Implements safe and
 
 ::: info
 **Implemented Traits**
-- io::Reader
-- io::Writer
-- io::ReadWriter
-- io::ByteReader
-- io::RuneWriter
-- io::StrWriter
+- `io::Reader`
+- `io::Writer`
+- `io::ReadWriter`
+- `io::ByteReader`
+- `io::RuneWriter`
+- `io::StrWriter`
 :::
 
 **Methods:**

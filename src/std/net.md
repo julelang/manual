@@ -200,7 +200,7 @@ Represents the address of a TCP end point.
 
 ::: info
 **Implemented Traits**
-- Addr
+- `Addr`
 :::
 
 **Methods:**
@@ -232,7 +232,7 @@ Represents the address of a UDP end point.
 
 ::: info
 **Implemented Traits**
-- Addr
+- `Addr`
 :::
 
 **Methods:**
@@ -260,7 +260,7 @@ TCP listener. In most cases, represents TCP server.
 
 ::: info
 **Implemented Traits**
-- Listener
+- `Listener`
 :::
 
 **Methods:**
@@ -298,11 +298,11 @@ TCP connection. In most cases, represents TCP client.
 
 ::: info
 **Implemented Traits**
-- Conn
-- io::Reader
-- io::Writer
-- io::Stream
-- io::WriteCloser
+- `Conn`
+- `io::Reader`
+- `io::Writer`
+- `io::Stream`
+- `io::WriteCloser`
 :::
 
 **Methods:**
@@ -340,11 +340,11 @@ UDP connection. This structure represents server and client connections.
 
 ::: info
 **Implemented Traits**
-- Conn
-- io::Reader
-- io::Writer
-- io::Stream
-- io::WriteCloser
+- `Conn`
+- `io::Reader`
+- `io::Writer`
+- `io::Stream`
+- `io::WriteCloser`
 :::
 
 **Methods:**

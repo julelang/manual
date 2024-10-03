@@ -262,10 +262,10 @@ Optimized for single string building not for repeated use.
 
 ::: info
 **Implemented Traits**
-- io::Writer
-- io::ByteWriter
-- io::RuneWriter
-- io::StrWriter
+- `io::Writer`
+- `io::ByteWriter`
+- `io::RuneWriter`
+- `io::StrWriter`
 :::
 
 **Methods:**

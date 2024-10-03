@@ -74,7 +74,7 @@ struct Enum {
 Enum.
 ::: info
 **Implemented Traits**\
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -107,7 +107,7 @@ struct TypeEnum {
 TypeEnum.
 ::: info
 **Implemented Traits**\
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -142,7 +142,7 @@ struct Data {
 Value data.
 ::: info
 **Implemented Traits**\
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -614,7 +614,7 @@ struct ParamIns {
 Parameter instance.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -634,7 +634,7 @@ struct FnIns {
 Function instance. 
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -715,7 +715,7 @@ Import information.\
 Represents imported package by use declaration. 
 ::: info
 **Implemented Traits**
-- Lookup
+- `Lookup`
 :::
 
 ---
@@ -728,7 +728,7 @@ struct Package {
 Package.
 ::: info
 **Implemented Traits**
-- Lookup
+- `Lookup`
 :::
 
 ---
@@ -1116,7 +1116,7 @@ struct StructIns {
 Structure instance.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -1167,7 +1167,7 @@ struct SymTab {
 Structure instance.
 ::: info
 **Implemented Traits**
-- Lookup
+- `Lookup`
 :::
 
 ---
@@ -1186,7 +1186,7 @@ struct Trait {
 Trait.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -1227,7 +1227,7 @@ struct TypeAlias {
 Type alias.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -1243,7 +1243,7 @@ struct TypeKind {
 Evaluated type declaration.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -1331,7 +1331,7 @@ struct Prim {
 Primitive type. 
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
@@ -1397,7 +1397,7 @@ struct Slc {
 Slice type.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -1410,7 +1410,7 @@ struct Tuple {
 Tuple type.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -1424,7 +1424,7 @@ struct Map {
 Map type.
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -1437,7 +1437,7 @@ struct Arr {
 Array type. 
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 ---
@@ -1450,7 +1450,7 @@ struct Ptr {
 Pointer type. 
 ::: info
 **Implemented Traits**
-- Kind
+- `Kind`
 :::
 
 **Methods:**
