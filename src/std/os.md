@@ -1,5 +1,23 @@
 # std/os
 
+## Globals
+
+```jule
+const O_RDONLY: oFlag // Open the file read-only
+const O_WRONLY: oFlag // Open the file write-only
+const O_RDWR: oFlag   // Open the file read-write
+const O_APPEND: oFlag // Append data to the file when writing
+const O_CREATE: oFlag // Create a new file if none exists
+const O_EXCL: oFlag   // Used with O_CREATE, file must not exist
+const O_SYNC: oFlag   // Open for synchronous I/O
+const O_TRUNC: oFlag  // Truncate regular writable file when opened
+```
+Flags to open wrapping those of the underlying system.
+Not all flags may be implemented on a given system.
+Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified.
+
+All flags have the underlying enum type for type safety.
+
 ## Functions
 
 ```jule
@@ -132,8 +150,8 @@ There may be system call differences and performance differences for console han
 Returns new `&File` by handle.
 If hadle <= 0, returns nil reference.
 
-`static fn Open(path: str, flag: OFlag, mode: int)!: &File`\
-Opens file stream with named file, specified flag (OFlag.Rdwr, OFlag.Trunc etc.) and perm. If named file does not exist and OFlag.Creat flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations.
+`static fn Open(path: str, flag: oFlag, mode: int)!: &File`\
+Opens file stream with named file, specified flag (O_RDWR, O_TRUNC etc.) and perm. If named file does not exist and O_CREATE flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations.
 
 Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProcessLimit` `LongPath` `SystemWideLimit` `NotExist` `UnableStream` `NoSpace` `NotDir` `Device` `Overflow` `ReadOnly` `Retry` `Busy`
 
@@ -151,7 +169,7 @@ Possible errors: `Denied` `Exist` `Signal` `SyncIO` `IO` `IsDir` `Loop` `PerProc
 Writes data to the named file, creating it if necessary. If the file does not exist, creates it with permissions perm (before umask); otherwise truncates it before writing, without changing permissions. Since requires multiple system calls to complete, a failure mid-operation can leave the file in a partially written state. Calls internally `File.Open`, `File.Write`, `File.Close` and forwards any exceptional.
 
 `static fn Create(path: str)!: &File`\
-Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode OFlag.Rdwr. Calls internally `File.Open` and forwards any exceptional.
+Creates or truncates the named file. If the file already exists, it is truncated. If the file does not exist, it is created with mode 0666 (before umask). If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode O_RDWR. Calls internally `File.Open` and forwards any exceptional.
 
 `fn Seek(mut self, offset: int, origin: Seek)!: int`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
@@ -325,22 +343,3 @@ Seek whence values.
 - `Set`: Seek relative to the origin of the file
 - `Cur`: Seek relative to the current offset
 - `End`: Seek relative to the end
-
----
-
-```jule
-enum OFlag: int
-```
-Flags to open wrapping those of the underlying system.\
-Not all flags may be implemented on a given system.\
-Exactly one of Rdonly, Wronly, or Rdwr must be specified. 
-
-**Fields:**
-- `Rdonly`: Open the file read-only
-- `Wronly`: Open the file write-only
-- `Rdwr`: Open the file read-write
-- `Append`: Append data to the file when writing
-- `Create`: Create a new file if none exists
-- `Excl`: Used with OFlag.Create, file must not exist
-- `Sync`: Open for synchronous I/O
-- `Trunc`: Truncate regular writable file when opened
