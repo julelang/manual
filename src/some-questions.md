@@ -6,7 +6,7 @@
 - [Is Jule the C++ successor?](#is-jule-the-c-successor)
 - [Is Jule experimental?](#is-jule-experimental)
 - [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
-- [Why exceptionals designed instead of using optional types?](#why-exceptionals-designed-instead-of-using-optional-types)
+- [Why Jule uses exceptionals instead other error handling methods?](#why-jule-uses-exceptionals-instead-other-error-handling-methods)
 - [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
 - [Why Jule have not built-in methods?](#why-jule-have-not-built-in-methods)
 - [Why are null values ​allowed?](#why-are-null-values-%E2%80%8Ballowed)
@@ -16,6 +16,7 @@
 - [Will runtime reflection be added?](#will-runtime-reflection-be-added)
 - [Why Jule have an optimizing compiler?](#why-jule-have-an-optimizing-compiler)
 - [Jule have a runtime?](#jule-have-a-runtime)
+- [Why receiver parameters always named as self?](#why-receiver-parameters-always-named-as-self)
 
 ### Why an another language?
 
@@ -39,11 +40,19 @@ No. Jule himself is not experimental. But it may contain some experimental ideas
 
 Only two languages: Go and Rust. Mostly Go.
 
-### Why exceptionals designed instead of using optional types?
+### Why Jule uses exceptionals instead other error handling methods?
+
+Because exceptional handling is considered more successful and safe in using an alternative value or handling exceptional and returning in elegant.
 
 Exceptionals was evaluated as more suitable in terms of readability and safety. Optional types can be checked at any time. Exceptionals are particularly useful for error handling and can be used somewhat like optionals. It is required to be checked by the developer and this must be done instantly, that is, the check is not postponed, unlike optional types.
 
-Exceptional handling is considered more successful in using an alternative value or handling exceptional and returning in elegant way.
+Exceptionals are typically similar to Go's `error` returns. However, in Go, error returns can be easily ignored, and it is easy to forget this because it is necessary to know the return type to understand that the ignored return is an error. Although this is especially true for functions that do not return errors and always return a nil error because they implement an interface, such as `strings.Builder`, the relevant function may return an error in future implementations. Ignoring this may cause various problems when switching between versions. This is also an uncertainty for new contributors until they look at the documentation.
+
+Due to these problems, Jule adopted the exceptionals design. They basically provide a hybrid experience of Go's error-handling method and optional types. Exceptions due to strict behavior aim to solve all these problems.
+
+Its most obvious feature is that even if an exception is not discussed, it remains clear that it is an exception. This solves the ignore issue mentioned for Go's method.
+
+Simply placing `!` at the end of an exceptional function call indicates that there is no special handling for that exception, but that a possible exception will result in panic. This makes it easier to spot potential exceptions in the future, and a senior or new contributor can easily tell when reading the code that whether a function is exceptional.
 
 ### Will Jule always use C++ as backend?
 
@@ -148,3 +157,9 @@ The above two optimizations are also possible to be done by the Jule compiler. T
 If we assume that the concept of "runtime" in this question is used in the sense of virtual machine, no. Jule is a language compiled entirely into machine code. But it has `std/runtime` package in the standard library. However, the main purpose of this package is to define special algorithms and some API functions that Jule programs will hear at run time.
 
 If you want to know more about this package, read the [Runtime](/runtime/) section.
+
+### Why receiver parameters always named as self?
+
+In languages ​​like Go, the developer provides the name of the receiver parameter. This can sometimes lead to writing shorter code with shorter names. But consistent naming is the developer's own effort. A simple renaming can be painful when applied to every method, especially in large structs.
+
+For reasons like these, Jule chose the `self` keyword to eliminate developer thinking cost for receiver name and always ensure a consistent receiver parameter name. This is also useful to keep the receiver parameter declaration shorter and gain some syntactical possibilities.
