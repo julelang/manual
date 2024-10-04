@@ -64,11 +64,11 @@ Reports whether item has auto expression.
 
 ```jule
 struct Enum {
-    Token:  &token::Token
-    Public: bool
-    Ident:  str
-    Kind:   &TypeSymbol
-    Items:  []&EnumItem
+    Token:   &token::Token
+    Public:  bool
+    Ident:   str
+    TypeSym: &TypeSym
+    Items:   []&EnumItem
 }
 ```
 Enum.
@@ -87,9 +87,9 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct TypeEnumItem {
-    Token: &token::Token
-    Ident: str
-    Kind:  &TypeSymbol
+    Token:   &token::Token
+    Ident:   str
+    TypeSym: &TypeSym
 }
 ```
 TypeEnum item.
@@ -120,8 +120,7 @@ Returns nil reference if not exist any item in this identifier.
 
 ```jule
 struct Data {
-    Kind:      &TypeKind
-    CastKind:  &TypeKind // This expression should be cast to this kind.
+    Type:      &Type
     Mutable:   bool
     Reference: bool
     Lvalue:    bool
@@ -175,7 +174,7 @@ Value.
 
 ```jule
 struct OperandExprModel {
-    Kind:  &TypeKind
+    Type:  &Type
     Model: ExprModel
 }
 ```
@@ -240,8 +239,8 @@ For example: `&MyStruct{}`
 struct CastingExprModel {
     Token:    &token::Token
     Expr:     &Data
-    Kind:     &TypeKind
-    ExprKind: &TypeKind
+    Type:     &Type
+    ExprType: &Type
 }
 ```
 Casting expression model. For example: `(int)(myFloat)`
@@ -275,7 +274,7 @@ Expression model for built-in error function calls.
 
 ```jule
 struct SliceExprModel {
-    ElemKind: &TypeKind
+    ElemType: &Type
     Elems:    []ExprModel
 }
 ```
@@ -404,8 +403,8 @@ struct BuiltinOutlnCallExprModel {
 Expression model for built-in outln function calls.
 
 ```jule
-struct BuiltinNewExprModel {
-    Kind: &TypeKind
+struct BuiltinNewCallExprModel {
+    Type: &Type
     Init: ExprModel
 }
 ```
@@ -425,7 +424,7 @@ Expression model for built-in panic function calls.
 
 ```jule
 struct BuiltinMakeCallExprModel {
-    Kind: &TypeKind
+    Type: &Type
     Size: ExprModel
 }
 ```
@@ -532,8 +531,8 @@ Function provided by: `std/mem`
 
 ```jule
 struct RetType {
-    Kind:   &TypeSymbol
-    Idents: []&token::Token
+    TypeSym: &TypeSym
+    Idents:  []&token::Token
 }
 ```
 Return type.
@@ -546,7 +545,7 @@ struct Param {
     Mutable:   bool
     Variadic:  bool
     Reference: bool
-    Kind:      &TypeSymbol
+    TypeSym:   &TypeSym
     Ident:     str
 }
 ```
@@ -608,7 +607,7 @@ Reports whether function has return variable(s).
 ```jule
 struct ParamIns {
     Decl: &Param
-    Kind: &TypeKind
+    Type: &Type
 }
 ```
 Parameter instance.
@@ -625,7 +624,7 @@ struct FnIns {
     Decl:     &Fn
     Generics: []&InsGeneric
     Params:   []&ParamIns
-    Result:   &TypeKind
+    Result:   &Type
     Scope:    &Scope
     Refers:   &ReferenceStack
     Anon:     bool
@@ -639,7 +638,7 @@ Function instance.
 
 **Methods:**
 
-`fn Types(mut self): []&TypeKind`\
+`fn Types(mut self): []&Type`\
 Returns all types of result.\
 Returns nil if result is nil.\
 Returns mutable slice if returns internal slice.
@@ -998,7 +997,7 @@ struct Field {
     Public:  bool
     Mutable: bool
     Ident:   str
-    Kind:    &TypeSymbol
+    TypeSym: &TypeSym
     Default: &ast::Expr
 }
 ```
@@ -1091,7 +1090,7 @@ Reports whether structure has only reference-type-accessible defines.
 struct FieldIns {
     Owner:   &StructIns
     Decl:    &Field
-    Kind:    &TypeKind
+    Type:    &Type
     Default: &Data
 }
 ```
@@ -1179,7 +1178,7 @@ struct Trait {
     Public:      bool
     Mutable:     bool
     Methods:     []&Fn
-    Inherits:    []&TypeSymbol
+    Inherits:    []&TypeSym
     Implemented: []&Struct
 }
 ```
@@ -1202,8 +1201,8 @@ Returns nil reference if not exist any method in this identifier.
 
 ```jule
 struct InsGeneric {
-    Kind:       &TypeKind
-    Constraint: []&TypeKind
+    Type:       &Type
+    Constraint: []&Type
 }
 ```
 Generic type for instance types.
@@ -1219,7 +1218,7 @@ struct TypeAlias {
     Generic:  bool
     Token:    &token::Token
     Ident:    str
-    Kind:     &TypeSymbol
+    TypeSym:  &TypeSym
     Refers:   []any
     Generics: []&TypeAlias
 }
@@ -1233,7 +1232,7 @@ Type alias.
 ---
 
 ```jule
-struct TypeKind {
+struct Type {
     CppIdent:  str
     Generic:   bool
     Variadic:  bool
@@ -1314,9 +1313,9 @@ Returns tuple type if kind is tuple, nil reference if not.
 ---
 
 ```jule
-struct TypeSymbol {
+struct TypeSym {
     Decl: &TypeDecl
-    Kind: &TypeDecl
+    Type: &TypeDecl
 }
 ```
 Type. 
@@ -1391,7 +1390,7 @@ Reports whether type is primitive any.
 
 ```jule
 struct Slc {
-    Elem: &TypeKind
+    Elem: &Type
 }
 ```
 Slice type.
@@ -1404,7 +1403,7 @@ Slice type.
 
 ```jule
 struct Tuple {
-    Types: []&TypeKind
+    Types: []&Type
 }
 ```
 Tuple type.
@@ -1417,8 +1416,8 @@ Tuple type.
 
 ```jule
 struct Map {
-    Key: &TypeKind
-    Val: &TypeKind
+    Key: &Type
+    Val: &Type
 }
 ```
 Map type.
@@ -1431,7 +1430,7 @@ Map type.
 
 ```jule
 struct Arr {
-    Elem: &TypeKind
+    Elem: &Type
 }
 ```
 Array type. 
@@ -1444,7 +1443,7 @@ Array type.
 
 ```jule
 struct Ptr {
-    Elem: &TypeKind
+    Elem: &Type
 }
 ```
 Pointer type. 
@@ -1473,7 +1472,7 @@ struct Var {
     Statically:    bool
     Reference:     bool
     Directives:    []&ast::Directive
-    Kind:          &TypeSymbol
+    TypeSym:       &TypeSym
     Value:         &Value
     Refers:        &ReferenceStack
 
@@ -1671,7 +1670,7 @@ Used by semantic analyzer for import use declarations.
 ```jule
 trait Kind {
     fn Str(self): str
-    fn Equal(&self, other: &TypeKind): bool
+    fn Equal(&self, other: &Type): bool
 }
 ```
 Kind of type declaration.
@@ -1722,7 +1721,7 @@ enum ExprModel: type
 Expression model.
 
 **Fields:**
-- `&TypeKind`
+- `&Type`
 - `&constant::Const`
 - `&Var`
 - `&FnIns`
