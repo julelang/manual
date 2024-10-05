@@ -122,6 +122,14 @@ Splits the string into the specified number of parts to the specified substring.
 ---
 
 ```jule
+fn SplitAll(s: str, sub: str): []str
+```
+Same as the Split function. But splits all parts.
+Basically equals to `Split(s, sub, -1)` call.
+
+---
+
+```jule
 fn Contains(s: str, sub: str): bool
 ```
 Reports whether string includes substring.
@@ -161,6 +169,13 @@ Returns zero if substring is empty.
 fn Replace(s: str, sub: str, new: str, mut n: int): str
 ```
 Replaces all substrings matching sub in the string with new. Returns same string if n is equals to zero. Replaces all matches if n less than zero.
+
+---
+
+```jule
+fn ReplaceAll(s: str, sub: str, new: str): str
+```
+Same as the Replace function. But replaces all matched subs. Basically equals to `Replace(s, sub, new, -1)` call.
 
 ---
 
