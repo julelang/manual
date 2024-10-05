@@ -140,6 +140,14 @@ Returns empty slice if n is equals to zero. Returns all parts if n less than zer
 ---
 
 ```jule
+fn SplitAll(mut s: []byte, sub: []byte): [][]byte
+```
+Same as the Split function. But splits all parts.
+Basically equals to `Split(s, sub, -1)` call.
+
+---
+
+```jule
 fn Contains(s: []byte, sub: []byte): bool
 ```
 Reports whether slice includes sub-slice.
@@ -178,6 +186,14 @@ Counts the number of non-overlapping instances of sub-slice in s. Returns zero i
 fn Replace(mut s: []byte, sub: []byte, new: []byte, mut n: int): []byte
 ```
 Replaces all sub-slices matching sub in the slice with new. Returns same slice if n is equals to zero. Replaces all matches if n less than zero. This function may return mutable copy of s, of new slice allocation.
+
+---
+
+```jule
+fn ReplaceAll(mut s: []byte, sub: []byte, new: []byte): []byte
+```
+Same as the Replace function. But replaces all matched subs.
+Basically equals to `Replace(s, sub, new, -1)` call.
 
 ---
 
