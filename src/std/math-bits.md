@@ -272,7 +272,7 @@ Returns the minimum number of bits required to represent x; the result is 0 for 
 ```jule
 fn Add(x: uint, y: uint, carry: uint): (sum: uint, carry_out: uint)
 ```
-Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryout output is guaranteed to be 0 or 1.
+Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
@@ -280,9 +280,9 @@ This function's execution time does not depend on the inputs.
 ---
 
 ```jule
-fn Add32(x: u32, y: u32, carry: u32): (sum: u32, carryout: u32)
+fn Add32(x: u32, y: u32, carry: u32): (sum: u32, carryOut: u32)
 ```
-Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryout output is guaranteed to be 0 or 1.
+Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
@@ -290,9 +290,9 @@ This function's execution time does not depend on the inputs.
 ---
 
 ```jule
-fn Add64(x: u64, y: u64, carry: u64): (sum: u64, carryout: u64)
+fn Add64(x: u64, y: u64, carry: u64): (sum: u64, carryOut: u64)
 ```
-Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryout output is guaranteed to be 0 or 1.
+Returns the sum with carry of x, y and carry: sum = x + y + carry. The carry input must be 0 or 1; otherwise the behavior is undefined. The carryOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
@@ -300,9 +300,9 @@ This function's execution time does not depend on the inputs.
 ---
 
 ```jule
-fn Sub(x: uint, y: uint, borrow: uint): (diff: uint, borrow_out: uint)
+fn Sub(x: uint, y: uint, borrow: uint): (diff: uint, borrowOut: uint)
 ```
-Returns the difference of x, y and borrow, diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowout output is guaranteed to be 0 or 1.
+Returns the difference of x, y and borrow, diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
@@ -310,9 +310,9 @@ This function's execution time does not depend on the inputs.
 ---
 
 ```jule
-fn Sub32(x: u32, y: u32, borrow: u32): (diff: u32, borrowout: u32)
+fn Sub32(x: u32, y: u32, borrow: u32): (diff: u32, borrowOut: u32)
 ```
-Returns the difference of x, y and borrow, diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowout output is guaranteed to be 0 or 1.
+Returns the difference of x, y and borrow, diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
@@ -320,9 +320,9 @@ This function's execution time does not depend on the inputs.
 ---
 
 ```jule
-fn Sub64(x: u64, y: u64, borrow: u64): (diff: u64, borrowout: u64)
+fn Sub64(x: u64, y: u64, borrow: u64): (diff: u64, borrowOut: u64)
 ```
-Returns the difference of x, y and borrow: diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowout output is guaranteed to be 0 or 1.
+Returns the difference of x, y and borrow: diff = x - y - borrow. The borrow input must be 0 or 1; otherwise the behavior is undefined. The borrowOut output is guaranteed to be 0 or 1.
 ::: tip
 This function's execution time does not depend on the inputs.
 :::
