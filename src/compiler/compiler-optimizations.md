@@ -151,6 +151,13 @@ Enables special optimizations for dynamic programming features.
 
 - If it can be understood that the `<any>` is the type `x` and not nil, it removes the cost of not-nil and type compatibiltiy checking for casting expressions with type `t`. <div class="warning-badge">experimental</div>
 
+---
+
+`--opt-std-strings`\
+Enables special optimizations for the `std/strings` package.
+
+- Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WRiteStr` methods of the `Builder` struct.
+
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -166,6 +173,7 @@ The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
 - `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`
+- `L2`: passes all `L1` flags with `--opt-std-strings`
 
 ## Production Compilation
 
@@ -175,7 +183,7 @@ Production compilation may have an impact on IR rendering, but in addition it ha
 
 When you enable production compilation, it provides improvements that optimization options cannot provide. It can cause some changes to the IR and additionally prompts your backend compiler to compile the IR code more efficiently. In this way, significantly optimized faster programs can be obtained by using optimization options and production compilation together.
 
-Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls ot etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `main_package_directory/`.
+Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls ot etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `mainPackageDirectory/`.
 
 Pros of enabling production compilation:
 - Disable assertions of backend compiler.
