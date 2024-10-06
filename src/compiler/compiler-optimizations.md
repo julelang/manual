@@ -64,6 +64,7 @@ Enables special optimizations for mathematical operations.
 - Converts modulo by 2 expressions to equavalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
+- Eliminates runtime overflow of the `x^0` computations. It will be simplified to `x` expression.
 
 ---
 
