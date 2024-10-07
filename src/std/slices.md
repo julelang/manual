@@ -71,3 +71,10 @@ Returns count of replacements.
 fn Reverse[S: []E, E](mut s: S)
 ```
 Reverses elements of the slice.
+
+---
+
+```jule
+fn Insert[S: []E, E](mut s: S, i: int, v: ...E): S
+```
+Inserts the values v... into s at index i, returning the modified slice. The elements at s[i:] are shifted up to make room. In the returned slice r, r[i] == v[0], and, if i < len(s), r[i+len(v)] == value originally at r[i]. Insert panics if i > len(s). This function is O(len(s) + len(v)).
