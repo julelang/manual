@@ -187,9 +187,9 @@ Reports whether firs rune of string is allowed to first rune for identifier.
 ---
 
 ```jule
-fn IsDecimal(b: byte): bool
+fn IsDecimal(r: rune): bool
 ```
-Reports whether byte is decimal sequence.
+Reports whether rune is decimal sequence.
 
 ---
 
@@ -201,23 +201,23 @@ Reports whether s is keyword.
 ---
 
 ```jule
-fn IsBinary(b: byte): bool
+fn IsBinary(r: rune): bool
 ```
-Reports whether byte is binary sequence.
+Reports whether rune is binary sequence.
 
 ---
 
 ```jule
-fn IsOctal(b: byte): bool
+fn IsOctal(r: rune): bool
 ```
-Reports whether byte is octal sequence.
+Reports whether rune is octal sequence.
 
 ---
 
 ```jule
-fn IsHex(b: byte): bool
+fn IsHex(r: rune): bool
 ```
-Reports whether byte is hexadecimal sequence.
+Reports whether rune is hexadecimal sequence.
 
 ## Structs
 ```jule
