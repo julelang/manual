@@ -1,10 +1,6 @@
 # std/jule/build
 
 ## Globals
-### `const Ext: str`
-Extension (includes dot) of Jule source code files.
-
----
 
 ### `const Api: str`
 Directory name of JuleC++ API.
@@ -13,21 +9,6 @@ Directory name of JuleC++ API.
 
 ### `const Stdlib: str`
 Directory name of standard library.
-
----
-
-### `const EntryPoint: str`
-Identifier of entry point function.
-
----
-
-### `const InitFn: str`
-Identifier of initializer function.
-
----
-
-### `const ModuleFile: str`
-Filename of module file.
 
 ---
 
