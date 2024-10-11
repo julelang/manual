@@ -533,3 +533,4 @@ Compiler log messages with formatting.
 - `DefineZeroDefaultToUseAmper`
 - `InvalidExprForConstMatch`
 - `GiveAnAliasManually`
+- `CastingBindedTypesRequiresUnsafeJule`
