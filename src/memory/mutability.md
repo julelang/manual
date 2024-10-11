@@ -58,7 +58,7 @@ For example:
 ```jule
 struct MyStruct {
     mut x: int
-    y: int
+    y:     int
 }
 ```
 
