@@ -41,11 +41,17 @@ At runtime, an `any` stores and uses 2 different data;
 - **Allocation**\
 Allocation is a pointer to the data itself that the `any` stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the `any`, for example a smart pointer, the `any` uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.\
 \
-If given smart pointer is `nil`, then the `any` will be `nil`. Will not point to the smart pointer. The `any` type always tries to use smart pointers as base allocation and shares same memory.
+If given smart pointer is nil, then the allocation pointer of the `any` will be nil. Will not point to the smart pointer with additional allocation. The `any` type always tries to use smart pointers as base allocation and shares same memory.
 - **Type Pointer**\
 An `any` maintains a general pointer and this pointer is not traced by the GC because it is guaranteed to always will point to static memory that will be available for the lifetime of the program. This pointer points directly to the type handler structure automatically created by the compiler.\
 \
 The handler structure includes the deallocator function required for the type. The deallocator function is the first field of the structure. Also contains 2 function pointer for string conversion and comparison functions for stored type.
+
+#### Nil Value Handling
+
+The `Allocation` section describes how allocation handled for the `any` type. And it says nil smart pointer results as nil allocation pointer. But, this is creates ambiguous behavior if the `any` equals to nil when assigned with a nil smart pointer. It should point to nil smart pointer.
+
+Therefore, nil checking will be use the type pointer data. So, if type pointer is nil, then the `any` type is equals to nil. But if type pointer is not nil, the `any` is considered as not nil, even with nil allocation data. Thus, we have pointing to the nil smart pointer behavior for nil smart pointers. No different behavior for some special cases.
 
 ### Type Enums
 
@@ -60,13 +66,18 @@ At runtime, a trait stores and uses 3 different data;
 - **Allocation**\
 Allocation is a pointer to the data itself that the trait stores. Managed by GC. The current implementation handles this well. If a pointer that is already traced by the GC is passed to the trait, for example a smart pointer, the trait uses it by directly referencing that smart pointer rather than making a new allocation. This helps reduce memory allocations and increases efficiency.\
 \
-If given smart pointer is `nil`, then the trait will be `nil`. Will not point to the smart pointer. Traits always tries to use smart pointers as base allocation and shares same memory.
+If given smart pointer is nil, then the allocation data will be nil of the trait. Will not point to the smart pointer with additional allocation. Traits always tries to use smart pointers as base allocation and shares same memory.
 - **Pointer State**\
 Traits may take both a smart pointer or a normal instance for supported types. Accordingly, the deallocation method and type comparison also vary. If separate code was generated for both forms with and without smart pointers, this could significantly increase the size and compilation time of the executable. Since it does not contribute much to the runtime cost, it stores whether the stored data is a smart pointer or not with a simple boolean flag. In this way, it is sufficient to generate a single handler for each form of trait type.
 - **Type Pointer**\
 A trait container maintains a general pointer and this pointer is not traced by the GC because it is guaranteed to always will point to static memory that will be available for the lifetime of the program. This pointer points directly to the type handler structure automatically created by the compiler. The handler structure includes the deallocator function required for the type. The deallocator function is the first field of the structure. In this way, with a simple reinterpretation, the trait container can call the deallocator function when necessary. Each time trait is used, the type pointer is reinterpreted for the correct type, providing direct access to the required function.
 
 The compiler defines additional wrapper functions so that the trait calls the right function of the right type. These wrapper functions are stored in conjunction with the handle structure pointed to by the type pointer. When a trait method called, trait calls the required wrapper function to performs the necessary type conversion and redirects to the original function.
+
+#### Nil Value Handling
+
+Completely same as the nil handling method of the `any` type.\
+See [nil value handling of the `any` type](#nil-value-handling).
 
 #### Inheritance
 
