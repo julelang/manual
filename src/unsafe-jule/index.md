@@ -19,6 +19,7 @@ Benefits of Unsafe Jule:
 - Concurrent calls with reference parameters
 - Pass pointer to reference
 - Access reference from parent scope
+- Cast binded types
 - [Emit backend code](/integrated-jule/backend-emits)
 - [Use deprecated code](/packages/3rd-party-packages/deprecation)
 

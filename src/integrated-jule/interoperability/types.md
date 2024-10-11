@@ -26,6 +26,8 @@ cpp type CPTR: *cpp.char
 
 For type safety reasons, binded types are only compatible with binded types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a binded `char` type, or vice versa, even if you have binded the `char` type as `byte`. To do this, if you have binded with a compatible type, you can cast it.
 
+In addition, each casting process is within the scope of Unsafe Jule and cannot be performed with Safe Jule. Because incompatible types can be incorrectly binded and cast, Jule has no responsibility for this, so it is considered an unsafe action.
+
 For example:
 ```jule
 cpp type char: byte
@@ -33,7 +35,7 @@ cpp type char: byte
 cpp fn get_char(): cpp.char
 
 fn main() {
-	let b: byte = byte(cpp.get_char())
+	b := unsafe { byte(cpp.get_char()) }
 	println(b)
 }
 ```
