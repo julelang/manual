@@ -102,7 +102,6 @@ Enables special optimizations for conditional expressions and structures.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
 - Removes condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
 - Avoids using wrapper for strings if string compared with literal.
-- Converts string comparison with empty literal to `len(s) == 0` check.
 - Eliminates and simplifies predictible boolean expressions. Such as `if (x || true)` will be handled as `if (true)` or `if (x && false)` will be handled as `if (false)`.
 - Eliminates predictible comparison expressions. Such as `if (x > x)` will be handles ad `if (false)` or `if (x == x)` will be handled as `if (true)`.
 
@@ -111,6 +110,7 @@ Enables special optimizations for conditional expressions and structures.
 `--opt-str` \
 Enables special optimizations for string operations.
 
+- Converts string comparison with empty literal to `len(s) == 0` check.
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
 
@@ -120,6 +120,13 @@ Enables special optimizations for string operations.
 Enables special optimizations for slice operations.
 
 - Erases relevant ranges of slice's itself instead of making allocation for subslice and assignment if slice gets assignment with subslice from itself.
+
+---
+
+`--opt-array` \
+Enables special optimizations for array operations.
+
+- Simplifies zero-length array comparisons (such as `x == y`) to `true`.
 
 ---
 
@@ -175,7 +182,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`
 - `L2`: passes all `L1` flags with `--opt-std-strings`
 
 ## Production Compilation
