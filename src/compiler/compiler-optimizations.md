@@ -65,6 +65,8 @@ Enables special optimizations for mathematical operations.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
 - Eliminates runtime overflow of the `x^0` computations. It will be simplified to `x` expression.
+- Simplifies expresions such as `x+x` to `x<<1` if possible.
+- Simplifies expressions such as `x-x` to `0` if possible.
 
 ---
 
