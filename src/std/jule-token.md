@@ -223,7 +223,6 @@ Reports whether rune is hexadecimal sequence.
 ```jule
 struct Fileset {
     Path:   str
-    Data:   []byte
     Tokens: []&token::Token
 }
 ```
@@ -243,8 +242,13 @@ Returns filename.
 `fn Addr(self): uintptr`\
 Returns self as uintptr.
 
-`fn Fill(mut self, mut data: []byte)`\
-Fill data.
+`fn Fill(mut self, data: []byte)`\
+Fills data.
+Not uses mutable copy of data, allocates new copy.
+
+`unsafe fn FillMut(mut self, mut data: []byte)`\
+Fills data.
+Uses mutable copy of data, not allocated new copy. But it is unsafe, because any mutation on the data may cause inconsistent results. However, it is efficient way to use already allocated datas.
 
 `fn GetRow(self, row: int): str`\
 Return line (not include new-line char) by row. \
