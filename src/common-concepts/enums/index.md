@@ -98,10 +98,6 @@ For the amper operator, you can use only when you define a default enum field wi
 
 Maps doen't support enums for type safety. You can use enums for key type, but not for value type.
 
-### Any Type
-
-The `any` type can store enums. You can use `==` and `!=` operators, it is safe. But you cannot cast an enum type from `any` type because this is unsafe and the type is lost at compile time. To get the value, you can try to cast it to the type pointed to by the enum, but if you are using a value such as an integer, it may be converted to different types at compile time because of enum items are constant literals actually. So, even though the enum is `i32`, `any` may be storing it as `i64` in compile time code generation, so casting may fail.
-
 ### Comparing Enums
 
 It only allows you to use the base type for the `==` and `!=` operators when comparing enums. This means you can compare base types of enums for simple equality checks without having to constantly cast. But this is only true if the base type of comparison is being made. If you are trying to compare an enum in situations that require strict matching, such as a match statement, implicit casting is not done.
