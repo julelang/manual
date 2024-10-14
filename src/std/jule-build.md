@@ -404,7 +404,7 @@ Compiler log messages with formatting.
 - `ConcurrentCallWithRefParam`
 - `ConcurrentCallWithSelfParam`
 - `UsedRefInAnonFnFromParentScope`
-- `EnumCastedFromAny`
+- `TypeEnumCastedFromAny`
 - `DuplicatedUseAlias`
 - `BuiltinUsedForRef`
 - `RefPointsToInvalidType`
@@ -494,7 +494,6 @@ Compiler log messages with formatting.
 - `RemoveFallthroughFromFinalCase`
 - `MakePubToAccess`
 - `ExpressionMustBeReferenceType`
-- `CastToEnumTypeInsteadOfEnum`
 - `TryFloatingPoint`
 - `ExpectedColonForAssign`
 - `DeclareExceptional`
