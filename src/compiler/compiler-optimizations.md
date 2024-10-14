@@ -161,6 +161,7 @@ Enables special optimizations for iterations.
 
 - Removes casting if non-constant string casted to byte slice for range iteration. Uses string directly.
 - Removes casting if non-constant stringf cases to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
+- Makes array the slice literal expressions of the range iterations.
 
 ---
 
