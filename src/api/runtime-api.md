@@ -155,3 +155,8 @@ Declaration of: `runeStep`
 jule::Bool __jule_coSpawn(void *func, void *args);
 ```
 Declaration of: `coSpawn`
+
+```cpp
+jule::Int __jule_runeCount(jule::Str s);
+```
+Declaration of: `runeCount`
