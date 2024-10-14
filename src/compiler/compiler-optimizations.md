@@ -54,6 +54,14 @@ Enables special optimizations for built-in `append` function.
 
 ---
 
+`--opt-len` \
+Enables special optimizations for built-in `len` function.
+
+- Simplifies expressions such as `len([]byte(myStr))` to `len(myStr)`.
+- Converts expressions such as `len([]rune(myStr))` to more efficient variant which is avoids making allocation.
+
+---
+
 `--opt-math` \
 Enables special optimizations for mathematical operations.
 
@@ -182,7 +190,7 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`
+- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
 - `L2`: passes all `L1` flags with `--opt-std-strings`
 
 ## Production Compilation
