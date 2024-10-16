@@ -103,3 +103,21 @@ fn main() {
 }
 ```
 In the example above, since the type of the variable `f` is clearly known, it is sufficient to use only braces in the assignment. Brace literal evaluates to type `map[int]str`.
+
+## Exceptional Handler Scopes
+
+If compiler knows the result of the exceptional handler scope will assigned to the immutable storage, it allows using immutable expressions in the use statement.
+
+For example:
+```jule
+fn getInt()!: &int { error("foo") }
+
+fn main() {
+	y := new(int, 90)
+	x := getInt() else {
+		use y
+	}
+	println(*x)
+}
+```
+In the example above, the `use y` statement is not requires the variable `y` should be mutable, since it is assigning to the variable `x` which is immutable.
