@@ -391,7 +391,6 @@ Compiler log messages with formatting.
 - `NoMemberInEnum`
 - `InternalTypeNotSupportsClone`
 - `InvalidExprForBinary`
-- `BindedStructForRef`
 - `TraitMethodHasGenerics`
 - `EnumAsMapVal`
 - `GlobalNotStatic`
@@ -407,7 +406,6 @@ Compiler log messages with formatting.
 - `TypeEnumCastedFromAny`
 - `DuplicatedUseAlias`
 - `BuiltinUsedForRef`
-- `RefPointsToInvalidType`
 - `DefaultNotLast`
 - `TraitImplHasStatic`
 - `IncompatibleTypeForPtrArithmetic`
