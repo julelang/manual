@@ -121,6 +121,7 @@ Enables special optimizations for string operations.
 - Converts string comparison with empty literal to `len(s) == 0` check.
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
+- Optimizes allocations of the string concatenations if possible.
 
 ---
 
