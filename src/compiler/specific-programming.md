@@ -30,6 +30,10 @@ example_darwin_arm64.jule
 example_linux.jule
 ```
 
+### Test Files
+
+You can use file annotation for test files. See [Test Files](/debugging/testing/writing-tests#test-files) section of the manual.
+
 ## The `build` Directive
 
 The `build` directive is a top directive that includes the source code file in the build based on the evaluation result using directive expressions. For more information about expressions, you can read the [Directive Expressions](/compiler/directives#directive-expressions) section.

@@ -55,9 +55,11 @@ If you make a call such as `Error` or `Fail` after the `Skip` call, the skip sta
 
 ## Test Files
 
-It is recommended to write test functions in separate files. This makes it easier to maintain your code. In addition, since your test functions will not be included in the compilations other than your test compilations, your compilation costs will be reduced and you will achieve faster code compilation time and resource usage.
+It is recommended to write test functions in separate files. This makes it easier to maintain your code. In addition, since your test functions will not be included in the compilations other than your test compilations, your compilation costs will be reduced and you will achieve faster code compilation time and less resource usage.
 
-You can use the `build` directive to do this. It will be more effective to declare that your test files are a test file by ending them with `_test.jule`. But this does not affect the compiler, it is just a naming approach to make it easier for developers to maintain. Use the `#build test` directive so that your test files are only included in test compilations. In test defines the `test` variable is defined so that you only include your test functions in test compilations.
+You can use the `build` directive to do this. Use the `#build test` directive so that your test files are only included in test compilations. In test defines the `test` variable is defined so that you only include your test functions in test compilations.
+
+But, here is recommended way; It will be more effective to declare that your test files are a test file by ending them with `_test.jule`. If a filename ends with `_test.jule`, it only hanlded if test compilation enabled. No need to the `#build test` directive. You can you file annotations before test suffix. For example: `foo_windows_amd64_test.jule`
 
 ## Running Tests
 
