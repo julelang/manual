@@ -1689,6 +1689,62 @@ Available on: `windows`
 
 ---
 
+### `const ERROR_CURRENT_DIRECTORY`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_LOCK_VIOLATION`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_WRITE_PROTECT`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_DISK_FULL`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_NOT_SUPPORTED`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_FILENAME_EXCED_RANGE`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_INVALID_PARAMETER`
+::: warning
+Available on: `windows`
+:::
+
+---
+
+### `const ERROR_ALREADY_EXIST`
+::: warning
+Available on: `windows`
+:::
+
+---
+
 ### `const WSAEACCES`
 ::: warning
 Available on: `windows`

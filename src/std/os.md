@@ -63,14 +63,10 @@ fn Getwd()!: str
 ```
 Returns an absolute path name of the current working directory of the calling process.
 
-Possible errors (`Error`): `Denied`
-
 ```jule
 fn Chdir(path: str)!
 ```
 Changes the current working directory to the given directory.
-
-Possible errors (`Error`): `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `InsufficientMemory`
 
 ## Structs
 
@@ -84,8 +80,6 @@ Status information.
 `static fn Of(path: str)!: Stat`\
 Returns a Stat describing the path.\
 Returns nil reference if error occurs.
-
-Possible errors (`FSError`): `Denied` `IO` `Loop` `LongPath` `NotExist` `NotDir` `Overflow`
 
 `fn IsDir(self): bool`\
 Reports path is directory or not.
@@ -111,17 +105,11 @@ Directory entry.
 `static fn Read(path: str)!: []Dir`\
 Reads the named directory and returs all its directory entries can read.
 
-Possible errors (`FSError`): `Denied` `InvalidDescriptor` `PerProcessLimit` `SystemWideLimit` `NotExist` `InsufficientMemory` `NotDir`
-
 `static fn Create(path: str)!`\
 Creates directory.
 
-Possible errors (`FSError`): `Denied` `Exist` `ReadOnly` `NoSpace`
-
 `static fn Remove(path: str)!`\
 Removes empty directory.
-
-Possible errors (`FSError`): `Denied` `NotExist` `NotEmpty` `SyncIO` `IO` `Loop` `NotDir`
 
 ---
 
@@ -174,23 +162,14 @@ Creates or truncates the named file. If the file already exists, it is truncated
 `fn Seek(mut self, offset: int, origin: Seek)!: int`\
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
-Possible errors (`FSError`): `InvalidDescriptor` `SyncIO` `Overflow` `Seek`
-
 `fn Read(mut self, mut buf: []byte)!: (n: int)`\
 Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
-
-Possible errors (`FSError`): `Retry` `InvalidDescriptor` `Signal` `SyncIO` `IO` `IsDir` `Overflow` `Buffer` `InsufficientMemory` `Device` `Seek`
 
 `fn Write(mut self, buf: []byte)!: (n: int)`\
 Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buf.
 
-Possible errors (`FSError`): `Retry` `InvalidDescriptor` `Big` `Signal` `IO` `NoSpace` `Pipe` `Range` `SyncIO` `Seek` `Device` `Buffer`
-
 `fn Close(mut self)!`\
-Closes file handle. 
-
-Possible errors (`FSError`): `InvalidDescriptor` `Signal` `IO`
-
+Closes file handle.
 ---
 
 ```jule
