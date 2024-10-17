@@ -1879,6 +1879,13 @@ Available on: `unix`
 ## Functions
 
 ```jule
+fn NewTimeval(sec: i64, usec: i64, mut &out: Timeval): bool
+```
+Creates new Timeval by sec and usec. Sets fields of the out. Reports whether sec and usec have valid range. If sec or usec have invalid range, out will not be mutated.
+
+---
+
+```jule
 fn GetStdHandle(stdh: uintptr): Handle
 ```
 ::: warning
@@ -2633,8 +2640,8 @@ C's fd_set structure.
 
 ```jule
 struct Timeval {
-    tv_sec:  i64
-    tv_usec: i64
+    tv_sec:  <system specific>
+    tv_usec: <system specific>
 }
 ```
 C's timeval structure.
