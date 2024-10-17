@@ -44,7 +44,7 @@ It will forward any exceptional from network connectors.
 ```jule
 fn ConnectTimeout(network: Network, addr: str, timeout: time::DurInt)!: Conn
 ```
-Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored. Timeout precision is microseconds. If the timeout is below one microsecond it will be ignored.
+Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored. Timeout precision is microseconds. If the timeout is below one microsecond it will be ignored. If timeout is invalid or out of range, throws exceptional with Error.InvalidTimeout.
 
 ---
 
@@ -445,6 +445,14 @@ trait Addr {
 ```
 
 ## Enums
+
+`enum Error`\
+Common connection error codes.
+
+**Fields:**
+- `InvalidTimeout`: Timeout value is not valid. Duration is out of range.
+
+---
 
 `enum Network: str`\
 Network names.
