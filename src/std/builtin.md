@@ -55,17 +55,7 @@ Returns new instance of data type for supported types.
 ```jule
 fn copy(mut dest: Dest, mut src: Src): int
 ```
-Copies elements of source to destination.\
-Returns number of copied elements.\
-Source can be any data type that supported by destination type. 
-
-Special cases are:
-- `copy(dest, src) = length accepts as len(src) if len(dest) > len(src)`
-- `copy(dest, src) = length accepts as len(dest) if len(src) > len(dest)`
-
-Slice destination:\
-&nbsp;&nbsp;&nbsp;&nbsp;In slice destinations, source should be compatible type slice.\
-&nbsp;&nbsp;&nbsp;&nbsp;If destination slice is `[]byte`, source might be `str` also.
+The copy built-in function copies elements from a source slice into a destination slice. (As a special case, it also will copy bytes from a string to a slice of bytes.) The source and destination may overlap, it is safe. Copy returns the number of elements copied, which will be the minimum of len(src) and len(dst).
 
 ---
 
