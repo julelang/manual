@@ -49,3 +49,4 @@ $ julefmt src
 - The output is produced without using the statement terminator.
 - Type declarations are always combined on a single line.
 	- The comments inside are not processed regardless and are intuitively owned by the other node.
+- All single-line comments are will be trimmed for trailing space chracters.
