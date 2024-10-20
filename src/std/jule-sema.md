@@ -886,6 +886,7 @@ struct MultiAssign {
     Decls: []&Var
     Left:  []&Data
     Right: ExprModel
+    Op:    &token::Token
 }
 ```
 Multi-declarative assignment.
