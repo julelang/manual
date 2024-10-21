@@ -24,7 +24,8 @@ Integer type of durations.
 ## Functions
 
 `fn Sleep(mut dur: DurInt)`\
-Stops execution of caller thread by absolute duration. This function only affects execution of caller thread, not process.
+Stops execution of the caller thread by stated duration. This function only affects execution of caller thread, not process.
+If duration is <=0, function will return immediately. It guarantees sleeping at least for the stated duration.
 
 ## Structures
 
