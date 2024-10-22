@@ -461,7 +461,8 @@ Compiler log messages with formatting.
 - `ComptimeExprForRuntimeIteration`
 - `InvalidTypeForComptimeIter`
 - `InvalidComptimeIter`
-- `WrongRetForward`
+- `NotEnoughVariablesForRet`
+- `TooManyVariablesForRet`
 - `ExportedUsedAsAnonymous`
 - `InvalidImportPath`
 - `AutoAliasFail`

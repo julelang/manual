@@ -533,6 +533,7 @@ Function provided by: `std/mem`
 struct RetType {
     TypeSym: &TypeSym
     Idents:  []&token::Token
+    Named:   bool // Whether any return type uses name.
 }
 ```
 Return type.
