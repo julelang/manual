@@ -125,7 +125,7 @@ struct Data {
     Reference: bool
     Lvalue:    bool
     IsRune:    bool
-    Model:     ExprModel
+    Model:     Expr
 
     // True if kind is declaration such as:
     //  - &Enum
@@ -173,9 +173,9 @@ Value.
 ---
 
 ```jule
-struct OperandExprModel {
+struct OperandExpr {
     Type:  &Type
-    Model: ExprModel
+    Model: Expr
 }
 ```
 Operand expression model.
@@ -183,9 +183,9 @@ Operand expression model.
 ---
 
 ```jule
-struct BinaryExprModel {
-    Left:  &OperandExprModel
-    Right: &OperandExprModel
+struct BinaryExpr {
+    Left:  &OperandExpr
+    Right: &OperandExpr
     Op:    &token::Token
 }
 ```
@@ -194,8 +194,8 @@ Binary operation expression model.
 ---
 
 ```jule
-struct UnaryExprModel {
-    Expr:  ExprModel
+struct UnaryExpr {
+    Expr:  Expr
     Op:    &token::Token
 }
 ```
@@ -204,9 +204,9 @@ Unary operation expression model.
 ---
 
 ```jule
-struct StructArgExprModel {
+struct StructArgExpr {
     Field: &FieldIns
-    Expr:  ExprModel
+    Expr:  Expr
 }
 ```
 Structure field argument expression model for constructors.\
@@ -215,10 +215,10 @@ For example: `&MyStruct{10, false, "-"}`
 ---
 
 ```jule
-struct StructLitExprModel {
+struct StructLitExpr {
     Token: &token::Token
     Strct: &StructIns
-    Args:  []&StructArgExprModel
+    Args:  []&StructArgExpr
 }
 ```
 Structure literal. 
@@ -226,8 +226,8 @@ Structure literal.
 ---
 
 ```jule
-struct AllocStructLitExprModel {
-    Lit: &StructLitExprModel
+struct AllocStructLitExpr {
+    Lit: &StructLitExpr
 }
 ```
 Heap allocated structure litral expression.\
@@ -236,7 +236,7 @@ For example: `&MyStruct{}`
 ---
 
 ```jule
-struct CastingExprModel {
+struct CastingExpr {
     Token:    &token::Token
     Expr:     &Data
     Type:     &Type
@@ -248,12 +248,12 @@ Casting expression model. For example: `(int)(myFloat)`
 ---
 
 ```jule
-struct FnCallExprModel {
+struct FnCallExpr {
     Token:    &token::Token
     Func:     &FnIns
     IsCo:     bool
-    Expr:     ExprModel
-    Args:     []ExprModel
+    Expr:     Expr
+    Args:     []Expr
     Except:   &Scope
     Assigned: bool
 }
@@ -263,7 +263,7 @@ Function call expression model.
 ---
 
 ```jule
-struct BuiltinErrorCallExprModel {
+struct BuiltinErrorCallExpr {
     Func: &FnIns
     Err:  &Data
 }
@@ -273,9 +273,9 @@ Expression model for built-in error function calls.
 ---
 
 ```jule
-struct SliceExprModel {
+struct SliceExpr {
     ElemType: &Type
-    Elems:    []ExprModel
+    Elems:    []Expr
 }
 ```
 Slice expression model.\
@@ -284,7 +284,7 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 ---
 
 ```jule
-struct IndexingExprModel {
+struct IndexingExpr {
     Token: &token::Token
     Expr:  &Data
     Index: &Data
@@ -296,7 +296,7 @@ For example: `mySlice[myIndex]`
 ---
 
 ```jule
-struct AnonFnExprModel {
+struct AnonFnExpr {
     Captured: []&Var
     Func:     &FnIns
     Global:   bool
@@ -307,9 +307,9 @@ Anonymous function expression model.
 ---
 
 ```jule
-struct KeyValPairExprModel {
-    Key: ExprModel
-    Val: ExprModel
+struct KeyValPairExpr {
+    Key: Expr
+    Val: Expr
 }
 ```
 Key-value expression pair model.
@@ -317,9 +317,9 @@ Key-value expression pair model.
 ---
 
 ```jule
-struct MapExprModel {
+struct MapExpr {
     Kind:    &Map
-    Entries: []&KeyValPairExprModel
+    Entries: []&KeyValPairExpr
 }
 ```
 Map expression model.
@@ -328,11 +328,11 @@ For example: `{0: false, 1: true}`
 ---
 
 ```jule
-struct SlicingExprModel {
+struct SlicingExpr {
     Token: &token::Token
-    Expr:  ExprModel
-    Left:  ExprModel
-    Right: ExprModel
+    Expr:  Expr
+    Left:  Expr
+    Right: Expr
 }
 ```
 Slicing expression model.
@@ -341,9 +341,9 @@ For example: `mySlice[2:len(mySlice)-5]`
 ---
 
 ```jule
-struct TraitSubIdentExprModel {
+struct TraitSubIdentExpr {
     Token:  &token::Token
-    Expr:   ExprModel
+    Expr:   Expr
     Method: &Fn
     Trt:    &Trait
 }
@@ -354,7 +354,7 @@ For example: `myTrait.mySubIdent`
 ---
 
 ```jule
-struct StructSubIdentExprModel {
+struct StructSubIdentExpr {
     Token:  &token::Token
     Expr:   &Data
     Method: &FnIns
@@ -368,9 +368,9 @@ For example: `myStruct.mySubIdent`
 ---
 
 ```jule
-struct ArrayExprModel {
+struct ArrayExpr {
     Kind:  &Arr
-    Elems: []ExprModel
+    Elems: []Expr
 }
 ```
 Array expression model.  If array filled, elems field holds 2 data. First data is expression, second is nil, kind of mark to that array filled.
@@ -378,7 +378,7 @@ Array expression model.  If array filled, elems field holds 2 data. First data i
 ---
 
 ```jule
-struct TupleExprModel {
+struct TupleExpr {
     Datas: []&Data
 }
 ```
@@ -387,8 +387,8 @@ Tuple expression model.
 ---
 
 ```jule
-struct BuiltinOutCallExprModel {
-    Expr:  ExprModel
+struct BuiltinOutCallExpr {
+    Expr:  Expr
 }
 ```
 Expression model for built-in out function calls.
@@ -396,16 +396,16 @@ Expression model for built-in out function calls.
 ---
 
 ```jule
-struct BuiltinOutlnCallExprModel {
-    Expr:  ExprModel
+struct BuiltinOutlnCallExpr {
+    Expr:  Expr
 }
 ```
 Expression model for built-in outln function calls.
 
 ```jule
-struct BuiltinNewCallExprModel {
+struct BuiltinNewCallExpr {
     Type: &Type
-    Init: ExprModel
+    Init: Expr
 }
 ```
 Expression model for built-in new function calls.
@@ -413,9 +413,9 @@ Expression model for built-in new function calls.
 ---
 
 ```jule
-struct BuiltinPanicCallExprModel {
+struct BuiltinPanicCallExpr {
     Token: &token::Token
-    Expr:  ExprModel
+    Expr:  Expr
 }
 ```
 Expression model for built-in panic function calls.
@@ -423,9 +423,9 @@ Expression model for built-in panic function calls.
 ---
 
 ```jule
-struct BuiltinMakeCallExprModel {
+struct BuiltinMakeCallExpr {
     Type: &Type
-    Size: ExprModel
+    Size: Expr
 }
 ```
 Expression model for built-in make function calls.
@@ -433,9 +433,9 @@ Expression model for built-in make function calls.
 ---
 
 ```jule
-struct BuiltinAppendCallExprModel {
-    Dest:     ExprModel
-    Elements: ExprModel
+struct BuiltinAppendCallExpr {
+    Dest:     Expr
+    Elements: Expr
 }
 ```
 Expression model for built-in append function calls.
@@ -443,7 +443,7 @@ Expression model for built-in append function calls.
 ---
 
 ```jule
-struct BuiltinLenCallExprModel {
+struct BuiltinLenCallExpr {
     Expr: &Data
 }
 ```
@@ -452,7 +452,7 @@ Expression Model: for built-in len function calls.
 ---
 
 ```jule
-struct BuiltinCapCallExprModel {
+struct BuiltinCapCallExpr {
     Expr: &Data
 }
 ```
@@ -461,7 +461,7 @@ Expression Model: for built-in cap function calls.
 ---
 
 ```jule
-struct BuiltinDeleteCallExprModel {
+struct BuiltinDeleteCallExpr {
     Dest: &Data
     Key:  &Data
 }
@@ -471,8 +471,8 @@ Expression Model: for built-in delete function calls.
 ---
 
 ```jule
-struct SizeofExprModel {
-    Expr:  ExprModel
+struct SizeofExpr {
+    Expr:  Expr
 }
 ```
 Expression model for sizeof expressions.\
@@ -481,8 +481,8 @@ For exmaple, in C++: `sizeof(int)`
 ---
 
 ```jule
-struct AlignofExprModel {
-    Expr:  ExprModel
+struct AlignofExpr {
+    Expr:  Expr
 }
 ```
 Expression model for alignof expressions.\
@@ -491,8 +491,8 @@ For exmaple, in C++: `alignof(int)`
 ---
 
 ```jule
-struct StrConstructorCallExprModel {
-    Expr:  ExprModel
+struct StrConstructorCallExpr {
+    Expr:  Expr
 }
 ```
 Expression model for constructor call of str type.\
@@ -501,7 +501,7 @@ For exmaple: `str(myExpr)`
 ---
 
 ```jule
-struct RuneExprModel {
+struct RuneExpr {
     Code: rune
 }
 ```
@@ -511,7 +511,7 @@ For exmaple: `'a'`
 ---
 
 ```jule
-struct BackendEmitExprModel {
+struct BackendEmitExpr {
     Code: str
 }
 ```
@@ -520,8 +520,8 @@ Expression model for inline code emit to backend.
 ---
 
 ```jule
-struct FreeExprModel {
-    Expr: ExprModel
+struct FreeExpr {
+    Expr: Expr
 }
 ```
 Expression model for free calls.\
@@ -756,7 +756,7 @@ Scope.
 
 ```jule
 struct If {
-    Expr:  ExprModel
+    Expr:  Expr
     Scope: &Scope
 }
 ```
@@ -794,7 +794,7 @@ Infinity iteration.
 
 ```jule
 struct WhileIter {
-    Expr:  ExprModel
+    Expr:  Expr
     Next:  Stmt
     Scope: &Scope
 }
@@ -810,7 +810,7 @@ Reports whether iteration is while-next.
 
 ```jule
 struct RangeIter {
-    Expr:  ExprModel
+    Expr:  Expr
     Scope: &Scope
     KeyA:  &Var
     KeyB:  &Var
@@ -863,7 +863,7 @@ struct GotoSt {
 
 ```jule
 struct Postfix {
-    Expr: ExprModel
+    Expr: Expr
     Op:   str
 }
 ```
@@ -873,8 +873,8 @@ Postfix assignment.
 
 ```jule
 struct Assign {
-    Left:  &OperandExprModel
-    Right: &OperandExprModel
+    Left:  &OperandExpr
+    Right: &OperandExpr
     Op:    &token::Token
 }
 ```
@@ -886,7 +886,7 @@ Assignment.
 struct MultiAssign {
     Decls: []&Var
     Left:  []&Data
-    Right: ExprModel
+    Right: Expr
     Op:    &token::Token
 }
 ```
@@ -941,7 +941,7 @@ struct FallSt {
 struct RetSt {
     Func: &FnIns
     Vars: []&Var
-    Expr: ExprModel
+    Expr: Expr
 }
 ```
 Return statement. 
@@ -951,7 +951,7 @@ Return statement.
 ```jule
 struct Recover {
     Handler:     &FnIns
-    HandlerExpr: ExprModel
+    HandlerExpr: Expr
     Scope:       &Scope
     ScopeOwner:  &FnIns
 }
@@ -1718,7 +1718,7 @@ Statement type.
 ---
 
 ```jule
-enum ExprModel: type
+enum Expr: type
 ```
 Expression model.
 
@@ -1728,36 +1728,36 @@ Expression model.
 - `&Var`
 - `&FnIns`
 - `&StructIns`
-- `&OperandExprModel`
-- `&BinaryExprModel`
-- `&UnaryExprModel`
-- `&StructArgExprModel`
-- `&StructLitExprModel`
-- `&AllocStructLitExprModel`
-- `&CastingExprModel`
-- `&FnCallExprModel`
-- `&SliceExprModel`
-- `&IndexingExprModel`
-- `&AnonFnExprModel`
-- `&KeyValPairExprModel`
-- `&MapExprModel`
-- `&SlicingExprModel`
-- `&TraitSubIdentExprModel`
-- `&StructSubIdentExprModel`
-- `&StructStaticIdentExprModel`
-- `&ArrayExprModel`
-- `&TupleExprModel`
-- `&BuiltinOutCallExprModel`
-- `&BuiltinOutlnCallExprModel`
-- `&BuiltinNewCallExprModel`
-- `&BuiltinPanicCallExprModel`
-- `&BuiltinMakeCallExprModel`
-- `&BuiltinAppendCallExprModel`
-- `&BuiltinCopyCallExprModel`
-- `&BuiltinErrorCallExprModel`
-- `&SizeofExprModel`
-- `&AlignofExprModel`
-- `&RuneExprModel`
-- `&IntegratedToStrExprModel`
-- `&BackendEmitExprModel`
-- `&FreeExprModel`
+- `&OperandExpr`
+- `&BinaryExpr`
+- `&UnaryExpr`
+- `&StructArgExpr`
+- `&StructLitExpr`
+- `&AllocStructLitExpr`
+- `&CastingExpr`
+- `&FnCallExpr`
+- `&SliceExpr`
+- `&IndexingExpr`
+- `&AnonFnExpr`
+- `&KeyValPairExpr`
+- `&MapExpr`
+- `&SlicingExpr`
+- `&TraitSubIdentExpr`
+- `&StructSubIdentExpr`
+- `&StructStaticIdentExpr`
+- `&ArrayExpr`
+- `&TupleExpr`
+- `&BuiltinOutCallExpr`
+- `&BuiltinOutlnCallExpr`
+- `&BuiltinNewCallExpr`
+- `&BuiltinPanicCallExpr`
+- `&BuiltinMakeCallExpr`
+- `&BuiltinAppendCallExpr`
+- `&BuiltinCopyCallExpr`
+- `&BuiltinErrorCallExpr`
+- `&SizeofExpr`
+- `&AlignofExpr`
+- `&RuneExpr`
+- `&IntegratedToStrExpr`
+- `&BackendEmitExpr`
+- `&FreeExpr`
