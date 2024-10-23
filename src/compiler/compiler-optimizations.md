@@ -122,6 +122,7 @@ Enables special optimizations for string operations.
 - Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
 - Optimizes allocations of the string concatenations if possible.
+- Optimizes string and bytes conversions of binary expressions such as `str([]byte) == str([]byte)`.
 
 ---
 
