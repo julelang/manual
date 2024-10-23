@@ -1007,43 +1007,6 @@ struct Field {
 ---
 
 ```jule
-struct Operators {
-    Eq:            &FnIns
-    Gt:            &FnIns
-    GtEq:          &FnIns
-    Lt:            &FnIns
-    LtEq:          &FnIns
-    Shl:           &FnIns
-    Shr:           &FnIns
-    Add:           &FnIns
-    Sub:           &FnIns
-    Div:           &FnIns
-    Mul:           &FnIns
-    Mod:           &FnIns
-    BitAnd:        &FnIns
-    BitOr:         &FnIns
-    BitXor:        &FnIns
-    Neg:           &FnIns
-    Pos:           &FnIns
-    BitNot:        &FnIns
-    AddAssign:     &FnIns
-    SubAssign:     &FnIns
-    DivAssign:     &FnIns
-    MulAssign:     &FnIns
-    ModAssign:     &FnIns
-    ShlAssign:     &FnIns
-    ShrAssign:     &FnIns
-    BitOrAssign:   &FnIns
-    BitAndAssign:  &FnIns
-    BitXorAssign:  &FnIns
-}
-```
-Overloaded operators for instance.
-Patterns are checked.
-
----
-
-```jule
 struct Struct {
     Depends:    []&Struct
     Uses:       []&Struct
@@ -1111,7 +1074,6 @@ struct StructIns {
     Mutable:    bool
     Comparable: bool
     Refers:     &ReferenceStack
-    Operators:  Operators
 }
 ```
 Structure instance.
