@@ -37,7 +37,7 @@ For shifting operators, discards high and low bits upon overflow. If bitsize exc
 | `>=` | Greater than or equal to |
 | `<=` | Less than or equal to |
 
-For `==` and `!=` operators, the slices, maps, anonymous functions, and some binded types are not supported. If a structure uses one of these types, it will be unsupported also. In this case, to make a comparable relevant structure, use operator overloading and overload the comparison operators.
+For `==` and `!=` operators, the slices, maps, anonymous functions, and some binded types are not supported. If a structure uses one of these types, it will be unsupported also.
 
 For binded types, all binded structures accepted as non-comparable. Other type aliases like binded as `int` or something like that, accepted as comparable.
 
