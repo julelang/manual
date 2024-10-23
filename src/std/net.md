@@ -90,7 +90,7 @@ Returns empty IP address.
 `fn Empty(self): bool`\
 Reports whether IP is empty.
 
-`fn Eq(self, other: Ip): bool`\
+`fn Equal(self, other: Ip): bool`\
 Reports wherher IPs are points to the same address. An IPv4 address and that same address in IPv6 from are considered to be equal.
 
 `fn IsUnspecified(self): bool`\
