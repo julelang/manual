@@ -22,7 +22,7 @@ Reports whether the path is absolute.
 ---
 
 ```jule
-fn IsPathSep(c: u8): bool
+fn IsPathSep(c: byte): bool
 ```
 Reports whether c is path separator.
 

@@ -7,6 +7,24 @@ fn TypeOf(TYPE || EXPRESSION): comptimeTypeInfo
 ```
 Returns compile-time type information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
+::: info
+All type information functionalities uses actual type (may there are exception cases). To examine and match actual types, comptime type information handling is useful.
+
+For example:
+```jule
+type ByteSlice: []byte
+const t = comptime::TypeOf(ByteSlice)
+const match type t.Kind() {
+| comptime::Kind.Slice:
+	const match type t.Elem().Kind() {
+	| comptime::Kind.Byte:
+		// ...
+	}
+}
+```
+In the example code above, the ByteSlice type is a strict type alias. But we can examine the actual type with comptime type information api.
+:::
+
 ---
 
 ```jule
@@ -70,7 +88,7 @@ Returns as constant expression.
 
 `fn Decl(self): comptimeDecl`\
 Returns declaration information for type.
-Supports only structs, traits, enums, type enums, and functions.
+Supports only structs, traits, enums, type enums, and functions. For structures that constructed by the strict type alias, it returns declaration information for the relevant implicit struct declaration.
 
 `fn Bits(self): int`\
 Returns bitsize of type.
@@ -254,6 +272,7 @@ Returns comptimeValue for method access expression.
 Supports only structure types.
 Parameter ident should be constant.
 It allows access to private methods.
+It will not use the actual kind, so this method an provide access to methods of the any strict type alias.
 
 `fn Unwrap(self)`\
 Unwraps expression for runtime execution.

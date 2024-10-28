@@ -1,26 +1,16 @@
 # Types
 
 ## Linking Types
-Although it is possible to link any typedef, these type aliases are not like standard aliases, for example they cannot be used as an alias for a struct if you use them in an expression. These type aliases are for linking unavoidable types to Jule.
+Type statements are used to bind types. They can only bind in the global scope. A bind type alias must always be a strict type alias. For Bind, put the keyword `cpp` at the beginning.
 
-For example: 
-```jule
+For example:
+```
 cpp type char: byte
 ```
 
 ::: tip
 If the types you use do not belong to Jule, if you are linking from C/C++, make sure to use the types you link, even if you have a compatible Jule type. This is important for your type safety.
 :::
-
-## Linking Type Aliases
-
-Type alias linking is the same as type linking.
-
-For example:
-```jule
-cpp type char: byte
-cpp type CPTR: *cpp.char
-```
 
 ## Type Safety
 
