@@ -78,6 +78,9 @@ Supports the `==` and `!=` operators to compare types.
 
 **Methods:**
 
+`fn Strict(self): bool`\
+Reports whether type is constructed by a strict type alias as constant expression.
+
 `fn Kind(self): Kind`\
 Returns Kind of type.
 Returns as constant expression.
