@@ -1435,10 +1435,11 @@ struct Var {
     Used:          bool
     Statically:    bool
     Reference:     bool
-    Directives:    []&ast::Directive
+    Checked:       bool
     TypeSym:       &TypeSym
     Value:         &Value
     Refers:        &ReferenceStack
+    Directives:    []&ast::Directive
 
     // The -2 means this variable is not one of the return variables.
     // The -1 means this variable is just the single return variable one.
