@@ -237,10 +237,9 @@ For example: `&MyStruct{}`
 
 ```jule
 struct CastingExpr {
-    Token:    &token::Token
-    Expr:     &Data
-    Type:     &Type
-    ExprType: &Type
+    Token: &token::Token
+    Expr:  &Data
+    Type:  &Type
 }
 ```
 Casting expression model. For example: `(int)(myFloat)`
