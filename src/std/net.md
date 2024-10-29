@@ -42,7 +42,7 @@ It will forward any exceptional from network connectors.
 ---
 
 ```jule
-fn ConnectTimeout(network: Network, addr: str, timeout: time::DurInt)!: Conn
+fn ConnectTimeout(network: Network, addr: str, timeout: time::Duration)!: Conn
 ```
 Same as `Connect`, but uses timeout. For UDP networks, timeout will be ignored. Timeout precision is microseconds. If the timeout is below one microsecond it will be ignored. If timeout is invalid or out of range, throws exceptional with Error.InvalidTimeout.
 
@@ -275,7 +275,7 @@ Connects to TCP listener by given address. Returns relevant created &TcpConn if 
 
 See the `Connect` function for a description of the addr parameter.
 
-`static fn ConnectTimeout(addr: str, timeout: time::DurInt)!: &TcpConn`\
+`static fn ConnectTimeout(addr: str, timeout: time::Duration)!: &TcpConn`\
 Same as `TcpListener.Connect`, but uses timeout.
 
 `fn Accept(self)!: Conn`\
@@ -317,10 +317,10 @@ All exceptionals are error code of implementation.
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
-`fn SetReadTimeout(mut self, timeout: time::DurInt)!`\
+`fn SetReadTimeout(mut self, timeout: time::Duration)!`\
 Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
 
-`fn SetWriteTimeout(mut self, timeout: time::DurInt)!`\
+`fn SetWriteTimeout(mut self, timeout: time::Duration)!`\
 Sets write timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
 
 `fn Network(self): Network`\
@@ -365,10 +365,10 @@ Read bytes to buffer from connection and returns readed byte count. The number o
 `fn Write(mut self, buf: []byte)!: int`\
 Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
-`fn SetReadTimeout(mut self, timeout: time::DurInt)!`\
+`fn SetReadTimeout(mut self, timeout: time::Duration)!`\
 Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
 
-`fn SetWriteTimeout(mut self, timeout: time::DurInt)!`\
+`fn SetWriteTimeout(mut self, timeout: time::Duration)!`\
 Sets write timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
 
 `fn Network(self): Network`\
@@ -411,8 +411,8 @@ trait Conn {
     io::Reader
     io::Writer
     io::Closer
-    fn SetReadTimeout(mut self, timeout: time::DurInt)!
-    fn SetWriteTimeout(mut self, timeout: time::DurInt)!
+    fn SetReadTimeout(mut self, timeout: time::Duration)!
+    fn SetWriteTimeout(mut self, timeout: time::Duration)!
     fn Network(self): Network
 }
 ```
