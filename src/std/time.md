@@ -17,13 +17,86 @@ Type of abstract time data.
 ---
 
 ```jule
-type DurInt: i64
+type Duration: i64
 ```
-Integer type of durations.
+A Duration represents the elapsed time between two instants as an i64 nanosecond count. The representation limits the largest representable duration to approximately 290 years.
+
+**Methods:**
+
+`fn Nanoseconds(self): Duration`\
+Returns duration as nanoseconds.
+
+`fn Microseconds(self): Duration`\
+Returns duration as microseconds.
+
+`fn Milliseconds(self): Duration`\
+Returns duration as milliseconds.
+
+`fn Seconds(self): f64`\
+Returns duration as floating-point seconds.
+
+`fn Minutes(self): f64`\
+Returns duration as floating-point minutes.
+
+`fn Hours(self): f64`\
+Returns duration as floating-point hours.
+
+`fn Abs(self): Duration`\
+Returns absolute value of duration.
+
+`fn Str(self): str`\
+Returns a string representing the duration in the form "72h3m0.5s". Leading zero units are omitted. As a special case, durations less than one second format use a smaller unit (milli-, micro-, or nanoseconds) to ensure that the leading digit is non-zero. The zero duration formats as 0s.
+
+## Constants
+
+```jule
+const Nanosecond: Duration
+```
+A nanosecond.
+
+---
+
+```jule
+const Microsecond: Duration
+```
+Nanoseconds in microsecond.
+How many nanoseconds are in microsecond.
+
+---
+
+```jule
+const Millisecond: Duration
+```
+Nanoseconds in millisecond.
+How many nanoseconds are in millisecond.
+
+---
+
+```jule
+const Second: Duration
+```
+Nanoseconds in second.
+How many nanoseconds are in second.
+
+---
+
+```jule
+const Minute: Duration
+```
+Nanoseconds in minute.
+How many nanoseconds are in minute.
+
+---
+
+```jule
+const Hour: Duration
+```
+Nanoseconds in hour.
+How many nanoseconds are in hour.
 
 ## Functions
 
-`fn Sleep(mut dur: DurInt)`\
+`fn Sleep(mut dur: Duration)`\
 Stops execution of the caller thread by stated duration. This function only affects execution of caller thread, not process.
 If duration is <=0, function will return immediately. It guarantees sleeping at least for the stated duration.
 
@@ -87,61 +160,3 @@ Returns hour.
 
 `fn Abs(self): AbsTime`\
 Returns time as abstract time.
-
----
-
-```jule
-struct Duration
-```
-Duration is the time between two times.
-
-**Static Fields:**
-
-`const Nanosecond: DurInt`\
-A nanosecond.
-
-`const Microsecond: DurInt`\
-Nanoseconds in microsecond.
-How many nanoseconds are in microsecond.
-
-`const Millisecond: DurInt`\
-Nanoseconds in millisecond.
-How many nanoseconds are in millisecond.
-
-`const Second: DurInt`\
-Nanoseconds in second.
-How many nanoseconds are in second.
-
-`const Minute: DurInt`\
-Nanoseconds in minute.
-How many nanoseconds are in minute.
-
-`const Hour: DurInt`\
-Nanoseconds in hour.
-How many nanoseconds are in hour.
-
-**Methods:**
-
-`static fn Nanoseconds(d: DurInt): DurInt`\
-Returns duration as nanoseconds.
-
-`static fn Microseconds(d: DurInt): DurInt`\
-Returns duration as microseconds.
-
-`static fn Milliseconds(d: DurInt): DurInt`\
-Returns duration as milliseconds.
-
-`static fn Seconds(d: DurInt): f64`\
-Returns duration as floating-point seconds.
-
-`static fn Minutes(d: DurInt): f64`\
-Returns duration as floating-point minutes.
-
-`static fn Hours(d: DurInt): f64`\
-Returns duration as floating-point hours.
-
-`static fn Abs(d: DurInt): DurInt`\
-Returns absolute value of duration.
-
-`static fn Str(d: DurInt): str`\
-Returns a string representing the duration in the form `72h3m0.5s`. Leading zero units are omitted. As a special case, durations less than one second format use a smaller unit (milli-, micro-, or nanoseconds) to ensure that the leading digit is non-zero. The zero duration formats as 0s.
