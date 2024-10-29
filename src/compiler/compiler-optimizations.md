@@ -37,7 +37,7 @@ It eliminates dead (unused / unreachable) codes from object code.
 
 - Eliminates dead globals.
 - Eliminates dead functions.
-- Eliminates dead structures. <div class="warning-badge">experimental</div>
+- Eliminates dead structures (including strict type alias structures). <div class="warning-badge">experimental</div>
 - Eliminates dead methods of living structures. <div class="warning-badge">experimental</div>
 - Eliminates dead traits. <div class="warning-badge">experimental</div>
 - Eliminates followed statements of the return statement.
