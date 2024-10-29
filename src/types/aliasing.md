@@ -63,3 +63,5 @@ Any bound methods will be ignored, regardless of the source data type. Strict ty
 When the source is a trait, you can use it for impl statements. But it does not behave like a new trait. For impl statements, the source type trait is valid. Strict type aliases to a trait are generally only useful for adding methods specific to that type, but they are not helpful for creating a new duplicate trait.
 
 If the source type is a structure, it inherits the structure's fields, although methods are ignored. In other words, the new strict type will have the fields of the relevant structure exactly.
+
+Any static field of source type, such as type constants or enum fields, will not be derived.
