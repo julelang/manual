@@ -134,10 +134,6 @@ There may be system call differences and performance differences for console han
 
 **Methods:**
 
-`static fn New(handle: uintptr): &File`\
-Returns new `&File` by handle.
-If hadle <= 0, returns nil reference.
-
 `static fn Open(path: str, flag: oFlag, mode: int)!: &File`\
 Opens file stream with named file, specified flag (O_RDWR, O_TRUNC etc.) and perm. If named file does not exist and O_CREATE flag is passed, will created with mode (before umask). If successful, returns File reference with handle to file stream and the reference can used for I/O operations.
 
