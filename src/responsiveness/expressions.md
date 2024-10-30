@@ -121,3 +121,22 @@ fn main() {
 }
 ```
 In the example above, the `use y` statement is not requires the variable `y` should be mutable, since it is assigning to the variable `x` which is immutable.
+
+## Types and Literals
+
+If the compiler knows that there must be a type in the expression, it will allow that type to be used, even if it is shadowed.
+
+For example:
+```jule
+struct Test{
+	a: int
+	b: str
+}
+
+fn main() {
+	Test := 10
+	_ = Test
+	_ = Test{a: 10, b: "foo"}
+}
+```
+In the example program above, a variable named `Test` may shadow the `Test` structure. But in the case of a struct literal, the compiler knows there is must be a type, so it uses the structure and not the variable for the type.
