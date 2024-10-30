@@ -25,3 +25,26 @@ Okay, so why doesn't the compiler implement immutability by default only for tho
 Traits are considered mutable types because the type of data they store can be mutable. It is not possible to track this at runtime. Because, in its simplest explanation, an immutable trait data can be assigned to a mutable memory. However, it is not possible to understand at compile time whether the trait stores mutable data, so it's risky. The only way to check this is to add an additional unwanted runtime.
 
 However, there is one point for traits: they respect the concept of interior mutability. If the data stored by a trait implements interior mutability, this is allowed.
+
+## Shared Memory
+
+In the case of shared memory, you may also encounter changes in immutable memory. Immutable memory does not guarantee that the data it stores is strictly, directly and indirectly immutable. Immutable memory space guarantees that it cannot be changed directly.
+
+For example, when you assign a mutable byte slice to an immutable field, this is valid behavior. Now the assigned immutable memory will point to the same shared memory (since the slices share the common memory). This immutable memory cannot be assigned to a mutable memory or mutated in any way. It is safe in this respect. However, since there is no deep immutability guarantee, if the mutable memory to which it is assigned changes, its data will also mutate.
+
+For example:
+```jule
+fn main() {
+	mut x := []byte("hello world")
+	y := x
+	x[0] = 'H'
+	println(str(y))
+}
+```
+In the example program above the output will be `Hello world`. This is exactly for the reason explained above. `y` is immutable memory. It guarantees immutability, but this is not a guarantee that the memory cannot be modified from `y`. Mutation of the shared memory mutates it.
+
+The fact that a deeper imutability has not been adopted is one of Jule's purposes of simplicity and convenience. This way, you only know which memory needs to be changed in cases like shared memory, but you don't have to guarantee it too deeply.
+
+For example, you might exhibit an immutable share during a function call when you are handling mutable memory. In this case, you would not expect a change in your data, because the function using the memory is declared not to mutate it. However, if a deep guarantee was required by design, things would not be so easy in such shared memory situations.
+
+Shared memory spaces are important and something to consider in concurrent programming and this is an important help in concurrent programming because you know which memory areas can mutate in concurrent code.
