@@ -2396,7 +2396,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Recvfrom(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: *u32): uint
+unsafe fn Recvfrom(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: *u32): int
 ```
 Calls C's recvfrom function.
 ::: warning
@@ -2436,7 +2436,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn Sendto(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: u32): uint
+unsafe fn Sendto(handle: int, mut buf: *unsafe, len: uint, flags: int, srcAddr: *Sockaddr, addrLen: u32): int
 ```
 Calls C's sendto function.
 ::: warning
