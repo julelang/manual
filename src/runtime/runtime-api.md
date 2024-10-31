@@ -118,6 +118,16 @@ unsafe fn panic1(m: *byte, n: int)
 The built-in panic call.
 
 ```jule
+unsafe fn panic1(m: *byte, n: int)
+```
+The built-in panic call.
+
+```jule
+fn panicStr(m: str)
+```
+Calls the panic1 function by m.
+
+```jule
 fn compareStr(&a: str, &b: str): int
 ```
 See `strings::{Compare}` function for documentation.
@@ -166,3 +176,33 @@ A low level API function for threads. It doesn't provide much abstraction. It ju
 fn runeCount(s: str): int
 ```
 Returns rune count of the string.
+
+```jule
+fn pseudoMalloc(n: i64, size: uint)
+```
+Pseudo memory allocation, for allocation checking and documentation purposes. Any runtime allocation must be follow this implementation documentation. Pseudo allocates linear memory on the heap. The |n| is non-negative count of elements. The |size| is size in bytes of the single instance of a type which is will be allocated. Panics if |n*size > maxAlloc || n > max(int)|, also panics if allocation failed. Returns pointer to the allocation (pointer to the first cell if n>1). The allocated memory will not be initialized by default.
+
+Calling this function, performs allocation size checking as described and panics if conditions are met.
+
+```jule
+unsafe fn strBytePtr(b: *byte, n: int): str
+```
+Returns string based on b, the parameter b means first byte of string. The returned string uses n as length. Will not perform garbage collection.
+
+```jule
+unsafe fn sliceBytePtr(mut b: *byte, len: int, cap: int): []byte
+```
+Returns slice based on b, the parameter b means first element of slice. Will not perform garbage collection.
+
+```jule
+fn strAsSlice(s: str): []byte
+```
+Equals to sliceBytePtr(&s[0], len(s), len(s)) call.
+Returns nil slice for empty string.
+
+```jule
+fn sliceAsStr(b: []byte): str
+```
+Returns byte slice as str.
+Equals to strBytePtr(&b[0], len(b)) call.
+Returns empty string if len(b) == 0.

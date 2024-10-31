@@ -117,6 +117,11 @@ void __jule_panic(jule::U8 *m, jule::Int n);
 Declaration of: `panic1`
 
 ```cpp
+void __jule_panicStr(jule::Str m);
+```
+Declaration of: `panicStr`
+
+```cpp
 jule::Str __jule_bytesToStr(jule::Slice<jule::U8> bytes);
 ```
 Declaration of: `bytesToStr`
@@ -160,3 +165,28 @@ Declaration of: `coSpawn`
 jule::Int __jule_runeCount(jule::Str s);
 ```
 Declaration of: `runeCount`
+
+```cpp
+void __jule_pseudoMalloc(jule::Int n, jule::Uint size);
+```
+Declaration of: `pseudoMalloc`
+
+```cpp
+jule::Str __jule_strBytePtr(jule::U8 *b, jule::Int n);
+```
+Declaration of: `strBytePtr`
+
+```cpp
+jule::Slice<jule::U8> __jule_sliceBytePtr(jule::U8 *b, jule::Int len, jule::Int cap);
+```
+Declaration of: `sliceBytePtr`
+
+```cpp
+jule::Slice<jule::U8> __jule_strAsSlice(jule::Str s);
+```
+Declaration of: `strAsSlice`
+
+```cpp
+jule::Str __jule_sliceAsStr(jule::Slice<jule::U8> b);
+```
+Declaration of: `sliceAsStr`
