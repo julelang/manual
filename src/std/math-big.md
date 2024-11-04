@@ -47,7 +47,7 @@ Returns the binomial coefficient C(n, k).
 `fn Add(self, y: Int): Int`\
 Returns x(self) + y.
 
-`fn Sub(mut self, y: Int): Int`\
+`fn Sub(self, y: Int): Int`\
 Returns x(self) - y.
 
 `fn Mul(self, y: Int): Int`\
