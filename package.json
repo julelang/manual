@@ -29,7 +29,7 @@
     "picocolors": "^1.0.0",
     "postcss": "^8.4.24",
     "preact": "^10.15.1",
-    "rollup": "^3.26.0",
+    "rollup": "^3.29.5",
     "search-insights": "^2.6.0",
     "shiki": "^0.14.3",
     "source-map-js": "^1.0.2",
