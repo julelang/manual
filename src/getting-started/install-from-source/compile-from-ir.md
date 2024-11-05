@@ -40,13 +40,17 @@ We recommend compiling JuleC's IR codes with Clang and C++17. The recommended bu
 
 Recommended compile command (Unix):
 ```sh
-clang++ -O3 -Wno-everything --std=c++17 ir.cpp
+clang++ -O3 --std=c++17 -Wno-everything -o bin/julec ir.cpp
 ```
 
 Recommended compile command (Windows):
 ```sh
-clang++ -lshell32 -O3 -Wno-everything --std=c++17 ir.cpp
+clang++ -O3 --std=c++17 -Wno-everything -o bin/julec.exe ir.cpp -lws2_32 -lshell32
 ```
+
+::: warning
+The above build commands may differ from the build commands that will be produced by JuleC or the official commands used for production builds.
+:::
 
 ::: tip
 Note that if you want to use the build you received as JuleC after the compilation phase, you have to place it in the bin directory in the root directory. Simply review any JuleC release to understand the relevant positioning. You can easily see the bin directory in the root directory.
