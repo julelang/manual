@@ -11,7 +11,7 @@ Implements the basic Read method.
 
 Reads up to `len(buf)` bytes into buf. It returns the number of bytes read `(0 <= n <= len(buf))`. Even if Read returns `n < len(buf)`, it may use all of buf as scratch space during the call. If some data is available but not `len(buf)` bytes, Read conventionally returns what is available instead of waiting for more.
 
-If `len(buf) == 0`, Read should always return `n == 0`. Implementations of Read are should return zero byte count for EOF. If `len(buf) != 0` and and EOF reached, should return zero byte count to represent EOF.
+If `len(buf) == 0`, Read should always return `n == 0`. Implementations of Read are should return zero byte count for EOF. If `len(buf) != 0` and EOF reached, should return zero byte count to represent EOF.
 
 The Read method mutable because implementation may should do mutable operations, or this method may called needed from the mutable method, which is not cannot be internally mutable. Such a mutable behaviors should be documented by the implementation.
 
@@ -80,7 +80,7 @@ trait RuneReader {
 ```
 Implements the basic ReadRune method.
 
-It should read rune and return without throwing exceptional if success. If raed failed, should throw exceptional.
+It should read rune and return without throwing exceptional if success. If read failed, should throw exceptional.
 
 The ReadRune method mutable because of same reasons of the `Writer` trait.
 
