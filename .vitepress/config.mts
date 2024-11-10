@@ -451,6 +451,7 @@ export default defineConfig({
           items: [
             { text: 'builtin', link: '/std/builtin' },
             { text: 'std/bytes', link: '/std/bytes' },
+            { text: 'std/bufio', link: '/std/bufio' },
             { text: 'std/comptime', link: '/std/comptime' },
             { text: 'std/conv', link: '/std/conv' },
             {
