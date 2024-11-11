@@ -270,6 +270,9 @@ Supports only structure types.
 Parameter ident should be constant.
 It allows access to private fields.
 
+`fn FieldByIndex(self, index: int): comptimeValue`\
+Same as the Field method, but takes constant index istead of identifier.
+
 `fn Method(self, ident: str): comptimeValue`\
 Returns comptimeValue for method access expression.
 Supports only structure types.
