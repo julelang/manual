@@ -392,6 +392,10 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Performance Tuning and Tips',
+          link: '/performance-tuning-and-tips/',
+        },
+        {
           items: [
             { text: 'End', link: '/end' },
           ]
