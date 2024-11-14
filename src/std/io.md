@@ -159,31 +159,3 @@ trait Stream {
 }
 ```
 Inheritance group for the `Reader`, `ReadCloser`, `Writer`, `WriteCloser`, `ReadWriter` and `Closer` traits.
-
-## Structs
-
-```jule
-struct Scanner
-```
-Scanner for files or etc.
-Scans bytes line-by-line.
-
-**Methods:**
-
-`static fn New(mut r: Reader): &Scanner`\
-New `&Scanner` from `Reader`.
-
-`static fn Newf(mut f: &os::File): &Scanner`\
-New `&Scanner` from `&File`.
-Uses `&FileStream` for `Reader` trait compatibility.
-
-`fn Bytes(self): []byte`\
-Returns bytes of recent scan.
-Returned slice is mutable copy of buffer.
-The next `Scan` call will write into same internal allocation.
-
-`fn Text(self): str`\
-Returns text from bytes of recent scan.
-
-`fn Scan(self)!: bool`\
-Scans line from handle via read method. Scans bytes until end of the line, line delimiter is not included. Reports whether readed byte into buffer. Forwards any exceptional.
