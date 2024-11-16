@@ -43,3 +43,7 @@ f64       bool      str        any      new       make
 copy      append    out        outln    delete    cap
 len       panic      true     false     nil
 ```
+
+::: info
+According to Jule's public modifier rules, no reserved keyword can be public. So if you want to use a reserved keyword as an identifier, this would be a name used only within this package, will not be exported for public use.
+:::
