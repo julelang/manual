@@ -3,20 +3,6 @@
 ## Type Aliases
 
 ```jule
-type UnixTime: u64
-```
-Type of unix-time seconds.
-
----
-
-```jule
-type TimeData: uint
-```
-Type of abstract time data.
-
----
-
-```jule
 type Duration: i64
 ```
 A Duration represents the elapsed time between two instants as an i64 nanosecond count. The representation limits the largest representable duration to approximately 290 years.
@@ -96,67 +82,64 @@ How many nanoseconds are in hour.
 
 ## Functions
 
-`fn Sleep(mut dur: Duration)`\
+```jule
+fn Sleep(mut dur: Duration)
+```
 Stops execution of the caller thread by stated duration. This function only affects execution of caller thread, not process.
 If duration is <=0, function will return immediately. It guarantees sleeping at least for the stated duration.
+
+---
+
+```jule
+fn Now(): Time
+```
+Returns the current system time with UTC local.
+
+---
+
+```jule
+fn Unix(sec: i64, nsec: i64): Time
+```
+Returns new time by Unix time with nanoseconds. It is not valid to pass nanoseconds outside the range (0, 999999999). Any invalid range will cause panic.
+
+---
+
+```jule
+fn UnixAbs(sec: i64): AbsTime
+```
+Returns new absolute time by Unix time without nanoseconds.
 
 ## Structures
 
 ```jule
 struct AbsTime {
-    Day:     TimeData
-    WeekDay: TimeData
-    YearDay: TimeData
-    Month:   TimeData
-    Year:    TimeData
-    Second:  TimeData
-    Minute:  TimeData
-    Hour:    TimeData
+    Day:     int
+    WeekDay: int
+    YearDay: int
+    Month:   int
+    Year:    int
+    Second:  int
+    Minute:  int
+    Hour:    int
 }
 ```
-Abstract time.
+Absolute time.
 
 **Methods:**
 
-`fn Unix(self): UnixTime`\
-Returns abstract time as unix-time seconds.
+`fn Unix(self): i64`\
+Returns absolute time in Unix time.
 
 ---
 
 ```jule
 struct Time
 ```
-Timestamp.
-If you are going to use this structure to process data of a time, you can obtain an 'AbsTime' instance by using the `Abs()` method to be more efficient. Each function of this structure, such as `day` or `year`, uses an `Abs()` call in the background. Back-to-back calls may cause you to make the same calculation over and over again.
+A Time represents an instant in time with nanosecond precision.
+
+Zero-value indicates the beginning of Unix time, i.e. zero seconds. This means the date January 1, 1970. Implementation can also handle the Unix time in the negative plane. For example, -10 seconds should be equivalent to Wed Dec 31 1969 23:59:50 UTC+0000.
 
 **Methods:**
 
-`static fn Unix(sec: UnixTime): Time`\
-Returns new time instance from unix-time.
-
-`static fn Now(): Time`\
-Returns time instance of the moment.
-
-`fn Unix(self): UnixTime`\
-Returns time as unix-time.
-
-`fn Day(self): TimeData`\
-Returns day of month.
-
-`fn Month(self): TimeData`\
-Returns month.
-
-`fn Year(self): TimeData`\
-Returns year.
-
-`fn Second(self): TimeData`\
-Returns second.
-
-`fn Minute(self): TimeData`\
-Returns minute.
-
-`fn Hour(self): TimeData`\
-Returns hour.
-
-`fn Abs(self): AbsTime`\
-Returns time as abstract time.
+`fn Unix(self): i64`\
+Returns time in Unix time, nanoseconds will be ignored.
