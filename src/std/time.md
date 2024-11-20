@@ -100,7 +100,7 @@ Returns the current system time with UTC local.
 ```jule
 fn Unix(sec: i64, nsec: i64): Time
 ```
-Returns new time by Unix time with nanoseconds. It is not valid to pass nanoseconds outside the range (0, 999999999). Any invalid range will cause panic.
+Returns new time by Unix time with nanoseconds. It is valid to pass nsec outside the range (0, 999999999). Not all sec values have a corresponding time value. One such value is 1<<63-1 (the largest i64 value).
 
 ---
 
@@ -108,6 +108,21 @@ Returns new time by Unix time with nanoseconds. It is not valid to pass nanoseco
 fn UnixAbs(sec: i64): AbsTime
 ```
 Returns new absolute time by Unix time without nanoseconds.
+
+---
+
+```jule
+fn Date(year: int, month: int, day: int,
+	hour: int, minute: int, second: int, nsecond: int): (t: Time)
+```
+Returns the Time corresponding to
+
+  yyyy-mm-dd hh:mm:ss + nsec nanoseconds
+
+in the appropriate zone for that time in the given location.
+
+The month, day, hour, minute, second, and nsecond values may be outside their usual ranges and will be normalized during the conversion. For example, October 32 converts to November 1.
+
 
 ## Structures
 
@@ -125,11 +140,6 @@ struct AbsTime {
 ```
 Absolute time.
 
-**Methods:**
-
-`fn Unix(self): i64`\
-Returns absolute time in Unix time.
-
 ---
 
 ```jule
@@ -142,4 +152,4 @@ Zero-value indicates the beginning of Unix time, i.e. zero seconds. This means t
 **Methods:**
 
 `fn Unix(self): i64`\
-Returns time in Unix time, nanoseconds will be ignored.
+Returns time in Unix time.
