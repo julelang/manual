@@ -2627,6 +2627,46 @@ Available on: `windows`
 ---
 
 ```jule
+unsafe fn GetEnvironmentVariable(key: *u16, mut out: *u16, outLen: u32): u32
+```
+Windows's GetEnvironmentVariableW function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn SetEnvironmentVariable(key: *u16, val: *u16): bool
+```
+Windows's SetEnvironmentVariableW function.
+::: warning
+Available on: `windows`
+:::
+
+---
+
+```jule
+unsafe fn Getenv(key: *byte): (val: str, unset: bool)
+```
+Retrieves the value of the environment variable named by the key. It returns the value, which will be empty if the variable is not present.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
+unsafe fn Setenv(key: *byte, val: *byte, overwrite: integ::Int): bool
+```
+Wrapper for C's setenv function. Reports whether it successful.
+::: warning
+Available on: `unix`
+:::
+
+---
+
+```jule
 fn FindClose(h: Handle): int
 ```
 Call's Windows FindClose function.

@@ -68,6 +68,21 @@ fn Chdir(path: str)!
 ```
 Changes the current working directory to the given directory.
 
+```jule
+fn LookupEnv(key: str): (val: str, unset: bool)
+```
+Retrieves the value of the environment variable named by the key. If the variable is present in the environment the value (which may be empty) is returned and the boolean is false. Otherwise the returned value will be empty and the boolean will be true.
+
+```jule
+fn Getenv(key: str): str
+```
+Retrieves the value of the environment variable named by the key. It returns the value, which will be empty if the variable is not present. To distinguish between an empty value and an unset value, use \[LookupEnv\].
+
+```jule
+fn Setenv(key: str, val: str): bool
+```
+Sets the value of the environment variable named by the key. Reports whether it successful.
+
 ## Structs
 
 ```jule
