@@ -38,13 +38,6 @@ std::cout << s.cap() << std::endl;
 std::cout << s.len() << std::endl;
 ```
 
-The `alloc` method will not initialize memory. To do this, pass your initialize expression as a third argument.
-
-For example:
-```cpp
-jule::Int len = 10;
-jule::Int cap = 10;
-auto s = jule::Slice<jule::Int>::alloc(len, cap, 0);
-std::cout << s.cap() << std::endl;
-std::cout << s.len() << std::endl;
-```
+::: warning
+The `alloc` method will not initialize the memory.
+:::
