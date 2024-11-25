@@ -408,6 +408,13 @@ fn ParseInLocation(layout: str, value: str, loc: &Location)!: Time
 ```
 Like Parse but differs in two important ways. First, in the absence of time zone information, Parse interprets a time as UTC; ParseInLocation interprets the time as in the given location. Second, when given a zone offset or abbreviation, Parse tries to match it against the Local location; ParseInLocation uses the given location.
 
+---
+
+```jule
+fn ParseDuration(mut s: str): (Duration, bool)
+```
+Parses a duration string and reports whether it successful. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+
 ## Structures
 
 ```jule
