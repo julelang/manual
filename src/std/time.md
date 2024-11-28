@@ -415,6 +415,20 @@ fn ParseDuration(mut s: str): (Duration, bool)
 ```
 Parses a duration string and reports whether it successful. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 
+---
+
+```jule
+fn Since(t: Time): Duration
+```
+Returns the time elapsed since t. It is shorthand for time::Now().Sub(t).
+
+---
+
+```jule
+fn Until(t: Time): Duration
+```
+Returns the duration until t. It is shorthand for t.Sub(time::Now()).
+
 ## Structures
 
 ```jule
@@ -439,6 +453,8 @@ struct Time
 A Time represents an instant in time with nanosecond precision.
 
 Zero-value indicates the beginning of Unix time, i.e. zero seconds. This means the date January 1, 1970. Implementation can also handle the Unix time in the negative plane. For example, -10 seconds should be equivalent to Wed Dec 31 1969 23:59:50 UTC+0000.
+
+Using the == operator when comparing a Time instance is often not what is desired. Because this compares not only the time, but also things like the memory address of the location data.
 
 **Methods:**
 
@@ -486,6 +502,24 @@ Returns the nanosecond offset within the second specified by the time, in the ra
 
 `fn ISO(self): (year: int, week: int)`\
 Returns the ISO 8601 year and week number of the time. Week ranges from 1 to 53. Jan 01 to Jan 03 of year n might belong to week 52 or 53 of year n-1, and Dec 29 to Dec 31 might belong to week 1 of year n+1.
+
+`fn Add(self, d: Duration): Time`\
+Returns the time self+d.
+
+`fn Sub(self, u: Time): Duration`\
+Returns the duration t(self)-u. If the result exceeds the maximum (or minimum) value that can be stored in a \[Duration\], the maximum (or minimum) duration will be returned. To compute t-d for a duration d, use t.Add(-d).
+
+`fn After(self, u: Time): bool`\
+Reports whether the time instant is after u.
+
+`fn Before(self, u: Time): bool`\
+Reports whether the time instant is before u.
+
+`fn Compare(self, u: Time): int`\
+Compares the time instant t(self) with u. If t is before u, it returns -1; if t is after u, it returns +1; if they're the same, it returns 0.
+
+`fn Equal(self, u: Time): bool`\
+Reports whether self and u represent the same time instant. Two times can be equal even if they are in different locations. For example, 6:00 +0200 and 4:00 UTC are Equal. See the documentation on the Time type for the pitfalls of using == with Time values; most code should use Equal instead.
 
 `fn AppendFormat(self, mut b: []byte, layout: str): []byte`\
 Like \[Time.Format\] but appends the textual representation to b and returns the extended buffer.
