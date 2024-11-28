@@ -495,6 +495,17 @@ Returns a textual representation of the time value formatted according to the la
 
 The executable example for \[Time.Format\] demonstrates the working of the layout string in detail and is a good reference.
 
+`fn AppendText(self, mut b: []byte)!: []byte`\
+Implements the custom text encoder method which is appends to b. The time is formatted in RFC 3339 format with sub-second precision. If the timestamp cannot be represented as valid RFC 3339 (e.g., the year is out of range), then throws exception with the ParseError.InvalidRange.
+
+`fn EncodeText(self)!: []byte`\
+Implements the custom text encoder method. matches that of calling the \[Time.AppendText\] method.
+
+See \[Time.AppendText\] for more information.
+
+`fn DecodeText(mut self, data: []byte)!`\
+Implements the custom text decoder method. The time must be in the RFC 3339 format.
+
 `fn Str(self): str`\
 Returns the time formatted using the format string
 
