@@ -47,11 +47,9 @@ If smart pointer is nil, will be allocated by the algorithm for decoding. Otherw
 
 Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data. However, tousands of nested-data is always risky even below 10000.
 
-Custom decoder methods are supported. Any type that supports it must define an appropriate decoder method:
+Supported trait implementations by higher-to-lower precedence (having methods without implementing the trait is valid):
 
-	fn DecodeJSON(self, data: []byte)!
-
-For types with this method, this method is called instead of the default decoding strategy and custom decoding is performed. The data parameter is the corresponding data equivalent and is always a validated, error-free JSON data. It is a mutable copy taken from the data used for decoding, so any change may cause mutation in the main data. According to the defined behavior, decoder methods should not mutate the content of the data. Throwing any exception is considered valid. The thrown exception will be forwarded by the Decode. Successful decoding should not throw any exceptions and self should be changed as required.
+	JSONDecoder, TextDecoder
 
 ---
 
@@ -93,11 +91,9 @@ If smart pointer is nil, encode as null JSON value. Otherwise, will encode deref
 
 Encode cannot represent cyclic data structures and does not handle them. Passing cyclic structures for encoding will result in an cycle at runtime. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data. However, tousands of nested-data is always risky even below 10000.
 
-Custom encoder methods are supported. Any type that supports it must define an appropriate encoder method:
+Supported trait implementations by higher-to-lower precedence (having methods without implementing the trait is valid):
 
-	fn EncodeJSON(self)!: []byte
-
-For types with this method, this method is called instead of the default encoding strategy and custom encoding is performed. The returned bytes must be a valid JSON value. Otherwise, EncodeError.EncodeJSON exception is thrown. Throwing any exception is considered valid. The thrown exception will be forwarded by the Encode. Successful encoding should not throw any exceptions.
+	JSONEncoder, TextEncoder
 
 ---
 
