@@ -1,5 +1,5 @@
 # Maps
-Maps are hashmap. Maps a unique key value to a value.
+Maps are hashmap. Maps a unique key value to a value. Key type always must met the key type constraint: comparable.
 ::: info
 Map values ​​are not kept in the inserted order. Hence iterations etc. It's very likely that you don't get a sequential output in actions.
 :::
