@@ -84,6 +84,8 @@ Smart Pointer receivers require the function to be a reference. The function can
 
 **Receiver Parameter**
 Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. However, when the structure is given as arguments to different functions, or in a different state, it is copied. That is, it is only variable within itself.
+
+Assigning to the self parameter will cause mutation in the same way. This is because, behind the scenes, the self parameter is treated as a [reference variable](/memory/references). Therefore, assignments made directly to the self variable will be written to the memory of the instance calling the method.
 ::: warning
 Not deep copy.
 :::
@@ -91,7 +93,7 @@ Not deep copy.
 ### Syntax
 ```
 fn IDENTIFIER([RECEIVER_PARAMETER], PARAMETERS...): RET_TYPE {
-    // Body
+    [BODY]
 }
 ```
 
