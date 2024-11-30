@@ -274,7 +274,7 @@ Expression model for built-in error function calls.
 ```jule
 struct SliceExpr {
     ElemType: &Type
-    Elems:    []Expr
+    Elems:    []&Data
 }
 ```
 Slice expression model.\
@@ -369,7 +369,7 @@ For example: `myStruct.mySubIdent`
 ```jule
 struct ArrayExpr {
     Kind:  &Arr
-    Elems: []Expr
+    Elems: []&Data
 }
 ```
 Array expression model.  If array filled, elems field holds 2 data. First data is expression, second is nil, kind of mark to that array filled.
