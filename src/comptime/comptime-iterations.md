@@ -29,3 +29,22 @@ fn main() {
 ```
 
 The example program above will prints names of `MyStruct`'s fields. In compile-time, fields are iterated and created new sub scope for each iteration. This may will increase your executable size because of code duplication, use it carefully.
+
+## Slice Literals
+
+Slice literals also supported by comptime iterations. All values of the slice literal should be constant (values supported by constant evaluation). When this slice literals used for comptime iterations, iteration will iterate each constant element sequentally.
+
+For example:
+```jule
+fn main() {
+	const for _, p in ["hello", "comptime", "iterations"] {
+		println(p)
+	}
+}
+```
+
+In the example above, iteration will iterate each constant expression sequentally, from index 0 to index len-1. So output will be:
+
+    hello
+    comptime
+    iterations

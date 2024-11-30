@@ -22,7 +22,7 @@ const match type t.Kind() {
 	}
 }
 ```
-In the example code above, the ByteSlice type is a strict type alias. But we can examine the actual type with comptime type information api.
+In the example code above, the ByteSlice type is a strict type alias. But we can examine the actual type with comptime type information API.
 :::
 
 ---
