@@ -38,7 +38,7 @@ static mut n = atomic::Int.New(0)
 
 fn addToN(mut wg: &sync::WaitGroup) {
     defer { wg.Done() }
-    n.Add(1, atomic::MemoryOrder.Relaxed)
+    n.Add(1, atomic::SeqCst)
 }
 
 fn main() {
@@ -52,7 +52,7 @@ fn main() {
 
     wg.Wait()
 
-    println(n.Load(atomic::MemoryOrder.Relaxed))
+    println(n.Load(atomic::SeqCst))
 }
 ```
 
