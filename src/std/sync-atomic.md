@@ -46,7 +46,7 @@ Only integer types are supported.
 ---
 
 ```jule
-fn CompareSwap[T](mut &addr: T, old: T, new: T, order: memoryOrder): (swapped: bool)
+fn CompareAndSwap[T](mut &addr: T, old: T, new: T, order: memoryOrder): (swapped: bool)
 ```
 Executes the compare-and-swap operation for value.
 Only integer types are supported.
@@ -90,11 +90,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: i8, order: memoryOrder): (old: i8)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: i8, new: i8, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: i8, new: i8, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: i8, order: memoryOrder): (old: i8)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: i8, order: memoryOrder): (new: i8)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): i8`\
 Atomically reads and returns value.
@@ -117,11 +117,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: i16, order: memoryOrder): (old: i16)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: i16, new: i16, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: i16, new: i16, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: i16, order: memoryOrder): (old: i16)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: i16, order: memoryOrder): (new: i16)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): i16`\
 Atomically reads and returns value.
@@ -144,11 +144,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: i32, order: memoryOrder): (old: i32)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: i32, new: i32, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: i32, new: i32, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: i32, order: memoryOrder): (old: i32)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: i32, order: memoryOrder): (new: i32)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): i32`\
 Atomically reads and returns value.
@@ -171,11 +171,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: i64, order: memoryOrder): (old: i64)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: i64, new: i64, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: i64, new: i64, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: i64, order: memoryOrder): (old: i64)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: i64, order: memoryOrder): (new: i64)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): i64`\
 Atomically reads and returns value.
@@ -198,11 +198,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: int, order: memoryOrder): (old: int)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: int, new: int, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: int, new: int, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: int, order: memoryOrder): (old: int)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: int, order: memoryOrder): (new: int)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): int`\
 Atomically reads and returns value.
@@ -225,11 +225,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: u8, order: memoryOrder): (old: u8)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: u8, new: u8, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: u8, new: u8, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: u8, order: memoryOrder): (old: u8)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: u8, order: memoryOrder): (new: u8)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): u8`\
 Atomically reads and returns value.
@@ -252,11 +252,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: u16, order: memoryOrder): (old: u16)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: u16, new: u16, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: u16, new: u16, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: u16, order: memoryOrder): (old: u16)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: u16, order: memoryOrder): (new: u16)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): u16`\
 Atomically reads and returns value.
@@ -279,11 +279,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: u32, order: memoryOrder): (old: u32)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: u32, new: u32, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: u32, new: u32, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: u32, order: memoryOrder): (old: u32)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: u32, order: memoryOrder): (new: u32)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): u32`\
 Atomically reads and returns value.
@@ -306,11 +306,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: u64, order: memoryOrder): (old: u64)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: u64, new: u64, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: u64, new: u64, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: u64, order: memoryOrder): (old: u64)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: u64, order: memoryOrder): (new: u64)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): u64`\
 Atomically reads and returns value.
@@ -333,11 +333,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: uint, order: memoryOrder): (old: uint)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: uint, new: uint, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: uint, new: uint, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: uint, order: memoryOrder): (old: uint)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: uint, order: memoryOrder): (new: uint)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): uint`\
 Atomically reads and returns value.
@@ -360,11 +360,11 @@ Returns new atomic instance for type with initializer value.
 `fn Swap(mut self, new: uintptr, order: memoryOrder): (old: uintptr)`\
 Atomically stores new value and returns the previous value.
 
-`fn CompareSwap(mut self, old: uintptr, new: uintptr, order: memoryOrder): (swapped: bool)`\
+`fn CompareAndSwap(mut self, old: uintptr, new: uintptr, order: memoryOrder): (swapped: bool)`\
 Executes the compare-and-swap operation.
 
-`fn Add(mut self, delta: uintptr, order: memoryOrder): (old: uintptr)`\
-Atomically adds delta to value and returns the previous value.
+`fn Add(mut self, delta: uintptr, order: memoryOrder): (new: uintptr)`\
+Atomically adds delta to value and returns the new value.
 
 `fn Load(self, order: memoryOrder): uintptr`\
 Atomically reads and returns value.
