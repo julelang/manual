@@ -34,20 +34,27 @@ struct Mutex
 ```
 Muxtex is a primitive used to protect memory in multi-threading situations such as concurrent access.
 
-Mutextes are uses internal mutability and internal states. Locking, unlocking and etc is not mutable operations. But there is no internal mutable memory, so mutexes are not use shared memory. Therefore, for correct use, a mutex instance should not be copied. Otherwise internal state will be copied and not mutated by other instances.
+Mutextes are uses internal mutability and internal states. Locking, unlocking and etc is not mutable operations. But there is no internal mutable memory, so mutexes are not use shared memory. Therefore, for correct use, a mutex instance should not be copied after first use. Otherwise internal state will be copied and not mutated by other instances.
 
-Mutexes are not implemented using API of operating system. Implemented in pure Jule. This mutex implementation is not fair and will not optimize starvations. Also it will not check ownership of the mutex, so another thread can unlock the mutex locked by another thread.
+Mutexes are not implemented using API of operating system. Implemented in pure Jule. This mutex implementation will not check ownership of the mutex. So, a locked Mutex is not associated with a particular thread. It is allowed for one thread to lock a Mutex and then arrange for another thread to unlock it.
+
+::: info
+**Implemented Traits**
+- `Locker`
+:::
 
 **Methods:**
 
 `fn Lock(self)`\
-Locks the mutex. If the mutex is locked by another thread, it stops the execution of the algorithm to seize it and waits to lock the mutex.
+Locks mutex. If the lock is already in use, the calling thread blocks until the mutex is available.
 
 `fn Unlock(self)`\
-Unlock the mutex you locked and make it open to locking by the thread.
+Unlocks mutex. It is a run-time error if mutex is not locked on entry to Unlock.
 
 `fn TryLock(self): bool`\
-Try locking the mutex. But unlike the lock method, it just tries to lock instead of waiting to lock. Returns true if the locking was successful, false otherwise.
+Tries to lock mutwx and reports whether it succeeded.
+
+Note that while correct uses of TryLock do exist, they are rare, and use of TryLock is often a sign of a deeper problem in a particular use of mutexes.
 
 ---
 
@@ -74,3 +81,13 @@ do is intended for initialization that must be run exactly once. Since f is nila
 Because no call to do returns until the one call to f returns, if f causes do to be called, it will deadlock.
 
 If f panics, do considers it to have returned; future calls of do return without calling f.
+
+## Traits
+
+```jule
+trait Locker {
+	fn Lock(self)
+	fn Unlock(self)
+}
+```
+Represents an object that can be locked and unlocked.
