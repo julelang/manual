@@ -6,11 +6,15 @@ JuleFmt is a source code formatter for Jule developed using the Jule programming
 
 ## Using
 
-It's easy to format your source code using JuleFmt. Just pass in the path of the package you want to format. JuleFmt will format and update all Jule source codes in the directory for you.
+It's easy to format your source code using JuleFmt. Just pass in the path of the package or file you want to format. JuleFmt will format and update all Jule source codes in the directory or specific filepath for you.
 
 For example:
 ```
 $ julefmt src
+```
+For example:
+```
+$ julefmt main.jule
 ```
 
 ## Formatting Rules
