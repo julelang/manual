@@ -6,16 +6,23 @@ JuleFmt is a source code formatter for Jule developed using the Jule programming
 
 ## Using
 
-It's easy to format your source code using JuleFmt. Just pass in the path of the package or file you want to format. JuleFmt will format and update all Jule source codes in the directory or specific filepath for you.
+JuleFmt can process data from different sources and output it in different ways. When run alone, it reads data from stdin and when EOF, it formats the Jule source code received as input and writes it to stdout. If a directory is given as an argument, it formats all Jule source code files located under the directory (not deep) and writes the output to stdout. If a file path is given, it formats the file and writes the output to stdout. Whenever there is any error, it will be written to stderr, exit code always will be zero.
 
 For example:
 ```
-$ julefmt src
+$ julefmt
 ```
-For example:
 ```
-$ julefmt main.jule
+$ julefmt <directory>
 ```
+```
+$ julefmt <file>
+```
+
+### Formatter Options
+
+`-w`\
+Write result to (source) file instead of stdout.
 
 ## Formatting Rules
 
