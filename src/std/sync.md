@@ -82,6 +82,52 @@ Because no call to do returns until the one call to f returns, if f causes do to
 
 If f panics, do considers it to have returned; future calls of do return without calling f.
 
+---
+
+```jule
+struct Cond
+```
+Implements a condition variable, a rendezvous point for threads waiting for or announcing the occurrence of an event.
+
+Each Cond has an associated Locker L (often a \[&Mutex\]), which must be held when changing the condition and when calling the \[Cond.Wait\] method.
+
+A Cond must not be copied after first use.
+
+**Methods:**
+
+`static fn New(l: Locker): &Cond`\
+Returns a new Cond with locker l.
+
+`fn Lock(self)`\
+Locks the locker.
+
+`fn Unlock(self)`\
+Unlocks the locker.
+
+`fn Wait(self)`\
+Atomically unlocks the locker and suspends execution of the calling thread. After later resuming execution, Wait locks the locker before returning. Unlike in other systems, Wait cannot return unless awoken by \[Cond.Broadcast\] or \[Cond.Signal\].
+
+Because the locker is not locked while Wait is waiting, the caller typically cannot assume that the condition is true when Wait returns. Instead, the caller should Wait in a loop:
+
+	self.Lock()
+	for !condition() {
+	    self.Wait()
+	}
+	... make use of condition ...
+	self.Unlock()
+
+`fn Signal(self)`\
+Wakes one thread waiting on the condition, if there is any.
+
+It is allowed but not required for the caller to hold the locker during the call.
+
+Signal() does not affect thread scheduling priority; if other threads are attempting to lock the locker, they may be awoken before a "waiting" thread.
+
+`fn Broadcast(self)`\
+Broadcast wakes all threads waiting on the condition.
+
+It is allowed but not required for the caller to hold the locker during the call.
+
 ## Traits
 
 ```jule
