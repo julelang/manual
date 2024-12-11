@@ -4,28 +4,25 @@
 ```jule
 struct WaitGroup
 ```
-Do not copy an instance of WaitGroup, use a ref or pointer instead.
+A WaitGroup waits for a collection of threads to finish. The main thread calls \[WaitGroup.Add\] to set the number of threads to wait for. Then each of the threads runs and calls \[WaitGroup.Done\] when finished. At the same time, \[WaitGroup.Wait\] can be used to block until all goroutines have finished.
 
-usage: in main thread: wg: `sync::WaitGroup`\
-"wg.Add(delta)" before starting tasks with "co ..."\
-"wg.Wait()" to wait for all tasks to have finished
-
-in each parallel job:\
-"wg.Done()" when finished
+A WaitGroup must not be copied after first use.
 
 **Methods:**
 
 `static fn New(): &WaitGroup`\
-Returns new WaitGroup instance.
+Returns new \[WaitGroup\] instance.
 
 `fn Add(mut self, delta: int)` \
-Increments (+delta) or decrements (-delta) task count by delta and unblocks any Wait() calls if task count becomes zero. Panics if task count reaches below zero.
+Adds delta, which may be negative, to the \[WaitGroup\] counter. If the counter becomes zero, all threads blocked on \[WaitGroup.Wait\] are released. If the counter goes negative, Add panics.
+
+Note that calls with a positive delta that occur when the counter is zero must happen before a Wait. Calls with a negative delta, or calls with a positive delta that start when the counter is greater than zero, may happen at any time. Typically this means the calls to Add should execute before the statement creating the thread or other event to be waited for. If a \[WaitGroup\] is reused to wait for several independent sets of events, new Add calls must happen after all previous Wait calls have returned.
 
 `fn Done(mut self)` \
-Decrements the WaitGroup counter by one.
+Decrements the \[WaitGroup\] counter by one.
 
 `fn Wait(mut self)` \
-Blocks until all tasks are done (task count becomes zero) 
+Blocks until the \[WaitGroup\] counter is zero.
 
 ---
 
