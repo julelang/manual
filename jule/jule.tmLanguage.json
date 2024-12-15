@@ -51,10 +51,12 @@
 			"name": "variable.language"
 		},
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.jule",
-				"match": "\\b(map|error|use|fn|pub|struct|byte|rune|enum|unsafe|const|let|static|mut|self|match|defer|if|else|for|in|impl|trait|break|continue|goto|cpp|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|str|int|uint|type|any|bool|ret|fall|uintptr|co)\\b"
-			}]
+			"patterns": [
+				{
+					"name": "keyword.control.jule",
+					"match": "\\b(chan|map|error|use|fn|pub|struct|byte|rune|enum|unsafe|const|let|static|mut|self|match|defer|if|else|for|in|impl|trait|break|continue|goto|cpp|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|str|int|uint|type|any|bool|ret|fall|uintptr|co)\\b"
+				}
+			]
 		},
 		"storage": {
 			"name": "storage.modifier.jule",
