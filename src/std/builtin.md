@@ -50,6 +50,9 @@ Returns new instance of data type for supported types.
     Allocates slices dynamically.
     In addition to the slice type, it can take two more arguments. The first argument is mandatory. The first argument specifies the length of the slice. The second argument specifies the capacity of the slice and is optional. The slice is returned with its length, and the field within its length is initialized with the default value.
 
+- Channels:\
+    Channels can only take a type parameter or a buffer capacity length. When a channel is initialized without capacity, it creates an unbuffered channel. If a capacity is provided, a buffered channel is created. Capacities smaller than zero result in a panic. If capacity is equals to zero, then an unbuffered channel will be created.
+
 ---
 
 ```jule
@@ -102,3 +105,10 @@ Returns capacity of string, aka possible maximum count of bytes without expandin
 fn delete(mut map[K]V, ...)
 ```
 Deletes key from map. It takes two argument. The first one is map, second one is the key. If just given one argument, this one is a map, and clears all keys of map.
+
+---
+
+```jule
+fn close(c: chan T)
+```
+Closes channel c. It should be executed only by the sender, never the receiver, and has the effect of shutting down the channel after the last sent value is received. After the last value has been received from a closed channel c, any receive from c will succeed without blocking, returning the zero value for the channel element.

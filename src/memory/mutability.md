@@ -214,3 +214,15 @@ Within the scope of interior mutability, sharing mutable data between copies can
 Under the rule 3, the reason why areas within the scope of interior mutability are recommended to be private is more clear. If the field is public, developers may experience problems when creating new copies when accessing from external packages. Having the structure field private supports easier copies in external packages and easier data sharing.
 
 If you want mutable data to be shared between copies and want to make this data available, keep the data private and share it through methods with [Mutability Encapsulation](#mutability-encapsulation).
+
+## Channels
+
+Whether a channel is mutable or immutable is not only related to whether the variable holding the channel is mutable or not. It also determines the mutability of the data that the channel will sent or deliver.
+
+Regardless of whether a channel is immutable or mutable, it can send both immutable and mutable data. When data is received, if the channel is mutable, the data is received as mutable; if the channel is immutable, the data is received as immutable.
+
+If the channel is immutable but the received data is intended to be assigned to mutable memory, types that do not carry mutability risks (such as basic arithmetic types) support this, while types that carry mutability risks (such as slices or smart pointers) can only be stored in immutable memory.
+
+::: tip
+If the variable storing the channel does not need to be mutable, and the channel will not send a mutable type or the sent data will not be used with mutability, it is recommended to store channel in an immutable variable.
+:::

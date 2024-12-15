@@ -8,7 +8,7 @@ Jule has data types in which it is mutable. These are:
 - Raw and Smart Pointer
 - Slice
 - Traits
-- Array, structure or etc. which is has mutable type
+- Array, structure, channels or etc. which is has mutable type
 
 These are types that point to commonalities among the variables with which they are shared. You may want to ensure that one of these types has not changed. You are safe about this as variables are immutable by default. This is possible if you want it to be mutable. But before we get into how this is done, let's take a look at how obsessed the compiler is with immutability.
 

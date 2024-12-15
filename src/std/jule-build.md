@@ -466,6 +466,8 @@ Compiler log messages with formatting.
 - `ExportedUsedAsAnonymous`
 - `InvalidImportPath`
 - `AutoAliasFail`
+- `ExprNotChan`
+- `ImmutDataSendViaMutChan`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`
@@ -513,3 +515,4 @@ Compiler log messages with formatting.
 - `InvalidExprForConstMatch`
 - `GiveAnAliasManually`
 - `CastingBindedTypesRequiresUnsafeJule`
+- `RArrowOpExpectsChan`

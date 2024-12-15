@@ -291,6 +291,7 @@ export default defineConfig({
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Mutexes', link: '/concurrency/mutexes' },
             { text: 'Condition Variables', link: '/concurrency/condition-variables' },
+            { text: 'Channels', link: '/concurrency/channels' },
           ],
         },
         {

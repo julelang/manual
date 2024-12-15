@@ -173,6 +173,14 @@ Accordingly, strings, like slices, can be moved very efficiently, sharing common
 - With unsafe algorithms, strings can be converted into byte-slices and new allocations in operations such as slicing can be avoided. However, the Unsafe Jule in this code is very useful in encouraging and increasing its use. Many algorithms may require slicing of strings, which may require unsafe conversions in many places in the codebase. It is not a simple experience.
 - In some fields it may be necessary to return byte-slice allocations as strings. In this case, if you are sure it is safe, you may want to unsafely convert it to string to avoid new allocation. But before doing this, you need to make sure that there is a NULL termination every time. Besides this increasing the developer's considerations, perhaps that single NULL termination you add to the slice will in some cases exceed the capacity and result in new allocation, in which case it's not much different than converting to string.
 
+## Channels
+
+Channels are structures implemented by the Jule runtime and compiler. Each initialized non-nil channel is a smart pointer to the corresponding structure instance.
+
+Channels use a queue that operates with a singly linked list, which has O(1) complexity for a FIFO queue. The data received from the queue is zeroed out, and if they performs GC, the references held by the channel are released.
+
+For unbuffered channels, the queue always have 1 preallocated list node. For buffered channels, the queue alwas have N preallocated list node.
+
 ## Smart Pointers
 
 Smart pointers are pointers that work depending on the GC technique used. They are basically implemented as a raw pointer wrapper, but are more safety restricted to allowed to be used with Safe Jule.
@@ -181,6 +189,7 @@ Some data types of Jule also use smart pointers in the background. This is becau
 
 List of all types which is performs internal reference counting:
 - Smart Pointers
+- Channels
 - Slice
 - Trait
 - Any

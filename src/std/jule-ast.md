@@ -84,6 +84,15 @@ Namespace chain type.
 ---
 
 ```jule
+struct ChanTypeDecl {
+	Elem: &TypeDecl
+}
+```
+Channel type.
+
+---
+
+```jule
 struct SptrTypeDecl {
     Elem: &TypeDecl
 }
@@ -168,7 +177,16 @@ struct Expr {
     Kind:  ExprData
 }
 ```
-Expression. 
+Expression.
+
+---
+
+```jule
+struct ChanRecv {
+	Expr: &Expr
+}
+```
+Channel receive expression.
 
 ---
 
@@ -505,6 +523,16 @@ struct ScopeTree {
 }
 ```
 Scope tree.
+
+---
+
+```jule
+struct ChanSend {
+	Chan: &Expr
+	Data: &Expr
+}
+```
+Channel send data statement.
 
 ---
 
@@ -914,6 +942,7 @@ Type of Expr's data.
 - `&FnDecl`
 - `&FieldExprPair`
 - `&KeyValPair`
+- `&ChanRecv`
 
 ---
 
@@ -938,6 +967,7 @@ Type of Stmt's data.
 - `&ScopeTree`
 - `&TypeAliasDecl`
 - `&UseExpr`
+- `&ChanSend`
 
 ---
 
@@ -968,3 +998,4 @@ Kind type of type declarations.
 - `&TupleTypeDecl`
 - `&FnDecl`
 - `&NamespaceTypeDecl`
+- `&ChanTypeDecl`

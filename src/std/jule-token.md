@@ -342,6 +342,7 @@ Token identities.
 - `Self`
 - `Trait`
 - `Impl`
+- `Chan`
 - `Cpp`
 - `Fall`
 - `Fn`
@@ -392,6 +393,7 @@ Token identities.
 - `RParent`
 - `LBracket`
 - `RBracket`
+- `RArrow`
 
 ---
 
@@ -439,6 +441,7 @@ Token kinds.
 - `Gt`
 - `Eq`
 - `ColonEq`
+- `RArrow`
 - `LnComment`
 - `RangLComment`
 - `RangRComment`
@@ -467,6 +470,7 @@ Token kinds.
 - `Self`
 - `Trait`
 - `Impl`
+- `Chan`
 - `Cpp`
 - `Fall`
 - `Fn`
