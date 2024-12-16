@@ -75,15 +75,23 @@ export default defineConfig({
           text: 'Getting Started',
           link: '/getting-started/',
           items: [
-            { text: 'Downloads', link: '/getting-started/downloads' },
             {
-              text: 'Install from Source',
-              link: '/getting-started/install-from-source/',
+              text: 'Installation',
+              link: '/getting-started/installation/',
               items: [
-                { text: 'Compile From IR', link: '/getting-started/install-from-source/compile-from-ir' },
-                { text: 'Build Scripts', link: '/getting-started/install-from-source/build-scripts' },
-                { text: 'Manual Compilation', link: '/getting-started/install-from-source/manual-compilation' },
-              ],
+                { text: 'Windows', link: '/getting-started/installation/windows' },
+                { text: 'Linux', link: '/getting-started/installation/linux' },
+                { text: 'MacOS', link: '/getting-started/installation/macos' },
+                {
+                  text: 'Compiling from Source',
+                  link: '/getting-started/installation/compiling-from-source/',
+                  items: [
+                    { text: 'Compiling From IR', link: '/getting-started/installation/compiling-from-source/compile-from-ir' },
+                    { text: 'Build Scripts', link: '/getting-started/installation/compiling-from-source/build-scripts' },
+                    { text: 'Manual Compilation', link: '/getting-started/installation/compiling-from-source/manual-compilation' },
+                  ],
+                },
+              ]
             },
           ],
         },
