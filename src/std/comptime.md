@@ -99,7 +99,7 @@ Supports only primitive integer and floating-point types.
 Returns as constant expression.
 
 `fn Elem(self): comptimeTypeInfo`\
-Returns comptimeTypeInfo for element type. Supports only pointers (except unsafe pointer), smart pointers, arrays, slices and enums.
+Returns comptimeTypeInfo for element type. Supports only raw pointers (except unsafe pointer), smart pointers, arrays, slices, channels, and enums.
 
 `fn Size(self): int`\
 Returns size of array. Returns as constant expression.
@@ -407,3 +407,4 @@ Type kinds.
 - `SmartPtr`: Smart pointer
 - `Func`: Function
 - `Tuple`: Tuple
+- `Chan`: Channel
