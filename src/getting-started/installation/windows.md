@@ -1,6 +1,6 @@
 # Windows Installation
 
-## Steps
+## Pre-compiled Binaries
 
 1. Download the precompiled package from the [latest GitHub Release](https://github.com/julelang/jule/releases/latest)<br>
 The file will be named `jule-windows-amd64.zip` for x86_64 systems and `jule-windows-arm64.zip` for ARM64 systems.
