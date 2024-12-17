@@ -128,6 +128,22 @@ In buffered channels, if there are pending items in the queue, you will continue
 
 Calling `close` on a channel that is already closed does not result in a panic. However, attempting to close a `nil` channel will result in a panic.
 
+### Receiving Data with Status
+
+Channels will return the default value for the type as said when there is no data to receive.
+To determine whether a data retrieval was successful, you can use an additional return value.
+
+For example:
+```jule
+data, ok := <-c
+if !ok {
+	// receiving failed
+}
+```
+In the above code example, an attempt is made to receive data from the `c` channel. The returned value is assigned to the `data` variable. The `ok` variable holds whether the data reception was successful. This allows you to check the status of the channel while receiving data.
+
+The channel will return true for status only when data is successfully received from the channel. If the channel is unbuffered, it will return true if the channel is open and data has been received. If the channel is buffered, it will return true even if the channel is closed, as long as there is data waiting in the queue. After all the data in the queue has been received, it will return false.
+
 ## Mutability
 
 For detailed information on channels and mutability, please refer to the main section titled [Mutability](/memory/mutability#channels).
