@@ -85,6 +85,8 @@ Namespace chain type.
 
 ```jule
 struct ChanTypeDecl {
+    Recv: bool
+    Send: bool
 	Elem: &TypeDecl
 }
 ```

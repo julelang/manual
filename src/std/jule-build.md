@@ -468,6 +468,10 @@ Compiler log messages with formatting.
 - `AutoAliasFail`
 - `ExprNotChan`
 - `ImmutDataSendViaMutChan`
+- `CloseRecvOnlyChan`
+- `MakingRecvOnlyChanSendOnly`
+- `SendToRecvOnlyChan`
+- `RecvFromSendOnlyChan`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

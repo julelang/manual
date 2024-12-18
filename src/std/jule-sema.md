@@ -1240,6 +1240,9 @@ Reports whether kind is variadicable.
 `fn Prim(self): &Prim`\
 Returns primitive type if kind is primitive type, nil reference if not.
 
+`fn Chan(mut self): &Chan`\
+Returns channel type if actual kind is channel, nil if not.
+
 `fn Sptr(self): &Sptr`\
 Returns reference type if kind is smart pointer, nil reference if not.
 
@@ -1348,6 +1351,21 @@ Reports whether type is primitive str.
 
 `fn IsAny(self): bool`\
 Reports whether type is primitive any. 
+
+---
+
+```jule
+struct Chan {
+    Recv: bool
+    Send: bool
+    Elem: &Type
+}
+```
+Channel type.
+::: info
+**Implemented Traits**
+- `Kind`
+:::
 
 ---
 

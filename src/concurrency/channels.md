@@ -144,6 +144,26 @@ In the above code example, an attempt is made to receive data from the `c` chann
 
 The channel will return true for status only when data is successfully received from the channel. If the channel is unbuffered, it will return true if the channel is open and data has been received. If the channel is buffered, it will return true even if the channel is closed, as long as there is data waiting in the queue. After all the data in the queue has been received, it will return false.
 
+## One-Way Channels
+
+One-way channels are restricted channels designed for safer channel usage. By removing certain permissions, potential misuse can be prevented at compile time. This is particularly useful in scenarios where package developers need to share channels within their package with users.
+
+In the type declaration of one-way channels, just like in data sending and receiving, the channel operator (arrow) indicates the direction of the data.
+
+Channels can be implicitly converted to one another, but they must have the required permissions. For example, a regular both-way channel can be implicitly converted to receive-only or send-only channel. However, a receive-only channel cannot be converted back to regular both-way or send-only channel because it lacks send permissions.
+
+### Receive-Only Channels
+
+Type declaration: `<-chan T`
+
+Receive-only channels can only receive data from the channel. They cannot send data or close the channel.
+
+### Send-Only Channels
+
+Type declaration: `chan<- T`
+
+Send-only channels can only send data to the channel. They also have the permission to close the channel but cannot receive data from it.
+
 ## Mutability
 
 For detailed information on channels and mutability, please refer to the main section titled [Mutability](/memory/mutability#channels).
