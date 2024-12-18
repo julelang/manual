@@ -155,6 +155,9 @@ Channels can be implicitly converted to one another, but they must have the requ
 ### Receive-Only Channels
 
 Type declaration: `<-chan T`
+::: tip
+If you want to pass receive-only channel to a regular both-way channel, like `chan <-chan int`, the parser will consider this as `chan<- chan int` actually. You can use parentheses like this `chan (<-chan int)` to achieve this.
+:::
 
 Receive-only channels can only receive data from the channel. They cannot send data or close the channel.
 
