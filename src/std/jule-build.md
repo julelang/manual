@@ -469,7 +469,6 @@ Compiler log messages with formatting.
 - `ExprNotChan`
 - `ImmutDataSendViaMutChan`
 - `CloseRecvOnlyChan`
-- `MakingRecvOnlyChanSendOnly`
 - `SendToRecvOnlyChan`
 - `RecvFromSendOnlyChan`
 
