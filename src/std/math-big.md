@@ -205,3 +205,4 @@ Conversion error codes.
 
 - `NoDigits`: Number has no digits.
 - `InvalidSep`: '_' must separate successive digits.
+- `InvalidFormat`
