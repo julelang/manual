@@ -299,7 +299,7 @@ Lexer mode.
 
 ---
 
-`enum Idenet: str`
+`enum Ident: str`
 
 Special identifiers.
 
