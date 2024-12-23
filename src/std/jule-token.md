@@ -394,6 +394,7 @@ Token identities.
 - `LBracket`
 - `RBracket`
 - `RArrow`
+- `Select`
 
 ---
 
@@ -481,3 +482,5 @@ Token kinds.
 - `Static`
 - `Hash`
 - `Error`
+- `Map`
+- `Select`

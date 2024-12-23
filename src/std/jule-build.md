@@ -453,6 +453,7 @@ Compiler log messages with formatting.
 - `ComptimeAsExpr`
 - `InvalidTypeForFn`
 - `ComptimeFallthrough`
+- `SelectFallthrough`
 - `CannotBeMut`
 - `AnonFn`
 - `CopyWithMutableData`
@@ -471,6 +472,8 @@ Compiler log messages with formatting.
 - `CloseRecvOnlyChan`
 - `SendToRecvOnlyChan`
 - `RecvFromSendOnlyChan`
+- `InvalidSelectExpr`
+- `ExpectedNExpr`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

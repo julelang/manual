@@ -747,7 +747,19 @@ struct MatchCase {
     Default:    &Else
 }
 ```
-Match-Case. 
+Match-Case.
+
+---
+
+```jule
+struct SelectCase {
+	Token:   &token::Token
+	End:     &token::Token
+	Cases:   []&Case
+	Default: &Else
+}
+```
+Select-Case.
 
 ---
 
@@ -945,6 +957,7 @@ Type of Expr's data.
 - `&FieldExprPair`
 - `&KeyValPair`
 - `&ChanRecv`
+- `&ChanSend`
 
 ---
 
@@ -969,7 +982,7 @@ Type of Stmt's data.
 - `&ScopeTree`
 - `&TypeAliasDecl`
 - `&UseExpr`
-- `&ChanSend`
+- `&SelectCase`
 
 ---
 

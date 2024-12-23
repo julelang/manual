@@ -529,6 +529,37 @@ Function provided by: `std/mem`
 ---
 
 ```jule
+struct ChanRecv {
+	Token: &token::Token
+	Expr:  &Data
+}
+```
+Expression model: for channel receive.
+
+---
+
+```jule
+struct ChanSend {
+	Token: &token::Token
+	Chan:  &Data
+	Data:  &Data
+}
+```
+Expression mode: for channel send.
+
+---
+
+```jule
+struct BuiltinCloseCallExpr {
+	Token: &token::Token
+	Chan:  &Data
+}
+```
+Expression Model: for built-in close function calls.
+
+---
+
+```jule
 struct RetType {
     TypeSym: &TypeSym
     Idents:  []&token::Token
@@ -820,7 +851,7 @@ Range iteration.
 ---
 
 ```jule
-struct Contst {
+struct ContSt {
     It: uintptr
 }
 ```
@@ -829,9 +860,10 @@ Continue statement.
 ---
 
 ```jule
-struct Breakst {
-    It:   uintptr
-    Mtch: uintptr
+struct BreakSt {
+    It:     uintptr
+    Mtch:   uintptr
+    Select: uintptr
 }
 ```
 Break statement.
@@ -913,8 +945,19 @@ Reports whether match is type-match for generic type.
 ---
 
 ```jule
+struct Select {
+	Scope:   &Scope // Owner scope. See developer reference (10).
+	Cases:   []&Case
+	Default: &Case
+}
+```
+Select-Case.
+
+---
+
+```jule
 struct Case {
-    Owner: &Match
+    Owner: CaseOwner
     Scope: &Scope
     Exprs: []&Data
     Next:  &Case
@@ -1607,6 +1650,7 @@ Statement type.
 - `&FallSt`
 - `&BreakSt`
 - `&RetSt`
+- `&Select`
 
 ---
 
@@ -1654,3 +1698,17 @@ Expression model.
 - `&IntegratedToStrExpr`
 - `&BackendEmitExpr`
 - `&FreeExpr`
+- `&ChanRecv`
+- `&ChanSend`
+- `BuiltinCloseCallExpr`
+
+---
+
+```jule
+enum CaseOwner: type
+```
+Valid owner types for Case.
+
+**Fields:**
+- `&Match`
+- `&Select`

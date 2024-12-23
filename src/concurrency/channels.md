@@ -170,3 +170,56 @@ Send-only channels can only send data to the channel. They also have the permiss
 ## Mutability
 
 For detailed information on channels and mutability, please refer to the main section titled [Mutability](/memory/mutability#channels).
+
+## Select Statement
+
+Select statements are similar to match statements but are specialized for channels and are ideal for managing conditional situations. They are particularly preferred when multiple channels are involved.
+
+A select statement's case can only take a single expression, and this expression must always involve either receiving data from a channel or sending data to a channel. The select statement evaluates each given expression and uses the first case that is eligible. If multiple cases are eligible, one of the eligible cases is chosen randomly.
+
+When a receive expression (e.g., `<-c`) is used as a case in a select statement, the select checks if data can be received from the channel. If data is available to be receive, the select statement evaluates this case as eligible. Similarly, if a send expression (e.g., `c <-`) is used, the select checks if data can be sent to the channel. If the channel can receive data, the select statement evaluates this case as eligible.
+
+Select statements are categorized into two types: non-blocking select and blocking select. If a select statement includes a default case, it is a non-blocking select. If it does not have a default case, it is a blocking select.
+
+Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and pauses the program's execution until at least one case becomes eligible.
+
+Nil channels do not cause errors such as runtime panics. Select statements simply ignore nil channels. This behavior can lead to an infinite lock. For example, a blocking select statement will block the program indefinitely if all its cases involve nil channels.
+
+Using a select statement is similar to using a match statement and is written almost the same way. However, unlike match statements, select statements can use `break` statements but do not support `fall` statements.
+
+For example:
+```jule
+use "std/time"
+
+fn main() {
+	ch1 := make(chan str)
+	ch2 := make(chan str)
+
+	co fn() {
+		time::Sleep(1 * time::Second)
+		ch1 <- "Message from channel 1"
+	}()
+
+	co fn() {
+		time::Sleep(1 * time::Second)
+		ch2 <- "Message from channel 2"
+	}()
+
+	select {
+	| <-ch1:
+		println("channel 1 selected")
+	| <-ch2:
+		println("channel 2 selected")
+	}
+}
+```
+In the above code example, a blocking select statement attempts to receive data from two channels. The result could be either of the two channels. After one case is executed, the program will terminate, meaning the expected behavior is that data will be received from at least one channel and one case will be executed.
+
+### Empty Select Statement
+
+An empty select statement results in a CPU yield, meaning it stops the current thread and switches to executing a different thread. If no alternative thread is available, it can result in indefinite waiting within the same thread.
+
+For example:
+```jule
+select{}
+```
