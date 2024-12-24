@@ -223,3 +223,23 @@ For example:
 ```jule
 select{}
 ```
+
+## Range Iterations over Channels
+
+Channels can be used in range iterations. For this, a channel must have the receive permission. The iteration will continue as long as data can be receive from the channel. This means it will repeat until the channel is closed and the buffer, if any, is consumed.
+
+For example:
+```jule
+fn main() {
+	c := make(chan int, 4)
+	c <- 10
+	c <- 20
+	c <- 30
+	c <- 40
+	close(c)
+	for x in c {
+		println(x)
+	}
+}
+```
+In the above code example, the iteration receives all the values from the buffer in sequence and then terminates because the channel is closed, meaning no more data can be received.
