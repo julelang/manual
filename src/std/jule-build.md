@@ -474,6 +474,7 @@ Compiler log messages with formatting.
 - `RecvFromSendOnlyChan`
 - `InvalidSelectExpr`
 - `ExpectedNExpr`
+- `IterPermitsNVar`
 
 - `ExpectedIdentifier`
 - `ExpectedLabelIdent`

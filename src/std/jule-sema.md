@@ -840,10 +840,11 @@ Reports whether iteration is while-next.
 
 ```jule
 struct RangeIter {
-    Expr:  Expr
-    Scope: &Scope
-    KeyA:  &Var
-    KeyB:  &Var
+    Scope:     &Scope
+    Expr:      &Data
+    ExprToken: &token::Token
+    KeyA:      &Var
+    KeyB:      &Var
 }
 ```
 Range iteration.
