@@ -13,6 +13,7 @@ for      in        break     continue
 goto     match     fall      if
 else     ret       error     use
 co       cpp       unsafe    defer
+chan     select
 ```
 
 ## Imaginary Keywords
@@ -37,11 +38,14 @@ As seen in the example above, the variable `a` is defined as `int` type. At firs
 **List of Imaginary Keywords**
 
 ```jule
-int       uint      uintptr    i8       i16       i32
-i64       u8        u16        u32      u64       f32
-f64       bool      str        any      new       make
-copy      append    out        outln    delete    cap
-len       panic      true     false     nil
+int       uint      uintptr    i8
+i16       i32       i64        u8
+u16       u32       u64        f32
+f64       bool      str        any
+rune      byte      new        make
+copy      append    out        outln
+delete    cap       len        panic
+true      false     nil
 ```
 
 ::: info
