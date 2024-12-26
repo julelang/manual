@@ -247,9 +247,9 @@ Casting expression model. For example: `(int)(myFloat)`
 ---
 
 ```jule
-struct FnCallExpr {
+struct FuncCallExpr {
     Token:    &token::Token
-    Func:     &FnIns
+    Func:     &FuncIns
     IsCo:     bool
     Expr:     Expr
     Args:     []Expr
@@ -263,7 +263,7 @@ Function call expression model.
 
 ```jule
 struct BuiltinErrorCallExpr {
-    Func: &FnIns
+    Func: &FuncIns
     Err:  &Data
 }
 ```
@@ -295,9 +295,9 @@ For example: `mySlice[myIndex]`
 ---
 
 ```jule
-struct AnonFnExpr {
+struct AnonFuncExpr {
     Captured: []&Var
-    Func:     &FnIns
+    Func:     &FuncIns
     Global:   bool
 }
 ```
@@ -343,7 +343,7 @@ For example: `mySlice[2:len(mySlice)-5]`
 struct TraitSubIdentExpr {
     Token:  &token::Token
     Expr:   Expr
-    Method: &Fn
+    Method: &Func
     Trt:    &Trait
 }
 ```
@@ -356,7 +356,7 @@ For example: `myTrait.mySubIdent`
 struct StructSubIdentExpr {
     Token:  &token::Token
     Expr:   &Data
-    Method: &FnIns
+    Method: &FuncIns
     Field:  &FieldIns
     Owner:  &StructIns
 }
@@ -593,7 +593,7 @@ Reports whether self (receiver) parameter is reference.
 ---
 
 ```jule
-struct Fn {
+struct Func {
     Token:       &token::Token
     Global:      bool
     Unsafety:    bool
@@ -604,14 +604,14 @@ struct Fn {
     Ident:       str
     Directives:  []&ast::Directive
     Scope:       &ast::ScopeTree
-    Generics:    []&ast::GenericDecl
+    Generics:    []&ast::Generic
     Result:      &RetType
     Params:      []&Param
     Owner:       &Struct
 
     // Function instances for each unique type combination of function call.
     // Nil if function is never used.
-    Instances: []&FnIns
+    Instances: []&FuncIns
 }
 ```
 Function.
@@ -650,9 +650,9 @@ Parameter instance.
 ---
 
 ```jule
-struct FnIns {
+struct FuncIns {
     Owner:    &StructIns
-    Decl:     &Fn
+    Decl:     &Func
     Generics: []&InsGeneric
     Params:   []&ParamIns
     Result:   &Type
@@ -685,7 +685,10 @@ Returns kind string of function instance.
 Appends identifier to kind of this instance.
 Does not appends identifier of this instance to kind if self.decl is nil reference.
 
-`fn Same(self, f: &FnIns): bool`\
+`fn EqualFunc(&self, &f: &FuncIns): bool`\
+Reports whether functions are equal.
+
+`fn Same(self, f: &FuncIns): bool`\
 Reports whether instances are same. Returns true if declarations and generics are same.
 
 ---
@@ -694,7 +697,7 @@ Reports whether instances are same. Returns true if declarations and generics ar
 struct Impl {
     Base:    &TypeDecl
     Dest:    &TypeDecl
-    Methods: []&Fn
+    Methods: []&Func
     Statics: []&Var
 }
 ```
@@ -852,7 +855,7 @@ Range iteration.
 ---
 
 ```jule
-struct ContSt {
+struct Continue {
     It: uintptr
 }
 ```
@@ -861,9 +864,9 @@ Continue statement.
 ---
 
 ```jule
-struct BreakSt {
+struct Break {
     It:     uintptr
-    Mtch:   uintptr
+    Match:  uintptr
     Select: uintptr
 }
 ```
@@ -973,7 +976,7 @@ Reports whether case is default.
 ---
 
 ```jule
-struct FallSt {
+struct Fall {
     DestCase: uintptr
 }
 ```
@@ -981,25 +984,13 @@ struct FallSt {
 ---
 
 ```jule
-struct RetSt {
-    Func: &FnIns
+struct Ret {
+    Func: &FuncIns
     Vars: []&Var
     Expr: Expr
 }
 ```
 Return statement. 
-
----
-
-```jule
-struct Recover {
-    Handler:     &FnIns
-    HandlerExpr: Expr
-    Scope:       &Scope
-    ScopeOwner:  &FnIns
-}
-```
-Built-in recover function call statement.
 
 ---
 
@@ -1010,7 +1001,7 @@ Stack for symbol references.\
 It used by Sema to store necessary references.
 
 List of necessary references;
-- `&FnIns`
+- `&FuncIns`
 - `&StructIns`
 - `&Trait`
 - `&Var` -> Only global ones.
@@ -1056,10 +1047,10 @@ struct Struct {
     Token:      &token::Token::Token
     Ident:      str
     Fields:     []&Field
-    Methods:    []&Fn
+    Methods:    []&Func
     Binded:     bool
     Directives: []&ast::Directive
-    Generics:   []&ast::GenericDecl
+    Generics:   []&ast::Generic
     Implements: []&Trait
     Instances:  []&StructIns
 }
@@ -1068,7 +1059,7 @@ Structure.
 
 **Methods:**
 
-`fn FindMethod(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier.
 
@@ -1113,7 +1104,7 @@ struct StructIns {
     Generics:   []&InsGeneric
     Fields:     []&FieldIns
     Statics:    []&Var
-    Methods:    []&Fn
+    Methods:    []&Func
     Mutable:    bool
     Comparable: bool
     Refers:     &ReferenceStack
@@ -1127,7 +1118,7 @@ Structure instance.
 
 **Methods:**
 
-`fn FindMethod(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier.
 
@@ -1163,7 +1154,7 @@ struct SymTab {
     Vars:         []&Var        // Variables.
     TypeAliases:  []&TypeAlias  // Type aliases.
     Structs:      []&Struct     // Structures.
-    Funcs:        []&Fn         // Functions.
+    Funcs:        []&Func       // Functions.
     Traits:       []&Trait      // Traits.
     Enums:        []&Enum       // Enums.
     TypeEnums:    []&TypeEnum   // Type enums.
@@ -1184,7 +1175,7 @@ struct Trait {
     Ident:       str
     Public:      bool
     Mutable:     bool
-    Methods:     []&Fn
+    Methods:     []&Func
     Inherits:    []&TypeSym
     Implemented: []&Struct
 }
@@ -1200,7 +1191,7 @@ Trait.
 `fn IsBuiltin(self): bool`\
 Returns whether Trait is built-in
 
-`fn FindMethod(mut self, ident: str): &Fn`\
+`fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
 Returns nil reference if not exist any method in this identifier. 
 
@@ -1293,31 +1284,31 @@ Returns reference type if kind is smart pointer, nil reference if not.
 `fn Ptr(self): &Ptr`\
 Returns pointer type if kind is pointer, nil reference if not.
 
-`fn Enm(self): &Enum`\
+`fn Enum(self): &Enum`\
 Returns enum type if kind is enum, nil reference if not.
 
-`fn Tenm(self): &TypeEnum`\
+`fn TypeEnum(self): &TypeEnum`\
 Returns type enum if kind is type enum, nil reference if not.
 
-`fn Arr(self): &Arr`\
+`fn Array(self): &Array`\
 Returns array type if kind is array, nil reference if not.
 
-`fn Slc(self): &Slc`\
+`fn Slice(self): &Slice`\
 Returns slice type if kind is slice, nil reference if not.
 
-`fn Fnc(self): &FnIns`\
+`fn Func(self): &FuncIns`\
 Returns function type if kind is function, nil reference if not.
 
-`fn Strct(self): &Struct`\
+`fn Struct(self): &Struct`\
 Returns struct type if kind is structure, nil reference if not.
 
-`fn Trt(self): &Trait`\
+`fn Trait(self): &Trait`\
 Returns trait type if kind is trait, nil reference if not.
 
 `fn Map(self): &Map`\
 Returns map type if kind is map, nil reference if not.
 
-`fn Tup(self): &Tuple`\
+`fn Tuple(self): &Tuple`\
 Returns tuple type if kind is tuple, nil reference if not. 
 
 ---
@@ -1414,7 +1405,7 @@ Channel type.
 ---
 
 ```jule
-struct Slc {
+struct Slice {
     Elem: &Type
 }
 ```
@@ -1454,7 +1445,7 @@ Map type.
 ---
 
 ```jule
-struct Arr {
+struct Array {
     Elem: &Type
 }
 ```
@@ -1531,7 +1522,7 @@ Pattern checker for functions and methods.
 
 **Methods:**
 
-`static fn Str(f: &Fn): bool`\
+`static fn Str(f: &Func): bool`\
 Reports whether function is the reserved Str function.
 
 ## Traits
@@ -1555,7 +1546,7 @@ trait Lookup {
 
     // Find function by identifier and binded state.
     // Returns nil reference if did not found any match.
-    fn FindFn(mut self, ident: str, binded: bool): &Fn
+    fn FindFunc(mut self, ident: str, binded: bool): &Func
 
     // Find trait by identifier.
     // Returns nil reference if did not found any match.
@@ -1641,16 +1632,16 @@ Statement type.
 - `&InfIter`
 - `&WhileIter`
 - `&RangeIter`
-- `&ContSt`
+- `&Continue`
 - `&Label`
-- `&GotoSt`
+- `&Goto`
 - `&Postfix`
 - `&Assign`
 - `&MultiAssign`
 - `&Match`
-- `&FallSt`
-- `&BreakSt`
-- `&RetSt`
+- `&Fall`
+- `&Break`
+- `&Ret`
 - `&Select`
 
 ---
@@ -1664,7 +1655,7 @@ Expression model.
 - `&Type`
 - `&constant::Const`
 - `&Var`
-- `&FnIns`
+- `&FuncIns`
 - `&StructIns`
 - `&OperandExpr`
 - `&BinaryExpr`
@@ -1673,10 +1664,10 @@ Expression model.
 - `&StructLitExpr`
 - `&AllocStructLitExpr`
 - `&CastingExpr`
-- `&FnCallExpr`
+- `&FuncCallExpr`
 - `&SliceExpr`
 - `&IndexingExpr`
-- `&AnonFnExpr`
+- `&AnonFuncExpr`
 - `&KeyValPairExpr`
 - `&MapExpr`
 - `&SlicingExpr`

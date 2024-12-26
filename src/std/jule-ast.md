@@ -5,7 +5,7 @@
 struct AST {
     File:          &token::Fileset
     TopDirectives: []&Directive
-    UseDecls:      []&UseDecl
+    UseDecls:      []&Use
     Nodes:         []Node
 }
 ```
@@ -34,30 +34,30 @@ Directive.
 ---
 
 ```jule
-struct TypeDecl {
+struct Type {
     Token: &token::Token
-    Kind:  TypeDeclKind
+    Kind:  TypeKind
 }
 ```
 Type declaration.\
 Also represents type expression.
 
 For primitive types:
-- Represented by IdentTypeDecl
+- Represented by IdentType
 - Token's identity is data type
 - Primitive type kind is Ident
 
 For function types:
-- Function types represented by &FnDecl
+- Function types represented by &Func
 
 ---
 
 ```jule
-struct IdentTypeDecl {
+struct IdentType {
     Token:    &token::Token
     Ident:    str
     Binded:   bool
-    Generics: []&TypeDecl
+    Generics: []&Type
 }
 ```
 Identifier type.
@@ -65,8 +65,8 @@ Identifier type.
 ---
 
 ```jule
-struct SubIdentTypeDecl {
-    Idents: []&IdentTypeDecl
+struct SubIdentType {
+    Idents: []&IdentType
 }
 ```
 Sub-identifier type.
@@ -74,9 +74,9 @@ Sub-identifier type.
 ---
 
 ```jule
-struct NamespaceTypeDecl {
+struct NamespaceType {
     Namespace: &token::Token // Namespace token.
-    Kind:      &TypeDecl     // Type of identifier.
+    Kind:      &Type         // Type of identifier.
 }
 ```
 Namespace chain type.
@@ -84,10 +84,10 @@ Namespace chain type.
 ---
 
 ```jule
-struct ChanTypeDecl {
+struct ChanType {
     Recv: bool
     Send: bool
-	Elem: &TypeDecl
+	Elem: &Type
 }
 ```
 Channel type.
@@ -95,8 +95,8 @@ Channel type.
 ---
 
 ```jule
-struct SptrTypeDecl {
-    Elem: &TypeDecl
+struct SptrType {
+    Elem: &Type
 }
 ```
 Smart pointer type. 
@@ -104,8 +104,8 @@ Smart pointer type.
 ---
 
 ```jule
-struct SlcTypeDecl {
-    Elem: &TypeDecl
+struct SliceType {
+    Elem: &Type
 }
 ```
 Slice type.
@@ -113,8 +113,8 @@ Slice type.
 ---
 
 ```jule
-struct TupleTypeDecl {
-    Types: []&TypeDecl
+struct TupleType {
+    Types: []&Type
 }
 ```
 Tuple type. 
@@ -122,8 +122,8 @@ Tuple type.
 ---
 
 ```jule
-struct PtrTypeDecl {
-    Elem: &TypeDecl
+struct PtrType {
+    Elem: &Type
 }
 ```
 Pointer type. 
@@ -136,8 +136,8 @@ Reports whether pointer is unsafe pointer (*unsafe).
 ---
 
 ```jule
-struct ArrTypeDecl {
-    Elem: &TypeDecl
+struct ArrayType {
+    Elem: &Type
     Size: &Expr
 }
 ```
@@ -152,9 +152,9 @@ Reports whether array is auto-sized.
 ---
 
 ```jule
-struct MapTypeDecl {
-    Key: &TypeDecl
-    Val: &TypeDecl
+struct MapType {
+    Key: &Type
+    Val: &Type
 }
 ```
 Map type.
@@ -162,8 +162,8 @@ Map type.
 ---
 
 ```jule
-struct RetTypeDecl {
-    Kind:   &TypeDecl
+struct RetType {
+    Kind:   &Type
     Idents: []&token::Token
 }
 ```
@@ -276,7 +276,7 @@ Variadiced expression.
 
 ```jule
 struct CastExpr {
-    Kind: &TypeDecl
+    Kind: &Type
     Expr: &Expr
 }
 ```
@@ -316,7 +316,7 @@ Binary operation.
 ---
 
 ```jule
-struct FnCallExpr {
+struct FuncCallExpr {
     Token:     &token::Token
     Expr:      &Expr
     Args:      []&Expr
@@ -354,7 +354,7 @@ Reports whether pair targeted field.
 ```jule
 struct StructLit {
     End:   &token::Token
-    Kind:  &TypeDecl
+    Kind:  &Type
     Exprs: []ExprData
 }
 ```
@@ -433,7 +433,7 @@ Slicing expression.
 
 ```jule
 struct Constraint {
-    Mask: []&TypeDecl
+    Mask: []&Type
 }
 ```
 Constraint.
@@ -441,7 +441,7 @@ Constraint.
 ---
 
 ```jule
-struct GenericDecl {
+struct Generic {
     Token:      &token::Token
     Ident:      str
     Constraint: &Constraint
@@ -452,7 +452,7 @@ Generic type declaration.
 ---
 
 ```jule
-struct LabelSt {
+struct Label {
     Token: &token::Token
     Ident: str
 }
@@ -462,7 +462,7 @@ Label statement.
 ---
 
 ```jule
-struct GotoSt {
+struct Goto {
     Token: &token::Token
     Label: &token::Token
 }
@@ -472,7 +472,7 @@ Goto statement.
 ---
 
 ```jule
-struct FallSt {
+struct Fall {
     Token: &token::Token
 }
 ```
@@ -494,7 +494,7 @@ Left expression of assign statement.
 ---
 
 ```jule
-struct AssignSt {
+struct Assign {
     Declarative: bool
     Setter:      &token::Token
     Left:        []&AssignLeft
@@ -544,7 +544,7 @@ struct ParamDecl {
     Mutable:   bool
     Variadic:  bool
     Reference: bool
-    Kind:      &TypeDecl
+    Kind:      &Type
     Ident:     str
 }
 ```
@@ -561,7 +561,7 @@ Reports whether self (receivers) parameter is reference.
 ---
 
 ```jule
-struct FnDecl {
+struct Func {
     Token:       &token::Token
     Global:      bool
     Unsafety:    bool
@@ -572,8 +572,8 @@ struct FnDecl {
     Ident:       str
     Directives:  []&Directive
     Scope:       &ScopeTree
-    Generics:    []&GenericDecl
-    Result:      &RetTypeDecl
+    Generics:    []&Generic
+    Result:      &RetType
     Params:      []&ParamDecl
 }
 ```
@@ -588,7 +588,7 @@ Reports whether function is anonymous.
 ---
 
 ```jule
-struct VarDecl {
+struct Var {
     Scope:      &ScopeTree // nil for global scopes
     Token:      &token::Token
     Setter:     &token::Token
@@ -599,7 +599,7 @@ struct VarDecl {
     Constant:   bool
     Statically: bool
     Directives: []&Directive
-    Kind:       &TypeDecl // nil for auto-typed
+    Kind:       &Type // nil for auto-typed
     Expr:       &Expr
 }
 ```
@@ -608,7 +608,7 @@ Variable declaration.
 ---
 
 ```jule
-struct RetSt {
+struct Ret {
     Token: &token::Token
     Expr:  &Expr
 }
@@ -654,8 +654,8 @@ Reports whether kind is while-next iteration.
 struct RangeKind {
     InToken: &token::Token // Token of "in" keyword
     Expr:    &Expr
-    KeyA:    &VarDecl // first key of range
-    KeyB:    &VarDecl // second key of range
+    KeyA:    &Var // first key of range
+    KeyB:    &Var // second key of range
 }
 ```
 Range iteration kind.
@@ -663,7 +663,7 @@ Range iteration kind.
 ---
 
 ```jule
-struct BreakSt {
+struct Break {
     Token: &token::Token
     Label: &token::Token
 }
@@ -673,7 +673,7 @@ Break statement.
 ---
 
 ```jule
-struct ContSt {
+struct Continue {
     Token: &token::Token
     Label: &token::Token
 }
@@ -713,13 +713,13 @@ Condition chain.
 ---
 
 ```jule
-struct TypeAliasDecl {
+struct TypeAlias {
     Scope:  &ScopeTree
     Public: bool
     Binded: bool
     Token:  &token::Token
     Ident:  str
-    Kind:   &TypeDecl
+    Kind:   &Type
 }
 ```
 Type alias declaration.
@@ -738,7 +738,7 @@ Case of match-case.
 ---
 
 ```jule
-struct MatchCase {
+struct Match {
     Token:      &token::Token
     End:        &token::Token
     TypeMatch:  bool
@@ -747,24 +747,24 @@ struct MatchCase {
     Default:    &Else
 }
 ```
-Match-Case.
+Match statement.
 
 ---
 
 ```jule
-struct SelectCase {
+struct Select {
 	Token:   &token::Token
 	End:     &token::Token
 	Cases:   []&Case
 	Default: &Else
 }
 ```
-Select-Case.
+Select statement.
 
 ---
 
 ```jule
-struct UseDecl {
+struct Use {
     Token:  &token::Token
     Path:   &token::Token // Use declaration path token.
     Alias:  &token::Token // Custom alias. Nil if not given.
@@ -776,7 +776,7 @@ Use declaration statement.
 ---
 
 ```jule
-struct EnumItemDecl {
+struct EnumItem {
     Token: &token::Token
     Ident: str
     Expr:  &Expr // Nil for auto expression.
@@ -792,12 +792,12 @@ Reports whether item has auto expression.
 ---
 
 ```jule
-struct EnumDecl {
+struct Enum {
     Token:  &token::Token
     Public: bool
     Ident:  str
-    Kind:   &TypeDecl
-    Items:  []&EnumItemDecl
+    Kind:   &Type
+    Items:  []&EnumItem
     End:    &token::Token
 }
 ```
@@ -811,10 +811,10 @@ Reports whether enum's type is default.
 ---
 
 ```jule
-struct TypeEnumItemDecl {
+struct TypeEnumItem {
     Token: &token::Token
     Ident: str
-    Kind:  &TypeDecl
+    Kind:  &Type
 }
 ```
 TypeEnum item.
@@ -823,11 +823,11 @@ TypeEnum item.
 
 ```jule
 // TypeEnum declaration.
-struct TypeEnumDecl {
+struct TypeEnum {
     Token:  &token::Token
     Public: bool
     Ident:  str
-    Items:  []&TypeEnumItemDecl
+    Items:  []&TypeEnumItem
     End:    &token::Token
 }
 ```
@@ -836,12 +836,12 @@ TypeEnum declaration.
 ---
 
 ```jule
-struct FieldDecl {
+struct Field {
     Token:   &token::Token
     Public:  bool
     Mutable: bool // Interior mutability.
     Ident:   str
-    Kind:    &TypeDecl
+    Kind:    &Type
     Default: &Expr
 }
 ```
@@ -850,15 +850,15 @@ Field declaration.
 ---
 
 ```jule
-struct StructDecl {
+struct Struct {
     Token:      &token::Token
     End:        &token::Token
     Ident:      str
-    Fields:     []&FieldDecl
+    Fields:     []&Field
     Public:     bool
     Binded:     bool
     Directives: []&Directive
-    Generics:   []&GenericDecl
+    Generics:   []&Generic
 }
 ```
 Structure declaration.
@@ -866,13 +866,13 @@ Structure declaration.
 ---
 
 ```jule
-struct TraitDecl {
+struct Trait {
     Token:    &token::Token
     End:      &token::Token
     Ident:    str
     Public:   bool
-    Inherits: []&TypeDecl
-    Methods:  []&FnDecl
+    Inherits: []&Type
+    Methods:  []&Func
 }
 ```
 Trait declaration.
@@ -885,18 +885,18 @@ struct Impl {
 
     // This Token available for these cases:
     //  - Implementation trait to structure, represents trait's type.
-    Base: &TypeDecl
+    Base: &Type
 
     // This Token available for these cases:
     //  - Implementation trait to structure, represents structure's type.
     //  - Implementation to structure, represents structure's type.
-    Dest: &TypeDecl
+    Dest: &Type
 
     // Given methods to implement.
-    Methods: []&FnDecl
+    Methods: []&Func
 
     // Static varaibles to implement.
-    Statics: []&VarDecl
+    Statics: []&Var
 }
 ```
 Implementation.
@@ -918,13 +918,13 @@ Type of AST Node's data.
 
 **Fields:**
 
-- `&EnumDecl`
-- `&TypeEnumDecl`
-- `&FnDecl`
-- `&StructDecl`
-- `&TraitDecl`
-- `&TypeAliasDecl`
-- `&VarDecl`
+- `&Enum`
+- `&TypeEnum`
+- `&Func`
+- `&Struct`
+- `&Trait`
+- `&TypeAlias`
+- `&Var`
 - `&Impl`
 
 ---
@@ -938,14 +938,14 @@ Type of Expr's data.
 - `&RangeExpr`
 - `&TupleExpr`
 - `&LitExpr`
-- `&TypeDecl`
+- `&Type`
 - `&IdentExpr`
 - `&UnaryExpr`
 - `&SubIdentExpr`
 - `&NamespaceExpr`
 - `&VariadicExpr`
 - `&CastExpr`
-- `&FnCallExpr`
+- `&FuncCallExpr`
 - `&StructLit`
 - `&BraceLit`
 - `&SlicingExpr`
@@ -953,7 +953,7 @@ Type of Expr's data.
 - `&BinaryExpr`
 - `&UnsafeExpr`
 - `&IndexingExpr`
-- `&FnDecl`
+- `&Func`
 - `&FieldExprPair`
 - `&KeyValPair`
 - `&ChanRecv`
@@ -967,22 +967,22 @@ Type of Stmt's data.
 
 **Fields:**
 
-- `&VarDecl`
-- `&RetSt`
-- `&GotoSt`
-- `&BreakSt`
-- `&ContSt`
+- `&Var`
+- `&Ret`
+- `&Goto`
+- `&Break`
+- `&Continue`
 - `&Expr`
 - `&Conditional`
-- `&MatchCase`
+- `&Match`
 - `&Iter`
-- `&AssignSt`
-- `&FallSt`
-- `&LabelSt`
+- `&Assign`
+- `&Fall`
+- `&Label`
 - `&ScopeTree`
-- `&TypeAliasDecl`
+- `&TypeAlias`
 - `&UseExpr`
-- `&SelectCase`
+- `&Select`
 
 ---
 
@@ -997,20 +997,20 @@ Type of Iter's kind.
 
 ---
 
-`enum TypeDeclKind: type`
+`enum TypeKind: type`
 
 Kind type of type declarations.
 
 **Fields:**
 
-- `&IdentTypeDecl`
-- `&SubIdentTypeDecl`
-- `&SptrTypeDecl`
-- `&PtrTypeDecl`
-- `&SlcTypeDecl`
-- `&ArrTypeDecl`
-- `&MapTypeDecl`
-- `&TupleTypeDecl`
-- `&FnDecl`
-- `&NamespaceTypeDecl`
-- `&ChanTypeDecl`
+- `&IdentType`
+- `&SubIdentType`
+- `&SptrType`
+- `&PtrType`
+- `&SliceType`
+- `&ArrayType`
+- `&MapType`
+- `&TupleType`
+- `&Func`
+- `&NamespaceType`
+- `&ChanType`
