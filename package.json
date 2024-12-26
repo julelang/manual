@@ -25,7 +25,7 @@
     "magic-string": "^0.30.1",
     "mark.js": "^8.11.1",
     "minisearch": "^6.1.0",
-    "nanoid": "^3.3.6",
+    "nanoid": "^3.3.8",
     "picocolors": "^1.0.0",
     "postcss": "^8.4.24",
     "preact": "^10.15.1",
