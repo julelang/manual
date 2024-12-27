@@ -5,259 +5,311 @@ Package `std/bytes` implements functions for the manipulation of byte slices. It
 ## Functions
 
 ```jule
-fn Equal(s1: []byte, s2: []byte): bool
+fn Equal(a: []byte, b: []byte): bool
 ```
-Reports whether two byte slices are the same length and contains same bytes. The nil slice considered as zero-length empty slice.
+Reports whether a and b are the same length and contain the same bytes. A nil argument is equivalent to an empty slice.
 
 ---
 
 ```jule
-fn Repeat(s: []byte, mut n: int): []byte
+fn Compare(a: []byte, b: []byte): int
 ```
-Returns bytes that equals to concatenation of n-count s.
-Returns nil slice is n <= 0.
+Returns an integer comparing two byte slices lexicographically. The result will be 0 if a == b, -1 if a < b, and +1 if a > b. A nil argument is equivalent to an empty slice.
 
 ---
 
 ```jule
-fn HasPrefix(s: []byte, sub: []byte): bool
+fn Count(s: []byte, sep: []byte): int
 ```
-Reports slice has prefix as specified sub-slice or not.
+Counts the number of non-overlapping instances of sep in s. If sep is an empty slice, returns 1 + the number of UTF-8-encoded code points in s.
 
 ---
 
 ```jule
-fn HasSuffix(s: []byte, sub: []byte): bool
+fn Contains(b: []byte, subslice: []byte): bool
 ```
-Reports slice has suffix as specified sub-slice or not.
+Reports whether subslice is within b.
 
 ---
 
 ```jule
-fn FindAt(s: []byte, sub: []byte, mut i: int): int
+fn ContainsAny(b: []byte, chars: str): bool
 ```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at left of slice to right. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
-
----
-
-```jule
-fn Find(s: []byte, sub: []byte): int
-```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at left of slice to right.
-
----
-
-```jule
-fn FindLastAt(s: []byte, sub: []byte, i: int): int
-```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
-
----
-
-```jule
-fn FindLast(s: []byte, sub: []byte): int
-```
-Returns index of first matched item with specified sub-slice, returns -1 if not exist any match. Starts searching at right of slice to left.
-
----
-
-```jule
-fn FindByte(s: []byte, b: byte): int
-```
-Returns index of first matched item with specified byte, returns -1 if not exist any match. Starts searching at left of slice to right.
-
----
-
-```jule
-fn FindLastByte(s: []byte, b: byte): int
-```
-Returns index of first matched item with specified byte, returns -1 if not exist any match. Starts searching at right of slice to left.
-
----
-
-```jule
-fn FindRune(s: []byte, r: rune): int
-```
-Returns index of first matched item with specified rune, returns -1 if not exist any match. Starts searching at left of slice to right.
-
----
-
-```jule
-fn FindLastRune(s: []byte, r: rune): int
-```
-Returns index of first matched item with specified rune, returns -1 if not exist any match. Starts searching at right of slice to left.
-
----
-
-```jule
-fn FindFnAt(s: []byte, mut i: int, f: fn(mut rune): bool): int
-```
-Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of slice to right. Starts searching s at given index. Returns -1, if i < 0.
-
----
-
-```jule
-fn FindFn(s: []byte, f: fn(mut rune): bool): int
-```
-Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at left of slice to right.
-
----
-
-```jule
-fn FindFnLastAt(s: []byte, mut i: int, f: fn(mut rune): bool): int
-```
-Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left. Starts searching s at given index. Returns -1, if i < 0 || i >= len(s).
-
----
-
-```jule
-fn FindFnLast(s: []byte, f: fn(mut rune): bool): int
-```
-Returns index of first matched item with finder function, returns -1 if not exist any match. Starts searching at right of slice to left.
-
----
-
-```jule
-fn FindAny(s: []byte, runes: []byte): int
-```
-Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at left of slice to right.
-
----
-
-```jule
-fn FindLastAny(s: []byte, runes: []byte): int
-```
-Returns index of first matched item with any of runes, returns -1 if not exist any match. Starts searching at right of slice to left.
-
----
-
-```jule
-fn Split(mut s: []byte, sub: []byte, mut n: int): [][]byte
-```
-Splits the slice into the specified number of parts to the specified sub-slice. Appends parts as immutable slice.
-Returns empty slice if n is equals to zero. Returns all parts if n less than zero.
-
----
-
-```jule
-fn SplitAll(mut s: []byte, sub: []byte): [][]byte
-```
-Same as the Split function. But splits all parts.
-Basically equals to `Split(s, sub, -1)` call.
-
----
-
-```jule
-fn Contains(s: []byte, sub: []byte): bool
-```
-Reports whether slice includes sub-slice.
-
----
-
-```jule
-fn ContainsByte(s: []byte, b: byte): bool
-```
-Reports whether slice includes byte.
+Reports whether any of the UTF-8-encoded code points in chars are within b.
 
 ---
 
 ```jule
 fn ContainsRune(b: []byte, r: rune): bool
 ```
-Reports whether slice includes rune.
+Reports whether the rune is contained in the UTF-8-encoded byte slice b.
 
 ---
 
 ```jule
-fn ContainsAny(s: []byte, runes: []byte): bool
+fn ContainsFunc(b: []byte, f: fn(mut r: rune): bool): bool
 ```
-Reports whether slice includes any of runes.
+Reports whether any of the UTF-8-encoded code points r within b satisfy f(r).
 
 ---
 
 ```jule
-fn Count(s: []byte, sub: []byte): int
+fn IndexByte(b: []byte, c: byte): int
 ```
-Counts the number of non-overlapping instances of sub-slice in s. Returns zero if sub-slice is empty.
+Returns the index of the first instance of c in b, or -1 if c is not present in b.
 
 ---
 
 ```jule
-fn Replace(mut s: []byte, sub: []byte, new: []byte, mut n: int): []byte
+fn LastIndex(s: []byte, sep: []byte): int
 ```
-Replaces all sub-slices matching sub in the slice with new. Returns same slice if n is equals to zero. Replaces all matches if n less than zero. This function may return mutable copy of s, of new slice allocation.
+Returns the index of the last instance of sep in s, or -1 if sep is not present in s.
 
 ---
 
 ```jule
-fn ReplaceAll(mut s: []byte, sub: []byte, new: []byte): []byte
+fn LastIndexByte(s: []byte, c: byte): int
 ```
-Same as the Replace function. But replaces all matched subs.
-Basically equals to `Replace(s, sub, new, -1)` call.
+Returns the index of the last instance of c in s, or -1 if c is not present in s.
 
 ---
 
 ```jule
-fn Map(s: []byte, mapping: fn(mut rune): rune): []byte
+fn IndexRune(s: []byte, r: rune): int
 ```
-Returns a immutable copy of the slice s with all its characters modified according to the mapping function. If mapping returns a negative value, the character is dropped from the slice with no replacement.
+Interprets s as a sequence of UTF-8-encoded code points. It returns the byte index of the first occurrence in s of the given rune. It returns -1 if rune is not present in s. If r is \[utf8::RuneError\], it returns the first instance of any invalid UTF-8 byte sequence.
 
 ---
 
 ```jule
-fn ToLower(s: []byte): []byte
+fn IndexAny(s: []byte, chars: str): int
 ```
-Returns s with all Unicode letters mapped to their lower case. Returns immutable new slice allocation.
+Interprets s as a sequence of UTF-8-encoded Unicode code points. It returns the byte index of the first occurrence in s of any of the Unicode code points in chars. It returns -1 if chars is empty or if there is no code point in common.
 
 ---
 
 ```jule
-fn ToUpper(s: []byte): []byte
+fn LastIndexAny(s: []byte, chars: str): int
 ```
-Returns s with all Unicode letters mapped to their upper case. Returns immutable new slice allocation.
+Interprets s as a sequence of UTF-8-encoded Unicode code points. It returns the byte index of the last occurrence in s of any of the Unicode code points in chars. It returns -1 if chars is empty or if there is no code point in common.
 
 ---
 
 ```jule
-fn TrimLeft(mut s: []byte, cutset: []byte): []byte
+fn SplitN(mut s: []byte, sep: []byte, n: int): [][]byte
 ```
-Trims slice by specified runes at left. Cutset should include runes to trim. Returns mutable copy of s.
+Slices s into subslices separated by sep and returns a slice of the subslices between those separators. If sep is empty, SplitN splits after each UTF-8 sequence. The count determines the number of subslices to return:
+   - n > 0: at most n subslices; the last subslice will be the unsplit remainder;
+   - n == 0: the result is nil (zero subslices);
+   - n < 0: all subslices.
+
+To split around the first instance of a separator, see \[Cut\].
 
 ---
 
 ```jule
-fn TrimRight(mut s: []byte, cutset: []byte): []byte
+fn SplitAfterN(mut s: []byte, sep: []byte, n: int): [][]byte
 ```
-Trims slice by specified runes at right. Cutset should include runes to trim. Returns mutable copy of s.
+Slices s into subslices after each instance of sep and returns a slice of those subslices. If sep is empty, SplitAfterN splits after each UTF-8 sequence. The count determines the number of subslices to return:
+   - n > 0: at most n subslices; the last subslice will be the unsplit remainder;
+   - n == 0: the result is nil (zero subslices);
+   - n < 0: all subslices.
 
 ---
 
 ```jule
-fn Trim(mut s: []byte, cutset: []byte): []byte
+fn Split(mut s: []byte, sep: []byte): [][]byte
 ```
-Trims slice by specified runes at left and right. Cutset should include runes to trim. Returns mutable copy of s.
+Slices s into all subslices separated by sep and returns a slice of the subslices between those separators. If sep is empty, Split splits after each UTF-8 sequence. It is equivalent to SplitN with a count of -1.
+
+To split around the first instance of a separator, see \[Cut\].
 
 ---
 
 ```jule
-fn Join(parts: [][]byte, sep: []byte): []byte
+fn SplitAfter(mut s: []byte, sep: []byte): [][]byte
 ```
-Concatenates the parts of its first argument to create a single slice. The separator sep is placed between parts in the resulting slice.
+Slices s into all subslices after each instance of sep and returns a slice of those subslices. If sep is empty, SplitAfter splits after each UTF-8 sequence. It is equivalent to SplitAfterN with a count of -1.
+
+---
+
+```jule
+fn Join(s: [][]byte, sep: []byte): []byte
+```
+Concatenates the elements of s to create a new byte slice. The separator sep is placed between elements in the resulting slice.
+
+---
+
+```jule
+fn HasPrefix(s: []byte, prefix: []byte): bool
+```
+Reports whether the byte slice s begins with prefix.
+
+---
+
+```jule
+fn HasSuffix(s: []byte, suffix: []byte): bool
+```
+Reports whether the byte slice s ends with suffix.
+
+---
+
+```jule
+fn Map(mapping: fn(mut r: rune): rune, s: []byte): []byte
+```
+Returns a copy of the byte slice s with all its characters modified according to the mapping function. If mapping returns a negative value, the character is dropped from the byte slice with no replacement. The characters in s and the output are interpreted as UTF-8-encoded code points.
+
+---
+
+```jule
+fn Repeat(b: []byte, count: int): []byte
+```
+Returns a new byte slice consisting of count copies of b.
+
+It panics if count is negative or if the result of (len(b) * count) overflows.
+
+---
+
+```jule
+fn IndexFunc(s: []byte, f: fn(mut r: rune): bool): int
+```
+Interprets s as a sequence of UTF-8-encoded code points. It returns the byte index in s of the first Unicode code point satisfying f(c), or -1 if none do.
+
+---
+
+```jule
+fn LastIndexFunc(s: []byte, f: fn(mut r: rune): bool): int
+```
+Interprets s as a sequence of UTF-8-encoded code points. It returns the byte index in s of the last Unicode code point satisfying f(c), or -1 if none do.
+
+---
+
+```jule
+fn TrimLeftFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+```
+Treats s as UTF-8-encoded bytes and returns a subslice of s by slicing off all leading UTF-8-encoded code points c that satisfy f(c).
+
+---
+
+```jule
+fn TrimRight(mut s: []byte, cutset: str): []byte
+```
+Returns a subslice of s by slicing off all trailing UTF-8-encoded code points that are contained in cutset.
+
+---
+
+```jule
+fn TrimRightFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+```
+Returns a subslice of s by slicing off all trailing UTF-8-encoded code points c that satisfy f(c).
+
+---
+
+```jule
+fn TrimFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+```
+Returns a subslice of s by slicing off all leading and trailing UTF-8-encoded code points c that satisfy f(c).
+
+---
+
+```jule
+fn TrimPrefix(mut s: []byte, prefix: []byte): []byte
+```
+Returns s without the provided leading prefix string. If s doesn't start with prefix, s is returned unchanged.
+
+---
+
+```jule
+fn TrimSuffix(mut s: []byte, suffix: []byte): []byte
+```
+Returns s without the provided trailing suffix string. If s doesn't end with suffix, s is returned unchanged.
+
+---
+
+```jule
+fn Trim(mut s: []byte, cutset: str): []byte
+```
+Returns a subslice of s by slicing off all leading and trailing UTF-8-encoded code points contained in cutset.
+
+---
+
+```jule
+fn TrimLeft(mut s: []byte, cutset: str): []byte
+```
+Returns a subslice of s by slicing off all leading UTF-8-encoded code points contained in cutset.
+
+---
+
+```jule
+fn TrimSpace(mut s: []byte): []byte
+```
+Returns a subslice of s by slicing off all leading and trailing white space, as defined by Unicode.
 
 ---
 
 ```jule
 fn Runes(s: []byte): []rune
 ```
-Returns runes from UTF-8 encoded bytes.
+Interprets s as a sequence of UTF-8-encoded code points. It returns a slice of runes (Unicode code points) equivalent to s.
+
+---
+
+```jule
+fn Replace(s: []byte, old: []byte, new: []byte, mut n: int): []byte
+```
+Returns a copy of the slice s with the first n non-overlapping instances of old replaced by new. If old is empty, it matches at the beginning of the slice and after each UTF-8 sequence, yielding up to k+1 replacements for a k-rune slice. If n < 0, there is no limit on the number of replacements.
+
+---
+
+```jule
+fn ReplaceAll(s: []byte, old: []byte, new: []byte): []byte
+```
+Returns a copy of the slice s with all non-overlapping instances of old replaced by new. If old is empty, it matches at the beginning of the slice and after each UTF-8 sequence, yielding up to k+1 replacements for a k-rune slice.
+
+---
+
+```jule
+fn EqualFold(s: []byte, t: []byte): bool
+```
+Reports whether s and t, interpreted as UTF-8 strings, are equal under simple Unicode case-folding, which is a more general form of case-insensitivity.
+
+---
+
+```jule
+fn Index(s: []byte, sep: []byte): int
+```
+Returns the index of the first instance of sep in s, or -1 if sep is not present in s.
 
 ---
 
 ```jule
 fn Cut(mut s: []byte, sep: []byte): (before: []byte, after: []byte, found: bool)
 ```
-Cut slices s around the first instance of sep, returning the text before and after sep.
-The found result reports whether sep appears in s.
-If sep does not appear in s, cut returns s, nil, false.
+Slices s around the first instance of sep, returning the text before and after sep. The found result reports whether sep appears in s. If sep does not appear in s, returns s, nil, false.
 
-Cut returns slices of the original slice s, not copies.
+Returns slices of the original slice s, not copies.
+
+---
+
+```jule
+fn Clone(b: []byte): []byte
+```
+Returns a copy of b[:len(b)]. The result may have additional unused capacity. Clone(nil) returns nil.
+
+---
+
+```jule
+fn CutPrefix(mut s: []byte, prefix: []byte): (after: []byte, found: bool)
+```
+Returns s without the provided leading prefix byte slice and reports whether it found the prefix. If s doesn't start with prefix, returns s, false. If prefix is the empty byte slice, returns s, true.
+
+Returns slices of the original slice s, not copies.
+
+---
+
+```jule
+fn CutSuffix(mut s: []byte, suffix: []byte): (before: []byte, found: bool)
+```
+Returns s without the provided ending suffix byte slice and reports whether it found the suffix. If s doesn't end with suffix, returns s, false. If suffix is the empty byte slice, returns s, true.
+
+Returns slices of the original slice s, not copies.
