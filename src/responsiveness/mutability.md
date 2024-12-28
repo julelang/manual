@@ -46,3 +46,57 @@ impl Foo {
 ```
 
 In this case, the structure has a method, even if it is empty. In order not to increase compilation costs too much, Jule does not examine this and considers it risky. In this case, your compiler will check the mutability risk for the `s` field that is within the scope of interior mutability and complain if necessary.
+
+## Functions
+
+In functions, to provide flexibility and avoid unnecessary mutability requirements, type compatibility is more relaxed in terms of mutability. For example, when an anonymous function has a mutable parameter, Jule's type system does not treat this mutability as an inflexible and strict part of the type system. It does not enforce the rule that all compatible types must handle the same parameter as mutable.
+
+In some cases, mutability is evaluated more loosely. For instance, if the parameter poses no mutability risk (e.g., the parameter type is immutable), whether the parameter is mutable or immutable does not result in a type mismatch.
+
+
+
+For example:
+```jule
+fn main() {
+	let mut a: fn(mut a: int)
+	a = fn(mut a: int) {}
+	a = fn(a: int) {}
+}
+```
+In the code above, there is no type compatibility issue even if the function parameters exhibit different mutability, and the code compiles successfully. This is because the parameter is not a reference and its type is the immutable `int`. Therefore, whether the parameter is mutable or not has no effect on the original data (which passed as argument to the function) and is entirely specific to the function's body.
+
+Even if the type is mutable, you will not encounter a type mismatch issue when using an immutable parameter. This is because the wrapper type specifies that the parameter is mutable, ensuring safety and indicating mutability. However, not every anonymous function is required to adhere to this, allowing immutable parameters to be used when desired.
+
+For example:
+```jule
+fn main() {
+	let mut a: fn(mut a: &int)
+	a = fn(mut a: &int) {}
+	a = fn(a: &int) {}
+}
+```
+In the example above, the wrapper function type indicates that the parameter `a` is of the mutable type `&int` and exhibits mutable behavior. However, the subsequent two different assignments will not cause any type compatibility issues. This is because the mutability of the parameter is contextually flexible, allowing both mutable and immutable values to be used without violating the type system's constraints. This design promotes adaptability and simplifies handling different mutability scenarios while ensuring type safety.
+
+As previously mentioned, mutability is a crucial tool for developers and should remain as much as possible under their control. If the assigned function does not require mutable behavior on a parameter, there is no need to force it to be defined as mutable solely because the type is specified that way. Developers should be able to use it as immutable. However, the wrapper function type makes it possible for the parameter to exhibit mutable behavior if needed. This ensures that any invocation can assume the parameter to always be mutable. In this way, flexibility is provided while maintaining safety.
+
+:::info
+This is not a deep responsiness; it is provided solely through the main function type. Exceptions like function parameters may be exempt from this flexibility.
+:::
+
+### Traits
+
+Traits and methods are treated similarly to functions in this context. When a type implements a trait, the types of the methods implemented by the trait are checked just like function types.
+
+For example:
+```jule
+trait Foo {
+	fn baz(mut self, mut x: &int)
+}
+
+struct Bar{}
+
+impl Foo for Bar {
+	fn baz(self, x: &int) {}
+}
+```
+In the example code above, the `Bar` struct correctly implements the `Foo` trait. Just like with functions, the same logic applies. The trait continues to wrap the struct with mutable behavior, but by taking advantage of flexibility, the `Bar` struct can behave immutably within its own type.
