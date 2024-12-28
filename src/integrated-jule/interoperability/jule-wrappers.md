@@ -50,7 +50,7 @@ fn main() {
 }
 ```
 
-There is a wrapper function for `say_hello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and readable. It takes Jule's `str` type as an argument and allows to get rid of the `unsafe` qualifier.
+There is a wrapper function for `sayHello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and readable. It takes Jule's `str` type as an argument and allows to get rid of the `unsafe` qualifier.
 
 Wrapper Jule takes the `str` type and passes it to the function it wraps accordingly. Jule strings are in byte encoded UTF-8 format, so taking the pointer to the first byte gives you a simple byte pointer. They are the same as `char*` in size. For this reason, a correct and trouble-free usage is displayed by casting. In addition, we maintain type safety.
 
