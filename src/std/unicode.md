@@ -1804,21 +1804,21 @@ Reports whether the rune is in the specified table of ranges.
 ---
 
 ```jule
-fn IsUpper(mut r: rune): bool
+fn IsUpper(r: rune): bool
 ```
 Reports whether the rune is an upper case letter.
 
 ---
 
 ```jule
-fn IsLower(mut r: rune): bool
+fn IsLower(r: rune): bool
 ```
 Reports whether the rune is a lower case letter.
 
 ---
 
 ```jule
-fn IsDigit(mut r: rune): bool
+fn IsDigit(r: rune): bool
 ```
 Reports whether the rune is a decimal digit.
 
@@ -1846,7 +1846,7 @@ Reports whether the rune is a Unicode punctuation character (category P).
 ---
 
 ```jule
-fn IsSpace(mut r: rune): bool
+fn IsSpace(r: rune): bool
 ```
 Reports whether the rune is a space character as defined by Unicode's White Space property; in the Latin-1 space this is
 

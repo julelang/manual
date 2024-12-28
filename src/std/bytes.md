@@ -47,7 +47,7 @@ Reports whether the rune is contained in the UTF-8-encoded byte slice b.
 ---
 
 ```jule
-fn ContainsFunc(b: []byte, f: fn(mut r: rune): bool): bool
+fn ContainsFunc(b: []byte, f: fn(rune): bool): bool
 ```
 Reports whether any of the UTF-8-encoded code points r within b satisfy f(r).
 
@@ -155,7 +155,7 @@ Reports whether the byte slice s ends with suffix.
 ---
 
 ```jule
-fn Map(mapping: fn(mut r: rune): rune, s: []byte): []byte
+fn Map(mapping: fn(rune): rune, s: []byte): []byte
 ```
 Returns a copy of the byte slice s with all its characters modified according to the mapping function. If mapping returns a negative value, the character is dropped from the byte slice with no replacement. The characters in s and the output are interpreted as UTF-8-encoded code points.
 
@@ -171,21 +171,21 @@ It panics if count is negative or if the result of (len(b) * count) overflows.
 ---
 
 ```jule
-fn IndexFunc(s: []byte, f: fn(mut r: rune): bool): int
+fn IndexFunc(s: []byte, f: fn(rune): bool): int
 ```
 Interprets s as a sequence of UTF-8-encoded code points. It returns the byte index in s of the first Unicode code point satisfying f(c), or -1 if none do.
 
 ---
 
 ```jule
-fn LastIndexFunc(s: []byte, f: fn(mut r: rune): bool): int
+fn LastIndexFunc(s: []byte, f: fn(rune): bool): int
 ```
 Interprets s as a sequence of UTF-8-encoded code points. It returns the byte index in s of the last Unicode code point satisfying f(c), or -1 if none do.
 
 ---
 
 ```jule
-fn TrimLeftFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+fn TrimLeftFunc(mut s: []byte, f: fn(rune): bool): []byte
 ```
 Treats s as UTF-8-encoded bytes and returns a subslice of s by slicing off all leading UTF-8-encoded code points c that satisfy f(c).
 
@@ -199,14 +199,14 @@ Returns a subslice of s by slicing off all trailing UTF-8-encoded code points th
 ---
 
 ```jule
-fn TrimRightFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+fn TrimRightFunc(mut s: []byte, f: fn(rune): bool): []byte
 ```
 Returns a subslice of s by slicing off all trailing UTF-8-encoded code points c that satisfy f(c).
 
 ---
 
 ```jule
-fn TrimFunc(mut s: []byte, f: fn(mut r: rune): bool): []byte
+fn TrimFunc(mut s: []byte, f: fn(rune): bool): []byte
 ```
 Returns a subslice of s by slicing off all leading and trailing UTF-8-encoded code points c that satisfy f(c).
 
