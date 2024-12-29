@@ -94,7 +94,7 @@ Status information.
 
 `static fn Of(path: str)!: Stat`\
 Returns a Stat describing the path.\
-Returns nil reference if error occurs.
+Returns nil if error occurs.
 
 `fn IsDir(self): bool`\
 Reports path is directory or not.

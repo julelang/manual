@@ -33,7 +33,7 @@ Wrapper for heap allocation. Should be freed, occurs memory leak if did not.
 **Methods:**
 
 `static fn New(): &Heap[T]`\
-Allocates new `T` on heap, and returns `&Heap[T]` instance that points relevant allocation. Returns nil reference if allocation failed.
+Allocates new `T` on heap, and returns `&Heap[T]` instance that points relevant allocation. Returns nil if allocation failed.
 
 ---
 

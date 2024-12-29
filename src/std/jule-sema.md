@@ -81,7 +81,7 @@ Enum.
 
 `fn FindItem(mut self, ident: str): &EnumItem`\
 Returns item by identifier.\
-Returns nil reference if not exist any item in this identifier. 
+Returns nil if not exist any item in this identifier. 
 
 ---
 
@@ -114,7 +114,7 @@ TypeEnum.
 
 `fn FindItem(mut self, ident: str): &TypeEnumItem`\
 Returns item by identifier.\
-Returns nil reference if not exist any item in this identifier. 
+Returns nil if not exist any item in this identifier. 
 
 ---
 
@@ -683,7 +683,7 @@ Reports whether instance is anonymous function.
 `fn GetKindStr(self, ident: bool): str` \
 Returns kind string of function instance.
 Appends identifier to kind of this instance.
-Does not appends identifier of this instance to kind if self.decl is nil reference.
+Does not appends identifier of this instance to kind if self.decl is nil.
 
 `fn EqualFunc(&self, &f: &FuncIns): bool`\
 Reports whether functions are equal.
@@ -1061,15 +1061,15 @@ Structure.
 
 `fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
-Returns nil reference if not exist any method in this identifier.
+Returns nil if not exist any method in this identifier.
 
 `fn FindStatic(mut self, ident: str): &Var`\
 Returns static field by identifier.
-Returns nil reference if not exist any static field in this identifier.
+Returns nil if not exist any static field in this identifier.
 
 `fn FindField(mut self, ident: str): &Field`\
 Returns field by identifier.\
-Returns nil reference if not exist any field in this identifier.
+Returns nil if not exist any field in this identifier.
 
 `fn IsImplements(self, t: &Trait): bool`\
 Reports whether structure implements given trait.
@@ -1120,15 +1120,15 @@ Structure instance.
 
 `fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
-Returns nil reference if not exist any method in this identifier.
+Returns nil if not exist any method in this identifier.
 
 `fn FindField(mut self, ident: str): &FieldIns`\
 Returns field by identifier.\
-Returns nil reference if not exist any field in this identifier. 
+Returns nil if not exist any field in this identifier. 
 
 `fn FindStatic(mut self, ident: str): &Var`\
 Returns static field by identifier.
-Returns nil reference if not exist any static field in this identifier.
+Returns nil if not exist any static field in this identifier.
 
 `fn Same(self, s: &StructIns): bool`\
 Reports whether instances are same.\
@@ -1193,7 +1193,7 @@ Returns whether Trait is built-in
 
 `fn FindMethod(mut self, ident: str): &Func`\
 Returns method by identifier.\
-Returns nil reference if not exist any method in this identifier. 
+Returns nil if not exist any method in this identifier. 
 
 ---
 
@@ -1273,43 +1273,43 @@ Reports whether kind performs garbage collection.
 Reports whether kind is variadicable.
 
 `fn Prim(self): &Prim`\
-Returns primitive type if kind is primitive type, nil reference if not.
+Returns primitive type if kind is primitive type, nil if not.
 
 `fn Chan(mut self): &Chan`\
 Returns channel type if actual kind is channel, nil if not.
 
 `fn Sptr(self): &Sptr`\
-Returns reference type if kind is smart pointer, nil reference if not.
+Returns reference type if kind is smart pointer, nil if not.
 
 `fn Ptr(self): &Ptr`\
-Returns pointer type if kind is pointer, nil reference if not.
+Returns pointer type if kind is pointer, nil if not.
 
 `fn Enum(self): &Enum`\
-Returns enum type if kind is enum, nil reference if not.
+Returns enum type if kind is enum, nil if not.
 
 `fn TypeEnum(self): &TypeEnum`\
-Returns type enum if kind is type enum, nil reference if not.
+Returns type enum if kind is type enum, nil if not.
 
 `fn Array(self): &Array`\
-Returns array type if kind is array, nil reference if not.
+Returns array type if kind is array, nil if not.
 
 `fn Slice(self): &Slice`\
-Returns slice type if kind is slice, nil reference if not.
+Returns slice type if kind is slice, nil if not.
 
 `fn Func(self): &FuncIns`\
-Returns function type if kind is function, nil reference if not.
+Returns function type if kind is function, nil if not.
 
 `fn Struct(self): &Struct`\
-Returns struct type if kind is structure, nil reference if not.
+Returns struct type if kind is structure, nil if not.
 
 `fn Trait(self): &Trait`\
-Returns trait type if kind is trait, nil reference if not.
+Returns trait type if kind is trait, nil if not.
 
 `fn Map(self): &Map`\
-Returns map type if kind is map, nil reference if not.
+Returns map type if kind is map, nil if not.
 
 `fn Tuple(self): &Tuple`\
-Returns tuple type if kind is tuple, nil reference if not. 
+Returns tuple type if kind is tuple, nil if not. 
 
 ---
 
@@ -1529,35 +1529,35 @@ Reports whether function is the reserved Str function.
 ```jule
 trait Lookup {
     // Select imported package.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
 
     // Find variable by identifier and binded state.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindVar(mut self, ident: str, binded: bool): &Var
 
     // Find type alias by identifier and binded state.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindTypeAlias(mut self, ident: str, binded: bool): &TypeAlias
 
     // Find structure by identifier and binded state.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindStruct(mut self, ident: str, binded: bool): &Struct
 
     // Find function by identifier and binded state.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindFunc(mut self, ident: str, binded: bool): &Func
 
     // Find trait by identifier.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindTrait(mut self, ident: str): &Trait
 
     // Find enum by identifier.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindEnum(mut self, ident: str): &Enum
 
     // Find type enum by identifier.
-    // Returns nil reference if did not found any match.
+    // Returns nil if did not found any match.
     fn FindTypeEnum(mut self, ident: str): &TypeEnum
 }
 ```

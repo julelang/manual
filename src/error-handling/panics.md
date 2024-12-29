@@ -9,7 +9,7 @@ For example:
 ```jule
 fn addToRef(rate: int, mut i: &int) {
     if i == nil {
-        panic("i is nil reference")
+        panic("i is nil")
     }
     i += rate
 }
