@@ -46,23 +46,23 @@ Prints new-line after arguments.
 ---
 
 ```jule
-fn Fprint(mut f: &os::File, args: ...any)
+fn Fprint(mut w: io::Writer, args: ...any)
 ```
-Prints arguments to file by default formatting. See documentation of format function for formatting.
+Prints arguments to w by default formatting. See documentation of format function for formatting.
 
 ---
 
 ```jule
-fn Fprintln(mut f: &os::File, args: ...any)
+fn Fprintln(mut w: io::Writer, args: ...any)
 ```
-Prints arguments to file by default formatting. Prints new-line after arguments. See documentation of format function for formatting.
+Prints arguments to w by default formatting. Prints new-line after arguments. See documentation of format function for formatting.
 
 ---
 
 ```jule
-fn Fprintf(mut f: &os::File, fmt: str, args: ...any)
+fn Fprintf(mut w: io::Writer, fmt: str, args: ...any)
 ```
-Prints result of formatting to file. See documentation of format function for formatting.
+Prints result of formatting to w. See documentation of format function for formatting.
 
 ---
 
