@@ -9,7 +9,7 @@ Reports whether rune is byte actually. In other words, whether rune is ASCII.
 ---
 
 ```jule
-fn ToRune(lit: str): rune
+fn ToRune(lit: str): (rune, []Error)
 ```
 Returns rune value string from literal, includes quotes.
 Bytes are represents rune literal, allows escape sequences.
@@ -29,9 +29,19 @@ Assumes lit is syntaticaly and semantically correct.
 ---
 
 ```jule
-fn ToStr(lit: str): str
+fn ToStr(lit: str): (str, []Error)
 ```
 Returns string value string from literal, includes quotes.
 Bytes are represents string characters, allows escape sequences.
 Returns empty string if `len(lit) == 0`.
 Assumes lit is syntaticaly and semantically correct.
+
+## Structs
+
+```jule
+struct Error {
+	Offset: int
+	Text:   str
+}
+```
+An error for literal parsing.
