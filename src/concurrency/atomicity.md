@@ -5,18 +5,23 @@ Atomicity is important for concurrency. An atomic operation guarantees that the 
 Here is an example code:
 
 ```jule
+use "std/runtime"
+
 static mut n: int = 0
 
-fn addToN() {
-    n++
+fn addToN(mut part: int) {
+	for part > 0; part-- {
+		n++
+	}
 }
 
 fn main() {
-    let mut j = 0
-    for j < 1000000; j++ {
-        co addToN()
-    }
-    println(n)
+	const Total = 1_000_000
+	mut j := 0
+	for j < runtime::NumCPU(); j++ {
+		co addToN(Total / runtime::NumCPU())
+	}
+	println(n)
 }
 ```
 
@@ -31,28 +36,29 @@ Atomic accesses can be used to synchronize memory accesses. An atomic process lo
 Jule provides the `std/sync/atomic` package for atomicity as standard. Now let's take a look at the above code secured with `WaitGroup` and atomic operations:
 
 ```jule
+use "std/runtime"
 use "std/sync"
 use "std/sync/atomic"
 
 static mut n = atomic::Int.New(0)
 
-fn addToN(mut wg: &sync::WaitGroup) {
-    defer { wg.Done() }
-    n.Add(1, atomic::SeqCst)
+fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
+	for part > 0; part-- {
+		n.Add(1, atomic::SeqCst)
+	}
+	wg.Done()
 }
 
 fn main() {
-    let mut wg = sync::WaitGroup.New()
-
-    let mut j = 0
-    for j < 1000000; j++ {
-        wg.Add(1)
-        co addToN(wg)
-    }
-
-    wg.Wait()
-
-    println(n.Load(atomic::SeqCst))
+	mut wg := sync::WaitGroup.New()
+	const Total = 1_000_000
+	mut j := 0
+	for j < runtime::NumCPU(); j++ {
+		wg.Add(1)
+		co addToN(wg, Total/runtime::NumCPU())
+	}
+	wg.Wait()
+	println(n.Load(atomic::Relaxed))
 }
 ```
 

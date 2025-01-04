@@ -170,7 +170,7 @@ Designed for `[]rune(s)` iterations. Takes pointer to string withl length and se
 ```jule
 unsafe fn coSpawn(func: *unsafe, args: *unsafe)
 ```
-A low level API function for threads. It doesn't provide much abstraction. It just creates and detaches a thread using API. Reports whether the thread created successfully. The created thread is a native-thread. The `func` parameter should point to the valid function for operating system thread API. The `args` parameter may be nil and should point to the argument data.
+A low level API function for threads. It doesn't provide much abstraction. It just creates and detaches a thread using API. Reports whether the thread created successfully. The created thread is a native-thread. The `func` parameter should point to the valid function for operating system thread API. The `args` parameter may be nil and should point to the argument data. The thread data, should be fit into the threadData struct. So, the head fields of the thread data should be matched fields of the threadData.
 
 ```jule
 fn runeCount(s: str): int

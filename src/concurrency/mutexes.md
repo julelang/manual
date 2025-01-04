@@ -4,28 +4,28 @@ In the previous section, atomics were explained and when atomicity was required 
 
 For example:
 ```jule
+use "std/runtime"
 use "std/sync"
 
 static mut n = 0
 
-fn addToN(mut wg: &sync::WaitGroup) {
-    defer { wg.Done() }
-    println("incrementing")
-    n++
-    println("incremented")
+fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
+	for part > 0; part-- {
+		n++
+	}
+	wg.Done()
 }
 
 fn main() {
-    let mut wg = sync::WaitGroup.New()
-
-    let mut j = 0
-    for j < 1000000; j++ {
-        wg.Add(1)
-        co addToN(wg)
-    }
-
-    wg.Wait()
-    println(n)
+	mut wg := sync::WaitGroup.New()
+	const Total = 1_000_000
+	mut j := 0
+	for j < runtime::NumCPU(); j++ {
+		wg.Add(1)
+		co addToN(wg, Total/runtime::NumCPU())
+	}
+	wg.Wait()
+	println(n)
 }
 ```
 
@@ -36,31 +36,31 @@ To solve this problem we can use a mutex. Mutexes are locking mechanisms that al
 For example:
 
 ```jule
+use "std/runtime"
 use "std/sync"
 
 static mut n = 0
-static mtx = sync::Mutex{} // [!code ++]
+static mtx = new(sync::Mutex)
 
-fn addToN(mut wg: &sync::WaitGroup) {
-    defer { wg.Done() }
-    mtx.Lock() // [!code ++]
-    println("incrementing")
-    n++
-    println("incremented")
-    mtx.Unlock() // [!code ++]
+fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
+	mtx.Lock()
+	for part > 0; part-- {
+		n++
+	}
+	mtx.Unlock()
+	wg.Done()
 }
 
 fn main() {
-    let mut wg = sync::WaitGroup.New()
-
-    let mut j = 0
-    for j < 1000000; j++ {
-        wg.Add(1)
-        co addToN(wg)
-    }
-
-    wg.Wait()
-    println(n)
+	mut wg := sync::WaitGroup.New()
+	const Total = 1_000_000
+	mut j := 0
+	for j < runtime::NumCPU(); j++ {
+		wg.Add(1)
+		co addToN(wg, Total/runtime::NumCPU())
+	}
+	wg.Wait()
+	println(n)
 }
 ```
 

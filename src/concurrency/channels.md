@@ -183,7 +183,7 @@ Select statements are categorized into two types: non-blocking select and blocki
 
 Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and pauses the program's execution until at least one case becomes eligible.
 
-Nil channels do not cause errors such as runtime panics. Select statements simply ignore nil channels. This behavior can lead to an infinite lock. For example, a blocking select statement will block the program indefinitely if all its cases involve nil channels.
+Nil channels do not cause errors such as runtime panics. Select statements simply ignore nil channels.
 
 Using a select statement is similar to using a match statement and is written almost the same way. However, unlike match statements, select statements can use `break` statements but do not support `fall` statements.
 
@@ -217,7 +217,7 @@ In the above code example, a blocking select statement attempts to receive data 
 
 ### Empty Select Statement
 
-An empty select statement results in a CPU yield, meaning it stops the current thread and switches to executing a different thread. If no alternative thread is available, it can result in indefinite waiting within the same thread.
+An empty select statement results in a CPU yield, meaning it stops the current thread and switches to executing a different thread. Thread will not continue to execute following statements after an empty statement.
 
 For example:
 ```jule

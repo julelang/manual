@@ -295,6 +295,7 @@ export default defineConfig({
           text: 'Concurrency',
           link: "/concurrency/",
           items: [
+            { text: 'Threads', link: '/concurrency/threads' },
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Mutexes', link: '/concurrency/mutexes' },
@@ -367,7 +368,7 @@ export default defineConfig({
           text: 'Runtime',
           link: '/runtime/',
           items: [
-            { text: 'Public Functionalities', link: '/runtime/public-functionalities' },
+            { text: 'Public API', link: '/runtime/public-api' },
             { text: 'Runtime API', link: '/runtime/runtime-api' },
           ],
         },
