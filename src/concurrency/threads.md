@@ -4,8 +4,6 @@ In Jule, threads are OS threads. They are scheduled and managed by the operating
 
 For effective use of threads, it is recommended to divide tasks appropriately among threads. While languages like Go allow the creation of thousands of lightweight threads (goroutines), in languages like Jule that use OS threads, creating thousands of threads is not beneficial. Therefore, it is advisable to distribute workloads among threads as efficiently as possible.
 
-
-
 For example:
 ```jule
 use "std/runtime"
@@ -22,6 +20,10 @@ fn main() {
 }
 ```
 The simple example code above makes concurrent calls to the `task` function, equal to the number of CPUs. Dividing tasks like this into the number of CPUs or another optimal number can be beneficial for maximizing resource utilization and improving performance.
+
+### Stack Size of Threads
+
+Jule does not interfere with the stack size of threads, including the main thread of the program. Therefore, the stack size of threads can vary depending on the operating system. If this stack size is exceeded, it usually results in a segmentation fault (segfault).
 
 ## Thread Management
 <div class="warning-badge">experimental</div>
