@@ -16,6 +16,10 @@ Members of structures are the same as a variable definition except `const` keywo
 
 You may want to change the default values ​​assigned to fields of structures. To do this, simply assign an expression. When you do this, each time your structures are instantiated, it will initialize that field using the value given for that field.
 
+::: info
+Only constant expressions allowed.
+:::
+
 For example:
 ```jule
 struct Employee {
