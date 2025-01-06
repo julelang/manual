@@ -3,11 +3,20 @@
 ## Type Aliases
 
 ```jule
+type FinalToken: []byte
+```
+Special sentinel exception value type. It is intended to be thrown exception by a Split function to indicate that the scanning should stop with no error. If the token being delivered with this exception, the token is the last token.
+
+The value is useful to stop processing early or when it is necessary to deliver a final empty token (which is different from a nil token). One could achieve the same behavior with a custom error value but providing one here is tidier.
+
+---
+
+```jule
 type SplitFunc: fn(mut data: []byte, atEOF: bool)!: (advance: int, token: []byte)
 ```
 The signature of the split function used to tokenize the input. The arguments are an initial substring of the remaining unprocessed data and a flag, atEOF, that reports whether the \[Reader\] has no more data to give. The return values are the number of bytes to advance the input and the next token to return to the user, if any. It throws error as exceptional, if any.
 
-Any exceptional scanning will stop and data may be lost. A successful read should always return successfully, any exceptional means it failed.
+Any exceptional scanning will stop and data may be lost. A successful read should always return successfully, any exceptional means it failed. If that exceptional is \[FinalToken\], scanning stops with no error. A non-nil token delivered with \[FinalToken\] will be the last token, and a nil token with \[FinalToken\] immediately stops the scanning.
 
 Otherwise, the \[Scanner\] advances the input. If the token is not nil, the \[Scanner\] returns it to the user. If the token is nil, the
 \[Scanner]\ reads more data and continues scanning; if there is no more data--if atEOF was true--the \[Scanner\] returns. If the data does not yet hold a complete token, for instance if it has no newline while scanning lines, a \[SplitFunc\] can return (0, nil) to signal the \[Scanner\] to read more data into the slice and try again with a
