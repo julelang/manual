@@ -7,7 +7,7 @@ For example:
 ```jule
 let age = 18
 ```
-The data type of the above variable is defaulted to `int`. 
+The data type of the above variable is defaulted to `int`.
 
 ## Type Annotation
 You may want to annotate the type, it is possible. It also brings you advantages.
@@ -98,6 +98,31 @@ fn main() {
 ::: info
 Binded globals can be declare via `let` keyword.
 :::
+
+### Initialization
+Global variables are initialized during the earliest stages of the program. At the time of their initialization, no `init` calls have been executed yet.
+
+If the execution of an `init` function is necessary for the proper initialization of global variables, care must be taken. Otherwise, unexpected results may occur.
+
+For example:
+```jule
+static foo = bar()
+static mut baz = 0
+
+fn bar(): int {
+	ret baz
+}
+
+fn init() {
+	baz = 123
+}
+
+fn main() {
+	println(foo)
+	println(bar())
+}
+```
+In the example code above, the `foo` variable is initialized with the value returned by the `bar()` function call. Since the `baz` variable has not yet been assigned a value by the `init` function, the `foo` variable is initialized with `0`. As a result, the program's output will be `0` and `123`.
 
 ## Constant Variables
 
