@@ -41,6 +41,7 @@ It eliminates dead (unused / unreachable) codes from object code.
 - Eliminates dead methods of living structures. <div class="warning-badge">experimental</div>
 - Eliminates dead traits. <div class="warning-badge">experimental</div>
 - Eliminates followed statements of the return statement.
+- Eliminates followed statements of the empty select statement.
 - Eliminates followed statements of the goto statement if possible.
 - Eliminates followed statements of the built-in `panic`, and `erorr` function calls.
 
