@@ -537,6 +537,7 @@ export default defineConfig({
                 { text: 'std/os/filepath', link: '/std/os-filepath' },
               ],
             },
+            { text: 'std/path', link: '/std/path' },
             { text: 'std/runtime', link: '/runtime/' },
             { text: 'std/slices', link: '/std/slices' },
             { text: 'std/strings', link: '/std/strings' },
