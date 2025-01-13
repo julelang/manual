@@ -31,7 +31,7 @@ For example:
 let x: [1000]int = [100, ...]
 ```
 
-The array in the example above holds `1000` integers and each integer is setted to `100`.
+The array in the example above holds `1000` integers and each integer is set to `100`.
 
 ::: info
 This method cannot be used for auto-sized arrays.

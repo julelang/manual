@@ -59,7 +59,7 @@ Writes to stderr. Returns written byte count if success, `-1` otherwise.
 ```jule
 fn readStdin(mut buf: []byte): int
 ```
-Reads from stdin. Returns readed byte count if success, `-1` otherwise.
+Reads from stdin. Returns read byte count if success, `-1` otherwise.
 
 ```jule
 fn ptrEqual(a: *unsafe, b: *unsafe): bool
@@ -98,7 +98,7 @@ Same as `_RCAdd` but have thread-safe implementation.
 ```jule
 unsafe fn _RCDrop(mut p: _RCPtr): bool
 ```
-Drops strong reference from reference pointer. Passing nil pointer is not safe. Reports wheter allocation still alive.
+Drops strong reference from reference pointer. Passing nil pointer is not safe. Reports whether allocation still alive.
 
 Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
 

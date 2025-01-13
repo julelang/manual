@@ -93,7 +93,7 @@ fn main() {
 
 The `build` directive is a top directive. Different way of specific programming such as platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
 
-Plese look at the [specific programming](/compiler/specific-programming) section for more information.
+Please look at the [specific programming](/compiler/specific-programming) section for more information.
 
 ## Directive: `typedef`
 In binded structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.

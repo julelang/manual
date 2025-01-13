@@ -128,7 +128,7 @@ Length data of slice of main allocation.
 
 ### Slicing
 
-Slices are perfect for slicing, suprisingly. Since the slices have mutable memory, the slicing cost is relatively cheap. A slice is created based on the relevant range and no new allocation or copying is performed due to the mutable buffer, only the cost of organizing the memory range pointed to by the returned slice.
+Slices are perfect for slicing, surprisingly. Since the slices have mutable memory, the slicing cost is relatively cheap. A slice is created based on the relevant range and no new allocation or copying is performed due to the mutable buffer, only the cost of organizing the memory range pointed to by the returned slice.
 
 The last index of slices is limited by their capacity. If you specify a value that exceeds length but does not exceed capacity when slicing a slice, the length of the slice will be expanded. In this way, if there is sufficient capacity, the slice can be expanded without having to reallocate.
 
@@ -179,7 +179,7 @@ Channels are structures implemented by the Jule runtime and compiler. Each initi
 
 Channels use a queue that operates with a singly linked list, which has O(1) complexity for a FIFO queue. The data received from the queue is zeroed out, and if they performs GC, the references held by the channel are released.
 
-For unbuffered channels, the queue always have 1 preallocated list node. For buffered channels, the queue alwas have N preallocated list node.
+For unbuffered channels, the queue always have 1 preallocated list node. For buffered channels, the queue always have N preallocated list node.
 
 ## Smart Pointers
 

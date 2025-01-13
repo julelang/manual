@@ -209,7 +209,7 @@ Within the scope of interior mutability, sharing mutable data between copies can
 3. If the structure has an interior mutable field while copying and this field has a mutable type, it is considered to be at mutbility risk.
    - Your compiler won't complain if the 1. and 2. rules are met.
    - If the copy is made to an immutable memory, there is no risk.
-   - If the copy is being created for mutable memory from immutable memoty, there should be no access to that field. If the structure has an interior mutable field and there is access to this field within the scope of copying, after copying to a mutable memory, that copy may break the mutability by mutating the interior mutable field. This is not allowed.
+   - If the copy is being created for mutable memory from immutable memory, there should be no access to that field. If the structure has an interior mutable field and there is access to this field within the scope of copying, after copying to a mutable memory, that copy may break the mutability by mutating the interior mutable field. This is not allowed.
 
 Under the rule 3, the reason why areas within the scope of interior mutability are recommended to be private is more clear. If the field is public, developers may experience problems when creating new copies when accessing from external packages. Having the structure field private supports easier copies in external packages and easier data sharing.
 

@@ -63,6 +63,6 @@ jule::Ptr<Person> p = jule::new_ptr<Person>(Person{
     .surname="Julenour",
 });
 std::cout << p->name << " " << p->surname << std::endl;
-p->name = "Unknown"; // Set name field to "Unkown"
+p->name = "Unknown"; // Set name field to "Unknown"
 std::cout << p->name << " " << p->surname << std::endl;
 ```

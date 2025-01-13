@@ -1,6 +1,6 @@
 # References
 
-References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable-based expression. You can think of them as pointers but they are safer because of compiler's safety obsessions. Actualy, references are raw pointers with safety mask.
+References are like an alias for an lvalue, but this lvalue is no ordinary lvalue. It should always be a variable-based expression. You can think of them as pointers but they are safer because of compiler's safety obsessions. Actually, references are raw pointers with safety mask.
 
 They are used with `&` operator in syntax. You can't have nested references, for example you can have a pointer pointing to a pointer but not a reference referencing to a reference.
 
@@ -38,7 +38,7 @@ fn main() {
 
 Static variables cannot be reference due to safety reasons. After assigned to static storage, reference may be dangling, so pointer is dangling. Tracking lifetime of lvalues is expensive, therefore Jule is not allows reference static variables.
 
-If you need reference for static storage, use raw pointer istead. Raw pointers are part of the Unsafe Jule and references are safety masks for raw pointers.
+If you need reference for static storage, use raw pointer instead. Raw pointers are part of the Unsafe Jule and references are safety masks for raw pointers.
 
 ### Anonymous Functions with References
 

@@ -475,7 +475,7 @@ struct SizeofExpr {
 }
 ```
 Expression model for sizeof expressions.\
-For exmaple, in C++: `sizeof(int)`
+For example, in C++: `sizeof(int)`
 
 ---
 
@@ -485,7 +485,7 @@ struct AlignofExpr {
 }
 ```
 Expression model for alignof expressions.\
-For exmaple, in C++: `alignof(int)`
+For example, in C++: `alignof(int)`
 
 ---
 
@@ -495,7 +495,7 @@ struct StrConstructorCallExpr {
 }
 ```
 Expression model for constructor call of str type.\
-For exmaple: `str(myExpr)`
+For example: `str(myExpr)`
 
 ---
 
@@ -505,7 +505,7 @@ struct RuneExpr {
 }
 ```
 Rune literal expression model.
-For exmaple: `'a'`
+For example: `'a'`
 
 ---
 

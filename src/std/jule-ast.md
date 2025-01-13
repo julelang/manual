@@ -895,7 +895,7 @@ struct Impl {
     // Given methods to implement.
     Methods: []&Func
 
-    // Static varaibles to implement.
+    // Static variables to implement.
     Statics: []&Var
 }
 ```

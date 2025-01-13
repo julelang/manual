@@ -96,7 +96,7 @@ For the amper operator, you can use only when you define a default enum field wi
 
 ### Maps
 
-Maps doen't support enums for type safety. You can use enums for key type, but not for value type.
+Maps doesn't support enums for type safety. You can use enums for key type, but not for value type.
 
 ### Comparing Enums
 
