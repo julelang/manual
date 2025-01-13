@@ -90,7 +90,7 @@ Since the Handler scope is a subscope, you can use `ret` statements to the main 
 
 ### Error Classification
 
-Error coding can be used to determine the type of exceptions. The `error` call can accept any type, its parameter is of tyoe `any`. Custom error structures make it possible to do error coding for classification and so on.
+Error coding can be used to determine the type of exceptions. The `error` call can accept any type, its parameter is of type `any`. Custom error structures make it possible to do error coding for classification and so on.
 
 For example:
 ```jule

@@ -59,7 +59,7 @@ It is recommended to write test functions in separate files. This makes it easie
 
 You can use the `build` directive to do this. Use the `#build test` directive so that your test files are only included in test compilations. In test defines the `test` variable is defined so that you only include your test functions in test compilations.
 
-But, here is recommended way; It will be more effective to declare that your test files are a test file by ending them with `_test.jule`. If a filename ends with `_test.jule`, it only hanlded if test compilation enabled. No need to the `#build test` directive. You can you file annotations before test suffix. For example: `foo_windows_amd64_test.jule`
+But, here is recommended way; It will be more effective to declare that your test files are a test file by ending them with `_test.jule`. If a filename ends with `_test.jule`, it only handled if test compilation enabled. No need to the `#build test` directive. You can you file annotations before test suffix. For example: `foo_windows_amd64_test.jule`
 
 ## Running Tests
 

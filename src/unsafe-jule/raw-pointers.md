@@ -1,6 +1,6 @@
 # Raw Pointers
 
-## Derefence a Raw Pointer
+## Dereference a Raw Pointer
 Unsafe Jule allows deference raw pointers.
 
 For example:

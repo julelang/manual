@@ -43,7 +43,7 @@ It eliminates dead (unused / unreachable) codes from object code.
 - Eliminates followed statements of the return statement.
 - Eliminates followed statements of the empty select statement.
 - Eliminates followed statements of the goto statement if possible.
-- Eliminates followed statements of the built-in `panic`, and `erorr` function calls.
+- Eliminates followed statements of the built-in `panic`, and `error` function calls.
 
 ---
 
@@ -70,19 +70,19 @@ Enables special optimizations for mathematical operations.
 - Skips the divide-by-zero check for modulo when operand is constant.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
 - Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
-- Converts modulo by 2 expressions to equavalent bitwise operation.
+- Converts modulo by 2 expressions to equivalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
 - Eliminates runtime overflow of the `x^0` computations. It will be simplified to `x` expression.
-- Simplifies expresions such as `x+x` to `x<<1` if possible.
+- Simplifies expressions such as `x+x` to `x<<1` if possible.
 - Simplifies expressions such as `x-x` to `0` if possible.
 
 ---
 
 `--opt-access` \
-Enables special optimizations for memory acessing.
+Enables special optimizations for memory accessing.
 
-- Skips safety checkings such as boundary checking if accessed to array via constant index expression.
+- Skips safety checks such as boundary checking if accessed to array via constant index expression.
 - If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
 - If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
 - If it can be understood that the smart pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
@@ -111,8 +111,8 @@ Enables special optimizations for conditional expressions and structures.
 - Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
 - Removes condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
 - Avoids using wrapper for strings if string compared with literal.
-- Eliminates and simplifies predictible boolean expressions. Such as `if (x || true)` will be handled as `if (true)` or `if (x && false)` will be handled as `if (false)`.
-- Eliminates predictible comparison expressions. Such as `if (x > x)` will be handles ad `if (false)` or `if (x == x)` will be handled as `if (true)`.
+- Eliminates and simplifies predictable boolean expressions. Such as `if (x || true)` will be handled as `if (true)` or `if (x && false)` will be handled as `if (false)`.
+- Eliminates predictable comparison expressions. Such as `if (x > x)` will be handles ad `if (false)` or `if (x == x)` will be handled as `if (true)`.
 
 ---
 
@@ -206,13 +206,13 @@ The optimization levels are as follows:
 
 ## Production Compilation
 
-Production compilation is a compiler feature that must be enabled separately using the `-p` or `--production` flag. It behaves differently than optimization options whic is enabled with `--opt` options.
+Production compilation is a compiler feature that must be enabled separately using the `-p` or `--production` flag. It behaves differently than optimization options which is enabled with `--opt` options.
 
 Production compilation may have an impact on IR rendering, but in addition it has an impact on backend compilers. By default, your compiler compiles code to make it suitable for debugging and testing. This allows you to get faster compile times and a better debugging experience. In the common scenario for Production, you only do one build, when you are sure everything is ready. That's why production builds are rarer and not the default option.
 
 When you enable production compilation, it provides improvements that optimization options cannot provide. It can cause some changes to the IR and additionally prompts your backend compiler to compile the IR code more efficiently. In this way, significantly optimized faster programs can be obtained by using optimization options and production compilation together.
 
-Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls ot etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `mainPackageDirectory/`.
+Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls, etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `mainPackageDirectory/`.
 
 Pros of enabling production compilation:
 - Disable assertions of backend compiler.

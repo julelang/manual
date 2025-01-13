@@ -131,7 +131,7 @@ Jule strings are UTF-8 encoded byte-by-byte, and support Unicode. They are also 
 
 Strings support the `+` operator for concatenation, It's that easy to concatenate two strings. Additionally, using the `==` and `!=` operators, you can easily determine whether two strings are the same or not.
 
-In most cases, any concatenation will result as heap allocation which is might be expensive. For higly-repeated concatenations use string builder utilities instead.
+In most cases, any concatenation will result as heap allocation which is might be expensive. For highly-repeated concatenations use string builder utilities instead.
 
 It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares bytes/runes of strings.
 

@@ -4,7 +4,7 @@ JuleC commits that the codes it produces can be successfully compiled by the GNU
 
 Even if you can compile code generated outside of official support compilers with a different compiler, it is not under official support and there is no commitment that the code will be compiled. Regardless of whether you use Clang to compile the code or a compiler with or without official support, make sure that you either support or use a version of compiler that does support the C++ standard that Jule created.
 
-## Officialy Supported Compilers
+## Officially Supported Compilers
 
 | Compiler                | Support State                          |
 |-------------------------|----------------------------------------|
@@ -25,7 +25,7 @@ Partial support may not be available for all platforms and is broad in scope. Th
 
 ### Jule 0.0.14 and Higher
 
-MSVC is supported by Jule. Our GitHub Action workflows use MSVC Clang on Windows machines to compile Jule programs. Hovewer, MSVC support is not guaranteed to work as expected. When using MSVC your program may able to compile successfully, but may need to additional actions like linking missing libraries. If you encounter issues like that, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
+MSVC is supported by Jule. Our GitHub Action workflows use MSVC Clang on Windows machines to compile Jule programs. However, MSVC support is not guaranteed to work as expected. When using MSVC your program may able to compile successfully, but may need to additional actions like linking missing libraries. If you encounter issues like that, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
 
 ### Jule 0.0.13 and Before
 

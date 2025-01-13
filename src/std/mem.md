@@ -17,7 +17,7 @@ Returns the alignment, in bytes, required for any instance of the type indicated
 ```jule
 fn Free(h: T)
 ```
-Frees memory. If reference counting is enabled, just countdowns reference and sets to nil. If reference counting is disabled, frees memory allocation immediately. This is migh be unsafe, because your another shared pointers will have invalid memory address after freed.
+Frees memory. If reference counting is enabled, just countdowns reference and sets to nil. If reference counting is disabled, frees memory allocation immediately. This is might be unsafe, because your another shared pointers will have invalid memory address after freed.
 
 If you call Free function for string, be sure about this string is heap-allocated. Otherwise, this is undefined behavior and probably it will cause segfault.
 

@@ -7,8 +7,8 @@ When working with Integrated Jule, sometimes using use declarations and linking 
 ::: danger
 This is not a recommended way to use C++ code in Jule. For more safe approach, see the [wrappers](/integrated-jule/interoperability/jule-wrappers). This is just might be useful for a minimal use cases, but mid/large scale C++ codes should be use wrappers for safety and maintainability.
 
-- Your error messages might be confusing for your emitted C++ code. For example, the line numbers of the error messages cannot be predictible since the emitted code placed in the IR.
-- Hard to maintain and investigate emitted C++ code in the IR. You cannot predict the output of the code compeletely and where the emitted code be placed in the IR. Your emitted C++ code may unexpectedly mix with the Jule.
+- Your error messages might be confusing for your emitted C++ code. For example, the line numbers of the error messages cannot be predictable since the emitted code placed in the IR.
+- Hard to maintain and investigate emitted C++ code in the IR. You cannot predict the output of the code completely and where the emitted code be placed in the IR. Your emitted C++ code may unexpectedly mix with the Jule.
 - You will lost tools, editor/IDE support and other things for your C++ code. This means you will no longer have static analysis, code completion and others. Using separate C++ source files can still provide editor and tool support, which is more safe and maintainable.
 :::
 

@@ -77,7 +77,7 @@ fn main() {
 ```
 
 ## Unsafe Pointers
-Developers who have previously worked with programming languages such as C and C++ are probably familiar with void pointers. Jule has void pointers. To obtain a void pointer, an unsafe pointer is used. Unsafe pointers can receive assignments from any pointer type. It is general purpose. Unsafe pointer is not an explicit pointer, it cannot be used with postfix and cannot be deferenced.
+Developers who have previously worked with programming languages such as C and C++ are probably familiar with void pointers. Jule has void pointers. To obtain a void pointer, an unsafe pointer is used. Unsafe pointers can receive assignments from any pointer type. It is general purpose. Unsafe pointer is not an explicit pointer, it cannot be used with postfix and cannot be dereference.
 
 These pointers are known as unsafe pointers in Jule because they are actually more unsafe than regular pointers. This is mainly because they are not a pointer to a data type. It is assumed that they simply point to a memory location. Therefore, there is no guarantee that it is correct, even if cast to a datatype pointer. The developer must know the data type at the pointed address. Unsafe pointers are not helpful in this regard.
 
@@ -89,7 +89,7 @@ fn main() {
     unsafe { println(*( (*int)(ptr) )) }
 }
 ```
- In this example, the variable `ptr` is an unsafe pointer and points to the variable `a`. Then we see that this pointer is cast to the `int` pointer and deferenced. As a result, we get the value the `20` because was done right. 
+ In this example, the variable `ptr` is an unsafe pointer and points to the variable `a`. Then we see that this pointer is cast to the `int` pointer and dereference. As a result, we get the value the `20` because was done right. 
 
 ## Pointer Arithmetic
 

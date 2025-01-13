@@ -49,4 +49,4 @@ Creates new reference from allocation. Allocates new allocation for reference co
 ```cpp
 void dealloc(void);
 ```
-Drops reference. This function will destruct this instace for reference counting. Frees memory if reference counting reaches to zero.
+Drops reference. This function will destruct this instance for reference counting. Frees memory if reference counting reaches to zero.

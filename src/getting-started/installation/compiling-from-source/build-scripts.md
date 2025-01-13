@@ -14,7 +14,7 @@ Compiles JuleC with zero optimization.
 
 ### Windows
 ::: tip
-Ideal scripts for Windows: usally batchfiles (.bat). 
+Ideal scripts for Windows: usually batchfiles (.bat). 
 :::
 
 Using example for PowerShell:
@@ -24,7 +24,7 @@ $ build.bat
 
 ### macOS (Darwin)
 ::: tip
-Ideal scripts for macOS: usally shellscripts (.sh).
+Ideal scripts for macOS: usually shellscripts (.sh).
 :::
 
 Using example for ZSH:
@@ -34,7 +34,7 @@ $ zsh build.sh
 
 ### Linux
 ::: tip
-Ideal scripts for Linux: usally shellscripts (.sh). 
+Ideal scripts for Linux: usually shellscripts (.sh). 
 :::
 
 Using example for Bash:

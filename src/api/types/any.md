@@ -52,7 +52,7 @@ int main() {
 ```
 
 ::: info
-The example above, writtin in production mode. If you are writing non-production code, code might be needs some changes.
+The example above is written in production mode. If you are writing non-production code, code might be needs some changes.
 :::
 
 ## Internal Data

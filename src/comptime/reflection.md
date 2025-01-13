@@ -57,7 +57,7 @@ The value information wrapper provides functionalities only for the value. Not d
 
 Since the function designed for comptime, expressions of `comptime::ValueOf` will not be executed at runtime by default. To do this, you should call the `Unwrap` method of the value information wrapper. The `Unwrap` method is unwraps expression of value information wrapper to called statement, so expression will be executed ad runtime.
 
-This unwrap functionality provides additional benifits for value reflection such as dynamic access to struct fields. Thus, not just examination, we have dynamic handled expressions at comptime.
+This unwrap functionality provides additional benefits for value reflection such as dynamic access to struct fields. Thus, not just examination, we have dynamic handled expressions at comptime.
 
 For example:
 
