@@ -332,14 +332,14 @@ TCP connection. In most cases, represents TCP client.
 **Methods:**
 
 `fn Read(mut self, mut buf: []byte)!: int`\
-Read bytes to buffer from connection and returns readed byte count. The number of bytes readed can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow.
+Read bytes to buffer from connection and returns read byte count. The number of bytes read can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow.
 
 It will panic if connection is closed. If connection is closed by server, it returns zero and sets connection state as closed. So if you try read again, function will panic because of connection state is closed.
 
 All exceptionals are error code of implementation.
 
 `fn Write(mut self, buf: []byte)!: int`\
-Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
+Writes bytes to connection and returns written byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
 `fn SetReadTimeout(mut self, timeout: time::Duration)!`\
 Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.
@@ -384,10 +384,10 @@ Connects to UDP listener by given address. Returns relevant created `&UDPConn` i
 See the `Dial` function for a description of the addr parameter.
 
 `fn Read(mut self, mut buf: []byte)!: int`\
-Read bytes to buffer from connection and returns readed byte count. The number of bytes readed can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow. It will panic if connection is closed. All exceptionals are error code of implementation.
+Read bytes to buffer from connection and returns read byte count. The number of bytes read can never exceed the length of the buffer. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow. It will panic if connection is closed. All exceptionals are error code of implementation.
 
 `fn Write(mut self, buf: []byte)!: int`\
-Writes bytes to connection and returns writed byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
+Writes bytes to connection and returns written byte count. The number of bytes written can never exceed the length of the buffer. All exceptionals are error code of implementation.
 
 `fn SetReadTimeout(mut self, timeout: time::Duration)!`\
 Sets read timeout for connection. Timeout precision is microseconds. If the timeout is below one microsecond it will be accepted as zero. The zero timeout, clears current timeout if exist. All exceptionals are error code of implementation.

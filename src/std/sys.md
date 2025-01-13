@@ -2097,7 +2097,7 @@ Available on: `windows`
 ---
 
 ```jule
-unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, toRead: u32, mut &readed: u32): bool
+unsafe fn ReadConsole(handle: Handle, mut buffer: *u16, toRead: u32, mut &read: u32): bool
 ```
 Calls Windows's ReadConsoleW function. \
 Passes nil pointer for input control.
@@ -2111,7 +2111,7 @@ Available on: `windows`
 ```jule
 unsafe fn GetCurrentDirectory(bufflen: u32, mut buf: *u16): u32
 ```
-Reads working directory into buf and returns readed rune count of current process. Returns 0 if fail.
+Reads working directory into buf and returns read rune count of current process. Returns 0 if fail.
 ::: warning
 Available on: `windows`
 :::

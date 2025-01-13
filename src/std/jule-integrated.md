@@ -314,7 +314,7 @@ This function is part of the C-style memory management. It can be very dangerous
 ```jule
 unsafe fn Free(mut ptr: *unsafe)
 ```
-Free a block allocated by malloc, realloc or calloc. ptr is not setted as nil by function, therefore ptr is dangling after free. Set ptr as nil after free for more safety. 
+Free a block allocated by malloc, realloc or calloc. ptr is not set as nil by function, therefore ptr is dangling after free. Set ptr as nil after free for more safety. 
 
 ::: warning
 This function is part of the C-style memory management. It can be very dangerous.
@@ -326,7 +326,7 @@ This function is part of the C-style memory management. It can be very dangerous
 fn New[T](): *T
 ```
 Allocates new memory.
-Equavalent to: `new T` in C++
+Equivalent to: `new T` in C++
 
 ---
 
@@ -334,7 +334,7 @@ Equavalent to: `new T` in C++
 fn NewArray[T](size: int): *T
 ```
 Allocates new array memory.
-Equavalent to: `new T[size]` in C++
+Equivalent to: `new T[size]` in C++
 
 ---
 
@@ -342,7 +342,7 @@ Equavalent to: `new T[size]` in C++
 unsafe fn Delete[T](heap: *T)
 ```
 Deallocates memory allocation.
-Equavalent to: `delete heap` in C++
+Equivalent to: `delete heap` in C++
 
 ---
 
@@ -350,4 +350,4 @@ Equavalent to: `delete heap` in C++
 unsafe fn DeleteArray[T](heap: *T)
 ```
 Deallocates array memory allocation.
-Equavalent to: `delete[] heap` in C++
+Equivalent to: `delete[] heap` in C++

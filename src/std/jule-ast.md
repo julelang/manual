@@ -142,12 +142,12 @@ struct ArrayType {
 }
 ```
 Array type.\
-Size expression is nil for auto-sized array. 
+Size expression is nil for auto-sized array.
 
 **Methods:**
 
 `AutoSized(self): bool`\
-Reports whether array is auto-sized. 
+Reports whether array is auto-sized.
 
 ---
 
@@ -358,7 +358,7 @@ struct StructLit {
     Exprs: []ExprData
 }
 ```
-Struct literal instiating expression. 
+Struct literal instantiating expression. 
 
 ---
 
@@ -369,7 +369,7 @@ struct BraceLit {
     Exprs: []ExprData
 }
 ```
-Anonymous brace instiating expression.
+Anonymous brace instantiating expression.
 
 **Methods:**
 

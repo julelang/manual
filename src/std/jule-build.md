@@ -14,13 +14,13 @@ Directory name of standard library.
 
 ### `static mut OS: str`
 Target operating system.\
-Setted to runtime operating system by default.
+Set to runtime operating system by default.
 
 ---
 
 ### `static mut Arch: str`
 Target architecture.\
-Setted to runtime architecture by default.
+Set to runtime architecture by default.
 
 ---
 
@@ -413,6 +413,7 @@ Compiler log messages with formatting.
 - `InvalidTypeForIndexing`
 - `UnusedDirective`
 - `UnsupportedDirective`
+- `PanickedWithNonStr`
 - `ErrorWithNonExceptional`
 - `BindedExceptional`
 - `HandledUnexceptional`
@@ -496,7 +497,7 @@ Compiler log messages with formatting.
 - `RenameForAvoidDuplication`
 - `RemoveUseDeclAvoidDuplication`
 - `RenameUseAliasAvoidDuplication`
-- `RemoveUseSelectionAvoidDupliation`
+- `RemoveUseSelectionAvoidDuplication`
 - `RemoveConstToAssign`
 - `UseStaticKeywordToDef`
 - `RemoveFallthroughFromFinalCase`

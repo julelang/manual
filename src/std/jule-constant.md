@@ -7,7 +7,7 @@ struct Const {
 }
 ```
 Constant data.\
-Use `Const.NewNil` function istead of `Const{}` for nil literal.
+Use `Const.NewNil` function instead of `Const{}` for nil literal.
 
 **Methods:**
 

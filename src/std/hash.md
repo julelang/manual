@@ -4,7 +4,7 @@
 
 ```jule
 trait Hash {
-    // Implements same mehod as io::Writer trait.
+    // Implements same method as io::Writer trait.
     // But it will not throws any exceptional.
     io::Writer
 

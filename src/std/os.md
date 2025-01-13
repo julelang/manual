@@ -56,7 +56,7 @@ Starts with the program name.
 ```jule
 fn Env(): []str
 ```
-Returns envrionment variables.
+Returns environment variables.
 
 ```jule
 fn Getwd()!: str
@@ -118,7 +118,7 @@ Directory entry.
 **Methods:**
 
 `static fn Read(path: str)!: []Dir`\
-Reads the named directory and returs all its directory entries can read.
+Reads the named directory and returns all its directory entries can read.
 
 `static fn Create(path: str)!`\
 Creates directory.
@@ -174,10 +174,10 @@ Creates or truncates the named file. If the file already exists, it is truncated
 Sets offset to next Read/Write operation and returns the new offset. whence: 0 (Seek.Set) means, relative to the origin of the file, 1 (Seek.Cur) means relative to the current offset, and 2 (Seek.End) means relative to end.
 
 `fn Read(mut self, mut buf: []byte)!: (n: int)`\
-Read bytes to buffer from handle and returns readed byte count. The number of bytes readed can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
+Read bytes to buffer from handle and returns read byte count. The number of bytes read can never exceed the length of the buf. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow. Offset will be shifted by the number of bytes read.
 
 `fn Write(mut self, buf: []byte)!: (n: int)`\
-Writes bytes to handle and returns writed byte count. The number of bytes written can never exceed the length of the buf.
+Writes bytes to handle and returns written byte count. The number of bytes written can never exceed the length of the buf.
 
 `fn Close(mut self)!`\
 Closes file handle.
@@ -279,7 +279,7 @@ General OS error codes.
 - `Denied`: Search permission is denied for a component of the path prefix
 - `IO`: Input/Output error, an error occurred while reading from the file system
 - `Loop`: A loop exists in symbolic links encountered during resolution of the path argument
-- `LongPath`: The length of the path argument exceeds maxium path length or a pathname component is longer than maximum name length
+- `LongPath`: The length of the path argument exceeds maximum path length or a pathname component is longer than maximum name length
 - `NotExist`: A component of path does not name an existing file or path is an empty string
 - `NotDir`: A component of the path prefix is not a directory
 - `InsufficientMemory`: Insufficient memory to complete the operation
@@ -296,7 +296,7 @@ File system error codes.
 - `Denied`: Search permission is denied for a component of the path prefix
 - `IO`: Input/Output error, an error occurred while reading from the file system
 - `Loop`: A loop exists in symbolic links encountered during resolution of the path argument
-- `LongPath`: The length of the path argument exceeds maxium path length or a pathname component is longer than maximum name length
+- `LongPath`: The length of the path argument exceeds maximum path length or a pathname component is longer than maximum name length
 - `NotExist`: A component of path does not name an existing file or path is an empty string
 - `NotDir`: A component of the path prefix is not a directory
 - `Overflow`: The file size in bytes or the number of blocks allocated to the file or the file serial number cannot be represented correctly in the structure pointed to by buf

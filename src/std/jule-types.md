@@ -9,13 +9,13 @@ Possible values are: 32, and 64.
 
 ### `static SysInt: str`
 Signed integer kind of target architecture.\
-Is equavalent to `int`, but specific bit-sized integer kind.
+Is equivalent to `int`, but specific bit-sized integer kind.
 
 ---
 
 ### `static SysUint: str`
 Unsigned integer kind of target architecture.\
-Is equavalent to `uint` and `uintptr`, but specific bit-sized integer kind.
+Is equivalent to `uint` and `uintptr`, but specific bit-sized integer kind.
 
 ---
 
@@ -101,7 +101,7 @@ Maximum value of 64-bit unsigned integers.
 ```jule
 fn UpdateTarget()
 ```
-Updates platform-specific informations by target. If you will update target configuration, you should call this function. In other words, new configurations is not applied for types.
+Updates platform-specific information by target. If you will update target configuration, you should call this function. In other words, new configurations is not applied for types.
 
 ```jule
 fn RealKindOf(kind: str): str

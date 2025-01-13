@@ -114,7 +114,7 @@ Returns type information for value type.
 Supports only map types.
 
 `fn Fields(self): comptimeStructFields | comptimeEnumFields`\
-Returns field informations for type.
+Returns field information for type.
 Supports only structure and enum types.
 Using with built-in len function returns count of fields as constant expression.
 
@@ -271,7 +271,7 @@ Parameter ident should be constant.
 It allows access to private fields.
 
 `fn FieldByIndex(self, index: int): comptimeValue`\
-Same as the Field method, but takes constant index istead of identifier.
+Same as the Field method, but takes constant index instead of identifier.
 
 `fn Method(self, ident: str): comptimeValue`\
 Returns comptimeValue for method access expression.

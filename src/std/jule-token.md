@@ -168,7 +168,7 @@ Reports whether rune is punctuation.
 ```jule
 fn IsSpace(r: rune): bool
 ```
-Reports wheter byte is whitespace.
+Reports whether byte is whitespace.
 
 ---
 
