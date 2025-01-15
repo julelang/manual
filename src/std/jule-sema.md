@@ -50,7 +50,7 @@ You can pass nil to importer, but panics if importer is nil and semantic analyze
 struct EnumItem {
     Token: &token::Token
     Ident: str
-    Value: &Value
+    Value: &ValueSym
 }
 ```
 Enum item.
@@ -119,7 +119,7 @@ Returns nil if not exist any item in this identifier.
 ---
 
 ```jule
-struct Data {
+struct Value {
     Type:      &Type
     Mutable:   bool
     Reference: bool
@@ -138,7 +138,7 @@ struct Data {
     Constant: &constant::Const
 }
 ```
-Value data.
+Value.
 ::: info
 **Implemented Traits**\
 - `Kind`
@@ -155,7 +155,7 @@ Reports whether Data is void.
 `fn IsConst(self): bool`\
 Reports whether Data is constant expression. 
 
-`fn GoodOperand(self, mut &other: &Data): bool`\
+`fn GoodOperand(self, mut &other: &Value): bool`\
 Reports left and right operand is good order.
 If reports false, left and right operand should be swapped.
 Accepts itself as left operand.
@@ -163,9 +163,9 @@ Accepts itself as left operand.
 ---
 
 ```jule
-struct Value {
+struct ValueSym {
     Expr: &ast::Expr
-    Data: &Data
+    Value: &Value
 }
 ```
 Value. 
@@ -238,7 +238,7 @@ For example: `&MyStruct{}`
 ```jule
 struct CastingExpr {
     Token: &token::Token
-    Expr:  &Data
+    Expr:  &Value
     Type:  &Type
 }
 ```
@@ -264,7 +264,7 @@ Function call expression model.
 ```jule
 struct BuiltinErrorCallExpr {
     Func: &FuncIns
-    Err:  &Data
+    Err:  &Value
 }
 ```
 Expression model for built-in error function calls.
@@ -274,7 +274,7 @@ Expression model for built-in error function calls.
 ```jule
 struct SliceExpr {
     ElemType: &Type
-    Elems:    []&Data
+    Elems:    []&Value
 }
 ```
 Slice expression model.\
@@ -285,8 +285,8 @@ For example: `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 ```jule
 struct IndexingExpr {
     Token: &token::Token
-    Expr:  &Data
-    Index: &Data
+    Expr:  &Value
+    Index: &Value
 }
 ```
 Indexing expression model.\
@@ -355,7 +355,7 @@ For example: `myTrait.mySubIdent`
 ```jule
 struct StructSubIdentExpr {
     Token:  &token::Token
-    Expr:   &Data
+    Expr:   &Value
     Method: &FuncIns
     Field:  &FieldIns
     Owner:  &StructIns
@@ -369,7 +369,7 @@ For example: `myStruct.mySubIdent`
 ```jule
 struct ArrayExpr {
     Kind:  &Arr
-    Elems: []&Data
+    Elems: []&Value
 }
 ```
 Array expression model.  If array filled, elems field holds 2 data. First data is expression, second is nil, kind of mark to that array filled.
@@ -378,7 +378,7 @@ Array expression model.  If array filled, elems field holds 2 data. First data i
 
 ```jule
 struct TupleExpr {
-    Datas: []&Data
+    Values: []&Value
 }
 ```
 Tuple expression model.
@@ -443,7 +443,7 @@ Expression model for built-in append function calls.
 
 ```jule
 struct BuiltinLenCallExpr {
-    Expr: &Data
+    Expr: &Value
 }
 ```
 Expression Model: for built-in len function calls.
@@ -452,7 +452,7 @@ Expression Model: for built-in len function calls.
 
 ```jule
 struct BuiltinCapCallExpr {
-    Expr: &Data
+    Expr: &Value
 }
 ```
 Expression Model: for built-in cap function calls.
@@ -461,8 +461,8 @@ Expression Model: for built-in cap function calls.
 
 ```jule
 struct BuiltinDeleteCallExpr {
-    Dest: &Data
-    Key:  &Data
+    Dest: &Value
+    Key:  &Value
 }
 ```
 Expression Model: for built-in delete function calls.
@@ -531,7 +531,7 @@ Function provided by: `std/mem`
 ```jule
 struct ChanRecv {
 	Token: &token::Token
-	Expr:  &Data
+	Expr:  &Value
 }
 ```
 Expression model: for channel receive.
@@ -541,8 +541,8 @@ Expression model: for channel receive.
 ```jule
 struct ChanSend {
 	Token: &token::Token
-	Chan:  &Data
-	Data:  &Data
+	Chan:  &Value
+	Data:  &Value
 }
 ```
 Expression mode: for channel send.
@@ -552,7 +552,7 @@ Expression mode: for channel send.
 ```jule
 struct BuiltinCloseCallExpr {
 	Token: &token::Token
-	Chan:  &Data
+	Chan:  &Value
 }
 ```
 Expression Model: for built-in close function calls.
@@ -844,7 +844,7 @@ Reports whether iteration is while-next.
 ```jule
 struct RangeIter {
     Scope:     &Scope
-    Expr:      &Data
+    Expr:      &Value
     ExprToken: &token::Token
     KeyA:      &Var
     KeyB:      &Var
@@ -920,7 +920,7 @@ Assignment.
 ```jule
 struct MultiAssign {
     Decls: []&Var
-    Left:  []&Data
+    Left:  []&Value
     Right: Expr
     Op:    &token::Token
 }
@@ -932,7 +932,7 @@ Multi-declarative assignment.
 ```jule
 struct Match {
     Scope:     &Scope // Owner scope.
-    Expr:      &Data
+    Expr:      &Value
     TypeMatch: bool
     Comptime:  bool
     Cases:     []&Case
@@ -963,7 +963,7 @@ Select-Case.
 struct Case {
     Owner: CaseOwner
     Scope: &Scope
-    Exprs: []&Data
+    Exprs: []&Value
     Next:  &Case
 }
 ```
@@ -1090,7 +1090,7 @@ struct FieldIns {
     Owner:   &StructIns
     Decl:    &Field
     Type:    &Type
-    Default: &Data
+    Default: &Value
 }
 ```
 Field instance. 
@@ -1489,7 +1489,7 @@ struct Var {
     Reference:     bool
     Checked:       bool
     TypeSym:       &TypeSym
-    Value:         &Value
+    Value:         &ValueSym
     Refers:        &ReferenceStack
     Directives:    []&ast::Directive
 
@@ -1627,7 +1627,7 @@ Statement type.
 **Fields:**
 - `&Scope`
 - `&Var`
-- `&Data`
+- `&Value`
 - `&Conditional`
 - `&InfIter`
 - `&WhileIter`
