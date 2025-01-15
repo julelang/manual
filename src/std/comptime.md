@@ -153,7 +153,7 @@ Reports whether kind performs garbage collection as constant expression.
 ---
 
 ```jule
-struct comptileStructFields
+struct comptimeStructFields
 ```
 Private compile-time information wrapper for struct fields.
 Supports iterable and indexing implementations.
@@ -162,7 +162,7 @@ Using with built-in len function returns count of fields as constant expression.
 ---
 
 ```jule
-struct comptileStructField
+struct comptimeStructField
 ```
 Private compile-time struct field information wrapper.
 
@@ -177,7 +177,7 @@ Returns type information for field.
 ---
 
 ```jule
-struct comptileEnumFields
+struct comptimeEnumFields
 ```
 Private compile-time information wrapper for enum fields.
 Supports iterable and indexing implementations.
@@ -186,7 +186,7 @@ Using with built-in len function returns count of fields as constant expression.
 ---
 
 ```jule
-struct comptileEnumField
+struct comptimeEnumField
 ```
 Private compile-time enum field information wrapper.
 
