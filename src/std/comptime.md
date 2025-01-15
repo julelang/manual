@@ -136,10 +136,10 @@ Returns compile-time information for result type of function. Only supports func
 Reports whether type is binded as constant expression.
 
 `fn Ordered(self): bool`\
-Reports whether kind supports ordered constrait as constant expression.
+Reports whether kind supports ordered constraint as constant expression.
 
 `fn Comparable(self): bool`\
-Reports whether kind supports comparable constrait as constant expression.
+Reports whether kind supports comparable constraint as constant expression.
 
 `fn Mutable(self): bool`\
 Reports whether kind is mutable as constant expression.

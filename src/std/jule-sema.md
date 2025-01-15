@@ -1261,7 +1261,7 @@ Reports whether kind is comparable.
 Reports whether kind is mutable.
 
 `fn Ordered(self): bool`\
-Reports whether kind supports ordered constrait.
+Reports whether kind supports ordered constraint.
 
 `fn NilCompatible(self): bool`\
 Reports whether kind is nil compatible.
