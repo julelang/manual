@@ -126,11 +126,11 @@ Supports only structure types.
 Returns parameter information for function's parameters. Supports only function types.
 
 `fn Types(self): comptimeTypeInfos`\
-Returns comptime-type information datas for tuple types.
+Returns comptime-type information for tuple types.
 Supports only tuple types.
 
 `fn Result(self): comptimeTypeInfo`\
-Returns compile-time information data for result type of function. Only supports function types.
+Returns compile-time information for result type of function. Only supports function types.
 
 `fn Binded(self): bool`\
 Reports whether type is binded as constant expression.

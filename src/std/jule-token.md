@@ -248,7 +248,7 @@ Not uses mutable copy of data, allocates new copy.
 
 `unsafe fn FillMut(mut self, mut data: []byte)`\
 Fills data.
-Uses mutable copy of data, not allocated new copy. But it is unsafe, because any mutation on the data may cause inconsistent results. However, it is efficient way to use already allocated datas.
+Uses mutable copy of data, not allocated new copy. But it is unsafe, because any mutation on the data may cause inconsistent results. However, it is efficient way to use already allocated data.
 
 `fn GetRow(self, row: int): str`\
 Return line (not include new-line char) by row. \
