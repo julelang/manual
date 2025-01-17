@@ -491,6 +491,7 @@ export default defineConfig({
                 { text: 'std/hash/fnv', link: '/std/hash-fnv' },
               ],
             },
+            { text: 'std/html', link: '/std/html' },
             { text: 'std/io', link: '/std/io' },
             {
               text: 'std/jule',
