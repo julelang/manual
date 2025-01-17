@@ -378,3 +378,23 @@ Returns mutable buffer for low-level interactions.
 
 `unsafe fn SetBuf(mut self, mut buf: []byte)`\
 Sets mutable internal buffer for low-level interactions.
+
+---
+
+```jule
+struct Replacer
+```
+Replaces a list of strings with replacements. It is more efficient than Replace function for multiple replacements on one string. It is safe for concurrent use by multiple threads.
+
+**Methods:**
+
+`static fn New(oldnew: ...str): &Replacer`\
+Returns a new [Replacer] from a list of old, new string pairs. Replacements are performed in the order they appear in the target string, without overlapping matches. The old string comparisons are done in argument order.
+
+Panics if given an odd number of arguments.
+
+`fn Replace(self, s: str): str`\
+Replaces s and returns the result.
+
+`fn WriteStr(self, s: str, mut w: io::StrWriter)!: (n: int)`\
+Applies replace on s and writes result to w. Forwards any exception if any.
