@@ -2,9 +2,9 @@
 
 The official documentation generator for the Jule programming language.
 
-JuleDoc is a documentation generator for Jule developed using the Jule programming language. It helps keep your Jule code well documented. Except for the documentation algorithms, it relies heavily on [`std/jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also.
+JuleDoc is a documentation generator for Jule developed using the Jule programming language. It helps keep your Jule code well documented, based on [documentation comments](/maintenance/documentation-comments) of the source code. It only generated documentation for the exported defines.
 
-JuleDoc also uses JuleFmt-like formatting to represent source code snippets in consistent format. But it is not generates all the code for some places, such as variables.
+Except for the documentation algorithms, it relies heavily on [`std/jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also. JuleDoc also uses JuleFmt-like formatting to represent source code snippets in consistent format. But it is not generates all the code for some places, such as variables.
 
 ## Using
 

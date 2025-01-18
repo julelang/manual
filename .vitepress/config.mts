@@ -403,8 +403,13 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Performance Tuning and Tips',
-          link: '/performance-tuning-and-tips/',
+          text: 'Maintenance',
+          link: '/maintenance/',
+          items: [
+            { text: 'Documentation Comments', link: '/maintenance/documentation-comments' },
+            { text: 'Code Formatting', link: '/tools/julefmt' },
+            { text: 'Performance Tuning and Tips', link: '/maintenance/performance-tuning-and-tips' },
+          ],
         },
         {
           items: [
