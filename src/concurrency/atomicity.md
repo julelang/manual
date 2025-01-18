@@ -40,7 +40,7 @@ use "std/runtime"
 use "std/sync"
 use "std/sync/atomic"
 
-static mut n = atomic::Int.New(0)
+static mut n = atomic::Int(0)
 
 fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
 	for part > 0; part-- {
