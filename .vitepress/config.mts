@@ -574,6 +574,7 @@ export default defineConfig({
               items: [
                 { text: 'JuleC', link: '/tools/julec' },
                 { text: 'JuleFmt', link: '/tools/julefmt' },
+                { text: 'JuleDoc', link: '/tools/juledoc' },
               ],
             },
           ],
