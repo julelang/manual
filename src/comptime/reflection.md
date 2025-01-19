@@ -32,7 +32,7 @@ fn FooBar[T](x: T) {
 
 The `comptime::TypeOf` function will return type information wrapper for the type. This wrapper provides some functionalities according the type.
 
-The type information wrapper provides only functionalities for the type. Not declaration, generic instances and other analysis-related informations.
+The type information wrapper provides only functionalities for the type. Not declaration, generic instances and other analysis-related information.
 
 ## Introduction to Reflection for Values
 
@@ -51,7 +51,7 @@ fn FooBar[T](x: T) {
 
 The `comptime::ValueOf` function will return value information wrapper for the value. This wrapper provides some functionalities according the value.
 
-The value information wrapper provides functionalities only for the value. Not declaration, generic instances and other analysis-related informations.
+The value information wrapper provides functionalities only for the value. Not declaration, generic instances and other analysis-related information.
 
 ### Unwrap Expression of Wrapper
 

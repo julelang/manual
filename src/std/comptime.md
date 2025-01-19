@@ -304,7 +304,7 @@ Returns type information for value type. Supports only map types.
 ```jule
 fn Fields(self): comptimeStructFields | comptimeEnumFields
 ```
-Returns field informations for type. Supports only structure and enum types.
+Returns field information for type. Supports only structure and enum types.
 
 ### Params
 ```jule

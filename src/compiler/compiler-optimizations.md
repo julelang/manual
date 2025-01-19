@@ -212,7 +212,7 @@ Production compilation may have an impact on IR rendering, but in addition it ha
 
 When you enable production compilation, it provides improvements that optimization options cannot provide. It can cause some changes to the IR and additionally prompts your backend compiler to compile the IR code more efficiently. In this way, significantly optimized faster programs can be obtained by using optimization options and production compilation together.
 
-Production compilation also normalizes informations to make ready-to-production. This informations are embedded informations which is added to executable file for debugging reasons with minimum cost such as path information of panic calls, etc. Normally path informations are absolute paths but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `mainPackageDirectory/`.
+Production compilation also normalizes information to make ready-to-production. This information is embedded which is added to executable file for debugging reasons with minimum cost such as path information of panic calls, etc. Normally the path information is absolute path but in production compilation absolute paths can be ambiguous and complex to read. To prevent this, production compilation removes prefix of absolute path and leaves just necessary root directory and following path. For example if panic call raised from standard library, the path starts with `std/`, if panic call raised from main package, the paths start with `mainPackageDirectory/`.
 
 Pros of enabling production compilation:
 - Disable assertions of backend compiler.
@@ -220,7 +220,7 @@ Pros of enabling production compilation:
 - Additional optimizations that vary by backend compiler.
 - Do not use frame pointer if possible.
 - Remove debug information overhead of Jule runtime calls.
-- Use production-ready informations.
+- Use production-ready information.
 
 Cons of enabling production compilation:
 - Harder debugging.

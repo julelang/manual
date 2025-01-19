@@ -264,7 +264,7 @@ Possible values are:<br>
 ```jule
 fn UpdateTarget()
 ```
-Updates platform-specific informations by target. If you will update target configuration, you should call this function. In other words, new configurations is not applied for types.
+Updates platform-specific information based on the target. If you will update target configuration, you should call this function. In other words, new configurations is not applied for types.
 
 ## MinI
 ```jule
