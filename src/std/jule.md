@@ -1,30 +1,47 @@
 # std/jule
-## Globals
-### `const Version: str`
-Version of package and sub-packages.\
-This version represents also JuleC version. 
+
+## Index
+
+[Variables](#variables)
+
+## Variables
+
+```jule
+const Version = `...`
+```
+Version of package and sub-packages. This version represents also JuleC version.
 
 ---
 
-### `const Ext: str`
+```jule
+const Ext = `.jule`
+```
 Extension (includes dot) of Jule source code files.
 
 ---
 
-### `const EntryPoint: str`
+```jule
+const EntryPoint = "main"
+```
 Identifier of entry point function.
 
 ---
 
-### `const InitFn: str`
+```jule
+const InitFunc = "init"
+```
 Identifier of initializer function.
 
 ---
 
-### `const ModuleFile: str`
+```jule
+const ModuleFile = "jule.mod"
+```
 Filename of module file.
 
 ---
 
-### `const ImportPathSep: str`
+```jule
+const ImportPathSep = "/"
+```
 Separator of import paths.

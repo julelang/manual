@@ -1,18 +1,25 @@
 # std/hash/adler32
 
-## Constant
+## Index
 
+[Variables](#variables)\
+[fn New(): hash::Hash32](#new)\
+[fn Checksum(data: \[\]byte): u32](#checksum)
+
+## Variables
+
+```jule
+const Size = 4
 ```
-const Size: untyped integer
-```
+The size of an Adler-32 checksum in bytes.
 
-## Functions
-
+## New
 ```jule
 fn New(): hash::Hash32
 ```
-Returns a new `hash::Hash32` computing the Adler-32 checksum. Its Sum method will lay the value out in big-endian byte order.
+Returns a new hash::Hash32 computing the Adler-32 checksum. Its Sum method will lay the value out in big-endian byte order.
 
+## Checksum
 ```jule
 fn Checksum(data: []byte): u32
 ```

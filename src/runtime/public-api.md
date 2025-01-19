@@ -2,7 +2,12 @@
 
 The runtime library is not completely internal, also provides a public API. This API is mostly safe, and they may influence common runtime behavior or provide some additional opportunities.
 
-## Globals
+## Index
+
+[Variables](#variables)\
+[fn NumCPU(): int](#numcpu)
+
+## Variables
 
 ```jule
 const BigEndian: bool
@@ -31,8 +36,7 @@ const RCDelta: untyped integer
 ```
 The reference counting data delta value that must occur per each reference counting operation.
 
-## Functions
-
+## NumCPU
 ```jule
 fn NumCPU(): int
 ```

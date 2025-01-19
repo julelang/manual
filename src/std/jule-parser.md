@@ -1,37 +1,39 @@
 # std/jule/parser
 
-## Functions
+## Index
+
+[fn ParseFile(mut f: &amp;token::Fileset): &amp;FileInfo](#parsefile)\
+[fn ParsePackage(mut filesets: \[\]&amp;token::Fileset): &amp;PackageInfo](#parsepackage)\
+[struct FileInfo](#fileinfo)\
+[struct PackageInfo](#packageinfo)
+
+
+
+## ParseFile
 ```jule
 fn ParseFile(mut f: &token::Fileset): &FileInfo
 ```
-Parses fileset's tokens and builds AST.\
-Returns nil if f is not real. \
-File should not contain comment tokens.
+Parses fileset&#39;s tokens and builds AST. Returns nil if f is not real. Fileset should not contain comment tokens.
 
----
-
+## ParsePackage
 ```jule
 fn ParsePackage(mut filesets: []&token::Fileset): &PackageInfo
 ```
-Parses fileset's tokens and builds AST.\
-Returns nil if filesets is nil.\
-Skip fileset if nil. \
-Files should not contain comment tokens.
+Parses fileset&#39;s tokens and builds AST. Returns nil if filesets is nil. Skip fileset if nil. Filesets should not contain comment tokens.
 
-## Structs
+## FileInfo
 ```jule
 struct FileInfo {
-    AST:    &ast::AST
-    Errors: []build::Log
+	AST:    &ast::AST
+	Errors: []build::Log
 }
 ```
 Stores information about file parsing.
 
----
-
+## PackageInfo
 ```jule
 struct PackageInfo {
-    Files: []&FileInfo
+	Files: []&FileInfo
 }
 ```
-Stores information about package parsing. 
+Stores information about package parsing.

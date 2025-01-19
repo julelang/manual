@@ -1,56 +1,68 @@
 # std/mem
-## Functions
+
+## Index
+
+[fn SizeOf(TYPE || EXPRESSION): uint](#sizeof)\
+[fn AlignOf(TYPE || EXPRESSION): uint](#alignof)\
+[fn Free(h: T)](#free)\
+[struct Heap](#heap)\
+&nbsp;&nbsp;&nbsp;&nbsp;[static fn New(): &amp;Heap\[T\]](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Addr(self): uintptr](#addr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Free(mut self)](#free)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Get(mut self): T](#get)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Set(mut self, mut val: T)](#set)
+
+## SizeOf
 ```jule
 fn SizeOf(TYPE || EXPRESSION): uint
 ```
 Returns the size of the type in bytes. If given expression, uses type of expression. Void and function types are not supported. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
----
-
+## AlignOf
 ```jule
 fn AlignOf(TYPE || EXPRESSION): uint
 ```
 Returns the alignment, in bytes, required for any instance of the type indicated by type-id, which is either complete object type. If given expression, uses type of expression. Void and function types are not supported. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
----
-
+## Free
 ```jule
 fn Free(h: T)
 ```
-Frees memory. If reference counting is enabled, just countdowns reference and sets to nil. If reference counting is disabled, frees memory allocation immediately. This is might be unsafe, because your another shared pointers will have invalid memory address after freed.
 
-If you call Free function for string, be sure about this string is heap-allocated. Otherwise, this is undefined behavior and probably it will cause segfault.
-
-You can use this function for only rc-performed types.
-
-## Structures
-
+## Heap
 ```jule
-struct Heap[T]
+struct Heap[T] {
+	// NOTE: contains filtered hidden or unexported fields
+}
 ```
 Wrapper for heap allocation. Should be freed, occurs memory leak if did not.
 
-**Methods:**
+### New
+```jule
+static fn New(): &Heap[T]
+```
+Allocates new T on heap, and returns &amp;Heap\[T\] instance that points relevant allocation. Returns nil if allocation failed.
 
-`static fn New(): &Heap[T]`\
-Allocates new `T` on heap, and returns `&Heap[T]` instance that points relevant allocation. Returns nil if allocation failed.
-
----
-
-`fn Addr(self): uintptr`\
+### Addr
+```jule
+fn Addr(self): uintptr
+```
 Returns address of allocation. Returns 0 if internal pointer is nil.
 
----
-
-`fn Free(mut self)`\
+### Free
+```jule
+fn Free(mut self)
+```
 Frees allocation and sets address as 0 (aka nil).
 
----
-
-`fn Get(mut self): T`\
+### Get
+```jule
+fn Get(mut self): T
+```
 Dereferences and returns value of internal pointer. Panics if internal pointer is nil.
 
----
-
-`fn Set(mut self, mut val: T)`\
+### Set
+```jule
+fn Set(mut self, mut val: T)
+```
 Sets value of internal pointer. Panics if internal pointer is nil.
