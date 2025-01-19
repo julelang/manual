@@ -20,8 +20,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Broadcast(self)](#broadcast)\
 [struct Mutex](#mutex)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Lock(self)](#lock-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock(self)](#unlock-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock(self): bool](#trylock)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock(self): bool](#trylock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock(self)](#unlock-1)
 
 
 
@@ -176,7 +176,7 @@ struct Mutex {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Muxtex is a primitive used to protect memory in multi-threading situations such as concurrent access.
+Muxtex is a primitive used to protect memory in multi\-threading situations such as concurrent access.
 
 Mutextes are uses internal mutability and internal states. Locking, unlocking and etc is not mutable operations. But there is no internal mutable memory, so mutexes are not use shared memory. Therefore, for correct use, a mutex instance should not be copied after first use. Otherwise internal state will be copied and not mutated by other instances.
 
@@ -192,12 +192,6 @@ fn Lock(self)
 ```
 Locks mutex. If the lock is already in use, the calling thread blocks until the mutex is available.
 
-### Unlock
-```jule
-fn Unlock(self)
-```
-Unlocks mutex. It is a run-time error if mutex is not locked on entry to Unlock.
-
 ### TryLock
 ```jule
 fn TryLock(self): bool
@@ -205,3 +199,9 @@ fn TryLock(self): bool
 Tries to lock mutwx and reports whether it succeeded.
 
 Note that while correct uses of TryLock do exist, they are rare, and use of TryLock is often a sign of a deeper problem in a particular use of mutexes.
+
+### Unlock
+```jule
+fn Unlock(self)
+```
+Unlocks mutex. It is a runtime error if mutex is not locked on entry to Unlock.
