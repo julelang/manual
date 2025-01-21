@@ -25,18 +25,18 @@ It can be used in two ways. The first parameter should be the type which is type
 For example:
 ```jule
 fn main() {
-    let x = new(int)
+    x := new(int)
     println(x)
 }
 ```
-The `x` variable is integer reference, and stores zero.
+The `x` variable is integer smart pointer, and stores zero.
 
 The second parameter is initialization value of pointer.
 
 For example:
 ```jule
 fn main() {
-    let x = new(int, 100)
+    x := new(int, 100)
     println(x)
 }
 ```
@@ -49,7 +49,7 @@ Smart pointers that are automatically initialized by the compiler are created as
 For example:
 ```jule
 fn main() {
-    let x = make([]&int, 1)
+    x := make([]&int, 1)
     println(x[0] == nil) // true
 }
 ```
@@ -62,8 +62,8 @@ For example:
 
 ```jule
 fn main() {
-    let a = new(int, 10)
-    let b = (*int)(a)
+    a := new(int, 10)
+    b := (*int)(a)
     unsafe { println(*b) }
 }
 ```
@@ -78,7 +78,7 @@ Assigning to the `nil` drops allocation and reference counting, sets smart point
 For example:
 ```jule
 fn main() {
-    let mut x = new(int, 20)
+    mut x := new(int, 20)
     println(x != nil) // true
     x = nil
     println(x != nil) // false
@@ -96,7 +96,7 @@ fn main() {
 
     // Make heap-allocation, returns heap-allocated &int initialized with 100
     // Ref count is 1
-    let mut x = new(int, 100)
+    mut x := new(int, 100)
 
     // Prints 100
     println(*x)
@@ -107,7 +107,7 @@ fn main() {
 
     // Ref count is 2 now of current allocation
     // The y referencing to allocation of x
-    let y = x
+    y := x
 
     // Prints 50
     println(*y)
@@ -123,8 +123,8 @@ If the reference count of the migrated data has not reached zero, but the smart 
 For example:
 ```jule
 fn main() {
-    let mut ref = new([]int, [1, 2, 3, 4])
-    let s = *ref
+    mut ref := new([]int, [1, 2, 3, 4])
+    s := *ref
     ref = nil
     println(s)
 }
@@ -152,8 +152,8 @@ struct B {
 }
 
 fn main() {
-    let mut a = &A{}
-    let mut b = &B{}
+    mut a := &A{}
+    mut b := &B{}
     a.b = b
     b.a = a
 }
@@ -171,8 +171,8 @@ struct B {
 }
 
 fn main() {
-    let mut a = &A{}
-    let mut b = &B{}
+    mut a := &A{}
+    mut b := &B{}
     a.b = b
     b.a = a
     b.a = nil
