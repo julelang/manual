@@ -39,7 +39,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Ignored(self): bool](#ignored)\
 [struct FieldExprPair](#fieldexprpair)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTargeted(self): bool](#istargeted)\
-[struct StructLit](#structlit)\
+[struct TypedBraceLit](#typedbracelit)\
 [struct BraceLit](#bracelit)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty(self): bool](#isempty)\
 [struct KeyValPair](#keyvalpair)\
@@ -164,7 +164,7 @@ struct SubIdentType {
 	Idents: []&IdentType
 }
 ```
-Sub-identifier type.
+Sub\-identifier type.
 
 ## NamespaceType
 ```jule
@@ -230,13 +230,13 @@ struct ArrayType {
 	Size: &Expr
 }
 ```
-Array type. Size expression is nil for auto-sized array.
+Array type. Size expression is nil for auto\-sized array.
 
 ### AutoSized
 ```jule
 fn AutoSized(self): bool
 ```
-Reports whether array is auto-sized.
+Reports whether array is auto\-sized.
 
 ## MapType
 ```jule
@@ -419,7 +419,7 @@ struct FieldExprPair {
 	Expr:  &Expr
 }
 ```
-Field-Expression pair.
+Field\-Expression pair.
 
 ### IsTargeted
 ```jule
@@ -427,15 +427,14 @@ fn IsTargeted(self): bool
 ```
 Reports whether pair targeted field.
 
-## StructLit
+## TypedBraceLit
 ```jule
-struct StructLit {
-	End:   &token::Token
-	Kind:  &Type
-	Exprs: []&Expr // Possible types: &FieldExprPair, and other expressions.
+struct TypedBraceLit {
+	Kind: &Type
+	Lit:  &BraceLit
 }
 ```
-Struct literal instantiating expression.
+Typed brace instantiating expression.
 
 ## BraceLit
 ```jule
@@ -461,7 +460,7 @@ struct KeyValPair {
 	Colon: &token::Token
 }
 ```
-Key-value pair expression.
+Key\-value pair expression.
 
 ## SliceExpr
 ```jule
@@ -711,7 +710,7 @@ While iteration kind.
 ```jule
 fn IsWhileNext(self): bool
 ```
-Reports whether kind is while-next iteration.
+Reports whether kind is while\-next iteration.
 
 ## RangeKind
 ```jule
@@ -796,7 +795,7 @@ struct Case {
 	Exprs: []&Expr
 }
 ```
-Case of match-case.
+Case of match\-case.
 
 ## Match
 ```jule
@@ -1012,7 +1011,7 @@ enum ExprData: type {
 	&VariadicExpr,
 	&CastExpr,
 	&FuncCallExpr,
-	&StructLit,
+	&TypedBraceLit,
 	&BraceLit,
 	&SlicingExpr,
 	&SliceExpr,
