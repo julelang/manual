@@ -20,6 +20,28 @@ The example above shows how a map is defined and its data-type representation. T
 In iterations, the first variable is the key and the second variable is the value.
 :::
 
+## Map Literals with Explicit Type
+
+You can combine casting and map literals for explicit typed map literals.
+
+For example:
+```jule
+x := (map[int]str)({
+	0: "foo",
+	1: "bar",
+})
+```
+
+Also you can use instantiation literal directly.
+
+For example:
+```jule
+x := map[int]str{
+	0: "foo",
+	1: "bar",
+}
+```
+
 ## Access to Elements and Indexing
 To get the value of a key, it is sufficient to index it with the key.
 

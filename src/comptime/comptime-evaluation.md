@@ -9,7 +9,7 @@ List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i3
 - Evaluates of supported primitive type literals.
 - Evaluates indexing expressions as constant data of supported literals such as strings.
 - Evaluates slicing expressions as constant data of supported literals such as strings.
-- Compiler checks boundaries for indexing expressions with supported literals such as strings or slices.
+- Compiler checks boundaries for indexing expressions with supported literals such as strings.
 - Compiler checks boundaries for indexing expressions with supported fixed-size types such as arrays.
 - Compiler casts basic constant expressions like `int` to `uint` casting.
 - The built-in `len` function returns constant length data for constant strings, arrays and other comptime supported types.

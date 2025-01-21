@@ -22,6 +22,15 @@ let x: [...]int = [1, 2, 3, 4, 5] // [5]int
 Only works as expected with variables. Other declarations supports this syntax, but always uses zero length arrays, not auto-sized arrays.
 :::
 
+## Array Literals with Explicit Type
+
+You can combine casting and array literals for explicit typed array literals.
+
+For example:
+```jule
+x := [5]int([1, 2, 3, 4, 5])
+```
+
 ## Filling Arrays
 
 You can use `...` for filling arrays with special expression.
