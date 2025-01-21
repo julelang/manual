@@ -30,28 +30,21 @@
 ```jule
 static CppHeaderExts: [...]str = [ ... ]
 ```
-Valid extensions of C++ headers.
+Valid extensions of C\+\+ headers.
 
 ---
 
 ```jule
 static CppExts: [...]str = [ ... ]
 ```
-Valid extensions of C++ source files.
+Valid extensions of C\+\+ source files.
 
 ---
 
 ```jule
 static ObjectiveCppExts: [...]str = [ ... ]
 ```
-Valid extensions of Objective-C++ source files.
-
----
-
-```jule
-const DIRECTIVEPREFIX = "jule:"
-```
-Prefix of directive comments.
+Valid extensions of Objective\-C\+\+ source files.
 
 ---
 
@@ -82,7 +75,7 @@ Target architecture. Set to runtime architecture by default.
 ```jule
 const Api = "api"
 ```
-Directory name of JuleC++ API.
+Directory name of JuleC\+\+ API.
 
 ---
 
@@ -95,19 +88,19 @@ Directory name of standard library.
 ```jule
 fn IsStdHeaderPath(p: str): bool
 ```
-Reports whether path is C++ std library path.
+Reports whether path is C\+\+ std library path.
 
 ## IsValidHeaderExt
 ```jule
 fn IsValidHeaderExt(ext: str): bool
 ```
-Reports whether C++ header extension is valid.
+Reports whether C\+\+ header extension is valid.
 
 ## IsValidCppExt
 ```jule
 fn IsValidCppExt(ext: str): bool
 ```
-Reports whether C++ extension is valid.
+Reports whether C\+\+ extension is valid.
 
 ## Logf
 ```jule
@@ -119,7 +112,7 @@ Returns formatted error message by fmt and args.
 ```jule
 fn IsTopDirective(directive: str): bool
 ```
-Reports whether directive is top-directive.
+Reports whether directive is top\-directive.
 
 ## IsWindows
 ```jule
@@ -167,13 +160,13 @@ Reports whether os is unix.
 ```jule
 fn Is32Bit(arch: str): bool
 ```
-Reports whether architecture is 32-bit.
+Reports whether architecture is 32\-bit.
 
 ## Is64Bit
 ```jule
 fn Is64Bit(arch: str): bool
 ```
-Reports whether architecture is 64-bit.
+Reports whether architecture is 64\-bit.
 
 ## IsJule
 ```jule
@@ -314,7 +307,7 @@ enum LogMsg: str {
 	DynamicTypeAnnotationFailed: `dynamic type annotation failed`,
 	FallthroughWrongUse: `fall keyword can only be used at end of case scopes`,
 	FallthroughIntoFinalCase: `fall cannot be used in the final case`,
-	UnsafeBehaviorAtOutOfUnsafeScope: `unsafe call outside of unsafe scope`,
+	UnsafeBehaviorAtOutOfUnsafeScope: `unsafe behavior outside of unsafe scope`,
 	RefMethodUsedWithNotRefInstance: `reference method cannot be used with a non-reference instance`,
 	MethodAsAnonFunc: `non-static methods cannot be anonymized`,
 	BindedFuncAsAnonFunc: `binded functions cannot be anonymized`,
@@ -400,8 +393,6 @@ enum LogMsg: str {
 	ExceptionalInit: `initializer function cannot be exceptional`,
 	AutoSizedArrFilled: `auto-sized arrays cannot filled`,
 	AssignInExpr: `assignments not available for expressions`,
-	UsingDeprecated: `@ is deprecated`,
-	TraitImplDeprecated: `trait implementations cannot contain deprecated code`,
 	WrongTestFuncDecl: `wrong test function declaration`,
 	TestMethod: `test methods cannot be declared`,
 	TestCalled: `test functions cannot be called`,
@@ -487,7 +478,6 @@ enum LogMsg: str {
 	HandleInFunc: `handle this exceptional in a separate function or anonymous function`,
 	JustIgnoreOrHandle: `ignore this exceptional or handle it but you cannot do both at same time`,
 	UseImperative: `use clear imperative approach, comes relevant assignment statement before the expression`,
-	UseUnsafeForDeprecated: `use unsafe Jule for deprecated codes or replace with the successor`,
 	UseExpectedTestFuncDecl: `use the expected test function declaration: fn(t: &testing::T)`,
 	UseModInit: `run "julec mod init" to initialize a module in the current directory`,
 	RemovePubModifier: `don't use an identifier that starts with a capital letter to avoid making it public`,
@@ -502,6 +492,7 @@ enum LogMsg: str {
 	DefineZeroDefaultToUseAmper: `define default enum field (the first one is default) with zero value to use "&"`,
 	InvalidExprForConstMatch: `comptime-matching requires constant expression`,
 	GiveAnAliasManually: `alias the import manually (e.g. use <alias> @)`,
+	WriteYourCodeInUnsafeJule: `use unsafe Jule with "unsafe { ... }"`,
 	CastingBindedTypesRequiresUnsafeJule: `casting binded types requires using unsafe Jule, "unsafe { ... }"`,
 	DefineAsStrictAlias: `define as strict type alias with a colon (:) (e.g. type @: <type>)`,
 	RArrowOpExpectsChan: `the "<-" operator expects a channel`,
@@ -526,7 +517,6 @@ enum Directive: str {
 	Pass: "pass",
 	Build: "build",
 	Namespace: "namespace",
-	Deprecated: "deprecated",
 	Test: "test",
 	Export: "export",
 }
