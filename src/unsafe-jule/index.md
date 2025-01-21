@@ -21,7 +21,6 @@ Benefits of Unsafe Jule:
 - Access reference from parent scope
 - Cast binded types
 - [Emit backend code](/integrated-jule/backend-emits)
-- [Use deprecated code](/packages/3rd-party-packages/deprecation)
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
 

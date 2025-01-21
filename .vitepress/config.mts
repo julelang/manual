@@ -329,7 +329,6 @@ export default defineConfig({
               link: '/packages/3rd-party-packages/',
               items: [
                 { text: 'Exporting Definitions', link: '/packages/3rd-party-packages/exporting-definitions' },
-                { text: 'Deprecation', link: '/packages/3rd-party-packages/deprecation', },
               ],
             },
             { text: 'Standard Library', link: '/std/' },

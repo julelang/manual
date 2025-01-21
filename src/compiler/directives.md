@@ -19,8 +19,7 @@ The arguments of the directives are separated by spaces. The directive must be f
 \
 For example:
 ```jule
-#deprecated "my reason"
-fn myFunc() {}
+#foo "my-argument"
 ```
 
 ## Directive Expressions
@@ -103,9 +102,6 @@ In binded functions, if the function is a `#define`, it configures code generati
 
 ## Directive: `namespace`
 Adds namesapce selection for supported binded types. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
-
-## Directive: `deprecated`
-Definitions qualify as deprecated. For more information, read the [Deprecation](/packages/3rd-party-packages/deprecation) section.
 
 ## Directive: `test`
 Declares test function. For more information, read the [Writing Tests](/debugging/testing/writing-tests) section.
