@@ -20,6 +20,8 @@ The main context contains the primary content of the documentation. It includes 
 
 Lists can only be used in the main context and cannot have sub-lists. Any type of list always appears in the main context. A list item is defined by the `-` character (ASCII code 45) and accepts a single line of content. Any new line signifies the end of a list item.
 
+If you do not want to move to a new line and end the list item, end the previous line with a comma ",". In this case, following line is considered part of the previous list item. But a new list mark (it is `-`) appears, it starts a new list item context. Indentation will not break the list item handling, so you can any space to align comment.
+
 ::: info
 With indentation, you might make it appear as if it's part of a sub-scope or sub-list. However, JuleDoc does not evaluate it this way. If the list is within the main scope, it is treated as a list. If it is inside a sub-scope, it is treated as part of the text within that sub-scope.
 :::
@@ -49,6 +51,8 @@ Here is an example documentation that uses all context types as described:
 //This is a main scope documentation line.
 // This is a main scope documentation line too.
 //
+//		- Tab indented, but this is not a subscope. This is a list item.
+//
 //	This is a subscope because it uses tab for indentation.
 //		This is a subscope for a previous subscope because it uses 2 tab.
 //		- Looks like-list item but JuleDoc handles as a text in this subscope.
@@ -56,6 +60,9 @@ Here is an example documentation that uses all context types as described:
 //
 //- This is a list item.
 // - This is a list item.
+// - This is a list item,
+//   And this line is a part of the previous list item,
+//   and this is too. Because lines ends with comma.
 ```
 
 Documentation must always come before the definition it belongs to, and any spaces or invalid comments (such as range comments) will break the documentation sequence. Therefore, using a separator for spaces is recommended.
