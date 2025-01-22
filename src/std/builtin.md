@@ -218,12 +218,47 @@ fn copy(mut dest: Dest, mut src: Src): int
 ```
 The copy built-in function copies elements from a source slice into a destination slice. (As a special case, it also will copy bytes from a string to a slice of bytes.) The source and destination may overlap, it is safe. Returns the number of elements copied, which will be the minimum of len(src) and len(dst).
 
+Arrays:
+```
+The dest and src parameters may be array slicing.
+Slicing is allowed for arrays on mutable memory.
+Thus, the changes will be reflected in the array.
+
+For exmaple:
+
+	mut x := [5]int([0, ...])
+	println(x)
+	copy(x[:], [1, 2, 3, 4, 5, 6])
+	println(x)
+
+In the example code above, x will be sliced with mutable memory.
+So copy operation will directly affect the x array.
+
+This only applies to the last sliced array.
+Previous slicings may result in memory allocation, and changes may not be reflected.
+
+For example:
+
+	mut x := [3][5]int([])
+	copy(x[:][1][:], [1, 2, 3, 4, 5])
+	println(x[1])
+
+In the example code above, the x[1] array will not be mutated.
+Because x[:] expression will allocate a new slice with copy of arrays.
+```
+
 ## append
 ```jule
 fn append(mut dest: []T, mut items: ...T): []T
 ```
 If there is enough capacity, it adds to the destination slice. If there is not enough capacity, it creates a copy of the destination slice with enough capacity and adds the new elements and returns the new allocation.
 fn append(mut dest: []T, mut items: ...T): []T
+
+Arrays:
+```
+The behavior of the copy function is applied to arrays for items.
+But dest always will be allocated slice for array slicing.
+```
 
 ## len
 ```jule

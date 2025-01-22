@@ -20,6 +20,20 @@ Some optimizations may be enabled by default and it may not be possible to disab
 Some optimizations may not be applied for some scopes and expressions.
 :::
 
+`--opt-zcopy` \
+Enabled special optimizations for the built-in copy function.
+See the documentation of copy for the arrays.
+This optimization flag enabled mandatory optimizations for arrays.
+
+---
+
+`--opt-zappend` \
+Enabled special optimizations for the built-in copy function.
+See the documentation of copy for the arrays.
+This optimization flag enabled mandatory optimizations for arrays.
+
+---
+
 `--opt-copy` \
 Enables special optimizations for copy operations.\
 It reduces copying operations whenever possible.
@@ -200,8 +214,8 @@ Set optimization level to `<level>`.
 
 The optimization levels are as follows:
 
-- `L0`: disable all compiler optimizations (default value of JuleC)
-- `L1`: passes `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
+- `L0`: The default optimization level. Implicitly passes the `--opt-zcopy`, and `--opt-zappend`
+- `L1`: passes all `L0` flags with `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
 - `L2`: passes all `L1` flags with `--opt-std-strings`, `--opt-std-math-cmplx`
 
 ## Production Compilation
