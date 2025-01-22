@@ -224,7 +224,7 @@ The dest and src parameters may be array slicing.
 Slicing is allowed for arrays on mutable memory.
 Thus, the changes will be reflected in the array.
 
-For exmaple:
+For example:
 
 	mut x := [5]int([0, ...])
 	println(x)
