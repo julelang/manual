@@ -12,21 +12,39 @@ fn main() {
     }
 }
 ```
-The above example shows an anonymous scope contained within the scope of the `main` function. 
+The above example shows an anonymous scope contained within the scope of the `main` function.
 
 ## Deferred Scopes
-Deferred scopes are scopes whose execution is deferred until the scope they are in expires. Declares with the `defer` keyword.
+
+A deferred scope defers the execution of statements until the surrounding function returns.
+
+The deferred scope variables evaluated immediately, but statements is not executed until the surrounding function returns.
+
+Deferred scopes are pushed onto a stack. When a function returns, its deferred calls are executed in LIFO (last-in-first-out) order.
 
 For example:
 ```jule
+use "std/fmt"
+
 fn main() {
-    defer {
-        println("Hello Defer")
-    }
-    println("Hello World")
+	defer { fmt::Println("\nAll numbers printed.") }
+	mut i := 0
+	for i < 10; i++ {
+		defer { fmt::Printf(" {}", i) }
+	}
+	fmt::Print("Numbers:")
 }
+
+/* OUTPUT:
+Numbers: 9 8 7 6 5 4 3 2 1 0
+All numbers printed.
+*/
 ```
-In the example above, the output `Hello World` appears before. This is because the deferred scope is defined in the scope of the function and its execution is deferred until the scope of the function exits.
+In the code above, the deferred scope inside the iteration records the current value of the variable `i` each time, effectively capturing a snapshot of the state. Before the function returns, it writes `Numbers:` to stdout. Then, as the function terminates, the statements in the deferred scopes start executing in LIFO (Last In, First Out) order. Accordingly, the deferred scopes inside the iteration are executed first, and finally, the initial deferred scope at the beginning of the function is executed.
+
+**See Also**\
+\- [Anonymous Functions and Closures](/common-concepts/functions/anonymous-functions)\
+\- [Memory Model of Deferred Scopes](/memory/memory-model#deferred-scopes)
 
 ## Unsafe Scopes
 Unsafe scopes allows to use Unsafe Jule. Declares with the `unsafe` keyword.
