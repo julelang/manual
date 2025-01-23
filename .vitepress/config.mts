@@ -443,7 +443,6 @@ export default defineConfig({
                 { text: 'Any', link: '/api/types/any' },
               ],
             },
-            { text: 'Deferred Scopes', link: '/api/deferred-scopes' },
             {
               text: 'Reference Counting',
               link: '/api/reference-counting/',
