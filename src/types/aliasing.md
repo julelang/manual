@@ -65,3 +65,15 @@ When the source is a trait, you can use it for impl statements. But it does not 
 If the source type is a structure, it inherits the structure's fields, although methods are ignored. In other words, the new strict type will have the fields of the relevant structure exactly.
 
 Any static field of source type, such as type constants or enum fields, will not be derived.
+
+## Scopes
+In global scope, type aliases can refer to each other without error. Except some special cases such as cyclic aliases.
+
+For example:
+```jule
+type A: B
+type B: int
+```
+In the code example above, it is valid use of type aliases.
+
+But in the scopes, such as function scope, they must be ordered. A type alias cannot refer th type alias which is not defined yet. So, when the code example above used in such a scope, type alias `A` will cause an error about `B` is not exist yet, since `B` is not defined yet.
