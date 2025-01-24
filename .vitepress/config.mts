@@ -240,6 +240,7 @@ export default defineConfig({
                 { text: 'Inheritance', link: '/dynamic-types/traits/inheritance' },
               ],
             },
+            { text: 'Assertion Casting', link: '/dynamic-types/assertion-casting' },
           ],
         },
         {
