@@ -3,21 +3,21 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsStdHeaderPath(p: str): bool](#isstdheaderpath)\
-[fn IsValidHeaderExt(ext: str): bool](#isvalidheaderext)\
-[fn IsValidCppExt(ext: str): bool](#isvalidcppext)\
-[fn Logf(fmt: LogMsg, args: ...any): str](#logf)\
-[fn IsTopDirective(directive: str): bool](#istopdirective)\
-[fn IsWindows(os: str): bool](#iswindows)\
-[fn IsDarwin(os: str): bool](#isdarwin)\
-[fn IsLinux(os: str): bool](#islinux)\
-[fn IsI386(arch: str): bool](#isi386)\
-[fn IsAmd64(arch: str): bool](#isamd64)\
-[fn IsArm64(arch: str): bool](#isarm64)\
-[fn IsUnix(os: str): bool](#isunix)\
-[fn Is32Bit(arch: str): bool](#is32bit)\
-[fn Is64Bit(arch: str): bool](#is64bit)\
-[fn IsJule(path: str): bool](#isjule)\
+[fn IsStdHeaderPath\(p: str\): bool](#isstdheaderpath)\
+[fn IsValidHeaderExt\(ext: str\): bool](#isvalidheaderext)\
+[fn IsValidCppExt\(ext: str\): bool](#isvalidcppext)\
+[fn Logf\(fmt: LogMsg, args: \.\.\.any\): str](#logf)\
+[fn IsTopDirective\(directive: str\): bool](#istopdirective)\
+[fn IsWindows\(os: str\): bool](#iswindows)\
+[fn IsDarwin\(os: str\): bool](#isdarwin)\
+[fn IsLinux\(os: str\): bool](#islinux)\
+[fn IsI386\(arch: str\): bool](#isi386)\
+[fn IsAmd64\(arch: str\): bool](#isamd64)\
+[fn IsArm64\(arch: str\): bool](#isarm64)\
+[fn IsUnix\(os: str\): bool](#isunix)\
+[fn Is32Bit\(arch: str\): bool](#is32bit)\
+[fn Is64Bit\(arch: str\): bool](#is64bit)\
+[fn IsJule\(path: str\): bool](#isjule)\
 [struct Log](#log)\
 [enum LogMsg](#logmsg)\
 [enum LogKind](#logkind)\
@@ -30,21 +30,21 @@
 ```jule
 static CppHeaderExts: [...]str = [ ... ]
 ```
-Valid extensions of C\+\+ headers.
+Valid extensions of C\+\+ headers\.
 
 ---
 
 ```jule
 static CppExts: [...]str = [ ... ]
 ```
-Valid extensions of C\+\+ source files.
+Valid extensions of C\+\+ source files\.
 
 ---
 
 ```jule
 static ObjectiveCppExts: [...]str = [ ... ]
 ```
-Valid extensions of Objective\-C\+\+ source files.
+Valid extensions of Objective\-C\+\+ source files\.
 
 ---
 
@@ -54,125 +54,125 @@ static PathExec = ""   // Path of executable file's directory.
 static PathWd = ""     // Path of working directory.
 static PathApi = ""    // Path of main API header file.
 ```
-Environment Variables. Initialized by initializer function.
+Environment Variables\. Initialized by initializer function\.
 
 ---
 
 ```jule
 static mut OS = runtime::OS
 ```
-Target operating system. Set to runtime operating system by default.
+Target operating system\. Set to runtime operating system by default\.
 
 ---
 
 ```jule
 static mut Arch = runtime::Arch
 ```
-Target architecture. Set to runtime architecture by default.
+Target architecture\. Set to runtime architecture by default\.
 
 ---
 
 ```jule
 const Api = "api"
 ```
-Directory name of JuleC\+\+ API.
+Directory name of JuleC\+\+ API\.
 
 ---
 
 ```jule
 const Stdlib = "std"
 ```
-Directory name of standard library.
+Directory name of standard library\.
 
 ## IsStdHeaderPath
 ```jule
 fn IsStdHeaderPath(p: str): bool
 ```
-Reports whether path is C\+\+ std library path.
+Reports whether path is C\+\+ std library path\.
 
 ## IsValidHeaderExt
 ```jule
 fn IsValidHeaderExt(ext: str): bool
 ```
-Reports whether C\+\+ header extension is valid.
+Reports whether C\+\+ header extension is valid\.
 
 ## IsValidCppExt
 ```jule
 fn IsValidCppExt(ext: str): bool
 ```
-Reports whether C\+\+ extension is valid.
+Reports whether C\+\+ extension is valid\.
 
 ## Logf
 ```jule
 fn Logf(fmt: LogMsg, args: ...any): str
 ```
-Returns formatted error message by fmt and args.
+Returns formatted error message by fmt and args\.
 
 ## IsTopDirective
 ```jule
 fn IsTopDirective(directive: str): bool
 ```
-Reports whether directive is top\-directive.
+Reports whether directive is top\-directive\.
 
 ## IsWindows
 ```jule
 fn IsWindows(os: str): bool
 ```
-Reports whether os is windows.
+Reports whether os is windows\.
 
 ## IsDarwin
 ```jule
 fn IsDarwin(os: str): bool
 ```
-Reports whether os is darwin.
+Reports whether os is darwin\.
 
 ## IsLinux
 ```jule
 fn IsLinux(os: str): bool
 ```
-Reports whether os is linux.
+Reports whether os is linux\.
 
 ## IsI386
 ```jule
 fn IsI386(arch: str): bool
 ```
-Reports whether architecture is intel 386.
+Reports whether architecture is intel 386\.
 
 ## IsAmd64
 ```jule
 fn IsAmd64(arch: str): bool
 ```
-Reports whether architecture is amd64.
+Reports whether architecture is amd64\.
 
 ## IsArm64
 ```jule
 fn IsArm64(arch: str): bool
 ```
-Reports whether architecture is arm64.
+Reports whether architecture is arm64\.
 
 ## IsUnix
 ```jule
 fn IsUnix(os: str): bool
 ```
-Reports whether os is unix.
+Reports whether os is unix\.
 
 ## Is32Bit
 ```jule
 fn Is32Bit(arch: str): bool
 ```
-Reports whether architecture is 32\-bit.
+Reports whether architecture is 32\-bit\.
 
 ## Is64Bit
 ```jule
 fn Is64Bit(arch: str): bool
 ```
-Reports whether architecture is 64\-bit.
+Reports whether architecture is 64\-bit\.
 
 ## IsJule
 ```jule
 fn IsJule(path: str): bool
 ```
-Reports whether file path is Jule source code.
+Reports whether file path is Jule source code\.
 
 ## Log
 ```jule
@@ -186,7 +186,7 @@ struct Log {
 	Suggestion: str
 }
 ```
-Compiler log.
+Compiler log\.
 
 ## LogMsg
 ```jule
@@ -498,7 +498,7 @@ enum LogMsg: str {
 	RArrowOpExpectsChan: `the "<-" operator expects a channel`,
 }
 ```
-Compiler log messages with formatting.
+Compiler log messages with formatting\.
 
 ## LogKind
 ```jule
@@ -507,7 +507,7 @@ enum LogKind {
 	Error, // Error message.
 }
 ```
-Log kinds.
+Log kinds\.
 
 ## Directive
 ```jule
@@ -521,7 +521,7 @@ enum Directive: str {
 	Export: "export",
 }
 ```
-Compiler directives.
+Compiler directives\.
 
 ## DistOS
 ```jule
@@ -532,7 +532,7 @@ enum DistOS: str {
 	Unix: "unix",
 }
 ```
-Operating Systems for file annotation kind.
+Operating Systems for file annotation kind\.
 
 ## DistArch
 ```jule
@@ -544,4 +544,4 @@ enum DistArch: str {
 	X64: "x64",
 }
 ```
-Architectures for file annotation kind.
+Architectures for file annotation kind\.

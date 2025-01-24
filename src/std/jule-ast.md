@@ -14,9 +14,9 @@
 [struct SliceType](#slicetype)\
 [struct TupleType](#tupletype)\
 [struct PtrType](#ptrtype)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe(self): bool](#isunsafe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe\(self\): bool](#isunsafe)\
 [struct ArrayType](#arraytype)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AutoSized(self): bool](#autosized)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AutoSized\(self\): bool](#autosized)\
 [struct MapType](#maptype)\
 [struct RetType](#rettype)\
 [struct Expr](#expr)\
@@ -27,7 +27,7 @@
 [struct LitExpr](#litexpr)\
 [struct UnsafeExpr](#unsafeexpr)\
 [struct IdentExpr](#identexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf(self): bool](#isself)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(self\): bool](#isself)\
 [struct UnaryExpr](#unaryexpr)\
 [struct VariadicExpr](#variadicexpr)\
 [struct CastExpr](#castexpr)\
@@ -35,16 +35,16 @@
 [struct SubIdentExpr](#subidentexpr)\
 [struct BinaryExpr](#binaryexpr)\
 [struct FuncCallExpr](#funccallexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unhandled(self): bool](#unhandled)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Ignored(self): bool](#ignored)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unhandled\(self\): bool](#unhandled)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Ignored\(self\): bool](#ignored)\
 [struct FieldExprPair](#fieldexprpair)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTargeted(self): bool](#istargeted)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTargeted\(self\): bool](#istargeted)\
 [struct TypedBraceLit](#typedbracelit)\
 [struct BraceLit](#bracelit)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty(self): bool](#isempty)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(self\): bool](#isempty)\
 [struct KeyValPair](#keyvalpair)\
 [struct SliceExpr](#sliceexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty(self): bool](#isempty-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(self\): bool](#isempty-1)\
 [struct IndexingExpr](#indexingexpr)\
 [struct SlicingExpr](#slicingexpr)\
 [struct Constraint](#constraint)\
@@ -58,16 +58,16 @@
 [struct ScopeTree](#scopetree)\
 [struct ChanSend](#chansend)\
 [struct Param](#param)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf(self): bool](#isself-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRef(self): bool](#isref)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(self\): bool](#isself-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRef\(self\): bool](#isref)\
 [struct Func](#func)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon(self): bool](#isanon)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(self\): bool](#isanon)\
 [struct Var](#var)\
 [struct Ret](#ret)\
 [struct Iter](#iter)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsInf(self): bool](#isinf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsInf\(self\): bool](#isinf)\
 [struct WhileKind](#whilekind)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsWhileNext(self): bool](#iswhilenext)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsWhileNext\(self\): bool](#iswhilenext)\
 [struct RangeKind](#rangekind)\
 [struct Break](#break)\
 [struct Continue](#continue)\
@@ -80,17 +80,17 @@
 [struct Select](#select)\
 [struct Use](#use)\
 [struct EnumItem](#enumitem)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AutoExpr(self): bool](#autoexpr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AutoExpr\(self\): bool](#autoexpr)\
 [struct Enum](#enum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DefaultTyped(self): bool](#defaulttyped)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DefaultTyped\(self\): bool](#defaulttyped)\
 [struct TypeEnumItem](#typeenumitem)\
 [struct TypeEnum](#typeenum)\
 [struct Field](#field)\
 [struct Struct](#struct)\
 [struct Trait](#trait)\
 [struct Impl](#impl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl(self): bool](#istraitimpl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl(self): bool](#isstructimpl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(self\): bool](#istraitimpl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(self\): bool](#isstructimpl)\
 [enum NodeData: type ](#nodedata)\
 [enum TypeKind: type ](#typekind)\
 [enum ExprData: type ](#exprdata)\
@@ -108,7 +108,7 @@ struct AST {
 	Nodes:         []Node
 }
 ```
-Abstract syntax tree.
+Abstract syntax tree\.
 
 ## Node
 ```jule
@@ -117,7 +117,7 @@ struct Node {
 	Data:  NodeData
 }
 ```
-AST Node.
+AST Node\.
 
 ## Directive
 ```jule
@@ -126,7 +126,7 @@ struct Directive {
 	Args: []&token::Token
 }
 ```
-Directive.
+Directive\.
 
 ## Type
 ```jule
@@ -135,17 +135,17 @@ struct Type {
 	Kind:  TypeKind
 }
 ```
-Type declaration. Also represents type expression.
+Type declaration\. Also represents type expression\.
 
 For primitive types:<br>
 
-- Represented by IdentType.
-- Token&#39;s identity is data type.
-- Primitive type kind is Ident.
+- Represented by IdentType\.
+- Token&#39;s identity is data type\.
+- Primitive type kind is Ident\.
 
 For function types:<br>
 
-- Function types represented by &amp;Func.
+- Function types represented by &amp;Func\.
 
 ## IdentType
 ```jule
@@ -156,7 +156,7 @@ struct IdentType {
 	Generics: []&Type
 }
 ```
-Identifier type.
+Identifier type\.
 
 ## SubIdentType
 ```jule
@@ -164,7 +164,7 @@ struct SubIdentType {
 	Idents: []&IdentType
 }
 ```
-Sub\-identifier type.
+Sub\-identifier type\.
 
 ## NamespaceType
 ```jule
@@ -173,7 +173,7 @@ struct NamespaceType {
 	Kind:      &Type         // Type of identifier.
 }
 ```
-Namespace chain type.
+Namespace chain type\.
 
 ## ChanType
 ```jule
@@ -183,7 +183,7 @@ struct ChanType {
 	Elem: &Type
 }
 ```
-Channel type.
+Channel type\.
 
 ## SptrType
 ```jule
@@ -191,7 +191,7 @@ struct SptrType {
 	Elem: &Type
 }
 ```
-Smart pointer type.
+Smart pointer type\.
 
 ## SliceType
 ```jule
@@ -199,7 +199,7 @@ struct SliceType {
 	Elem: &Type
 }
 ```
-Slice type.
+Slice type\.
 
 ## TupleType
 ```jule
@@ -207,7 +207,7 @@ struct TupleType {
 	Types: []&Type
 }
 ```
-Tuple type.
+Tuple type\.
 
 ## PtrType
 ```jule
@@ -215,13 +215,13 @@ struct PtrType {
 	Elem: &Type
 }
 ```
-Pointer type.
+Pointer type\.
 
 ### IsUnsafe
 ```jule
 fn IsUnsafe(self): bool
 ```
-Reports whether pointer is unsafe pointer (\*unsafe).
+Reports whether pointer is unsafe pointer \(\*unsafe\)\.
 
 ## ArrayType
 ```jule
@@ -230,13 +230,13 @@ struct ArrayType {
 	Size: &Expr
 }
 ```
-Array type. Size expression is nil for auto\-sized array.
+Array type\. Size expression is nil for auto\-sized array\.
 
 ### AutoSized
 ```jule
 fn AutoSized(self): bool
 ```
-Reports whether array is auto\-sized.
+Reports whether array is auto\-sized\.
 
 ## MapType
 ```jule
@@ -245,7 +245,7 @@ struct MapType {
 	Val: &Type
 }
 ```
-Map type.
+Map type\.
 
 ## RetType
 ```jule
@@ -254,7 +254,7 @@ struct RetType {
 	Idents: []&token::Token
 }
 ```
-Return type. Kind and Idents is nil for void type.
+Return type\. Kind and Idents is nil for void type\.
 
 ## Expr
 ```jule
@@ -264,7 +264,7 @@ struct Expr {
 	Kind:  ExprData
 }
 ```
-Expression.
+Expression\.
 
 ## ChanRecv
 ```jule
@@ -272,7 +272,7 @@ struct ChanRecv {
 	Expr: &Expr
 }
 ```
-Channel receive expression.
+Channel receive expression\.
 
 ## RangeExpr
 ```jule
@@ -280,7 +280,7 @@ struct RangeExpr {
 	Expr: &Expr
 }
 ```
-Range expression between parentheses.
+Range expression between parentheses\.
 
 ## UseExpr
 ```jule
@@ -289,7 +289,7 @@ struct UseExpr {
 	Expr:  &Expr
 }
 ```
-Use expression.
+Use expression\.
 
 ## TupleExpr
 ```jule
@@ -297,7 +297,7 @@ struct TupleExpr {
 	Expr: []&Expr
 }
 ```
-Tuple expression.
+Tuple expression\.
 
 ## LitExpr
 ```jule
@@ -306,7 +306,7 @@ struct LitExpr {
 	Value: str
 }
 ```
-Literal expression.
+Literal expression\.
 
 ## UnsafeExpr
 ```jule
@@ -315,7 +315,7 @@ struct UnsafeExpr {
 	Expr:  &Expr
 }
 ```
-Unsafe expression.
+Unsafe expression\.
 
 ## IdentExpr
 ```jule
@@ -325,13 +325,13 @@ struct IdentExpr {
 	Binded: bool
 }
 ```
-Identifier expression.
+Identifier expression\.
 
 ### IsSelf
 ```jule
 fn IsSelf(self): bool
 ```
-Reports whether identifier is self keyword.
+Reports whether identifier is self keyword\.
 
 ## UnaryExpr
 ```jule
@@ -340,7 +340,7 @@ struct UnaryExpr {
 	Expr: &Expr
 }
 ```
-Unary expression.
+Unary expression\.
 
 ## VariadicExpr
 ```jule
@@ -349,7 +349,7 @@ struct VariadicExpr {
 	Expr:  &Expr
 }
 ```
-Variadiced expression.
+Variadiced expression\.
 
 ## CastExpr
 ```jule
@@ -358,7 +358,7 @@ struct CastExpr {
 	Expr: &Expr
 }
 ```
-Casting expression.
+Casting expression\.
 
 ## NamespaceExpr
 ```jule
@@ -367,7 +367,7 @@ struct NamespaceExpr {
 	Ident:     &token::Token // Token of selected identifier.
 }
 ```
-Namespace identifier selection expression.
+Namespace identifier selection expression\.
 
 ## SubIdentExpr
 ```jule
@@ -376,7 +376,7 @@ struct SubIdentExpr {
 	Ident: &token::Token // Token of selected identifier.
 }
 ```
-Object sub identifier selection expression.
+Object sub identifier selection expression\.
 
 ## BinaryExpr
 ```jule
@@ -386,7 +386,7 @@ struct BinaryExpr {
 	Op:    &token::Token
 }
 ```
-Binary operation.
+Binary operation\.
 
 ## FuncCallExpr
 ```jule
@@ -398,19 +398,19 @@ struct FuncCallExpr {
 	IsCo:      bool
 }
 ```
-Function call expression kind.
+Function call expression kind\.
 
 ### Unhandled
 ```jule
 fn Unhandled(self): bool
 ```
-Reports whether exception is not handled.
+Reports whether exception is not handled\.
 
 ### Ignored
 ```jule
 fn Ignored(self): bool
 ```
-Reports whether exception is ignored.
+Reports whether exception is ignored\.
 
 ## FieldExprPair
 ```jule
@@ -419,13 +419,13 @@ struct FieldExprPair {
 	Expr:  &Expr
 }
 ```
-Field\-Expression pair.
+Field\-Expression pair\.
 
 ### IsTargeted
 ```jule
 fn IsTargeted(self): bool
 ```
-Reports whether pair targeted field.
+Reports whether pair targeted field\.
 
 ## TypedBraceLit
 ```jule
@@ -434,7 +434,7 @@ struct TypedBraceLit {
 	Lit:  &BraceLit
 }
 ```
-Typed brace instantiating expression.
+Typed brace instantiating expression\.
 
 ## BraceLit
 ```jule
@@ -444,13 +444,13 @@ struct BraceLit {
 	Exprs: []&Expr
 }
 ```
-Anonymous brace instantiating expression.
+Anonymous brace instantiating expression\.
 
 ### IsEmpty
 ```jule
 fn IsEmpty(self): bool
 ```
-Reports whether literal is empty ( \{\} ).
+Reports whether literal is empty \( \{\} \)\.
 
 ## KeyValPair
 ```jule
@@ -460,7 +460,7 @@ struct KeyValPair {
 	Colon: &token::Token
 }
 ```
-Key\-value pair expression.
+Key\-value pair expression\.
 
 ## SliceExpr
 ```jule
@@ -470,13 +470,13 @@ struct SliceExpr {
 	Exprs: []&Expr
 }
 ```
-Slice initiating expression. Also represents array initiating expression.
+Slice initiating expression\. Also represents array initiating expression\.
 
 ### IsEmpty
 ```jule
 fn IsEmpty(self): bool
 ```
-Reports whether slice is empty.
+Reports whether slice is empty\.
 
 ## IndexingExpr
 ```jule
@@ -487,7 +487,7 @@ struct IndexingExpr {
 	Index: &Expr // Index value expression.
 }
 ```
-Indexing expression.
+Indexing expression\.
 
 ## SlicingExpr
 ```jule
@@ -499,7 +499,7 @@ struct SlicingExpr {
 	To:    &Expr // To index value expression.
 }
 ```
-Slicing expression.
+Slicing expression\.
 
 ## Constraint
 ```jule
@@ -507,7 +507,7 @@ struct Constraint {
 	Mask: []&Type
 }
 ```
-Constraint.
+Constraint\.
 
 ## Generic
 ```jule
@@ -517,7 +517,7 @@ struct Generic {
 	Constraint: &Constraint
 }
 ```
-Generic type declaration.
+Generic type declaration\.
 
 ## Label
 ```jule
@@ -526,7 +526,7 @@ struct Label {
 	Ident: str
 }
 ```
-Label statement.
+Label statement\.
 
 ## Goto
 ```jule
@@ -535,7 +535,7 @@ struct Goto {
 	Label: &token::Token
 }
 ```
-Goto statement.
+Goto statement\.
 
 ## Fall
 ```jule
@@ -543,7 +543,7 @@ struct Fall {
 	Token: &token::Token
 }
 ```
-Fall statement.
+Fall statement\.
 
 ## AssignLeft
 ```jule
@@ -555,7 +555,7 @@ struct AssignLeft {
 	Expr:      &Expr
 }
 ```
-Left expression of assign statement.
+Left expression of assign statement\.
 
 ## Assign
 ```jule
@@ -566,7 +566,7 @@ struct Assign {
 	Right:       &Expr
 }
 ```
-Assign statement.
+Assign statement\.
 
 ## Stmt
 ```jule
@@ -576,7 +576,7 @@ struct Stmt {
 	Data:  StmtData
 }
 ```
-Statement.
+Statement\.
 
 ## ScopeTree
 ```jule
@@ -588,7 +588,7 @@ struct ScopeTree {
 	End:      &token::Token
 }
 ```
-Scope tree.
+Scope tree\.
 
 ## ChanSend
 ```jule
@@ -597,7 +597,7 @@ struct ChanSend {
 	Data: &Expr
 }
 ```
-Channel send data statement.
+Channel send data statement\.
 
 ## Param
 ```jule
@@ -610,19 +610,19 @@ struct Param {
 	Ident:     str
 }
 ```
-Parameter.
+Parameter\.
 
 ### IsSelf
 ```jule
 fn IsSelf(self): bool
 ```
-Reports whether parameter is self (receiver) parameter.
+Reports whether parameter is self \(receiver\) parameter\.
 
 ### IsRef
 ```jule
 fn IsRef(self): bool
 ```
-Reports whether self (receiver) parameter is reference.
+Reports whether self \(receiver\) parameter is reference\.
 
 ## Func
 ```jule
@@ -642,13 +642,13 @@ struct Func {
 	Params:      []&Param
 }
 ```
-Function declaration. Also represents anonymous function expression.
+Function declaration\. Also represents anonymous function expression\.
 
 ### IsAnon
 ```jule
 fn IsAnon(self): bool
 ```
-Reports whether function is anonymous.
+Reports whether function is anonymous\.
 
 ## Var
 ```jule
@@ -668,7 +668,7 @@ struct Var {
 	Expr:       &Expr
 }
 ```
-Variable declaration.
+Variable declaration\.
 
 ## Ret
 ```jule
@@ -677,7 +677,7 @@ struct Ret {
 	Expr:  &Expr
 }
 ```
-Return statement.
+Return statement\.
 
 ## Iter
 ```jule
@@ -688,13 +688,13 @@ struct Iter {
 	Scope:    &ScopeTree
 }
 ```
-Iteration.
+Iteration\.
 
 ### IsInf
 ```jule
 fn IsInf(self): bool
 ```
-Reports whether iteration is infinity.
+Reports whether iteration is infinity\.
 
 ## WhileKind
 ```jule
@@ -704,13 +704,13 @@ struct WhileKind {
 	NextToken: &token::Token
 }
 ```
-While iteration kind.
+While iteration kind\.
 
 ### IsWhileNext
 ```jule
 fn IsWhileNext(self): bool
 ```
-Reports whether kind is while\-next iteration.
+Reports whether kind is while\-next iteration\.
 
 ## RangeKind
 ```jule
@@ -721,7 +721,7 @@ struct RangeKind {
 	KeyB:    &Var // second key of range
 }
 ```
-Range iteration kind.
+Range iteration kind\.
 
 ## Break
 ```jule
@@ -730,7 +730,7 @@ struct Break {
 	Label: &token::Token
 }
 ```
-Break statement.
+Break statement\.
 
 ## Continue
 ```jule
@@ -739,7 +739,7 @@ struct Continue {
 	Label: &token::Token
 }
 ```
-Continue statement.
+Continue statement\.
 
 ## If
 ```jule
@@ -749,7 +749,7 @@ struct If {
 	Scope: &ScopeTree
 }
 ```
-If condition.
+If condition\.
 
 ## Else
 ```jule
@@ -758,7 +758,7 @@ struct Else {
 	Scope: &ScopeTree
 }
 ```
-Else condition.
+Else condition\.
 
 ## Conditional
 ```jule
@@ -768,7 +768,7 @@ struct Conditional {
 	Default: &Else
 }
 ```
-Condition chain.
+Condition chain\.
 
 ## TypeAlias
 ```jule
@@ -782,7 +782,7 @@ struct TypeAlias {
 	Kind:   &Type
 }
 ```
-Type alias declaration.
+Type alias declaration\.
 
 ## Case
 ```jule
@@ -795,7 +795,7 @@ struct Case {
 	Exprs: []&Expr
 }
 ```
-Case of match\-case.
+Case of match\-case\.
 
 ## Match
 ```jule
@@ -809,7 +809,7 @@ struct Match {
 	Default:   &Else
 }
 ```
-Match statement.
+Match statement\.
 
 ## Select
 ```jule
@@ -820,7 +820,7 @@ struct Select {
 	Default: &Else
 }
 ```
-Select statement.
+Select statement\.
 
 ## Use
 ```jule
@@ -831,7 +831,7 @@ struct Use {
 	Binded: bool          // Bind use declaration.
 }
 ```
-Use declaration statement.
+Use declaration statement\.
 
 ## EnumItem
 ```jule
@@ -841,13 +841,13 @@ struct EnumItem {
 	Expr:  &Expr // Nil for auto expression.
 }
 ```
-Enum item.
+Enum item\.
 
 ### AutoExpr
 ```jule
 fn AutoExpr(self): bool
 ```
-Reports whether item has auto expression.
+Reports whether item has auto expression\.
 
 ## Enum
 ```jule
@@ -860,13 +860,13 @@ struct Enum {
 	End:    &token::Token
 }
 ```
-Enum declaration.
+Enum declaration\.
 
 ### DefaultTyped
 ```jule
 fn DefaultTyped(self): bool
 ```
-Reports whether enum&#39;s type is default.
+Reports whether enum&#39;s type is default\.
 
 ## TypeEnumItem
 ```jule
@@ -876,7 +876,7 @@ struct TypeEnumItem {
 	Kind:  &Type
 }
 ```
-TypeEnum item.
+TypeEnum item\.
 
 ## TypeEnum
 ```jule
@@ -888,7 +888,7 @@ struct TypeEnum {
 	End:    &token::Token
 }
 ```
-TypeEnum declaration.
+TypeEnum declaration\.
 
 ## Field
 ```jule
@@ -901,7 +901,7 @@ struct Field {
 	Default: &Expr // Nil if not given.
 }
 ```
-Field declaration.
+Field declaration\.
 
 ## Struct
 ```jule
@@ -916,7 +916,7 @@ struct Struct {
 	Generics:   []&Generic
 }
 ```
-Structure declaration.
+Structure declaration\.
 
 ## Trait
 ```jule
@@ -938,31 +938,31 @@ struct Impl {
 	End: &token::Token
 
 	// This token available for these cases:
-	//  - Implementation trait to structure, represents trait's type.
+	//	- Implementation trait to structure, represents trait's type.
 	Base: &Type
 
 	// This token available for these cases:
-	//  - Implementation trait to structure, represents structure's type.
-	//  - Implementation to structure, represents structure's type.
+	//	- Implementation trait to structure, represents structure's type.
+	//	- Implementation to structure, represents structure's type.
 	Dest: &Type
 
 	// Given methods to implement.
 	Methods: []&Func
 }
 ```
-Implementation.
+Implementation\.
 
 ### IsTraitImpl
 ```jule
 fn IsTraitImpl(self): bool
 ```
-Reports whether implementation type is trait to structure.
+Reports whether implementation type is trait to structure\.
 
 ### IsStructImpl
 ```jule
 fn IsStructImpl(self): bool
 ```
-Reports whether implementation type is append to destination structure.
+Reports whether implementation type is append to destination structure\.
 
 ## NodeData
 ```jule
@@ -977,7 +977,7 @@ enum NodeData: type {
 	&Impl,
 }
 ```
-Type of AST Node&#39;s data.
+Type of AST Node&#39;s data\.
 
 ## TypeKind
 ```jule
@@ -995,7 +995,7 @@ enum TypeKind: type {
 	&ChanType,
 }
 ```
-Kind type of type declarations.
+Kind type of type declarations\.
 
 ## ExprData
 ```jule
@@ -1025,7 +1025,7 @@ enum ExprData: type {
 	&ChanSend,
 }
 ```
-Type of Expr&#39;s data.
+Type of Expr&#39;s data\.
 
 ## StmtData
 ```jule
@@ -1048,7 +1048,7 @@ enum StmtData: type {
 	&Select,
 }
 ```
-Type of Stmt&#39;s data.
+Type of Stmt&#39;s data\.
 
 ## IterKind
 ```jule
@@ -1057,4 +1057,4 @@ enum IterKind: type {
 	&RangeKind,
 }
 ```
-Type of Iter&#39;s kind.
+Type of Iter&#39;s kind\.
