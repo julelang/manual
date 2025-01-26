@@ -12,7 +12,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut self, ident: str, statically: bool\): &amp;Func](#findmethod)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindField\(mut self, ident: str\): &amp;Field](#findfield)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsImplements\(self, t: &amp;Trait\): bool](#isimplements)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUses\(self, s: &amp;Struct\): bool](#isuses)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn HasRefAccessible\(self\): bool](#hasrefaccessible)\
 [struct FieldIns](#fieldins)\
 [struct StructIns](#structins)\
@@ -390,12 +389,11 @@ Field\.
 struct Struct {
 	// This structure depended to these structures, except binded ones.
 	// Only stores plain identifier references such as A, B, and MyStruct.
-	// Not includes non-pain identifier references such as *A, &B, and []MyStruct.
+	// Not includes non-plain identifier references such as *A, &B, and []MyStruct.
+	//
+	// As far as tested, safe to store in structure declaration rather than instances.
+	// This collection applied for all instances.
 	Depends: []&Struct
-
-	// This structures uses these structures.
-	// Stores all referred structures.
-	Uses: []&Struct
 
 	Token:      &token::Token
 	Ident:      str
@@ -432,12 +430,6 @@ Returns field by identifier\. Returns nil if not exist any field in this identif
 fn IsImplements(self, t: &Trait): bool
 ```
 Reports whether structure implements given trait\.
-
-### IsUses
-```jule
-fn IsUses(self, s: &Struct): bool
-```
-Reports whether structure is uses given structure\.
 
 ### HasRefAccessible
 ```jule
@@ -1836,7 +1828,6 @@ struct TypeAlias {
 	Token:    &token::Token
 	Ident:    str
 	TypeSym:  &TypeSym
-	Refers:   []any        // Referred identifiers, except binded ones.
 	Generics: []&TypeAlias // See developer reference (1).
 }
 ```
