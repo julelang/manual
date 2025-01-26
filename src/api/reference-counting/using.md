@@ -2,7 +2,7 @@
 
 Include reference counting header:
 ```cpp
-#include "api/ref.hpp"
+#include "api/ptr.hpp"
 ````
 
 ## Creating References

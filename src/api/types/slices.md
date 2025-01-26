@@ -15,9 +15,10 @@ int main(int argc, char *argv[]) {
 
     std::cout << s.cap() << std::endl;
     std::cout << s.len() << std::endl;
- 
-    for (auto &item: s)
-        jule::pritln(item);
+
+    for (auto &item : s) {
+        std::cout << item << std::endl;
+    }
  
     return 0;
 }

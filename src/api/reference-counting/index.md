@@ -1,6 +1,6 @@
 # Reference Counting
 
-Jule's reference counting functionality for allocations is provided in the API. The `ref.hpp` header contains the `Ptr` struct for reference counting.
+Jule's reference counting functionality for allocations is provided in the API. The `ptr.hpp` header contains the `Ptr` for reference counting.
 
 ## Functions
 
@@ -34,7 +34,7 @@ Wrapper structure for raw pointer of JuleC. This structure is the used by Jule r
 static jule::Ptr<T>
 make(T *ptr, jule::Uint *ref);
 ```
-Creates new reference from allocation and reference counting allocation. Reference does not counted if reference count allocation is null.
+Creates new reference from allocation and reference counting allocation. Reference does not counted if reference count allocation is null, so allocation never will be deallocated by Ptr. The ref pointer should be allocated by the runtime `__jule_RCNew` function.
 
 ---
 

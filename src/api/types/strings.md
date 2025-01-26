@@ -21,3 +21,26 @@ For example:
 jule::Str s = __jule_strBytePtr("Hello World!", 12);
 jule::println(s);
 ```
+
+## Allocation Strings with Buffering
+
+You can allocate strings with the `jule::Str::alloc` method.
+
+For example:
+```cpp
+jule::Int len = 11;
+jule::Str s;
+s._slice = jule::Str::alloc(len);
+s.buffer = jule::Str::buffer_t(s._slice);
+std::strncpy(s, "hello world", len);
+std::cout << s.operator char *() << std::endl;
+```
+
+Strings are always heap allocated for external source, even for pointers. When you need to preallocate a string buffer, do not allocate seperately. Allocate a string buffer with the `jule::Str::alloc` static method. It returns pointer to the `jule::U8` type.
+
+Then create a buffer using pointer to perform GC. Do not forget the `_slice` field should be assigned to the allocation. Then you have a string with preallocated buffer and GC. Ready to use.
+
+::: warning
+The `alloc` method will initialize the memory to zero.
+:::
+
