@@ -5,16 +5,19 @@ import { readFileSync } from 'fs';
 
 class Jule implements ILanguageRegistration {
   id: string;
+  name: string;
   scopeName: string;
+  displayName?: string | undefined;
   path: string;
   grammar?: IGrammar | undefined;
   aliases?: string[] | undefined;
 
   constructor() {
     this.id = "jule";
+    this.name = "jule";
     this.scopeName = "source.jule";
+    this.displayName = "jule";
     this.path = "";
-    this.aliases = ["jule"];
     this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json"));
   }
 }
