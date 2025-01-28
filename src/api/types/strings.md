@@ -36,7 +36,7 @@ std::strncpy(s, "hello world", len);
 std::cout << s.operator char *() << std::endl;
 ```
 
-Strings are always heap allocated for external source, even for pointers. When you need to preallocate a string buffer, do not allocate seperately. Allocate a string buffer with the `jule::Str::alloc` static method. It returns pointer to the `jule::U8` type.
+Strings are always heap allocated for external source, even for pointers. When you need to preallocate a string buffer, do not allocate separately. Allocate a string buffer with the `jule::Str::alloc` static method. It returns pointer to the `jule::U8` type.
 
 Then create a buffer using pointer to perform GC. Do not forget the `_slice` field should be assigned to the allocation. Then you have a string with preallocated buffer and GC. Ready to use.
 
