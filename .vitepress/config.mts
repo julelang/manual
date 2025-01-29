@@ -18,15 +18,15 @@ class Jule implements ILanguageRegistration {
     this.scopeName = "source.jule";
     this.displayName = "jule";
     this.path = "";
-    this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json"));
+    this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json").toString());
   }
 }
 
 const jule = new Jule();
-(async () => {
-  const highlighter = await getHighlighter({});
-  await highlighter.loadLanguage(jule);
-})();
+const highlighter = await getHighlighter({
+  theme: JSON.parse(readFileSync("jule/draculaTheme.json").toString()),
+});
+await highlighter.loadLanguage(jule);
 
 export default defineConfig({
   srcDir: 'src',
@@ -36,6 +36,9 @@ export default defineConfig({
   markdown: {
     lineNumbers: true,
     languages: [jule],
+    highlight(str, lang, attrs) {
+      return highlighter.codeToHtml(str, { lang: lang });
+    },
     theme: "dracula-soft",
   },
 
