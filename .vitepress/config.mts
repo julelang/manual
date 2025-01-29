@@ -539,7 +539,13 @@ export default defineConfig({
               link: '/std/mem',
               items: [],
             },
-            { text: 'std/net', link: '/std/net' },
+            {
+              text: 'std/net',
+              link: '/std/net',
+              items: [
+                { text: 'std/net/url', link: '/std/net-url' },
+              ],
+            },
             {
               text: 'std/os',
               link: '/std/os',
