@@ -37,7 +37,7 @@ export default defineConfig({
     lineNumbers: true,
     languages: [jule],
     highlight(str, lang, attrs) {
-      return highlighter.codeToHtml(str, { lang: lang });
+      return highlighter.codeToHtml(str.trim(), { lang: lang });
     },
     theme: "dracula-soft",
   },
