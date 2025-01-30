@@ -132,3 +132,16 @@ unsafe {
 }
 ```
 The version of the above example using string. While this is not recommended, it is something that can be done for important reasons such as efficiency and performance concerns, but Jule does not guarantee this and the responsibility lies with the developer.
+
+### Conversions
+
+Jule strings support bidirectional conversion between `const char*`, `char*`, and `std::string`. However, due to security concerns, these conversions often result in new memory allocations. Therefore, for a more performant and memory-efficient approach, you may need to delve deeper.
+
+- Jule string -> `char*` and `const char*`:\
+No allocation occurs. It returns a pointer to the first character of the Jule string. Since heap allocation is not guaranteed (string may be a read-only literal), any mutation may lead to memory errors. Additionally, as mentioned earlier, the string is not NULL-terminated, so it must be used with caution.
+- Jule string -> `std::string`:\
+An allocation occurs because `std::string` will allocate new memory and copy the value of the Jule string. Since Jule strings use shared memory and are tracked by the GC, maintaining this behavior with `std::string` is not possible because `std::string` does not have Jule's GC. Alternative approaches may be adopted using custom allocators, but this is left to the developer.
+- `char*` and `const char*` -> Jule string:\
+Jule string creates a new allocation and copies the content from the char pointer. The important point is that the char pointer must be NULL-terminated. Jule string calculates its length based on the NULL-termination.
+- `std::string` -> Jule String:\
+Jule string creates a new allocation and copies the content from the `std::string`.
