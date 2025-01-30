@@ -17,6 +17,7 @@
 - [Why Jule have an optimizing compiler?](#why-jule-have-an-optimizing-compiler)
 - [Jule have a runtime?](#jule-have-a-runtime)
 - [Why receiver parameters always named as self?](#why-receiver-parameters-always-named-as-self)
+- [Why some packages in the standard library adopted from Go?](#why-some-packages-in-the-standard-library-adopted-from-go)
 
 ### Why an another language?
 
@@ -34,7 +35,7 @@ No. It's not.
 
 ### Is Jule experimental?
 
-No. Jule himself is not experimental. But it may contain some experimental ideas in itself. However, we often avoid adding experimental things to the language before they are sufficiently well designed and implemented.
+No. Jule itself is not experimental. But it may contain some experimental ideas in itself. However, we often avoid adding experimental things to the language before they are sufficiently well designed and implemented.
 
 ### What languages inspired Jule the most?
 
@@ -53,6 +54,12 @@ Due to these problems, Jule adopted the exceptionals design. They basically prov
 Its most obvious feature is that even if an exception is not discussed, it remains clear that it is an exception. This solves the ignore issue mentioned for Go's method.
 
 Simply placing `!` at the end of an exceptional function call indicates that there is no special handling for that exception, but that a possible exception will result in panic. This makes it easier to spot potential exceptions in the future, and a senior or new contributor can easily tell when reading the code that whether a function is exceptional.
+
+**The Proposal for Go's Error Handling**
+
+An issue ([#71203](https://github.com/golang/go/issues/71203)) was opened for the Go language on January 10, 2025, and was later converted into a discussion ([#71460](https://github.com/golang/go/discussions/71460)). This proposal suggests a new syntax for error handling in Go, which bears similarities to Jule's exceptional syntax, with some important differences. The fact that Jule is largely influenced by Go and the opening of such a proposal supports our belief that adopting the exceptional design for error handling may be a good approach.
+
+Although this proposal is not related to Jule, with this proposal and the contributions of Go's large community, we now have more insights into this type of design. Therefore, we thank the Go community.
 
 ### Will Jule always use C++ as backend?
 
@@ -106,7 +113,6 @@ Jule aims to be memory efficient. Runtime reflection can make this significantly
 
 Must have. Jule aims to be fast and efficient. It provides an infrastructure to optimize the code in the future when different backends are supported such as native. But that's not the only reason, even if Jule always uses only C++ backend, it inevitably needs an optimizing compiler.
 
-
 Jule can't achieve performance goals by relying on a backend compiler alone. Abviously, the most language can't achieve this if they are using a language as backend. Yes, advanced and mature backend compilers like Clang are very good at optimizing C++ code, but that's exactly the problem; They optimize C++ code, not Jule code.
 
 Languages ​​that use a language as a backend often have different designs than that language. Although compiler tries to create code that is as efficient as possible, it is not possible to create code that is good enough for the backend compiler without additional optimizations of the compiler.
@@ -127,21 +133,21 @@ Let's look at a different, more complex example;
 use "std/unicode/utf8"
 
 fn Exist(s: str, c: any): bool {
-    for _, r in []rune(s) {
-        match type c {
-        | byte:
-            if r < utf8::RuneSelf && byte(r) == byte(c) {
-                ret true
-            }
-        | rune:
-            if r == rune(c) {
-                ret true
-            }
-        |:
-            panic("Exist: invalid character type")
-        }
-    }
-    ret false
+	for _, r in []rune(s) {
+		match type c {
+		| byte:
+			if r < utf8::RuneSelf && byte(r) == byte(c) {
+				ret true
+			}
+		| rune:
+			if r == rune(c) {
+				ret true
+			}
+		|:
+			panic("Exist: invalid character type")
+		}
+	}
+	ret false
 }
 ```
 The above Jule code could probably be considered bad practice in most cases. But it's not bad to discuss. Assuming the Jule compiler has all its optimizations turned on. For the code above, Jule applies some optimizations. These optimizations are aimed at reducing memory usage and improving performance.
@@ -163,3 +169,9 @@ If you want to know more about this package, read the [Runtime](/runtime/) secti
 In languages ​​like Go, the developer provides the name of the receiver parameter. This can sometimes lead to writing shorter code with shorter names. But consistent naming is the developer's own effort. A simple renaming can be painful when applied to every method, especially in large structs.
 
 For reasons like these, Jule chose the `self` keyword to eliminate developer thinking cost for receiver name and always ensure a consistent receiver parameter name. This is also useful to keep the receiver parameter declaration shorter and gain some syntactical possibilities.
+
+### Why some packages in the standard library adopted from Go?
+
+Due to Jule being largely influenced by Go, many Go codes can be easily adapted to Jule. Go and Jule share very similar semantics. Implementing existing code is not too difficult.
+
+That is, time cost. Designing and developing well-implemented algorithms takes time. Go has enough well-implemented algorithms, so it makes sense to adopt them. And not all packages were adopted from Go, just specific ones that play well with Jule. Many algorithms are implemented from scratch for Jule.
