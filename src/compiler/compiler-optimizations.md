@@ -87,7 +87,8 @@ Enables special optimizations for mathematical operations.
 - Converts modulo by 2 expressions to equivalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
-- Eliminates runtime overflow of the `x^0` computations. It will be simplified to `x` expression.
+- Eliminates cost of the `x^0`, `0^x`, `x|0`, or `0|x` computations. It will be simplified to `x` expression.
+- Eliminates cost of the `x&0`, `0&x` computations. It will be simplified to `0` expression.
 - Simplifies expressions such as `x+x` to `x<<1` if possible.
 - Simplifies expressions such as `x-x` to `0` if possible.
 
@@ -97,6 +98,7 @@ Enables special optimizations for mathematical operations.
 Enables special optimizations for memory accessing.
 
 - Skips safety checks such as boundary checking if accessed to array via constant index expression.
+- Removes the cost of boundary checking of expressions like `array[i&(len(array)-1)]` for arrays whose length is power of two.
 - If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
 - If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
 - If it can be understood that the smart pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
