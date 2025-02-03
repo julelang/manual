@@ -451,7 +451,7 @@ Field instance\.
 ## StructIns
 ```jule
 struct StructIns {
-	Source:     &Type // See developer reference (11).
+	Source:     &Type // See developer reference (9).
 	Checked:    bool
 	Decl:       &Struct
 	Generics:   []&InsGeneric
@@ -1134,7 +1134,7 @@ Conditional chain\.
 ## InfIter
 ```jule
 struct InfIter {
-	Scope: &Scope // See developer reference (10).
+	Scope: &Scope // See developer reference (8).
 }
 ```
 Infinity iteration\.
@@ -1142,7 +1142,7 @@ Infinity iteration\.
 ## WhileIter
 ```jule
 struct WhileIter {
-	Scope: &Scope // See developer reference (10).
+	Scope: &Scope // See developer reference (8).
 	Expr:  Expr   // Can be nil if iteration is while-next kind.
 	Next:  Stmt   // Nil if iteration is not while-next kind.
 }
@@ -1158,7 +1158,7 @@ Reports whether iteration is while\-next kind\.
 ## RangeIter
 ```jule
 struct RangeIter {
-	Scope:     &Scope // See developer reference (10).
+	Scope:     &Scope // See developer reference (8).
 	Expr:      &Value
 	ExprToken: &token::Token
 	KeyA:      &Var
@@ -1240,7 +1240,7 @@ Multi\-declarative assignment\.
 ## Match
 ```jule
 struct Match {
-	Scope:     &Scope // Owner scope. See developer reference (10).
+	Scope:     &Scope // Owner scope. See developer reference (8).
 	Expr:      &Value
 	TypeMatch: bool
 	Comptime:  bool
@@ -1259,7 +1259,7 @@ Reports whether match is type\-match for generic type\.
 ## Select
 ```jule
 struct Select {
-	Scope:   &Scope // Owner scope. See developer reference (10).
+	Scope:   &Scope // Owner scope. See developer reference (8).
 	Cases:   []&Case
 	Default: &Case
 }
@@ -1881,7 +1881,7 @@ Reports whether actual kind is &#34;void&#34;\.
 ```jule
 fn ActualKind(mut self): Kind
 ```
-Returns actual kind of the type, so returns the root type\. If kind is a struct, which is implemented by the type statement, see developer reference \(11\) for details, returns the actual kind of the source type of the struct\.
+Returns actual kind of the type, so returns the root type\. If kind is a struct, which is implemented by the type statement, see developer reference \(9\) for details, returns the actual kind of the source type of the struct\.
 
 ### ActualEqual
 ```jule
