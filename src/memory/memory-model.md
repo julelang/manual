@@ -45,7 +45,7 @@ If given smart pointer is nil, then the allocation pointer of the `any` will be 
 - **Type Pointer**\
 An `any` maintains a general pointer and this pointer is not traced by the GC because it is guaranteed to always will point to static memory that will be available for the lifetime of the program. This pointer points directly to the type handler structure automatically created by the compiler.\
 \
-The handler structure includes the deallocator function required for the type. The deallocator function is the first field of the structure. Also contains 2 function pointer for string conversion and comparison functions for stored type.
+The handler structure includes the deallocator function required for the type. The deallocator function is the first field of the structure. Also contains 3 function pointer for string conversion, comparison functions, and hasher for stored type.
 
 #### Nil Value Handling
 
