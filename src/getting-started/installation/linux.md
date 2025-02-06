@@ -3,7 +3,7 @@
 JuleC is available on Linux through various package managers.<br>
 If you don't see your distribution listed below, check the [pre-compiled binaries](#pre-compiled-binaries) section.
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/julec.svg)](https://repology.org/project/julec/versions)
+See manual page about [packages](/getting-started/installation/packages).
 
 ## Arch Linux
 
