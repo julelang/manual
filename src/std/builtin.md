@@ -220,7 +220,7 @@ The copy built-in function copies elements from a source slice into a destinatio
 
 Arrays:
 ```
-The dest and src parameters may be array slicing.
+The dest parameter may be array slicing.
 Slicing is allowed for arrays on mutable memory.
 Thus, the changes will be reflected in the array.
 
@@ -252,13 +252,6 @@ Because x[:] expression will allocate a new slice with copy of arrays.
 fn append(mut dest: []T, mut items: ...T): []T
 ```
 If there is enough capacity, it adds to the destination slice. If there is not enough capacity, it creates a copy of the destination slice with enough capacity and adds the new elements and returns the new allocation.
-fn append(mut dest: []T, mut items: ...T): []T
-
-Arrays:
-```
-The behavior of the copy function is applied to arrays for items.
-But dest always will be allocated slice for array slicing.
-```
 
 ## len
 ```jule
