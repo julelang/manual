@@ -5,6 +5,7 @@
 - [What about future of Jule?](#what-about-future-of-jule)
 - [Is Jule the C++ successor?](#is-jule-the-c-successor)
 - [Is Jule experimental?](#is-jule-experimental)
+- [What is the experimental feature?](#what-is-the-experimental-feature)
 - [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
 - [Why Jule uses exceptionals instead other error handling methods?](#why-jule-uses-exceptionals-instead-other-error-handling-methods)
 - [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
@@ -36,6 +37,10 @@ No. It's not.
 ### Is Jule experimental?
 
 No. Jule itself is not experimental. But it may contain some experimental ideas in itself. However, we often avoid adding experimental things to the language before they are sufficiently well designed and implemented.
+
+### What is the experimental feature?
+
+Experimental features are those that are not yet stable or expected to be, and are still in the development phase. These features may have various issues and are not guaranteed to become stable in the final version. In other words, experimental features may be cancelled and removed.
 
 ### What languages inspired Jule the most?
 
