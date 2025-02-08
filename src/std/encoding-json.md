@@ -2,12 +2,18 @@
 
 ## Index
 
-[fn Encode\[T\](t: T)!: \[\]byte](#encode)\
-[fn EncodeIndent\[T\](t: T, indent: str)!: \[\]byte](#encodeindent)\
-[fn Valid(data: \[\]byte): bool](#valid)\
-[fn Decode\[T\](data: \[\]byte, mut &amp;t: T)!](#decode)\
+[fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
+[fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
+[fn Valid\(data: \[\]byte\): bool](#valid)\
+[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: T\)\!](#decode)\
+[type Object](#object)\
+[type Array](#array)\
+[type Bool](#bool)\
+[type Number](#number)\
+[type String](#string)\
 [enum EncodeError](#encodeerror)\
-[enum DecodeError](#decodeerror)
+[enum DecodeError](#decodeerror)\
+[enum Value: type ](#value)
 
 
 
@@ -15,11 +21,11 @@
 ```jule
 fn Encode[T](t: T)!: []byte
 ```
-Implements encoding of JSON as defined in RFC 7159.
+Implements encoding of JSON as defined in RFC 7159\.
 
-The algorithm is optimized for efficiency, performance and minimum runtime. Uses generics and Jule&#39;s comptime. Type analysis guaranteed to be completed at compile-time. Also this function is no-overhead guaranteed. So just implements plain encoding algorithm without unnecessary algorithms such as indentation handling.
+The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\. Also this function is no\-overhead guaranteed\. So just implements plain encoding algorithm without unnecessary algorithms such as indentation handling\.
 
-Implementation supports only Jule types, excluding binded types.
+Implementation supports only Jule types, excluding binded types\.
 
 Encoding details:<br>
 ```
@@ -63,9 +69,9 @@ Smart Pointers:
 	If smart pointer is nil, encode as null JSON value.
 	Otherwise, will encode dereferenced value.
 ```
-Encode cannot represent cyclic data structures and does not handle them. Passing cyclic structures for encoding will result in an cycle at runtime. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data. However, tousands of nested-data is always risky even below 10000.
+Encode cannot represent cyclic data structures and does not handle them\. Passing cyclic structures for encoding will result in an cycle at runtime\. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data\. However, tousands of nested\-data is always risky even below 10000\.
 
-Supported trait implementations by higher-to-lower precedence (having methods without implementing the trait is valid):<br>
+Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
 JSONEncoder, TextEncoder
 ```
@@ -75,23 +81,23 @@ JSONEncoder, TextEncoder
 ```jule
 fn EncodeIndent[T](t: T, indent: str)!: []byte
 ```
-Same as Encode\[T\] function but enables indentation.
+Same as Encode\[T\] function but enables indentation\.
 
 ## Valid
 ```jule
 fn Valid(data: []byte): bool
 ```
-Reports whether data is a valid JSON.
+Reports whether data is a valid JSON\.
 
 ## Decode
 ```jule
 fn Decode[T](data: []byte, mut &t: T)!
 ```
-Implements decoding of JSON as defined in RFC 7159.
+Implements decoding of JSON as defined in RFC 7159\.
 
-The algorithm is optimized for efficiency, performance and minimum runtime. Uses generics and Jule&#39;s comptime. Type analysis guaranteed to be completed at compile-time.
+The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\.
 
-Implementation supports only Jule types, excluding binded types.
+Implementation supports only Jule types, excluding binded types\.
 
 Decoding details:<br>
 ```
@@ -134,13 +140,62 @@ Smart Pointers:
 	If smart pointer is nil, will be allocated by the algorithm for decoding.
 	Otherwise, will decode into dereferenced value.
 ```
-Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data. However, tousands of nested-data is always risky even below 10000.
+Dynamic decoding details:<br>
+```
+Dynamic JSON decoding uses dynamic JSON types:
+Value, Object, Array, Bool, Number, and String.
+No dynamic decoding can be achieved outside of these types;
+for example, the [any] type is not supported.
+If you want to obtain any JSON value, use [Value] instead.
 
-Supported trait implementations by higher-to-lower precedence (having methods without implementing the trait is valid):<br>
+Dynamic decoding will always decode using dynamic types;
+	nil    -> for JSON null
+	Object -> for JSON object
+	Array  -> for JSON array
+	Bool   -> for JSON boolean
+	Number -> for JSON number
+	String -> for JSON string
+
+If you use Value as destination type, it may store any JSON value,
+and the type will be determined dynamically based on the JSON value.
+```
+Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data\. However, tousands of nested\-data is always risky even below 10000\.
+
+Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
 JSONDecoder, TextDecoder
 ```
 
+
+## Object
+```jule
+type Object: map[str]Value
+```
+Dynamic JSON object type\.
+
+## Array
+```jule
+type Array: []Value
+```
+Dynamic JSON array type\.
+
+## Bool
+```jule
+type Bool: bool
+```
+Dynamic JSON boolean type\.
+
+## Number
+```jule
+type Number: f64
+```
+Dynamic JSON number type\.
+
+## String
+```jule
+type String: str
+```
+Dynamic JSON string type\.
 
 ## EncodeError
 ```jule
@@ -150,7 +205,7 @@ enum EncodeError {
 	EncodeJSON,            // EncodeJSON returned invalid JSON value
 }
 ```
-JSON encoding error codes.
+JSON encoding error codes\.
 
 ## DecodeError
 ```jule
@@ -163,4 +218,16 @@ enum DecodeError {
 	InvalidValue,
 }
 ```
-JSON decoding error codes.
+JSON decoding error codes\.
+
+## Value
+```jule
+enum Value: type {
+	Object,
+	Array,
+	Bool,
+	Number,
+	String,
+}
+```
+Dynamic JSON value type\. Can store any JSON value\.
