@@ -633,12 +633,16 @@ struct SlicingExpr {
 	Expr: &Value
 
 	// Left index expression.
-	// Zero integer if expression have not left index.
+	// Nil integer if expression have not left index.
 	Left: Expr
 
 	// Right index expression.
 	// Nil if expression have not right index.
 	Right: Expr
+
+	// Cap index expression.
+	// Nil if expression have not cap index.
+	Cap: Expr
 }
 ```
 Slicing expression model\. For example: mySlice\[2:len\(mySlice\)\-5\]
