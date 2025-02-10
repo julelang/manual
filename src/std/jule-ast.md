@@ -497,6 +497,7 @@ struct SlicingExpr {
 	Expr:  &Expr // Value expression to slicing.
 	Start: &Expr // Start index value expression.
 	To:    &Expr // To index value expression.
+	Cap:   &Expr // Cap index value expression.
 }
 ```
 Slicing expression\.
