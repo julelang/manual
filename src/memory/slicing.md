@@ -26,3 +26,20 @@ fn main() {
     println(mySlice[4:])  // [5, 6, 7, 8, 9, 10]
 }
 ```
+
+### 3-Index Slicing
+3-index slicing is only supported by slices. The third index specifies the capacity limit of slice. This method can be used to ensure memory safety of shared slices. For example, it allows sharing the same memory with a slice until an append operation occurs. When an append operation happens, if the slice's capacity is capped to its length, a new slice allocation occurs, preventing the append operation from affecting the capacity of the original slice.
+
+#### Syntax
+```
+DATA[START:TO:CAP]
+```
+For example:
+```jule
+foo[2:10:10]
+```
+At the example above, slice items start at `2` to `10` The `10` index is not included. So if you want to slice all components of the data after the index `2`, the length of the data needs to be given. Slice capacity will be capped to `10`.
+
+::: warning
+For 3-index slicing, the middle and final index must be given.
+:::
