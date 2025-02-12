@@ -772,8 +772,8 @@ Expression Model: for built\-in make function calls\. If Type is slice, the Len 
 ## BuiltinAppendCallExpr
 ```jule
 struct BuiltinAppendCallExpr {
-	Dest:     Expr
-	Elements: Expr
+	Dest:     &Value // Type is always slice.
+	Elements: &Value // Type is always slice or string, no chance for variadic.
 }
 ```
 Expression Model: for built\-in append function calls\.
