@@ -10,8 +10,8 @@ For example:
 ```cpp
 jule::Str s1 = "Hello World!";
 jule::Str s2("Hello World!", 12);
-jule::println(s1);
-jule::println(s2);
+__jule_println(s1);
+__jule_println(s2);
 ```
 
 String is always heap allocated. However, if you want to use a literal that is not heap allocated, you can do this with the `__jule_strBytePtr` runtime API function. In case of any need, the string will be moved to the heap again, but until then heap allocation is not made.
@@ -19,7 +19,7 @@ String is always heap allocated. However, if you want to use a literal that is n
 For example:
 ```cpp
 jule::Str s = __jule_strBytePtr("Hello World!", 12);
-jule::println(s);
+__jule_println(s);
 ```
 
 ## Allocation Strings with Buffering

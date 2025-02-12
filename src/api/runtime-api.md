@@ -190,3 +190,13 @@ Declaration of: `strAsSlice`
 jule::Str __jule_sliceAsStr(jule::Slice<jule::U8> b);
 ```
 Declaration of: `sliceAsStr`
+
+```cpp
+void __jule_print(jule::Str s);
+```
+Declaration of: `zprint`
+
+```cpp
+void __jule_println(jule::Str s);
+```
+Declaration of: `zprintln`

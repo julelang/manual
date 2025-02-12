@@ -206,3 +206,13 @@ fn sliceAsStr(b: []byte): str
 Returns byte slice as str.
 Equals to strBytePtr(&b[0], len(b)) call.
 Returns empty string if len(b) == 0.
+
+```jule
+fn zprint(s: str)
+```
+The runtime implementation of the built-in print function.
+
+```jule
+fn zprintln(s: str)
+```
+The runtime implementation of the built-in println function.
