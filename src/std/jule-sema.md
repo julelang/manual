@@ -2408,8 +2408,9 @@ Valid owner types for Case\.
 ## Flag
 ```jule
 enum Flag {
-	Default: 0,        // Default semantic analysis of Jule.
-	Shadowing: 1 << 0, // Default + enable shadowing.
+	Default: 0,         // Default semantic analysis of Jule.
+	Shadowing: 1 << 0,  // Default + enable shadowing.
+	References: 1 << 1, // Default + enable reference collection.
 }
 ```
 Flags for semantic analysis\.
