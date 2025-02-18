@@ -32,6 +32,13 @@ const InvalidWrite = ioerror(2)
 ```
 Means that a write returned an impossible count\.
 
+---
+
+```jule
+static mut Discard = discard{ ... }
+```
+A \[Writer\] on which all Write calls succeed without doing anything\.
+
 ## Copy
 ```jule
 fn Copy(mut dst: Writer, mut src: Reader)!: (written: i64)
