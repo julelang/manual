@@ -35,6 +35,15 @@ Means that a write returned an impossible count\.
 ---
 
 ```jule
+const SeekStart = 0   // seek relative to the origin of the file
+const SeekCurrent = 1 // seek relative to the current offset
+const SeekEnd = 2     // seek relative to the end
+```
+Seek whence values\.
+
+---
+
+```jule
 static mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
