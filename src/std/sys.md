@@ -4,16 +4,16 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 
 ## Index
 
-[fn GetLastErrno(): Errno](#getlasterrno)\
-[fn NewTimeval(sec: i64, usec: i64, mut &amp;out: Timeval): bool](#newtimeval)\
-[fn Seek(handle: int, offset: int, origin: int): int](#seek)\
-[unsafe fn Read(handle: int, mut buff: \*unsafe, n: uint): int](#read)\
-[fn Close(handle: int): int](#close)\
-[unsafe fn Write(handle: int, buff: \*unsafe, n: uint): int](#write)\
-[fn Exit(code: int)](#exit)\
-[fn Htons(x: int): u16](#htons)\
-[fn Ntohs(x: int): u16](#ntohs)\
-[unsafe fn Select(nfds: int, mut read: \*Fd, mut write: \*Fd, mut err: \*Fd, mut timeout: \*Timeval): int](#select)\
+[fn GetLastErrno\(\): Errno](#getlasterrno)\
+[fn NewTimeval\(sec: i64, usec: i64, mut &amp;out: Timeval\): bool](#newtimeval)\
+[fn Seek\(handle: int, offset: i64, origin: int\): i64](#seek)\
+[unsafe fn Read\(handle: int, mut buff: \*unsafe, n: uint\): int](#read)\
+[fn Close\(handle: int\): int](#close)\
+[unsafe fn Write\(handle: int, buff: \*unsafe, n: uint\): int](#write)\
+[fn Exit\(code: int\)](#exit)\
+[fn Htons\(x: int\): u16](#htons)\
+[fn Ntohs\(x: int\): u16](#ntohs)\
+[unsafe fn Select\(nfds: int, mut read: \*Fd, mut write: \*Fd, mut err: \*Fd, mut timeout: \*Timeval\): int](#select)\
 [type Errno](#errno)\
 [type Timeval](#timeval)\
 [type Sockaddr](#sockaddr)\
@@ -27,94 +27,94 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 ```jule
 fn GetLastErrno(): Errno
 ```
-Returns number of last error.
+Returns number of last error\.
 
 ## NewTimeval
 ```jule
 fn NewTimeval(sec: i64, usec: i64, mut &out: Timeval): bool
 ```
-Creates new Timeval by sec and usec. Sets fields of the out. Reports whether sec and usec have valid range. If sec or usec have invalid range, out will not be mutated.
+Creates new Timeval by sec and usec\. Sets fields of the out\. Reports whether sec and usec have valid range\. If sec or usec have invalid range, out will not be mutated\.
 
 ## Seek
 ```jule
-fn Seek(handle: int, offset: int, origin: int): int
+fn Seek(handle: int, offset: i64, origin: int): i64
 ```
-Wrapper for C&#39;s lseek function.
+Wrapper for C&#39;s lseek function\.
 
 ## Read
 ```jule
 unsafe fn Read(handle: int, mut buff: *unsafe, n: uint): int
 ```
-Wrapper for C&#39;s read function.
+Wrapper for C&#39;s read function\.
 
 ## Close
 ```jule
 fn Close(handle: int): int
 ```
-Wrapper for C&#39;s close function.
+Wrapper for C&#39;s close function\.
 
 ## Write
 ```jule
 unsafe fn Write(handle: int, buff: *unsafe, n: uint): int
 ```
-Wrapper for C&#39;s write function.
+Wrapper for C&#39;s write function\.
 
 ## Exit
 ```jule
 fn Exit(code: int)
 ```
-Wrapper for C&#39;s exit.
+Wrapper for C&#39;s exit\.
 
 ## Htons
 ```jule
 fn Htons(x: int): u16
 ```
-C&#39;s htons macro.
+C&#39;s htons macro\.
 
 ## Ntohs
 ```jule
 fn Ntohs(x: int): u16
 ```
-C&#39;s ntohs macro.
+C&#39;s ntohs macro\.
 
 ## Select
 ```jule
 unsafe fn Select(nfds: int, mut read: *Fd, mut write: *Fd, mut err: *Fd, mut timeout: *Timeval): int
 ```
-C&#39;s select function.
+C&#39;s select function\.
 
 ## Errno
 ```jule
 type Errno: int
 ```
-Type of error numbers.
+Type of error numbers\.
 
 ## Timeval
 ```jule
 type Timeval: cpp.timeval
 ```
-C&#39;s timeval structure.
+C&#39;s timeval structure\.
 
 ## Sockaddr
 ```jule
 type Sockaddr: cpp.sockaddr
 ```
-C&#39;s sockaddr structure.
+C&#39;s sockaddr structure\.
 
 ## SockaddrIn
 ```jule
 type SockaddrIn: cpp.sockaddr_in
 ```
-C&#39;s sockaddr\_in structure.
+C&#39;s sockaddr\_in structure\.
 
 ## SockaddrIn6
 ```jule
 type SockaddrIn6: cpp.sockaddr_in6
 ```
-C&#39;s sockaddr\_in6 structure.
+C&#39;s sockaddr\_in6 structure\.
 
 ## Fd
 ```jule
 type Fd: cpp.fd_set
 ```
-C&#39;s fd\_set structure.
+C&#39;s fd\_set structure\.
