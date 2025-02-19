@@ -35,7 +35,7 @@
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut self, offset: i64, whence: Seek\)\!: i64](#seek)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut self\)\!](#sync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut self, size: i64\)\!](#truncate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close)\
@@ -61,7 +61,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
 [enum Error](#error)\
 [enum CmdError](#cmderror)\
-[enum Seek](#seek-1)\
 [enum FSError](#fserror)
 
 ## Variables
@@ -337,9 +336,9 @@ Implements the io::Reader trait\.
 
 ### Seek
 ```jule
-fn Seek(mut self, offset: i64, whence: Seek)!: i64
+fn Seek(mut self, offset: i64, whence: int)!: i64
 ```
-Sets offset to next Read/Write operation and returns the new offset\. whence: 0 \(Seek\.Set\) means, relative to the whence of the file, 1 \(Seek\.Cur\) means relative to the current offset, and 2 \(Seek\.End\) means relative to end\.
+Sets offset to next Read/Write operation and returns the new offset\. whence: 0 \(io::SeekStart\) means, relative to the whence of the file, 1 \(io::SeekCurrent\) means relative to the current offset, and 2 \(io::SeekEnd\) means relative to end\.
 
 ### Sync
 ```jule
@@ -521,16 +520,6 @@ enum CmdError {
 }
 ```
 Cmd error codes\.
-
-## Seek
-```jule
-enum Seek: int {
-	Set: 0, // Seek relative to the origin of the file
-	Cur: 1, // Seek relative to the current offset
-	End: 2, // Seek relative to the end
-}
-```
-Seek whence values\.
 
 ## FSError
 ```jule
