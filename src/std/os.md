@@ -12,6 +12,7 @@
 [fn Create\(path: str\)\!: &amp;File](#create)\
 [fn ReadFile\(path: str\)\!: \[\]byte](#readfile)\
 [fn WriteFile\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefile)\
+[fn Pipe\(\)\!: \(r: &amp;File, w: &amp;File\)](#pipe)\
 [fn Stat\(path: str\)\!: FileInfo](#stat)\
 [fn Lstat\(path: str\)\!: FileInfo](#lstat)\
 [fn Exit\(code: int\)](#exit)\
@@ -64,6 +65,13 @@
 [enum FSError](#fserror)
 
 ## Variables
+
+```jule
+const DevNull = devNull
+```
+The name of the operating system&#39;s “null device\.” On Unix\-like systems, it is &#34;/dev/null&#34;; on Windows, &#34;NUL&#34;\.
+
+---
 
 ```jule
 const O_RDONLY = sys::O_RDONLY // Open the file read-only
@@ -163,6 +171,12 @@ Reads bytes of file\. First, learns byte\-size of file\. Then reads bytes and re
 fn WriteFile(path: str, data: []byte, perm: FileMode)!
 ```
 Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any exceptional\.
+
+## Pipe
+```jule
+fn Pipe()!: (r: &File, w: &File)
+```
+Pipe returns a connected pair of Files; reads from r return bytes written to w\. The Windows handles underlying the returned files are marked as inheritable by child processes\.
 
 ## Stat
 ```jule
