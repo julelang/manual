@@ -2,6 +2,7 @@
 
 ## Index
 
+[Variables](#variables)\
 [fn TypeAlias(ident: str, t: T)](#typealias)\
 [fn Line(): int](#line)\
 [fn File(): comptimeFile](#file)\
@@ -28,7 +29,7 @@
 [struct comptimeTypeInfos](#comptimeTypeInfos)\
 [struct comptimeTypeInfo](#comptimeTypeInfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Strict(self): bool](#strict)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Kind(self): Kind](#kind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Kind(self): int](#kind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str(self): str](#str)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Decl(self): comptimeDecl](#decl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bits(self): int](#bits)\
@@ -69,6 +70,42 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unwrap(self)](#unwrap)\
 [enum Kind](#Kind)
 
+## Variables
+
+```jule
+const Void = 0       // Void
+const Int = 1        // int
+const Uint = 2       // uint
+const Uintptr = 3    // uinptr
+const I8 = 4         // i8
+const I16 = 5        // i16
+const I32 = 6        // i32
+const I64 = 7        // i64
+const U8 = 8         // u8
+const U16 = 9        // u16
+const U32 = 10       // u32
+const U64 = 11       // u64
+const F32 = 12       // f32
+const F64 = 13       // f64
+const Str = 14       // str
+const Bool = 15      // bool
+const Any = 16       // any
+const Array = 17     // Array
+const Slice = 18     // Slice
+const Map = 19       // Map
+const Struct = 20    // Structure
+const Trait = 21     // Trait
+const Enum = 22      // Enum
+const TypeEnum = 23  // Type Enum
+const Ptr = 24       // Raw pointer
+const UnsafePtr = 25 // Unsafe raw pointer
+const SmartPtr = 26  // Smart pointer
+const Func = 27      // Function
+const Tuple = 28     // Tuple
+const Chan = 29      // Channel
+```
+Type kinds.
+
 ## TypeAlias
 ```jule
 fn TypeAlias(ident: str, t: T)
@@ -107,9 +144,9 @@ For example:
 type ByteSlice: []byte
 const t = comptime::TypeOf(ByteSlice)
 const match type t.Kind() {
-| comptime::Kind.Slice:
+| comptime::Slice:
 	const match type t.Elem().Kind() {
-	| comptime::Kind.Byte:
+	| comptime::Byte:
 		// ...
 	}
 }
@@ -484,40 +521,3 @@ Returns comptimeValue for method access expression. Supports only structure type
 fn Unwrap(self)
 ```
 Unwraps expression for runtime execution.
-
-## Kind
-```jule
-enum Kind {
-	Void,      // Void
-	Int,       // int
-	Uint,      // uint
-	Uintptr,   // uinptr
-	I8,        // i8
-	I16,       // i16
-	I32,       // i32
-	I64,       // i64
-	U8,        // u8
-	U16,       // u16
-	U32,       // u32
-	U64,       // u64
-	F32,       // f32
-	F64,       // f64
-	Str,       // str
-	Bool,      // bool
-	Any,       // any
-	Array,     // Array
-	Slice,     // Slice
-	Map,       // Map
-	Struct,    // Structure
-	Trait,     // Trait
-	Enum,      // Enum
-	TypeEnum,  // Type Enum
-	Ptr,       // Raw pointer
-	UnsafePtr, // Unsafe raw pointer
-	SmartPtr,  // Smart pointer
-	Func,      // Function
-	Tuple,     // Tuple
-	Chan,      // Channel
-}
-```
-Type kinds.
