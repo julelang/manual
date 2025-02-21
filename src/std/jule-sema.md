@@ -319,6 +319,12 @@ trait Importer {
 	// Invoked after the package is imported.
 	// Sets module identitity of imported package to current module.
 	fn Imported(mut self, mut &ImportInfo)
+
+	// Returns all imported packages.
+	// The return value is mutable reference to internal buffer.
+	// Packages should be ordered by FIFO; starting with the first deepest
+	// imported package, and ending with the last imported package.
+	fn AllPackages(mut self): []&ImportInfo
 }
 ```
 Importer\. Used by semantic analysis to import use declarations\. The default importer implementation is highly recommended\. 3rd\-party importer implementations may cause unpredictable issues\.
@@ -2408,9 +2414,8 @@ Valid owner types for Case\.
 ## Flag
 ```jule
 enum Flag {
-	Default: 0,         // Default semantic analysis of Jule.
-	Shadowing: 1 << 0,  // Default + enable shadowing.
-	References: 1 << 1, // Default + enable reference collection.
+	Default: 0,        // Default semantic analysis of Jule.
+	Shadowing: 1 << 0, // Default + enable shadowing.
 }
 ```
 Flags for semantic analysis\.
