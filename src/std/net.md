@@ -13,10 +13,8 @@
 [trait Addr](#addr)\
 [trait Conn](#conn)\
 [trait Listener](#listener)\
-[type Error](#error)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 [struct AddrError](#addrerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 [struct TCPListener](#tcplistener)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
@@ -34,14 +32,14 @@
 [struct TCPAddr](#tcpaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Resolve\(mut network: Network, addr: str\)\!: &amp;TCPAddr](#resolve)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
 [struct UDPAddr](#udpaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Resolve\(mut network: Network, addr: str\)\!: &amp;UDPAddr](#resolve-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-3)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
 [type HardwareAddr](#hardwareaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Parse\(s: str\)\!: HardwareAddr](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
 [struct UDPConn](#udpconn)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
@@ -60,16 +58,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(self\): bool](#isprivate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut self\): IP](#to4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut self\): IP](#to16)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-5)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-4)\
 [enum Network](#network-5)
 
 ## Variables
 
 ```jule
-const ErrInvalidTimeout = Error(0) // Timeout value is not valid. Duration is out of range.
-const ErrTimeout = Error(1)        // Connection timeout.
+static mut ErrInvalidTimeout = errors::New("timeout value is not valid, duration is out of range")
+static mut ErrTimeout = errors::New("connection timed out")
 ```
-Common connection error codes\.
+Common errors of net package\. Mutation is undefined behavior\.
 
 ---
 
@@ -281,18 +279,6 @@ trait Listener {
 }
 ```
 Common listener behavior\. Inherits the io::Closer trait\.
-
-## Error
-```jule
-type Error: int
-```
-Common type of connection error codes\.
-
-### Str
-```jule
-fn Str(self): str
-```
-
 
 ## AddrError
 ```jule
