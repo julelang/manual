@@ -189,6 +189,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Slice\(mut self\): &amp;Slice](#slice)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Func\(mut self\): &amp;FuncIns](#func-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Struct\(mut self\): &amp;StructIns](#struct-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SoftStruct\(mut self\): &amp;StructIns](#softstruct)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Trait\(mut self\): &amp;Trait](#trait-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Map\(mut self\): &amp;Map](#map)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Tuple\(mut self\): &amp;Tuple](#tuple)\
@@ -1994,6 +1995,12 @@ Returns function type if actual kind is function, nil if not\.
 fn Struct(mut self): &StructIns
 ```
 Returns struct type if actual kind is structure, nil if not\.
+
+### SoftStruct
+```jule
+fn SoftStruct(mut self): &StructIns
+```
+Returns struct type if actual kind is structure\. If type kind is the strict type alias source, returns the underlying structure type of the strict type alias\.
 
 ### Trait
 ```jule
