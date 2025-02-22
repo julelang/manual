@@ -491,6 +491,7 @@ export default defineConfig({
                 { text: 'std/encoding/json', link: '/std/encoding-json' },
               ],
             },
+            { text: 'std/errors', link: '/std/errors' },
             { text: 'std/flag', link: '/std/flag' },
             { text: 'std/fmt', link: '/std/fmt' },
             {
