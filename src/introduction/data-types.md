@@ -135,6 +135,10 @@ In most cases, any concatenation will result as heap allocation which is might b
 
 It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares bytes/runes of strings.
 
+### Range Iterations
+
+Strings can be used with range iteration. The first variable in the iteration is an integer-type index variable. This variable represents the starting byte position of the rune based on runes (Unicode code points), while the second variable is the rune currently pointed to in the iteration.
+
 ### String Literals
 ```jule
 "String literal of Jule."

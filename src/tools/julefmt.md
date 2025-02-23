@@ -34,7 +34,7 @@ Write result to (source) file instead of stdout.
 - In binary expressions, if it is necessary to go to the next line, the indentation is increased only once and the following part is provided by this entry.
 	- If this happens in a new expression with parentheses, indentation is applied in the same way. For indentation that continues after the parentheses, the previous indentation level is used, no alignment is performed.
 	- If there is a shift to the bottom line in a binary expression, comments are exempt from any alignment process.
-- In Foreach iterations, comments coming before key variables are considered to belong to the variables. Comments before the `in` token and expression are preserved. Follow-up comments are transferred into scope.
+- In range iterations, comments coming before key variables are considered to belong to the variables. Comments before the `in` token and expression are preserved. Follow-up comments are transferred into scope.
 - In match expressions, comments before the expression are preserved. Followers are transferred into the scope. If there is a case, it owns it. If it does not exist, it is added to the scope.
 	- Comments coming within the scope of case statements are evaluated within the scope. So, if you are going to write a comment for a case and there is a case before it, the comments are accepted within the scope of that case. Therefore, it must be written within the scope of the relevant case.
 - In if statements, comments before the statement are preserved. Followers are transferred into the scope.

@@ -42,6 +42,10 @@ x := map[int]str{
 }
 ```
 
+### Range Iterations
+
+Maps can be used with range iteration. The first variable in the iteration is the key variable. This variable represents the key, while the second variable is the value currently pointed to in the iteration.
+
 ## Access to Elements and Indexing
 To get the value of a key, it is sufficient to index it with the key.
 

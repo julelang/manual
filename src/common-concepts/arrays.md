@@ -102,3 +102,7 @@ len(myArray)
 Arrays are allocated on the stack and this is guaranteed. But they are not implemented with references and common allocations. So when an array is copied, a copy that shares the common allocation is not created. A new array is created on the stack.
 
 The copies are not deep copy. Just allocates new stack with size of array and copies all elements with default copy semantics, not deep copy semantics.
+
+### Range Iterations
+
+Arrays can be used with range iteration. The first variable in the iteration is an integer-type index variable. This variable represents the index of the element, while the second variable is the element currently pointed to in the iteration.

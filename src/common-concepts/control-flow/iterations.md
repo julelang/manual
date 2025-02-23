@@ -45,10 +45,10 @@ fn main() {
 ```
 The while-next iteration above executes first if the condition is met. After execution, the statement is executed. Then the scope executes if the condition is met, so on.
 
-## Foreach Iterations
-Foreach or for-each can be summarized as an iteration standard for collections. It repeats itself by looping through the elements of the collection.
+## Range Iterations
+Range iterations can be summarized as an iteration standard for collections. It repeats itself by looping through the elements of the collection.
 
-Each identifier used for foreach is used to create a new variable. So if there is a definition that already has this identifier, it will be shaded.
+Each identifier used for range is used to create a new variable. So if there is a definition that already has this identifier, it will be shaded.
 
 For example:
 ```jule
@@ -66,10 +66,10 @@ fn main() {
 // 3
 // 4
 ```
-Seen as the example at above, this is a foreach iteration.\
+Seen as the example at above, this is a range iteration.\
 Iterations can have two variables: Current index and current element.
 
-This example, just shows index. Let's see foreach iteration with content.
+This example, just shows index. Let's see range iteration with content.
 
 For example:
 ```jule
@@ -94,7 +94,7 @@ Jule assign variables data types by automatically by collection. Similar to type
 
 ---
 
-Foreach iterations have immutable variables by default. But you may want to get them as mutable. For this, enclose the identifiers in parentheses and qualify the variable you want to be mutable as mutable.
+Range iterations have immutable variables by default. But you may want to get them as mutable. For this, enclose the identifiers in parentheses and qualify the variable you want to be mutable as mutable.
 
 For example:
 ```jule

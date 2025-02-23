@@ -31,6 +31,10 @@ let x = []f64([1, 2, 3, 4, 5])
 
 At example above, the variable `x` has the `[]f64` type.
 
+### Range Iterations
+
+Slices can be used with range iteration. The first variable in the iteration is an integer-type index variable. This variable represents the index of the element, while the second variable is the element currently pointed to in the iteration.
+
 ## Passing Slices to Variadic Parameter
 We know that `...` is used for Variadic parameters. We also know that each variadic parameter is actually a slice.
 So can we pass an slice to a variadic parameter? Yes. Again, the `...` operator is used for this.

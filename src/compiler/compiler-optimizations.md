@@ -37,7 +37,7 @@ Enabled special optimizations for the built-in append function.
 Enables special optimizations for copy operations.\
 It reduces copying operations whenever possible.
 
-- Once proven safe, it reduces the cost of copying in foreach iterations. Having immutability is very effective to have this optimization.
+- Once proven safe, it reduces the cost of copying in range iterations. Having immutability is very effective to have this optimization.
 - Refers to data instead of copying when using lvalue in match statements.
 - Converts empty string comparisons to length-is-zero checking.
 - Avoids making literal wrapper for strings when strings compared with literals.
@@ -97,7 +97,7 @@ Enables special optimizations for memory accessing.
 
 - Skips safety checks such as boundary checking if accessed to array via constant index expression.
 - Removes the cost of boundary checking of expressions like `array[i&(len(array)-1)]` for arrays whose length is power of two.
-- If in a foreach iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
+- If in a range iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
 - If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
 - If it can be understood that the smart pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
 
@@ -176,8 +176,8 @@ Enables special optimizations for exceptionals.
 `--opt-iter`\
 Enables special optimizations for iterations.
 
-- Removes casting if non-constant string casted to byte slice for range iteration. Uses string directly.
-- Removes casting if non-constant stringf cases to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
+- Removes casting if non-constant string casted to byte slice for range iteration. Uses string's bytes directly.
+- Removes casting if non-constant string casted to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
 - Makes array the slice literal expressions of the range iterations.
 
 ---
