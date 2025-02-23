@@ -3,20 +3,22 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsGraphic(r: rune): bool](#isgraphic)\
-[fn IsIn(r: rune, ranges: ...&amp;RangeTable): bool](#isin)\
-[fn IsLetter(r: rune): bool](#isletter)\
-[fn IsNumber(r: rune): bool](#isnumber)\
-[fn IsPunct(r: rune): bool](#ispunct)\
-[fn IsSpace(r: rune): bool](#isspace)\
-[fn IsDigit(r: rune): bool](#isdigit)\
-[fn To(case: int, mut r: rune): rune](#to)\
-[fn ToUpper(mut r: rune): rune](#toupper)\
-[fn ToLower(mut r: rune): rune](#tolower)\
-[fn Is(rangeTab: &amp;RangeTable, r: rune): bool](#is)\
-[fn IsUpper(r: rune): bool](#isupper)\
-[fn IsLower(r: rune): bool](#islower)\
-[fn SimpleFold(r: rune): rune](#simplefold)\
+[fn IsGraphic\(r: rune\): bool](#isgraphic)\
+[fn IsIn\(r: rune, ranges: \.\.\.&amp;RangeTable\): bool](#isin)\
+[fn IsLetter\(r: rune\): bool](#isletter)\
+[fn IsNumber\(r: rune\): bool](#isnumber)\
+[fn IsPunct\(r: rune\): bool](#ispunct)\
+[fn IsSpace\(r: rune\): bool](#isspace)\
+[fn IsPrint\(r: rune\): bool](#isprint)\
+[fn IsDigit\(r: rune\): bool](#isdigit)\
+[fn To\(case: int, mut r: rune\): rune](#to)\
+[fn ToUpper\(mut r: rune\): rune](#toupper)\
+[fn ToLower\(mut r: rune\): rune](#tolower)\
+[fn Is\(rangeTab: &amp;RangeTable, r: rune\): bool](#is)\
+[fn In\(r: rune, ranges: \.\.\.&amp;RangeTable\): bool](#in)\
+[fn IsUpper\(r: rune\): bool](#isupper)\
+[fn IsLower\(r: rune\): bool](#islower)\
+[fn SimpleFold\(r: rune\): rune](#simplefold)\
 [struct CaseRange](#caserange)\
 [struct Range16](#range16)\
 [struct Range32](#range32)\
@@ -27,14 +29,21 @@
 ```jule
 static GraphicRanges = [ ... ]
 ```
-Defines the set of graphic characters according to Unicode.
+Defines the set of graphic characters according to Unicode\.
+
+---
+
+```jule
+static PrintRanges = [ ... ]
+```
+Defines the set of printable characters according to Jule\. ASCII space, U\+0020, is handled separately\.
 
 ---
 
 ```jule
 static Categories: map[str]&RangeTable = { ... }
 ```
-The set of Unicode category tables.
+The set of Unicode category tables\.
 
 ---
 
@@ -94,7 +103,7 @@ static ZS: &RangeTable = _ZS    // The set of Unicode characters in category ZS 
 ```jule
 static Scripts: map[str]&RangeTable = { ... }
 ```
-The set of Unicode script tables.
+The set of Unicode script tables\.
 
 ---
 
@@ -270,7 +279,7 @@ static ZanabazarSquare: &RangeTable = _ZANABAZAR_SQUARE             // The set o
 ```jule
 static Properties: map[str]&RangeTable = { ... }
 ```
-The set of Unicode property tables.
+The set of Unicode property tables\.
 
 ---
 
@@ -317,42 +326,42 @@ static WhiteSpace: &RangeTable = _WHITE_SPACE                                   
 ```jule
 static FoldCategory: map[str]&RangeTable = { ... }
 ```
-Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category. If there is NO entry for a category name, there are NO such points.
+Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category\. If there is NO entry for a category name, there are NO such points\.
 
 ---
 
 ```jule
 static FoldScript: map[str]&RangeTable = { ... }
 ```
-Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script. If there is NO entry for a script name, there are NO such points.
+Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script\. If there is NO entry for a script name, there are NO such points\.
 
 ---
 
 ```jule
 const MaxRune = '\U0010FFFF'
 ```
-Maximum valid Unicode code point.
+Maximum valid Unicode code point\.
 
 ---
 
 ```jule
 const ReplacementChar = '\uFFFD'
 ```
-Represents invalid code points.
+Represents invalid code points\.
 
 ---
 
 ```jule
 const MaxASCII = '\u007F'
 ```
-Maximum ASCII value.
+Maximum ASCII value\.
 
 ---
 
 ```jule
 const MaxLatin1 = '\u00FF'
 ```
-Maximum Latin-1 value.
+Maximum Latin\-1 value\.
 
 ---
 
@@ -362,96 +371,108 @@ const LowerCase = 1
 const TitleCase = 2
 const MaxCase = 3
 ```
-Indices into the delta arrays inside CaseRanges for case mapping.
+Indices into the delta arrays inside CaseRanges for case mapping\.
 
 ## IsGraphic
 ```jule
 fn IsGraphic(r: rune): bool
 ```
-Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, ZS.
+Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, ZS\.
 
 ## IsIn
 ```jule
 fn IsIn(r: rune, ranges: ...&RangeTable): bool
 ```
-Reports whether the rune is a member of one of the ranges.
+Reports whether the rune is a member of one of the ranges\.
 
 ## IsLetter
 ```jule
 fn IsLetter(r: rune): bool
 ```
-Reports whether the rune is a letter (category L).
+Reports whether the rune is a letter \(category L\)\.
 
 ## IsNumber
 ```jule
 fn IsNumber(r: rune): bool
 ```
-Reports whether the rune is a number (category N).
+Reports whether the rune is a number \(category N\)\.
 
 ## IsPunct
 ```jule
 fn IsPunct(r: rune): bool
 ```
-Reports whether the rune is a Unicode punctuation character (category P).
+Reports whether the rune is a Unicode punctuation character \(category P\)\.
 
 ## IsSpace
 ```jule
 fn IsSpace(r: rune): bool
 ```
-Reports whether the rune is a space character as defined by Unicode&#39;s White Space property; in the Latin-1 space this is
+Reports whether the rune is a space character as defined by Unicode&#39;s White Space property; in the Latin\-1 space this is
 
 ```
 '\t', '\n', '\v', '\f', '\r', ' ', U+0085 (NEL), U+00A0 (NBSP).
 ```
-Other definitions of spacing characters are set by category Z and property Pattern\_White\_Space.
+Other definitions of spacing characters are set by category Z and property Pattern\_White\_Space\.
+
+## IsPrint
+```jule
+fn IsPrint(r: rune): bool
+```
+Reports whether the rune is defined as printable by Jule\. Such characters include letters, marks, numbers, punctuation, symbols, and the ASCII space character, from categories \[L\], \[M\], \[N\], \[P\], \[S\] and the ASCII space character\. This categorization is the same as \[IsGraphic\] except that the only spacing character is ASCII space, U\+0020\.
 
 ## IsDigit
 ```jule
 fn IsDigit(r: rune): bool
 ```
-Reports whether the rune is a decimal digit.
+Reports whether the rune is a decimal digit\.
 
 ## To
 ```jule
 fn To(case: int, mut r: rune): rune
 ```
-Maps the rune to the specified case: UpperCase, LowerCase, or TitleCase.
+Maps the rune to the specified case: UpperCase, LowerCase, or TitleCase\.
 
 ## ToUpper
 ```jule
 fn ToUpper(mut r: rune): rune
 ```
-Maps the rune to upper case.
+Maps the rune to upper case\.
 
 ## ToLower
 ```jule
 fn ToLower(mut r: rune): rune
 ```
-Maps the rune to lower case.
+Maps the rune to lower case\.
 
 ## Is
 ```jule
 fn Is(rangeTab: &RangeTable, r: rune): bool
 ```
-Reports whether the rune is in the specified table of ranges.
+Reports whether the rune is in the specified table of ranges\.
+
+## In
+```jule
+fn In(r: rune, ranges: ...&RangeTable): bool
+```
+Reports whether the rune is a member of one of the ranges\.
 
 ## IsUpper
 ```jule
 fn IsUpper(r: rune): bool
 ```
-Reports whether the rune is an upper case letter.
+Reports whether the rune is an upper case letter\.
 
 ## IsLower
 ```jule
 fn IsLower(r: rune): bool
 ```
-Reports whether the rune is a lower case letter.
+Reports whether the rune is a lower case letter\.
 
 ## SimpleFold
 ```jule
 fn SimpleFold(r: rune): rune
 ```
-Iterates over Unicode code points equivalent under the Unicode-defined simple case folding. Among the code points equivalent to rune (including rune itself), SimpleFold returns the smallest rune &gt; r if one exists, or else the smallest rune &gt;= 0. If r is not a valid Unicode code point, SimpleFold(r) returns r.
+Iterates over Unicode code points equivalent under the Unicode\-defined simple case folding\. Among the code points equivalent to rune \(including rune itself\), SimpleFold returns the smallest rune &gt; r if one exists, or else the smallest rune &gt;= 0\. If r is not a valid Unicode code point, SimpleFold\(r\) returns r\.
 
 For example:
 
@@ -477,12 +498,12 @@ struct CaseRange {
 	Delta: d
 }
 ```
-Represents a range of Unicode code points for simple (one code point to one code point) case conversion. The range runs from lo to hi inclusive, with a fixed stride of 1. Deltas are the number to add to the code point to reach the code point for a different case for that character. They may be negative. If zero, it means the character is in the corresponding case. There is a special case representing sequences of alternating corresponding Upper and Lower pairs. It appears with a fixed delta of
+Represents a range of Unicode code points for simple \(one code point to one code point\) case conversion\. The range runs from lo to hi inclusive, with a fixed stride of 1\. Deltas are the number to add to the code point to reach the code point for a different case for that character\. They may be negative\. If zero, it means the character is in the corresponding case\. There is a special case representing sequences of alternating corresponding Upper and Lower pairs\. It appears with a fixed delta of
 
 ```
 {UpperLower, UpperLower, UpperLower}
 ```
-The constant UpperLower has an otherwise impossible delta value.
+The constant UpperLower has an otherwise impossible delta value\.
 
 ## Range16
 ```jule
@@ -492,7 +513,7 @@ struct Range16 {
 	Stride: u16
 }
 ```
-Represents of a range of 16-bit Unicode code points. The range runs from lo to hi inclusive and has the specified stride.
+Represents of a range of 16\-bit Unicode code points\. The range runs from lo to hi inclusive and has the specified stride\.
 
 ## Range32
 ```jule
@@ -502,7 +523,7 @@ struct Range32 {
 	Stride: u32
 }
 ```
-Represents of a range of Unicode code points and is used when one or more of the values will not fit in 16 bits. The range runs from lo to hi inclusive and has the specified stride. lo and hi must always be &gt;= 1&lt;&lt;16.
+Represents of a range of Unicode code points and is used when one or more of the values will not fit in 16 bits\. The range runs from lo to hi inclusive and has the specified stride\. lo and hi must always be &gt;= 1&lt;&lt;16\.
 
 ## RangeTable
 ```jule
@@ -512,4 +533,4 @@ struct RangeTable {
 	LatinOffset: int // number of entries in R16 with Hi <= MaxLatin1
 }
 ```
-Defines a set of Unicode code points by listing the ranges of code points within the set. The ranges are listed in two slices to save space: a slice of 16-bit ranges and a slice of 32-bit ranges. The two slices must be in sorted order and non-overlapping. Also, R32 should contain only values &gt;= 0x10000 (1&lt;&lt;16).
+Defines a set of Unicode code points by listing the ranges of code points within the set\. The ranges are listed in two slices to save space: a slice of 16\-bit ranges and a slice of 32\-bit ranges\. The two slices must be in sorted order and non\-overlapping\. Also, R32 should contain only values &gt;= 0x10000 \(1&lt;&lt;16\)\.
