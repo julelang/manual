@@ -6,13 +6,17 @@
 [fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
 [fn Valid\(data: \[\]byte\): bool](#valid)\
 [fn Decode\[T\]\(data: \[\]byte, mut &amp;t: T\)\!](#decode)\
+[struct UnsupportedTypeError](#unsupportedtypeerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+[struct UnsupportedValueError](#unsupportedvalueerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+[struct EncodeError](#encodeerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
 [type Object](#object)\
 [type Array](#array)\
 [type Bool](#bool)\
 [type Number](#number)\
 [type String](#string)\
-[enum EncodeError](#encodeerror)\
-[enum DecodeError](#decodeerror)\
 [enum Value: type ](#value)
 
 
@@ -31,11 +35,11 @@ Encoding details:<br>
 ```
 Since this function designed for comptime type analysis, the type [T] should
 be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
-Any unsupported type causes exceptional with [EncodeError.UnsupportedType].
+Any unsupported type causes exceptional with [UnsupportedTypeError].
 
 Signed/Unsigned Integers, Floating-Points:
 	Encode as JSON numbers.
-	For floating-points, NaN or ±Inf will cause exceptional with [EncodeError.UnsupportedFloatValue].
+	For floating-points, NaN or ±Inf will cause exceptional with [UnsupportedValueError].
 
 Booleans:
 	Encode as JSON booleans.
@@ -63,7 +67,7 @@ Maps:
 	If map is nil, encode as null JSON value.
 	The keys of the map always will be quoted.
 	Also map's key type only can be: signed integer, unsigned integer and string.
-	Other types will cause exceptional with [EncodeError.UnsupportedType].
+	Other types will cause exceptional with [UnsupportedTypeError].
 
 Smart Pointers:
 	If smart pointer is nil, encode as null JSON value.
@@ -103,9 +107,9 @@ Decoding details:<br>
 ```
 Since this function designed for comptime type analysis, the type [T] should
 be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
-Any unsupported type causes exceptional with [DecodeError.UnsupportedType].
+Any unsupported type causes exceptional with [UnsupportedTypeError].
 Any incompatible value for type, invalid literal or something else causes
-exceptional with [DecodeError.UnsupportedType].
+exceptional with [UnsupportedTypeError].
 
 Signed/Unsigned Integers, Floating-Points:
 	Decode as JSON numbers.
@@ -134,7 +138,7 @@ Slices:
 Maps:
 	Decode as JSON object.
 	Map's key type only can be: signed integer, unsigned integer and string.
-	Other types will cause exceptional with [DecodeError.UnsupportedType].
+	Other types will cause exceptional with [UnsupportedTypeError].
 
 Smart Pointers:
 	If smart pointer is nil, will be allocated by the algorithm for decoding.
@@ -167,6 +171,50 @@ JSONDecoder, TextDecoder
 ```
 
 
+## UnsupportedTypeError
+```jule
+struct UnsupportedTypeError {
+	Type: str
+}
+```
+Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value type\.
+
+### Str
+```jule
+fn Str(self): str
+```
+
+
+## UnsupportedValueError
+```jule
+struct UnsupportedValueError {
+	Value: str
+}
+```
+Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value\.
+
+### Str
+```jule
+fn Str(self): str
+```
+
+
+## EncodeError
+```jule
+struct EncodeError {
+	Type:       str
+	Err:        any
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+Represents an error from calling a reserved \[EncodeJSON\] or \[EncodeText\] method\.
+
+### Str
+```jule
+fn Str(self): str
+```
+
+
 ## Object
 ```jule
 type Object: map[str]Value
@@ -196,29 +244,6 @@ Dynamic JSON number type\.
 type String: str
 ```
 Dynamic JSON string type\.
-
-## EncodeError
-```jule
-enum EncodeError {
-	UnsupportedType,
-	UnsupportedFloatValue, // NaN or ±Inf
-	EncodeJSON,            // EncodeJSON returned invalid JSON value
-}
-```
-JSON encoding error codes\.
-
-## DecodeError
-```jule
-enum DecodeError {
-	UnsupportedType,
-	UnexpectedEnd, // Unexpected end of JSON input.
-	ExceededMaxDepth,
-	MissingBeginningOfValue,
-	InvalidToken,
-	InvalidValue,
-}
-```
-JSON decoding error codes\.
 
 ## Value
 ```jule
