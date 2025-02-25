@@ -11,6 +11,16 @@ Clang is a C/C++ compiler using LLVM. Jule gives priority support to Clang and i
 
 ## Clang on Windows
 
-The [MSVC](/compiler/backend/cpp-backend-compilers/#msvc-compatibility) section mentions Jule's support for MSVC. You may want to use Clang on Windows. There is a Clang build we recommend so you can do this. It uses the MinGW toolchain. Compatible with compiling Jule IRs by default. MSVC support is not guaranteed.
+### Jule 0.1.4 and Higher
+
+Jule has a standard library implemented entirely using the Windows API on Windows. For detailed information about Jule's Windows API support, refer to the [Windows API](/compiler/backend/cpp-backend-compilers/#windows-api-compatibility) section.
+
+By default, Jule assumes that you are using Clang (not MinGW; with GCC command-line interface, not MSVC) on Windows if you are using Clang. However, if you are using MinGW Clang, it should not require additional effort.
+
+If you want to use MinGW Clang, the [LLVM/Clang/LLD based mingw-w64 toolchain](https://github.com/mstorsjo/llvm-mingw) GitHub repository is recommended.
+
+### Jule 0.1.3 and Before
+
+The [Windows API](/compiler/backend/cpp-backend-compilers/#windows-api-compatibility) section mentions Jule's support for Windows API. You may want to use Clang on Windows. There is a Clang build we recommend so you can do this. It uses the MinGW toolchain. Compatible with compiling Jule IRs by default. Windows API support is not guaranteed.
 
 Here is the recommended [LLVM/Clang/LLD based mingw-w64 toolchain](https://github.com/mstorsjo/llvm-mingw) repository on GitHub.
