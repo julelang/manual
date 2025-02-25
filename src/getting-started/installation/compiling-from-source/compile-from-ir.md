@@ -40,12 +40,12 @@ We recommend compiling JuleC's IR codes with Clang and C++17. The recommended bu
 
 Recommended compile command (Unix):
 ```sh
-clang++ -O3 --std=c++17 -Wno-everything -o bin/julec ir.cpp
+clang++ -O3 -fwrapv --std=c++17 -Wno-everything -o bin/julec ir.cpp
 ```
 
 Recommended compile command (Windows):
 ```sh
-clang++ -O3 --std=c++17 -Wno-everything -o bin/julec.exe ir.cpp -lws2_32 -lshell32
+clang++ -O3 -fwrapv --std=c++17 -Wno-everything -o bin/julec.exe ir.cpp -lws2_32 -lshell32
 ```
 
 ::: warning
