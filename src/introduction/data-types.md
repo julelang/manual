@@ -23,7 +23,7 @@ Jule is designed strongly typed. Therefore, the data-types of all values must be
 
 ## Integer Literals
 
-Integer literals are handled at compile time using the `Int` structure provided by the `std/math/big` package. As long as they remain untyped, they can represent arbitrarily large numbers. However, when they need to be used with a specific type, they must fit within the bounds of that type.
+Integers constants represent exact values of arbitrary precision and do not overflow. Integer literals are handled at compile time using the `Int` structure provided by the `std/math/big` package. As long as they remain untyped, they can represent arbitrarily large numbers. However, when they need to be used with a specific type, they must fit within the bounds of that type.
 
 For example:
 ```jule
@@ -34,6 +34,10 @@ fn main() {
 }
 ```
 In Jule 0.1.3 and earlier versions, constants were not treated as arbitrarily large numbers. Therefore, the expression `1 << 64` would result in an overflow, leading to an unexpected final computation result. Starting from Jule 0.1.4, `1 << 64` is now a valid expression, and the computation produces the exact expected result.
+
+::: info
+Arbitrary large literals are not technically unlimited. They are constrained to ensure the compiler can function safely. An untyped literal can represent a value of up to 256 bits. Exceeding this limit will cause the compiler to report a constant overflow error.
+:::
 
 ### Decimal
 
