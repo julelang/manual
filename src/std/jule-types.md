@@ -25,8 +25,7 @@
 [fn IsInt\(k: str\): bool](#isint)\
 [fn IsFloat\(k: str\): bool](#isfloat)\
 [fn IsNum\(k: str\): bool](#isnum)\
-[fn IsSigNum\(k: str\): bool](#issignum)\
-[enum Kind](#kind)
+[fn IsSigNum\(k: str\): bool](#issignum)
 
 ## Variables
 
@@ -79,6 +78,28 @@ const MaxU64 = 1<<64 - 1 // 18446744073709551615
 ```
 Integer limit values\.
 
+---
+
+```jule
+const I8 = "i8"
+const I16 = "i16"
+const I32 = "i32"
+const I64 = "i64"
+const U8 = "u8"
+const U16 = "u16"
+const U32 = "u32"
+const U64 = "u64"
+const F32 = "f32"
+const F64 = "f64"
+const Uint = "uint"
+const Int = "int"
+const Uintptr = "uintptr"
+const Bool = "bool"
+const Str = "str"
+const Any = "any"
+```
+Type kinds of primitive types\. These kinds are must match keyword form itself\.
+
 ## RealKindOf
 ```jule
 fn RealKindOf(kind: str): str
@@ -101,13 +122,13 @@ Returns signed integer kind by bit\-size\. Possible bit\-sizes are: 8, 16, 32, a
 ```jule
 fn UintFromBits(bits: int): str
 ```
-Returns unsigned integer kind by bit\-size\. Possible bit\-sizes are: 8, 16, 32, and 64\. Returns empty string if bits is invalid\.
+Returns unsigned integer kind by bit\-size\. Possible bit\-sizes are: 8, 16, 32, and 64\. Panics if bits is invalid\.
 
 ## FloatFromBits
 ```jule
 fn FloatFromBits(bits: int): str
 ```
-Returns floating\-point kind by bit\-size\. Possible bit\-sizes are: 32, and 64\. Returns empty string if bits is invalid\.
+Returns floating\-point kind by bit\-size\. Possible bit\-sizes are: 32, and 64\. Panics if bits is invalid\.
 
 ## CheckBitInt
 ```jule
@@ -174,31 +195,31 @@ Updates platform\-specific information based on the target\. If you will update 
 ```jule
 fn MinI(mut k: str): i64
 ```
-Returns minimum value of signed integer kinds\. Returns 0 if kind iss invalid\.
+Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
 
 ## MaxI
 ```jule
 fn MaxI(mut k: str): i64
 ```
-Returns minimum value of signed integer kinds\. Returns 0 if kind is invalid\.
+Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
 
 ## MaxU
 ```jule
 fn MaxU(mut k: str): u64
 ```
-Returns maximum value of unsigned integer kinds\. Returns 0 if kind is invalid\.
+Returns maximum value of unsigned integer kinds\. Panics if kind is invalid\.
 
 ## Min
 ```jule
 fn Min(mut k: str): f64
 ```
-Returns minimum value of signed/unsigned integer and floating\-point kinds\. Returns 0 if kind is invalid\.
+Returns minimum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
 
 ## Max
 ```jule
 fn Max(mut k: str): f64
 ```
-Returns maximum value of signed/unsigned integer and floating\-point kinds\. Returns 0 if kind is invalid\.
+Returns maximum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
 
 ## IsSigInt
 ```jule
@@ -235,26 +256,3 @@ Reports whether kind is numeric\.
 fn IsSigNum(k: str): bool
 ```
 Reports whether kind is signed numeric\.
-
-## Kind
-```jule
-enum Kind: str {
-	I8: "i8",           // Kind of signed 8-bit integer
-	I16: "i16",         // Kind of signed 16-bit integer
-	I32: "i32",         // Kind of signed 32-bit integer
-	I64: "i64",         // Kind of signed 64-bit integer
-	U8: "u8",           // Kind of unsigned 8-bit integer
-	U16: "u16",         // Kind of unsigned 16-bit integer
-	U32: "u32",         // Kind of unsigned 32-bit integer
-	U64: "u64",         // Kind of unsigned 64-bit integer
-	F32: "f32",         // Kind of 32-bit floating-point
-	F64: "f64",         // Kind of 64-bit floating-point
-	Uint: "uint",       // Kind of system specific bit-size unsigned integer
-	Int: "int",         // Kind of system specific bit-size signed integer
-	Uintptr: "uintptr", // Kind of system specific bit-size unsigned integer
-	Bool: "bool",       // Kind of boolean
-	Str: "str",         // Kind of string
-	Any: "any",         // Kind of any type
-}
-```
-Type kinds of primitive types\. These kinds are must match keyword form itself\.
