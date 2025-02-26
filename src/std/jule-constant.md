@@ -106,7 +106,7 @@ Returns new constant value instance with nil\.
 ```jule
 fn ReadInt(mut self): big::Int
 ```
-Reads integer data\. Returns nil if data is not integer\.
+Reads integer data\. Returns zero value if data is not integer\.
 
 ### ReadBool
 ```jule
