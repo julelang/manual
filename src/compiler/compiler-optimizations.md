@@ -81,7 +81,6 @@ Enables special optimizations for mathematical operations.
 - Skips the divide-by-zero check for division when operand is constant.
 - Skips the divide-by-zero check for modulo when operand is constant.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
-- Converts divisions to bit shifting if possible. Good conditions for this optimization: operands are integer, denominator is constant and power of 2.
 - Converts modulo by 2 expressions to equivalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
