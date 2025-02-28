@@ -3,73 +3,73 @@
 ## Index
 
 [Variables](#variables)\
-[fn Atanh(mut x: f64): f64](#atanh)\
-[fn F32Bits(f: f32): u32](#f32bits)\
-[fn F32FromBits(b: u32): f32](#f32frombits)\
-[fn F64Bits(f: f64): u64](#f64bits)\
-[fn F64FromBits(b: u64): f64](#f64frombits)\
-[fn Cos(mut x: f64): f64](#cos)\
-[fn Sin(mut x: f64): f64](#sin)\
-[fn Tan(mut x: f64): f64](#tan)\
-[fn Mod(x: f64, mut y: f64): f64](#mod)\
-[fn Frexp(mut f: f64): (frac: f64, exp: int)](#frexp)\
-[fn NextAfter32(x: f32, y: f32): (r: f32)](#nextafter32)\
-[fn NextAfter(x: f64, y: f64): (r: f64)](#nextafter)\
-[fn Copysign(f: f64, sign: f64): f64](#copysign)\
-[fn Atan2(y: f64, x: f64): f64](#atan2)\
-[fn Floor(x: f64): f64](#floor)\
-[fn Ceil(x: f64): f64](#ceil)\
-[fn Trunc(x: f64): f64](#trunc)\
-[fn Round(x: f64): f64](#round)\
-[fn RoundEven(x: f64): f64](#roundeven)\
-[fn NaN(): f64](#nan)\
-[fn IsNaN(f: f64): bool](#isnan)\
-[fn Inf(sign: int): f64](#inf)\
-[fn IsInf(f: f64, sign: int): bool](#isinf)\
-[fn Sincos(mut x: f64): (sin: f64, cos: f64)](#sincos)\
-[fn Dim(x: f64, y: f64): f64](#dim)\
-[fn Max(x: f64, y: f64): f64](#max)\
-[fn Min(x: f64, y: f64): f64](#min)\
-[fn Log(x: f64): f64](#log)\
-[fn Expm1(mut x: f64): f64](#expm1)\
-[fn Abs(x: f64): f64](#abs)\
-[fn J1(mut x: f64): f64](#j1)\
-[fn Y1(x: f64): f64](#y1)\
-[fn FMA(x: f64, y: f64, z: f64): f64](#fma)\
-[fn Modf(f: f64): (integer: f64, frac: f64)](#modf)\
-[fn Log10(x: f64): f64](#log10)\
-[fn Log2(x: f64): f64](#log2)\
-[fn Hypot(mut p: f64, mut q: f64): f64](#hypot)\
-[fn J0(mut x: f64): f64](#j0)\
-[fn Y0(x: f64): f64](#y0)\
-[fn Ldexp(mut frac: f64, mut exp: int): f64](#ldexp)\
-[fn Signbit(x: f64): bool](#signbit)\
-[fn Sinh(mut x: f64): f64](#sinh)\
-[fn Cosh(mut x: f64): f64](#cosh)\
-[fn Lgamma(mut x: f64): (lgamma: f64, sign: int)](#lgamma)\
-[fn Acosh(x: f64): f64](#acosh)\
-[fn Tanh(x: f64): f64](#tanh)\
-[fn Cbrt(mut x: f64): f64](#cbrt)\
-[fn Pow(x: f64, y: f64): f64](#pow)\
-[fn Exp(x: f64): f64](#exp)\
-[fn Exp2(x: f64): f64](#exp2)\
-[fn Log1p(x: f64): f64](#log1p)\
-[fn Gamma(mut x: f64): f64](#gamma)\
-[fn Erfinv(mut x: f64): f64](#erfinv)\
-[fn Erfcinv(x: f64): f64](#erfcinv)\
-[fn Erf(mut x: f64): f64](#erf)\
-[fn Erfc(mut x: f64): f64](#erfc)\
-[fn Pow10(n: int): f64](#pow10)\
-[fn Sqrt(x: f64): f64](#sqrt)\
-[fn Logb(x: f64): f64](#logb)\
-[fn Ilogb(x: f64): int](#ilogb)\
-[fn Jn(mut n: int, mut x: f64): f64](#jn)\
-[fn Yn(mut n: int, x: f64): f64](#yn)\
-[fn Remainder(mut x: f64, mut y: f64): f64](#remainder)\
-[fn Atan(x: f64): f64](#atan)\
-[fn Asin(mut x: f64): f64](#asin)\
-[fn Acos(x: f64): f64](#acos)\
-[fn Asinh(mut x: f64): f64](#asinh)
+[fn Atanh\(mut x: f64\): f64](#atanh)\
+[fn F32bits\(f: f32\): u32](#f32bits)\
+[fn F32frombits\(b: u32\): f32](#f32frombits)\
+[fn F64bits\(f: f64\): u64](#f64bits)\
+[fn F64frombits\(b: u64\): f64](#f64frombits)\
+[fn Cos\(mut x: f64\): f64](#cos)\
+[fn Sin\(mut x: f64\): f64](#sin)\
+[fn Tan\(mut x: f64\): f64](#tan)\
+[fn Mod\(x: f64, mut y: f64\): f64](#mod)\
+[fn Frexp\(mut f: f64\): \(frac: f64, exp: int\)](#frexp)\
+[fn Nextafter32\(x: f32, y: f32\): \(r: f32\)](#nextafter32)\
+[fn Nextafter\(x: f64, y: f64\): \(r: f64\)](#nextafter)\
+[fn Copysign\(f: f64, sign: f64\): f64](#copysign)\
+[fn Atan2\(y: f64, x: f64\): f64](#atan2)\
+[fn Floor\(x: f64\): f64](#floor)\
+[fn Ceil\(x: f64\): f64](#ceil)\
+[fn Trunc\(x: f64\): f64](#trunc)\
+[fn Round\(x: f64\): f64](#round)\
+[fn RoundEven\(x: f64\): f64](#roundeven)\
+[fn NaN\(\): f64](#nan)\
+[fn IsNaN\(f: f64\): bool](#isnan)\
+[fn Inf\(sign: int\): f64](#inf)\
+[fn IsInf\(f: f64, sign: int\): bool](#isinf)\
+[fn Sincos\(mut x: f64\): \(sin: f64, cos: f64\)](#sincos)\
+[fn Dim\(x: f64, y: f64\): f64](#dim)\
+[fn Max\(x: f64, y: f64\): f64](#max)\
+[fn Min\(x: f64, y: f64\): f64](#min)\
+[fn Log\(x: f64\): f64](#log)\
+[fn Expm1\(mut x: f64\): f64](#expm1)\
+[fn Abs\(x: f64\): f64](#abs)\
+[fn J1\(mut x: f64\): f64](#j1)\
+[fn Y1\(x: f64\): f64](#y1)\
+[fn FMA\(x: f64, y: f64, z: f64\): f64](#fma)\
+[fn Modf\(f: f64\): \(i: f64, frac: f64\)](#modf)\
+[fn Log10\(x: f64\): f64](#log10)\
+[fn Log2\(x: f64\): f64](#log2)\
+[fn Hypot\(mut p: f64, mut q: f64\): f64](#hypot)\
+[fn J0\(mut x: f64\): f64](#j0)\
+[fn Y0\(x: f64\): f64](#y0)\
+[fn Ldexp\(mut frac: f64, mut exp: int\): f64](#ldexp)\
+[fn Signbit\(x: f64\): bool](#signbit)\
+[fn Sinh\(mut x: f64\): f64](#sinh)\
+[fn Cosh\(mut x: f64\): f64](#cosh)\
+[fn Lgamma\(mut x: f64\): \(lgamma: f64, sign: int\)](#lgamma)\
+[fn Acosh\(x: f64\): f64](#acosh)\
+[fn Tanh\(x: f64\): f64](#tanh)\
+[fn Cbrt\(mut x: f64\): f64](#cbrt)\
+[fn Pow\(x: f64, y: f64\): f64](#pow)\
+[fn Exp\(x: f64\): f64](#exp)\
+[fn Exp2\(x: f64\): f64](#exp2)\
+[fn Log1p\(x: f64\): f64](#log1p)\
+[fn Gamma\(mut x: f64\): f64](#gamma)\
+[fn Erfinv\(mut x: f64\): f64](#erfinv)\
+[fn Erfcinv\(x: f64\): f64](#erfcinv)\
+[fn Erf\(mut x: f64\): f64](#erf)\
+[fn Erfc\(mut x: f64\): f64](#erfc)\
+[fn Pow10\(n: int\): f64](#pow10)\
+[fn Sqrt\(x: f64\): f64](#sqrt)\
+[fn Logb\(x: f64\): f64](#logb)\
+[fn Ilogb\(x: f64\): int](#ilogb)\
+[fn Jn\(mut n: int, mut x: f64\): f64](#jn)\
+[fn Yn\(mut n: int, x: f64\): f64](#yn)\
+[fn Remainder\(mut x: f64, mut y: f64\): f64](#remainder)\
+[fn Atan\(x: f64\): f64](#atan)\
+[fn Asin\(mut x: f64\): f64](#asin)\
+[fn Acos\(x: f64\): f64](#acos)\
+[fn Asinh\(mut x: f64\): f64](#asinh)
 
 ## Variables
 
@@ -105,13 +105,13 @@ const Log10E = 1 / Ln10
 ```jule
 static M_PI4: [...]u64 = [ ... ]
 ```
-Is the binary digits of 4/pi as a u64 array, that is, 4/pi = Sum M\_PI4\[i\]\*2^(-64\*i) 19 64-bit digits and the leading one bit give 1217 bits of precision to handle the largest possible f64 exponent.
+Is the binary digits of 4/pi as a u64 array, that is, 4/pi = Sum M\_PI4\[i\]\*2^\(\-64\*i\) 19 64\-bit digits and the leading one bit give 1217 bits of precision to handle the largest possible f64 exponent\.
 
 ## Atanh
 ```jule
 fn Atanh(mut x: f64): f64
 ```
-Returns the inverse hyperbolic tangent of x.
+Returns the inverse hyperbolic tangent of x\.
 
 Special cases are:<br>
 ```
@@ -123,35 +123,35 @@ Atanh(NaN) = NaN
 ```
 
 
-## F32Bits
+## F32bits
 ```jule
-fn F32Bits(f: f32): u32
+fn F32bits(f: f32): u32
 ```
-Returns the IEEE 754 binary representation of f, with the sign bit of f and the result in the same bit position. F32Bits(F32FromBits(x)) == x.
+Returns the IEEE 754 binary representation of f, with the sign bit of f and the result in the same bit position\. F32bits\(F32frombits\(x\)\) == x\.
 
-## F32FromBits
+## F32frombits
 ```jule
-fn F32FromBits(b: u32): f32
+fn F32frombits(b: u32): f32
 ```
-Returns the floating-point number corresponding to the IEEE 754 binary representation b, with the sign bit of b and the result in the same bit position. F32FromBits(F32Bits(x)) == x.
+Returns the floating\-point number corresponding to the IEEE 754 binary representation b, with the sign bit of b and the result in the same bit position\. F32frombits\(F32bits\(x\)\) == x\.
 
-## F64Bits
+## F64bits
 ```jule
-fn F64Bits(f: f64): u64
+fn F64bits(f: f64): u64
 ```
-Returns the IEEE 754 binary representation of f, with the sign bit of f and the result in the same bit position, and F64Bits(F64FromBits(x)) == x.
+Returns the IEEE 754 binary representation of f, with the sign bit of f and the result in the same bit position, and F64bits\(F64frombits\(x\)\) == x\.
 
-## F64FromBits
+## F64frombits
 ```jule
-fn F64FromBits(b: u64): f64
+fn F64frombits(b: u64): f64
 ```
-Returns the floating-point number corresponding to the IEEE 754 binary representation b, with the sign bit of b and the result in the same bit position. F64FromBits(F64Bits(x)) == x.
+Returns the floating\-point number corresponding to the IEEE 754 binary representation b, with the sign bit of b and the result in the same bit position\. F64frombits\(F64bits\(x\)\) == x\.
 
 ## Cos
 ```jule
 fn Cos(mut x: f64): f64
 ```
-Returns the cosine of the radian argument x.
+Returns the cosine of the radian argument x\.
 
 Special cases are:<br>
 ```
@@ -164,7 +164,7 @@ Cos(NaN) = NaN
 ```jule
 fn Sin(mut x: f64): f64
 ```
-Returns the sine of the radian argument x.
+Returns the sine of the radian argument x\.
 
 Special cases are:<br>
 ```
@@ -178,7 +178,7 @@ Sin(NaN) = NaN
 ```jule
 fn Tan(mut x: f64): f64
 ```
-Returns the tangent of the radian argument x.
+Returns the tangent of the radian argument x\.
 
 Special cases are:<br>
 ```
@@ -192,7 +192,7 @@ Tan(NaN) = NaN
 ```jule
 fn Mod(x: f64, mut y: f64): f64
 ```
-Returns the floating-point remainder of x/y. The magnitude of the result is less than y and its sign agrees with that of x.
+Returns the floating\-point remainder of x/y\. The magnitude of the result is less than y and its sign agrees with that of x\.
 
 Special cases are:<br>
 ```
@@ -208,7 +208,7 @@ Mod(x, NaN) = NaN
 ```jule
 fn Frexp(mut f: f64): (frac: f64, exp: int)
 ```
-Breaks f into a normalized fraction and an integral power of two. It returns frac and exp satisfying f == frac × 2\*\*exp, with the absolute value of frac in the interval \[½, 1).
+Breaks f into a normalized fraction and an integral power of two\. It returns frac and exp satisfying f == frac × 2\*\*exp, with the absolute value of frac in the interval \[½, 1\)\.
 
 Special cases are:<br>
 ```
@@ -218,31 +218,31 @@ Frexp(NaN) = NaN, 0
 ```
 
 
-## NextAfter32
+## Nextafter32
 ```jule
-fn NextAfter32(x: f32, y: f32): (r: f32)
+fn Nextafter32(x: f32, y: f32): (r: f32)
 ```
-Returns the next representable f32 value after x towards y.
+Returns the next representable f32 value after x towards y\.
 
 Special cases are:<br>
 ```
-NextAfter32(x, x)   = x
-NextAfter32(NaN, y) = NaN
-NextAfter32(x, NaN) = NaN
+Nextafter32(x, x)   = x
+Nextafter32(NaN, y) = NaN
+Nextafter32(x, NaN) = NaN
 ```
 
 
-## NextAfter
+## Nextafter
 ```jule
-fn NextAfter(x: f64, y: f64): (r: f64)
+fn Nextafter(x: f64, y: f64): (r: f64)
 ```
-Returns the next representable f64 value after x towards y.
+Returns the next representable f64 value after x towards y\.
 
 Special cases are:<br>
 ```
-NextAfter(x, x)   = x
-NextAfter(NaN, y) = NaN
-NextAfter(x, NaN) = NaN
+Nextafter(x, x)   = x
+Nextafter(NaN, y) = NaN
+Nextafter(x, NaN) = NaN
 ```
 
 
@@ -250,15 +250,15 @@ NextAfter(x, NaN) = NaN
 ```jule
 fn Copysign(f: f64, sign: f64): f64
 ```
-Returns a value with the magnitude of f and the sign of sign.
+Returns a value with the magnitude of f and the sign of sign\.
 
 ## Atan2
 ```jule
 fn Atan2(y: f64, x: f64): f64
 ```
-Returns the arc tangent of y/x, using the signs of the two to determine the quadrant of the return value.
+Returns the arc tangent of y/x, using the signs of the two to determine the quadrant of the return value\.
 
-Special cases are (in order):<br>
+Special cases are \(in order\):<br>
 ```
 Atan2(y, NaN) = NaN
 Atan2(NaN, x) = NaN
@@ -284,7 +284,7 @@ Atan2(-Inf, x) = -Pi/2
 ```jule
 fn Floor(x: f64): f64
 ```
-Returns the greatest integer value less than or equal to x.
+Returns the greatest integer value less than or equal to x\.
 
 Special cases are:<br>
 ```
@@ -298,7 +298,7 @@ Floor(NaN) = NaN
 ```jule
 fn Ceil(x: f64): f64
 ```
-Returns the least integer value greater than or equal to x.
+Returns the least integer value greater than or equal to x\.
 
 Special cases are:<br>
 ```
@@ -312,7 +312,7 @@ Ceil(NaN) = NaN
 ```jule
 fn Trunc(x: f64): f64
 ```
-Returns the integer value of x.
+Returns the integer value of x\.
 
 Special cases are:<br>
 ```
@@ -326,7 +326,7 @@ Trunc(NaN) = NaN
 ```jule
 fn Round(x: f64): f64
 ```
-Returns the nearest integer, rounding half away from zero.
+Returns the nearest integer, rounding half away from zero\.
 
 Special cases are:<br>
 ```
@@ -340,7 +340,7 @@ Round(NaN) = NaN
 ```jule
 fn RoundEven(x: f64): f64
 ```
-Returns the nearest integer, rounding ties to even.
+Returns the nearest integer, rounding ties to even\.
 
 Special cases are:<br>
 ```
@@ -354,31 +354,31 @@ RoundEven(NaN) = NaN
 ```jule
 fn NaN(): f64
 ```
-Returns an IEEE 754 “not-a-number” value.
+Returns an IEEE 754 “not\-a\-number” value\.
 
 ## IsNaN
 ```jule
 fn IsNaN(f: f64): bool
 ```
-Reports whether f is an IEEE 754 “not-a-number” value.
+Reports whether f is an IEEE 754 “not\-a\-number” value\.
 
 ## Inf
 ```jule
 fn Inf(sign: int): f64
 ```
-Returns positive infinity if sign &gt;= 0, negative infinity if !sign &lt; 0.
+Returns positive infinity if sign &gt;= 0, negative infinity if \!sign &lt; 0\.
 
 ## IsInf
 ```jule
 fn IsInf(f: f64, sign: int): bool
 ```
-Reports whether f is an infinity, according to sign. If sign &gt; 0, IsInf reports whether f is positive infinity. If sign &lt; 0, IsInf reports whether f is negative infinity. If sign == 0, IsInf reports whether f is either infinity.
+Reports whether f is an infinity, according to sign\. If sign &gt; 0, IsInf reports whether f is positive infinity\. If sign &lt; 0, IsInf reports whether f is negative infinity\. If sign == 0, IsInf reports whether f is either infinity\.
 
 ## Sincos
 ```jule
 fn Sincos(mut x: f64): (sin: f64, cos: f64)
 ```
-Returns Sin(x), Cos(x).
+Returns Sin\(x\), Cos\(x\)\.
 
 Special cases are:<br>
 ```
@@ -392,7 +392,7 @@ Sincos(NaN) = NaN, NaN
 ```jule
 fn Dim(x: f64, y: f64): f64
 ```
-Returns the maximum of x-y or 0.
+Returns the maximum of x\-y or 0\.
 
 Special cases are:<br>
 ```
@@ -406,7 +406,7 @@ Dim(x, NaN) = Dim(NaN, x) = NaN
 ```jule
 fn Max(x: f64, y: f64): f64
 ```
-Returns the larger of x or y.
+Returns the larger of x or y\.
 
 Special cases are:<br>
 ```
@@ -421,7 +421,7 @@ Max(-0, -0)  = -0
 ```jule
 fn Min(x: f64, y: f64): f64
 ```
-Returns the smaller of x or y.
+Returns the smaller of x or y\.
 
 Special cases are:<br>
 ```
@@ -435,7 +435,7 @@ Min(-0, ±0)  = Min(±0, -0) = -0
 ```jule
 fn Log(x: f64): f64
 ```
-Returns the natural logarithm of x.
+Returns the natural logarithm of x\.
 
 Special cases are:<br>
 ```
@@ -450,7 +450,7 @@ Log(NaN) = NaN
 ```jule
 fn Expm1(mut x: f64): f64
 ```
-Returns e\*\*x - 1, the base-e exponential of x minus 1. It is more accurate than Exp(x) - 1 when x is near zero.
+Returns e\*\*x \- 1, the base\-e exponential of x minus 1\. It is more accurate than Exp\(x\) \- 1 when x is near zero\.
 
 Special cases are:<br>
 ```
@@ -458,13 +458,13 @@ Expm1(+Inf) = +Inf
 Expm1(-Inf) = -1
 Expm1(NaN) = NaN
 ```
-Very large values overflow to -1 or +Inf.
+Very large values overflow to \-1 or \+Inf\.
 
 ## Abs
 ```jule
 fn Abs(x: f64): f64
 ```
-Returns the absolute value of x.
+Returns the absolute value of x\.
 
 Special cases are:<br>
 ```
@@ -477,7 +477,7 @@ Abs(NaN) = NaN
 ```jule
 fn J1(mut x: f64): f64
 ```
-Returns the order-one Bessel function of the first kind.
+Returns the order\-one Bessel function of the first kind\.
 
 Special cases are:<br>
 ```
@@ -490,7 +490,7 @@ J1(NaN) = NaN
 ```jule
 fn Y1(x: f64): f64
 ```
-Returns the order-one Bessel function of the second kind.
+Returns the order\-one Bessel function of the second kind\.
 
 Special cases are:<br>
 ```
@@ -505,15 +505,16 @@ Y1(NaN) = NaN
 ```jule
 fn FMA(x: f64, y: f64, z: f64): f64
 ```
-Returns x \* y + z, computed with only one rounding. (That is, FMA returns the fused multiply-add of x, y, and z.)
+Returns x \* y \+ z, computed with only one rounding\. \(That is, FMA returns the fused multiply\-add of x, y, and z\.\)
 
 ## Modf
 ```jule
-fn Modf(f: f64): (integer: f64, frac: f64)
+fn Modf(f: f64): (i: f64, frac: f64)
 ```
-Returns integer and fractional floating-point numbers that sum to f. Both values have the same sign as f.
+Returns integer and fractional floating\-point numbers that sum to f\. Both values have the same sign as f\.
 
-Special cases are:<br>
+Special cases are:
+
 ```
 Modf(±Inf) = ±Inf, NaN
 Modf(NaN) = NaN, NaN
@@ -524,19 +525,19 @@ Modf(NaN) = NaN, NaN
 ```jule
 fn Log10(x: f64): f64
 ```
-Returns the decimal logarithm of x. The special cases are the same as for log.
+Returns the decimal logarithm of x\. The special cases are the same as for log\.
 
 ## Log2
 ```jule
 fn Log2(x: f64): f64
 ```
-Returns the binary logarithm of x. The special cases are the same as for log.
+Returns the binary logarithm of x\. The special cases are the same as for log\.
 
 ## Hypot
 ```jule
 fn Hypot(mut p: f64, mut q: f64): f64
 ```
-Returns Sqrt(p\*p + q\*q), taking care to avoid unnecessary overflow and underflow.
+Returns Sqrt\(p\*p \+ q\*q\), taking care to avoid unnecessary overflow and underflow\.
 
 Special cases are:<br>
 ```
@@ -551,7 +552,7 @@ Hypot(p, NaN) = NaN
 ```jule
 fn J0(mut x: f64): f64
 ```
-Returns the order-zero Bessel function of the first kind.
+Returns the order\-zero Bessel function of the first kind\.
 
 Special cases are:<br>
 ```
@@ -565,7 +566,7 @@ J0(NaN) = NaN
 ```jule
 fn Y0(x: f64): f64
 ```
-Returns the order-zero Bessel function of the second kind.
+Returns the order\-zero Bessel function of the second kind\.
 
 Special cases are:<br>
 ```
@@ -580,7 +581,7 @@ Y0(NaN) = NaN
 ```jule
 fn Ldexp(mut frac: f64, mut exp: int): f64
 ```
-Is the inverse of frexp. It returns frac × 2\*\*exp.
+Is the inverse of frexp\. It returns frac × 2\*\*exp\.
 
 Special cases are:<br>
 ```
@@ -594,13 +595,13 @@ Ldexp(NaN, exp) = NaN
 ```jule
 fn Signbit(x: f64): bool
 ```
-Reports whether x is negative or negative zero.
+Reports whether x is negative or negative zero\.
 
 ## Sinh
 ```jule
 fn Sinh(mut x: f64): f64
 ```
-Returns the hyperbolic sine of x.
+Returns the hyperbolic sine of x\.
 
 Special cases are:<br>
 ```
@@ -614,7 +615,7 @@ Sinh(NaN) = NaN
 ```jule
 fn Cosh(mut x: f64): f64
 ```
-Returns the hyperbolic cosine of x.
+Returns the hyperbolic cosine of x\.
 
 Special cases are:<br>
 ```
@@ -628,7 +629,7 @@ Cosh(NaN) = NaN
 ```jule
 fn Lgamma(mut x: f64): (lgamma: f64, sign: int)
 ```
-Returns the natural logarithm and sign (-1 or +1) of Gamma(x).
+Returns the natural logarithm and sign \(\-1 or \+1\) of Gamma\(x\)\.
 
 Special cases are:<br>
 ```
@@ -644,7 +645,7 @@ Lgamma(NaN) = NaN
 ```jule
 fn Acosh(x: f64): f64
 ```
-Returns the inverse hyperbolic cosine of x.
+Returns the inverse hyperbolic cosine of x\.
 
 Special cases are:<br>
 ```
@@ -658,7 +659,7 @@ Acosh(NaN) = NaN
 ```jule
 fn Tanh(x: f64): f64
 ```
-Returns the hyperbolic tangent of x.
+Returns the hyperbolic tangent of x\.
 
 Special cases are:<br>
 ```
@@ -672,7 +673,7 @@ Tanh(NaN) = NaN
 ```jule
 fn Cbrt(mut x: f64): f64
 ```
-Returns the cube root of x.
+Returns the cube root of x\.
 
 Special cases are:<br>
 ```
@@ -686,9 +687,10 @@ Cbrt(NaN) = NaN
 ```jule
 fn Pow(x: f64, y: f64): f64
 ```
-Returns x\*\*y, the base-x exponential of y.
+Returns x\*\*y, the base\-x exponential of y\.
 
-Special cases are (in order):<br>
+Special cases are \(in order\):
+
 ```
 Pow(x, ±0) = 1 for any x
 Pow(1, y) = 1 for any y
@@ -717,26 +719,26 @@ Pow(x, y) = NaN for finite x < 0 and finite non-integer y
 ```jule
 fn Exp(x: f64): f64
 ```
-Returns e\*\*x, the base-e exponential of x.
+Returns e\*\*x, the base\-e exponential of x\.
 
 Special cases are:<br>
 ```
 Exp(Inf) = Inf
 Exp(NaN) = NaN
 ```
-Very large values overflow to 0 or Inf. Very small values underflow to 1.
+Very large values overflow to 0 or Inf\. Very small values underflow to 1\.
 
 ## Exp2
 ```jule
 fn Exp2(x: f64): f64
 ```
-Returns 2\*\*x, the base-2 exponential of x. Special cases are the same as Exp.
+Returns 2\*\*x, the base\-2 exponential of x\. Special cases are the same as Exp\.
 
 ## Log1p
 ```jule
 fn Log1p(x: f64): f64
 ```
-Returns the natural logarithm of 1 plus its argument x. It is more accurate than Log(1 + x) when x is near zero.
+Returns the natural logarithm of 1 plus its argument x\. It is more accurate than Log\(1 \+ x\) when x is near zero\.
 
 Special cases are:<br>
 ```
@@ -752,7 +754,7 @@ Log1p(NaN) = NaN
 ```jule
 fn Gamma(mut x: f64): f64
 ```
-Returns the Gamma function of x.
+Returns the Gamma function of x\.
 
 Special cases are:<br>
 ```
@@ -769,7 +771,7 @@ Gamma(NaN) = NaN
 ```jule
 fn Erfinv(mut x: f64): f64
 ```
-Returns the inverse error function of x.
+Returns the inverse error function of x\.
 
 Special cases are:<br>
 ```
@@ -784,7 +786,7 @@ Erfinv(NaN) = NaN
 ```jule
 fn Erfcinv(x: f64): f64
 ```
-Returns the inverse of erfc(x).
+Returns the inverse of erfc\(x\)\.
 
 Special cases are:<br>
 ```
@@ -799,7 +801,7 @@ Erfcinv(NaN) = NaN
 ```jule
 fn Erf(mut x: f64): f64
 ```
-Returns the error function of x.
+Returns the error function of x\.
 
 Special cases are:<br>
 ```
@@ -813,7 +815,7 @@ Erf(NaN) = NaN
 ```jule
 fn Erfc(mut x: f64): f64
 ```
-Returns the complementary error function of x.
+Returns the complementary error function of x\.
 
 Special cases are:<br>
 ```
@@ -827,7 +829,7 @@ Erfc(NaN) = NaN
 ```jule
 fn Pow10(n: int): f64
 ```
-Returns 10\*\*n, the base-10 exponential of n.
+Returns 10\*\*n, the base\-10 exponential of n\.
 
 Special cases are:<br>
 ```
@@ -840,7 +842,7 @@ Pow10(n) = Inf for n > 308
 ```jule
 fn Sqrt(x: f64): f64
 ```
-Returns the square root of x.
+Returns the square root of x\.
 
 Special cases are:<br>
 ```
@@ -855,7 +857,7 @@ Sqrt(NaN) = NaN
 ```jule
 fn Logb(x: f64): f64
 ```
-Returns the binary exponent of x.
+Returns the binary exponent of x\.
 
 Special cases are:<br>
 ```
@@ -869,7 +871,7 @@ Logb(NaN) = NaN
 ```jule
 fn Ilogb(x: f64): int
 ```
-Returns the binary exponent of x as an integer.
+Returns the binary exponent of x as an integer\.
 
 Special cases are:<br>
 ```
@@ -883,7 +885,7 @@ Ilogb(NaN) = i32.Max
 ```jule
 fn Jn(mut n: int, mut x: f64): f64
 ```
-Returns the order-n Bessel function of the first kind.
+Returns the order\-n Bessel function of the first kind\.
 
 Special cases are:<br>
 ```
@@ -896,7 +898,7 @@ Jn(n, NaN) = NaN
 ```jule
 fn Yn(mut n: int, x: f64): f64
 ```
-Returns the order-n Bessel function of the second kind.
+Returns the order\-n Bessel function of the second kind\.
 
 Special cases are:<br>
 ```
@@ -912,7 +914,7 @@ Yn(n, NaN) = NaN
 ```jule
 fn Remainder(mut x: f64, mut y: f64): f64
 ```
-Returns the IEEE 754 floating-point remainder of x/y.
+Returns the IEEE 754 floating\-point remainder of x/y\.
 
 Special cases are:<br>
 ```
@@ -928,7 +930,7 @@ Remainder(x, NaN) = NaN
 ```jule
 fn Atan(x: f64): f64
 ```
-Returns the arctangent, in radians, of x.
+Returns the arctangent, in radians, of x\.
 
 Special cases are:<br>
 ```
@@ -941,7 +943,7 @@ Atan(±Inf) = ±Pi/2
 ```jule
 fn Asin(mut x: f64): f64
 ```
-Returns the arcsine, in radians, of x.
+Returns the arcsine, in radians, of x\.
 
 Special cases are:<br>
 ```
@@ -954,7 +956,7 @@ Asin(x) = NaN if x < -1 or x > 1
 ```jule
 fn Acos(x: f64): f64
 ```
-Returns the arccosine, in radians, of x.
+Returns the arccosine, in radians, of x\.
 
 Special case is:<br>
 ```
@@ -966,7 +968,7 @@ Acos(x) = NaN if x < -1 or x > 1
 ```jule
 fn Asinh(mut x: f64): f64
 ```
-Returns the inverse hyperbolic sine of x.
+Returns the inverse hyperbolic sine of x\.
 
 Special cases are:<br>
 ```
