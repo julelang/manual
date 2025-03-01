@@ -134,9 +134,9 @@ trait ByteReader {
 ```
 Implements the basic ReadByte method\.
 
-It should read byte and return one for n without throwing exceptional if success\. It should return zero n for EOF\. If read failed, should throw exceptional\.
+It should read byte and return one for n without throwing exceptional if success\. It should return zero n for EOF, the EOF byte is implementation\-dependent\. If read failed, should throw exceptional\.
 
-The ReadByte method mutable because of same reasons of the \`Writer\` trait\.
+The ReadByte method mutable because of same reasons of the \`Reader\` trait\.
 
 Exceptionals are not standardized\. Should be documented by implementations\.
 
@@ -155,14 +155,14 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## RuneReader
 ```jule
 trait RuneReader {
-	fn ReadRune(mut self)!: rune
+	fn ReadRune(mut self)!: (r: rune, size: int)
 }
 ```
 Implements the basic ReadRune method\.
 
-It should read rune and return without throwing exceptional if success\. If read failed, should throw exceptional\.
+It reads a single encoded Unicode character and returns the rune and its size in bytes\. It should return zero size for EOF, the EOF rune is implementation\-dependent\.
 
-The ReadRune method mutable because of same reasons of the \`Writer\` trait\.
+The ReadRune method mutable because of same reasons of the \`Reader\` trait\.
 
 Exceptionals are not standardized\. Should be documented by implementations\.
 
@@ -190,7 +190,7 @@ Implements the basic Close method\.
 
 The behavior of the Close method is not standardized\. Specific implementations should document their own behavior\. After first call the Close method behavior may be undefined, but exceptional throw recommended if any error should be occur\.
 
-The Close method mutable because of same reasons of the \`Writer\` trait\.
+The Close method mutable because of same reasons of the \`Reader\` trait\.
 
 Exceptionals are not standardized\. Should be documented by implementations\.
 
@@ -214,7 +214,9 @@ If it is reading from an input source with a seek offset, it should not affect n
 
 Clients of ReadAt can execute parallel ReadAt calls on the same input source\.
 
-Implementations must not retain p\.
+The ReadAt method mutable because of same reasons of the \`Reader\` trait\.
+
+Implementations must not retain p\. Exceptionals are not standardized\. Should be documented by implementations\.
 
 ## WriterTo
 ```jule
@@ -225,6 +227,10 @@ trait WriterTo {
 The trait that wraps the WriteTo method\.
 
 It writes data to w until there&#39;s no more data to write or when an error occurs\. The return value n is the number of bytes written\. Any error encountered during the write is also forwarded\.
+
+The WriteTo method mutable because of same reasons of the \`Reader\` trait\.
+
+Exceptionals are not standardized\. Should be documented by implementations\.
 
 ## Seeker
 ```jule
@@ -237,6 +243,10 @@ The trait that wraps the basic Seek method\.
 It sets the offset for the next Read or Write to offset, interpreted according to whence: \[SeekStart\] means relative to the start of the file, \[SeekCurrent\] means relative to the current offset, and \[SeekEnd\] means relative to the end \(for example, offset = \-2 specifies the penultimate byte of the file\)\. It returns the new offset relative to the start of the file or throws an error, if any\.
 
 Seeking to an offset before the start of the file is an error\. Seeking to any positive offset may be allowed, but if the new offset exceeds the size of the underlying object the behavior of subsequent I/O operations is implementation\-dependent\.
+
+The Seek method mutable because of same reasons of the \`Reader\` trait\.
+
+Exceptionals are not standardized\. Should be documented by implementations\.
 
 ## ReadCloser
 ```jule
