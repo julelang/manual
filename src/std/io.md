@@ -3,9 +3,12 @@
 ## Index
 
 [Variables](#variables)\
+[fn LimitReader\(mut r: Reader, n: i64\): Reader](#limitreader)\
+[fn CopyN\(mut dst: Writer, mut src: Reader, n: i64\)\!: \(written: i64\)](#copyn)\
 [fn Copy\(mut dst: Writer, mut src: Reader\)\!: \(written: i64\)](#copy)\
 [fn CopyBuffer\(mut dst: Writer, mut src: Reader, mut buf: \[\]byte\)\!: \(written: i64\)](#copybuffer)\
 [fn WriteStr\(mut w: Writer, s: str\)\!: \(n: int\)](#writestr)\
+[fn ReadAll\(mut r: Reader\)\!: \[\]byte](#readall)\
 [trait Reader](#reader)\
 [trait Writer](#writer)\
 [trait StrWriter](#strwriter)\
@@ -66,11 +69,23 @@ static mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
 
+## LimitReader
+```jule
+fn LimitReader(mut r: Reader, n: i64): Reader
+```
+Returns a Reader that reads from r but stops like EOF after n bytes\.
+
+## CopyN
+```jule
+fn CopyN(mut dst: Writer, mut src: Reader, n: i64)!: (written: i64)
+```
+Copies n bytes \(or until an error\) from src to dst\. It returns the number of bytes copied and throws the earliest error encountered while copying\. On return, written == n if and only if no errror\.
+
 ## Copy
 ```jule
 fn Copy(mut dst: Writer, mut src: Reader)!: (written: i64)
 ```
-Copy copies from src to dst until either EOF is reached on src or an error occurs\. It returns the number of bytes copied and the first error encountered while copying, if any\.
+Copies from src to dst until either EOF is reached on src or an error occurs\. It returns the number of bytes copied and the first error encountered while copying, if any\.
 
 Forwards any exceptional and may be throw InvalidWrite or ShortWrite\.
 
@@ -85,6 +100,12 @@ Identical to Copy except that it stages through the provided buffer \(if one is 
 fn WriteStr(mut w: Writer, s: str)!: (n: int)
 ```
 Writes the contents of the string s to w, which accepts a slice of bytes\. The \[Writer\.write\] is invoked directly\.
+
+## ReadAll
+```jule
+fn ReadAll(mut r: Reader)!: []byte
+```
+Reads from r until an error or EOF and returns the data it read\. A successful call throws no exception\.
 
 ## Reader
 ```jule
