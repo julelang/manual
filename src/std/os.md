@@ -59,10 +59,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(self\): bool](#isdir-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(self\): FileMode](#mode)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ModTime\(self\): time::Time](#modtime)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
-[enum Error](#error)\
-[enum CmdError](#cmderror)\
-[enum FSError](#fserror)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)
 
 ## Variables
 
@@ -331,6 +328,7 @@ There may be system call differences and performance differences for console han
 - `io::WriteCloser`
 - `io::ReadWriter`
 - `io::Stream`
+- `io::Seeker`
 
 ### Write
 ```jule
@@ -507,65 +505,3 @@ Returns modification time\.
 fn Size(self): i64
 ```
 Returns length in bytes for regular files; system\-dependent for others\.
-
-## Error
-```jule
-enum Error {
-	Denied,             // Search permission is denied for a component of the path prefix
-	IO,                 // Input/Output error, an error occurred while reading from the file system
-	Loop,               // A loop exists in symbolic links encountered during resolution of the path argument
-	LongPath,           // The length of the path argument exceeds maximum path length or a pathname component is longer than maximum name length
-	NotExist,           // A component of path does not name an existing file or path is an empty string
-	NotDir,             // A component of the path prefix is not a directory
-	InsufficientMemory, // Insufficient memory to complete the operation
-	Device,             // Device did not respond
-}
-```
-General OS error codes\.
-
-## CmdError
-```jule
-enum CmdError {
-	Denied,   // Permission is not enough.
-	NotExist, // One or more components of the new process path name of the file do not exist or is a null pathname.
-	Env,      // Environment variables are represented in wrong format or an error occurred when assigning.
-	Spawn,    // An error occurred spawning.
-	Other,    // Other system error.
-}
-```
-Cmd error codes\.
-
-## FSError
-```jule
-enum FSError {
-	Denied,             // Search permission is denied for a component of the path prefix
-	IO,                 // Input/Output error, an error occurred while reading from or writing to the file system
-	Loop,               // A loop exists in symbolic links encountered during resolution of the path argument
-	LongPath,           // The length of the path argument exceeds maximum path length or a pathname component is longer than maximum name length
-	NotExist,           // A component of path does not name an existing file or path is an empty string
-	NotDir,             // A component of the path prefix is not a directory
-	Overflow,           // The file size in bytes or the number of blocks allocated to the file or the file serial number cannot be represented correctly in the structure pointed to by buf
-	InvalidDescriptor,  // fd is not a valid file descriptor opened for reading
-	PerProcessLimit,    // The per-process limit on the number of open file descriptors has been reached
-	SystemWideLimit,    // The system-wide limit on the total number of open files has been reached
-	InsufficientMemory, // Insufficient memory to complete the operation
-	Exist,              // A component of path does name an existing file
-	Signal,             // A signal was caught during
-	SyncIO,             // The implementation does not support synchronized I/O for this file
-	IsDir,              // The named file is a directory and flag includes O_WRONLY or O_RDWR
-	UnableStream,       // The path argument names a STREAMS-based file and the system is unable to allocate a STREAM
-	NoSpace,            // There is no space on the drive
-	Device,             // Device did not respond
-	ReadOnly,           // Read-only filesystem
-	Retry,              // Resource temporarily unavailable
-	Busy,               // File is busy
-	Big,                // File too large
-	Pipe,               // Broken pipe
-	Range,              // Input is outside the range
-	Seek,               // Illegal seek
-	Buffer,             // No buffer space available
-	BadMessage,         // Not a data message
-	NotEmpty,           // Not empty
-}
-```
-File system error codes\.
