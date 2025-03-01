@@ -79,7 +79,7 @@ Returns a Reader that reads from r but stops like EOF after n bytes\.
 ```jule
 fn CopyN(mut dst: Writer, mut src: Reader, n: i64)!: (written: i64)
 ```
-Copies n bytes \(or until an error\) from src to dst\. It returns the number of bytes copied and throws the earliest error encountered while copying\. On return, written == n if and only if no errror\.
+Copies n bytes \(or until an error\) from src to dst\. It returns the number of bytes copied and throws the earliest error encountered while copying\. On return, written == n if and only if no error\.
 
 ## Copy
 ```jule
