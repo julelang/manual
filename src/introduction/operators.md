@@ -53,16 +53,6 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | `++` | Equals to += 1 as suffix | lvalue arithmetic++ |
 | `--` | Equals to -= 1 as suffix | lvalue arithmetic-- |
 
-## Integer Overflow
-
-Integer overflow is not checked in any way in Jule. To detect an integer overflow, Jule developers must place check mechanisms in suspicious locations or implement the necessary runtime checks themselves.
-
-Unsigned integer values ​​are handled the same way in Go.\
-From Go Language Specification:
-> For unsigned integer values, the operations +, -, *, and << are computed modulo 2n, where n is the bit width of the unsigned integer's type. Loosely speaking, these unsigned integer operations discard high bits upon overflow, and programs may rely on "wrap around".
-
-For shifting operators, discards high and low bits upon overflow. If bitsize exceeds, integer always will be zero.
-
 ## Comparison Operators
 
 | Operator | Description |
@@ -73,10 +63,6 @@ For shifting operators, discards high and low bits upon overflow. If bitsize exc
 | `<` | Less than |
 | `>=` | Greater than or equal to |
 | `<=` | Less than or equal to |
-
-For `==` and `!=` operators, the slices, maps, anonymous functions, and some binded types are not supported. If a structure uses one of these types, it will be unsupported also.
-
-For binded types, all binded structures accepted as non-comparable. Other type aliases like binded as `int` or something like that, accepted as comparable.
 
 ## Bitwise Operators
 | Operator | Description |

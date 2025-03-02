@@ -39,6 +39,20 @@ In Jule 0.1.3 and earlier versions, constants were not treated as arbitrarily la
 Arbitrary large literals are not technically unlimited. They are constrained to ensure the compiler can function safely. An untyped literal can represent a value of up to 256 bits. Exceeding this limit will cause the compiler to report a constant overflow error.
 :::
 
+#### Integer Overflow
+
+Integer overflow is not checked in any way in Jule. To detect an integer overflow, Jule developers must place check mechanisms in suspicious locations or implement the necessary runtime checks themselves.
+
+Unsigned integer values ​​are handled the same way in Go.\
+From Go Language Specification:
+> For unsigned integer values, the operations +, -, *, and << are computed modulo 2n, where n is the bit width of the unsigned integer's type. Loosely speaking, these unsigned integer operations discard high bits upon overflow, and programs may rely on "wrap around".
+
+For shifting operators, discards high and low bits upon overflow. If bitsize exceeds, integer always will be zero.
+
+#### Divisions
+
+Dividing integers by zero (including modulo) results in a runtime panic.
+
 ### Decimal
 
 Decimal expressions are literals that do not contain any special prefixes (such as `0x` or `0`).
@@ -69,6 +83,10 @@ Hexadecimal literals are literals that begin with `0x`. Only the digits [0, 9] a
 
 ## Floating-Point Literals
 All floating-point literals are `f64` by default.
+
+#### Divisions
+
+Dividing floating-point numbers by zero results in `Inf`. If either the divisor or the dividend is negative, the result will be `-Inf`; otherwise, it will be `Inf`.
 
 ```jule
 3.14
