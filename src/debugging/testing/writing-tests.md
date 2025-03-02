@@ -67,7 +67,7 @@ Just use your usual build command to run the tests. Just add `test` at the begin
 
 In test compilations, your code does not call the entry point. It executes test functions and runs your tests respectively when executed.
 
-Outputs appear in your test codes such as `out` or `outln` calls. In case of any panic, your tests will fail and the program will terminate as in every panic call.
+Outputs appear in your test codes such as `print` or `println` calls. In case of any panic, your tests will fail and the program will terminate as in every panic call.
 
 For example to test compilation:
 ```
