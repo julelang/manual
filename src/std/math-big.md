@@ -2,7 +2,9 @@
 
 ## Index
 
+[Variables](#variables)\
 [type Word](#word)\
+[type Accuracy](#accuracy)\
 [struct Int](#int)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Parse\(mut s: str, base: int\): \(Int, ok: bool\)](#parse)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn FromU64\(x: u64\): Int](#fromu64)\
@@ -34,7 +36,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn BitLen\(self\): int](#bitlen)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bit\(self, i: int\): uint](#bit)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(self\): Int](#abs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn BitNot\(self\): Int](#bitnot)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Not\(self\): Int](#not)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Neg\(self\): Int](#neg)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Odd\(self\): bool](#odd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Even\(self\): bool](#even)\
@@ -46,15 +48,29 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(self, b: int\): str](#format)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Cmp\(self, y: Int\): \(r: int\)](#cmp)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn CmpAbs\(self, y: Int\): int](#cmpabs)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn CmpAbs\(self, y: Int\): int](#cmpabs)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn F64\(self\): \(f64, Accuracy\)](#f64)
 
+## Variables
 
+```jule
+const Below: Accuracy = -1
+const Exact: Accuracy = 0
+const Above: Accuracy = +1
+```
+Constants describing the \[Accuracy\] of a \[Float\]\.
 
 ## Word
 ```jule
 type Word: uint
 ```
 Represents a single digit of a multi\-precision unsigned integer\.
+
+## Accuracy
+```jule
+type Accuracy: i8
+```
+Describes the rounding error produced by the most recent operation that generated a \[Float\] value, relative to the exact value\.
 
 ## Int
 ```jule
@@ -286,9 +302,9 @@ fn Abs(self): Int
 ```
 Returns absolute value of x\(self\)\.
 
-### BitNot
+### Not
 ```jule
-fn BitNot(self): Int
+fn Not(self): Int
 ```
 Returns ^x\(self\)\.
 
@@ -369,3 +385,9 @@ Compares integers\. x = self\. Returns \+1 if x &gt; y Returns 0 if x == y Retur
 fn CmpAbs(self, y: Int): int
 ```
 Compares absolute value\. x = self\. Returns \+1 if \|x\| &gt; \|y\| Returns 0 if \|x\| == \|y\| Returns \-1 if \|x\| &lt; \|y\|
+
+### F64
+```jule
+fn F64(self): (f64, Accuracy)
+```
+Returns the f64 value nearest x\(self\), and an indication of any rounding that occurred\.
