@@ -200,3 +200,13 @@ Declaration of: `zprint`
 void __jule_println(jule::Str s);
 ```
 Declaration of: `zprintln`
+
+```cpp
+jule::F64 __jule_NaN(void)
+```
+Declaration of `nan`
+
+```cpp
+jule::F64 __jule_Inf(jule::Int sign)
+```
+Declaration of `inf`

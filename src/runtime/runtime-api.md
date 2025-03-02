@@ -216,3 +216,13 @@ The runtime implementation of the built-in print function.
 fn zprintln(s: str)
 ```
 The runtime implementation of the built-in println function.
+
+```jule
+fn nan(): f64
+```
+Equals to the math::NaN function.
+
+```jule
+fn inf(sign: int): f64
+```
+Equals to the math::Inf function.
