@@ -19,35 +19,47 @@ List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i3
 
 ### Untyped Literals
 
-Untyped literals are constants that do not have an explicit type for numeric types. Since these values ​​do not have a definitive type, they can be used with any compatible type. These types only acquire an exact type through operations such as casting; when they lose an untyped state, they lose the advantage of being usable with compatible types and must pass compatibility checks with the exact type.
+Untyped literals are literals that do not have an exact type. This allows them to automatically adapt to any compatible type. When untyped literals undergo casting, they lose their untyped nature and start behaving as the explicitly cast type.
 
 For example:
 ```jule
-x := uint(0)
-if x < -1 {
-    println("impossible case")
+type String: str
+
+fn main() {
+	let mut x: String = "hello world"
+	x = "assignment with untyped literal"
+	x = str("assignment with typed literal") // compile error
 }
 ```
-The example above has an if that checks that the unsigned integer is less than `-1`. The `-1` literal is untyped, but since it is incompatible with unsigned integer, the compiler will not use it appropriately and will give an error.
+In the example above, the variable `x` is defined with the `String` type and initialized with an untyped string literal. The untyped string literal adapts to the `String` type. The following first statement assigns an untyped string literal to the variable `x`, which similarly results in the untyped literal behaving as a `String`, causing no errors. However, the subsequent assignment statement will result in an error because, with casting, the untyped string literal now has an exact type (i.e., `str`), which is incompatible with the `String` type.
 
-But if it had an exact type, this error wouldn't exist.\
+#### Untyped Integers
+
+Integers constants represent exact values of arbitrary precision and do not overflow. Integer literals are handled at compile time using the `Int` structure provided by the `std/math/big` package. As long as they remain untyped, they can represent arbitrarily big numbers. However, when they need to be used with a specific type, they must fit within the limits of that type.
+
+An untyped integer literal can be stored as untyped in an untyped constant variable. However, in cases where it needs to be treated as a typed value while still being untyped, it will always attempt to default to the `int` type. If the untyped value overflows the `int`, this will result in a compiler error.
+
 For example:
 ```jule
-x := uint(0)
-if x < uint(-1) {
-    println("possible case")
+const maxU64 = 1<<64 - 1
+
+fn main() {
+	println(maxU64)
 }
 ```
-Since the cast was made in the example above, the `-1` literal now has the exact type `uint` and is cast and converted according to this type at comptime. The above code is not a problem for the compiler since it has the exact type and is cast.
+In Jule 0.1.3 and earlier versions, constants were not treated as arbitrarily big numbers. Therefore, the expression `1 << 64` would result in an overflow, leading to an unexpected final computation result. Starting from Jule 0.1.4, `1 << 64` is now a valid expression, and the computation produces the exact expected result.
 
-### Example Evaluations
+::: info
+Arbitrary big literals are not technically unlimited. They are constrained to ensure the compiler can function safely. An untyped literal can represent a value of up to 256 bits. Exceeding this limit will cause the compiler to report a constant overflow error.
+:::
 
-| Expression                | Evaluation Result                      |
-|---------------------------|----------------------------------------|
-| `5 + 5`                   | `10`                                   |
-| `2 * (2 + 2)`             | `8`                                    |
-| `"hello" + " " + "world"` | `"hello world"`                        |
-| `uint(-1)`                | `uint.Max`                             |
+### Casting of Constant Values
+
+Casting is handled differently for untyped and typed constants.
+
+If an untyped constant is cast, it will no longer remain untyped and will instead adopt the cast type. If the untyped value overflows the cast type, this will result in a compiler error. An untyped value must always be compatible with the cast type. When untyped integers are cast to floating-point types, the `Int` type (provided by `std/math/big`) uses its `F64` method and accuracy always should be `Exact`.
+
+When casting typed constant values, it does not cause an error if the constant value overflows the cast type. At comptime, Jule arithmetic will yield the same result with runtime. For example, the expression `u32(i32(-12))` will result in a `u32` type with `4294967284`.
 
 ## Constant Variables
 
