@@ -10,7 +10,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn NewStr\(x: str\): &amp;Const](#newstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn NewF64\(x: f64\): &amp;Const](#newf64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn NewNil\(\): &amp;Const](#newnil)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(mut self\): big::Int](#readint)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(self\): bool](#readbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(self\): str](#readstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadF64\(self\): f64](#readf64)\
@@ -104,7 +104,7 @@ Returns new constant value instance with nil\.
 
 ### ReadInt
 ```jule
-fn ReadInt(mut self): big::Int
+fn ReadInt(self): big::Int
 ```
 Reads integer data\. Returns zero value if data is not integer\.
 
