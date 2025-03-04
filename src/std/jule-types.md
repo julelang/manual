@@ -53,10 +53,10 @@ Unsigned integer kind of target architecture\. Is equivalent to &#34;uint&#34; a
 ```jule
 const MaxF32 = 0x1p127 * (1 + (1 - 0x1p-23))
 const MinF32 = -0x1p127 * (1 + (1 - 0x1p-23))
-const SmallestNonZeroF32 = 0x1p-126 * 0x1p-23
+const SmallestNonzeroF32 = 0x1p-126 * 0x1p-23
 const MaxF64 = 0x1p1023 * (1 + (1 - 0x1p-52))
 const MinF64 = -0x1p1023 * (1 + (1 - 0x1p-52))
-const SmallestNonZeroF64 = 0x1p-1022 * 0x1p-52
+const SmallestNonzeroF64 = 0x1p-1022 * 0x1p-52
 ```
 Floating\-point limit values\. Max is the largest finite value representable by the type\. SmallestNonzero is the smallest positive, non\-zero value representable by the type\.
 
