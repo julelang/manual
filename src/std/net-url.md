@@ -16,10 +16,16 @@ See RFC 3986. This package generally follows RFC 3986, except where it deviates 
 [fn ParseRequestURI\(rawURL: str\)\!: &amp;URL](#parserequesturi)\
 [fn ParseQuery\(query: str\)\!: Values](#parsequery)\
 [fn JoinPath\(base: str, elem: \.\.\.str\)\!: str](#joinpath)\
+[struct Error](#error)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+[type EscapeError](#escapeerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+[type InvalidHostError](#invalidhosterror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
 [struct UserInfo](#userinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Username\(self\): str](#username)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Password\(self\): \(str, bool\)](#password)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
 [struct URL](#url)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedPath\(self\): str](#escapedpath)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedFragment\(self\): str](#escapedfragment)\
@@ -31,7 +37,7 @@ See RFC 3986. This package generally follows RFC 3986, except where it deviates 
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Hostname\(self\): str](#hostname)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Port\(self\): str](#port)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn JoinPath\(mut self, elem: \.\.\.str\): &amp;URL](#joinpath-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Redacted\(self\): str](#redacted)\
 [type Values](#values)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Get\(self, key: str\): str](#get)\
@@ -39,8 +45,7 @@ See RFC 3986. This package generally follows RFC 3986, except where it deviates 
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut self, key: str, value: str\)](#add)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Del\(mut self, key: str\)](#del)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Has\(self, key: str\): bool](#has)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\(self\): str](#encode)\
-[enum URLError](#urlerror)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\(self\): str](#encode)
 
 
 
@@ -111,6 +116,46 @@ Query is expected to be a list of key=value settings separated by ampersands\. A
 fn JoinPath(base: str, elem: ...str)!: str
 ```
 Returns a \[URL\] string with the provided path elements joined to the existing path of base and the resulting path cleaned of any \./ or \.\./ elements\.
+
+## Error
+```jule
+struct Error {
+	Op:  str
+	URL: str
+	Err: any
+}
+```
+Reports an error and the operation and URL that caused it\.
+
+### Str
+```jule
+fn Str(self): str
+```
+
+
+## EscapeError
+```jule
+type EscapeError: str
+```
+
+
+### Str
+```jule
+fn Str(self): str
+```
+
+
+## InvalidHostError
+```jule
+type InvalidHostError: str
+```
+
+
+### Str
+```jule
+fn Str(self): str
+```
+
 
 ## UserInfo
 ```jule
@@ -307,20 +352,3 @@ Reports whether a given key is set\.
 fn Encode(self): str
 ```
 Encodes the values into “URL encoded” form \(&#34;bar=baz&amp;foo=quux&#34;\) sorted by key\.
-
-## URLError
-```jule
-enum URLError {
-	Escape,
-	InvalidHost,
-	MissingProtocolScheme,
-	EmptyURL,
-	InvalidControlCharacter,
-	InvalidURI,
-	FirstPathSegmentCannotContainColon,
-	InvalidUserInfo,
-	InvalidPort,
-	InvalidFormat,
-}
-```
-URL error codes\.
