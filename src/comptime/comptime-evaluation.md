@@ -57,7 +57,7 @@ Arbitrary big literals are not technically unlimited. They are constrained to en
 
 Casting is handled differently for untyped and typed constants.
 
-If an untyped constant is cast, it will no longer remain untyped and will instead adopt the cast type. If the untyped value overflows the cast type, this will result in a compiler error. An untyped value must always be compatible with the cast type. When untyped integers are cast to floating-point types, the `Int` type (provided by `std/math/big`) uses its `F64` method and accuracy always should be `Exact`.
+If an untyped constant is cast, it will no longer remain untyped and will instead adopt the cast type. If the untyped value overflows the cast type, this will result in a compiler error. An untyped value must always be compatible with the cast type. When untyped integers are cast to floating-point types, the `Int` type (provided by `std/math/big`) uses its `F64` method and accuracy always should be `Exact`. For the `f32` type, first, it is cast to the `f64` type in the same way and then cast to the `f32` type. If the cast results in NaN or ±Inf, the `f64` value must also be NaN or ±Inf; otherwise, the casting will result in a compilation error. Otherwise, the result of the casting is not expected to be the same and may be rounded.
 
 When casting typed constant values, it does not cause an error if the constant value overflows the cast type. At comptime, Jule arithmetic will yield the same result with runtime. For example, the expression `u32(i32(-12))` will result in a `u32` type with `4294967284`.
 
