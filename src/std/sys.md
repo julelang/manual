@@ -6,7 +6,6 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 
 [fn GetLastErrno\(\): Errno](#getlasterrno)\
 [fn NewTimeval\(sec: i64, usec: i64, mut &amp;out: Timeval\): bool](#newtimeval)\
-[fn Seek\(handle: int, offset: i64, origin: int\): i64](#seek)\
 [unsafe fn Read\(handle: int, mut buff: \*unsafe, n: uint\): int](#read)\
 [fn Close\(handle: int\): int](#close)\
 [unsafe fn Write\(handle: int, buff: \*unsafe, n: uint\): int](#write)\
@@ -15,6 +14,7 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 [fn Ntohs\(x: int\): u16](#ntohs)\
 [unsafe fn Select\(nfds: int, mut read: \*Fd, mut write: \*Fd, mut err: \*Fd, mut timeout: \*Timeval\): int](#select)\
 [type Errno](#errno)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 [type Timeval](#timeval)\
 [type Sockaddr](#sockaddr)\
 [type SockaddrIn](#sockaddrin)\
@@ -34,12 +34,6 @@ Returns number of last error\.
 fn NewTimeval(sec: i64, usec: i64, mut &out: Timeval): bool
 ```
 Creates new Timeval by sec and usec\. Sets fields of the out\. Reports whether sec and usec have valid range\. If sec or usec have invalid range, out will not be mutated\.
-
-## Seek
-```jule
-fn Seek(handle: int, offset: i64, origin: int): i64
-```
-Wrapper for C&#39;s lseek function\.
 
 ## Read
 ```jule
@@ -85,9 +79,15 @@ C&#39;s select function\.
 
 ## Errno
 ```jule
-type Errno: int
+type Errno: errno
 ```
-Type of error numbers\.
+Type of error number\.
+
+### Str
+```jule
+fn Str(self): str
+```
+
 
 ## Timeval
 ```jule
