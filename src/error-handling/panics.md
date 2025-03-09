@@ -8,14 +8,14 @@ Panics are not recoverable.
 For example:
 ```jule
 fn addToRef(rate: int, mut i: &int) {
-    if i == nil {
-        panic("i is nil")
-    }
-    i += rate
+	if i == nil {
+		panic("i is nil")
+	}
+	*i += rate
 }
 
 fn main() {
-    addToRef(10, nil)
+	addToRef(10, nil)
 }
 ```
 The code above is an example of panicking.

@@ -293,8 +293,8 @@ export default defineConfig({
           text: 'Error Handling',
           link: '/error-handling/',
           items: [
-            { text: 'Error Coding', link: '/error-handling/error-coding' },
             { text: 'Exceptionals', link: '/error-handling/exceptionals' },
+            { text: 'Errors', link: '/error-handling/errors' },
             { text: 'Panics', link: '/error-handling/panics' },
           ],
         },
