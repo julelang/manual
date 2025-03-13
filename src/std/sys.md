@@ -15,7 +15,6 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 [unsafe fn Select\(nfds: int, mut read: \*Fd, mut write: \*Fd, mut err: \*Fd, mut timeout: \*Timeval\): int](#select)\
 [type Errno](#errno)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
-[type Timeval](#timeval)\
 [type Sockaddr](#sockaddr)\
 [type SockaddrIn](#sockaddrin)\
 [type SockaddrIn6](#sockaddrin6)\
@@ -88,12 +87,6 @@ Type of error number\.
 fn Str(self): str
 ```
 
-
-## Timeval
-```jule
-type Timeval: cpp.timeval
-```
-C&#39;s timeval structure\.
 
 ## Sockaddr
 ```jule
