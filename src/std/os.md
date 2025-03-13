@@ -1,5 +1,62 @@
 # std/os
 
+The `std/os` package provides high-level, safe functions for interacting with the operating system. I/O components such as File are not thread-safe and should be used with caution.
+
+<details>
+<summary>Idiomatic Use of Cmd</summary>
+
+The `Cmd` is a structure that allows you to execute commands on the operating system. The following examples work on all UNIX-like platforms where the `ls` command is available.
+
+A simple example:
+```jule
+use "std/os"
+
+fn main() {
+	cmd := os::Cmd.New("ls", "-l")
+	cmd.Stdout(os::Stdout())!
+	cmd.Run()!
+}
+```
+The example code above, runs `ls -l` with main process's standard output. So child process's output will be written to parent's output. The `Stdout` method sets command's child process's stdout handle to input, which is `os::Stdout`. If handles are nil, `Cmd` will be assign child process's handles to DevNull.
+
+If you want to redirect the output to a pipe, it is recommended to use the methods provided by `Cmd` for the relevant handle.
+
+A simple example:
+```jule
+use "std/io"
+use "std/os"
+
+fn main() {
+	cmd := os::Cmd.New("ls", "-l")
+	mut r := cmd.StdoutPipe()!
+	cmd.Start()!
+	data := io::ReadAll(r)!
+	cmd.Wait()!
+	println(str(data))
+}
+```
+The example code above creates a pipe for stdout using the `StdoutPipe` method and obtains it as an `io::ReadCloser`. The `Wait` call will release the created pipes after the child process completed. If you do not use `Wait`, resources may leak.
+
+If you want to redirect a different pipe;
+```jule
+use "std/io"
+use "std/os"
+
+fn main() {
+	mut r, mut w := os::Pipe()!
+	cmd := os::Cmd.New("ls", "-l")
+	cmd.Stdout(w)!
+	cmd.Run()!
+	w.Close()!
+	data := io::ReadAll(r)!
+	r.Close()!
+	println(str(data))
+}
+```
+The example above creates a pipe using the `Pipe` function and assigns the writer pipe to `Stdout`, passing it to the child process. After executing the child process with `Run`, it closes the writer pipe. This step is crucial because the `Cmd` structure does not release resources provided by third parties, so they must be manually closed. Finally, the output is read, and the reader pipe is also closed. Functionally, this is equivalent to using `StdoutPipe`.
+
+</details>
+
 ## Index
 
 [Variables](#variables)\
@@ -7,7 +64,7 @@
 [fn Mkdir\(path: str\)\!](#mkdir)\
 [fn Rmdir\(path: str\)\!](#rmdir)\
 [fn Open\(path: str\)\!: &amp;File](#open)\
-[fn OpenFile\(path: str, mode: int, perm: FileMode\)\!: &amp;File](#openfile)\
+[fn OpenFile\(path: str, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
 [fn Remove\(path: str\)\!](#remove)\
 [fn Create\(path: str\)\!: &amp;File](#create)\
 [fn ReadFile\(path: str\)\!: \[\]byte](#readfile)\
@@ -29,12 +86,19 @@
 [fn Stderr\(\): &amp;Stdio](#stderr)\
 [struct DirEntry](#direntry)\
 [struct Cmd](#cmd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(path: str\): &amp;Cmd](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Spawn\(self\)\!](#spawn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Kill\(self\)\!](#kill)\
+&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(self, mut r: io::Reader\)\!](#stdin-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(self, mut w: io::Writer\)\!](#stdout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(self, mut w: io::Writer\)\!](#stderr-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StdinPipe\(self\)\!: io::WriteCloser](#stdinpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StdoutPipe\(self\)\!: io::ReadCloser](#stdoutpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(self\)\!: io::ReadCloser](#stderrpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(self\)\!](#start)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(self\)\!](#run)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(self\)\!: int](#wait)\
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut self\)\!](#sync)\
@@ -53,13 +117,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadByte\(mut self\)\!: \(b: byte, n: int\)](#readbyte)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut self, b: byte\)\!](#writebyte)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut self, r: rune\)\!: \(n: int\)](#writerune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadLine\(mut self\)\!: str](#readline)\
 [struct FileInfo](#fileinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(self\): bool](#isdir-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(self\): FileMode](#mode)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ModTime\(self\): time::Time](#modtime)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(self, fi2: FileInfo\): bool](#samefile)
 
 ## Variables
 
@@ -141,9 +206,9 @@ Opens the named file for reading\. If successful, methods on the returned file c
 
 ## OpenFile
 ```jule
-fn OpenFile(path: str, mode: int, perm: FileMode)!: &File
+fn OpenFile(path: str, flag: int, perm: FileMode)!: &File
 ```
-Opens file stream with named file, specified flag \(O\_RDRW, O\_TRUNC etc\.\) and perm\. If named file does not exist and O\_CREATE flag is passed, will created with mode \(before umask\)\. If successful, returns File reference with handle to file stream and the reference can used for I/O operations\.
+Opens file stream with named file, specified flag \(O\_RDRW, O\_TRUNC etc\.\) and perm\. If named file does not exist and O\_CREATE flag is passed, will created with mode perm \(before umask\)\. If successful, returns File reference with handle to file stream and the reference can used for I/O operations\.
 
 ## Remove
 ```jule
@@ -273,40 +338,102 @@ Directory entry\.
 ## Cmd
 ```jule
 struct Cmd {
+	// The path of the command to run.
+	//
+	// This is the only field that must be set to a non-zero
+	// value. If it is relative, it is evaluated relative to Dir.
+	Path: str
+
+	// Specifies the working directory of the command.
+	// If it is the empty string, Cmd runs the command in the
+	// calling process's current directory.
+	Dir: str
+
+	// Holds command line arguments, including the command as Args[0].
+	// If it is empty or nil, Start uses {Path}.
+	//
+	// In typical use, both Path and Args are set by calling [Cmd.New].
 	Args: []str
-	Env:  []str
+
+	// Specifies the environment of the process.
+	// Each entry is of the form "key=value".
+	// If it is nil, the new process uses the current process's environment.
+	// If it contains duplicate environment keys, only the last
+	// value in the slice for each duplicate key is used.
+	// As a special case on Windows, SYSTEMROOT is always added if
+	// missing and not explicitly set to the empty string.
+	Env: []str
+
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Runs a command in the operating system\. There is no pipe for the output of the command, so any output will appear on the standard output\.
+Represents an external command being prepared or run\.
 
-The Args stores command\-line arguments\. The first argument is not should to be the path of the executable\. Just pass necessary arguments\.
-
-The Env stores environment variables\. If Env is nil or len\(Env\) == 0, child process will use copy of the parent process&#39;s environment variables\. Environment variables should be in the &#34;KEY=value&#34; format\.
+Once a Cmd has been executed, it is not recommended to reuse the same instance multiple times\. If you use a method that calls \`Wait\`, or explicitly call \`Start\` followed by \`Wait\`, the Cmd instance will become reusable\. However, since data such as Stdout and Stdin will be reset, the command may need to be reconfigured\. Therefore, even after a \`Wait\` call, it is recommended to configure a new Cmd instance for safety\.
 
 ### New
 ```jule
-static fn New(path: str): &Cmd
+static fn New(path: str, mut args: ...str): &Cmd
 ```
-Returns Cmd instance for path\.
+Returns Cmd instance for path with arguments\.
 
-### Spawn
+### Stdin
 ```jule
-fn Spawn(self)!
+fn Stdin(self, mut r: io::Reader)!
 ```
-Spawns new child\-process and executes command\. Panics if command is already spawned\. Use the \[Wait\] or \[Kill\] method to make respawnable\. Exceptionals will always be CmdError\.
+Sets reader that will be connected to the command&#39;s standard input when the command starts\. The reader may be &amp;File or &amp;Stdio; all files will be accepted, if reader is a &amp;Stdio, it should be stdin typically received from \[Stdin\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
-### Kill
+### Stdout
 ```jule
-fn Kill(self)!
+fn Stdout(self, mut w: io::Writer)!
 ```
-Kills process\. Fails if process is not alive\. Panics if command is not spawned\. Exceptionals will always be CmdError\.
+Sets writer that will be connected to the command&#39;s standard output when the command starts\. The writer may be &amp;File or &amp;Stdio; all files will be accepted, if writer is a &amp;Stdio, it should be stdout or stderr typically received from \[Stdin\] or \[Stderr\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
+
+### Stderr
+```jule
+fn Stderr(self, mut w: io::Writer)!
+```
+Sets writer that will be connected to the command&#39;s standard error when the command starts\. The writer may be &amp;File or &amp;Stdio; all files will be accepted, if writer is a &amp;Stdio, it should be stdout or stderr typically received from \[Stdin\] or \[Stderr\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
+
+### StdinPipe
+```jule
+fn StdinPipe(self)!: io::WriteCloser
+```
+Returns a pipe that will be connected to the command&#39;s standard input when the command starts\. The pipe will be closed automatically after \[Cmd\.Wait\] sees the command exit\. A caller need only call Close to force the pipe to close sooner\. For example, if the command being run will not exit until standard input is closed, the caller must close the pipe\.
+
+### StdoutPipe
+```jule
+fn StdoutPipe(self)!: io::ReadCloser
+```
+Returns a pipe that will be connected to the command&#39;s standard output when the command starts\.
+
+\[Cmd\.Wait\] will close the pipe after seeing the command exit, so most callers need not close the pipe themselves\. It is thus incorrect to call Wait before all reads from the pipe have completed\. For the same reason, it is incorrect to call \[Cmd\.Run\] when using StdoutPipe\.
+
+### StderrPipe
+```jule
+fn StderrPipe(self)!: io::ReadCloser
+```
+Returns a pipe that will be connected to the command&#39;s standard error when the command starts\.
+
+\[Cmd\.Wait\] will close the pipe after seeing the command exit, so most callers need not close the pipe themselves\. It is thus incorrect to call Wait before all reads from the pipe have completed\. For the same reason, it is incorrect to use \[Cmd\.Run\] when using StderrPipe\.
+
+### Start
+```jule
+fn Start(self)!
+```
+Starts the specified command but does not wait for it to complete\. After a successful call to Start the \[Cmd\.Wait\] method must be called in order to release associated system resources\.
+
+### Run
+```jule
+fn Run(self)!
+```
+Starts the specified command and waits for it to complete\.
 
 ### Wait
 ```jule
 fn Wait(self)!: int
 ```
-Waits complete for running of process\. Returns exit code of process\. Panics if command is not spawned\. Exceptionals will always be CmdError\.
+Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
 
 ## File
 ```jule
@@ -329,6 +456,7 @@ There may be system call differences and performance differences for console han
 - `io::ReadWriter`
 - `io::Stream`
 - `io::Seeker`
+- `io::StrWriter`
 
 ### Write
 ```jule
@@ -336,15 +464,17 @@ fn Write(mut self, buf: []byte)!: (n: int)
 ```
 Writes bytes to handle and returns written byte count\. The number of bytes written can never exceed the length of the buf\.
 
-Implements the io::Writer trait\.
+### WriteStr
+```jule
+fn WriteStr(mut self, s: str)!: (n: int)
+```
+Like Write, but writes the contents of string s rather than a slice of bytes\.
 
 ### Read
 ```jule
 fn Read(mut self, mut buf: []byte)!: (n: int)
 ```
 Read bytes to buffer from handle and returns read byte count\. The number of bytes read can never exceed the length of the buf\. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow\. Offset will be shifted by the number of bytes read\.
-
-Implements the io::Reader trait\.
 
 ### Seek
 ```jule
@@ -369,8 +499,6 @@ Changes the size of the file\. It does not change the I/O offset\.
 fn Close(mut self)!
 ```
 Closes file handle\.
-
-Implements the io::Closer trait\.
 
 ## FileMode
 ```jule
@@ -505,3 +633,11 @@ Returns modification time\.
 fn Size(self): i64
 ```
 Returns length in bytes for regular files; system\-dependent for others\.
+
+### SameFile
+```jule
+fn SameFile(self, fi2: FileInfo): bool
+```
+Reports whether self and fi2 describe the same file\. For example, on Unix this means that the device and inode fields of the two underlying structures are identical; on other systems the decision may be based on the path names\.
+
+It only applies to results returned by this package&#39;s \[Stat\]\. It returns false in other cases\.
