@@ -32,6 +32,10 @@ fn main() {
 
 The above code should execute without problems, but removing casting will result in a compiler error regarding type safety.
 
+::: info
+Untyped constants can be assigned and cast within Safe Jule. Any typed value, including typed constant literals, must be cast using Unsafe Jule.
+:::
+
 ### Why do we need this safety?
 
 To achieve full compatibility with C types, your compiler encourages you to use only those types. There is an important and simple reason for this: type safety. Even if they are fully compatible, if your compiler treated them like Jule types, it would be easier to get compiler errors and you would run into various problems.
