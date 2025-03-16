@@ -506,8 +506,8 @@ enum LogMsg: str {
 	CastingBindedTypesRequiresUnsafeJule: `casting binded types requires using unsafe Jule, "unsafe { ... }"`,
 	DefineAsStrictAlias: `define as strict type alias with a colon (:) (e.g. type @: <type>)`,
 	RArrowOpExpectsChan: `the "<-" operator expects a channel`,
-	ExpectedMainLike: `declarate main function like: fn main() {}`,
-	ExpectedInitializerLike: `declarate initializer function like: fn init() {}`,
+	ExpectedMainLike: `declare main function like: fn main() {}`,
+	ExpectedInitializerLike: `declare initializer function like: fn init() {}`,
 }
 ```
 Compiler log messages with formatting\.
