@@ -10,8 +10,8 @@ For code example:
 fn main() {
     let x: f32 = 3.14
     let y: int = (int)(x) // Casting
-    println(x)              // Prints 3.14
-    println(y)              // Prints 3
+    println(x)            // Prints 3.14
+    println(y)            // Prints 3
 }
 ```
 As you can see, the variable `x` is of type `f32` and the variable `y` is of type `int`. Normally, variable `y` cannot take variable `x` as a value. However, as seen for example, we can accept the value as `int` by explicitly casting. 
@@ -22,3 +22,7 @@ There is an alternative syntax for single data types.
 It consists of using it like a function.
 
 For example: `u64(10)`
+
+## Dynamic Types
+
+For dynamic types, see the [Casting and Assertion](/dynamic-types/casting-and-assertion) section.
