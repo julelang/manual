@@ -184,7 +184,7 @@ Enables special optimizations for iterations.
 `--opt-dynamic`\
 Enables special optimizations for dynamic programming features.
 
-- If it can be understood that the `<any>` is the type `x` and not nil, it removes the cost of not-nil and type compatibiltiy checking for casting expressions with type `t`. <div class="warning-badge">experimental</div>
+- If it can be understood that the `<any>` is the type `x` and not nil, it removes the cost of not-nil and type compatibiltiy checking for type assertion expressions with type `t`. <div class="warning-badge">experimental</div>
 
 ---
 
