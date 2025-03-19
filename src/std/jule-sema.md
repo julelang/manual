@@ -27,6 +27,7 @@
 [struct StructLitExpr](#structlitexpr)\
 [struct AllocStructLitExpr](#allocstructlitexpr)\
 [struct CastingExpr](#castingexpr)\
+[struct TypeAssertionExpr](#typeassertionexpr)\
 [struct FuncCallExpr](#funccallexpr)\
 [struct SliceExpr](#sliceexpr)\
 [struct IndexingExpr](#indexingexpr)\
@@ -81,7 +82,6 @@
 [struct TypeEnum](#typeenum)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-3)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindItem\(mut self, ident: str\): &amp;TypeEnumItem](#finditem-1)\
 [struct Impl](#impl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(self\): bool](#istraitimpl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(self\): bool](#isstructimpl)\
@@ -156,6 +156,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInitialized\(self\): bool](#isinitialized)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTypeInferred\(self\): bool](#istypeinferred)\
 [struct FuncPattern](#funcpattern)\
+&nbsp;&nbsp;&nbsp;&nbsp;[static fn Main\(f: &amp;Func\): bool](#main)\
+&nbsp;&nbsp;&nbsp;&nbsp;[static fn Init\(f: &amp;Func\): bool](#init)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Str\(f: &amp;Func\): bool](#str-6)\
 [struct Value](#value)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(self\): bool](#isnil)\
@@ -568,7 +570,17 @@ struct CastingExpr {
 	Type:  &Type
 }
 ```
-Casting expression model\. For example: \(int\)\(my\_float\)
+Casting expression model\. For example: \(int\)\(myFloat\)
+
+## TypeAssertionExpr
+```jule
+struct TypeAssertionExpr {
+	Token: &token::Token
+	Expr:  &Value
+	Type:  &Type
+}
+```
+Type assertion expression model\. For example: myExpr\.\(destType\)
 
 ## FuncCallExpr
 ```jule
@@ -1030,7 +1042,6 @@ Returns item by identifier\. Returns nil if not exist any item in this identifie
 ```jule
 struct TypeEnumItem {
 	Token:   &token::Token
-	Ident:   str
 	TypeSym: &TypeSym
 }
 ```
@@ -1062,12 +1073,6 @@ Implement: Kind Returns TypeEnum&#39;s identifier\.
 fn Equal(&self, other: &Type): bool
 ```
 Reports whether types are same\.
-
-### FindItem
-```jule
-fn FindItem(mut self, ident: str): &TypeEnumItem
-```
-Returns item by identifier\. Returns nil if not exist any item in this identifier\.
 
 ## Impl
 ```jule
@@ -1755,6 +1760,18 @@ struct FuncPattern{}
 ```
 Pattern checker for functions and methods\.
 
+### Main
+```jule
+static fn Main(f: &Func): bool
+```
+Reports whether function is the reserved main function\.
+
+### Init
+```jule
+static fn Init(f: &Func): bool
+```
+Reports whether function is the reserved init function\.
+
 ### Str
 ```jule
 static fn Str(f: &Func): bool
@@ -2380,6 +2397,7 @@ enum Expr: type {
 	&ChanRecv,
 	&ChanSend,
 	&BuiltinCloseCallExpr,
+	&TypeAssertionExpr,
 }
 ```
 Expression model\.
