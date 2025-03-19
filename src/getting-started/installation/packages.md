@@ -14,4 +14,5 @@ Still, keep in mind that these packages are not official packages. Jule maintain
 
 ## Trusted Package Maintainers
 
-- [`@adamperkowski`](https://github.com/adamperkowski)(✔): maintainer of the AUR; jule, juledoc, and julefmt packages.
+- [`@adamperkowski`](https://github.com/adamperkowski)(✔): maintainer of the AUR; jule, juledoc, julefmt and nixpkgs; jule packages.
+- [`@sebaguardian`](https://github.com/sebaguardian)(✔): maintainer of the nixpkgs jule package.
