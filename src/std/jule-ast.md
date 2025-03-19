@@ -7,7 +7,6 @@
 [struct Directive](#directive)\
 [struct Type](#type)\
 [struct IdentType](#identtype)\
-[struct SubIdentType](#subidenttype)\
 [struct NamespaceType](#namespacetype)\
 [struct ChanType](#chantype)\
 [struct SptrType](#sptrtype)\
@@ -31,6 +30,7 @@
 [struct UnaryExpr](#unaryexpr)\
 [struct VariadicExpr](#variadicexpr)\
 [struct CastExpr](#castexpr)\
+[struct TypeAssertionExpr](#typeassertionexpr)\
 [struct NamespaceExpr](#namespaceexpr)\
 [struct SubIdentExpr](#subidentexpr)\
 [struct BinaryExpr](#binaryexpr)\
@@ -157,14 +157,6 @@ struct IdentType {
 }
 ```
 Identifier type\.
-
-## SubIdentType
-```jule
-struct SubIdentType {
-	Idents: []&IdentType
-}
-```
-Sub\-identifier type\.
 
 ## NamespaceType
 ```jule
@@ -359,6 +351,15 @@ struct CastExpr {
 }
 ```
 Casting expression\.
+
+## TypeAssertionExpr
+```jule
+struct TypeAssertionExpr {
+	Kind: &Type
+	Expr: &Expr
+}
+```
+Type assertion expression\.
 
 ## NamespaceExpr
 ```jule
@@ -873,7 +874,6 @@ Reports whether enum&#39;s type is default\.
 ```jule
 struct TypeEnumItem {
 	Token: &token::Token
-	Ident: str
 	Kind:  &Type
 }
 ```
@@ -984,7 +984,6 @@ Type of AST Node&#39;s data\.
 ```jule
 enum TypeKind: type {
 	&IdentType,
-	&SubIdentType,
 	&SptrType,
 	&PtrType,
 	&SliceType,
@@ -1024,6 +1023,7 @@ enum ExprData: type {
 	&KeyValPair,
 	&ChanRecv,
 	&ChanSend,
+	&TypeAssertionExpr,
 }
 ```
 Type of Expr&#39;s data\.
