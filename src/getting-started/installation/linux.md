@@ -18,6 +18,48 @@ You can install them using an [AUR helper](https://wiki.archlinux.org/title/AUR_
 paru -S julec
 ```
 
+## Nix
+
+JuleC is available in [Nixpkgs](https://search.nixos.org/packages?channel=unstable&show=julec). The package can be installed with:
+
+<details>
+<summary>nix-env</summary>
+
+On NixOs:
+```bash
+nix-env -iA nixos.julec
+```
+
+On Non NixOs:
+```bash
+# without flakes:
+nix-env -iA nixpkgs.julec
+# with flakes:
+nix profile install nixpkgs#julec
+```
+
+</details>
+
+<details>
+<summary>NixOS Configuration</summary>
+
+```nix
+environment.systemPackages = [
+  pkgs.julec
+];
+```
+
+</details>
+
+<details>
+<summary>nix-shell</summary>
+
+```bash
+nix-shell -p julec
+```
+
+</details>
+
 ## Pre-compiled Binaries
 
 1. Download the latest precompiled package from [GitHub Releases](https://github.com/julelang/jule/releases/latest)<br>
