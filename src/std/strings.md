@@ -42,6 +42,7 @@
 [fn CutSuffix\(s: str, suffix: str\): \(before: str, found: bool\)](#cutsuffix)\
 [fn ToUpper\(s: str\): str](#toupper)\
 [fn ToLower\(s: str\): str](#tolower)\
+[fn Clone\(s: str\): str](#clone)\
 [fn Compare\(a: str, b: str\): int](#compare)\
 [struct Replacer](#replacer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
@@ -352,6 +353,12 @@ Returns s with all Unicode letters mapped to their upper case\.
 fn ToLower(s: str): str
 ```
 Returns s with all Unicode letters mapped to their lower case\.
+
+## Clone
+```jule
+fn Clone(s: str): str
+```
+Returns a fresh copy of s\. It guarantees to make a copy of s into a new allocation, which can be important when retaining only a small substring of a much larger string\. Using Clone can help such programs use less memory\. Of course, since using Clone makes a copy, overuse of Clone can make programs use more memory\. Clone should typically be used only rarely, and only when profiling indicates that it is needed\. For strings of length zero the string &#34;&#34; will be returned and no allocation is made\.
 
 ## Compare
 ```jule
