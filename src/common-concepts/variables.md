@@ -279,3 +279,74 @@ fn shortcut() {
 ::: info
 You can use whichever method you find more useful/readable. Jule does not make any recommendations or set standards on this matter.
 :::
+
+## Grouped Variables and Enumeration
+
+You can define variables by grouping them. This provides maintenance benefits such as common documentation for multiple variables or grouping variables that serve a specific purpose, as well as enabling enumeration.
+
+Only constant variables can be grouped. To group them, define them using the `const` keyword and enclose all variables within parentheses.
+
+For example:
+```jule
+const (
+	a = 10
+	b = 20
+	c = 30
+	d = 40
+	e = 50
+)
+```
+The above definition is technically equivalent to:
+```jule
+const a = 10
+const b = 20
+const c = 30
+const d = 40
+const e = 50
+```
+
+### Enumeration
+
+The enumeration automatically assigns constant values to variables. If a variable within the group does not have an initialization value, it is automatically assigned to enumerated value.
+
+The first constant variable in the group must be explicitly initialized. Its type and value will be copied to the following non-initialized variables accordingly. If any variable within the group has a type annotation, it must be explicitly initialized.
+
+For example:
+```jule
+const (
+    a = 90
+    b
+    c
+)
+```
+In the example above, the `b` and `c` variables inherit the same value as the `a` variable, which means they are untyped constants with the value `90`.
+
+#### The `iota` Variable
+The `iota` variable is defined only for grouped variables. It is an untyped integer constant. For each variable in the grouped variable set, `iota` represents the index of that variable within the group, starting from zero. For `iota` to be defined, the first variable in the group must have a numeric type.
+
+For example:
+```jule
+const (
+    a = iota + 1
+    b = iota + 1
+    c = iota + 1
+)
+```
+As explained, the `iota` variable represents the index of the variable within the group and starts counting from zero. Accordingly, in the example above, the variables `a`, `b`, and `c` take the values `1`, `2`, and `3`, respectively.
+
+As an additional note, if a variable has a value that uses the `iota` variable, the subsequent uninitialized variables will use one more than the previous variable's value instead of copying it directly. This situation continues until a variable is initialized with a value.
+
+For example:
+```jule
+const (
+	a = iota + 1
+	b
+	c
+	e = 89
+	f
+	g
+)
+```
+In the above example, the variable `a` is initialized with a value using the `iota` variable. Therefore, the variables `b` and `c` will take the values `2` and `3`, respectively. The reason for this is that the value of `a` is initialized using the `iota` variable with `iota + 1`, which means it is initialized with the value `1`. The use of the `iota` variable enables incremental enumeration, where each variable is assigned the value that is one more than the previous variable.
+
+The `f` and `g` variables will be assigned the value `89` because the `e` variable is initialized with the value `89`. As explained, this ends the incremental enumeration, and since the `e` variable does not use the `iota` variable, the `f` and `g` variables will copy the value of `e` directly instead of being assigned an incremented value based on `e`.
