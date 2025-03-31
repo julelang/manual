@@ -46,6 +46,11 @@ The example above, here is list of the field values:
 - `G`: `2`
 - `H`: `3`
 
+::: info
+The `iota` variable is available for supported type.
+See [The `iota` variable](/common-concepts/variables#the-iota-variable).
+:::
+
 ## Custom Data Types
 If you want to give enums a data type other than the default, it is possible to do so.
 
@@ -150,3 +155,7 @@ match MyEnum.Foo {
 }
 ```
 In the example above, the type of the actual expression matched is enum. Therefore implicit conversion is not allowed. So the code above is incorrect, the expression `"bar"` is not a valid expression for matching.
+
+## See Also
+
+- [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration)
