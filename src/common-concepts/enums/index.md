@@ -1,11 +1,15 @@
 # Enums
-Enumerations are a structure that allows to collect numeric constant values together. This increases the readability of the code and makes it easier to maintain. The keyword enum is used to declare an enum.
 
-For example:
+
+[The `iota` variable](/common-concepts/variables#the-iota-variable)
+
+Enums are typically grouped constant variables bound to a strict type. Therefore, it is recommended to read the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section before using enums. All enum members are constant and typed literals.
+
+For example to defining enum:
 ```jule
 enum FileMode {
-    Read:  35,
-    Write: 89,
+    Read,
+    Write,
     Both,
 }
 
@@ -13,11 +17,7 @@ fn main() {
     println(FileMode.Read)
 }
 ```
-As seen in the example above, there is an enumeration definition.
-::: info
-- You can use an element before them as a value in enumerations.
-- Enumerations has `int` data type by default.
-:::
+As seen in the example above, there is an enum definition. Enum types default to the `int` type. For numeric types, the default value of the first member of enum is the `iota` variable.
 
 ## Value Assignments
 
@@ -25,7 +25,7 @@ The value assignments are based on previous field. The first element is assigned
 
 For example:
 ```jule
-enum MyEnum: int {
+enum MyEnum {
     A: -20,
     B,
     C,
@@ -38,18 +38,13 @@ enum MyEnum: int {
 ```
 The example above, here is list of the field values:
 - `A`: `-20`
-- `B`: `-19`
-- `C`: `-18`
+- `B`: `-20`
+- `C`: `-20`
 - `D`: `20`
-- `E`: `21`
+- `E`: `20`
 - `F`: `1`
-- `G`: `2`
-- `H`: `3`
-
-::: info
-The `iota` variable is available for supported type.
-See [The `iota` variable](/common-concepts/variables#the-iota-variable).
-:::
+- `G`: `1`
+- `H`: `1`
 
 ## Custom Data Types
 If you want to give enums a data type other than the default, it is possible to do so.
@@ -72,9 +67,9 @@ You can use only signed/unsigned integer or str data types.
 :::
 
 ## Default Values
-Enums should always define a default value for security reasons. This default value is the first field of the enum. The first field always represents the default value, and your compiler will initialize an enum type with its default value when necessary.
+Enums should always define a default value for safety reasons. This default value is the first field of the enum. The first field always represents the default value, and your compiler will initialize an enum type with its default value when necessary.
 
-If you are using a numeric type, this default value is zero. If you are using a string, the default value will be directly the same as the identifier of the first field.
+The first member of an enum with no custom expression is always have a default value, unlike enumeration of grouped variables. If you are using a numeric type, this default value is `iota`. If you are using a string, the default value will be directly the same as the identifier of the first field. Other fileds will evaluated based on the first member's expressions, following the explained behavior in the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section.
 
 Your compiler does not automatically define the default field. Therefore, every time you define an enum, it must have at least one field and this field will be used as the default field.
 
@@ -155,7 +150,3 @@ match MyEnum.Foo {
 }
 ```
 In the example above, the type of the actual expression matched is enum. Therefore implicit conversion is not allowed. So the code above is incorrect, the expression `"bar"` is not a valid expression for matching.
-
-## See Also
-
-- [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration)

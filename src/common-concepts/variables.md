@@ -347,6 +347,19 @@ const (
 	g
 )
 ```
-In the above example, the variable `a` is initialized with a value using the `iota` variable. Therefore, the variables `b` and `c` will take the values `2` and `3`, respectively. The reason for this is that the value of `a` is initialized using the `iota` variable with `iota + 1`, which means it is initialized with the value `1`. The use of the `iota` variable enables incremental enumeration, where each variable is assigned the value that is one more than the previous variable.
+In the example above, the variable `a` is initialized with a value using the `iota` variable. Therefore, the variables `b` and `c` will take the values `2` and `3`, respectively. The reason for this is that the value of `a` is initialized using the `iota` variable with `iota + 1`, which means it is initialized with the value `1`. The use of the `iota` variable enables incremental enumeration, where each variable is assigned the value that is one more than the previous variable.
 
 The `f` and `g` variables will be assigned the value `89` because the `e` variable is initialized with the value `89`. As explained, this ends the incremental enumeration, and since the `e` variable does not use the `iota` variable, the `f` and `g` variables will copy the value of `e` directly instead of being assigned an incremented value based on `e`.
+
+Note that incremental enumeration uses the same expression with latest `iota` value for the following members. So if you're expecting an increment of one, your expression needs to accommodate that. If you have an expression like binary shifting, the value may increase exponentially.
+
+For example:
+```jule
+const (
+	a = 1 << iota
+	b
+	c
+	d
+)
+```
+In the example above, the varaible `a` is initialized with a value using the  `iota` variable. This value is result of a binary shifting. Following members use incremental enumeration and result will be changed by the `iota` variable value. As explained, the members will take the values `1`, `2`, `4`, and `8` because expression is applied for the each member with their `iota` value.
