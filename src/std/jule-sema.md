@@ -72,12 +72,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut self, ident: str\): &amp;Func](#findmethod-2)\
-[struct EnumItem](#enumitem)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AutoExpr\(self\): bool](#autoexpr)\
 [struct Enum](#enum)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindItem\(mut self, ident: str\): &amp;EnumItem](#finditem)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindItem\(mut self, ident: str\): &amp;Var](#finditem)\
 [struct TypeEnumItem](#typeenumitem)\
 [struct TypeEnum](#typeenum)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
@@ -155,6 +153,7 @@
 [struct Var](#var)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInitialized\(self\): bool](#isinitialized)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTypeInferred\(self\): bool](#istypeinferred)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEnumField\(self\): bool](#isenumfield)\
 [struct FuncPattern](#funcpattern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Main\(f: &amp;Func\): bool](#main)\
 &nbsp;&nbsp;&nbsp;&nbsp;[static fn Init\(f: &amp;Func\): bool](#init)\
@@ -988,22 +987,6 @@ fn FindMethod(mut self, ident: str): &Func
 ```
 Returns method by identifier\. Returns nil if not exist any method in this identifier\.
 
-## EnumItem
-```jule
-struct EnumItem {
-	Token:    &token::Token
-	Ident:    str
-	ValueSym: &ValueSym
-}
-```
-Enum item\.
-
-### AutoExpr
-```jule
-fn AutoExpr(self): bool
-```
-Reports whether item has auto expression\.
-
 ## Enum
 ```jule
 struct Enum {
@@ -1011,7 +994,7 @@ struct Enum {
 	Public:  bool
 	Ident:   str
 	TypeSym: &TypeSym
-	Items:   []&EnumItem
+	Items:   []&Var // See developer reference (14).
 }
 ```
 Enum\.
@@ -1034,7 +1017,7 @@ Reports whether types are same\.
 
 ### FindItem
 ```jule
-fn FindItem(mut self, ident: str): &EnumItem
+fn FindItem(mut self, ident: str): &Var
 ```
 Returns item by identifier\. Returns nil if not exist any item in this identifier\.
 
@@ -1738,6 +1721,11 @@ struct Var {
 	// This variable depended to these variables for initialization expression.
 	// Nil if not global variable.
 	Depends: []&Var
+
+	// See developer reference (13).
+	GroupIndex: int    // Index of variable in the group, if variable is grouped.
+	Group:      []&Var // All variables of group in define order, if variable is grouped.
+	Iota:       bool   // The enumerable iota variable used in the expression.
 }
 ```
 Variable\.
@@ -1753,6 +1741,12 @@ Reports whether variable is initialized explicitly\.
 fn IsTypeInferred(self): bool
 ```
 Reports whether variable is type inferred\.
+
+### IsEnumField
+```jule
+fn IsEnumField(self): bool
+```
+Reports whether variable is enum field\.
 
 ## FuncPattern
 ```jule
