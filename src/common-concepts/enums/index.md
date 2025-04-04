@@ -69,7 +69,7 @@ You can use only signed/unsigned integer or str data types.
 ## Default Values
 Enums should always define a default value for safety reasons. This default value is the first field of the enum. The first field always represents the default value, and your compiler will initialize an enum type with its default value when necessary.
 
-The first member of an enum with no custom expression is always have a default value, unlike enumeration of grouped variables. If you are using a numeric type, this default value is `iota`. If you are using a string, the default value will be directly the same as the identifier of the first field. Other fileds will evaluated based on the first member's expressions, following the explained behavior in the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section.
+The first member of an enum with no custom expression is always have a default value, unlike enumeration of grouped variables. If you are using a numeric type, this default value is `iota`. If you are using a string, the default value will be directly the same as the identifier of the first field. Other fields will evaluated based on the first member's expressions, following the explained behavior in the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section.
 
 Your compiler does not automatically define the default field. Therefore, every time you define an enum, it must have at least one field and this field will be used as the default field.
 

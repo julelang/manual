@@ -362,4 +362,4 @@ const (
 	d
 )
 ```
-In the example above, the varaible `a` is initialized with a value using the  `iota` variable. This value is result of a binary shifting. Following members use incremental enumeration and result will be changed by the `iota` variable value. As explained, the members will take the values `1`, `2`, `4`, and `8` because expression is applied for the each member with their `iota` value.
+In the example above, the variable `a` is initialized with a value using the  `iota` variable. This value is result of a binary shifting. Following members use incremental enumeration and result will be changed by the `iota` variable value. As explained, the members will take the values `1`, `2`, `4`, and `8` because expression is applied for the each member with their `iota` value.
