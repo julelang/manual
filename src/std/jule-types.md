@@ -51,52 +51,59 @@ Unsigned integer kind of target architecture\. Is equivalent to &#34;uint&#34; a
 ---
 
 ```jule
-const MaxF32 = 0x1p127 * (1 + (1 - 0x1p-23))
-const MinF32 = -0x1p127 * (1 + (1 - 0x1p-23))
-const SmallestNonzeroF32 = 0x1p-126 * 0x1p-23
-const MaxF64 = 0x1p1023 * (1 + (1 - 0x1p-52))
-const MinF64 = -0x1p1023 * (1 + (1 - 0x1p-52))
-const SmallestNonzeroF64 = 0x1p-1022 * 0x1p-52
+const (
+	MaxF32 = 0x1p127 * (1 + (1 - 0x1p-23))
+	MinF32 = -0x1p127 * (1 + (1 - 0x1p-23))
+	SmallestNonzeroF32 = 0x1p-126 * 0x1p-23
+
+	MaxF64 = 0x1p1023 * (1 + (1 - 0x1p-52))
+	MinF64 = -0x1p1023 * (1 + (1 - 0x1p-52))
+	SmallestNonzeroF64 = 0x1p-1022 * 0x1p-52
+)
 ```
 Floating\-point limit values\. Max is the largest finite value representable by the type\. SmallestNonzero is the smallest positive, non\-zero value representable by the type\.
 
 ---
 
 ```jule
-const MaxI8 = 1<<7 - 1   // 127
-const MinI8 = -1 << 7    // -128
-const MaxI16 = 1<<15 - 1 // 32767
-const MinI16 = -1 << 15  // -32768
-const MaxI32 = 1<<31 - 1 // 2147483647
-const MinI32 = -1 << 31  // -2147483648
-const MaxI64 = 1<<63 - 1 // 9223372036854775807
-const MinI64 = -1 << 63  // -9223372036854775808
-const MaxU8 = 1<<8 - 1   // 255
-const MaxU16 = 1<<16 - 1 // 65535
-const MaxU32 = 1<<32 - 1 // 4294967295
-const MaxU64 = 1<<64 - 1 // 18446744073709551615
+const (
+	MaxI8 = 1<<7 - 1   // 127
+	MinI8 = -1 << 7    // -128
+	MaxI16 = 1<<15 - 1 // 32767
+	MinI16 = -1 << 15  // -32768
+	MaxI32 = 1<<31 - 1 // 2147483647
+	MinI32 = -1 << 31  // -2147483648
+	MaxI64 = 1<<63 - 1 // 9223372036854775807
+	MinI64 = -1 << 63  // -9223372036854775808
+	MaxU8 = 1<<8 - 1   // 255
+	MaxU16 = 1<<16 - 1 // 65535
+	MaxU32 = 1<<32 - 1 // 4294967295
+	MaxU64 = 1<<64 - 1 // 18446744073709551615
+)
 ```
 Integer limit values\.
 
 ---
 
 ```jule
-const I8 = "i8"
-const I16 = "i16"
-const I32 = "i32"
-const I64 = "i64"
-const U8 = "u8"
-const U16 = "u16"
-const U32 = "u32"
-const U64 = "u64"
-const F32 = "f32"
-const F64 = "f64"
-const Uint = "uint"
-const Int = "int"
-const Uintptr = "uintptr"
-const Bool = "bool"
-const Str = "str"
-const Any = "any"
+const (
+	I8 = "i8"
+	I16 = "i16"
+	I32 = "i32"
+	I64 = "i64"
+	U8 = "u8"
+	U16 = "u16"
+	U32 = "u32"
+	U64 = "u64"
+	F32 = "f32"
+	F64 = "f64"
+	Uint = "uint"
+	Int = "int"
+	Uintptr = "uintptr"
+	Bool = "bool"
+	Str = "str"
+	Any = "any"
+)
 ```
 Type kinds of primitive types\. These kinds are must match keyword form itself\.
 
