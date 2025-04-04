@@ -366,10 +366,12 @@ Maximum Latin\-1 value\.
 ---
 
 ```jule
-const UpperCase = 0
-const LowerCase = 1
-const TitleCase = 2
-const MaxCase = 3
+const (
+	UpperCase = 0
+	LowerCase = 1
+	TitleCase = 2
+	MaxCase = 3
+)
 ```
 Indices into the delta arrays inside CaseRanges for case mapping\.
 
