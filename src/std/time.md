@@ -65,31 +65,35 @@
 ## Variables
 
 ```jule
-const January = Month(1)
-const February = Month(2)
-const March = Month(3)
-const April = Month(4)
-const May = Month(5)
-const June = Month(6)
-const July = Month(7)
-const August = Month(8)
-const September = Month(9)
-const October = Month(10)
-const November = Month(11)
-const December = Month(12)
+const (
+	January: Month = 1 + iota
+	February
+	March
+	April
+	May
+	June
+	July
+	August
+	September
+	October
+	November
+	December
+)
 ```
 
 
 ---
 
 ```jule
-const Sunday = Weekday(0)
-const Monday = Weekday(1)
-const Tuesday = Weekday(2)
-const Wednesday = Weekday(3)
-const Thursday = Weekday(4)
-const Friday = Weekday(5)
-const Saturday = Weekday(6)
+const (
+	Sunday: Weekday = iota
+	Monday
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Saturday
+)
 ```
 
 
@@ -152,18 +156,29 @@ Represents the system&#39;s local time zone\. On Unix systems, Local consults th
 ---
 
 ```jule
-const Layout = "01/02 03:04:05PM '06 -0700" // The reference time, in numerical order.
-const ANSIC = "Mon Jan _2 15:04:05 2006"
-const UnixDate = "Mon Jan _2 15:04:05 MST 2006"
-const RubyDate = "Mon Jan 02 15:04:05 -0700 2006"
-const RFC822 = "02 Jan 06 15:04 MST"
-const RFC822Z = "02 Jan 06 15:04 -0700" // RFC822 with numeric zone
-const RFC850 = "Monday, 02-Jan-06 15:04:05 MST"
-const RFC1123 = "Mon, 02 Jan 2006 15:04:05 MST"
-const RFC1123Z = "Mon, 02 Jan 2006 15:04:05 -0700" // RFC1123 with numeric zone
-const RFC3339 = "2006-01-02T15:04:05Z07:00"
-const RFC3339Nano = "2006-01-02T15:04:05.999999999Z07:00"
-const Kitchen = "3:04PM"
+const (
+	Layout = "01/02 03:04:05PM '06 -0700" // The reference time, in numerical order.
+	ANSIC = "Mon Jan _2 15:04:05 2006"
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	RubyDate = "Mon Jan 02 15:04:05 -0700 2006"
+	RFC822 = "02 Jan 06 15:04 MST"
+	RFC822Z = "02 Jan 06 15:04 -0700" // RFC822 with numeric zone
+	RFC850 = "Monday, 02-Jan-06 15:04:05 MST"
+	RFC1123 = "Mon, 02 Jan 2006 15:04:05 MST"
+	RFC1123Z = "Mon, 02 Jan 2006 15:04:05 -0700" // RFC1123 with numeric zone
+	RFC3339 = "2006-01-02T15:04:05Z07:00"
+	RFC3339Nano = "2006-01-02T15:04:05.999999999Z07:00"
+	Kitchen = "3:04PM"
+
+	// Handy time stamps.
+	Stamp = "Jan _2 15:04:05"
+	StampMilli = "Jan _2 15:04:05.000"
+	StampMicro = "Jan _2 15:04:05.000000"
+	StampNano = "Jan _2 15:04:05.000000000"
+	DateTime = "2006-01-02 15:04:05"
+	DateOnly = "2006-01-02"
+	TimeOnly = "15:04:05"
+)
 ```
 These are predefined layouts for use in \[Time\.Format\] and \[time::Parse\]\. The reference time used in these layouts is the specific time stamp:
 
@@ -223,19 +238,6 @@ The formats \_\_2 and 002 are space\-padded and zero\-padded three\-character da
 A comma or decimal point followed by one or more zeros represents a fractional second, printed to the given number of decimal places\. A comma or decimal point followed by one or more nines represents a fractional second, printed to the given number of decimal places, with trailing zeros removed\. For example &#34;15:04:05,000&#34; or &#34;15:04:05\.000&#34; formats or parses with millisecond precision\.
 
 Some valid layouts are invalid time values for time::Parse, due to formats such as \_ for space padding and Z for zone information\.
-
----
-
-```jule
-const Stamp = "Jan _2 15:04:05"
-const StampMilli = "Jan _2 15:04:05.000"
-const StampMicro = "Jan _2 15:04:05.000000"
-const StampNano = "Jan _2 15:04:05.000000000"
-const DateTime = "2006-01-02 15:04:05"
-const DateOnly = "2006-01-02"
-const TimeOnly = "15:04:05"
-```
-Handy time stamps\.
 
 ## Now
 ```jule
