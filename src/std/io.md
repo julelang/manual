@@ -56,9 +56,11 @@ It is returned by some clients of a \[Reader\] when many calls to Read have fail
 ---
 
 ```jule
-const SeekStart = 0   // seek relative to the origin of the file
-const SeekCurrent = 1 // seek relative to the current offset
-const SeekEnd = 2     // seek relative to the end
+const (
+	SeekStart = 0   // seek relative to the origin of the file
+	SeekCurrent = 1 // seek relative to the current offset
+	SeekEnd = 2     // seek relative to the end
+)
 ```
 Seek whence values\.
 
