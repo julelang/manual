@@ -136,49 +136,45 @@ The name of the operating system&#39;s “null device\.” On Unix\-like systems
 ---
 
 ```jule
-const O_RDONLY = sys::O_RDONLY // Open the file read-only
-const O_WRONLY = sys::O_WRONLY // Open the file write-only
-const O_RDWR = sys::O_RDWR     // Open the file read-write
-const O_APPEND = sys::O_APPEND // Append data to the file when writing
-const O_CREATE = sys::O_CREAT  // Create a new file if none exists
-const O_EXCL = sys::O_EXCL     // Used with O_CREATE, file must not exist
-const O_SYNC = sys::O_SYNC     // Open for synchronous I/O
-const O_TRUNC = sys::O_TRUNC   // Truncate regular writable file when opened
+const (
+	O_RDONLY = sys::O_RDONLY // Open the file read-only
+	O_WRONLY = sys::O_WRONLY // Open the file write-only
+	O_RDWR = sys::O_RDWR     // Open the file read-write
+	O_APPEND = sys::O_APPEND // Append data to the file when writing
+	O_CREATE = sys::O_CREAT  // Create a new file if none exists
+	O_EXCL = sys::O_EXCL     // Used with O_CREATE, file must not exist
+	O_SYNC = sys::O_SYNC     // Open for synchronous I/O
+	O_TRUNC = sys::O_TRUNC   // Truncate regular writable file when opened
+)
 ```
 Flags to OpenFile wrapping those of the underlying system\. Not all flags may be implemented on a given system\.
 
 ---
 
 ```jule
-const ModeDir = 1 << 31        // d: is a directory
-const ModeAppend = 1 << 30     // a: append-only
-const ModeExclusive = 1 << 29  // l: exclusive use
-const ModeTemporary = 1 << 28  // T: temporary file; Plan 9 only
-const ModeSymlink = 1 << 27    // L: symbolic link
-const ModeDevice = 1 << 26     // D: device file
-const ModeNamedPipe = 1 << 25  // p: named pipe (FIFO)
-const ModeSocket = 1 << 24     // S: Unix domain socket
-const ModeSetuid = 1 << 23     // u: setuid
-const ModeSetgid = 1 << 22     // g: setgid
-const ModeCharDevice = 1 << 21 // c: Unix character device, when ModeDevice is set
-const ModeSticky = 1 << 20     // t: sticky
-const ModeIrregular = 1 << 19  // ?: non-regular file; nothing else is known about this file
+const (
+	ModeDir: FileMode = 1 << (32 - 1 - iota) // d: is a directory
+	ModeAppend                               // a: append-only
+	ModeExclusive                            // l: exclusive use
+	ModeTemporary                            // T: temporary file; Plan 9 only
+	ModeSymlink                              // L: symbolic link
+	ModeDevice                               // D: device file
+	ModeNamedPipe                            // p: named pipe (FIFO)
+	ModeSocket                               // S: Unix domain socket
+	ModeSetuid                               // u: setuid
+	ModeSetgid                               // g: setgid
+	ModeCharDevice                           // c: Unix character device, when ModeDevice is set
+	ModeSticky                               // t: sticky
+	ModeIrregular                            // ?: non-regular file; nothing else is known about this file
+
+	// Mask for the type bits. For regular files, none will be set.
+	ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice | ModeCharDevice | ModeIrregular
+
+	// Unix permission bits.
+	ModePerm = 0777
+)
 ```
 The defined file mode bits are the most significant bits of the \[FileMode\]\. The nine least\-significant bits are the standard Unix rwxrwxrwx permissions\. The values of these bits should be considered part of the public API and may be used in wire protocols or disk representations: they must not be changed, although new bits might be added\.
-
----
-
-```jule
-const ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice | ModeCharDevice | ModeIrregular
-```
-Mask for the type bits\. For regular files, none will be set\.
-
----
-
-```jule
-const ModePerm = 0777
-```
-Unix permission bits\.
 
 ## ReadDir
 ```jule
