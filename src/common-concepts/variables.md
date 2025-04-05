@@ -322,7 +322,7 @@ const (
 In the example above, the `b` and `c` variables inherit the same value as the `a` variable, which means they are untyped constants with the value `90`.
 
 #### The `iota` Variable
-The `iota` variable is defined only for grouped variables. It is an untyped integer constant. For each variable in the grouped variable set, `iota` represents the index of that variable within the group, starting from zero. For `iota` to be defined, the first variable in the group must have a numeric type.
+The `iota` variable is defined only for grouped variables. It is an untyped integer constant. For each variable in the grouped variable set, `iota` represents the index of that variable within the group, starting from zero.
 
 For example:
 ```jule
