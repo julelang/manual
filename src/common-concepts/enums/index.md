@@ -1,8 +1,5 @@
 # Enums
 
-
-[The `iota` variable](/common-concepts/variables#the-iota-variable)
-
 Enums are typically grouped constant variables bound to a strict type. Therefore, it is recommended to read the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section before using enums. All enum members are constant and typed literals.
 
 For example to defining enum:

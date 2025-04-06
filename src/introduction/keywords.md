@@ -45,7 +45,7 @@ f64       bool      str        any
 rune      byte      new        make
 copy      append    out        outln
 delete    cap       len        panic
-true      false     nil
+true      false     nil        iota
 ```
 
 ::: info
