@@ -17,6 +17,11 @@
 [fn IsUnix\(os: str\): bool](#isunix)\
 [fn Is32Bit\(arch: str\): bool](#is32bit)\
 [fn Is64Bit\(arch: str\): bool](#is64bit)\
+[fn PathStdlib\(\): str](#pathstdlib)\
+[fn PathExec\(\): str](#pathexec)\
+[fn PathWd\(\): str](#pathwd)\
+[fn PathAPI\(\): str](#pathapi)\
+[fn SetEnv\(exec: str, wd: str\)](#setenv)\
 [fn IsJule\(path: str\): bool](#isjule)\
 [struct Log](#log)\
 [enum LogMsg](#logmsg)\
@@ -45,16 +50,6 @@ Valid extensions of C\+\+ source files\.
 static ObjectiveCppExts: [...]str = [ ... ]
 ```
 Valid extensions of Objective\-C\+\+ source files\.
-
----
-
-```jule
-static PathStdlib = "" // Path of standard library.
-static PathExec = ""   // Path of executable file's directory.
-static PathWd = ""     // Path of working directory.
-static PathApi = ""    // Path of main API header file.
-```
-Environment Variables\. Initialized by initializer function\.
 
 ---
 
@@ -167,6 +162,38 @@ Reports whether architecture is 32\-bit\.
 fn Is64Bit(arch: str): bool
 ```
 Reports whether architecture is 64\-bit\.
+
+## PathStdlib
+```jule
+fn PathStdlib(): str
+```
+Returns path of standard library\. Returns empty string if not initialized by \[SetEnv\]\.
+
+## PathExec
+```jule
+fn PathExec(): str
+```
+Returns path of compiler&#39;s executable file\. Returns empty string if not initialized by \[SetEnv\]\.
+
+## PathWd
+```jule
+fn PathWd(): str
+```
+Returns path of working directory\. Returns empty string if not initialized by \[SetEnv\]\.
+
+## PathAPI
+```jule
+fn PathAPI(): str
+```
+Returns path of main API header file\. Returns empty string if not initialized by \[SetEnv\]\.
+
+## SetEnv
+```jule
+fn SetEnv(exec: str, wd: str)
+```
+Sets the environment variables of the compiler\. The exec should hold the path of the compiler&#39;s executable path\. The wd should hold the path of working directory\. SetEnv panics is exec or wd is empty and will not check if paths are exist and appropriate for compiler\. Therefore, any misinformation for environment variables may cause analysis issues\.
+
+SetEnv is a mandatory call if you need to use package sema\. Because semantic analysis and all relevant behavior relies to environment variables\. Therefore, there might be analysis issues if environment variables will not be initialized before\.
 
 ## IsJule
 ```jule
