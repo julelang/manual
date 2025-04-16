@@ -12,7 +12,7 @@ Exceptional functions must be used alone, it does not supports combining such as
 
 You can use exceptionals in;
 - Assignment to variable
-- Initializing a variable
+- Initializing a variable (except static variables)
 - `use` expressions in the exceptional handler scope
 - Return statements
 - Expression statements of scope
