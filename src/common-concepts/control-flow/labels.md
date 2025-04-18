@@ -13,7 +13,8 @@ For example: `goto repeat`
 - Labels are only valid for the function block you are in.
 :::
 ::: warning
-- If your jumps over any declaration you will get a compiler error.
+- If you jumps over any declaration you will get a compiler error.
+- If you jumps into scope you will get a compiler error. The label must be in the same or parent scopes of goto statement.
 - Each label declared and not used causes a compiler error.
 :::
 
