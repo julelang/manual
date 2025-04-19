@@ -485,6 +485,8 @@ enum LogMsg: str {
 	TypeNotSupportsTypeAssertion: `type @ not supports type assertion`,
 	FirstGroupVarIsNotInitialized: `first define of group must be initialized`,
 	EmptyGroup: `group declaration is empty`,
+	ExceptionalNotPlain: `exceptionals must be used alone, not in binary expression or etc.`,
+	GotoJumpsIntoScope: `goto jumps into scope`,
 
 	// Suggestions.
 	ExpectedIdentifier: `create an identifier because identifier expected`,
@@ -540,6 +542,7 @@ enum LogMsg: str {
 	RArrowOpExpectsChan: `the "<-" operator expects a channel`,
 	ExpectedMainLike: `declare main function like: fn main() {}`,
 	ExpectedInitializerLike: `declare initializer function like: fn init() {}`,
+	AssignExceptionalResultToVariable: `consider assign result of exceptional to variable and then use it`,
 }
 ```
 Compiler log messages with formatting\.
