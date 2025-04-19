@@ -2,8 +2,9 @@
 
 ## Index
 
-[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: Flag\): \(&amp;Package, \[\]build::Log\)](#analyzepackage)\
-[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: Flag\): \(&amp;SymTab, \[\]build::Log\)](#analyzefile)\
+[Variables](#variables)\
+[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]build::Log\)](#analyzepackage)\
+[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]build::Log\)](#analyzefile)\
 [trait Importer](#importer)\
 [trait Kind](#kind)\
 [trait Lookup](#lookup)\
@@ -84,6 +85,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(self\): bool](#istraitimpl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(self\): bool](#isstructimpl)\
 [struct Scope](#scope)\
+[struct Use](#use)\
 [struct If](#if)\
 [struct Else](#else)\
 [struct Conditional](#conditional)\
@@ -239,14 +241,21 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe\(self\): bool](#isunsafe)\
 [enum Expr: type ](#expr)\
 [enum Stmt: type ](#stmt)\
-[enum CaseOwner: type ](#caseowner)\
-[enum Flag](#flag)
+[enum CaseOwner: type ](#caseowner)
 
+## Variables
 
+```jule
+const (
+	Default = 1 << iota // Default semantic analysis of Jule.
+	Shadowing           // Default + enable shadowing.
+)
+```
+Flags for semantic analysis\.
 
 ## AnalyzePackage
 ```jule
-fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: Flag): (&Package, []build::Log)
+fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: int): (&Package, []build::Log)
 ```
 Builds symbol table of package&#39;s ASTs\. Returns nil if files is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -269,7 +278,7 @@ semantic analyzer used nil importer.
 
 ## AnalyzeFile
 ```jule
-fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: Flag): (&SymTab, []build::Log)
+fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (&SymTab, []build::Log)
 ```
 Builds symbol table of AST\. Returns nil if f is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -1103,6 +1112,14 @@ struct Scope {
 }
 ```
 Scope\.
+
+## Use
+```jule
+struct Use {
+	Value: &Value
+}
+```
+Use statement\.
 
 ## If
 ```jule
@@ -2417,6 +2434,7 @@ enum Stmt: type {
 	&Break,
 	&Ret,
 	&Select,
+	&Use,
 }
 ```
 Statement type\.
@@ -2429,12 +2447,3 @@ enum CaseOwner: type {
 }
 ```
 Valid owner types for Case\.
-
-## Flag
-```jule
-enum Flag {
-	Default: 0,        // Default semantic analysis of Jule.
-	Shadowing: 1 << 0, // Default + enable shadowing.
-}
-```
-Flags for semantic analysis\.
