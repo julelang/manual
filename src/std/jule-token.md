@@ -3,42 +3,42 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsUnaryOp(id: Id): bool](#isunaryop)\
-[fn IsBinOp(id: Id): bool](#isbinop)\
-[fn IsWeakOp(id: Id): bool](#isweakop)\
-[fn IsStr(k: str): bool](#isstr)\
-[fn IsRawStr(k: str): bool](#israwstr)\
-[fn IsRune(k: str): bool](#isrune)\
-[fn IsNil(k: str): bool](#isnil)\
-[fn IsBool(k: str): bool](#isbool)\
-[fn IsFloat(k: str): bool](#isfloat)\
-[fn IsNum(k: str): bool](#isnum)\
-[fn IsLit(k: str): bool](#islit)\
-[fn IsIgnoreIdent(ident: str): bool](#isignoreident)\
-[fn IsAnonIdent(ident: str): bool](#isanonident)\
-[fn IsPunct(r: rune): bool](#ispunct)\
-[fn IsSpace(r: rune): bool](#isspace)\
-[fn IsLetter(r: rune): bool](#isletter)\
-[fn IsIdentRune(s: str): bool](#isidentrune)\
-[fn IsKeyword(s: str): bool](#iskeyword)\
-[fn IsDecimal(r: rune): bool](#isdecimal)\
-[fn IsBinary(r: rune): bool](#isbinary)\
-[fn IsOctal(r: rune): bool](#isoctal)\
-[fn IsHex(r: rune): bool](#ishex)\
-[fn IsAssign(id: Id): bool](#isassign)\
-[fn IsPostfixOp(id: Id): bool](#ispostfixop)\
-[fn IsAssignOp(id: Id): bool](#isassignop)\
-[fn Lex(mut f: &amp;Fileset, mode: LexMode): \[\]build::Log](#lex)\
+[fn IsUnaryOp\(id: Id\): bool](#isunaryop)\
+[fn IsBinOp\(id: Id\): bool](#isbinop)\
+[fn IsWeakOp\(id: Id\): bool](#isweakop)\
+[fn IsStr\(k: str\): bool](#isstr)\
+[fn IsRawStr\(k: str\): bool](#israwstr)\
+[fn IsRune\(k: str\): bool](#isrune)\
+[fn IsNil\(k: str\): bool](#isnil)\
+[fn IsBool\(k: str\): bool](#isbool)\
+[fn IsFloat\(k: str\): bool](#isfloat)\
+[fn IsNum\(k: str\): bool](#isnum)\
+[fn IsLit\(k: str\): bool](#islit)\
+[fn IsIgnoreIdent\(ident: str\): bool](#isignoreident)\
+[fn IsAnonIdent\(ident: str\): bool](#isanonident)\
+[fn IsPunct\(r: rune\): bool](#ispunct)\
+[fn IsSpace\(r: rune\): bool](#isspace)\
+[fn IsLetter\(r: rune\): bool](#isletter)\
+[fn IsIdentRune\(s: str\): bool](#isidentrune)\
+[fn IsKeyword\(s: str\): bool](#iskeyword)\
+[fn IsDecimal\(r: rune\): bool](#isdecimal)\
+[fn IsBinary\(r: rune\): bool](#isbinary)\
+[fn IsOctal\(r: rune\): bool](#isoctal)\
+[fn IsHex\(r: rune\): bool](#ishex)\
+[fn IsAssign\(id: Id\): bool](#isassign)\
+[fn IsPostfixOp\(id: Id\): bool](#ispostfixop)\
+[fn IsAssignOp\(id: Id\): bool](#isassignop)\
+[fn Lex\(mut f: &amp;Fileset, mode: LexMode\): \[\]build::Log](#lex)\
 [struct Token](#token)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Prec(self): byte](#prec)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Prec\(self\): byte](#prec)\
 [struct Fileset](#fileset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New(path: str): &amp;Fileset](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Fill(mut self, data: \[\]byte)](#fill)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut(mut self, mut data: \[\]byte)](#fillmut)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir(self): str](#dir)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name(self): str](#name)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Addr(self): uintptr](#addr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow(self, row: int): str](#getrow)\
+&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(path: str\): &amp;Fileset](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut self, data: \[\]byte\)](#fill)\
+&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut\(mut self, mut data: \[\]byte\)](#fillmut)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(self\): str](#dir)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(self\): str](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(self\): uintptr](#addr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(self, row: int\): str](#getrow)\
 [enum Ident](#ident)\
 [enum Id](#id)\
 [enum Kind](#kind)\
@@ -49,205 +49,205 @@
 ```jule
 static Puncts: [...]rune = [ ... ]
 ```
-Punctuations.
+Punctuations\.
 
 ---
 
 ```jule
 static Spaces: [...]rune = [ ... ]
 ```
-Space characters.
+Space characters\.
 
 ---
 
 ```jule
 static UnaryOps: [...]Id = [ ... ]
 ```
-Kind list of unary operators.
+Kind list of unary operators\.
 
 ---
 
 ```jule
 static BinOps: [...]Id = [ ... ]
 ```
-Kind list of binary operators.
+Kind list of binary operators\.
 
 ---
 
 ```jule
 static WeakOps: [...]Id = [ ... ]
 ```
-Kind list of weak operators. These operators are weak, can used as part of expression.
+Kind list of weak operators\. These operators are weak, can used as part of expression\.
 
 ---
 
 ```jule
 static PostfixOps: [...]Id = [ ... ]
 ```
-List of postfix operators.
+List of postfix operators\.
 
 ---
 
 ```jule
 static AssignOps: [...]Id = [ ... ]
 ```
-List of assign operators.
+List of assign operators\.
 
 ## IsUnaryOp
 ```jule
 fn IsUnaryOp(id: Id): bool
 ```
-Reports whether kind is unary operator.
+Reports whether kind is unary operator\.
 
 ## IsBinOp
 ```jule
 fn IsBinOp(id: Id): bool
 ```
-Reports whether kind is binary operator.
+Reports whether kind is binary operator\.
 
 ## IsWeakOp
 ```jule
 fn IsWeakOp(id: Id): bool
 ```
-Reports whether kind is weak operator.
+Reports whether kind is weak operator\.
 
 ## IsStr
 ```jule
 fn IsStr(k: str): bool
 ```
-Reports whether kind is string literal.
+Reports whether kind is string literal\.
 
 ## IsRawStr
 ```jule
 fn IsRawStr(k: str): bool
 ```
-Reports whether kind is raw string literal.
+Reports whether kind is raw string literal\.
 
 ## IsRune
 ```jule
 fn IsRune(k: str): bool
 ```
-Reports whether kind is rune literal. Literal value can be byte or rune.
+Reports whether kind is rune literal\. Literal value can be byte or rune\.
 
 ## IsNil
 ```jule
 fn IsNil(k: str): bool
 ```
-Reports whether kind is nil literal.
+Reports whether kind is nil literal\.
 
 ## IsBool
 ```jule
 fn IsBool(k: str): bool
 ```
-Reports whether kind is boolean literal.
+Reports whether kind is boolean literal\.
 
 ## IsFloat
 ```jule
 fn IsFloat(k: str): bool
 ```
-Reports whether kind is float.
+Reports whether kind is float\.
 
 ## IsNum
 ```jule
 fn IsNum(k: str): bool
 ```
-Reports whether kind is numeric.
+Reports whether kind is numeric\.
 
 ## IsLit
 ```jule
 fn IsLit(k: str): bool
 ```
-Reports whether kind is literal.
+Reports whether kind is literal\.
 
 ## IsIgnoreIdent
 ```jule
 fn IsIgnoreIdent(ident: str): bool
 ```
-Reports whether identifier is ignore.
+Reports whether identifier is ignore\.
 
 ## IsAnonIdent
 ```jule
 fn IsAnonIdent(ident: str): bool
 ```
-Reports whether identifier is anonymous.
+Reports whether identifier is anonymous\.
 
 ## IsPunct
 ```jule
 fn IsPunct(r: rune): bool
 ```
-Reports whether rune is punctuation.
+Reports whether rune is punctuation\.
 
 ## IsSpace
 ```jule
 fn IsSpace(r: rune): bool
 ```
-Reports whether byte is whitespace.
+Reports whether rune is whitespace\.
 
 ## IsLetter
 ```jule
 fn IsLetter(r: rune): bool
 ```
-Reports whether rune is letter.
+Reports whether rune is letter\.
 
 ## IsIdentRune
 ```jule
 fn IsIdentRune(s: str): bool
 ```
-Reports whether first rune of string is allowed to first rune for identifier.
+Reports whether first rune of string is allowed to first rune for identifier\.
 
 ## IsKeyword
 ```jule
 fn IsKeyword(s: str): bool
 ```
-Reports whether s is keyword.
+Reports whether s is keyword\.
 
 ## IsDecimal
 ```jule
 fn IsDecimal(r: rune): bool
 ```
-Reports whether byte is decimal sequence.
+Reports whether rune is decimal sequence\.
 
 ## IsBinary
 ```jule
 fn IsBinary(r: rune): bool
 ```
-Reports whether byte is binary sequence.
+Reports whether rune is binary sequence\.
 
 ## IsOctal
 ```jule
 fn IsOctal(r: rune): bool
 ```
-Reports whether rune is octal sequence.
+Reports whether rune is octal sequence\.
 
 ## IsHex
 ```jule
 fn IsHex(r: rune): bool
 ```
-Reports whether rune is hexadecimal sequence.
+Reports whether rune is hexadecimal sequence\.
 
 ## IsAssign
 ```jule
 fn IsAssign(id: Id): bool
 ```
-Reports given token id is allow for assignment left-expression or not.
+Reports given token id is allow for assignment left\-expression or not\.
 
 ## IsPostfixOp
 ```jule
 fn IsPostfixOp(id: Id): bool
 ```
-Reports whether operator kind is postfix operator.
+Reports whether operator kind is postfix operator\.
 
 ## IsAssignOp
 ```jule
 fn IsAssignOp(id: Id): bool
 ```
-Reports whether operator kind is assignment operator.
+Reports whether operator kind is assignment operator\.
 
 ## Lex
 ```jule
 fn Lex(mut f: &Fileset, mode: LexMode): []build::Log
 ```
-Lex source code into fileset. Returns nil if f == nil. Returns nil slice for errors if no any error.
+Lex source code into fileset\. Returns nil if f == nil\. Returns nil slice for errors if no any error\.
 
 ## Token
 ```jule
@@ -259,15 +259,15 @@ struct Token {
 	Id:     Id
 }
 ```
-Token is lexer token.
+Token is lexer token\.
 
 ### Prec
 ```jule
 fn Prec(self): byte
 ```
-Returns operator precedence of token. Returns 0 if token is not operator or invalid operator for operator precedence.
+Returns operator precedence of token\. Returns 0 if token is not operator or invalid operator for operator precedence\.
 
-Accepts assignment tokens (like equals \[=\]) as precedenced operator to handle expression assignments.
+Accepts assignment tokens \(like equals \[=\]\) as precedenced operator to handle expression assignments\.
 
 ## Fileset
 ```jule
@@ -277,49 +277,49 @@ struct Fileset {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Fileset for lexing.
+Fileset for lexing\.
 
 ### New
 ```jule
 static fn New(path: str): &Fileset
 ```
-Returns new Fileset with path.
+Returns new Fileset with path\.
 
 ### Fill
 ```jule
 fn Fill(mut self, data: []byte)
 ```
-Fills data. Not uses mutable copy of data, allocates new copy.
+Fills data\. Not uses mutable copy of data, allocates new copy\.
 
 ### FillMut
 ```jule
 unsafe fn FillMut(mut self, mut data: []byte)
 ```
-Fills data. Uses mutable copy of data, not allocated new copy. But it is unsafe, because any mutation on the data may cause inconsistent results. However, it is efficient way to use already allocated data.
+Fills data\. Uses mutable copy of data, not allocated new copy\. But it is unsafe, because any mutation on the data may cause inconsistent results\. However, it is efficient way to use already allocated data\.
 
 ### Dir
 ```jule
 fn Dir(self): str
 ```
-Returns directory of file&#39;s path.
+Returns directory of file&#39;s path\.
 
 ### Name
 ```jule
 fn Name(self): str
 ```
-Returns filename.
+Returns filename\.
 
 ### Addr
 ```jule
 fn Addr(self): uintptr
 ```
-Returns self as uintptr.
+Returns self as uintptr\.
 
 ### GetRow
 ```jule
 fn GetRow(self, row: int): str
 ```
-Returns line (not include new-line char) by row. Returns empty string if line is not buffer.
+Returns line \(not include new\-line char\) by row\. Returns empty string if line is not buffer\.
 
 ## Ident
 ```jule
@@ -328,7 +328,7 @@ enum Ident: str {
 	Anon: "<anonymous>", // Anonymous
 }
 ```
-Special identifiers.
+Special identifiers\.
 
 ## Id
 ```jule
@@ -416,7 +416,7 @@ enum Id: uint {
 	Select,
 }
 ```
-Token identities.
+Token identities\.
 
 ## Kind
 ```jule
@@ -503,7 +503,7 @@ enum Kind: str {
 	Select: "select",
 }
 ```
-Token kinds.
+Token kinds\.
 
 ## LexMode
 ```jule
@@ -512,4 +512,4 @@ enum LexMode {
 	Comment: 1 << 0,  // Standard mode + comments.
 }
 ```
-Lexer mode.
+Lexer mode\.
