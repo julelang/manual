@@ -7,7 +7,6 @@
 [fn IsValidHeaderExt\(ext: str\): bool](#isvalidheaderext)\
 [fn IsValidCppExt\(ext: str\): bool](#isvalidcppext)\
 [fn Logf\(fmt: LogMsg, args: \.\.\.any\): str](#logf)\
-[fn IsTopDirective\(directive: str\): bool](#istopdirective)\
 [fn IsWindows\(os: str\): bool](#iswindows)\
 [fn IsDarwin\(os: str\): bool](#isdarwin)\
 [fn IsLinux\(os: str\): bool](#islinux)\
@@ -26,7 +25,6 @@
 [struct Log](#log)\
 [enum LogMsg](#logmsg)\
 [enum LogKind](#logkind)\
-[enum Directive](#directive)\
 [enum DistOS](#distos)\
 [enum DistArch](#distarch)
 
@@ -102,12 +100,6 @@ Reports whether C\+\+ extension is valid\.
 fn Logf(fmt: LogMsg, args: ...any): str
 ```
 Returns formatted error message by fmt and args\.
-
-## IsTopDirective
-```jule
-fn IsTopDirective(directive: str): bool
-```
-Reports whether directive is top\-directive\.
 
 ## IsWindows
 ```jule
@@ -555,20 +547,6 @@ enum LogKind {
 }
 ```
 Log kinds\.
-
-## Directive
-```jule
-enum Directive: str {
-	Cdef: "cdef",
-	Typedef: "typedef",
-	Pass: "pass",
-	Build: "build",
-	Namespace: "namespace",
-	Test: "test",
-	Export: "export",
-}
-```
-Compiler directives\.
 
 ## DistOS
 ```jule
