@@ -3,8 +3,8 @@
 ## Index
 
 [Variables](#variables)\
-[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]build::Log\)](#analyzepackage)\
-[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]build::Log\)](#analyzefile)\
+[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]log::Log\)](#analyzepackage)\
+[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]log::Log\)](#analyzefile)\
 [trait Importer](#importer)\
 [trait Kind](#kind)\
 [trait Lookup](#lookup)\
@@ -255,7 +255,7 @@ Flags for semantic analysis\.
 
 ## AnalyzePackage
 ```jule
-fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: int): (&Package, []build::Log)
+fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: int): (&Package, []log::Log)
 ```
 Builds symbol table of package&#39;s ASTs\. Returns nil if files is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -278,7 +278,7 @@ semantic analyzer used nil importer.
 
 ## AnalyzeFile
 ```jule
-fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (&SymTab, []build::Log)
+fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (&SymTab, []log::Log)
 ```
 Builds symbol table of AST\. Returns nil if f is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -325,7 +325,7 @@ trait Importer {
 	// Should return abstract syntax tree of package files.
 	// Logs accepts as error.
 	// Updated module to package's module if exist when updateMod is true.
-	fn ImportPackage(mut self, path: str, updateMod: bool): ([]&ast::AST, []build::Log)
+	fn ImportPackage(mut self, path: str, updateMod: bool): ([]&ast::AST, []log::Log)
 
 	// Invoked after the package is imported.
 	// Sets module identitity of imported package to current module.
