@@ -28,7 +28,7 @@
 [fn IsAssign\(id: Id\): bool](#isassign)\
 [fn IsPostfixOp\(id: Id\): bool](#ispostfixop)\
 [fn IsAssignOp\(id: Id\): bool](#isassignop)\
-[fn Lex\(mut f: &amp;Fileset, mode: LexMode\): \[\]build::Log](#lex)\
+[fn Lex\(mut f: &amp;Fileset, mode: LexMode\): \[\]log::Log](#lex)\
 [struct Token](#token)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Prec\(self\): byte](#prec)\
 [struct Fileset](#fileset)\
@@ -245,7 +245,7 @@ Reports whether operator kind is assignment operator\.
 
 ## Lex
 ```jule
-fn Lex(mut f: &Fileset, mode: LexMode): []build::Log
+fn Lex(mut f: &Fileset, mode: LexMode): []log::Log
 ```
 Lex source code into fileset\. Returns nil if f == nil\. Returns nil slice for errors if no any error\.
 
