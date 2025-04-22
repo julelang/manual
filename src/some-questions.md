@@ -1,5 +1,7 @@
 # Some Questions
 
+
+
 **List of all questions:**
 - [Why an another language?](#why-an-another-language)
 - [What about future of Jule?](#what-about-future-of-jule)
@@ -8,6 +10,7 @@
 - [What is the experimental feature?](#what-is-the-experimental-feature)
 - [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
 - [Why Jule uses exceptionals instead other error handling methods?](#why-jule-uses-exceptionals-instead-other-error-handling-methods)
+- [Why do exceptionals not support combining?](#why-do-exceptionals-not-support-combining)
 - [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
 - [Why Jule have not built-in methods?](#why-jule-have-not-built-in-methods)
 - [Why are null values ​allowed?](#why-are-null-values-%E2%80%8Ballowed)
@@ -19,6 +22,7 @@
 - [Jule have a runtime?](#jule-have-a-runtime)
 - [Why receiver parameters always named as self?](#why-receiver-parameters-always-named-as-self)
 - [Why some packages in the standard library adopted from Go?](#why-some-packages-in-the-standard-library-adopted-from-go)
+- [Why default values of fields must be constant?](#why-default-values-of-fields-must-be-constant)
 
 ### Why an another language?
 
@@ -66,6 +70,64 @@ An issue ([#71203](https://github.com/golang/go/issues/71203)) was opened for th
 
 Although this proposal is not related to Jule, with this proposal and the contributions of Go's large community, we now have more insights into this type of design. Therefore, we thank the Go community.
 
+### Why do exceptionals not support combining?
+
+Calls to exceptional functions must always form the entire expression. They cannot be used in conjunction with binary expressions, unary expressions, or combined with multiple operators, even for function arguments. There are two reasons for this design choice: simplicity and compiler costs.
+
+#### Simplicity
+
+Allowing any exceptional call without restrictions opens the door to having overly complex expressions. Honestly, we want to ensure that exceptional functions are only used in specific ways, as this is one of the most straightforward ways to keep error handling understandable and simple. Therefore, exceptional functions are only permitted under certain conditions, such as being used as a return expression, as a standalone call, as an assignment, or as part of a use statement.
+
+For example:
+```jule
+fn foo()!: int {
+	// ...
+}
+
+fn bar(x: int, y: int, z: int, j: int) {
+	// ...
+}
+
+fn main() {
+	fiz := true
+	bar(foo() else { use 90 }, foo() else { use 80 }, foo()!,
+		foo() else {
+			mut r := 0
+			if fiz {
+				r = 1
+			} else {
+				r = 0
+			}
+			use r
+		})
+}
+```
+
+The example above has a negative impact on maintainability. However, since your compiler does not allow this, you cannot write such code. This will encourage you to write more readable and maintainable code like the following;
+
+```jule
+fn main() {
+	fiz := true
+	x := foo() else { use 90 }
+	y := foo() else { use 80 }
+	z := foo()!
+	j := foo() else {
+		mut r := 0
+		if fiz {
+			r = 1
+		} else {
+			r = 0
+		}
+		use r
+	}
+	bar(x, y, z, j)
+}
+```
+
+#### Compiler Costs
+
+Calls to exceptional functions must be handled immediately. As a result, the compiler implicitly places certain control mechanisms at each call site. With this design choice, it is determined where an exceptional function can be called, and the cost of developing the compiler for only those situations is lower. Since it encourages writing code that is less complex and thus doesn't incur higher compilation costs, optimizing the compiler becomes easier.
+
 ### Will Jule always use C++ as backend?
 
 It's hard to say anything about this. C++ backend allows supporting many things. For example, using Clang for LLVM backend. In this case, it is debatable what the gain of writing a separate LLVM backend for Jule would be.
@@ -89,6 +151,10 @@ We think it is more reasonable to do this by casting instead of doing it this wa
 In most cases it is similar to optional types, but requires trust that the developer will be careful enough. Check before use. Go, which Jule is heavily inspired by, also allows null values, and frankly, it doesn't feel bad in terms of experience.
 
 If you prefer optional types, take a look at Jule's exceptionals.
+
+Besides these, null values are a fundamental mechanism for Jule. For example, it is guaranteed that every memory area will be automatically initialized, including pointers and some other types. Jule has two types of pointers: smart pointers and raw pointers. By default, there must be a value that can be assigned to them, and the most logical option for this is a null value. Using an optional or maybe monad even for pointers would make things unnecessarily more complex. Moreover, these types are quite common in Jule, especially since the standard library frequently uses smart pointers.
+
+In the interoperability side, null values clearly support flexibility in C/C++ interoperability in a positive way and make it significantly easier.
 
 ### Why is shadowing allowed for global scope?
 
@@ -180,3 +246,9 @@ For reasons like these, Jule chose the `self` keyword to eliminate developer thi
 Due to Jule being largely influenced by Go, many Go codes can be easily adapted to Jule. Go and Jule share very similar semantics. Implementing existing code is not too difficult.
 
 That is, time cost. Designing and developing well-implemented algorithms takes time. Go has enough well-implemented algorithms, so it makes sense to adopt them. And not all packages were adopted from Go, just specific ones that play well with Jule. Many algorithms are implemented from scratch for Jule.
+
+### Why default values of fields must be constant?
+
+We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.
+
+Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
