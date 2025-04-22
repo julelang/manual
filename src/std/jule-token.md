@@ -28,7 +28,7 @@
 [fn IsAssign\(id: Id\): bool](#isassign)\
 [fn IsPostfixOp\(id: Id\): bool](#ispostfixop)\
 [fn IsAssignOp\(id: Id\): bool](#isassignop)\
-[fn Lex\(mut f: &amp;Fileset, mode: LexMode\): \[\]log::Log](#lex)\
+[fn Lex\(mut f: &amp;Fileset, mode: int\): \[\]log::Log](#lex)\
 [struct Token](#token)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Prec\(self\): byte](#prec)\
 [struct Fileset](#fileset)\
@@ -41,8 +41,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(self, row: int\): str](#getrow)\
 [enum Ident](#ident)\
 [enum Id](#id)\
-[enum Kind](#kind)\
-[enum LexMode](#lexmode)
+[enum Kind](#kind)
 
 ## Variables
 
@@ -92,6 +91,16 @@ List of postfix operators\.
 static AssignOps: [...]Id = [ ... ]
 ```
 List of assign operators\.
+
+---
+
+```jule
+const (
+	Standard = 1 << iota // Standard mode.
+	Comment              // Standard mode + comments.
+)
+```
+Lexer mode\.
 
 ## IsUnaryOp
 ```jule
@@ -245,7 +254,7 @@ Reports whether operator kind is assignment operator\.
 
 ## Lex
 ```jule
-fn Lex(mut f: &Fileset, mode: LexMode): []log::Log
+fn Lex(mut f: &Fileset, mode: int): []log::Log
 ```
 Lex source code into fileset\. Returns nil if f == nil\. Returns nil slice for errors if no any error\.
 
@@ -504,12 +513,3 @@ enum Kind: str {
 }
 ```
 Token kinds\.
-
-## LexMode
-```jule
-enum LexMode {
-	Standard: 0 << 0, // Standard mode.
-	Comment: 1 << 0,  // Standard mode + comments.
-}
-```
-Lexer mode\.
