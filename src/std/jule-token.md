@@ -3,9 +3,9 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsUnaryOp\(id: Id\): bool](#isunaryop)\
-[fn IsBinOp\(id: Id\): bool](#isbinop)\
-[fn IsWeakOp\(id: Id\): bool](#isweakop)\
+[fn IsUnaryOp\(id: int\): bool](#isunaryop)\
+[fn IsBinOp\(id: int\): bool](#isbinop)\
+[fn IsWeakOp\(id: int\): bool](#isweakop)\
 [fn IsStr\(k: str\): bool](#isstr)\
 [fn IsRawStr\(k: str\): bool](#israwstr)\
 [fn IsRune\(k: str\): bool](#isrune)\
@@ -14,20 +14,18 @@
 [fn IsFloat\(k: str\): bool](#isfloat)\
 [fn IsNum\(k: str\): bool](#isnum)\
 [fn IsLit\(k: str\): bool](#islit)\
-[fn IsIgnoreIdent\(ident: str\): bool](#isignoreident)\
-[fn IsAnonIdent\(ident: str\): bool](#isanonident)\
 [fn IsPunct\(r: rune\): bool](#ispunct)\
 [fn IsSpace\(r: rune\): bool](#isspace)\
 [fn IsLetter\(r: rune\): bool](#isletter)\
-[fn IsIdentRune\(s: str\): bool](#isidentrune)\
+[fn IsNameRune\(s: str\): bool](#isnamerune)\
 [fn IsKeyword\(s: str\): bool](#iskeyword)\
 [fn IsDecimal\(r: rune\): bool](#isdecimal)\
 [fn IsBinary\(r: rune\): bool](#isbinary)\
 [fn IsOctal\(r: rune\): bool](#isoctal)\
 [fn IsHex\(r: rune\): bool](#ishex)\
-[fn IsAssign\(id: Id\): bool](#isassign)\
-[fn IsPostfixOp\(id: Id\): bool](#ispostfixop)\
-[fn IsAssignOp\(id: Id\): bool](#isassignop)\
+[fn IsAssign\(id: int\): bool](#isassign)\
+[fn IsPostfixOp\(id: int\): bool](#ispostfixop)\
+[fn IsAssignOp\(id: int\): bool](#isassignop)\
 [fn Lex\(mut f: &amp;Fileset, mode: int\): \[\]log::Log](#lex)\
 [struct Token](#token)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Prec\(self\): byte](#prec)\
@@ -38,10 +36,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(self\): str](#dir)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(self\): str](#name)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(self\): uintptr](#addr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(self, row: int\): str](#getrow)\
-[enum Ident](#ident)\
-[enum Id](#id)\
-[enum Kind](#kind)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(self, row: int\): str](#getrow)
 
 ## Variables
 
@@ -60,35 +55,35 @@ Space characters\.
 ---
 
 ```jule
-static UnaryOps: [...]Id = [ ... ]
+static UnaryOps: [...]int = [ ... ]
 ```
 Kind list of unary operators\.
 
 ---
 
 ```jule
-static BinOps: [...]Id = [ ... ]
+static BinOps: [...]int = [ ... ]
 ```
 Kind list of binary operators\.
 
 ---
 
 ```jule
-static WeakOps: [...]Id = [ ... ]
+static WeakOps: [...]int = [ ... ]
 ```
 Kind list of weak operators\. These operators are weak, can used as part of expression\.
 
 ---
 
 ```jule
-static PostfixOps: [...]Id = [ ... ]
+static PostfixOps: [...]int = [ ... ]
 ```
 List of postfix operators\.
 
 ---
 
 ```jule
-static AssignOps: [...]Id = [ ... ]
+static AssignOps: [...]int = [ ... ]
 ```
 List of assign operators\.
 
@@ -96,27 +91,116 @@ List of assign operators\.
 
 ```jule
 const (
+	Illegal = iota
+	Name
+	Ret
+	Semicolon
+	Lit
+	Comma
+	Const
+	Type
+	Colon
+	For
+	Break
+	Cont
+	In
+	If
+	Else
+	Comment
+	Use
+	Dot
+	Goto
+	DblColon
+	Enum
+	Struct
+	Co
+	Match
+	Self
+	Trait
+	Impl
+	Chan
+	Cpp
+	Fall
+	Fn
+	Let
+	Unsafe
+	Mut
+	Defer
+	Static
+	Hash
+	Error
+	Map
+	ColonEq
+	TripleDot
+	PlusEq
+	MinusEq
+	StarEq
+	SolidusEq
+	PercentEq
+	ShlEq
+	ShrEq
+	CaretEq
+	AmperEq
+	VlineEq
+	DblEq
+	NotEq
+	GtEq
+	LtEq
+	DblAmper
+	DblVline
+	Shl
+	Shr
+	DblPlus
+	DblMinus
+	Plus
+	Minus
+	Star
+	Solidus
+	Percent
+	Amper
+	Vline
+	Caret
+	Excl
+	Lt
+	Gt
+	Eq
+	LBrace
+	RBrace
+	LParent
+	RParent
+	LBracket
+	RBracket
+	RArrow
+	Select
+)
+```
+Token identities\.
+
+---
+
+```jule
+const (
 	Standard = 1 << iota // Standard mode.
-	Comment              // Standard mode + comments.
+	Comments             // Standard mode + comments.
 )
 ```
 Lexer mode\.
 
 ## IsUnaryOp
 ```jule
-fn IsUnaryOp(id: Id): bool
+fn IsUnaryOp(id: int): bool
 ```
 Reports whether kind is unary operator\.
 
 ## IsBinOp
 ```jule
-fn IsBinOp(id: Id): bool
+fn IsBinOp(id: int): bool
 ```
 Reports whether kind is binary operator\.
 
 ## IsWeakOp
 ```jule
-fn IsWeakOp(id: Id): bool
+fn IsWeakOp(id: int): bool
 ```
 Reports whether kind is weak operator\.
 
@@ -168,18 +252,6 @@ fn IsLit(k: str): bool
 ```
 Reports whether kind is literal\.
 
-## IsIgnoreIdent
-```jule
-fn IsIgnoreIdent(ident: str): bool
-```
-Reports whether identifier is ignore\.
-
-## IsAnonIdent
-```jule
-fn IsAnonIdent(ident: str): bool
-```
-Reports whether identifier is anonymous\.
-
 ## IsPunct
 ```jule
 fn IsPunct(r: rune): bool
@@ -198,9 +270,9 @@ fn IsLetter(r: rune): bool
 ```
 Reports whether rune is letter\.
 
-## IsIdentRune
+## IsNameRune
 ```jule
-fn IsIdentRune(s: str): bool
+fn IsNameRune(s: str): bool
 ```
 Reports whether first rune of string is allowed to first rune for identifier\.
 
@@ -236,19 +308,19 @@ Reports whether rune is hexadecimal sequence\.
 
 ## IsAssign
 ```jule
-fn IsAssign(id: Id): bool
+fn IsAssign(id: int): bool
 ```
 Reports given token id is allow for assignment left\-expression or not\.
 
 ## IsPostfixOp
 ```jule
-fn IsPostfixOp(id: Id): bool
+fn IsPostfixOp(id: int): bool
 ```
 Reports whether operator kind is postfix operator\.
 
 ## IsAssignOp
 ```jule
-fn IsAssignOp(id: Id): bool
+fn IsAssignOp(id: int): bool
 ```
 Reports whether operator kind is assignment operator\.
 
@@ -265,7 +337,7 @@ struct Token {
 	Row:    int
 	Column: int
 	Kind:   str
-	Id:     Id
+	Id:     int
 }
 ```
 Token is lexer token\.
@@ -329,187 +401,3 @@ Returns self as uintptr\.
 fn GetRow(self, row: int): str
 ```
 Returns line \(not include new\-line char\) by row\. Returns empty string if line is not buffer\.
-
-## Ident
-```jule
-enum Ident: str {
-	Ignore: "_",         // Ignore
-	Anon: "<anonymous>", // Anonymous
-}
-```
-Special identifiers\.
-
-## Id
-```jule
-enum Id: uint {
-	NA,
-	Ident,
-	Ret,
-	Semicolon,
-	Lit,
-	Comma,
-	Const,
-	Type,
-	Colon,
-	For,
-	Break,
-	Cont,
-	In,
-	If,
-	Else,
-	Comment,
-	Use,
-	Dot,
-	Goto,
-	DblColon,
-	Enum,
-	Struct,
-	Co,
-	Match,
-	Self,
-	Trait,
-	Impl,
-	Chan,
-	Cpp,
-	Fall,
-	Fn,
-	Let,
-	Unsafe,
-	Mut,
-	Defer,
-	Static,
-	Hash,
-	Error,
-	Map,
-	ColonEq,
-	TripleDot,
-	PlusEq,
-	MinusEq,
-	StarEq,
-	SolidusEq,
-	PercentEq,
-	ShlEq,
-	ShrEq,
-	CaretEq,
-	AmperEq,
-	VlineEq,
-	Eqs,
-	NotEq,
-	GtEq,
-	LtEq,
-	DblAmper,
-	DblVline,
-	Shl,
-	Shr,
-	DblPlus,
-	DblMinus,
-	Plus,
-	Minus,
-	Star,
-	Solidus,
-	Percent,
-	Amper,
-	Vline,
-	Caret,
-	Excl,
-	Lt,
-	Gt,
-	Eq,
-	LBrace,
-	RBrace,
-	LParent,
-	RParent,
-	LBracket,
-	RBracket,
-	RArrow,
-	Select,
-}
-```
-Token identities\.
-
-## Kind
-```jule
-enum Kind: str {
-	DblColon: "::",
-	Colon: ":",
-	Semicolon: ";",
-	Comma: ",",
-	TripleDot: "...",
-	Dot: ".",
-	PlusEq: "+=",
-	MinusEq: "-=",
-	StarEq: "*=",
-	SolidusEq: "/=",
-	PercentEq: "%=",
-	ShlEq: "<<=",
-	ShrEq: ">>=",
-	CaretEq: "^=",
-	AmperEq: "&=",
-	VlineEq: "|=",
-	Eqs: "==",
-	NotEq: "!=",
-	GtEq: ">=",
-	LtEq: "<=",
-	DblAmper: "&&",
-	DblVline: "||",
-	Shl: "<<",
-	Shr: ">>",
-	DblPlus: "++",
-	DblMinus: "--",
-	Plus: "+",
-	Minus: "-",
-	Star: "*",
-	Solidus: "/",
-	Percent: "%",
-	Amper: "&",
-	Vline: "|",
-	Caret: "^",
-	Excl: "!",
-	Lt: "<",
-	Gt: ">",
-	Eq: "=",
-	ColonEq: ":=",
-	RArrow: "<-",
-	LnComment: "//",
-	RangLComment: "/*",
-	RangRComment: "*/",
-	LParent: "(",
-	RParent: ")",
-	LBracket: "[",
-	RBracket: "]",
-	LBrace: "{",
-	RBrace: "}",
-	Hash: "#",
-	Const: "const",
-	Ret: "ret",
-	Type: "type",
-	For: "for",
-	Break: "break",
-	Cont: "continue",
-	In: "in",
-	If: "if",
-	Else: "else",
-	Use: "use",
-	Goto: "goto",
-	Enum: "enum",
-	Struct: "struct",
-	Co: "co",
-	Match: "match",
-	Self: "self",
-	Trait: "trait",
-	Impl: "impl",
-	Chan: "chan",
-	Cpp: "cpp",
-	Fall: "fall",
-	Fn: "fn",
-	Let: "let",
-	Unsafe: "unsafe",
-	Mut: "mut",
-	Defer: "defer",
-	Static: "static",
-	Error: "error",
-	Map: "map",
-	Select: "select",
-}
-```
-Token kinds\.
