@@ -518,6 +518,7 @@ export default defineConfig({
                   ]
                 },
                 { text: 'std/jule/directive', link: '/std/jule-directive' },
+                { text: 'std/jule/dist', link: '/std/jule-dist' },
                 { text: 'std/jule/importer', link: '/std/jule-importer' },
                 { text: 'std/jule/integrated', link: '/std/jule-integrated' },
                 { text: 'std/jule/log', link: '/std/jule-log' },
