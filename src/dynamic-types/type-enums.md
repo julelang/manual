@@ -50,3 +50,8 @@ In the example above, `Int` does not directly support the `int` type. However, t
 ::: info
 Strict type alias to a type-enum, will not be inherited.
 :::
+
+
+## Type Matching
+
+Type Enums are safer than the `any` type when performing type matching because they have a fundamental requirement: all possible types must be handled within the type matching. If you don't need to match every type individually, you can define a default case.
