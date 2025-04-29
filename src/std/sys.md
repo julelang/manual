@@ -10,15 +10,9 @@ This package may not be fully viewable as it is documented using `juledoc`. Due 
 [fn Close\(handle: int\): int](#close)\
 [unsafe fn Write\(handle: int, buff: \*unsafe, n: uint\): int](#write)\
 [fn Exit\(code: int\)](#exit)\
-[fn Htons\(x: int\): u16](#htons)\
-[fn Ntohs\(x: int\): u16](#ntohs)\
-[unsafe fn Select\(nfds: int, mut read: \*Fd, mut write: \*Fd, mut err: \*Fd, mut timeout: \*Timeval\): int](#select)\
+[unsafe fn Select\(nfds: int, mut read: \*FdSet, mut write: \*FdSet, mut err: \*FdSet, mut timeout: \*Timeval\): int](#select)\
 [type Errno](#errno)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
-[type Sockaddr](#sockaddr)\
-[type SockaddrIn](#sockaddrin)\
-[type SockaddrIn6](#sockaddrin6)\
-[type Fd](#fd)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)
 
 
 
@@ -58,21 +52,9 @@ fn Exit(code: int)
 ```
 Wrapper for C&#39;s exit\.
 
-## Htons
-```jule
-fn Htons(x: int): u16
-```
-C&#39;s htons macro\.
-
-## Ntohs
-```jule
-fn Ntohs(x: int): u16
-```
-C&#39;s ntohs macro\.
-
 ## Select
 ```jule
-unsafe fn Select(nfds: int, mut read: *Fd, mut write: *Fd, mut err: *Fd, mut timeout: *Timeval): int
+unsafe fn Select(nfds: int, mut read: *FdSet, mut write: *FdSet, mut err: *FdSet, mut timeout: *Timeval): int
 ```
 C&#39;s select function\.
 
@@ -86,28 +68,3 @@ Type of error number\.
 ```jule
 fn Str(self): str
 ```
-
-
-## Sockaddr
-```jule
-type Sockaddr: cpp.sockaddr
-```
-C&#39;s sockaddr structure\.
-
-## SockaddrIn
-```jule
-type SockaddrIn: cpp.sockaddr_in
-```
-C&#39;s sockaddr\_in structure\.
-
-## SockaddrIn6
-```jule
-type SockaddrIn6: cpp.sockaddr_in6
-```
-C&#39;s sockaddr\_in6 structure\.
-
-## Fd
-```jule
-type Fd: cpp.fd_set
-```
-C&#39;s fd\_set structure\.
