@@ -85,65 +85,33 @@ fn main() {
 ```
 
 ## Type Safety
-Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments should always be of their own type.
-
-Enum basically supports `==` and `!=` operators. But for enum types using integer, you can also use the `|`, `&`, `>`, `<`, `>=`, and `<=` operators. The `==` and `!=` logical operators can be used for compatible types for enum's type. It's safe. But others needs casting or it's own type.
-
-For the amper operator, you can use only when you define a default enum field with a zero value. Otherwise, the amper (`&`) operator is not available for relevant enum.
+Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments and comparisons should always be of their own type.
 
 ### Maps
 
 Maps doesn't support enums for type safety. You can use enums for key type, but not for value type.
 
-### Comparing Enums
+## Matching
 
-It only allows you to use the base type for the `==` and `!=` operators when comparing enums. This means you can compare base types of enums for simple equality checks without having to constantly cast. But this is only true if the base type of comparison is being made. If you are trying to compare an enum in situations that require strict matching, such as a match statement, implicit casting is not done.
-
-For example:
-```jule
-enum MyEnum: str {
-    Foo: "foo",
-    Bar: "bar",
-    Baz: "baz",
-}
-```
-You will see the above enum definition used in the codes below.
-
-Below are examples of valid comparisons:
-```jule
-MyEnum.Foo == "FooBarBaz"
-"FooBarBaz" == MyEnum.Foo
-MyEnum.Foo != "FooBarBaz"
-"FooBarBaz" != MyEnum.Foo
-```
-In these comparisons, implicit casting is performed regardless of whether the enum is a right or left operator. However, having enums on both operands still doesn't change anything. If you are comparing two different enums and their base types are the same, implicit casting performed.
-
-If you are matching with a match statement, implicit casting occurs if the base type is the main type you are matching with.
+In match statements for enum types, you only need to use the field names of the enum type. For example, instead of writing `Foo.Bar` as you would in a regular expression, you simply use `Bar` to represent the enum value.
 
 For example:
 ```jule
-match "FooBarBaz" {
-| MyEnum.Foo:
-    println("case1")
-| "bar":
-    println("case2")
-| MyEnum.Baz:
-    println("case3")
+enum Foo {
+	A,
+	B,
+	C,
+}
+
+fn main() {
+	x := Foo.A
+	match x {
+	| A:
+		println("Foo.A")
+	| B:
+		println("Foo.B")
+	| C:
+		println("Foo.C")
+	}
 }
 ```
-In the example above, the base type being matched is the same as the base type of the enum type `MyEnum`. Therefore, implicit casting is applied for the enum.
-
-In the opposite case, you cannot achieve implicit casting. So if the main type you use to match is an enum, you can only match enum's itself.
-
-For example:
-```jule
-match MyEnum.Foo {
-| MyEnum.Foo:
-    println("case1")
-| "bar":
-    println("case2")
-| MyEnum.Baz:
-    println("case3")
-}
-```
-In the example above, the type of the actual expression matched is enum. Therefore implicit conversion is not allowed. So the code above is incorrect, the expression `"bar"` is not a valid expression for matching.

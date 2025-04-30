@@ -52,7 +52,7 @@ For example:
 match {
 | x > 10 || x < 90:
     // Body
-| my_bool:
+| myBool:
     // Body
 | y == 100:
     // Body
