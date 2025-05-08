@@ -22,7 +22,7 @@
 - [Jule have a runtime?](#jule-have-a-runtime)
 - [Why receiver parameters always named as self?](#why-receiver-parameters-always-named-as-self)
 - [Why some packages in the standard library adopted from Go?](#why-some-packages-in-the-standard-library-adopted-from-go)
-- [Why default values of fields must be constant?](#why-default-values-of-fields-must-be-constant)
+- [Why were the default values ​​of the fields removed?](#why-were-the-default-values-of-the-fields-removed)
 
 ### Why an another language?
 
@@ -247,8 +247,14 @@ Due to Jule being largely influenced by Go, many Go codes can be easily adapted 
 
 That is, time cost. Designing and developing well-implemented algorithms takes time. Go has enough well-implemented algorithms, so it makes sense to adopt them. And not all packages were adopted from Go, just specific ones that play well with Jule. Many algorithms are implemented from scratch for Jule.
 
-### Why default values of fields must be constant?
+### Why were the default values of the fields removed?
 
-We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.
+There were significant concerns that it negatively affected readability. In particular, when tag support was added for fields, it became clear that combining default values and tags did not lead to maintainable code. To prevent this, the default value feature was removed from structs.
 
-Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
+In the future, a feature for assigning default values to structs may be reintroduced. However, it can be said with certainty that this won't be part of the struct declaration itself, as it was in the previous implementation. Instead, it will most likely involve using a struct literal returned from a dedicated reserved method. Just like the old implementation, all default values for the struct fields will be required to be constants. If you're wondering why they must be constants, see the old QA below.
+
+> #### Why default values of fields must be constant?
+>>
+> We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.
+>>
+> Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
