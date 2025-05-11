@@ -903,7 +903,7 @@ struct Field {
 	Mutable: bool // Interior mutability.
 	Ident:   str
 	Kind:    &Type
-	Default: &Expr // Nil if not given.
+	Tag:     &token::Token // Nil if not given.
 }
 ```
 Field declaration\.
