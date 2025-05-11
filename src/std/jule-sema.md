@@ -3,8 +3,8 @@
 ## Index
 
 [Variables](#variables)\
-[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]log::Log\)](#analyzepackage)\
-[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]log::Log\)](#analyzefile)\
+[fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&lt;anonymous&gt;: &amp;Package, &lt;anonymous&gt;: \[\]log::Log\)](#analyzepackage)\
+[fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&lt;anonymous&gt;: &amp;SymTab, &lt;anonymous&gt;: \[\]log::Log\)](#analyzefile)\
 [trait Importer](#importer)\
 [trait Kind](#kind)\
 [trait Lookup](#lookup)\
@@ -61,7 +61,7 @@
 [struct BackendEmitExpr](#backendemitexpr)\
 [struct FreeExpr](#freeexpr)\
 [struct SymTab](#symtab)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, selector: fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, selector: fn &lt;anonymous&gt;\(&lt;anonymous&gt;: &amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut self, ident: str, binded: bool\): &amp;Var](#findvar)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut self, ident: str, binded: bool\): &amp;TypeAlias](#findtypealias)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut self, ident: str, binded: bool\): &amp;Struct](#findstruct)\
@@ -135,16 +135,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Exist\[T\]\(self, t: T\): bool](#exist)\
 [struct Pass](#pass)\
 [struct ImportInfo](#importinfo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut self, ident: str, \_: bool\): &amp;Var](#findvar-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut self, ident: str, \_: bool\): &amp;TypeAlias](#findtypealias-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut self, ident: str, \_: bool\): &amp;Struct](#findstruct-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut self, ident: str, \_: bool\): &amp;Func](#findfunc-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, &lt;anonymous&gt;: fn &lt;anonymous&gt;\(&lt;anonymous&gt;: &amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut self, ident: str, bool\): &amp;Var](#findvar-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut self, ident: str, bool\): &amp;TypeAlias](#findtypealias-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut self, ident: str, bool\): &amp;Struct](#findstruct-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut self, ident: str, bool\): &amp;Func](#findfunc-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut self, ident: str\): &amp;Trait](#findtrait-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut self, ident: str\): &amp;Enum](#findenum-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut self, ident: str\): &amp;TypeEnum](#findtypeenum-1)\
 [struct Package](#package)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut self, &lt;anonymous&gt;: fn &lt;anonymous&gt;\(&lt;anonymous&gt;: &amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut self, ident: str, binded: bool\): &amp;Var](#findvar-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut self, ident: str, binded: bool\): &amp;TypeAlias](#findtypealias-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut self, ident: str, binded: bool\): &amp;Struct](#findstruct-2)\
@@ -241,21 +241,22 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe\(self\): bool](#isunsafe)\
 [enum Expr: type ](#expr)\
 [enum Stmt: type ](#stmt)\
-[enum CaseOwner: type ](#caseowner)
+[enum CaseOwner: type ](#caseowner)\
+[enum RetState](#retstate)
 
 ## Variables
 
 ```jule
 const (
-	Default = 1 << iota // Default semantic analysis of Jule.
-	Shadowing           // Default + enable shadowing.
+	Default   = 1 << iota // Default semantic analysis of Jule.
+	Shadowing             // Default + enable shadowing.
 )
 ```
 Flags for semantic analysis\.
 
 ## AnalyzePackage
 ```jule
-fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: int): (&Package, []log::Log)
+fn AnalyzePackage(mut files: []&ast::AST, mut importer: Importer, flags: int): (<anonymous>: &Package, <anonymous>: []log::Log)
 ```
 Builds symbol table of package&#39;s ASTs\. Returns nil if files is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -278,7 +279,7 @@ semantic analyzer used nil importer.
 
 ## AnalyzeFile
 ```jule
-fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (&SymTab, []log::Log)
+fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (<anonymous>: &SymTab, <anonymous>: []log::Log)
 ```
 Builds symbol table of AST\. Returns nil if f is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
 
@@ -325,11 +326,11 @@ trait Importer {
 	// Should return abstract syntax tree of package files.
 	// Logs accepts as error.
 	// Updated module to package's module if exist when updateMod is true.
-	fn ImportPackage(mut self, path: str, updateMod: bool): ([]&ast::AST, []log::Log)
+	fn ImportPackage(mut self, path: str, updateMod: bool): (<anonymous>: []&ast::AST, <anonymous>: []log::Log)
 
 	// Invoked after the package is imported.
 	// Sets module identitity of imported package to current module.
-	fn Imported(mut self, mut &ImportInfo)
+	fn Imported(mut self, mut <anonymous>: &ImportInfo)
 
 	// Returns all imported packages.
 	// The return value is mutable reference to internal buffer.
@@ -354,7 +355,7 @@ Kind of type declaration\.
 trait Lookup {
 	// Select imported package.
 	// Returns nil if did not found any match.
-	fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
+	fn SelectPackage(mut self, selector: fn <anonymous>(<anonymous>: &ImportInfo): bool): &ImportInfo
 
 	// Find variable by identifier and binded state.
 	// Returns nil if did not found any match.
@@ -396,7 +397,8 @@ struct Field {
 	Mutable: bool // Interior mutability.
 	Ident:   str
 	TypeSym: &TypeSym
-	Default: &ast::Expr // Nil if not given.
+	Tag:     &token::Token // Tag declaration.
+	Tags:    map[str]str   // Tags in key:value format.
 }
 ```
 Field\.
@@ -457,10 +459,9 @@ Reports whether structure has only reference\-type\-accessible defines\.
 ## FieldIns
 ```jule
 struct FieldIns {
-	Owner:   &StructIns
-	Decl:    &Field
-	Type:    &Type
-	Default: &Value // Nil if not given.
+	Owner: &StructIns
+	Decl:  &Field
+	Type:  &Type
 }
 ```
 Field instance\.
@@ -915,7 +916,7 @@ Symbol table\. Builds by semantic analyzer\.
 
 ### SelectPackage
 ```jule
-fn SelectPackage(mut self, selector: fn(&ImportInfo): bool): &ImportInfo
+fn SelectPackage(mut self, selector: fn <anonymous>(<anonymous>: &ImportInfo): bool): &ImportInfo
 ```
 Returns imported package by selector\. Returns nil if selector returns false for all packages\. Returns nil if selector is nil\.
 
@@ -1590,13 +1591,13 @@ Import information\. Represents imported package by use declaration\.
 
 ### SelectPackage
 ```jule
-fn SelectPackage(mut self, fn(&ImportInfo): bool): &ImportInfo
+fn SelectPackage(mut self, <anonymous>: fn <anonymous>(<anonymous>: &ImportInfo): bool): &ImportInfo
 ```
 Returns always nil\.
 
 ### FindVar
 ```jule
-fn FindVar(mut self, ident: str, _: bool): &Var
+fn FindVar(mut self, ident: str, bool): &Var
 ```
 Returns variable by identifier and binded state\. Returns nil if not exist any variable in this identifier\.
 
@@ -1604,7 +1605,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-binded de
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut self, ident: str, _: bool): &TypeAlias
+fn FindTypeAlias(mut self, ident: str, bool): &TypeAlias
 ```
 Returns type alias by identifier\. Returns nil if not exist any type alias in this identifier\.
 
@@ -1612,7 +1613,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-binded de
 
 ### FindStruct
 ```jule
-fn FindStruct(mut self, ident: str, _: bool): &Struct
+fn FindStruct(mut self, ident: str, bool): &Struct
 ```
 Returns struct by identifier and binded state\. Returns nil if not exist any struct in this identifier\.
 
@@ -1620,7 +1621,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-binded de
 
 ### FindFunc
 ```jule
-fn FindFunc(mut self, ident: str, _: bool): &Func
+fn FindFunc(mut self, ident: str, bool): &Func
 ```
 Returns function by identifier and binded state\. Returns nil if not exist any function in this identifier\.
 
@@ -1665,7 +1666,7 @@ Package\.
 
 ### SelectPackage
 ```jule
-fn SelectPackage(mut self, fn(&ImportInfo): bool): &ImportInfo
+fn SelectPackage(mut self, <anonymous>: fn <anonymous>(<anonymous>: &ImportInfo): bool): &ImportInfo
 ```
 Returns always nil\.
 
@@ -1730,10 +1731,12 @@ struct Var {
 	Refers:     &ReferenceStack
 	Directives: []&ast::Directive
 
-	// The -2 means this variable is not one of the return variables.
-	// The -1 means this variable is just the single return variable one.
+	// Return variable state for this variable.
+	RetState: RetState
+
 	// The 0..n means this variable is the nth variable of the return variables.
-	RetOrder: int = -2
+	// This order is not useful if variable is not associated with the return type.
+	RetOrder: int
 
 	// This variable depended to these variables for initialization expression.
 	// Nil if not global variable.
@@ -2370,10 +2373,8 @@ enum Expr: type {
 	&Var,
 	&FuncIns,
 	&StructIns,
-	&OperandExpr,
 	&BinaryExpr,
 	&UnaryExpr,
-	&StructArgExpr,
 	&StructLitExpr,
 	&AllocStructLitExpr,
 	&CastingExpr,
@@ -2381,7 +2382,6 @@ enum Expr: type {
 	&SliceExpr,
 	&IndexingExpr,
 	&AnonFuncExpr,
-	&KeyValPairExpr,
 	&MapExpr,
 	&SlicingExpr,
 	&TraitSubIdentExpr,
@@ -2447,3 +2447,13 @@ enum CaseOwner: type {
 }
 ```
 Valid owner types for Case\.
+
+## RetState
+```jule
+enum RetState {
+	NA,     // Variable is not associated with return type.
+	Single, // Variable is  associated with the single return type.
+	Tuple,  // Variable is associated with the tuple return type.
+}
+```
+Return variable states\.
