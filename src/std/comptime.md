@@ -273,6 +273,24 @@ fn Methods(self): comptimeDecls
 ```
 Returns declaration information wrappers for methods. Supports only structures and traits.
 
+###
+```jule
+fn Tags(self): int
+```
+Returns count of tags as constant expression. Supports only structure fields.
+
+### Tag
+```jule
+fn Tag(self, key: str): str
+```
+Returns the value of the tag corresponding to the key as a constant expression. Supports only structure fields. Parameter key should be constant. Returns empty string if key is not exist in the tags.
+
+### IsTag
+```jule
+fn IsTag(self, key: str): bool
+```
+Reports whether the key is exist in tags as a constant expression. Supports only structure fields. Parameter key should be constant.
+
 ## comptimeTypeInfos
 ```jule
 struct comptimeTypeInfos
@@ -502,21 +520,21 @@ Reports whether value is constant as constant expression.
 
 ### Field
 ```jule
-fn Field(self, ident: str): comptimeValue
+fn Field(self, name: str): comptimeValue
 ```
-Returns comptimeValue for field access expression. Supports only structure types. Parameter ident should be constant. It allows access to private fields.
+Returns comptimeValue for field access expression. Supports only structure types. Parameter name should be constant. It allows access to private fields.
 
 ### FieldByIndex
 ```jule
 fn FieldByIndex(self, index: int): comptimeValue
 ```
-Same as the Field method, but takes constant index instead of identifier.
+Same as the Field method, but takes constant index instead of name.
 
 ### Method
 ```jule
-fn Method(self, ident: str): comptimeValue
+fn Method(self, name: str): comptimeValue
 ```
-Returns comptimeValue for method access expression. Supports only structure types. Parameter ident should be constant. It allows access to private methods. It will not use the actual kind, so this method an provide access to methods of the any strict type alias.
+Returns comptimeValue for method access expression. Supports only structure types. Parameter name should be constant. It allows access to private methods. It will not use the actual kind, so this method an provide access to methods of the any strict type alias.
 
 ### Unwrap
 ```jule
