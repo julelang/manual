@@ -188,9 +188,6 @@ export default defineConfig({
             {
               text: 'Enums',
               link: '/common-concepts/enums/',
-              items: [
-                { text: 'Bit Flags', link: '/common-concepts/enums/bitflags' },
-              ],
             },
             {
               text: 'Structures', link: '/common-concepts/structures/',
