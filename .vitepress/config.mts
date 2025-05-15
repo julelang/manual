@@ -336,7 +336,13 @@ export default defineConfig({
                 { text: 'Exporting Definitions', link: '/packages/3rd-party-packages/exporting-definitions' },
               ],
             },
-            { text: 'Standard Library', link: '/std/' },
+            {
+              text: 'Standard Library',
+              link: '/std/',
+              items: [
+                { text: 'JSON', link: '/packages/std/json' },
+              ]
+            },
           ],
         },
         {
