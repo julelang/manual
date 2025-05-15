@@ -39,7 +39,7 @@ In the example above, an instance of the `User` structure is encoded into JSON a
 
 ### Encoding with Indentation
 
-The [EncodeIndent](/std/encoding-json#encodeindent) function will encode like the Encode function, but it will adds identation where it needed. The indentation string determinated by the function caller. Tabs or spaces are recommended for indentation.
+The [EncodeIndent](/std/encoding-json#encodeindent) function will encode like the Encode function, but it will adds indentation where it needed. The indentation string determined by the function caller. Tabs or spaces are recommended for indentation.
 
 For example:
 ```jule
