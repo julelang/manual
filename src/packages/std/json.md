@@ -89,7 +89,7 @@ If it is known that the incoming type is an object, the `v` variable could be us
 
 ## Tags
 
-The JSON encoder and decoder support a special tag naming convention. By adding a `json` tag to struct fields (see [Field Tags](/common-concepts/structures#field-tags)), you can specify the name under which each field should be encoded or decoded.
+The JSON encoder and decoder support a special tag naming convention. By adding a `json` tag to struct fields (see [Field Tags](/common-concepts/structures/#field-tags)), you can specify the name under which each field should be encoded or decoded.
 
 For example:
 ```jule
