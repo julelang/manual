@@ -52,7 +52,14 @@ Strings:
 	to "\u003c", "\u003e", "\u0026", "\u2028", and "\u2029".
 
 Structs:
-	Encode as JSON objects with only public fields of struct.
+	Encode as JSON objects with only visible fields of struct.
+
+	The private and anonymous fields will be ignored.
+	If the field is public, the field name will be used.
+	If the field have a json tag, the json tag will be used even if field is private or anonymous.
+	If the field have json tag but it is duplicate, the field will be ignored.
+	A valid JSON tag must contain only Unicode letter, digit or punctuation
+	except quote chars and backslash.
 
 Arrays:
 	Encode as JSON array.
@@ -73,7 +80,7 @@ Smart Pointers:
 	If smart pointer is nil, encode as null JSON value.
 	Otherwise, will encode dereferenced value.
 ```
-Encode cannot represent cyclic data structures and does not handle them\. Passing cyclic structures for encoding will result in an cycle at runtime\. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data\. However, tousands of nested\-data is always risky even below 10000\.
+Encode cannot represent cyclic data structures and does not handle them\. Passing cyclic structures for encoding will result in an cycle at runtime\. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
 
 Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
@@ -123,7 +130,14 @@ Strings:
 	Unicode replacement character U+FFFD.
 
 Structs:
-	Decode as JSON objects with only public fields of struct.
+	Decode as JSON objects with only visible fields of struct.
+
+	The private and anonymous fields will be ignored.
+	If the field is public, the field name will be used.
+	If the field have a json tag, the json tag will be used even if field is private or anonymous.
+	If the field have json tag but it is duplicate, the field will be ignored.
+	A valid JSON tag must contain only Unicode letter, digit or punctuation
+	except quote chars and backslash.
 
 Arrays:
 	Decode as JSON array.
@@ -163,7 +177,7 @@ Dynamic decoding will always decode using dynamic types;
 If you use Value as destination type, it may store any JSON value,
 and the type will be determined dynamically based on the JSON value.
 ```
-Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 10000 nested data\. However, tousands of nested\-data is always risky even below 10000\.
+Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
 
 Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
