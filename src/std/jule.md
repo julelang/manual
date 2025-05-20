@@ -53,7 +53,7 @@ Separator of import paths\.
 ```jule
 const (
 	Blank = "_"
-	Anon = "<anonymous>"
+	Anon  = "<anonymous>"
 )
 ```
 Special identifiers\.
