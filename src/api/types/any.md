@@ -2,7 +2,7 @@
 
 The Jule's `any` type implemented in C++ from scratch. It is not uses `std::any` which is provided by STL.
 
-Using the `jule::Any` might be pretty expensive development approach. Becasue this type implementation have low-level implementation with low abstraction. It is designed as compiler-oriented, not developer-oriented.
+Using the `jule::Any` might be pretty expensive development approach. Because this type implementation have low-level implementation with low abstraction. It is designed as compiler-oriented, not developer-oriented.
 
 You should pass type info structure manually for each type and they should be correct pointer.
 

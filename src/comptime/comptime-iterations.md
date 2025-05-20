@@ -32,7 +32,7 @@ The example program above will prints names of `MyStruct`'s fields. In compile-t
 
 ## Slice Literals
 
-Slice literals also supported by comptime iterations. All values of the slice literal should be constant (values supported by constant evaluation). When this slice literals used for comptime iterations, iteration will iterate each constant element sequentally.
+Slice literals also supported by comptime iterations. All values of the slice literal should be constant (values supported by constant evaluation). When this slice literals used for comptime iterations, iteration will iterate each constant element sequentially.
 
 For example:
 ```jule
@@ -43,7 +43,7 @@ fn main() {
 }
 ```
 
-In the example above, iteration will iterate each constant expression sequentally, from index 0 to index len-1. So output will be:
+In the example above, iteration will iterate each constant expression sequentially, from index 0 to index len-1. So output will be:
 
     hello
     comptime

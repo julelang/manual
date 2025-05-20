@@ -1,11 +1,11 @@
 # Foreword
-This manual is updated following the source code, according to the latest version of Jule. Some content may be not released yet, so it may be already documented here, but not yet available in the compiler you have.
+This manual is updated following the source code, according to the latest version of Jule. Some content may be not released yet, so it may be already documented here, but not yet available in the latest compiler release.
 
 The explanations in this documentation assume that you already know programming. Therefore, everything is not explained from the very beginning. If you are completely new to programming, it may be better to learn programming from the most basic sources. If you already know programming, you can easily learn Jule with this documentation.
 
 With this manual, it is possible to improve your Jule knowledge, programming, and adopt your analytical skills to Jule.
 
-Dear Julenour, welcome to the Jule community! 
+Dear Julenour, welcome to the Jule community!
 
 ## Version Specific
 
