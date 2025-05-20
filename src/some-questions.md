@@ -1,28 +1,26 @@
 # Some Questions
 
-
-
 **List of all questions:**
-- [Why an another language?](#why-an-another-language)
+- [Why another language?](#why-another-language)
 - [What about future of Jule?](#what-about-future-of-jule)
 - [Is Jule the C++ successor?](#is-jule-the-c-successor)
 - [Is Jule experimental?](#is-jule-experimental)
-- [What is the experimental feature?](#what-is-the-experimental-feature)
+- [What are experimental features?](#what-are-experimental-features)
 - [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
-- [Why Jule uses exceptionals instead other error handling methods?](#why-jule-uses-exceptionals-instead-other-error-handling-methods)
+- [Why does Jule use exceptionals instead of other error handling methods?](#why-does-jule-use-exceptionals-instead-of-other-error-handling-methods)
 - [Why do exceptionals not support combining?](#why-do-exceptionals-not-support-combining)
 - [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
-- [Why Jule have not built-in methods?](#why-jule-have-not-built-in-methods)
-- [Why are null values allowed?](#why-are-null-values-%E2%80%8Ballowed)
+- [Why does not Jule have built-in methods?](#why-does-not-jule-have-built-in-methods)
+- [Why are null values allowed?](#why-are-null-values-allowed)
 - [Why is shadowing allowed for global scope?](#why-is-shadowing-allowed-for-global-scope)
 - [Will function overloading be added?](#will-function-overloading-be-added)
 - [Will different memory management methods be added?](#will-different-memory-management-methods-be-added)
 - [Will runtime reflection be added?](#will-runtime-reflection-be-added)
-- [Why Jule have an optimizing compiler?](#why-jule-have-an-optimizing-compiler)
-- [Jule have a runtime?](#jule-have-a-runtime)
-- [Why receiver parameters always named as self?](#why-receiver-parameters-always-named-as-self)
-- [Why some packages in the standard library adopted from Go?](#why-some-packages-in-the-standard-library-adopted-from-go)
-- [Why were the default values of the fields removed?](#why-were-the-default-values-of-the-fields-removed)
+- [Why does Jule have its own compiler optimizations?](#why-does-jule-have-its-own-compiler-optimizations)
+- [Does Jule have a runtime?](#does-jule-have-a-runtime)
+- [Why is `self` the only receiver parameter?](#why-is-self-the-only-receiver-parameter)
+- [Why are some packages in the standard library adopted from Go?](#why-are-some-packages-in-the-standard-library-adopted-from-go)
+- [Why were default field values removed?](#why-were-default-field-values-removed)
 
 ### Why another language?
 
@@ -137,7 +135,7 @@ Native backend may be an exception. Native backend can be added for supported pl
 
 Only time can give a definitive answer to this question.
 
-### Why doesn't Jule have built-in methods?
+### Why does not Jule have built-in methods?
 
 Jule has built-in functions for some critical operations such as memory allocation, but not built-in methods because those are generally considered a bad design choice. Having methods for built-in types is vague and resembles functional programming and Jule is not a functional language.
 
