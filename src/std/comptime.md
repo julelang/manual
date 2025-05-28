@@ -303,11 +303,29 @@ struct comptimeTypeInfo
 ```
 Private compile-time type information wrapper. Supports the == and != operators to compare types.
 
+### Hash
+```jule
+fn Hash(self): uintptr
+```
+Returns unique hash for type as constant uintptr expression. Hash value is not fixed, it changes with each compilation.
+
 ### Strict
 ```jule
 fn Strict(self): bool
 ```
 Reports whether type is constructed by a strict type alias as constant expression.
+
+### Source
+```jule
+fn Source(self): comptimeTypeInfo
+```
+Returns source type of strict type alias.
+
+### ActualSource
+```jule
+fn ActualSource(self): comptimeTypeInfo
+```
+Returns actual source type of strict type alias.
 
 ### Kind
 ```jule
