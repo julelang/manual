@@ -221,7 +221,7 @@ struct EncodeError {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Represents an error from calling a reserved \[EncodeJSON\] or \[EncodeText\] method\.
+Represents an error from calling a reserved \[EncodeText\] method\.
 
 ### Str
 ```jule

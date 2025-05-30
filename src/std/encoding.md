@@ -1,3 +1,5 @@
+# std/encoding
+
 ## Index
 
 [trait TextEncoder](#textencoder)\
