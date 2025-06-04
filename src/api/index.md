@@ -10,10 +10,11 @@ With this API, you can use the definitions of JuleC in C++ codes and adapt funct
 ## Naming Conventions
 
 - All define directives starts with `__JULE_` prefix (with exception defines like atomic functions)
-- All `constexpr` defines are UPPER_CASE
 - All no-define-directive defines are placed in the `jule` namespace
 - Type aliases, classes, and structs are PascalCase
 - All variables, functions, methods, and fields are snake_case
+- All `constexpr` variables are UPPER_CASE
+- Runtime API is mostly follows Jule's naming conventions
 
 ## Disclaimer
 
