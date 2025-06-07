@@ -116,7 +116,7 @@
 		},
 		"storage": {
 			"name": "storage.modifier.jule",
-			"match": "\\b(let|static|const|mut|self)\\b"
+			"match": "\\b(let|const|mut|self)\\b"
 		},
 		"constants": {
 			"name": "constant.language.jule",
