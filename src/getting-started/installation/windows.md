@@ -15,3 +15,9 @@ You can run it by typing `.\bin\julec.exe` and pressing Enter.
 ::: info
 You can add the `bin` directory to your system's `PATH` variable to run `julec` from anywhere.
 :::
+
+## Community-Made Installers
+
+There are also unofficial community-made installers for Windows.
+
+- [Jule Universal Installer](https://github.com/JustLachin/jule-universal-installer)
