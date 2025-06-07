@@ -3,7 +3,7 @@
 ## Index
 
 [Variables](#variables)\
-[fn TypeAlias(ident: str, t: T)](#typealias)\
+[fn TypeAlias(name: str, t: T)](#typealias)\
 [fn Line(): int](#line)\
 [fn File(): comptimeFile](#file)\
 [fn Files(): comptimeFiles](#files)\
@@ -18,7 +18,7 @@
 [struct comptimeDecl](#comptimeDecl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name(self): str](#name-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Public(self): bool](#public)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Binded(self): bool](#binded)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind(self): bool](#bind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Exceptional(self): bool](#exceptional)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(self): bool](#mutable)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Variadic(self): bool](#variadic)\
@@ -33,7 +33,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str(self): str](#str)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Decl(self): comptimeDecl](#decl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bits(self): int](#bits)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Elem(self): comptimeTypeInfo](#elem)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size(self): int](#size)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Key(self): comptimeTypeInfo](#key)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Value(self): comptimeTypeInfo](#value)\
@@ -41,7 +40,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Params(self): comptimeParams](#params-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Types(self): comptimeTypeInfos](#types)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Result(self): comptimeTypeInfo](#result)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Binded(self): bool](#binded-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind(self): bool](#bind-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Ordered(self): bool](#ordered)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Comparable(self): bool](#comparable)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(self): bool](#mutable-1)\
@@ -64,9 +63,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Lvalue(self): bool](#lvalue)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(self): bool](#mutable-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Const(self): bool](#const)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Field(self, ident: str): comptimeValue](#field)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Field(self, name: str): comptimeValue](#field)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FieldByIndex(self, index: int): comptimeValue](#fieldbyindex)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Method(self, ident: str): comptimeValue](#method)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Method(self, name: str): comptimeValue](#method)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unwrap(self)](#unwrap)\
 [enum Kind](#Kind)
 
@@ -110,9 +109,9 @@ Type kinds.
 
 ## TypeAlias
 ```jule
-fn TypeAlias(ident: str, t: T)
+fn TypeAlias(name: str, t: T)
 ```
-Emplaces a type alias declaration to statement which is this function called. Defines a type alias with ident which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
+Emplaces a type alias declaration to statement which is this function called. Defines a type alias with identifier which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
 
 ## Line
 ```jule
@@ -147,7 +146,7 @@ type ByteSlice: []byte
 const t = comptime::TypeOf(ByteSlice)
 const match type t.Kind() {
 | comptime::Slice:
-	const match type t.Elem().Kind() {
+	const match type t.Value().Kind() {
 	| comptime::Byte:
 		// ...
 	}
@@ -225,11 +224,11 @@ fn Public(self): bool
 ```
 Reports whether type is public as constant expression.
 
-### Binded
+### Bind
 ```jule
-fn Binded(self): bool
+fn Bind(self): bool
 ```
-Reports whether type is binded as constant expression.
+Reports whether type is bind as constant expression.
 
 ### Exceptional
 ```jule
@@ -351,12 +350,6 @@ fn Bits(self): int
 ```
 Returns bitsize of type. Supports only primitive integer and floating-point types. Returns as constant expression.
 
-### Elem
-```jule
-fn Elem(self): comptimeTypeInfo
-```
-Returns comptimeTypeInfo for element type. Supports only raw pointers (except unsafe pointer), smart pointers, arrays, slices, channels, and enums.
-
 ### Size
 ```jule
 fn Size(self): int
@@ -373,7 +366,7 @@ Returns type information for key type. Supports only map types.
 ```jule
 fn Value(self): comptimeTypeInfo
 ```
-Returns type information for value type. Supports only map types.
+Returns type information for value type. Supports only raw pointers (except unsafe pointer), smart pointers, arrays, slices, channels, enums, and maps.
 
 ### Fields
 ```jule
@@ -399,11 +392,11 @@ fn Result(self): comptimeTypeInfo
 ```
 Returns compile-time information data for result type of function. Only supports function types.
 
-### Binded
+### Bind
 ```jule
-fn Binded(self): bool
+fn Bind(self): bool
 ```
-Reports whether type is binded as constant expression.
+Reports whether type is bind as constant expression.
 
 ### Ordered
 ```jule

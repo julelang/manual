@@ -67,7 +67,7 @@ use "std/comptime"
 fn PrintFields[T](s: T) {
     const t = comptime::TypeOf(T)
     const match {
-    | t.Kind() != comptime::Kind.Struct:
+    | t.Kind() != comptime::Struct:
         panic("PrintFields[T]: T is not struct")
     }
     const v = comptime::ValueOf(s)
@@ -139,25 +139,25 @@ cpp type Int: int
 fn IsNumeric[T](): bool {
     const t = comptime::TypeOf(T)
     const k = t.Kind()
-    ret k == comptime::Kind.Int ||
-        k == comptime::Kind.Uint ||
-        k == comptime::Kind.Uintptr ||
-        k == comptime::Kind.I8 ||
-        k == comptime::Kind.I16 ||
-        k == comptime::Kind.I32 ||
-        k == comptime::Kind.I64 ||
-        k == comptime::Kind.U8 ||
-        k == comptime::Kind.U16 ||
-        k == comptime::Kind.U32 ||
-        k == comptime::Kind.U64 ||
-        k == comptime::Kind.F32 ||
-        k == comptime::Kind.F64
+    ret k == comptime::Int ||
+        k == comptime::Uint ||
+        k == comptime::Uintptr ||
+        k == comptime::I8 ||
+        k == comptime::I16 ||
+        k == comptime::I32 ||
+        k == comptime::I64 ||
+        k == comptime::U8 ||
+        k == comptime::U16 ||
+        k == comptime::U32 ||
+        k == comptime::U64 ||
+        k == comptime::F32 ||
+        k == comptime::F64
 }
 
 fn IsValidType[T](): bool {
     const t = comptime::TypeOf(T)
     const match {
-    | t.Binded():
+    | t.Bind():
         ret false
     |:
         ret IsNumeric[T]()
@@ -182,13 +182,13 @@ fn main() {
 ```jule
 use "std/comptime"
 
-fn Fill[Arr, Elem](mut &arr: Arr, mut elem: Elem) {
+fn Fill[Arr, Value](mut &arr: Arr, mut elem: Value) {
     const t = comptime::TypeOf(Arr)
     const match {
-    | t.Kind() != comptime::Kind.Array:
+    | t.Kind() != comptime::Array:
         panic("type Arr is not an array")
-    | t.Elem() != comptime::TypeOf(Elem):
-        panic("type Elem is not same with type Arr's element type")
+    | t.Value() != comptime::TypeOf(Value):
+        panic("type Value is not same with type Arr's value type")
     }
     mut i := 0
     for i < t.Size(); i++ {
@@ -222,7 +222,7 @@ struct FooBarBaz {
 fn printPublicFields[T](x: T) {
     const t = comptime::TypeOf(T)
     const match {
-    | t.Kind() != comptime::Kind.Struct:
+    | t.Kind() != comptime::Struct:
         panic("type T is not a struct")
     }
     const fields = t.Decl().Fields()
