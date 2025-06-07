@@ -149,7 +149,7 @@ struct Foo {
 }
 
 impl Foo {
-    static fn New(): Foo {
+    fn New(): Foo {
         ret Foo{
             buf: make([]byte, 32)
         }

@@ -5,17 +5,17 @@ The runtime library provides some definitions as APIs to be used in the backend.
 ## Globals
 
 ```jule
-static mut argc: int
+let mut argc: int
 ```
 Assigned by entry point.
 
 ```jule
-static mut argv: **byte
+let mut argv: **byte
 ```
 Assigned by entry point.
 
 ```jule
-static mut envp: **byte
+let mut envp: **byte
 ```
 Assigned by entry point.
 

@@ -96,7 +96,7 @@ struct Person {
 }
 
 impl Person {
-    static fn new(name: str, surname: str): Person {
+    fn new(name: str, surname: str): Person {
         ret Person{
             buffer: cpp.Person{
                 name: unsafe { (*cpp.char)(&name[0]) },
@@ -142,7 +142,7 @@ struct Person {
 }
 
 impl Person {
-    static fn new(name: str, surname: str): Person {
+    fn new(name: str, surname: str): Person {
         ret Person{
             buffer: cpp.Person{
                 name: name,

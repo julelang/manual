@@ -45,59 +45,20 @@ fn example() {
 Variables must be mutable in order for their values ​​to change. For this, the keyword 'mut' was used in the example above. For more information about mutability, you can refer to the [mutability](/memory/mutability) section.
 :::
 
-## Static Variables
-
-Static variables are initialized once, they are living allocations over the life of the program. They are declared with the `static` keyword and, like constant variables, an initialize expression is required.
-
-For example:
-```jule
-static myInt: int = 20
-```
-
-::: info
-Binded variables can't be static.
-:::
-
-### Static Local Scope Variables
-
-Using static in fields where the concept of local scope is valid, such as function body, has the same effect as global scope static variables. Your static variable is allocated once and survives for the lifetime of the program. Therefore, the value of the variable can likewise be preserved between calls because the variable is a statically stored.
-
-For example:
-```jule
-fn count() {
-    static mut a: int = 0
-    a++
-    println(a)
-}
-
-fn main() {
-    count()
-    count()
-    count()
-    count()
-    count()
-    count()
-}
-```
-
 In the example above, the variable `a` is static so it will retain its value and you will get an integer that is constantly increasing.
 
 ## Global Variables
 
-Global variables are in the main scope of the program and are static variables by nature. Therefore, variables in the global scope must be declared as static.
+Global variables are in the main scope of the program and are static variables by nature.
 
 For example:
 ```jule
-static myInt: int = 20
+let myInt: int = 20
 
 fn main() {
     // ...
 }
 ```
-
-::: info
-Binded globals can be declare via `let` keyword.
-:::
 
 ### Initialization
 Global variables are initialized during the earliest stages of the program. At the time of their initialization, no `init` calls have been executed yet.
@@ -106,8 +67,8 @@ If the execution of an `init` function is necessary for the proper initializatio
 
 For example:
 ```jule
-static foo = bar()
-static mut baz = 0
+let foo = bar()
+let mut baz = 0
 
 fn bar(): int {
 	ret baz

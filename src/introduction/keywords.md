@@ -8,12 +8,12 @@ Keywords have been pre-reserved in the language and are not allowed to be used a
 ```jule
 map      type      impl      self
 trait    struct    enum      fn
-const    let       static    mut
-for      in        break     continue
-goto     match     fall      if
-else     ret       error     use
-co       cpp       unsafe    defer
-chan     select
+const    let       mut       for
+in       break     continue  goto
+match    fall      if        else
+ret      error     use       co
+cpp      unsafe    defer     chan
+select
 ```
 
 ## Imaginary Keywords

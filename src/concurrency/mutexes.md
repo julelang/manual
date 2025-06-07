@@ -7,7 +7,7 @@ For example:
 use "std/runtime"
 use "std/sync"
 
-static mut n = 0
+let mut n = 0
 
 fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
 	for part > 0; part-- {
@@ -39,8 +39,8 @@ For example:
 use "std/runtime"
 use "std/sync"
 
-static mut n = 0
-static mtx = new(sync::Mutex)
+let mut n = 0
+let mtx = new(sync::Mutex)
 
 fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
 	mtx.Lock()

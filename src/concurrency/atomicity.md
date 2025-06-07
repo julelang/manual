@@ -7,7 +7,7 @@ Here is an example code:
 ```jule
 use "std/runtime"
 
-static mut n: int = 0
+let mut n: int = 0
 
 fn addToN(mut part: int) {
 	for part > 0; part-- {
@@ -40,7 +40,7 @@ use "std/runtime"
 use "std/sync"
 use "std/sync/atomic"
 
-static mut n = atomic::Int(0)
+let mut n = atomic::Int(0)
 
 fn addToN(mut wg: &sync::WaitGroup, mut part: int) {
 	for part > 0; part-- {

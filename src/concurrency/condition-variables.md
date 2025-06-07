@@ -43,8 +43,8 @@ For example:
 use "std/sync"
 use "std/time"
 
-static cond = sync::Cond.New(new(sync::Mutex))
-static mut ready = false
+let cond = sync::Cond.New(new(sync::Mutex))
+let mut ready = false
 
 fn waitForCondition(mut wg: &sync::WaitGroup) {
 	cond.Lock()

@@ -12,7 +12,7 @@ The `Str` reserved method implements a special string conversion algorithm, repl
 
 ### The Pattern
 
-- Method should not be `unsafe` and `static`
+- Method should not be `unsafe` and static
 - Return type should be `str`
 - Method should only have immutable non-reference `self` parameter
 - Method should do not have generics

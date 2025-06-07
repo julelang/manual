@@ -133,7 +133,7 @@ If you are not sure how references work, check the [memory management documentat
 
 ## Static Methods
 
-Static methods, like normal methods, are dependent on the structure itself, but there are some differences.
+Static methods, like normal methods, are dependent on the structure itself, but there are some differences. To declare a static method, just do not use the receiver parameter.
 
 These differences are:
 
@@ -148,7 +148,7 @@ For example:
 struct Dog {}
 
 impl Dog {
-    static fn voice() {
+    fn voice() {
         println("woof woof")
     }
 }

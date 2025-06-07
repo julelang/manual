@@ -49,8 +49,8 @@ use "std/math"
 
 // Division errors.
 // Mutation is not safe.
-static mut ErrDivByZero = errors::New("divide by zero")
-static mut ErrOverflow = errors::New("denominator overflow")
+let mut ErrDivByZero = errors::New("divide by zero")
+let mut ErrOverflow = errors::New("denominator overflow")
 
 fn magicDiv(a: f64, b: f64)!: f64 {
 	if b == 0 {
