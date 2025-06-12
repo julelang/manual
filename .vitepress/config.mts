@@ -448,7 +448,6 @@ export default defineConfig({
               link: '/api/types/',
               items: [
                 { text: 'Primitive', link: '/api/types/primitive' },
-                { text: 'Limits', link: '/api/types/limits' },
                 { text: 'Strings', link: '/api/types/strings' },
                 { text: 'Slices', link: '/api/types/slices' },
                 { text: 'Any', link: '/api/types/any' },
