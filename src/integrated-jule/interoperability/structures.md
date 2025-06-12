@@ -100,3 +100,16 @@ cpp struct MyClass {
     magic_data: str
 }
 ```
+
+## Using Different Field Identifiers
+
+You can use different field identifiers in your Jule code. In fact, a kind of alias to the original identifier. Just use the `#export` compiler directive in your field tags.
+
+For example:
+```jule
+cpp struct Foo {
+	Bar: int `#export:"bar"`
+	Baz: int `#export:"baz"`
+}
+```
+In th examople above, the `Bar` and `Baz` fields of the structure `Foo` will be exported as `bar` and `baz` in the C++ code. Note that they are unchecked semantically and unlimited, even you can use an empty tag as an identifier.

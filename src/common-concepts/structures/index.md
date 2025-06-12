@@ -193,3 +193,10 @@ Tags are represented using string literals. Leading and trailing whitespace char
 **Recommended Tag Format**
 
 Even though special characters can be used in tags, it is recommended that key names be written as if naming variables in Jule source code.
+
+### Compiler Tags
+
+You can give some directives to the compiler using field tags. This kind of tags must be start with the hash, like `#export`. Leading hash symbol is not recommended for common use, this is compiler specific. But also it allowed for common use, to make things easy. For example, your package needs `#export` directive, but not for itself, for the compiler. It's ok. There is no limitation or difference about handling compiler directive file tags.
+
+Note that they are not semantically checked and limited, every tag with a leading hash is not a compiler directive. Here is list of the compiler directive field tags:
+- [`#export`](/integrated-jule/interoperability/structures#using-different-field-identifiers)
