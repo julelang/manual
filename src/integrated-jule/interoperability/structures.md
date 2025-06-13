@@ -103,7 +103,7 @@ cpp struct MyClass {
 
 ## Using Different Field Identifiers
 
-You can use different field identifiers in your Jule code. In fact, a kind of alias to the original identifier. Just use the `#export` compiler directive in your field tags.
+You can use different field identifiers for bind structures in your Jule code. In fact, a kind of alias to the original identifier. Just use the `#export` compiler directive in your field tags to define an alias.
 
 For example:
 ```jule
@@ -113,3 +113,7 @@ cpp struct Foo {
 }
 ```
 In th examople above, the `Bar` and `Baz` fields of the structure `Foo` will be exported as `bar` and `baz` in the C++ code. Note that they are unchecked semantically and unlimited, even you can use an empty tag as an identifier.
+
+::: warning
+This directive will be applied only for bind structures, not for Pure Jule.
+:::
