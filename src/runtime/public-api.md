@@ -40,4 +40,6 @@ The reference counting data delta value that must occur per each reference count
 ```jule
 fn NumCPU(): int
 ```
-Returns the number of CPUs. Returns zero until data initialized by the runtime.
+Returns the number of logical CPUs usable by the current process.
+
+The set of available CPUs is checked by querying the operating system at process startup. Changes to operating system CPU allocation after process startup are not reflected.
