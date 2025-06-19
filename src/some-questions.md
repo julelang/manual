@@ -23,6 +23,8 @@
 - [Why were default field values removed?](#why-were-default-field-values-removed)
 - [Why do not captured variables of closures need to be specified?](#why-do-not-captured-variables-of-closures-need-to-be-specified)
 - [Why do not allow choose how to capture variables of closures?](#why-do-not-allow-choose-how-to-capture-variables-of-closures)
+- [Why the function keyword needed for short function literals?](#why-the-function-keyword-needed-for-short-function-literals)
+- [Why mutability is not handled automatically for parameters of short function literals?](#why-mutability-is-not-handled-automatically-for-parameters-of-short-function-literals)
 
 ### Why another language?
 
@@ -294,3 +296,26 @@ fn main() {
 }
 ```
 In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.
+
+### Why the function keyword needed for short function literals?
+
+When adding short literals to the language, the way to support readability as much as possible seemed to be clearly indicating that the literal is definitely a function.
+
+### Why mutability is not handled automatically for parameters of short function literals?
+
+Due to Jule's immutable-by-default approach, this had to be the case. Developers should explicitly specify what needs to be mutable. However, this is not only a design choice based on principles but also to preserve the flexibility provided to developers and to prevent unnecessary mutability.
+
+If a function type defines mutable parameters, developers can still use immutable parameters if they want. Jule allows this. To preserve this, developers are allowed to have their own preferences regarding mutability.
+
+For example:
+```jule
+fn foo(f: fn(mut x: &int)) {
+	// ...
+}
+
+fn main() {
+	foo(fn|x| println(*x))
+	foo(fn|mut x| { *x++ })
+}
+```
+In the example above, the `foo` function takes an anonymous function as a parameter and allows the `x` parameter to be used mutably. However, if you look at the first call in the example, you’ll see it actually only makes a `println` call. In this case, there is no need for the parameter to be mutable, and this does not compromise Jule's mutability safety. However, in the second call, the value of the `x` parameter is modified, so mutability is required.

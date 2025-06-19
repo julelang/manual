@@ -57,3 +57,80 @@ The compiler detects used varaibles and automatically captures them.
 Accordingly, see these questions:
 - [Why do not captured variables of closures need to be specified?](/some-questions/#why-do-not-captured-variables-of-closures-need-to-be-specified)
 - [Why do not allow choose how to capture variables of closures?](/some-questions/#why-do-not-allow-choose-how-to-capture-variables-of-closures)
+
+## Short Literals
+
+Short literals allow anonymous functions to be quickly defined without specifying their parameter and return types. To enable this, a function type is required, as the short literal provides a prototype based on the target function type.
+
+For example:
+```jule
+fn main() {
+	let mut f: fn(x: int, y: int)
+	f = fn|x, y| println(x * y)
+	f(10, 20)
+}
+```
+In the example above, the type of the variable `f` is a function. Accordingly, you can use a short literal. For instance, in the assignment expression, there is a short literal that defines the parameters `x` and `y` and writes the product of their values to stdout. Here, the parameters `x` and `y` will be automatically mapped to the `int` type.
+
+For short literals, parameter types, return type, whether parameters are passed by reference, and exceptional behavior are automatically prototyped. However, mutability is not prototyped. If you want a parameter to be mutable, you must explicitly specify it.
+
+For example:
+```jule
+fn|x, y, mut z| /* ... */
+```
+In the example above, the parameters `x` and `y` are immutable, while the parameter `z` is defined as mutable.
+
+### One-Liner Literals
+
+One-liner literals are a usage form that consists of only a single statement, and this statement must be an expression. If the function returns a value, the expression is treated as the return value.
+
+For example:
+```jule
+fn main() {
+	let mut f1: fn(x: int, y: int)
+	let mut f2: fn(x: int, y: int): int
+	f1 = fn|x, y| println(x * y)
+	f2 = fn|x, y| x * y
+}
+```
+In the example above, since the function `f1` is void, the short literal makes a `println` call. However, `f2` returns an `int` type and uses `x * y` as the return expression.
+
+### Scoped Literals
+
+Scoped literals are literals that have a scope, just like plain anonymous functions.
+
+For example:
+```jule
+fn main() {
+	let mut f1: fn(x: int, y: int)
+	let mut f2: fn(x: int, y: int): int
+	f1 = fn|x, y| { println(x * y) }
+	f2 = fn|x, y| { ret x * y }
+}
+```
+In the example above, short literals have a scope and are not limited to a single statement. However, unlike one-liner literals, they must use standard return statements to return a value.
+
+### Generics and Type Inference
+
+The use of short literals in generic types is limited. Short literals are not supported for constraints; even if the only constraint is a function type, the use of short literals is not allowed.
+
+If the type is partially known, short literals are allowed. For this, the type must be explicit function type, the parameter types of the function, if any, must be known. Type inference is permitted only for the return type.
+
+For example:
+```jule
+struct User {
+	Name: str
+	Root: bool
+}
+
+fn printUserData[T](f: fn(User): T) {
+	r := f(User{"jule", true})
+	println(r)
+}
+
+fn main() {
+	printUserData(fn|user| user.Name)
+	printUserData(fn|user| user.Root)
+}
+```
+In the example above, the return type of the function is determined through type inference based on the return type of the short literal.
