@@ -21,6 +21,8 @@
 - [Why is `self` the only receiver parameter?](#why-is-self-the-only-receiver-parameter)
 - [Why are some packages in the standard library adopted from Go?](#why-are-some-packages-in-the-standard-library-adopted-from-go)
 - [Why were default field values removed?](#why-were-default-field-values-removed)
+- [Why do not captured variables of closures need to be specified?](#why-do-not-captured-variables-of-closures-need-to-be-specified)
+- [Why do not allow choose how to capture variables of closures?](#why-do-not-allow-choose-how-to-capture-variables-of-closures)
 
 ### Why another language?
 
@@ -261,3 +263,34 @@ In the future, a feature for assigning default values to structs may be reintrod
 > We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.
 >>
 > Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
+
+### Why do not captured variables of closures need to be specified?
+
+Because it is not simple. \
+Compiler can handle it instead of developer.
+
+### Why do not allow choose how to capture variables of closures?
+
+Because of safety. Jule doesn't have certain things to avoid adding too much responsibility to the runtime. One of these is to decide which variable in your runtime will be moved to the heap or not.
+
+For example, let's say a closure accesses variables within its scope by reference. If closure's lifetime is ended before the scope in which it is defined, it is safe. However, if the closure lives longer, a special runtime must be relied upon. However, if the shutdown takes longer, a special operating time must be relied upon. Because figuring out at compile time whether the closure will last longer may be completely impossible/require too much static analysis or involve adding significant complexity to the language. Therefore, there must be a runtime trust in the background.
+
+To prevent these problems, Jule captures all variables by copying instead of references. However, capturing with references may be possible if you know what you are doing. Jule has reference variables. For safety reasons, they cannot be used with Safe Jule from within the closure, but they can eliminate the need to capture by reference.
+
+For example:
+```jule
+fn foo(f: fn()) {
+    f()
+    f()
+}
+
+fn main() {
+    mut i := 0
+    {
+        mut &ri := i
+        foo(fn() { unsafe { ri++ } })
+    }
+    println(i) // 2
+}
+```
+In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.

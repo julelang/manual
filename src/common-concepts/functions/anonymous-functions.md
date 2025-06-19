@@ -52,36 +52,8 @@ The example above contains an example of fibonacci closure. The `fib` variable r
 
 In some languages, it is the developer's choice how the captured variables can be captured, and in some languages, it should be specified which variables will be captured. For example, C++.
 
-Jule does neither. \
-Accordingly, let's handle two questions;
-
-**Why do not captured variables need to be specified?**
-
-Because it is not simple. \
-Compiler can handle it instead of developer.
-
-**Why do not allow choose how to capture variables?**
-
-Because of safety. Jule doesn't have certain things to avoid adding too much responsibility to the runtime. One of these is to decide which variable in your runtime will be moved to the heap or not.
-
-For example, let's say a closure accesses variables within its scope by reference. If closure's lifetime is ended before the scope in which it is defined, it is safe. However, if the closure lives longer, a special runtime must be relied upon. However, if the shutdown takes longer, a special operating time must be relied upon. Because figuring out at compile time whether the closure will last longer may be completely impossible/require too much static analysis or involve adding significant complexity to the language. Therefore, there must be a runtime trust in the background.
-
-To prevent these problems, Jule captures all variables by copying instead of references. However, capturing with references may be possible if you know what you are doing. Jule has reference variables. For safety reasons, they cannot be used with Safe Jule from within the closure, but they can eliminate the need to capture by reference.
-
-For example:
-```jule
-fn foo(f: fn()) {
-    f()
-    f()
-}
-
-fn main() {
-    mut i := 0
-    {
-        mut &ri := i
-        foo(fn() { unsafe { ri++ } })
-    }
-    println(i) // 2
-}
-```
-In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.
+Jule does neither.
+The compiler detects used varaibles and automatically captures them.
+Accordingly, see these questions:
+- [Why do not captured variables of closures need to be specified?](/some-questions/#why-do-not-captured-variables-of-closures-need-to-be-specified)
+- [Why do not allow choose how to capture variables of closures?](/some-questions/#why-do-not-allow-choose-how-to-capture-variables-of-closures)
