@@ -55,8 +55,8 @@ In some languages, it is the developer's choice how the captured variables can b
 Jule does neither.
 The compiler detects used varaibles and automatically captures them.
 Accordingly, see these questions:
-- [Why do not captured variables of closures need to be specified?](/some-questions/#why-do-not-captured-variables-of-closures-need-to-be-specified)
-- [Why do not allow choose how to capture variables of closures?](/some-questions/#why-do-not-allow-choose-how-to-capture-variables-of-closures)
+- [Why do not captured variables of closures need to be specified?](/some-questions#why-do-not-captured-variables-of-closures-need-to-be-specified)
+- [Why do not allow choose how to capture variables of closures?](/some-questions#why-do-not-allow-choose-how-to-capture-variables-of-closures)
 
 ## Short Literals
 
