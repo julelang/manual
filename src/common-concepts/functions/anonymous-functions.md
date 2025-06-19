@@ -53,7 +53,7 @@ The example above contains an example of fibonacci closure. The `fib` variable r
 In some languages, it is the developer's choice how the captured variables can be captured, and in some languages, it should be specified which variables will be captured. For example, C++.
 
 Jule does neither.
-The compiler detects used varaibles and automatically captures them.
+The compiler detects used variables and automatically captures them.
 Accordingly, see these questions:
 - [Why do not captured variables of closures need to be specified?](/some-questions#why-do-not-captured-variables-of-closures-need-to-be-specified)
 - [Why do not allow choose how to capture variables of closures?](/some-questions#why-do-not-allow-choose-how-to-capture-variables-of-closures)
