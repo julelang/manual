@@ -95,6 +95,25 @@ fn main() {
 ```
 In the example above, since the function `f1` is void, the short literal makes a `println` call. However, `f2` returns an `int` type and uses `x * y` as the return expression.
 
+#### List Expressions
+
+There is a special case syntax for the short functions literals.
+List expressions cannot be in range, (ex. `(foo, bar)`), but you can use list expressions in range for one-line short function literals.
+
+For example:
+```jule
+fn Foo(f: fn(): (int, int)) {
+	x, y := f()
+	println(x)
+	println(y)
+}
+
+fn main() {
+	Foo(fn|| (10, 20))
+}
+```
+In the example above, function `Foo` takes an argument with short function literal, which is returns list expression.
+
 ### Scoped Literals
 
 Scoped literals are literals that have a scope, just like plain anonymous functions.
