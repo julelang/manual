@@ -92,6 +92,24 @@ When applying this method, make sure that the information you provide is meaning
 Please refer to the [compiler's optimizations](/compiler/compiler-optimizations) documentation to find out which optimizations can achieve this.
 :::
 
+## Disable Boundary Checking
+
+When the relevant compiler optimizations are turned on, you can skip some bounds checks. But compiler's static analysis may be not enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
+
+The [`disable`](/compiler/directives#directive-disable) directive provides this functionality.
+
+For example:
+```jule
+#disable boundary
+fn foo(mut x: []int) {
+	mut i := 0
+	for i < len(x); i++ {
+		x[i] = i
+	}
+}
+```
+The directive `#disable boundary` in the example above disables the boundary checks for the function `foo`. This can allow your program to avoid the cost of boundary checking subsequent accesses.
+
 ## Comptime
 
 ### Accessing Fields

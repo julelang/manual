@@ -111,3 +111,10 @@ Declares test function. For more information, read the [Writing Tests](/debuggin
 The `export` directive is an important part of Integrated Jule. Determines how existing definitions are passed to the backend. This way you have a fixed identifier and can provide an API to the backend language for your Jule codes.
 
 For more information, read the [API development](/integrated-jule/api/api-development) section.
+
+## Directive `disable`
+
+Disables some default configuration options of the language for specific areas of the source code. Supported by only functions. Supports multiple arguments.
+
+List of arguments:
+- `boundary`: Disables boundary checking for slice and array index expressions.
