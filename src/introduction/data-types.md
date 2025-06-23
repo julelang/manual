@@ -171,7 +171,7 @@ Strings can be used with range iteration. The first variable in the iteration is
 ```jule
 "String literal of Jule."
 ```
-String literals have a escape sequences.
+String literals supports escape sequences.
 
 | Escape | Description |
 | ------ | ----------- |
