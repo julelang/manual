@@ -8,7 +8,7 @@ This format is: ``<os>-<arch>``.
 But what if you want to use your OS as your current OS and only change your target architecture?
 You can actually do this by typing, but here you have an alternative way. The `native` value for both arguments is a valid target if you want to get the value of the system you are on.
 
-Here is a simple examples:
+Examples target commands:
 - ``--target windows-arm64``: Windows OS and ARM64 arch
 - ``--target windows-native``: Windows OS and native arch
 - ``--target native-amd64``: native OS and AMD64 arch
