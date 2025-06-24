@@ -251,7 +251,7 @@ export default defineConfig({
           text: 'Responsiveness',
           link: '/responsiveness/',
           items: [
-            { text: 'Mutabilitiy', link: '/responsiveness/mutability' },
+            { text: 'Mutability', link: '/responsiveness/mutability' },
             { text: 'Expressions', link: '/responsiveness/expressions' },
           ],
         },
