@@ -130,6 +130,20 @@ fn main() {
 
 In the code above, the `exceptional1` function is explicitly forwarding the exception of the `exceptional0` function call. In fact, the return statement requires an integer, but thanks to forwarding, the current function eliminates this requirement by forwarding the exception.
 
+If your exceptional function will not handle error, just forwards it, then you can forward the exception in shorter way. With the question-mark operator, you can forward exceptional directly.
+
+For example:
+```jule
+fn exceptional0()!: int {
+	error("my error")
+}
+
+fn exceptional1()!: int {
+	ret exceptional0()?
+}
+```
+In the example above, the function `exceptional1` return the result and forwards exception of the `exceptional0` function.
+
 ::: info
 One thing to remember is that your compiler may place a temporary expression there for correct backend compilation. However, this shouldn't affect how your program runtime behavior; it may just be a must-have knowledge for extreme memory efficiency requirements.
 :::
