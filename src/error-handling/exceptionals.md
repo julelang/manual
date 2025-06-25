@@ -165,3 +165,22 @@ fn main() {
     }()
 }
 ```
+
+## Global Scope
+
+Exceptionals are disallowed for the global scope. To use them in global scope, wrap with non-exceptional function.
+
+For example:
+```jule
+fn foo()!: int {
+	ret 10
+}
+
+fn fooMust(): int { ret foo()! }
+
+let a = fooMust()
+
+fn main() {
+	println(a)
+}
+```
