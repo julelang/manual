@@ -382,6 +382,14 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Shared Libraries',
+          link: '/shared-libraries/',
+          items: [
+            { text: 'Windows and DLL', link: '/shared-libraries/windows-and-dll' },
+            { text: 'UNIX and ELF/Mach-O', link: '/shared-libraries/unix-and-elf-macho' },
+          ],
+        },
+        {
           text: 'Integrated Jule',
           link: '/integrated-jule/',
           items: [
