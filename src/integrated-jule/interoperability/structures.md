@@ -96,7 +96,7 @@ The Jule code:
 ```jule
 #typedef
 cpp struct MyClass {
-    data: str
+    data:       str
     magic_data: str
 }
 ```

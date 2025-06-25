@@ -71,97 +71,84 @@ A simple `Person` struct definition is given above. Let's develop a wrapper for 
 
 Our Jule code:
 ```jule
-cpp type char: byte
+use integ "std/jule/integrated"
 
 #typedef
 cpp struct Person {
-    name:    *cpp.char
-    surname: *cpp.char
-}
-
-unsafe fn pchar_to_str(c: *cpp.char): str {
-    if c == nil {
-        ret ""
-    }
-    let mut s = ""
-    let mut i = 0
-    for int(c[i]) != 0; i++ {
-        s += str(c[i])
-    }
-    ret s
+	name:    *integ::Char
+	surname: *integ::Char
 }
 
 struct Person {
-    mut buffer: cpp.Person
+	mut buffer: cpp.Person
 }
 
 impl Person {
-    fn new(name: str, surname: str): Person {
-        ret Person{
-            buffer: cpp.Person{
-                name: unsafe { (*cpp.char)(&name[0]) },
-                surname: unsafe { (*cpp.char)(&surname[0]) },
-            },
-        }
-    }
+	fn new(name: str, surname: str): Person {
+		ret Person{
+			buffer: cpp.Person{
+				name: unsafe { (*integ::Char)(&name[0]) },
+				surname: unsafe { (*integ::Char)(&surname[0]) },
+			},
+		}
+	}
 
-    fn name(self): str {
-        ret unsafe { pchar_to_str(self.buffer.name) }
-    }
+	fn name(self): str {
+		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.name)) }
+	}
 
-    fn surname(self): str {
-        ret unsafe { pchar_to_str(self.buffer.surname) }
-    }
+	fn surname(self): str {
+		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.surname)) }
+	}
 
-    fn get_full_name(self): str {
-        ret self.name() + " " + self.surname()
-    }
+	fn getFullName(self): str {
+		ret self.name() + " " + self.surname()
+	}
 }
 
 fn main() {
-    let p = Person.new("Anonymous", "Julenour")
-    println(p.get_full_name())
+	p := Person.new("Anonymous", "Julenour")
+	println(p.getFullName())
 }
 ```
 
-The code looks long. That's because it's literally written as a clean wrapper. C/C++ types were preserved and manual algorithms were written for compatible conversions. In addition, it seems that the wrapper offers new capabilities with a method by adding the `get_full_name` method. In addition, there are `name` and `surname` methods to obtain the `name` and `surname` fields of the wrapped structure.
+The code looks long. That's because it's literally written as a clean wrapper. C/C++ types were preserved and manual algorithms were written for compatible conversions. In addition, it seems that the wrapper offers new capabilities with a method by adding the `getFullName` method. In addition, there are `name` and `surname` methods to obtain the `name` and `surname` fields of the wrapped structure.
 
 You may not want to write such neat wrappers, though. In this context, it is also possible to benefit from the compatibility of API types as much as possible. For example, in our example case, we can make the code less dimensional by stretching the type safety by taking advantage of the implicit conversion compatibility of the `char*` type and Jule's `str` type.
-
 
 In this case the wrapper Jule code would look like this:
 ```jule
 #typedef
 cpp struct Person {
-    name:    str
-    surname: str
+	name:    str
+	surname: str
 }
 
 struct Person {
-    mut buffer: cpp.Person
+	mut buffer: cpp.Person
 }
 
 impl Person {
-    fn new(name: str, surname: str): Person {
-        ret Person{
-            buffer: cpp.Person{
-                name: name,
-                surname: surname,
-            },
-        }
-    }
+	fn new(name: str, surname: str): Person {
+		ret Person{
+			buffer: cpp.Person{
+				name: name,
+				surname: surname,
+			},
+		}
+	}
 
-    fn name(self): str { ret self.buffer.name }
-    fn surname(self): str { ret self.buffer.surname }
+	fn name(self): str { ret self.buffer.name }
+	fn surname(self): str { ret self.buffer.surname }
 
-    fn getFullName(self): str {
-        ret self.name() + " " + self.surname()
-    }
+	fn getFullName(self): str {
+		ret self.name() + " " + self.surname()
+	}
 }
 
 fn main() {
-    let p = Person.new("Anonymous", "Julenour")
-    println(p.getFullName())
+	p := Person.new("Anonymous", "Julenour")
+	println(p.getFullName())
 }
 ```
 

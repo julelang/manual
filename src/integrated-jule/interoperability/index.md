@@ -19,11 +19,11 @@ cpp.myFunction(x, y, z)
 
 **sum.hpp**
 ```cpp
-using namespace jule;
+#include "api/jule.hpp"
 
-Int sum(const Slice<Int> slice) {
-    Int total{ 0 };
-    for (const Int x: slice)
+jule::Int sum(const jule::Slice<jule::Int> slice) {
+    jule::Int total = 0;
+    for (const jule::Int x: slice)
         total += x;
     return total;
 }

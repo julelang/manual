@@ -4,7 +4,7 @@
 Type statements are used to bind types. They can only bind in the global scope. A bind type alias must always be a strict type alias. For Bind, put the keyword `cpp` at the beginning.
 
 For example:
-```
+```jule
 cpp type char: byte
 ```
 
@@ -79,9 +79,9 @@ cpp use "myclass.hpp"
 
 #typedef
 cpp struct MyClass {
-    data: str
+    data:       str
     magic_data: str
-    c_data: str
+    c_data:     str
 }
 
 fn main() {
