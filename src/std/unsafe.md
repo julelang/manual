@@ -1,5 +1,9 @@
 # std/unsafe
 
+::: danger
+This package is under the terms of the [Unsafe Jule](/unsafe-jule/). Be careful using API of this package. Doing things correct is developer's responsibility.
+:::
+
 ## Index
 
 [fn Str(b: \*byte, n: int): str](#str)\

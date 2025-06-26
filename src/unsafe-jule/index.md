@@ -62,3 +62,11 @@ fn main() {
     x = unsafe { foo(&x) } + Offset
 }
 ```
+
+## Unsafe Packages
+
+The unsafe packages are distributed packages under the terms of the Unsafe Jule. Be careful when using them, and using the `unsafe` keyword is not mandatory for this packages unless the API wants it, like [unsafe functions](/unsafe-jule/unsafe-functions).
+
+List of unsafe packages:
+- [`std/sys`](/std/sys): Provides syscalls with low-level abstractions.
+- [`std/unsafe`](/std/unsafe): Provides pre-defined unsafe functionalities for common use cases.
