@@ -43,4 +43,4 @@ In a division or modulo operation, the denominator was zero.
 
 `runtime: all threads are asleep - deadlock!`\
 Your program is concurrent (or not?) and your concurrency management has issues.
-All threads are asleep, so waiting to be triggerred by another threads, which causes deadlock.
+All threads are asleep, so waiting to be triggered by another threads, which causes deadlock.
