@@ -384,7 +384,13 @@ export default defineConfig({
           text: 'Low-Level Helpers',
           link: '/low-level-helpers/',
           items: [
-            { text: 'Syscalls', link: '/low-level-helpers/syscalls' },
+            {
+              text: 'Syscalls',
+              link: '/low-level-helpers/syscalls/',
+              items: [
+                { text: 'Addrcalls', link: '/low-level-helpers/syscalls/addrcalls' },
+              ],
+            },
             { text: 'Unsafe Package', link: '/low-level-helpers/unsafe-package' },
           ],
         },
