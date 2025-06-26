@@ -20,6 +20,7 @@ auto libSystem_NSGetExecutablePath = (int (*)(char *, unsigned int *))(dlsym(lib
 
 `main.jule`:
 ```jule
+use "std/bytes"
 use integ "std/jule/integrated"
 
 cpp use "mylib.hpp"
@@ -38,6 +39,49 @@ fn main() {
 	if r > 0 {
 		cpp.libSystem_exit(1)
 	}
-	println(str(path[:size]))
+	path = path[:bytes::IndexByte(path, 0)]
+	println(str(path))
+}
+```
+
+### Using Addrcalls
+
+You can achieve the same thing using [Addrcalls](/low-level-helpers/syscalls/addrcalls).
+
+For example:
+
+`mylib.hpp`:
+```cpp
+#include <dlfcn.h>
+
+void *libSystem = dlopen("/usr/lib/libSystem.B.dylib", 0);
+void *libSystem_exit = dlsym(libSystem, "exit");
+void *libSystem_NSGetExecutablePath = dlsym(libSystem, "_NSGetExecutablePath");
+```
+
+`main.jule`:
+```jule
+use "std/bytes"
+use integ "std/jule/integrated"
+use "std/sys"
+
+cpp use "mylib.hpp"
+
+cpp let libSystem_exit: *unsafe
+cpp let libSystem_NSGetExecutablePath: *unsafe
+
+fn main() {
+	mut path := make([]byte, 1024)
+	mut size := u32(len(path))
+	r := unsafe {
+		sys::Addrcall[integ::Int](
+			uintptr(cpp.libSystem_NSGetExecutablePath),
+			&path[0], &size)
+	}
+	if r > 0 {
+		sys::Addrcall(uintptr(cpp.libSystem_exit), i32(1))
+	}
+	path = path[:bytes::IndexByte(path, 0)]
+	println(str(path))
 }
 ```

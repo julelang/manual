@@ -39,3 +39,43 @@ fn main() {
 	println(str(path[:r]))
 }
 ```
+
+### Using Addrcalls
+
+You can achieve the same thing using [Addrcalls](/low-level-helpers/syscalls/addrcalls).
+
+For example:
+
+`mylib.hpp`:
+```cpp
+#include <windows.h>
+
+auto kernel32 = LoadLibrary("kernel32.dll");
+auto kernel32_ExitProcess = GetProcAddress(kernel32, "ExitProcess");
+auto kernel32_GetModuleFileName = GetProcAddress(kernel32, "GetModuleFileNameA");
+```
+
+`main.jule`:
+```jule
+use integ "std/jule/integrated"
+use "std/sys"
+
+cpp use "mylib.hpp"
+
+cpp let kernel32_ExitProcess: *unsafe
+cpp let kernel32_GetModuleFileName: *unsafe
+
+fn main() {
+	mut path := make([]byte, 1024)
+	mut size := u32(len(path))
+	r := unsafe {
+		sys::Addrcall[u32](
+			uintptr(cpp.kernel32_GetModuleFileName),
+			(*unsafe)(nil), &path[0], size)
+	}
+	if r == 0 {
+		sys::Addrcall(uintptr(cpp.kernel32_ExitProcess), uint(1))
+	}
+	println(str(path[:r]))
+}
+```
