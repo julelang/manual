@@ -283,7 +283,6 @@ export default defineConfig({
             { text: 'Raw Pointers', link: '/unsafe-jule/raw-pointers' },
             { text: 'Unsafe Functions', link: '/unsafe-jule/unsafe-functions' },
             { text: 'References', link: '/unsafe-jule/references' },
-            { text: 'Unsafe Package', link: '/unsafe-jule/unsafe-package' },
           ],
         },
         {
@@ -379,6 +378,14 @@ export default defineConfig({
           items: [
             { text: 'Public API', link: '/runtime/public-api' },
             { text: 'Runtime API', link: '/runtime/runtime-api' },
+          ],
+        },
+        {
+          text: 'Low-Level Helpers',
+          link: '/low-level-helpers/',
+          items: [
+            { text: 'Syscalls', link: '/low-level-helpers/syscalls' },
+            { text: 'Unsafe Package', link: '/low-level-helpers/unsafe-package' },
           ],
         },
         {
