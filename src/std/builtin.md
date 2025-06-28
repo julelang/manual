@@ -152,13 +152,13 @@ It can be hold any data type and nil. See for more information: https://manual.j
 
 ## byte
 ```jule
-type byte: byte
+type byte = u8
 ```
 Is an alias for u8. It is used, by convention, to distinguish byte values from 8-bit unsigned integer values.
 
 ## rune
 ```jule
-type rune: rune
+type rune = i32
 ```
 Is an alias for i32. It is used, by convention, to distinguish character values from integer values.
 
