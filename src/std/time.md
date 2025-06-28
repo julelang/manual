@@ -142,14 +142,14 @@ Nanoseconds in hour\. How many nanoseconds are in hour\.
 ---
 
 ```jule
-static UTC = unsafe { (&Location)(&utcLoc) }
+let UTC = unsafe { (&Location)(&utcLoc) }
 ```
 Represents Universal Coordinated Time \(UTC\)\.
 
 ---
 
 ```jule
-static Local = unsafe { (&Location)(&localLoc) }
+let Local = unsafe { (&Location)(&localLoc) }
 ```
 Represents the system&#39;s local time zone\. On Unix systems, Local consults the TZ environment variable to find the time zone to use\. No TZ means use the system default /etc/localtime\. TZ=&#34;&#34; means use UTC\. TZ=&#34;foo&#34; means use file foo in the system timezone directory\.
 
@@ -157,27 +157,27 @@ Represents the system&#39;s local time zone\. On Unix systems, Local consults th
 
 ```jule
 const (
-	Layout = "01/02 03:04:05PM '06 -0700" // The reference time, in numerical order.
-	ANSIC = "Mon Jan _2 15:04:05 2006"
-	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
-	RubyDate = "Mon Jan 02 15:04:05 -0700 2006"
-	RFC822 = "02 Jan 06 15:04 MST"
-	RFC822Z = "02 Jan 06 15:04 -0700" // RFC822 with numeric zone
-	RFC850 = "Monday, 02-Jan-06 15:04:05 MST"
-	RFC1123 = "Mon, 02 Jan 2006 15:04:05 MST"
-	RFC1123Z = "Mon, 02 Jan 2006 15:04:05 -0700" // RFC1123 with numeric zone
-	RFC3339 = "2006-01-02T15:04:05Z07:00"
+	Layout      = "01/02 03:04:05PM '06 -0700" // The reference time, in numerical order.
+	ANSIC       = "Mon Jan _2 15:04:05 2006"
+	UnixDate    = "Mon Jan _2 15:04:05 MST 2006"
+	RubyDate    = "Mon Jan 02 15:04:05 -0700 2006"
+	RFC822      = "02 Jan 06 15:04 MST"
+	RFC822Z     = "02 Jan 06 15:04 -0700" // RFC822 with numeric zone
+	RFC850      = "Monday, 02-Jan-06 15:04:05 MST"
+	RFC1123     = "Mon, 02 Jan 2006 15:04:05 MST"
+	RFC1123Z    = "Mon, 02 Jan 2006 15:04:05 -0700" // RFC1123 with numeric zone
+	RFC3339     = "2006-01-02T15:04:05Z07:00"
 	RFC3339Nano = "2006-01-02T15:04:05.999999999Z07:00"
-	Kitchen = "3:04PM"
+	Kitchen     = "3:04PM"
 
 	// Handy time stamps.
-	Stamp = "Jan _2 15:04:05"
+	Stamp      = "Jan _2 15:04:05"
 	StampMilli = "Jan _2 15:04:05.000"
 	StampMicro = "Jan _2 15:04:05.000000"
-	StampNano = "Jan _2 15:04:05.000000000"
-	DateTime = "2006-01-02 15:04:05"
-	DateOnly = "2006-01-02"
-	TimeOnly = "15:04:05"
+	StampNano  = "Jan _2 15:04:05.000000000"
+	DateTime   = "2006-01-02 15:04:05"
+	DateOnly   = "2006-01-02"
+	TimeOnly   = "15:04:05"
 )
 ```
 These are predefined layouts for use in \[Time\.Format\] and \[time::Parse\]\. The reference time used in these layouts is the specific time stamp:

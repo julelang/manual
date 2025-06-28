@@ -18,9 +18,9 @@
 ```jule
 const (
 	Windows = "windows"
-	Linux = "linux"
-	Darwin = "darwin"
-	Unix = "unix"
+	Linux   = "linux"
+	Darwin  = "darwin"
+	Unix    = "unix"
 )
 ```
 Operating Systems for file annotation kind\.
@@ -29,11 +29,11 @@ Operating Systems for file annotation kind\.
 
 ```jule
 const (
-	I386 = "i386"
+	I386  = "i386"
 	ARM64 = "arm64"
 	AMD64 = "amd64"
-	X32 = "x32"
-	X64 = "x64"
+	X32   = "x32"
+	X64   = "x64"
 )
 ```
 Architectures for file annotation kind\.

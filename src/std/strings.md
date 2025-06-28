@@ -45,11 +45,11 @@
 [fn Clone\(s: str\): str](#clone)\
 [fn Compare\(a: str, b: str\): int](#compare)\
 [struct Replacer](#replacer)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(self, s: str\): str](#replace-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(self, s: str, mut w: io::StrWriter\)\!: \(n: int\)](#writestr)\
 [struct Reader](#reader)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(s: str\): &amp;Reader](#new-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: str\): &amp;Reader](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(self\): int](#len)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(self, mut b: \[\]byte\)\!: \(n: int\)](#read)\
@@ -378,7 +378,7 @@ Replaces a list of strings with replacements\. It is more efficient than Replace
 
 ### New
 ```jule
-static fn New(oldnew: ...str): &Replacer
+fn New(oldnew: ...str): &Replacer
 ```
 Returns a new \[Replacer\] from a list of old, new string pairs\. Replacements are performed in the order they appear in the target string, without overlapping matches\. The old string comparisons are done in argument order\.
 
@@ -415,7 +415,7 @@ Implements the io::Reader, io::ReaderAt, io::ByteReader, io::RuneReader, io::See
 
 ### New
 ```jule
-static fn New(s: str): &Reader
+fn New(s: str): &Reader
 ```
 Returns a new Reader reading from s\.
 

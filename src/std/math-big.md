@@ -6,12 +6,12 @@
 [type Word](#word)\
 [type Accuracy](#accuracy)\
 [struct Int](#int)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Parse\(mut s: str, base: int\): \(Int, ok: bool\)](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn FromU64\(x: u64\): Int](#fromu64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn FromI64\(mut x: i64\): Int](#fromi64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn MulRange\(mut a: i64, mut b: i64\): Int](#mulrange)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Jacobi\(x: Int, y: Int\): int](#jacobi)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Binomial\(n: i64, mut k: i64\): Int](#binomial)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut s: str, base: int\): \(Int, ok: bool\)](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FromU64\(x: u64\): Int](#fromu64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FromI64\(mut x: i64\): Int](#fromi64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn MulRange\(mut a: i64, mut b: i64\): Int](#mulrange)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Jacobi\(x: Int, y: Int\): int](#jacobi)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Binomial\(n: i64, mut k: i64\): Int](#binomial)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(self, y: Int\): Int](#add)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(self, y: Int\): Int](#sub)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(self, y: Int\): Int](#mul)\
@@ -54,11 +54,22 @@
 ## Variables
 
 ```jule
-const Below: Accuracy = -1
-const Exact: Accuracy = 0
-const Above: Accuracy = +1
+const (
+	Below: Accuracy = -1
+	Exact: Accuracy = 0
+	Above: Accuracy = +1
+)
 ```
 Constants describing the \[Accuracy\] of a \[Float\]\.
+
+---
+
+```jule
+const (
+	MaxBase = 10 + ('z' - 'a' + 1) + ('Z' - 'A' + 1)
+)
+```
+The largest number base accepted for string conversions\.
 
 ## Word
 ```jule
@@ -86,7 +97,7 @@ Note that methods may leak the Int&#39;s value through timing side\-channels\. B
 
 ### Parse
 ```jule
-static fn Parse(mut s: str, base: int): (Int, ok: bool)
+fn Parse(mut s: str, base: int): (Int, ok: bool)
 ```
 Returns int with the value of s, interpreted in the given base, and returns int and a boolean indicating success\. The entire string \(not just a prefix\) must be valid for success\. If it fails, it panics\. The first byte is optional to determine sign of value of s\. This first byte is not sign, it assumes value as positive\. The \`\-\` sign handled as negative number, \`\+\` is valid also\. If the entire string is not valid, it returns false for success with the integer value scanned successfully\.
 
@@ -98,31 +109,31 @@ For base 0, an underscore character “\_” may appear between a base prefix an
 
 ### FromU64
 ```jule
-static fn FromU64(x: u64): Int
+fn FromU64(x: u64): Int
 ```
 Returns Int by x\.
 
 ### FromI64
 ```jule
-static fn FromI64(mut x: i64): Int
+fn FromI64(mut x: i64): Int
 ```
 Returns Int by x\.
 
 ### MulRange
 ```jule
-static fn MulRange(mut a: i64, mut b: i64): Int
+fn MulRange(mut a: i64, mut b: i64): Int
 ```
 Returns the product of all integers in the range \[a, b\] inclusively\. If a &gt; b \(empty range\), the result is 1\.
 
 ### Jacobi
 ```jule
-static fn Jacobi(x: Int, y: Int): int
+fn Jacobi(x: Int, y: Int): int
 ```
 Returns the Jacobi symbol \(x/y\), either \+1, \-1, or 0\. The y argument must be an odd integer\.
 
 ### Binomial
 ```jule
-static fn Binomial(n: i64, mut k: i64): Int
+fn Binomial(n: i64, mut k: i64): Int
 ```
 Returns the binomial coefficient C\(n, k\)\.
 

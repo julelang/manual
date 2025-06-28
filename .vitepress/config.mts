@@ -392,6 +392,7 @@ export default defineConfig({
               ],
             },
             { text: 'Unsafe Package', link: '/low-level-helpers/unsafe-package' },
+            { text: 'Memory', link: '/low-level-helpers/memory' },
           ],
         },
         {

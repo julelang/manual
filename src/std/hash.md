@@ -32,7 +32,7 @@ trait Hash {
 	fn BlockSize(self): int
 }
 ```
-The common trait implemented by all hash functions.
+The common trait implemented by all hash functions\.
 
 ## Hash32
 ```jule
@@ -41,7 +41,7 @@ trait Hash32 {
 	fn Sum32(self): u32
 }
 ```
-Common trait implemented by all 32-bit hash functions.
+Common trait implemented by all 32\-bit hash functions\.
 
 ## Hash64
 ```jule
@@ -50,4 +50,4 @@ trait Hash64 {
 	fn Sum64(self): u64
 }
 ```
-Common trait implemented by all 64-bit hash functions.
+Common trait implemented by all 64\-bit hash functions\.

@@ -30,21 +30,21 @@
 ## Variables
 
 ```jule
-static BitSize = 0
+let BitSize = 0
 ```
 Bit\-size of target architecture\. Possible values are: 32, and 64\. Initialized using build::Arch by the package when imported\.
 
 ---
 
 ```jule
-static SysInt = ""
+let SysInt = ""
 ```
 Signed integer kind of target architecture\. Is equivalent to &#34;int&#34;, but specific bit\-sized integer kind\. Initialized using build::Arch by the package when imported\.
 
 ---
 
 ```jule
-static SysUint = ""
+let SysUint = ""
 ```
 Unsigned integer kind of target architecture\. Is equivalent to &#34;uint&#34; and &#34;uintptr&#34;, but specific bit\-sized integer kind\. Initialized using build::Arch by the package when imported\.
 
@@ -52,12 +52,12 @@ Unsigned integer kind of target architecture\. Is equivalent to &#34;uint&#34; a
 
 ```jule
 const (
-	MaxF32 = 0x1p127 * (1 + (1 - 0x1p-23))
-	MinF32 = -0x1p127 * (1 + (1 - 0x1p-23))
+	MaxF32             = 0x1p127 * (1 + (1 - 0x1p-23))
+	MinF32             = -0x1p127 * (1 + (1 - 0x1p-23))
 	SmallestNonzeroF32 = 0x1p-126 * 0x1p-23
 
-	MaxF64 = 0x1p1023 * (1 + (1 - 0x1p-52))
-	MinF64 = -0x1p1023 * (1 + (1 - 0x1p-52))
+	MaxF64             = 0x1p1023 * (1 + (1 - 0x1p-52))
+	MinF64             = -0x1p1023 * (1 + (1 - 0x1p-52))
 	SmallestNonzeroF64 = 0x1p-1022 * 0x1p-52
 )
 ```
@@ -67,15 +67,15 @@ Floating\-point limit values\. Max is the largest finite value representable by 
 
 ```jule
 const (
-	MaxI8 = 1<<7 - 1   // 127
-	MinI8 = -1 << 7    // -128
+	MaxI8  = 1<<7 - 1  // 127
+	MinI8  = -1 << 7   // -128
 	MaxI16 = 1<<15 - 1 // 32767
 	MinI16 = -1 << 15  // -32768
 	MaxI32 = 1<<31 - 1 // 2147483647
 	MinI32 = -1 << 31  // -2147483648
 	MaxI64 = 1<<63 - 1 // 9223372036854775807
 	MinI64 = -1 << 63  // -9223372036854775808
-	MaxU8 = 1<<8 - 1   // 255
+	MaxU8  = 1<<8 - 1  // 255
 	MaxU16 = 1<<16 - 1 // 65535
 	MaxU32 = 1<<32 - 1 // 4294967295
 	MaxU64 = 1<<64 - 1 // 18446744073709551615
@@ -87,22 +87,22 @@ Integer limit values\.
 
 ```jule
 const (
-	I8 = "i8"
-	I16 = "i16"
-	I32 = "i32"
-	I64 = "i64"
-	U8 = "u8"
-	U16 = "u16"
-	U32 = "u32"
-	U64 = "u64"
-	F32 = "f32"
-	F64 = "f64"
-	Uint = "uint"
-	Int = "int"
+	I8      = "i8"
+	I16     = "i16"
+	I32     = "i32"
+	I64     = "i64"
+	U8      = "u8"
+	U16     = "u16"
+	U32     = "u32"
+	U64     = "u64"
+	F32     = "f32"
+	F64     = "f64"
+	Uint    = "uint"
+	Int     = "int"
 	Uintptr = "uintptr"
-	Bool = "bool"
-	Str = "str"
-	Any = "any"
+	Bool    = "bool"
+	Str     = "str"
+	Any     = "any"
 )
 ```
 Type kinds of primitive types\. These kinds are must match keyword form itself\.

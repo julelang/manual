@@ -6,22 +6,22 @@
 [struct ParseError](#parseerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 [struct Reader](#reader)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(mut r: io::Reader\): &amp;Reader](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Reader](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(self\): i64](#inputoffset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self\)\!: \(record: \[\]str\)](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FieldPos\(self, field: int\): \(line: int, column: int\)](#fieldpos)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut self\)\!: \(records: \[\]\[\]str\)](#readall)\
 [struct Writer](#writer)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, record: \[\]str\)\!](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut self, records: \[\]\[\]str\)\!](#writeall)
 
 ## Variables
 
 ```jule
-static mut ErrBareQuote = errors::New("bare \" in non-quoted-field")
-static mut ErrQuote = errors::New("extraneous or missing \" in quoted-field")
-static mut ErrFieldCount = errors::New("wrong number of fields")
+let mut ErrBareQuote = errors::New("bare \" in non-quoted-field")
+let mut ErrQuote = errors::New("extraneous or missing \" in quoted-field")
+let mut ErrFieldCount = errors::New("wrong number of fields")
 ```
 These are the errors that can be returned in \[ParseError\.Err\]\. Mutation is undefined behavior\.
 
@@ -92,7 +92,7 @@ The Reader converts all \\r\\n sequences in its input to plain \\n, including in
 
 ### New
 ```jule
-static fn New(mut r: io::Reader): &Reader
+fn New(mut r: io::Reader): &Reader
 ```
 Returns new Reader instance that reads r\.
 
@@ -143,7 +143,7 @@ The writes of individual records are buffered\. After all data has been written,
 
 ### New
 ```jule
-static fn New(mut w: io::Writer): &Writer
+fn New(mut w: io::Writer): &Writer
 ```
 Returns new Writer instance that writes w\.
 

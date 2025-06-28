@@ -54,7 +54,7 @@ NewDecoder wraps an io::Reader trait around decode\.
 ```jule
 type CorruptInputError: i64
 ```
-If src was short, discard the low destination bytes\.
+
 
 ### Str
 ```jule

@@ -66,12 +66,12 @@ Arrays:
 
 Slices:
 	Encode as JSON array.
-	If slice is nil, encode as null JSON value.
+	If slice is nil, encode as empty array [] JSON value.
 	For the []byte type, encodes as a base64-encoded string.
 
 Maps:
 	Encode as JSON object.
-	If map is nil, encode as null JSON value.
+	If map is nil, encode as empty object {} JSON value.
 	The keys of the map always will be quoted.
 	Also map's key type only can be: signed integer, unsigned integer and string.
 	Other types will cause exceptional with [UnsupportedTypeError].

@@ -8,6 +8,7 @@
 [fn Copy\(mut dst: Writer, mut src: Reader\)\!: \(written: i64\)](#copy)\
 [fn CopyBuffer\(mut dst: Writer, mut src: Reader, mut buf: \[\]byte\)\!: \(written: i64\)](#copybuffer)\
 [fn WriteStr\(mut w: Writer, s: str\)\!: \(n: int\)](#writestr)\
+[fn WriteByte\(mut w: Writer, b: byte\)\!: \(n: int\)](#writebyte)\
 [fn ReadAll\(mut r: Reader\)\!: \[\]byte](#readall)\
 [trait Reader](#reader)\
 [trait Writer](#writer)\
@@ -28,28 +29,28 @@
 ## Variables
 
 ```jule
-static mut ErrShortWrite = errors::New("short write")
+let mut ErrShortWrite = errors::New("short write")
 ```
 It means that a write accepted fewer bytes than requested but failed to return an explicit error\. Mutation is undefined behavior\.
 
 ---
 
 ```jule
-static mut ErrShortBuffer = errors::New("short buffer")
+let mut ErrShortBuffer = errors::New("short buffer")
 ```
 It means that a read required a longer buffer than was provided\. Mutation is undefined behavior\.
 
 ---
 
 ```jule
-static mut ErrUnexpectedEOF = errors::New("unexpected EOF")
+let mut ErrUnexpectedEOF = errors::New("unexpected EOF")
 ```
 It means that EOF was encountered in the middle of reading a fixed\-size block or data structure\. Mutation is undefined behavior\.
 
 ---
 
 ```jule
-static mut ErrNoProgress = errors::New("multiple Read calls return no data or error")
+let mut ErrNoProgress = errors::New("multiple Read calls return no data or error")
 ```
 It is returned by some clients of a \[Reader\] when many calls to Read have failed to return any data or error, usually the sign of a broken \[Reader\] implementation\. Mutation is undefined behavior\.
 
@@ -57,9 +58,9 @@ It is returned by some clients of a \[Reader\] when many calls to Read have fail
 
 ```jule
 const (
-	SeekStart = 0   // seek relative to the origin of the file
+	SeekStart   = 0 // seek relative to the origin of the file
 	SeekCurrent = 1 // seek relative to the current offset
-	SeekEnd = 2     // seek relative to the end
+	SeekEnd     = 2 // seek relative to the end
 )
 ```
 Seek whence values\.
@@ -67,7 +68,7 @@ Seek whence values\.
 ---
 
 ```jule
-static mut Discard = discard{ ... }
+let mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
 
@@ -101,7 +102,13 @@ Identical to Copy except that it stages through the provided buffer \(if one is 
 ```jule
 fn WriteStr(mut w: Writer, s: str)!: (n: int)
 ```
-Writes the contents of the string s to w, which accepts a slice of bytes\. The \[Writer\.write\] is invoked directly\.
+Writes the contents of the string s to w efficiently\. Guarantees a slice will not be allocated\.
+
+## WriteByte
+```jule
+fn WriteByte(mut w: Writer, b: byte)!: (n: int)
+```
+Writes a single byte to w efficiently\. Guarantees a slice will not be allocated\.
 
 ## ReadAll
 ```jule

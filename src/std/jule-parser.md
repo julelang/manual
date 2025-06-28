@@ -2,8 +2,8 @@
 
 ## Index
 
-[fn ParseFile\(mut f: &amp;token::Fileset\): &amp;FileInfo](#parsefile)\
-[fn ParsePackage\(mut filesets: \[\]&amp;token::Fileset\): &amp;PackageInfo](#parsepackage)\
+[fn ParseFile\(mut f: &amp;token::FileSet\): &amp;FileInfo](#parsefile)\
+[fn ParsePackage\(mut filesets: \[\]&amp;token::FileSet\): &amp;PackageInfo](#parsepackage)\
 [struct FileInfo](#fileinfo)\
 [struct PackageInfo](#packageinfo)
 
@@ -11,15 +11,15 @@
 
 ## ParseFile
 ```jule
-fn ParseFile(mut f: &token::Fileset): &FileInfo
+fn ParseFile(mut f: &token::FileSet): &FileInfo
 ```
-Parses fileset&#39;s tokens and builds AST\. Returns nil if f is not real\. Fileset should not contain comment tokens\.
+Parses FileSet&#39;s tokens and builds AST\. Returns nil if f is not real\. FileSet should not contain comment tokens\.
 
 ## ParsePackage
 ```jule
-fn ParsePackage(mut filesets: []&token::Fileset): &PackageInfo
+fn ParsePackage(mut filesets: []&token::FileSet): &PackageInfo
 ```
-Parses fileset&#39;s tokens and builds AST\. Returns nil if filesets is nil\. Skip fileset if nil\. Filesets should not contain comment tokens\.
+Parses FileSet&#39;s tokens and builds AST\. Returns nil if filesets is nil\. Skips FileSet if nil\. FileSets should not contain comment tokens\.
 
 ## FileInfo
 ```jule

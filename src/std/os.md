@@ -63,6 +63,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn ReadDir\(path: str\)\!: \(dirents: \[\]DirEntry\)](#readdir)\
 [fn Mkdir\(path: str\)\!](#mkdir)\
 [fn Rmdir\(path: str\)\!](#rmdir)\
+[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Open\(path: str\)\!: &amp;File](#open)\
 [fn OpenFile\(path: str, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
 [fn Remove\(path: str\)\!](#remove)\
@@ -75,21 +76,21 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Exit\(code: int\)](#exit)\
 [fn Executable\(\): str](#executable)\
 [fn Args\(\): \[\]str](#args)\
-[fn Env\(\): \[\]str](#env)\
 [fn Getwd\(\)\!: str](#getwd)\
 [fn Chdir\(path: str\)\!](#chdir)\
+[fn Environ\(\): \[\]str](#environ)\
 [fn Getenv\(key: str\): str](#getenv)\
-[fn LookupEnv\(key: str\): \(val: str, unset: bool\)](#lookupenv)\
-[fn Setenv\(key: str, val: str\): bool](#setenv)\
-[fn Stdin\(\): &amp;Stdio](#stdin)\
-[fn Stdout\(\): &amp;Stdio](#stdout)\
-[fn Stderr\(\): &amp;Stdio](#stderr)\
+[fn LookupEnv\(key: str\): \(value: str, found: bool\)](#lookupenv)\
+[fn Setenv\(key: str, value: str\)\!](#setenv)\
+[fn Stdin\(\): &amp;File](#stdin)\
+[fn Stdout\(\): &amp;File](#stdout)\
+[fn Stderr\(\): &amp;File](#stderr)\
 [struct DirEntry](#direntry)\
 [struct Cmd](#cmd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(self, mut r: io::Reader\)\!](#stdin-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(self, mut w: io::Writer\)\!](#stdout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(self, mut w: io::Writer\)\!](#stderr-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(self, mut r: &amp;File\)\!](#stdin-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(self, mut w: &amp;File\)\!](#stdout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(self, mut w: &amp;File\)\!](#stderr-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn StdinPipe\(self\)\!: io::WriteCloser](#stdinpipe)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn StdoutPipe\(self\)\!: io::ReadCloser](#stdoutpipe)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(self\)\!: io::ReadCloser](#stderrpipe)\
@@ -110,15 +111,6 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(self\): bool](#isregular)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(self\): FileMode](#perm)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(self\): FileMode](#type)\
-[struct Stdio](#stdio)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn File\(mut self\): &amp;File](#file-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadByte\(mut self\)\!: \(b: byte, n: int\)](#readbyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut self, b: byte\)\!](#writebyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut self, r: rune\)\!: \(n: int\)](#writerune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadLine\(mut self\)\!: str](#readline)\
 [struct FileInfo](#fileinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(self\): bool](#isdir-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(self\): FileMode](#mode)\
@@ -127,6 +119,16 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(self, fi2: FileInfo\): bool](#samefile)
 
 ## Variables
+
+```jule
+const (
+	PathSeparator     = filepathlite::Separator     // OS-specific path separator
+	PathListSeparator = filepathlite::ListSeparator // OS-specific path list separator
+)
+```
+
+
+---
 
 ```jule
 const DevNull = devNull
@@ -139,12 +141,12 @@ The name of the operating system&#39;s “null device\.” On Unix\-like systems
 const (
 	O_RDONLY = sys::O_RDONLY // Open the file read-only
 	O_WRONLY = sys::O_WRONLY // Open the file write-only
-	O_RDWR = sys::O_RDWR     // Open the file read-write
+	O_RDWR   = sys::O_RDWR   // Open the file read-write
 	O_APPEND = sys::O_APPEND // Append data to the file when writing
 	O_CREATE = sys::O_CREAT  // Create a new file if none exists
-	O_EXCL = sys::O_EXCL     // Used with O_CREATE, file must not exist
-	O_SYNC = sys::O_SYNC     // Open for synchronous I/O
-	O_TRUNC = sys::O_TRUNC   // Truncate regular writable file when opened
+	O_EXCL   = sys::O_EXCL   // Used with O_CREATE, file must not exist
+	O_SYNC   = sys::O_SYNC   // Open for synchronous I/O
+	O_TRUNC  = sys::O_TRUNC  // Truncate regular writable file when opened
 )
 ```
 Flags to OpenFile wrapping those of the underlying system\. Not all flags may be implemented on a given system\.
@@ -153,19 +155,19 @@ Flags to OpenFile wrapping those of the underlying system\. Not all flags may be
 
 ```jule
 const (
-	ModeDir: FileMode = 1 << (32 - 1 - iota) // d: is a directory
-	ModeAppend                               // a: append-only
-	ModeExclusive                            // l: exclusive use
-	ModeTemporary                            // T: temporary file; Plan 9 only
-	ModeSymlink                              // L: symbolic link
-	ModeDevice                               // D: device file
-	ModeNamedPipe                            // p: named pipe (FIFO)
-	ModeSocket                               // S: Unix domain socket
-	ModeSetuid                               // u: setuid
-	ModeSetgid                               // g: setgid
-	ModeCharDevice                           // c: Unix character device, when ModeDevice is set
-	ModeSticky                               // t: sticky
-	ModeIrregular                            // ?: non-regular file; nothing else is known about this file
+	ModeDir:        FileMode = 1 << (32 - 1 - iota) // d: is a directory
+	ModeAppend                                      // a: append-only
+	ModeExclusive                                   // l: exclusive use
+	ModeTemporary                                   // T: temporary file; Plan 9 only
+	ModeSymlink                                     // L: symbolic link
+	ModeDevice                                      // D: device file
+	ModeNamedPipe                                   // p: named pipe (FIFO)
+	ModeSocket                                      // S: Unix domain socket
+	ModeSetuid                                      // u: setuid
+	ModeSetgid                                      // g: setgid
+	ModeCharDevice                                  // c: Unix character device, when ModeDevice is set
+	ModeSticky                                      // t: sticky
+	ModeIrregular                                   // ?: non-regular file; nothing else is known about this file
 
 	// Mask for the type bits. For regular files, none will be set.
 	ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice | ModeCharDevice | ModeIrregular
@@ -194,6 +196,12 @@ fn Rmdir(path: str)!
 ```
 Removes empty directory\.
 
+## IsPathSeparator
+```jule
+fn IsPathSeparator(c: byte): bool
+```
+Reports whether c is a directory separator character\.
+
 ## Open
 ```jule
 fn Open(path: str)!: &File
@@ -204,7 +212,7 @@ Opens the named file for reading\. If successful, methods on the returned file c
 ```jule
 fn OpenFile(path: str, flag: int, perm: FileMode)!: &File
 ```
-Opens file stream with named file, specified flag \(O\_RDRW, O\_TRUNC etc\.\) and perm\. If named file does not exist and O\_CREATE flag is passed, will created with mode perm \(before umask\)\. If successful, returns File reference with handle to file stream and the reference can used for I/O operations\.
+Opens file stream with named file, specified flag \(O\_RDWR, O\_TRUNC etc\.\) and perm\. If named file does not exist and O\_CREATE flag is passed, will created with mode perm \(before umask\)\. If successful, returns File reference with handle to file stream and the reference can used for I/O operations\.
 
 ## Remove
 ```jule
@@ -268,12 +276,6 @@ fn Args(): []str
 ```
 Returns command\-line arguments\. Starts with the program name\.
 
-## Env
-```jule
-fn Env(): []str
-```
-Returns environment variables\.
-
 ## Getwd
 ```jule
 fn Getwd()!: str
@@ -286,41 +288,47 @@ fn Chdir(path: str)!
 ```
 Changes the current working directory to the given directory\.
 
+## Environ
+```jule
+fn Environ(): []str
+```
+Returns environment variables\.
+
 ## Getenv
 ```jule
 fn Getenv(key: str): str
 ```
-Retrieves the value of the environment variable named by the key\. It returns the value, which will be empty if the variable is not present\. To distinguish between an empty value and an unset value, use \[LookupEnv\]\.
+Retrieves the value of the environment variable named by the key\. It returns the value, which will be empty if the variable is not present\. To distinguish between an empty value and an found value, use \[LookupEnv\]\.
 
 ## LookupEnv
 ```jule
-fn LookupEnv(key: str): (val: str, unset: bool)
+fn LookupEnv(key: str): (value: str, found: bool)
 ```
-Retrieves the value of the environment variable named by the key\. If the variable is present in the environment the value \(which may be empty\) is returned and the boolean is false\. Otherwise the returned value will be empty and the boolean will be true\.
+Retrieves the value of the environment variable named by the key\. If the variable is present in the environment the value \(which may be empty\) is returned and the boolean is true\. Otherwise the returned value will be empty and the boolean will be false\.
 
 ## Setenv
 ```jule
-fn Setenv(key: str, val: str): bool
+fn Setenv(key: str, value: str)!
 ```
-Sets the value of the environment variable named by the key\. Reports whether it successful\.
+Sets the value of the environment variable named by the key\.
 
 ## Stdin
 ```jule
-fn Stdin(): &Stdio
+fn Stdin(): &File
 ```
-Returns Stdio for the standard input file descriptor\.
+Returns File for the standard input file descriptor\.
 
 ## Stdout
 ```jule
-fn Stdout(): &Stdio
+fn Stdout(): &File
 ```
-Returns Stdio for the standard output file descriptor\.
+Returns File for the standard output file descriptor\.
 
 ## Stderr
 ```jule
-fn Stderr(): &Stdio
+fn Stderr(): &File
 ```
-Returns Stdio for the standard error file descriptor\.
+Returns File for the standard error file descriptor\.
 
 ## DirEntry
 ```jule
@@ -369,27 +377,27 @@ Once a Cmd has been executed, it is not recommended to reuse the same instance m
 
 ### New
 ```jule
-static fn New(path: str, mut args: ...str): &Cmd
+fn New(path: str, mut args: ...str): &Cmd
 ```
 Returns Cmd instance for path with arguments\.
 
 ### Stdin
 ```jule
-fn Stdin(self, mut r: io::Reader)!
+fn Stdin(self, mut r: &File)!
 ```
-Sets reader that will be connected to the command&#39;s standard input when the command starts\. The reader may be &amp;File or &amp;Stdio; all files will be accepted, if reader is a &amp;Stdio, it should be stdin typically received from \[Stdin\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
+Sets reader that will be connected to the command&#39;s standard input when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### Stdout
 ```jule
-fn Stdout(self, mut w: io::Writer)!
+fn Stdout(self, mut w: &File)!
 ```
-Sets writer that will be connected to the command&#39;s standard output when the command starts\. The writer may be &amp;File or &amp;Stdio; all files will be accepted, if writer is a &amp;Stdio, it should be stdout or stderr typically received from \[Stdin\] or \[Stderr\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
+Sets writer that will be connected to the command&#39;s standard output when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### Stderr
 ```jule
-fn Stderr(self, mut w: io::Writer)!
+fn Stderr(self, mut w: &File)!
 ```
-Sets writer that will be connected to the command&#39;s standard error when the command starts\. The writer may be &amp;File or &amp;Stdio; all files will be accepted, if writer is a &amp;Stdio, it should be stdout or stderr typically received from \[Stdin\] or \[Stderr\] function\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
+Sets writer that will be connected to the command&#39;s standard error when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### StdinPipe
 ```jule
@@ -531,72 +539,6 @@ Returns the Unix permission bits in self \(self &amp; \[ModePerm\]\)\.
 fn Type(self): FileMode
 ```
 Returns type bits in self \(self &amp; \[ModeType\]\)\.
-
-## Stdio
-```jule
-struct Stdio {
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-Safe file handler wrapper for the standard file descriptors\. Implements safe and extended functionalities for the standard output, standard error and standard input file descriptors\. In general, it is a File wrapper for the handle\. Any exceptional will be FsError and forwarded from File&#39;s methods\.
-
-### Implemented Traits
-
-- `io::Reader`
-- `io::Writer`
-- `io::ReadWriter`
-- `io::ByteReader`
-- `io::ByteWriter`
-- `io::RuneWriter`
-- `io::StrWriter`
-
-### File
-```jule
-unsafe fn File(mut self): &File
-```
-Returns File handle\. It is unsafe because using File handle directly may be not safe\. Stdio handlers use mutable internal handlers, so any mutation may will cause issues\.
-
-### Read
-```jule
-fn Read(mut self, mut buf: []byte)!: (n: int)
-```
-Implements the io::Reader trait\. Panics if file descriptor is not standard input\.
-
-### Write
-```jule
-fn Write(mut self, buf: []byte)!: (n: int)
-```
-Implements the io::Writer trait\. Panics if file descriptor is not standard output or standard error\.
-
-### ReadByte
-```jule
-fn ReadByte(mut self)!: (b: byte, n: int)
-```
-Implements the io::ByteReader trait\. Panics if file descriptor is not standard input\.
-
-### WriteByte
-```jule
-fn WriteByte(mut self, b: byte)!
-```
-Implements the io::ByteWriter trait\. Panics if file descriptor is not standard output or standard error\.
-
-### WriteRune
-```jule
-fn WriteRune(mut self, r: rune)!: (n: int)
-```
-Implements the io::RuneWriter trait\. Panics if file descriptor is not standard output or standard error\.
-
-### WriteStr
-```jule
-fn WriteStr(mut self, s: str)!: (n: int)
-```
-Implements the io::WriteStr trait\. Calls the \`Stdio\.Write\` internally and forwards any exceptinal\.
-
-### ReadLine
-```jule
-fn ReadLine(mut self)!: str
-```
-Reads input until the end of the line and returns as string\. Result string is not include newline\. Panics if file descriptor is not standard input\.
 
 ## FileInfo
 ```jule

@@ -3,13 +3,13 @@
 ## Index
 
 [struct Const](#const)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewInt\(i: big::Int\): &amp;Const](#newint)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewI64\(x: i64\): &amp;Const](#newi64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewU64\(x: u64\): &amp;Const](#newu64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewBool\(x: bool\): &amp;Const](#newbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewStr\(x: str\): &amp;Const](#newstr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewF64\(x: f64\): &amp;Const](#newf64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn NewNil\(\): &amp;Const](#newnil)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewInt\(i: big::Int\): &amp;Const](#newint)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewI64\(x: i64\): &amp;Const](#newi64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewU64\(x: u64\): &amp;Const](#newu64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewBool\(x: bool\): &amp;Const](#newbool)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewStr\(x: str\): &amp;Const](#newstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewF64\(x: f64\): &amp;Const](#newf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewNil\(\): &amp;Const](#newnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(self\): bool](#readbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(self\): str](#readstr)\
@@ -62,43 +62,43 @@ Constant data\. Use Const\.new\_nil function instead of Const\{\} for nil litera
 
 ### NewInt
 ```jule
-static fn NewInt(i: big::Int): &Const
+fn NewInt(i: big::Int): &Const
 ```
 Returns new constant value instance from big\-integer\.
 
 ### NewI64
 ```jule
-static fn NewI64(x: i64): &Const
+fn NewI64(x: i64): &Const
 ```
 Returns new constant value instance from 64\-bit signed integer\.
 
 ### NewU64
 ```jule
-static fn NewU64(x: u64): &Const
+fn NewU64(x: u64): &Const
 ```
 Returns new constant value instance from 64\-bit unsigned integer\.
 
 ### NewBool
 ```jule
-static fn NewBool(x: bool): &Const
+fn NewBool(x: bool): &Const
 ```
 Returns new constant value instance from boolean\.
 
 ### NewStr
 ```jule
-static fn NewStr(x: str): &Const
+fn NewStr(x: str): &Const
 ```
 Returns new constant value instance from string\.
 
 ### NewF64
 ```jule
-static fn NewF64(x: f64): &Const
+fn NewF64(x: f64): &Const
 ```
 Returns new constant value instance from 64\-bit floating\-point\.
 
 ### NewNil
 ```jule
-static fn NewNil(): &Const
+fn NewNil(): &Const
 ```
 Returns new constant value instance with nil\.
 

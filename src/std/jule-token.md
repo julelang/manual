@@ -3,34 +3,17 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsUnaryOp\(id: int\): bool](#isunaryop)\
-[fn IsBinOp\(id: int\): bool](#isbinop)\
-[fn IsWeakOp\(id: int\): bool](#isweakop)\
-[fn IsStr\(k: str\): bool](#isstr)\
-[fn IsRawStr\(k: str\): bool](#israwstr)\
-[fn IsRune\(k: str\): bool](#isrune)\
-[fn IsNil\(k: str\): bool](#isnil)\
-[fn IsBool\(k: str\): bool](#isbool)\
-[fn IsFloat\(k: str\): bool](#isfloat)\
-[fn IsNum\(k: str\): bool](#isnum)\
-[fn IsLit\(k: str\): bool](#islit)\
-[fn IsPunct\(r: rune\): bool](#ispunct)\
-[fn IsSpace\(r: rune\): bool](#isspace)\
-[fn IsLetter\(r: rune\): bool](#isletter)\
-[fn IsNameRune\(s: str\): bool](#isnamerune)\
 [fn IsKeyword\(s: str\): bool](#iskeyword)\
-[fn IsDecimal\(r: rune\): bool](#isdecimal)\
-[fn IsBinary\(r: rune\): bool](#isbinary)\
-[fn IsOctal\(r: rune\): bool](#isoctal)\
-[fn IsHex\(r: rune\): bool](#ishex)\
+[fn IsPostfix\(id: int\): bool](#ispostfix)\
 [fn IsAssign\(id: int\): bool](#isassign)\
-[fn IsPostfixOp\(id: int\): bool](#ispostfixop)\
-[fn IsAssignOp\(id: int\): bool](#isassignop)\
-[fn Lex\(mut f: &amp;Fileset, mode: int\): \[\]log::Log](#lex)\
+[fn ScanAll\(mut &amp;f: &amp;FileSet, opt: int\): \[\]log::Log](#scanall)\
 [struct Token](#token)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Prec\(self\): byte](#prec)\
-[struct Fileset](#fileset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(path: str\): &amp;Fileset](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Precedence\(self\): int](#precedence)\
+[struct Scanner](#scanner)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut f: &amp;FileSet, opt: int\): &amp;Scanner](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Scan\(mut self\): \(token: &amp;Token, EOF: bool\)](#scan)\
+[struct FileSet](#fileset)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str\): &amp;FileSet](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut self, data: \[\]byte\)](#fill)\
 &nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut\(mut self, mut data: \[\]byte\)](#fillmut)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(self\): str](#dir)\
@@ -41,140 +24,113 @@
 ## Variables
 
 ```jule
-static Puncts: [...]rune = [ ... ]
+const (
+	ILLEGAL = iota // illegal token
+
+	SEMICOLON // ;
+	COMMA     // ,
+	COLON     // :
+	PERIOD    // .
+	SEP       // ::
+	HASH      // #
+	ELLIPSIS  // ...
+	QMARK     // ?
+
+	COMMENT // /*..*/ or //...
+	NAME    // identifier
+
+	FLOAT // floating-point literal
+	INT   // integer literal
+	STR   // string literal
+	RUNE  // rune literal
+
+	RET      // ret
+	CONST    // const
+	TYPE     // type
+	FOR      // for
+	BREAK    // break
+	CONTINUE // continue
+	IN       // int
+	IF       // if
+	ELSE     // else
+	USE      // use
+	GOTO     // goto
+	ENUM     // enum
+	STRUCT   // struct
+	CO       // co
+	MATCH    // match
+	SELF     // self
+	TRAIT    // trait
+	IMPL     // impl
+	CHAN     // chan
+	BIND     // cpp
+	FALL     // fall
+	FN       // fn
+	LET      // let
+	UNSAFE   // unsafe
+	MUT      // mut
+	DEFER    // defer
+	ERROR    // error
+	MAP      // map
+	SELECT   // select
+
+	EQL  // ==
+	NEQ  // !=
+	GEQ  // >=
+	LEQ  // <=
+	LAND // &&
+	LOR  // ||
+
+	SHL   // <<
+	SHR   // >>
+	INC   // ++
+	DEC   // --
+	ADD   // +
+	SUB   // -
+	MUL   // *
+	QUO   // /
+	REM   // %
+	AND   // &
+	OR    // |
+	XOR   // ^
+	NOT   // !
+	LSS   // <
+	GTR   // >
+	ARROW // <-
+
+	ASSIGN     // =
+	DEFINE     // :=
+	ADD_ASSIGN // +=
+	SUB_ASSIGN // -=
+	MUL_ASSIGN // *=
+	QUO_ASSIGN // /=
+	REM_ASSIGN // %=
+	SHL_ASSIGN // <<=
+	SHR_ASSIGN // >>=
+	XOR_ASSIGN // ^=
+	AND_ASSIGN // &=
+	OR_ASSIGN  // |=
+
+	LPAREN // (
+	LBRACK // [
+	LBRACE // {
+	RPAREN // )
+	RBRACK // ]
+	RBRACE // }
+)
 ```
-Punctuations\.
-
----
-
-```jule
-static Spaces: [...]rune = [ ... ]
-```
-Space characters\.
-
----
-
-```jule
-static UnaryOps: [...]int = [ ... ]
-```
-Kind list of unary operators\.
-
----
-
-```jule
-static BinOps: [...]int = [ ... ]
-```
-Kind list of binary operators\.
-
----
-
-```jule
-static WeakOps: [...]int = [ ... ]
-```
-Kind list of weak operators\. These operators are weak, can used as part of expression\.
-
----
-
-```jule
-static PostfixOps: [...]int = [ ... ]
-```
-List of postfix operators\.
-
----
-
-```jule
-static AssignOps: [...]int = [ ... ]
-```
-List of assign operators\.
+Token identities\.
 
 ---
 
 ```jule
 const (
-	Illegal = iota
-	Name
-	Ret
-	Semicolon
-	Lit
-	Comma
-	Const
-	Type
-	Colon
-	For
-	Break
-	Cont
-	In
-	If
-	Else
-	Comment
-	Use
-	Dot
-	Goto
-	DblColon
-	Enum
-	Struct
-	Co
-	Match
-	Self
-	Trait
-	Impl
-	Chan
-	Cpp
-	Fall
-	Fn
-	Let
-	Unsafe
-	Mut
-	Defer
-	Static
-	Hash
-	Error
-	Map
-	ColonEq
-	TripleDot
-	PlusEq
-	MinusEq
-	StarEq
-	SolidusEq
-	PercentEq
-	ShlEq
-	ShrEq
-	CaretEq
-	AmperEq
-	VlineEq
-	DblEq
-	NotEq
-	GtEq
-	LtEq
-	DblAmper
-	DblVline
-	Shl
-	Shr
-	DblPlus
-	DblMinus
-	Plus
-	Minus
-	Star
-	Solidus
-	Percent
-	Amper
-	Vline
-	Caret
-	Excl
-	Lt
-	Gt
-	Eq
-	LBrace
-	RBrace
-	LParent
-	RParent
-	LBracket
-	RBracket
-	RArrow
-	Select
+	LowestPrec  = 0 // non-operators
+	UnaryPrec   = 6
+	HighestPrec = 7
 )
 ```
-Token identities\.
+A set of constants for precedence\-based expression parsing\. Non\-operators have lowest precedence, followed by operators starting with precedence 1 up to unary operators\. The highest precedence serves as &#34;catch\-all&#34; precedence for selector, indexing, and other operator and delimiter tokens\.
 
 ---
 
@@ -186,185 +142,84 @@ const (
 ```
 Lexer mode\.
 
-## IsUnaryOp
-```jule
-fn IsUnaryOp(id: int): bool
-```
-Reports whether kind is unary operator\.
-
-## IsBinOp
-```jule
-fn IsBinOp(id: int): bool
-```
-Reports whether kind is binary operator\.
-
-## IsWeakOp
-```jule
-fn IsWeakOp(id: int): bool
-```
-Reports whether kind is weak operator\.
-
-## IsStr
-```jule
-fn IsStr(k: str): bool
-```
-Reports whether kind is string literal\.
-
-## IsRawStr
-```jule
-fn IsRawStr(k: str): bool
-```
-Reports whether kind is raw string literal\.
-
-## IsRune
-```jule
-fn IsRune(k: str): bool
-```
-Reports whether kind is rune literal\. Literal value can be byte or rune\.
-
-## IsNil
-```jule
-fn IsNil(k: str): bool
-```
-Reports whether kind is nil literal\.
-
-## IsBool
-```jule
-fn IsBool(k: str): bool
-```
-Reports whether kind is boolean literal\.
-
-## IsFloat
-```jule
-fn IsFloat(k: str): bool
-```
-Reports whether kind is float\.
-
-## IsNum
-```jule
-fn IsNum(k: str): bool
-```
-Reports whether kind is numeric\.
-
-## IsLit
-```jule
-fn IsLit(k: str): bool
-```
-Reports whether kind is literal\.
-
-## IsPunct
-```jule
-fn IsPunct(r: rune): bool
-```
-Reports whether rune is punctuation\.
-
-## IsSpace
-```jule
-fn IsSpace(r: rune): bool
-```
-Reports whether rune is whitespace\.
-
-## IsLetter
-```jule
-fn IsLetter(r: rune): bool
-```
-Reports whether rune is letter\.
-
-## IsNameRune
-```jule
-fn IsNameRune(s: str): bool
-```
-Reports whether first rune of string is allowed to first rune for identifier\.
-
 ## IsKeyword
 ```jule
 fn IsKeyword(s: str): bool
 ```
 Reports whether s is keyword\.
 
-## IsDecimal
+## IsPostfix
 ```jule
-fn IsDecimal(r: rune): bool
+fn IsPostfix(id: int): bool
 ```
-Reports whether rune is decimal sequence\.
-
-## IsBinary
-```jule
-fn IsBinary(r: rune): bool
-```
-Reports whether rune is binary sequence\.
-
-## IsOctal
-```jule
-fn IsOctal(r: rune): bool
-```
-Reports whether rune is octal sequence\.
-
-## IsHex
-```jule
-fn IsHex(r: rune): bool
-```
-Reports whether rune is hexadecimal sequence\.
+Reports whether operator kind is postfix operator\.
 
 ## IsAssign
 ```jule
 fn IsAssign(id: int): bool
 ```
-Reports given token id is allow for assignment left\-expression or not\.
-
-## IsPostfixOp
-```jule
-fn IsPostfixOp(id: int): bool
-```
-Reports whether operator kind is postfix operator\.
-
-## IsAssignOp
-```jule
-fn IsAssignOp(id: int): bool
-```
 Reports whether operator kind is assignment operator\.
 
-## Lex
+## ScanAll
 ```jule
-fn Lex(mut f: &Fileset, mode: int): []log::Log
+fn ScanAll(mut &f: &FileSet, opt: int): []log::Log
 ```
-Lex source code into fileset\. Returns nil if f == nil\. Returns nil slice for errors if no any error\.
+Scans all tokens into FileSet f and returns error logs\.
 
 ## Token
 ```jule
 struct Token {
-	File:   &Fileset
-	Row:    int
-	Column: int
-	Kind:   str
-	Id:     int
+	ID:     int      // Identity of token.
+	File:   &FileSet // Associated FileSet where token appear.
+	Row:    int      // Row position of token.
+	Column: int      // Column position of token.
+	Kind:   str      // Token kind as string.
 }
 ```
-Token is lexer token\.
+Token\.
 
-### Prec
+### Precedence
 ```jule
-fn Prec(self): byte
+fn Precedence(self): int
 ```
-Returns operator precedence of token\. Returns 0 if token is not operator or invalid operator for operator precedence\.
+Returns operator precedence of token\. Returns 0 if token is not operator or invalid operator for operator precedence\. It only reports for the binary operators, otherwise returns LowestPrec\.
 
-Accepts assignment tokens \(like equals \[=\]\) as precedenced operator to handle expression assignments\.
-
-## Fileset
+## Scanner
 ```jule
-struct Fileset {
+struct Scanner {
+	Logs: []log::Log // Scan logs.
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+Scanner scans tokens from FileSet data\. Any log will be appended to \[Scanner\.Logs\]\.
+
+### New
+```jule
+fn New(mut f: &FileSet, opt: int): &Scanner
+```
+Returns new Scanner for the FileSet f\.
+
+### Scan
+```jule
+fn Scan(mut self): (token: &Token, EOF: bool)
+```
+Scans and returns new token, reports if EOF\. If and error appeared, returns nil token and not\-EOF\.
+
+## FileSet
+```jule
+struct FileSet {
 	Path:   str
 	Tokens: []&Token
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Fileset for lexing\.
+Fileset for the lexer\.
 
 ### New
 ```jule
-static fn New(path: str): &Fileset
+fn New(path: str): &FileSet
 ```
-Returns new Fileset with path\.
+Returns new FileSet with path\.
 
 ### Fill
 ```jule

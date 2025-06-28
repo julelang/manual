@@ -3,10 +3,10 @@
 ## Index
 
 [fn IsAscii\(r: rune\): bool](#isascii)\
-[fn ToRune\(mut lit: str\): \(&lt;anonymous&gt;: rune, errors: \[\]Error\)](#torune)\
+[fn ToRune\(mut lit: str\): \(rune, errors: \[\]Error\)](#torune)\
 [fn GetRune\(mut lit: str\): \(r: rune, length: int, errors: \[\]Error\)](#getrune)\
 [fn ToRawStr\(lit: str\): str](#torawstr)\
-[fn ToStr\(mut lit: str\): \(&lt;anonymous&gt;: str, errors: \[\]Error\)](#tostr)\
+[fn ToStr\(mut lit: str\): \(str, errors: \[\]Error\)](#tostr)\
 [struct Error](#error)
 
 
@@ -19,7 +19,7 @@ Reports whether rune is byte actually\. In other words, whether rune is ASCII\.
 
 ## ToRune
 ```jule
-fn ToRune(mut lit: str): (<anonymous>: rune, errors: []Error)
+fn ToRune(mut lit: str): (rune, errors: []Error)
 ```
 Returns rune from literal, literal includes quotes\. Allows escape sequences\. Assumes lit is syntactically correct\.
 
@@ -37,7 +37,7 @@ Returns raw\-string value string from literal, literal includes quotes\. Assumes
 
 ## ToStr
 ```jule
-fn ToStr(mut lit: str): (<anonymous>: str, errors: []Error)
+fn ToStr(mut lit: str): (str, errors: []Error)
 ```
 Returns string value string from literal, literal includes quotes\. Allows escape sequences\. Assumes lit is syntactically correct\.
 

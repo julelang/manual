@@ -2,7 +2,8 @@
 
 ## Index
 
-[fn Clean\(mut path: str\): str](#clean)\
+[Variables](#variables)\
+[fn Clean\(path: str\): str](#clean)\
 [fn ToSlash\(path: str\): str](#toslash)\
 [fn FromSlash\(path: str\): str](#fromslash)\
 [fn Join\(elem: \.\.\.str\): str](#join)\
@@ -11,13 +12,26 @@
 [fn Base\(mut path: str\): str](#base)\
 [fn Dir\(path: str\): str](#dir)\
 [fn VolumeName\(path: str\): str](#volumename)\
-[fn SplitList\(path: str\): \[\]str](#splitlist)
+[fn IsAbs\(path: str\): bool](#isabs)\
+[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)
 
+## Variables
 
+```jule
+const Separator = filepathlite::Separator
+```
+Operating system specific path separator\.
+
+---
+
+```jule
+const ListSeparator = filepathlite::ListSeparator
+```
+Operating system specific path list separator\.
 
 ## Clean
 ```jule
-fn Clean(mut path: str): str
+fn Clean(path: str): str
 ```
 Returns the shortest path name equivalent to path by purely lexical processing\. It applies the following rules iteratively until no further processing can be done:
 
@@ -88,8 +102,14 @@ fn VolumeName(path: str): str
 ```
 Returns leading volume name\. Given &#34;C:\\foo\\bar&#34; it returns &#34;C:&#34; on Windows\. Given &#34;\\\\host\\share\\foo&#34; it returns &#34;\\\\host\\share&#34;\. On other platforms it returns empty string\.
 
-## SplitList
+## IsAbs
 ```jule
-fn SplitList(path: str): []str
+fn IsAbs(path: str): bool
 ```
-Splits a list of paths joined by the OS\-specific \[ListSeparator\], usually found in PATH environment variable\. Unlike strings::Split, it returns an empty slice when passed an empty string\.
+Reports whether the path is absolute\.
+
+## IsPathSeparator
+```jule
+fn IsPathSeparator(c: byte): bool
+```
+Reports whether c is path separator\.

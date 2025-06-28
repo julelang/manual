@@ -16,35 +16,35 @@
 ## Variables
 
 ```jule
-static CppHeaderExts: [...]str = [ ... ]
+let CppHeaderExts: [...]str = [ ... ]
 ```
 Valid extensions of C\+\+ headers\.
 
 ---
 
 ```jule
-static CppExts: [...]str = [ ... ]
+let CppExts: [...]str = [ ... ]
 ```
 Valid extensions of C\+\+ source files\.
 
 ---
 
 ```jule
-static ObjectiveCppExts: [...]str = [ ... ]
+let ObjectiveCppExts: [...]str = [ ... ]
 ```
 Valid extensions of Objective\-C\+\+ source files\.
 
 ---
 
 ```jule
-static mut OS = runtime::OS
+let mut OS = runtime::OS
 ```
 Target operating system\. Set to runtime operating system by default\.
 
 ---
 
 ```jule
-static mut Arch = runtime::Arch
+let mut Arch = runtime::Arch
 ```
 Target architecture\. Set to runtime architecture by default\.
 

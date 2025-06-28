@@ -16,9 +16,9 @@
 [struct AddrError](#addrerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
 [struct TCPListener](#tcplistener)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(self\)\!: Conn](#accept)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close)\
@@ -30,19 +30,19 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close-1)\
 [struct TCPAddr](#tcpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Resolve\(mut network: Network, addr: str\)\!: &amp;TCPAddr](#resolve)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;TCPAddr](#resolve)\
 [struct UDPAddr](#udpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Resolve\(mut network: Network, addr: str\)\!: &amp;UDPAddr](#resolve-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;UDPAddr](#resolve-1)\
 [type HardwareAddr](#hardwareaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Parse\(s: str\)\!: HardwareAddr](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
 [struct UDPConn](#udpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut self, timeout: time::Duration\)\!](#setreadtimeout-1)\
@@ -50,7 +50,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network-4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close-2)\
 [type IP](#ip)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn Empty\(\): IP](#empty)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\): IP](#empty)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(self\): bool](#empty-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(self, other: IP\): bool](#equal)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnspecified\(self\): bool](#isunspecified)\
@@ -64,8 +64,8 @@
 ## Variables
 
 ```jule
-static mut ErrInvalidTimeout = errors::New("timeout value is not valid, duration is out of range")
-static mut ErrTimeout = errors::New("connection timed out")
+let mut ErrInvalidTimeout = errors::New("timeout value is not valid, duration is out of range")
+let mut ErrTimeout = errors::New("connection timed out")
 ```
 Common errors of net package\. Mutation is undefined behavior\.
 
@@ -79,28 +79,28 @@ Length of IPv4 address in bytes\.
 ---
 
 ```jule
-static mut Broadcast = IPv4(255, 255, 255, 255)
+let mut Broadcast = IPv4(255, 255, 255, 255)
 ```
 The IPv4 address known as limited broadcast\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv4AllSystems = IPv4(224, 0, 0, 1)
+let mut IPv4AllSystems = IPv4(224, 0, 0, 1)
 ```
 The IPv4 address known as all systems\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv4AllRouters = IPv4(224, 0, 0, 2)
+let mut IPv4AllRouters = IPv4(224, 0, 0, 2)
 ```
 The IPv4 address known as all routers\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv4Zero = IPv4(0, 0, 0, 0)
+let mut IPv4Zero = IPv4(0, 0, 0, 0)
 ```
 The IPv4 address known as all zeros\. The IP that returned is statically allocated and mutable\.
 
@@ -114,42 +114,42 @@ Length of IPv6 address in bytes\.
 ---
 
 ```jule
-static mut IPv6Zero = IP([ ... ])
+let mut IPv6Zero = IP([ ... ])
 ```
 The IPv6 address known as all zeros\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv6Unspecified = IP([ ... ])
+let mut IPv6Unspecified = IP([ ... ])
 ```
 The IPv6 address known as unspecified\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv6Loopback = IP([ ... ])
+let mut IPv6Loopback = IP([ ... ])
 ```
 The IPv6 address known as loopback\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv6InterfaceLocalAllNodes = IP([ ... ])
+let mut IPv6InterfaceLocalAllNodes = IP([ ... ])
 ```
 The IPv6 address known as interterface local all nodes\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv6LinkLocalAllNodes = IP([ ... ])
+let mut IPv6LinkLocalAllNodes = IP([ ... ])
 ```
 The IPv6 address known as link local all nodes\. The IP that returned is statically allocated and mutable\.
 
 ---
 
 ```jule
-static mut IPv6LinkLocalAllRouters = IP([ ... ])
+let mut IPv6LinkLocalAllRouters = IP([ ... ])
 ```
 The IPv6 address known as link local all routers\. The IP that returned is statically allocated and mutable\.
 
@@ -309,7 +309,7 @@ TCP listener\. In most cases, represents TCP server\.
 
 ### Bind
 ```jule
-static fn Bind(addr: str)!: &TCPListener
+fn Bind(addr: str)!: &TCPListener
 ```
 Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
 
@@ -317,7 +317,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Dial
 ```jule
-static fn Dial(addr: str)!: &TCPConn
+fn Dial(addr: str)!: &TCPConn
 ```
 Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
 
@@ -325,7 +325,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### DialTimeout
 ```jule
-static fn DialTimeout(addr: str, timeout: time::Duration)!: &TCPConn
+fn DialTimeout(addr: str, timeout: time::Duration)!: &TCPConn
 ```
 Same as TCPListener\.Dial, but uses timeout\.
 
@@ -414,14 +414,6 @@ Represents the address of a TCP end point\.
 
 - `Addr`
 
-### Resolve
-```jule
-static fn Resolve(mut network: Network, addr: str)!: &TCPAddr
-```
-Returns an address of TCP end point\. The network must be a TCP network name\.
-
-See the \[Dial\] function for a description of the network and addr parameters\.
-
 ### Network
 ```jule
 fn Network(self): str
@@ -433,6 +425,14 @@ Returns the address&#39;s network name\.
 fn Str(self): str
 ```
 Returns string form of address\.
+
+### Resolve
+```jule
+fn Resolve(mut network: Network, addr: str)!: &TCPAddr
+```
+Returns an address of TCP end point\. The network must be a TCP network name\.
+
+See the \[Dial\] function for a description of the network and addr parameters\.
 
 ## UDPAddr
 ```jule
@@ -448,14 +448,6 @@ Represents the address of a UDP end point\.
 
 - `Addr`
 
-### Resolve
-```jule
-static fn Resolve(mut network: Network, addr: str)!: &UDPAddr
-```
-Returns an address of UDP end point\. The network must be a UDP network name\.
-
-See the \[Dial\] function for a description of the network and addr parameters\.
-
 ### Network
 ```jule
 fn Network(self): str
@@ -468,6 +460,14 @@ fn Str(self): str
 ```
 Returns string form of address\.
 
+### Resolve
+```jule
+fn Resolve(mut network: Network, addr: str)!: &UDPAddr
+```
+Returns an address of UDP end point\. The network must be a UDP network name\.
+
+See the \[Dial\] function for a description of the network and addr parameters\.
+
 ## HardwareAddr
 ```jule
 type HardwareAddr: []byte
@@ -476,7 +476,7 @@ Physical hardware address\.
 
 ### Parse
 ```jule
-static fn Parse(s: str)!: HardwareAddr
+fn Parse(s: str)!: HardwareAddr
 ```
 Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over InfiniBand link\-layer address using one of the following formats:<br>
 ```
@@ -517,7 +517,7 @@ UDP connection\. This structure represents server and client connections\.
 
 ### Bind
 ```jule
-static fn Bind(addr: str)!: &UDPConn
+fn Bind(addr: str)!: &UDPConn
 ```
 Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
 
@@ -525,7 +525,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Dial
 ```jule
-static fn Dial(addr: str)!: &UDPConn
+fn Dial(addr: str)!: &UDPConn
 ```
 Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
 
@@ -579,7 +579,7 @@ Some methods might return mutable data\. There is no immutability promises\.
 
 ### Empty
 ```jule
-static fn Empty(): IP
+fn Empty(): IP
 ```
 Returns empty IP address\.
 

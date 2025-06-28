@@ -83,31 +83,31 @@ const (
 	// There no synchronization or ordering on read/write access.
 	// Only the operation is guaranteed to be atomic.
 	// Usually performs fastest atomicity performance.
-	Relaxed = memoryOrder(runtime::atomicRelaxed)
+	Relaxed = memoryOrder(atomic::Relaxed)
 
 	// Combined with a load, if the loaded value was written
 	// by a store operation with a Release or stronger order,
 	// all subsequent operations are ordered after that store.
 	// Especially all subsequent uploads will see the data
 	// written before the repository.
-	Acquire = memoryOrder(runtime::atomicAcquire)
+	Acquire = memoryOrder(atomic::Acquire)
 
 	// When combined with a store, all previous operations are
 	// ordered with the Acquire or stronger order before any load
 	// of that value. In particular, all previous writes become
 	// visible to all threads that perform an Acquire or stronger
 	// load of this value.
-	Release = memoryOrder(runtime::atomicRelease)
+	Release = memoryOrder(atomic::Release)
 
 	// Acquire and Release combined.
 	// Aka acquire/release.
 	// For loads it uses Acquire, for stores it uses Release ordering.
-	AcqRel = memoryOrder(runtime::atomicAcqRel)
+	AcqRel = memoryOrder(atomic::AcqRel)
 
 	// Default memory order for most things.
 	// Aka sequentially consistent.
 	// Operations are sequenced consistently.
-	SeqCst = memoryOrder(runtime::atomicSeqCst)
+	SeqCst = memoryOrder(atomic::SeqCst)
 )
 ```
 Atomic memory orders\.

@@ -23,10 +23,10 @@
 
 ```jule
 const (
-	RuneError = '\uFFFD'   // The "error" rune or "Unicode replacement character"
-	RuneSelf = 0x80        // Characters below RuneSelf are represented as themselves in a single byte.
-	MaxRune = '\U0010FFFF' // Maximum valid Unicode code point.
-	UTFMax = 4             // Maximum number of bytes of a UTF-8 encoded Unicode character.
+	RuneError = '\uFFFD'     // The "error" rune or "Unicode replacement character"
+	RuneSelf  = 0x80         // Characters below RuneSelf are represented as themselves in a single byte.
+	MaxRune   = '\U0010FFFF' // Maximum valid Unicode code point.
+	UTFMax    = 4            // Maximum number of bytes of a UTF-8 encoded Unicode character.
 )
 ```
 Numbers fundamental to the encoding\.

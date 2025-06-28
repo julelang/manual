@@ -10,7 +10,7 @@
 [type FinalToken](#finaltoken)\
 [type SplitFunc](#splitfunc)\
 [struct Scanner](#scanner)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(mut r: io::Reader\): &amp;Scanner](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Scanner](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Token\(mut self\): \[\]byte](#token)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Text\(self\): str](#text)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EOF\(self\): bool](#eof)\
@@ -21,10 +21,10 @@
 ## Variables
 
 ```jule
-static mut ErrTooLong = errors::New("bufio::Scanner: token too long")
-static mut ErrNegativeAdvance = errors::New("bufio::Scanner: SplitFunc returns negative advance count")
-static mut ErrAdvanceTooFar = errors::New("bufio::Scanner: SplitFunc returns advance count beyond input")
-static mut ErrBadReadCount = errors::New("bufio::Scanner: Read returned impossible count")
+let mut ErrTooLong = errors::New("bufio::Scanner: token too long")
+let mut ErrNegativeAdvance = errors::New("bufio::Scanner: SplitFunc returns negative advance count")
+let mut ErrAdvanceTooFar = errors::New("bufio::Scanner: SplitFunc returns advance count beyond input")
+let mut ErrBadReadCount = errors::New("bufio::Scanner: Read returned impossible count")
 ```
 Errors returned by Scanner\. Mutation is undefined behavior\.
 
@@ -93,7 +93,7 @@ Scanning stops unrecoverably at EOF, the first I/O error, or a token too large t
 
 ### New
 ```jule
-static fn New(mut r: io::Reader): &Scanner
+fn New(mut r: io::Reader): &Scanner
 ```
 Returns new Scanner for r with the default configuration\.
 

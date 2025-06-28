@@ -40,14 +40,14 @@
 ## Variables
 
 ```jule
-static mut ErrSyntax = errors::New("invalid syntax")
+let mut ErrSyntax = errors::New("invalid syntax")
 ```
 Indicates that a value does not have the right syntax for the target type\. Mutation is undefined behavior\.
 
 ---
 
 ```jule
-static mut ErrRange = errors::New("value out of range")
+let mut ErrRange = errors::New("value out of range")
 ```
 That a value is out of range for the target type\. Mutation is undefined behavior\.
 

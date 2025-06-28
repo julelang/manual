@@ -4,10 +4,10 @@
 
 [trait Locker](#locker)\
 [struct Once](#once)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(\): Once](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): Once](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(self, f: fn\(\)\)](#do)\
 [struct WaitGroup](#waitgroup)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(\): &amp;WaitGroup](#new-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;WaitGroup](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut self, delta: int\)](#add)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Done\(mut self\)](#done)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut self\)](#wait)\
@@ -20,7 +20,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(self\)](#unlock)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RLocker\(mut &amp;self\): Locker](#rlocker)\
 [struct Cond](#cond)\
-&nbsp;&nbsp;&nbsp;&nbsp;[static fn New\(l: Locker\): &amp;Cond](#new-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(l: Locker\): &amp;Cond](#new-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(self\)](#lock-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(self\)](#unlock-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(self\)](#wait-1)\
@@ -52,7 +52,7 @@ Once is an object that will perform exactly one action\. A Once must not be copi
 
 ### New
 ```jule
-static fn New(): Once
+fn New(): Once
 ```
 Returns new instance for Once\.
 
@@ -88,7 +88,7 @@ A WaitGroup must not be copied after first use\.
 
 ### New
 ```jule
-static fn New(): &WaitGroup
+fn New(): &WaitGroup
 ```
 Returns new \[WaitGroup\] instance\.
 
@@ -194,7 +194,7 @@ A Cond must not be copied after first use\.
 
 ### New
 ```jule
-static fn New(l: Locker): &Cond
+fn New(l: Locker): &Cond
 ```
 Returns a new Cond with locker l\.
 

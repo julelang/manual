@@ -9,13 +9,14 @@
 
 ```jule
 const (
-	Cdef = "cdef"
-	Typedef = "typedef"
-	Pass = "pass"
-	Build = "build"
+	Cdef      = "cdef"
+	Typedef   = "typedef"
+	Pass      = "pass"
+	Build     = "build"
 	Namespace = "namespace"
-	Test = "test"
-	Export = "export"
+	Test      = "test"
+	Export    = "export"
+	Disable   = "disable"
 )
 ```
 Compiler directives\.
