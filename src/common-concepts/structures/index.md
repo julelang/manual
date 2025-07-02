@@ -55,7 +55,7 @@ Just give structure identifier as receiver. Not generics or type alias.
 :::
 
 ### Receiver Parameters
-Receivers indicate which instance the function will use. Receiver parameters must be the first parameter of each method. Receiver parameters are also a [reference](/memory/references) by default.
+Receivers indicate which instance the function will use. Receiver parameters must be the first parameter of each method.
 
 There are two types of receiver parameters;
 
@@ -63,12 +63,7 @@ There are two types of receiver parameters;
 Smart Pointer receivers require the function to be a reference. The function can only be called from a reference instance of the structure.
 
 **Receiver Parameter**
-Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. However, when the structure is given as arguments to different functions, or in a different state, it is copied. That is, it is only variable within itself.
-
-Assigning to the self parameter will cause mutation in the same way. This is because, behind the scenes, the self parameter is treated as a [reference variable](/memory/references). Therefore, assignments made directly to the self variable will be written to the memory of the instance calling the method.
-::: warning
-Not deep copy.
-:::
+Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. Assigning to the self parameter will cause mutation in the same way. This is because, the self parameter is treated as a [reference pointer variable](/memory/raw-pointers/reference-pointers). Therefore, assignments made directly to the self variable will be written to the memory of the instance calling the method.
 
 ### Syntax
 ```
