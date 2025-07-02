@@ -52,8 +52,8 @@ For example:
 type Str: str
 
 impl Str {
-	fn LineCount(self): (n: int) {
-		for _, r in []rune(self) {
+	fn LineCount(*self): (n: int) {
+		for _, r in []rune(*self) {
 			if r == '\n' {
 				n++
 			}

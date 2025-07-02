@@ -41,7 +41,7 @@ In the code above, the `s` field of the `Foo` structure poses a risk since it is
 Let's implement such a method for the `Foo` struct:
 ```jule
 impl Foo {
-    fn bar(self) {}
+    fn bar(*self) {}
 }
 ```
 
@@ -90,13 +90,13 @@ Traits and methods are treated similarly to functions in this context. When a ty
 For example:
 ```jule
 trait Foo {
-	fn baz(mut self, mut x: &int)
+	fn baz(mut *self, mut x: &int)
 }
 
 struct Bar{}
 
 impl Foo for Bar {
-	fn baz(self, x: &int) {}
+	fn baz(*self, x: &int) {}
 }
 ```
 In the example code above, the `Bar` struct correctly implements the `Foo` trait. Just like with functions, the same logic applies. The trait continues to wrap the struct with mutable behavior, but by taking advantage of flexibility, the `Bar` struct can behave immutably within its own type.

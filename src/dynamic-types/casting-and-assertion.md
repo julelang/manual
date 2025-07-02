@@ -17,13 +17,13 @@ trait Foo1 {
 }
 
 trait Foo2 {
-	fn foo2(self)
+	fn foo2(*self)
 }
 
 type Bar: int
 
 impl Foo1 for Bar {
-	fn foo2(self) {
+	fn foo2(*self) {
 		println("foo2")
 	}
 }
@@ -41,13 +41,13 @@ If a strict type alias points to a trait, that strict type alias behaves as the 
 For example:
 ```jule
 trait Foo {
-	fn foo(self): str
+	fn foo(*self): str
 }
 
 struct Bar{}
 
 impl Baz for Bar {
-	fn foo(self): str {
+	fn foo(*self): str {
 		ret "bar"
 	}
 }
@@ -55,7 +55,7 @@ impl Baz for Bar {
 type Baz: Foo
 
 impl Baz for Baz {
-	fn foo(self): str {
+	fn foo(*self): str {
 		ret "baz"
 	}
 }

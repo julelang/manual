@@ -13,7 +13,7 @@ For example:
 const PI = 3.14159265359
 
 trait Shape {
-    fn area(self): f32
+    fn area(*self): f32
 }
 
 struct Rectangle {
@@ -22,7 +22,7 @@ struct Rectangle {
 }
 
 impl Shape for Rectangle {
-    fn area(self): f32 {
+    fn area(*self): f32 {
         ret f32(self.width * self.height)
     }
 }
@@ -32,7 +32,7 @@ struct Circle {
 }
 
 impl Shape for Circle {
-    fn area(self): f32 {
+    fn area(*self): f32 {
         ret PI * self.r * self.r
     }
 }
@@ -53,11 +53,11 @@ For example:
 
 ```jule
 trait Foo {
-    fn Foo(self)
+    fn Foo(*self)
 }
 
 trait Bar {
-    fn Bar(self)
+    fn Bar(*self)
 }
 
 struct Baz {}
@@ -66,11 +66,11 @@ impl Foo for Baz {}
 impl Bar for Baz {}
 
 impl Baz {
-    fn Foo(self) {
+    fn Foo(*self) {
         println("foo")
     }
 
-    fn Bar(self) {
+    fn Bar(*self) {
         println("bar")
     }
 }

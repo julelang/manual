@@ -92,7 +92,7 @@ struct ParseError {
 }
 
 impl ParseError {
-	fn Str(self): str {
+	fn Str(*self): str {
 		ret fmt::Format("{} {}: {}",
 			self.Err, self.Input, str(self.Input[self.Column]))
 	}

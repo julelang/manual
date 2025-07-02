@@ -79,26 +79,26 @@ fn IDENTIFIER([RECEIVER_PARAMETER], PARAMETERS...): RET_TYPE {
 
 For example to receiver parameters:
 ```jule
-// Immutable Smart Pointer Receiver
 fn method(&self): str { /* Body */ }
 ```
+Immutable [Smart Pointer](/memory/management/smart-pointers) Receiver
 ```jule
-// Mutable Smart Pointer Receiver
 fn method(mut &self): str { /* Body */ }
 ```
+Mutable [Smart Pointer](/memory/management/smart-pointers) Receiver
 ```jule
-// Immutable Receiver
-fn method(self): str { /* Body */ }
+fn method(*self): str { /* Body */ }
 ```
+Immutable [Reference Pointer](/memory/raw-pointers/reference-pointers) Receiver
 ```jule
-// Mutable Receiver
-fn method(mut self): str { /* Body */ }
+fn method(mut *self): str { /* Body */ }
 ```
+Mutable [Reference Pointer](/memory/raw-pointers/reference-pointers) Receiver
 
 For example to implementing method to structure:
 ```jule
 impl Position {
-    fn isOrigin(self): bool {
+    fn isOrigin(*self): bool {
         ret self.x == 0 && self.y == 0
     }
 }
@@ -111,7 +111,7 @@ The `self` keyword represents the receiver a receiver function has. It is used t
 For example:
 ```jule
 impl Person {
-    fn getName(self): str {
+    fn getName(*self): str {
         ret self.name
     }
 }

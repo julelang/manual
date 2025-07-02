@@ -263,8 +263,13 @@ export default defineConfig({
             { text: 'Slicing', link: '/memory/slicing' },
             { text: 'Immutability', link: '/memory/immutability' },
             { text: 'Mutability', link: '/memory/mutability' },
-            { text: 'Pointers', link: '/memory/pointers' },
-            { text: 'References', link: '/memory/references' },
+            {
+              text: 'Raw-Pointers',
+              link: '/memory/raw-pointers/',
+              items: [
+                { text: 'Reference Pointers', link: '/memory/raw-pointers/reference-pointers' },
+              ]
+            },
             {
               text: 'Management',
               link: '/memory/management/',

@@ -13,11 +13,11 @@ Functions in a trait should only exist as prototypes (declaration of a trait, no
 For example:
 ```jule
 trait Person {
-    fn name(self): str
-    fn age(self): u8
+    fn name(*self): str
+    fn age(*self): u8
 }
 ```
-All constructs that implement the trait above, must have the methods `name(self): str` and `age(self): u8`.
+All constructs that implement the trait above, must have the methods `name(*self): str` and `age(*self): u8`.
 
 ## Compatibility
 
@@ -26,11 +26,11 @@ A trait may be eligible to be cast into another trait, but there are some condit
 For example:
 ```jule
 trait Foo {
-    fn foo(self)
+    fn foo(*self)
 }
 
 trait Bar {
-    fn bar(self)
+    fn bar(*self)
 }
 
 trait FooBar {
@@ -41,8 +41,8 @@ trait FooBar {
 struct Baz {}
 
 impl FooBar for Baz {
-    fn foo(self) { println("foo") }
-    fn bar(self) { println("bar") }
+    fn foo(*self) { println("foo") }
+    fn bar(*self) { println("bar") }
 }
 
 fn main() {

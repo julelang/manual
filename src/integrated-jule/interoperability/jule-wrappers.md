@@ -93,15 +93,15 @@ impl Person {
 		}
 	}
 
-	fn name(self): str {
+	fn name(*self): str {
 		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.name)) }
 	}
 
-	fn surname(self): str {
+	fn surname(*self): str {
 		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.surname)) }
 	}
 
-	fn getFullName(self): str {
+	fn getFullName(*self): str {
 		ret self.name() + " " + self.surname()
 	}
 }
@@ -138,10 +138,10 @@ impl Person {
 		}
 	}
 
-	fn name(self): str { ret self.buffer.name }
-	fn surname(self): str { ret self.buffer.surname }
+	fn name(*self): str { ret self.buffer.name }
+	fn surname(*self): str { ret self.buffer.surname }
 
-	fn getFullName(self): str {
+	fn getFullName(*self): str {
 		ret self.name() + " " + self.surname()
 	}
 }
@@ -175,7 +175,7 @@ cpp struct Person {
 
 In this context, the `Person` wrapper structure could have such a method to wrap relevant method:
 ```jule
-fn sayHi(self) {
+fn sayHi(*self) {
     self.buffer.say_hi()
 }
 ```

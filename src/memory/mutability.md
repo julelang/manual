@@ -62,7 +62,7 @@ struct MyStruct {
 }
 ```
 
-In this example, the mutability of the `y` field is fully responsive. However, the variable `x` exhibits interior mutability. That's why it can be changed in methods without the need for `mut self` receiver parameter.
+In this example, the mutability of the `y` field is fully responsive. However, the variable `x` exhibits interior mutability. That's why it can be changed in methods without the need for `mut *self` receiver parameter.
 
 The point that should not be forgotten in this regard is that even if there is interior mutability, this field cannot be changed from outside the structure with an immutable instance. Interior mutability only applies inside the structure itself. 
 
@@ -84,12 +84,12 @@ struct Foo {
 }
 
 impl Foo {
-    fn Print(self) {
+    fn Print(*self) {
         println("hello")
         self.n++
     }
 
-    fn Printed(self): int {
+    fn Printed(*self): int {
         ret self.n
     }
 }
@@ -115,8 +115,8 @@ struct Fib {
 }
 
 impl Fib {
-    fn Next(self): Fib {
-        let f = self
+    fn Next(*self): Fib {
+        let f = *self
         f.x, f.y = f.y, f.x + f.y
         ret f
     }
@@ -155,7 +155,7 @@ impl Foo {
         }
     }
 
-    unsafe fn Buf(self): []byte {
+    unsafe fn Buf(*self): []byte {
         ret self.buf
     }
 }

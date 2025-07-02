@@ -9,7 +9,7 @@ The equality operators == and != apply to operands of comparable types. The orde
 - Integer types are comparable and ordered. Two integer values are compared in the usual way.
 - Floating-point types are comparable and ordered. Two floating-point values are compared as defined by the IEEE 754 standard.
 - String types are comparable and ordered. Two string values are compared lexically byte-wise.
-- Pointer types are comparable. Two pointer values are equal if they point to the same variable or if both have value nil. Pointers to distinct zero-size variables may or may not be equal.
+- Pointer types are not comparable. Two pointer values are equal if they point to the same variable or if both have value nil. Pointers to distinct zero-size variables may or may not be equal. But pointer types are not ordered, because [reference pointers](/memory/raw-pointers/reference-pointers) are not supports ordered-relevant operators for safety reasons.
 - Channel types are comparable. Two channel values are equal if they were created by the same call to make or if both have value nil.
 - Dynamic types are comparable. Two dynamic values are equal if they have identical dynamic types and equal dynamic values or if both have value nil.
 - A value x of non-dynamic type X and a value t of dynamic type T can be compared if type X is comparable and X implements T. They are equal if t's dynamic type is identical to X and t's dynamic value is equal to x.

@@ -6,7 +6,7 @@ In order for the reserved method to be implemented by the compiler, the pattern 
 
 Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore they do not cause any compiler errors.
 
-## `fn Str(self): str`
+## `fn Str(*self): str`
 
 The `Str` reserved method implements a special string conversion algorithm, replacing the structure's default string formatting applied by the compiler.
 
@@ -14,7 +14,7 @@ The `Str` reserved method implements a special string conversion algorithm, repl
 
 - Method should not be `unsafe` and static
 - Return type should be `str`
-- Method should only have immutable non-reference `self` parameter
+- Method should only have immutable reference pointer `self` parameter
 - Method should do not have generics
 
 ### Example
@@ -30,7 +30,7 @@ struct SNum {
 }
 
 impl SNum {
-    fn Str(self): str {
+    fn Str(*self): str {
         ret conv::Itoa(self.x)
     }
 }

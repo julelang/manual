@@ -98,7 +98,7 @@ Enables special optimizations for memory accessing.
 - Removes the cost of boundary checking of expressions like `array[i&(len(array)-1)]` for arrays whose length is power of two.
 - If in a range iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
 - If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
-- If it can be understood that the smart pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
+- If it can be understood that the smart pointer or reference pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
 
 ---
 
@@ -113,7 +113,6 @@ Enables special optimizatons for inlining.
 Enables special optimizations for pointers.
 
 - Simplifies immediate pointer dereferencings. For example, if the address of the variable `x` is accessed immediately after its pointer is obtained, it directly simplifies it to `x`. This optimization can be useful in eliminating the cost of expressions used to break immutability with Unsafe Jule.
-- Simplifies getting pointer of references. Since references implemented as pointers and dereferenced automatically, there is no need to dereferencing and getting pointer again. Compiler uses pointer of the reference directly.
 
 ---
 

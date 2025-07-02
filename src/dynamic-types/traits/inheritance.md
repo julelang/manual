@@ -7,18 +7,18 @@ To inherit a trait, type the trait you want to inherit when defining a trait.
 For example:
 ```jule
 trait Foo {
-    fn Foo(self)
+    fn Foo(*self)
 }
 
 trait Bar {
-    fn Bar(self)
+    fn Bar(*self)
 }
 
 trait Baz {
     Foo
     Bar
 
-    fn Baz(self)
+    fn Baz(*self)
 }
 
 struct Test {}
@@ -26,9 +26,9 @@ struct Test {}
 impl Baz for Test {}
 
 impl Test {
-    fn Foo(self) { println("foo") }
-    fn Bar(self) { println("bar") }
-    fn Baz(self) { println("baz") }
+    fn Foo(*self) { println("foo") }
+    fn Bar(*self) { println("bar") }
+    fn Baz(*self) { println("baz") }
 }
 
 fn main() {
