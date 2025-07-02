@@ -11,17 +11,17 @@ This packages includes some built-in powered functions:
 
 ## Index
 
-[fn NewTimeval\(sec: i64, usec: i64, mut &amp;out: Timeval\): bool](#newtimeval)\
+[fn NewTimeval\(sec: i64, usec: i64, mut &amp;out: \*Timeval\): bool](#newtimeval)\
 [type Errno](#errno)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [type Signal](#signal)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)
 
 
 
 ## NewTimeval
 ```jule
-fn NewTimeval(sec: i64, usec: i64, mut &out: Timeval): bool
+fn NewTimeval(sec: i64, usec: i64, mut &out: *Timeval): bool
 ```
 Creates new Timeval by sec and usec\. Sets fields of the out\. Reports whether sec and usec have valid range\. If sec or usec have invalid range, out will not be mutated\.
 
@@ -33,7 +33,7 @@ Type of error number\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
@@ -45,5 +45,5 @@ A Signal is a number describing a process signal\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```

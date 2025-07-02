@@ -9,19 +9,19 @@
 [type StrFlag](#strflag)\
 [trait CommonFlag](#commonflag)\
 [struct Flag](#flag)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(self\): str](#name)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn What\(self\): str](#what)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut self\)](#reset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Short\(self\): rune](#short)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn What\(\*self\): str](#what)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Short\(\*self\): rune](#short)\
 [struct FlagSet](#flagset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;FlagSet](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut self, name: str\): CommonFlag](#findflag)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlagShort\(mut self, name: rune\): CommonFlag](#findflagshort)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut self\): \[\]CommonFlag](#flags)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut self, args: \[\]str\)\!: \[\]str](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut self\)](#reset-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut self, name: str, short: rune, default: T, what: str\): &amp;T](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut self, mut var: &amp;T, name: str, short: rune, what: str\)](#addvar)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut \*self, name: str\): CommonFlag](#findflag)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlagShort\(mut \*self, name: rune\): CommonFlag](#findflagshort)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut \*self\): \[\]CommonFlag](#flags)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, args: \[\]str\)\!: \[\]str](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut \*self, name: str, short: rune, default: T, what: str\): &amp;T](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut \*self, mut var: &amp;T, name: str, short: rune, what: str\)](#addvar)
 
 
 
@@ -59,16 +59,16 @@ Flag for str type
 ```jule
 trait CommonFlag {
 	// Returns name of flag.
-	fn Name(self): str
+	fn Name(*self): str
 
 	// Returns short name of flag.
-	fn Short(self): rune
+	fn Short(*self): rune
 
 	// Returns description of flag.
-	fn What(self): str
+	fn What(*self): str
 
 	// Resets data to default.
-	fn Reset(mut self)
+	fn Reset(mut *self)
 }
 ```
 Common behaviors of flags\.
@@ -87,25 +87,25 @@ A Flag for FlagSet\.
 
 ### Name
 ```jule
-fn Name(self): str
+fn Name(*self): str
 ```
 
 
 ### What
 ```jule
-fn What(self): str
+fn What(*self): str
 ```
 
 
 ### Reset
 ```jule
-fn Reset(mut self)
+fn Reset(mut *self)
 ```
 
 
 ### Short
 ```jule
-fn Short(self): rune
+fn Short(*self): rune
 ```
 
 
@@ -145,42 +145,42 @@ Returns new flagset\.
 
 ### FindFlag
 ```jule
-fn FindFlag(mut self, name: str): CommonFlag
+fn FindFlag(mut *self, name: str): CommonFlag
 ```
 Returns flag by name, returns nil if not exist\.
 
 ### FindFlagShort
 ```jule
-fn FindFlagShort(mut self, name: rune): CommonFlag
+fn FindFlagShort(mut *self, name: rune): CommonFlag
 ```
 Returns flag by short name, returns nil if not exist\.
 
 ### Flags
 ```jule
-fn Flags(mut self): []CommonFlag
+fn Flags(mut *self): []CommonFlag
 ```
 Returns all flags\.
 
 ### Parse
 ```jule
-fn Parse(mut self, args: []str)!: []str
+fn Parse(mut *self, args: []str)!: []str
 ```
 Parse arguments and process flags\. Returns non\-flag content\. Exceptional always is string and holds error message\.
 
 ### Reset
 ```jule
-fn Reset(mut self)
+fn Reset(mut *self)
 ```
 Resets all flags to default value\.
 
 ### Add
 ```jule
-fn Add[T: i64 | u64 | f64 | bool | str](mut self, name: str, short: rune, default: T, what: str): &T
+fn Add[T: i64 | u64 | f64 | bool | str](mut *self, name: str, short: rune, default: T, what: str): &T
 ```
 Adds new flag and returns allocated reference variable\. Panics if name or short name is alreadys exist\. Zero \(0\) short names will be ignored\. Panics if used unsupported type\.
 
 ### AddVar
 ```jule
-fn AddVar[T: i64 | u64 | f64 | bool | str](mut self, mut var: &T, name: str, short: rune, what: str)
+fn AddVar[T: i64 | u64 | f64 | bool | str](mut *self, mut var: &T, name: str, short: rune, what: str)
 ```
 Same with the Add method but do not allocates new reference, uses existing\.

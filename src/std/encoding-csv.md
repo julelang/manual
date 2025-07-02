@@ -4,17 +4,17 @@
 
 [Variables](#variables)\
 [struct ParseError](#parseerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [struct Reader](#reader)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Reader](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(self\): i64](#inputoffset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self\)\!: \(record: \[\]str\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FieldPos\(self, field: int\): \(line: int, column: int\)](#fieldpos)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut self\)\!: \(records: \[\]\[\]str\)](#readall)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(\*self\): i64](#inputoffset)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self\)\!: \(record: \[\]str\)](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FieldPos\(\*self, field: int\): \(line: int, column: int\)](#fieldpos)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut \*self\)\!: \(records: \[\]\[\]str\)](#readall)\
 [struct Writer](#writer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, record: \[\]str\)\!](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut self, records: \[\]\[\]str\)\!](#writeall)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, record: \[\]str\)\!](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut \*self, records: \[\]\[\]str\)\!](#writeall)
 
 ## Variables
 
@@ -38,7 +38,7 @@ A ParseError is returned for parsing errors\. Line and column numbers are 1\-ind
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
@@ -98,19 +98,19 @@ Returns new Reader instance that reads r\.
 
 ### InputOffset
 ```jule
-fn InputOffset(self): i64
+fn InputOffset(*self): i64
 ```
 Returns the input stream byte offset of the current reader position\. The offset gives the location of the end of the most recently read row and the beginning of the next row\.
 
 ### Read
 ```jule
-fn Read(mut self)!: (record: []str)
+fn Read(mut *self)!: (record: []str)
 ```
 Reads one record \(a slice of fields\) from r\. If the record has an unexpected number of fields, read returns the \[ErrFieldCount\] as exception\. If there is no data left to be read, read returns nil\. If \[self\.ReuseRecord\] is true, the returned slice may be shared between multiple calls to read\.
 
 ### FieldPos
 ```jule
-fn FieldPos(self, field: int): (line: int, column: int)
+fn FieldPos(*self, field: int): (line: int, column: int)
 ```
 Returns the line and column corresponding to the start of the field with the given index in the slice most recently returned by \[read\]\. Numbering of lines and columns starts at 1; columns are counted in bytes, not runes\.
 
@@ -118,7 +118,7 @@ If this is called with an out\-of\-bounds index, it panics\.
 
 ### ReadAll
 ```jule
-fn ReadAll(mut self)!: (records: [][]str)
+fn ReadAll(mut *self)!: (records: [][]str)
 ```
 Reads all the remaining records from r\. Each record is a slice of fields\.
 
@@ -149,12 +149,12 @@ Returns new Writer instance that writes w\.
 
 ### Write
 ```jule
-fn Write(mut self, record: []str)!
+fn Write(mut *self, record: []str)!
 ```
 Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
 
 ### WriteAll
 ```jule
-fn WriteAll(mut self, records: [][]str)!
+fn WriteAll(mut *self, records: [][]str)!
 ```
 Writes multiple CSV records using \[Writer\.Write\]\.

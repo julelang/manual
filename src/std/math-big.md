@@ -12,44 +12,43 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn MulRange\(mut a: i64, mut b: i64\): Int](#mulrange)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Jacobi\(x: Int, y: Int\): int](#jacobi)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Binomial\(n: i64, mut k: i64\): Int](#binomial)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(self, y: Int\): Int](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(self, y: Int\): Int](#sub)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(self, y: Int\): Int](#mul)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sqrt\(self\): Int](#sqrt)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn QuoRem\(self, y: Int\): \(q: Int, r: Int\)](#quorem)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Quo\(self, y: Int\): \(q: Int\)](#quo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(self, y: Int\): Int](#div)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mod\(self, y: Int\): Int](#mod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DivMod\(self, y: Int\): \(q: Int, m: Int\)](#divmod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lsh\(self, y: uint\): Int](#lsh)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Rsh\(self, y: uint\): Int](#rsh)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Or\(self, y: Int\): Int](#or)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn And\(self, y: Int\): Int](#and)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Xor\(self, y: Int\): Int](#xor)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ExpMod\(self, y: Int, m: Int\): Int](#expmod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Exp\(self, y: Int\): Int](#exp)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GCD1\(self, mut &amp;x: Int, mut &amp;y: Int, b: Int\): Int](#gcd1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GCD\(self, b: Int\): Int](#gcd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ModInverse\(self, mut n: Int\): Int](#modinverse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ProbablyPrime\(self, n: int\): bool](#probablyprime)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn TrailingZeroBits\(self\): uint](#trailingzerobits)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn BitLen\(self\): int](#bitlen)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bit\(self, i: int\): uint](#bit)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(self\): Int](#abs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Not\(self\): Int](#not)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Neg\(self\): Int](#neg)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Odd\(self\): bool](#odd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Even\(self\): bool](#even)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sign\(self\): int](#sign)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn I64\(self\): i64](#i64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(self\): u64](#u64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsI64\(self\): bool](#isi64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsU64\(self\): bool](#isu64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(self, b: int\): str](#format)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Cmp\(self, y: Int\): \(r: int\)](#cmp)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn CmpAbs\(self, y: Int\): int](#cmpabs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn F64\(self\): \(f64, Accuracy\)](#f64)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(\*self, y: Int\): Int](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(\*self, y: Int\): Int](#sub)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(\*self, y: Int\): Int](#mul)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sqrt\(\*self\): Int](#sqrt)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn QuoRem\(\*self, y: Int\): \(q: Int, r: Int\)](#quorem)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Quo\(\*self, y: Int\): \(q: Int\)](#quo)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(\*self, y: Int\): Int](#div)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Mod\(\*self, y: Int\): Int](#mod)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DivMod\(\*self, y: Int\): \(q: Int, m: Int\)](#divmod)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Lsh\(\*self, y: uint\): Int](#lsh)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Rsh\(\*self, y: uint\): Int](#rsh)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Or\(\*self, y: Int\): Int](#or)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn And\(\*self, y: Int\): Int](#and)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Xor\(\*self, y: Int\): Int](#xor)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ExpMod\(\*self, y: Int, m: Int\): Int](#expmod)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Exp\(\*self, y: Int\): Int](#exp)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GCD\(\*self, mut &amp;x: \*Int, mut &amp;y: \*Int, b: Int\): Int](#gcd)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ModInverse\(\*self, mut n: Int\): Int](#modinverse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ProbablyPrime\(\*self, n: int\): bool](#probablyprime)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn TrailingZeroBits\(\*self\): uint](#trailingzerobits)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn BitLen\(\*self\): int](#bitlen)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bit\(\*self, i: int\): uint](#bit)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(\*self\): Int](#abs)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Not\(\*self\): Int](#not)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Neg\(\*self\): Int](#neg)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Odd\(\*self\): bool](#odd)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Even\(\*self\): bool](#even)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sign\(\*self\): int](#sign)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn I64\(\*self\): i64](#i64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsI64\(\*self\): bool](#isi64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsU64\(\*self\): bool](#isu64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, b: int\): str](#format)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Cmp\(\*self, y: Int\): \(r: int\)](#cmp)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn CmpAbs\(\*self, y: Int\): int](#cmpabs)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn F64\(\*self\): \(f64, Accuracy\)](#f64)
 
 ## Variables
 
@@ -139,31 +138,31 @@ Returns the binomial coefficient C\(n, k\)\.
 
 ### Add
 ```jule
-fn Add(self, y: Int): Int
+fn Add(*self, y: Int): Int
 ```
 Returns x\(self\) \+ y\.
 
 ### Sub
 ```jule
-fn Sub(self, y: Int): Int
+fn Sub(*self, y: Int): Int
 ```
 Returns x\(self\) \- y\.
 
 ### Mul
 ```jule
-fn Mul(self, y: Int): Int
+fn Mul(*self, y: Int): Int
 ```
 Returns x\(self\) \* y\.
 
 ### Sqrt
 ```jule
-fn Sqrt(self): Int
+fn Sqrt(*self): Int
 ```
 Returns square root \|√x\(self\)\|\. Panics if number is negative\.
 
 ### QuoRem
 ```jule
-fn QuoRem(self, y: Int): (q: Int, r: Int)
+fn QuoRem(*self, y: Int): (q: Int, r: Int)
 ```
 Returns the quotient x\(self\)/y and r to the remainder x%y and returns the pair \(z, r\) for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\.
 
@@ -177,25 +176,25 @@ r = x - y*q
 
 ### Quo
 ```jule
-fn Quo(self, y: Int): (q: Int)
+fn Quo(*self, y: Int): (q: Int)
 ```
 Returns the quotient x\(self\)/y for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\. Implements truncated division \(like Jule\); see \[Int\.QuoRem\] for more details\.
 
 ### Div
 ```jule
-fn Div(self, y: Int): Int
+fn Div(*self, y: Int): Int
 ```
 Returns the quotient x\(self\)/y for y \!= 0\. If y == 0, a division\-by\-zero runtime panic occurs\. Implements Euclidean division; see \[Int\.DivMod\] for more details\.
 
 ### Mod
 ```jule
-fn Mod(self, y: Int): Int
+fn Mod(*self, y: Int): Int
 ```
 Returns the modulus x\(self\)%y for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\. Implements Euclidean modulus \(unlike Jule\); see \[Int\.DivMod\] for more details\.
 
 ### DivMod
 ```jule
-fn DivMod(self, y: Int): (q: Int, m: Int)
+fn DivMod(*self, y: Int): (q: Int, m: Int)
 ```
 Returns the quotient x\(self\) div y and m to the modulus x mod y and returns the pair \(z, m\) for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\.
 
@@ -209,37 +208,37 @@ m = x - y*q  with 0 <= m < |y|
 
 ### Lsh
 ```jule
-fn Lsh(self, y: uint): Int
+fn Lsh(*self, y: uint): Int
 ```
 Returns x\(self\) &lt;&lt; y\.
 
 ### Rsh
 ```jule
-fn Rsh(self, y: uint): Int
+fn Rsh(*self, y: uint): Int
 ```
 Returns x\(self\) &gt;&gt; y\.
 
 ### Or
 ```jule
-fn Or(self, y: Int): Int
+fn Or(*self, y: Int): Int
 ```
 Returns x \| y\.
 
 ### And
 ```jule
-fn And(self, y: Int): Int
+fn And(*self, y: Int): Int
 ```
 Returns x &amp; y\.
 
 ### Xor
 ```jule
-fn Xor(self, y: Int): Int
+fn Xor(*self, y: Int): Int
 ```
 Returns x ^ y\.
 
 ### ExpMod
 ```jule
-fn ExpMod(self, y: Int, m: Int): Int
+fn ExpMod(*self, y: Int, m: Int): Int
 ```
 Returns x\(self\)\*\*y mod \|m\| \(i\.e\. the sign of m is ignored\)\. If m == 0, returns x\*\*y unless y &lt;= 0 then returns 1\. If m \!= 0, y &lt; 0, and self and m are not relatively prime, returns zero\.
 
@@ -247,15 +246,15 @@ Modular exponentiation of inputs of a particular size is not a cryptographically
 
 ### Exp
 ```jule
-fn Exp(self, y: Int): Int
+fn Exp(*self, y: Int): Int
 ```
 Calls the \[Int\.ExpMod\] method with zero mod\.
 
-### GCD1
+### GCD
 ```jule
-fn GCD1(self, mut &x: Int, mut &y: Int, b: Int): Int
+fn GCD(*self, mut &x: *Int, mut &y: *Int, b: Int): Int
 ```
-Returns the greatest common divisor of a\(self\) and b\. For x and y, GCD sets their value such that z \(result\) = a\*x \+ b\*y\.
+Returns the greatest common divisor of a\(self\) and b\. For x and y, they might be nil, GCD sets their value such that z \(result\) = a\*x \+ b\*y\.
 
 a and b may be positive, zero or negative\. Regardless of the signs of a and b, z is always &gt;= 0\.
 
@@ -265,21 +264,15 @@ If a == 0 and b \!= 0, GCD returns \|b\|, x = 0, y = sign\(b\) \* 1\.
 
 If a \!= 0 and b == 0, GCD returns \|a\|, x = sign\(a\) \* 1, y = 0\.
 
-### GCD
-```jule
-fn GCD(self, b: Int): Int
-```
-Same as the \[Int\.GCD1\] method, but not takes the \|x\| and \|y\| parameters\.
-
 ### ModInverse
 ```jule
-fn ModInverse(self, mut n: Int): Int
+fn ModInverse(*self, mut n: Int): Int
 ```
 Returns the multiplicative inverse of g\(self\) in the ring ℤ/nℤ\. If g and n are not relatively prime, g has no multiplicative inverse in the ring ℤ/nℤ\.  In this case, z is unchanged and the return value is zero\. If n == 0, a division\-by\-zero run\-time panic occurs\.
 
 ### ProbablyPrime
 ```jule
-fn ProbablyPrime(self, n: int): bool
+fn ProbablyPrime(*self, n: int): bool
 ```
 Reports whether x\(self\) is probably prime, applying the Miller\-Rabin test with n pseudorandomly chosen bases as well as a Baillie\-PSW test\.
 
@@ -291,55 +284,55 @@ It is not suitable for judging primes that an adversary may have crafted to fool
 
 ### TrailingZeroBits
 ```jule
-fn TrailingZeroBits(self): uint
+fn TrailingZeroBits(*self): uint
 ```
 Returns the number of consecutive least significant zero bits of \|self\|\.
 
 ### BitLen
 ```jule
-fn BitLen(self): int
+fn BitLen(*self): int
 ```
 Returns the length of the absolute value of int in bits\. The bit length of 0 is 0\.
 
 ### Bit
 ```jule
-fn Bit(self, i: int): uint
+fn Bit(*self, i: int): uint
 ```
 Returns the value of the i&#39;th bit of integer\. That is, it returns \(x&gt;&gt;i\)&amp;1\. The bit index i must be &gt;= 0\.
 
 ### Abs
 ```jule
-fn Abs(self): Int
+fn Abs(*self): Int
 ```
 Returns absolute value of x\(self\)\.
 
 ### Not
 ```jule
-fn Not(self): Int
+fn Not(*self): Int
 ```
 Returns ^x\(self\)\.
 
 ### Neg
 ```jule
-fn Neg(self): Int
+fn Neg(*self): Int
 ```
 Returns \-x\(self\)\.
 
 ### Odd
 ```jule
-fn Odd(self): bool
+fn Odd(*self): bool
 ```
 Reports whether x\(self\) is odd\.
 
 ### Even
 ```jule
-fn Even(self): bool
+fn Even(*self): bool
 ```
 Reports whether x\(self\) is even\.
 
 ### Sign
 ```jule
-fn Sign(self): int
+fn Sign(*self): int
 ```
 Returns, x = self:<br>
 ```
@@ -351,54 +344,54 @@ Sign() = +1 if x > 0
 
 ### I64
 ```jule
-fn I64(self): i64
+fn I64(*self): i64
 ```
 Returns the i64 representation of x\(self\)\. If x cannot be represented in an i64, the result is undefined\.
 
 ### U64
 ```jule
-fn U64(self): u64
+fn U64(*self): u64
 ```
 Returns the u64 representation of x\(self\)\. If x cannot be represented in a u64, the result is undefined\.
 
 ### IsI64
 ```jule
-fn IsI64(self): bool
+fn IsI64(*self): bool
 ```
 Reports whether x\(self\) can be represented as an i64\.
 
 ### IsU64
 ```jule
-fn IsU64(self): bool
+fn IsU64(*self): bool
 ```
 Reports whether x\(self\) can be represented as a u64\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns string representation of x\(self\) in decimal format\.
 
 ### Format
 ```jule
-fn Format(self, b: int): str
+fn Format(*self, b: int): str
 ```
 Returns the string representation of x\(self\) in the given base\. Base must be between 2 and 62, inclusive\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values 10 to 35, and the upper\-case letters &#39;A&#39; to &#39;Z&#39; for digit values 36 to 61\. No prefix \(such as &#34;0x&#34;\) is added to the string\.
 
 ### Cmp
 ```jule
-fn Cmp(self, y: Int): (r: int)
+fn Cmp(*self, y: Int): (r: int)
 ```
 Compares integers\. x = self\. Returns \+1 if x &gt; y Returns 0 if x == y Returns \-1 if x &lt; y
 
 ### CmpAbs
 ```jule
-fn CmpAbs(self, y: Int): int
+fn CmpAbs(*self, y: Int): int
 ```
 Compares absolute value\. x = self\. Returns \+1 if \|x\| &gt; \|y\| Returns 0 if \|x\| == \|y\| Returns \-1 if \|x\| &lt; \|y\|
 
 ### F64
 ```jule
-fn F64(self): (f64, Accuracy)
+fn F64(*self): (f64, Accuracy)
 ```
 Returns the f64 value nearest x\(self\), and an indication of any rounding that occurred\.

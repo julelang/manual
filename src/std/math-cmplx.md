@@ -33,13 +33,13 @@
 [fn Atan\(x: Cmplx\): Cmplx](#atan)\
 [fn Atanh\(x: Cmplx\): Cmplx](#atanh)\
 [struct Cmplx](#cmplx)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Real\(self\): f64](#real)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Imag\(self\): f64](#imag)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(self, c: Cmplx\): Cmplx](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(self, c: Cmplx\): Cmplx](#sub)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(self, c: Cmplx\): Cmplx](#mul)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(self, c: Cmplx\): Cmplx](#div)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Neg\(self\): Cmplx](#neg)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Real\(\*self\): f64](#real)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Imag\(\*self\): f64](#imag)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(\*self, c: Cmplx\): Cmplx](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(\*self, c: Cmplx\): Cmplx](#sub)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(\*self, c: Cmplx\): Cmplx](#mul)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(\*self, c: Cmplx\): Cmplx](#div)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Neg\(\*self\): Cmplx](#neg)
 
 
 
@@ -239,42 +239,42 @@ Complex number\.
 
 ### Real
 ```jule
-fn Real(self): f64
+fn Real(*self): f64
 ```
 Returns real part of complex number\.
 
 ### Imag
 ```jule
-fn Imag(self): f64
+fn Imag(*self): f64
 ```
 Returns imaginary part of complex number\.
 
 ### Add
 ```jule
-fn Add(self, c: Cmplx): Cmplx
+fn Add(*self, c: Cmplx): Cmplx
 ```
 Returns addition of complex numbers\.
 
 ### Sub
 ```jule
-fn Sub(self, c: Cmplx): Cmplx
+fn Sub(*self, c: Cmplx): Cmplx
 ```
 Returns subtraction of complex numbers\.
 
 ### Mul
 ```jule
-fn Mul(self, c: Cmplx): Cmplx
+fn Mul(*self, c: Cmplx): Cmplx
 ```
 Returns multiplication of complex numbers\.
 
 ### Div
 ```jule
-fn Div(self, c: Cmplx): Cmplx
+fn Div(*self, c: Cmplx): Cmplx
 ```
 Returns division of complex numbers\. Returns NaN complex number if denominator is zero\.
 
 ### Neg
 ```jule
-fn Neg(self): Cmplx
+fn Neg(*self): Cmplx
 ```
 Unary minus operator\.

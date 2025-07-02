@@ -35,7 +35,7 @@
 [fn AppendUint\(mut dst: \[\]byte, i: u64, base: int\): \[\]byte](#appenduint)\
 [fn Itoa\(i: int\): str](#itoa)\
 [struct NumError](#numerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
 
 ## Variables
 
@@ -292,5 +292,5 @@ Records a failed conversion\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```

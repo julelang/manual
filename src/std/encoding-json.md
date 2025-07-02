@@ -5,13 +5,13 @@
 [fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
 [fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
 [fn Valid\(data: \[\]byte\): bool](#valid)\
-[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: T\)\!](#decode)\
+[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
 [struct UnsupportedTypeError](#unsupportedtypeerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [struct UnsupportedValueError](#unsupportedvalueerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
 [struct EncodeError](#encodeerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
 [type Object](#object)\
 [type Array](#array)\
 [type Bool](#bool)\
@@ -102,7 +102,7 @@ Reports whether data is a valid JSON\.
 
 ## Decode
 ```jule
-fn Decode[T](data: []byte, mut &t: T)!
+fn Decode[T](data: []byte, mut &t: *T)!
 ```
 Implements decoding of JSON as defined in RFC 7159\.
 
@@ -195,7 +195,7 @@ Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsuppo
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
@@ -209,7 +209,7 @@ Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsuppo
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
@@ -225,7 +225,7 @@ Represents an error from calling a reserved \[EncodeText\] method\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 

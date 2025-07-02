@@ -119,7 +119,7 @@ Reads from r until an error or EOF and returns the data it read\. A successful c
 ## Reader
 ```jule
 trait Reader {
-	fn Read(mut self, mut buf: []byte)!: (n: int)
+	fn Read(mut *self, mut buf: []byte)!: (n: int)
 }
 ```
 Implements the basic Read method\.
@@ -135,7 +135,7 @@ Implementations must not retain buf\. Exceptionals are not standardized\. Should
 ## Writer
 ```jule
 trait Writer {
-	fn Write(mut self, buf: []byte)!: (n: int)
+	fn Write(mut *self, buf: []byte)!: (n: int)
 }
 ```
 Implements the basic Write method\.
@@ -147,7 +147,7 @@ Implementations must not retain buf\. Exceptionals are not standardized\. Should
 ## StrWriter
 ```jule
 trait StrWriter {
-	fn WriteStr(mut self, s: str)!: (n: int)
+	fn WriteStr(mut *self, s: str)!: (n: int)
 }
 ```
 Implements the basic WriteStr method\.
@@ -159,7 +159,7 @@ Implementations must not retain s\. Exceptionals are not standardized\. Should b
 ## ByteReader
 ```jule
 trait ByteReader {
-	fn ReadByte(mut self)!: (byte, n: int)
+	fn ReadByte(mut *self)!: (byte, n: int)
 }
 ```
 Implements the basic ReadByte method\.
@@ -173,7 +173,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## ByteWriter
 ```jule
 trait ByteWriter {
-	fn WriteByte(mut self, b: byte)!
+	fn WriteByte(mut *self, b: byte)!
 }
 ```
 Implements the basic WriteByte method\.
@@ -185,7 +185,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## RuneReader
 ```jule
 trait RuneReader {
-	fn ReadRune(mut self)!: (r: rune, size: int)
+	fn ReadRune(mut *self)!: (r: rune, size: int)
 }
 ```
 Implements the basic ReadRune method\.
@@ -199,7 +199,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## RuneWriter
 ```jule
 trait RuneWriter {
-	fn WriteRune(mut self, r: rune)!: (n: int)
+	fn WriteRune(mut *self, r: rune)!: (n: int)
 }
 ```
 Implements the basic WriteRune method\.
@@ -213,7 +213,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## Closer
 ```jule
 trait Closer {
-	fn Close(mut self)!
+	fn Close(mut *self)!
 }
 ```
 Implements the basic Close method\.
@@ -227,7 +227,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## ReaderAt
 ```jule
 trait ReaderAt {
-	fn ReadAt(mut self, mut p: []byte, off: i64)!: (n: int)
+	fn ReadAt(mut *self, mut p: []byte, off: i64)!: (n: int)
 }
 ```
 The trait that wraps the basic ReadAt method\.
@@ -251,7 +251,7 @@ Implementations must not retain p\. Exceptionals are not standardized\. Should b
 ## WriterTo
 ```jule
 trait WriterTo {
-	fn WriteTo(mut self, mut w: Writer)!: (n: i64)
+	fn WriteTo(mut *self, mut w: Writer)!: (n: i64)
 }
 ```
 The trait that wraps the WriteTo method\.
@@ -265,7 +265,7 @@ Exceptionals are not standardized\. Should be documented by implementations\.
 ## Seeker
 ```jule
 trait Seeker {
-	fn Seek(mut self, offset: i64, whence: int)!: i64
+	fn Seek(mut *self, offset: i64, whence: int)!: i64
 }
 ```
 The trait that wraps the basic Seek method\.

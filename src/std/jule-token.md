@@ -6,20 +6,20 @@
 [fn IsKeyword\(s: str\): bool](#iskeyword)\
 [fn IsPostfix\(id: int\): bool](#ispostfix)\
 [fn IsAssign\(id: int\): bool](#isassign)\
-[fn ScanAll\(mut &amp;f: &amp;FileSet, opt: int\): \[\]log::Log](#scanall)\
+[fn ScanAll\(mut f: &amp;FileSet, opt: int\): \[\]log::Log](#scanall)\
 [struct Token](#token)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Precedence\(self\): int](#precedence)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Precedence\(\*self\): int](#precedence)\
 [struct Scanner](#scanner)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut f: &amp;FileSet, opt: int\): &amp;Scanner](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Scan\(mut self\): \(token: &amp;Token, EOF: bool\)](#scan)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Scan\(mut \*self\): \(token: &amp;Token, EOF: bool\)](#scan)\
 [struct FileSet](#fileset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str\): &amp;FileSet](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut self, data: \[\]byte\)](#fill)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut\(mut self, mut data: \[\]byte\)](#fillmut)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(self\): str](#dir)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(self\): str](#name)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(self\): uintptr](#addr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(self, row: int\): str](#getrow)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut \*self, data: \[\]byte\)](#fill)\
+&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut\(mut \*self, mut data: \[\]byte\)](#fillmut)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(\*self\): str](#dir)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(\*self\): uintptr](#addr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(\*self, row: int\): str](#getrow)
 
 ## Variables
 
@@ -162,7 +162,7 @@ Reports whether operator kind is assignment operator\.
 
 ## ScanAll
 ```jule
-fn ScanAll(mut &f: &FileSet, opt: int): []log::Log
+fn ScanAll(mut f: &FileSet, opt: int): []log::Log
 ```
 Scans all tokens into FileSet f and returns error logs\.
 
@@ -180,7 +180,7 @@ Token\.
 
 ### Precedence
 ```jule
-fn Precedence(self): int
+fn Precedence(*self): int
 ```
 Returns operator precedence of token\. Returns 0 if token is not operator or invalid operator for operator precedence\. It only reports for the binary operators, otherwise returns LowestPrec\.
 
@@ -201,7 +201,7 @@ Returns new Scanner for the FileSet f\.
 
 ### Scan
 ```jule
-fn Scan(mut self): (token: &Token, EOF: bool)
+fn Scan(mut *self): (token: &Token, EOF: bool)
 ```
 Scans and returns new token, reports if EOF\. If and error appeared, returns nil token and not\-EOF\.
 
@@ -223,36 +223,36 @@ Returns new FileSet with path\.
 
 ### Fill
 ```jule
-fn Fill(mut self, data: []byte)
+fn Fill(mut *self, data: []byte)
 ```
 Fills data\. Not uses mutable copy of data, allocates new copy\.
 
 ### FillMut
 ```jule
-unsafe fn FillMut(mut self, mut data: []byte)
+unsafe fn FillMut(mut *self, mut data: []byte)
 ```
 Fills data\. Uses mutable copy of data, not allocated new copy\. But it is unsafe, because any mutation on the data may cause inconsistent results\. However, it is efficient way to use already allocated data\.
 
 ### Dir
 ```jule
-fn Dir(self): str
+fn Dir(*self): str
 ```
 Returns directory of file&#39;s path\.
 
 ### Name
 ```jule
-fn Name(self): str
+fn Name(*self): str
 ```
 Returns filename\.
 
 ### Addr
 ```jule
-fn Addr(self): uintptr
+fn Addr(*self): uintptr
 ```
 Returns self as uintptr\.
 
 ### GetRow
 ```jule
-fn GetRow(self, row: int): str
+fn GetRow(*self, row: int): str
 ```
 Returns line \(not include new\-line char\) by row\. Returns empty string if line is not buffer\.

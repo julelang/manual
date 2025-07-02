@@ -17,19 +17,19 @@ trait Hash {
 
 	// Appends the current hash to b and returns the resulting slice.
 	// It does not change the underlying hash state.
-	fn Sum(self, mut b: []byte): []byte
+	fn Sum(*self, mut b: []byte): []byte
 
 	// Resets the Hash to its initial state.
-	fn Reset(mut self)
+	fn Reset(mut *self)
 
 	// Returns the number of bytes Sum will return.
-	fn Size(self): int
+	fn Size(*self): int
 
 	// Returns the hash's underlying block size.
 	// The Write method must be able to accept any amount
 	// of data, but it may operate more efficiently if all writes
 	// are a multiple of the block size.
-	fn BlockSize(self): int
+	fn BlockSize(*self): int
 }
 ```
 The common trait implemented by all hash functions\.
@@ -38,7 +38,7 @@ The common trait implemented by all hash functions\.
 ```jule
 trait Hash32 {
 	Hash
-	fn Sum32(self): u32
+	fn Sum32(*self): u32
 }
 ```
 Common trait implemented by all 32\-bit hash functions\.
@@ -47,7 +47,7 @@ Common trait implemented by all 32\-bit hash functions\.
 ```jule
 trait Hash64 {
 	Hash
-	fn Sum64(self): u64
+	fn Sum64(*self): u64
 }
 ```
 Common trait implemented by all 64\-bit hash functions\.

@@ -10,7 +10,7 @@
 [struct ChanType](#chantype)\
 [struct SliceType](#slicetype)\
 [struct ArrayType](#arraytype)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAutoSized\(self\): bool](#isautosized)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAutoSized\(\*self\): bool](#isautosized)\
 [struct MapType](#maptype)\
 [struct RetType](#rettype)\
 [struct Expr](#expr)\
@@ -20,22 +20,22 @@
 [struct LitExpr](#litexpr)\
 [struct UnsafeExpr](#unsafeexpr)\
 [struct NameExpr](#nameexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(self\): bool](#isself)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(\*self\): bool](#isself)\
 [struct UnaryExpr](#unaryexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafePtr\(self\): bool](#isunsafeptr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafePtr\(\*self\): bool](#isunsafeptr)\
 [struct VariadicExpr](#variadicexpr)\
 [struct TypeAssertionExpr](#typeassertionexpr)\
 [struct NamespaceExpr](#namespaceexpr)\
 [struct SelectorExpr](#selectorexpr)\
 [struct BinaryExpr](#binaryexpr)\
 [struct CallExpr](#callexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unhandled\(self\): bool](#unhandled)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unhandled\(\*self\): bool](#unhandled)\
 [struct TypedBraceLit](#typedbracelit)\
 [struct BraceLit](#bracelit)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(self\): bool](#isempty)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(\*self\): bool](#isempty)\
 [struct KeyValueExpr](#keyvalueexpr)\
 [struct SliceExpr](#sliceexpr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(self\): bool](#isempty-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(\*self\): bool](#isempty-1)\
 [struct IndexExpr](#indexexpr)\
 [struct SlicingExpr](#slicingexpr)\
 [struct Constraint](#constraint)\
@@ -49,18 +49,19 @@
 [struct ScopeTree](#scopetree)\
 [struct ChanSend](#chansend)\
 [struct Param](#param)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(self\): bool](#isself-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRef\(self\): bool](#isref)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(\*self\): bool](#isself-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsSmartptr\(\*self\): bool](#issmartptr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRefptr\(\*self\): bool](#isrefptr)\
 [struct Func](#func)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(self\): bool](#isanon)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsShort\(self\): bool](#isshort)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDecl\(self\): bool](#isdecl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(\*self\): bool](#isanon)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsShort\(\*self\): bool](#isshort)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDecl\(\*self\): bool](#isdecl)\
 [struct Var](#var)\
 [struct Ret](#ret)\
 [struct Iter](#iter)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsInfinite\(self\): bool](#isinfinite)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsInfinite\(\*self\): bool](#isinfinite)\
 [struct WhileKind](#whilekind)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsWhileNext\(self\): bool](#iswhilenext)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsWhileNext\(\*self\): bool](#iswhilenext)\
 [struct RangeKind](#rangekind)\
 [struct Break](#break)\
 [struct Continue](#continue)\
@@ -73,17 +74,17 @@
 [struct Select](#select)\
 [struct Use](#use)\
 [struct EnumItem](#enumitem)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAutoExpr\(self\): bool](#isautoexpr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsAutoExpr\(\*self\): bool](#isautoexpr)\
 [struct Enum](#enum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDefaultTyped\(self\): bool](#isdefaulttyped)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDefaultTyped\(\*self\): bool](#isdefaulttyped)\
 [struct TypeEnumItem](#typeenumitem)\
 [struct TypeEnum](#typeenum)\
 [struct Field](#field)\
 [struct Struct](#struct)\
 [struct Trait](#trait)\
 [struct Impl](#impl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(self\): bool](#istraitimpl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(self\): bool](#isstructimpl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(\*self\): bool](#istraitimpl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(\*self\): bool](#isstructimpl)\
 [enum NodeData: type ](#nodedata)\
 [enum ExprData: type ](#exprdata)\
 [enum StmtData: type ](#stmtdata)\
@@ -171,7 +172,7 @@ Array type\. Size expression is nil for auto\-sized array\.
 
 ### IsAutoSized
 ```jule
-fn IsAutoSized(self): bool
+fn IsAutoSized(*self): bool
 ```
 Reports whether array is auto\-sized\.
 
@@ -258,7 +259,7 @@ Identifier expression\.
 
 ### IsSelf
 ```jule
-fn IsSelf(self): bool
+fn IsSelf(*self): bool
 ```
 Reports whether identifier is self keyword\.
 
@@ -273,7 +274,7 @@ Unary expression\. For the unsafe pointer \(\*unsafe\) type, Op is star and Expr
 
 ### IsUnsafePtr
 ```jule
-fn IsUnsafePtr(self): bool
+fn IsUnsafePtr(*self): bool
 ```
 Reports whether the unary expression is the unsafe pointer type declaration\.
 
@@ -337,7 +338,7 @@ Function call expression kind\.
 
 ### Unhandled
 ```jule
-fn Unhandled(self): bool
+fn Unhandled(*self): bool
 ```
 Reports whether exception is not handled\.
 
@@ -362,7 +363,7 @@ Anonymous brace instantiating expression\.
 
 ### IsEmpty
 ```jule
-fn IsEmpty(self): bool
+fn IsEmpty(*self): bool
 ```
 Reports whether literal is empty \( \{\} \)\.
 
@@ -388,7 +389,7 @@ Slice initiating expression\. Also represents array initiating expression\. For 
 
 ### IsEmpty
 ```jule
-fn IsEmpty(self): bool
+fn IsEmpty(*self): bool
 ```
 Reports whether slice is empty\.
 
@@ -529,15 +530,21 @@ Parameter\.
 
 ### IsSelf
 ```jule
-fn IsSelf(self): bool
+fn IsSelf(*self): bool
 ```
 Reports whether parameter is self \(receiver\) parameter\.
 
-### IsRef
+### IsSmartptr
 ```jule
-fn IsRef(self): bool
+fn IsSmartptr(*self): bool
 ```
-Reports whether self \(receiver\) parameter is reference\.
+Reports whether self \(receiver\) parameter is smart pointer\.
+
+### IsRefptr
+```jule
+fn IsRefptr(*self): bool
+```
+Reports whether self \(receiver\) parameter is reference pointer\.
 
 ## Func
 ```jule
@@ -562,19 +569,19 @@ Function declaration\. Also represents anonymous function expression and functio
 
 ### IsAnon
 ```jule
-fn IsAnon(self): bool
+fn IsAnon(*self): bool
 ```
 Reports whether the function is anonymous\.
 
 ### IsShort
 ```jule
-fn IsShort(self): bool
+fn IsShort(*self): bool
 ```
 Reports whether the function is anonymous and defined in short way\.
 
 ### IsDecl
 ```jule
-fn IsDecl(self): bool
+fn IsDecl(*self): bool
 ```
 Reports whether the function is type declaration\.
 
@@ -624,7 +631,7 @@ Iteration\.
 
 ### IsInfinite
 ```jule
-fn IsInfinite(self): bool
+fn IsInfinite(*self): bool
 ```
 Reports whether iteration is infinite\.
 
@@ -640,7 +647,7 @@ While iteration kind\.
 
 ### IsWhileNext
 ```jule
-fn IsWhileNext(self): bool
+fn IsWhileNext(*self): bool
 ```
 Reports whether kind is while\-next iteration\.
 
@@ -776,7 +783,7 @@ Enum item\.
 
 ### IsAutoExpr
 ```jule
-fn IsAutoExpr(self): bool
+fn IsAutoExpr(*self): bool
 ```
 Reports whether item has auto expression\.
 
@@ -795,7 +802,7 @@ Enum declaration\.
 
 ### IsDefaultTyped
 ```jule
-fn IsDefaultTyped(self): bool
+fn IsDefaultTyped(*self): bool
 ```
 Reports whether enum&#39;s type is default\.
 
@@ -884,13 +891,13 @@ Implementation\.
 
 ### IsTraitImpl
 ```jule
-fn IsTraitImpl(self): bool
+fn IsTraitImpl(*self): bool
 ```
 Reports whether implementation type is trait to structure\.
 
 ### IsStructImpl
 ```jule
-fn IsStructImpl(self): bool
+fn IsStructImpl(*self): bool
 ```
 Reports whether implementation type is append to destination structure\.
 

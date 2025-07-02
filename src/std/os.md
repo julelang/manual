@@ -88,35 +88,35 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [struct DirEntry](#direntry)\
 [struct Cmd](#cmd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(self, mut r: &amp;File\)\!](#stdin-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(self, mut w: &amp;File\)\!](#stdout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(self, mut w: &amp;File\)\!](#stderr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn StdinPipe\(self\)\!: io::WriteCloser](#stdinpipe)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn StdoutPipe\(self\)\!: io::ReadCloser](#stdoutpipe)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(self\)\!: io::ReadCloser](#stderrpipe)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(self\)\!](#start)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(self\)\!](#run)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(self\)\!: int](#wait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(\*self, mut r: &amp;File\)\!](#stdin-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(\*self, mut w: &amp;File\)\!](#stdout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(\*self, mut w: &amp;File\)\!](#stderr-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StdinPipe\(\*self\)\!: io::WriteCloser](#stdinpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StdoutPipe\(\*self\)\!: io::ReadCloser](#stdoutpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(\*self\)\!: io::ReadCloser](#stderrpipe)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(\*self\)\!](#start)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(\*self\)\!](#run)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
 [struct File](#file)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut self, offset: i64, whence: int\)\!: i64](#seek)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut self\)\!](#sync)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut self, size: i64\)\!](#truncate)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut \*self, offset: i64, whence: int\)\!: i64](#seek)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut \*self\)\!](#sync)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut \*self, size: i64\)\!](#truncate)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
 [type FileMode](#filemode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(self\): bool](#isdir)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(self\): bool](#isregular)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(self\): FileMode](#perm)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(self\): FileMode](#type)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(\*self\): bool](#isregular)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(\*self\): FileMode](#perm)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(\*self\): FileMode](#type)\
 [struct FileInfo](#fileinfo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(self\): bool](#isdir-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(self\): FileMode](#mode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ModTime\(self\): time::Time](#modtime)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(self, fi2: FileInfo\): bool](#samefile)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(\*self\): FileMode](#mode)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ModTime\(\*self\): time::Time](#modtime)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(\*self\): i64](#size)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(\*self, fi2: FileInfo\): bool](#samefile)
 
 ## Variables
 
@@ -383,31 +383,31 @@ Returns Cmd instance for path with arguments\.
 
 ### Stdin
 ```jule
-fn Stdin(self, mut r: &File)!
+fn Stdin(*self, mut r: &File)!
 ```
 Sets reader that will be connected to the command&#39;s standard input when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### Stdout
 ```jule
-fn Stdout(self, mut w: &File)!
+fn Stdout(*self, mut w: &File)!
 ```
 Sets writer that will be connected to the command&#39;s standard output when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### Stderr
 ```jule
-fn Stderr(self, mut w: &File)!
+fn Stderr(*self, mut w: &File)!
 ```
 Sets writer that will be connected to the command&#39;s standard error when the command starts\. The reader will not be closed automatically after \[Cmd\.Wait\] sees the command exit\.
 
 ### StdinPipe
 ```jule
-fn StdinPipe(self)!: io::WriteCloser
+fn StdinPipe(*self)!: io::WriteCloser
 ```
 Returns a pipe that will be connected to the command&#39;s standard input when the command starts\. The pipe will be closed automatically after \[Cmd\.Wait\] sees the command exit\. A caller need only call Close to force the pipe to close sooner\. For example, if the command being run will not exit until standard input is closed, the caller must close the pipe\.
 
 ### StdoutPipe
 ```jule
-fn StdoutPipe(self)!: io::ReadCloser
+fn StdoutPipe(*self)!: io::ReadCloser
 ```
 Returns a pipe that will be connected to the command&#39;s standard output when the command starts\.
 
@@ -415,7 +415,7 @@ Returns a pipe that will be connected to the command&#39;s standard output when 
 
 ### StderrPipe
 ```jule
-fn StderrPipe(self)!: io::ReadCloser
+fn StderrPipe(*self)!: io::ReadCloser
 ```
 Returns a pipe that will be connected to the command&#39;s standard error when the command starts\.
 
@@ -423,19 +423,19 @@ Returns a pipe that will be connected to the command&#39;s standard error when t
 
 ### Start
 ```jule
-fn Start(self)!
+fn Start(*self)!
 ```
 Starts the specified command but does not wait for it to complete\. After a successful call to Start the \[Cmd\.Wait\] method must be called in order to release associated system resources\.
 
 ### Run
 ```jule
-fn Run(self)!
+fn Run(*self)!
 ```
 Starts the specified command and waits for it to complete\.
 
 ### Wait
 ```jule
-fn Wait(self)!: int
+fn Wait(*self)!: int
 ```
 Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
 
@@ -464,43 +464,43 @@ There may be system call differences and performance differences for console han
 
 ### Write
 ```jule
-fn Write(mut self, buf: []byte)!: (n: int)
+fn Write(mut *self, buf: []byte)!: (n: int)
 ```
 Writes bytes to handle and returns written byte count\. The number of bytes written can never exceed the length of the buf\.
 
 ### WriteStr
 ```jule
-fn WriteStr(mut self, s: str)!: (n: int)
+fn WriteStr(mut *self, s: str)!: (n: int)
 ```
 Like Write, but writes the contents of string s rather than a slice of bytes\.
 
 ### Read
 ```jule
-fn Read(mut self, mut buf: []byte)!: (n: int)
+fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
 Read bytes to buffer from handle and returns read byte count\. The number of bytes read can never exceed the length of the buf\. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow\. Offset will be shifted by the number of bytes read\.
 
 ### Seek
 ```jule
-fn Seek(mut self, offset: i64, whence: int)!: i64
+fn Seek(mut *self, offset: i64, whence: int)!: i64
 ```
 Sets offset to next Read/Write operation and returns the new offset\. whence: 0 \(io::SeekStart\) means, relative to the whence of the file, 1 \(io::SeekCurrent\) means relative to the current offset, and 2 \(io::SeekEnd\) means relative to end\.
 
 ### Sync
 ```jule
-fn Sync(mut self)!
+fn Sync(mut *self)!
 ```
 Commits the current contents of the file to stable storage\. Typically, this means flushing the file system&#39;s in\-memory copy of recently written data to disk\.
 
 ### Truncate
 ```jule
-fn Truncate(mut self, size: i64)!
+fn Truncate(mut *self, size: i64)!
 ```
 Changes the size of the file\. It does not change the I/O offset\.
 
 ### Close
 ```jule
-fn Close(mut self)!
+fn Close(mut *self)!
 ```
 Closes file handle\.
 
@@ -512,31 +512,31 @@ Represents a file&#39;s mode and permission bits\. The bits have the same defini
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
 ### IsDir
 ```jule
-fn IsDir(self): bool
+fn IsDir(*self): bool
 ```
 Reports whether self describes a directory\. That is, it tests for the \[ModeDir\] bit being set in self\.
 
 ### IsRegular
 ```jule
-fn IsRegular(self): bool
+fn IsRegular(*self): bool
 ```
 Reports whether self describes a regular file\. That is, it tests that no mode type bits are set\.
 
 ### Perm
 ```jule
-fn Perm(self): FileMode
+fn Perm(*self): FileMode
 ```
 Returns the Unix permission bits in self \(self &amp; \[ModePerm\]\)\.
 
 ### Type
 ```jule
-fn Type(self): FileMode
+fn Type(*self): FileMode
 ```
 Returns type bits in self \(self &amp; \[ModeType\]\)\.
 
@@ -550,31 +550,31 @@ Describes a file and is returned by \[Stat\]\.
 
 ### IsDir
 ```jule
-fn IsDir(self): bool
+fn IsDir(*self): bool
 ```
 Abbreviation for self\.Mode\(\)\.IsDir\(\)\.
 
 ### Mode
 ```jule
-fn Mode(self): FileMode
+fn Mode(*self): FileMode
 ```
 Returns file mode bits\.
 
 ### ModTime
 ```jule
-fn ModTime(self): time::Time
+fn ModTime(*self): time::Time
 ```
 Returns modification time\.
 
 ### Size
 ```jule
-fn Size(self): i64
+fn Size(*self): i64
 ```
 Returns length in bytes for regular files; system\-dependent for others\.
 
 ### SameFile
 ```jule
-fn SameFile(self, fi2: FileInfo): bool
+fn SameFile(*self, fi2: FileInfo): bool
 ```
 Reports whether self and fi2 describe the same file\. For example, on Unix this means that the device and inode fields of the two underlying structures are identical; on other systems the decision may be based on the path names\.
 

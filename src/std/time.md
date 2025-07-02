@@ -16,51 +16,51 @@
 [fn ParseInLocation\(layout: str, value: str, loc: &amp;Location\)\!: Time](#parseinlocation)\
 [fn ParseDuration\(mut s: str\): \(Duration, bool\)](#parseduration)\
 [type Month](#month)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [type Weekday](#weekday)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
 [struct Time](#time)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unix\(self\): i64](#unix-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn UTC\(self\): Time](#utc)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Local\(self\): Time](#local)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Zone\(self\): \(name: str, offset: int\)](#zone)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Year\(self\): int](#year)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Month\(self\): Month](#month-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Day\(self\): int](#day)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Weekday\(self\): Weekday](#weekday-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Hour\(self\): int](#hour)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Second\(self\): int](#second)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Minute\(self\): int](#minute)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanosecond\(self\): int](#nanosecond)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Date\(self\): \(year: int, month: Month, day: int\)](#date-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Clock\(self\): \(hour: int, minute: int, second: int\)](#clock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ISO\(self\): \(year: int, week: int\)](#iso)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(self, d: Duration\): Time](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(self, u: Time\): Duration](#sub)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn After\(self, u: Time\): bool](#after)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Before\(self, u: Time\): bool](#before)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Compare\(self, u: Time\): int](#compare)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(self, u: Time\): bool](#equal)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendText\(self, mut b: \[\]byte\)\!: \[\]byte](#appendtext)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn EncodeText\(self\)\!: \[\]byte](#encodetext)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeText\(mut self, data: \[\]byte\)\!](#decodetext)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(self, mut b: \[\]byte, layout: str\): \[\]byte](#appendformat)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(self, layout: str\): str](#format)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unix\(\*self\): i64](#unix-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UTC\(\*self\): Time](#utc)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Local\(\*self\): Time](#local)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Zone\(\*self\): \(name: str, offset: int\)](#zone)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Year\(\*self\): int](#year)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Month\(\*self\): Month](#month-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Day\(\*self\): int](#day)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Weekday\(\*self\): Weekday](#weekday-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Hour\(\*self\): int](#hour)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Second\(\*self\): int](#second)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Minute\(\*self\): int](#minute)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanosecond\(\*self\): int](#nanosecond)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Date\(\*self\): \(year: int, month: Month, day: int\)](#date-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Clock\(\*self\): \(hour: int, minute: int, second: int\)](#clock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ISO\(\*self\): \(year: int, week: int\)](#iso)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(\*self, d: Duration\): Time](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(\*self, u: Time\): Duration](#sub)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn After\(\*self, u: Time\): bool](#after)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Before\(\*self, u: Time\): bool](#before)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Compare\(\*self, u: Time\): int](#compare)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(\*self, u: Time\): bool](#equal)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendText\(\*self, mut b: \[\]byte\)\!: \[\]byte](#appendtext)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn EncodeText\(\*self\)\!: \[\]byte](#encodetext)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeText\(mut \*self, data: \[\]byte\)\!](#decodetext)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(\*self, mut b: \[\]byte, layout: str\): \[\]byte](#appendformat)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, layout: str\): str](#format)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
 [struct AbsTime](#abstime)\
 [type Duration](#duration)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanoseconds\(self\): Duration](#nanoseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Microseconds\(self\): Duration](#microseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Milliseconds\(self\): Duration](#milliseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seconds\(self\): f64](#seconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Minutes\(self\): f64](#minutes)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Hours\(self\): f64](#hours)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(self\): Duration](#abs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanoseconds\(\*self\): Duration](#nanoseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Microseconds\(\*self\): Duration](#microseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Milliseconds\(\*self\): Duration](#milliseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seconds\(\*self\): f64](#seconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Minutes\(\*self\): f64](#minutes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Hours\(\*self\): f64](#hours)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(\*self\): Duration](#abs)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
 [struct Location](#location)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
 [struct ParseError](#parseerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-5)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)
 
 ## Variables
 
@@ -345,7 +345,7 @@ Specifies a month of the year \(January = 1, \.\.\.\)\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns the English name of the month \(&#34;January&#34;, &#34;February&#34;, \.\.\.\)\.
 
@@ -357,7 +357,7 @@ Specifies a day of the week \(Sunday = 0, \.\.\.\)\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns the English name of the day \(&#34;Sunday&#34;, &#34;Monday&#34;, \.\.\.\)\.
 
@@ -375,139 +375,139 @@ Using the == operator when comparing a Time instance is often not what is desire
 
 ### Unix
 ```jule
-fn Unix(self): i64
+fn Unix(*self): i64
 ```
 Returns time in Unix time\.
 
 ### UTC
 ```jule
-fn UTC(self): Time
+fn UTC(*self): Time
 ```
 Returns time with the location set to UTC\.
 
 ### Local
 ```jule
-fn Local(self): Time
+fn Local(*self): Time
 ```
 Returns time with the location set to local time\.
 
 ### Zone
 ```jule
-fn Zone(self): (name: str, offset: int)
+fn Zone(*self): (name: str, offset: int)
 ```
 Computes the time zone in effect at time specification, returning the abbreviated name of the zone \(such as &#34;CET&#34;\) and its offset in seconds east of UTC\.
 
 ### Year
 ```jule
-fn Year(self): int
+fn Year(*self): int
 ```
 Returns the year of the time\.
 
 ### Month
 ```jule
-fn Month(self): Month
+fn Month(*self): Month
 ```
 Returns the month of the year specified by the time\.
 
 ### Day
 ```jule
-fn Day(self): int
+fn Day(*self): int
 ```
 Returns the day of the month specified by the time\.
 
 ### Weekday
 ```jule
-fn Weekday(self): Weekday
+fn Weekday(*self): Weekday
 ```
 Returns the day of the week specified by the time\.
 
 ### Hour
 ```jule
-fn Hour(self): int
+fn Hour(*self): int
 ```
 Returns the hour within the day specified by the time, in the range \[0, 23\]\.
 
 ### Second
 ```jule
-fn Second(self): int
+fn Second(*self): int
 ```
 Returns the second offset within the minute specified by the time, in the range \[0, 59\]\.
 
 ### Minute
 ```jule
-fn Minute(self): int
+fn Minute(*self): int
 ```
 Returns the minute offset within the hour specified by the time, in the range \[0, 59\]\.
 
 ### Nanosecond
 ```jule
-fn Nanosecond(self): int
+fn Nanosecond(*self): int
 ```
 Returns the nanosecond offset within the second specified by the time, in the range \[0, 999999999\]\.
 
 ### Date
 ```jule
-fn Date(self): (year: int, month: Month, day: int)
+fn Date(*self): (year: int, month: Month, day: int)
 ```
 Returns the year, month, and day of the time\.
 
 ### Clock
 ```jule
-fn Clock(self): (hour: int, minute: int, second: int)
+fn Clock(*self): (hour: int, minute: int, second: int)
 ```
 Returns the hour, minute, and second of the time\.
 
 ### ISO
 ```jule
-fn ISO(self): (year: int, week: int)
+fn ISO(*self): (year: int, week: int)
 ```
 Returns the ISO 8601 year and week number of the time\. Week ranges from 1 to 53\. Jan 01 to Jan 03 of year n might belong to week 52 or 53 of year n\-1, and Dec 29 to Dec 31 might belong to week 1 of year n\+1\.
 
 ### Add
 ```jule
-fn Add(self, d: Duration): Time
+fn Add(*self, d: Duration): Time
 ```
 Returns the time self\+d\.
 
 ### Sub
 ```jule
-fn Sub(self, u: Time): Duration
+fn Sub(*self, u: Time): Duration
 ```
 Returns the duration t\(self\)\-u\. If the result exceeds the maximum \(or minimum\) value that can be stored in a \[Duration\], the maximum \(or minimum\) duration will be returned\. To compute t\-d for a duration d, use t\.Add\(\-d\)\.
 
 ### After
 ```jule
-fn After(self, u: Time): bool
+fn After(*self, u: Time): bool
 ```
 Reports whether the time instant is after u\.
 
 ### Before
 ```jule
-fn Before(self, u: Time): bool
+fn Before(*self, u: Time): bool
 ```
 Reports whether the time instant is before u\.
 
 ### Compare
 ```jule
-fn Compare(self, u: Time): int
+fn Compare(*self, u: Time): int
 ```
 Compares the time instant t\(self\) with u\. If t is before u, it returns \-1; if t is after u, it returns \+1; if they&#39;re the same, it returns 0\.
 
 ### Equal
 ```jule
-fn Equal(self, u: Time): bool
+fn Equal(*self, u: Time): bool
 ```
 Reports whether self and u represent the same time instant\. Two times can be equal even if they are in different locations\. For example, 6:00 \+0200 and 4:00 UTC are Equal\. See the documentation on the Time type for the pitfalls of using == with Time values; most code should use Equal instead\.
 
 ### AppendText
 ```jule
-fn AppendText(self, mut b: []byte)!: []byte
+fn AppendText(*self, mut b: []byte)!: []byte
 ```
 Implements the custom text encoder method which is appends to b\. The time is formatted in RFC 3339 format with sub\-second precision\. If the timestamp cannot be represented as valid RFC 3339 \(e\.g\., the year is out of range\), then throws exception with the ParseError\.InvalidRange\.
 
 ### EncodeText
 ```jule
-fn EncodeText(self)!: []byte
+fn EncodeText(*self)!: []byte
 ```
 Implements the custom text encoder method\. matches that of calling the \[Time\.AppendText\] method\.
 
@@ -515,19 +515,19 @@ See \[Time\.AppendText\] for more information\.
 
 ### DecodeText
 ```jule
-fn DecodeText(mut self, data: []byte)!
+fn DecodeText(mut *self, data: []byte)!
 ```
 Implements the custom text decoder method\. The time must be in the RFC 3339 format\.
 
 ### AppendFormat
 ```jule
-fn AppendFormat(self, mut b: []byte, layout: str): []byte
+fn AppendFormat(*self, mut b: []byte, layout: str): []byte
 ```
 Like \[Time\.Format\] but appends the textual representation to b and returns the extended buffer\.
 
 ### Format
 ```jule
-fn Format(self, layout: str): str
+fn Format(*self, layout: str): str
 ```
 Returns a textual representation of the time value formatted according to the layout defined by the argument\. See the documentation for the constant called \[Layout\] to see how to represent the layout format\.
 
@@ -535,7 +535,7 @@ The executable example for \[Time\.Format\] demonstrates the working of the layo
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns the time formatted using the format string
 
@@ -567,49 +567,49 @@ A Duration represents the elapsed time between two instants as an i64 nanosecond
 
 ### Nanoseconds
 ```jule
-fn Nanoseconds(self): Duration
+fn Nanoseconds(*self): Duration
 ```
 Returns duration as nanoseconds\.
 
 ### Microseconds
 ```jule
-fn Microseconds(self): Duration
+fn Microseconds(*self): Duration
 ```
 Returns duration as microseconds\.
 
 ### Milliseconds
 ```jule
-fn Milliseconds(self): Duration
+fn Milliseconds(*self): Duration
 ```
 Returns duration as milliseconds\.
 
 ### Seconds
 ```jule
-fn Seconds(self): f64
+fn Seconds(*self): f64
 ```
 Returns duration as floating\-point seconds\.
 
 ### Minutes
 ```jule
-fn Minutes(self): f64
+fn Minutes(*self): f64
 ```
 Returns duration as floating\-point minutes\.
 
 ### Hours
 ```jule
-fn Hours(self): f64
+fn Hours(*self): f64
 ```
 Returns duration as floating\-point hours\.
 
 ### Abs
 ```jule
-fn Abs(self): Duration
+fn Abs(*self): Duration
 ```
 Returns absolute value of duration\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns a string representing the duration in the form &#34;72h3m0\.5s&#34;\. Leading zero units are omitted\. As a special case, durations less than one second format use a smaller unit \(milli\-, micro\-, or nanoseconds\) to ensure that the leading digit is non\-zero\. The zero duration formats as 0s\.
 
@@ -625,7 +625,7 @@ Location is used to provide a time zone in a printed Time value and for calculat
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns a descriptive name for the time zone information\.
 
@@ -643,5 +643,5 @@ Describes a problem parsing a time string\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```

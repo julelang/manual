@@ -14,51 +14,51 @@
 [trait Conn](#conn)\
 [trait Listener](#listener)\
 [struct AddrError](#addrerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [struct TCPListener](#tcplistener)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(self\)\!: Conn](#accept)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(\*self\)\!: Conn](#accept)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
 [struct TCPConn](#tcpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: int](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: int](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut self, timeout: time::Duration\)\!](#setreadtimeout)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut self, timeout: time::Duration\)\!](#setwritetimeout)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-1)\
 [struct TCPAddr](#tcpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;TCPAddr](#resolve)\
 [struct UDPAddr](#udpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): str](#network-3)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;UDPAddr](#resolve-1)\
 [type HardwareAddr](#hardwareaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
 [struct UDPConn](#udpconn)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut self, timeout: time::Duration\)\!](#setreadtimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut self, timeout: time::Duration\)\!](#setwritetimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(self\): Network](#network-4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut self\)\!](#close-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-2)\
 [type IP](#ip)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\): IP](#empty)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(self\): bool](#empty-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(self, other: IP\): bool](#equal)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnspecified\(self\): bool](#isunspecified)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsLoopback\(self\): bool](#isloopback)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(self\): bool](#isprivate)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut self\): IP](#to4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut self\): IP](#to16)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\*self\): bool](#empty-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(\*self, other: IP\): bool](#equal)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnspecified\(\*self\): bool](#isunspecified)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsLoopback\(\*self\): bool](#isloopback)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(\*self\): bool](#isprivate)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut \*self\): IP](#to4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut \*self\): IP](#to16)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
 [enum Network](#network-5)
 
 ## Variables
@@ -249,10 +249,10 @@ Returns the IP address \(in 16\-byte form\) of the IPv4 address a\.b\.c\.d\.
 ```jule
 trait Addr {
 	// Returns name of the network.
-	fn Network(self): str
+	fn Network(*self): str
 
 	// String form of address.
-	fn Str(self): str
+	fn Str(*self): str
 }
 ```
 Represents a network end point address\.
@@ -263,9 +263,9 @@ trait Conn {
 	io::Reader
 	io::Writer
 	io::Closer
-	fn SetReadTimeout(mut self, timeout: time::Duration)!
-	fn SetWriteTimeout(mut self, timeout: time::Duration)!
-	fn Network(self): Network
+	fn SetReadTimeout(mut *self, timeout: time::Duration)!
+	fn SetWriteTimeout(mut *self, timeout: time::Duration)!
+	fn Network(*self): Network
 }
 ```
 Common connection behavior\. Inherits the io::Reader, io::Writer, and io::Closer traits\.
@@ -274,8 +274,8 @@ Common connection behavior\. Inherits the io::Reader, io::Writer, and io::Closer
 ```jule
 trait Listener {
 	io::Closer
-	fn Accept(self)!: Conn
-	fn Network(self): Network
+	fn Accept(*self)!: Conn
+	fn Network(*self): Network
 }
 ```
 Common listener behavior\. Inherits the io::Closer trait\.
@@ -291,7 +291,7 @@ Common type of address errors\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 
 
@@ -331,19 +331,19 @@ Same as TCPListener\.Dial, but uses timeout\.
 
 ### Accept
 ```jule
-fn Accept(self)!: Conn
+fn Accept(*self)!: Conn
 ```
 Accepts incoming connection, returns &amp;TCPConn\. Panics if connection is closed\.
 
 ### Network
 ```jule
-fn Network(self): Network
+fn Network(*self): Network
 ```
 Returns network name which is listening\. If connection closed, returns Network\.TCP as a general network\.
 
 ### Close
 ```jule
-fn Close(mut self)!
+fn Close(mut *self)!
 ```
 Closes connection\.
 
@@ -366,37 +366,37 @@ TCP connection\. In most cases, represents TCP client\.
 
 ### Read
 ```jule
-fn Read(mut self, mut buf: []byte)!: int
+fn Read(mut *self, mut buf: []byte)!: int
 ```
 Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\. If connection is closed by server, it returns zero and sets connection state as closed\. So if you try read again, function will panic because of connection state is closed\.
 
 ### Write
 ```jule
-fn Write(mut self, buf: []byte)!: int
+fn Write(mut *self, buf: []byte)!: int
 ```
 Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
 
 ### SetReadTimeout
 ```jule
-fn SetReadTimeout(mut self, timeout: time::Duration)!
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
 ```
 Sets read timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
 
 ### SetWriteTimeout
 ```jule
-fn SetWriteTimeout(mut self, timeout: time::Duration)!
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 ```
 Sets write timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
 
 ### Network
 ```jule
-fn Network(self): Network
+fn Network(*self): Network
 ```
 Returns network name which is connected\. If connection closed, returns Network\.TCP as a general network\.
 
 ### Close
 ```jule
-fn Close(mut self)!
+fn Close(mut *self)!
 ```
 Closes connection\.
 
@@ -416,13 +416,13 @@ Represents the address of a TCP end point\.
 
 ### Network
 ```jule
-fn Network(self): str
+fn Network(*self): str
 ```
 Returns the address&#39;s network name\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns string form of address\.
 
@@ -450,13 +450,13 @@ Represents the address of a UDP end point\.
 
 ### Network
 ```jule
-fn Network(self): str
+fn Network(*self): str
 ```
 Returns the address&#39;s network name\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns string form of address\.
 
@@ -494,7 +494,7 @@ Exceptional is always will be AddrError\.Unable\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns address in string form\.
 
@@ -533,37 +533,37 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Read
 ```jule
-fn Read(mut self, mut buf: []byte)!: (n: int)
+fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
 Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
 
 ### Write
 ```jule
-fn Write(mut self, buf: []byte)!: (n: int)
+fn Write(mut *self, buf: []byte)!: (n: int)
 ```
 Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
 
 ### SetReadTimeout
 ```jule
-fn SetReadTimeout(mut self, timeout: time::Duration)!
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
 ```
 Sets read timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
 
 ### SetWriteTimeout
 ```jule
-fn SetWriteTimeout(mut self, timeout: time::Duration)!
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 ```
 Sets write timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
 
 ### Network
 ```jule
-fn Network(self): Network
+fn Network(*self): Network
 ```
 Returns network name which is connected or listening\. If connection closed, returns Network\.UDP as a general network\.
 
 ### Close
 ```jule
-fn Close(mut self)!
+fn Close(mut *self)!
 ```
 Closes connection\.
 
@@ -585,49 +585,49 @@ Returns empty IP address\.
 
 ### Empty
 ```jule
-fn Empty(self): bool
+fn Empty(*self): bool
 ```
 Reports whether IP is empty\.
 
 ### Equal
 ```jule
-fn Equal(self, other: IP): bool
+fn Equal(*self, other: IP): bool
 ```
 Reports wherher IPs are points to the same address\. An IPv4 address and that same address in IPv6 from are considered to be equal\.
 
 ### IsUnspecified
 ```jule
-fn IsUnspecified(self): bool
+fn IsUnspecified(*self): bool
 ```
 Reports whether IP is an unspecified address, which is &#34;0\.0\.0\.0&#34; in IPv4 or &#34;::&#34; in IPv6\.
 
 ### IsLoopback
 ```jule
-fn IsLoopback(self): bool
+fn IsLoopback(*self): bool
 ```
 Reports whether IP is a loopback address\.
 
 ### IsPrivate
 ```jule
-fn IsPrivate(self): bool
+fn IsPrivate(*self): bool
 ```
 Reports whether IP is a private address according to RFC 1918 \(for IPv4\) and RFC 4193 \(for IPv6\)\.
 
 ### To4
 ```jule
-fn To4(mut self): IP
+fn To4(mut *self): IP
 ```
 Converts the IPv4 address to a 4\-byte representation\. Returns empty if IP is not an IPv4 address\. Returned IP may use the common mutable allocation with self\.
 
 ### To16
 ```jule
-fn To16(mut self): IP
+fn To16(mut *self): IP
 ```
 Converts the IP address to a 16\-byte representation\. Returns empty if address is not an IP address \(it is the wrong length\)\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns string form of the IP address\. It returns one of 4 forms:<br>
 

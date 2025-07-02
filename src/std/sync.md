@@ -5,39 +5,39 @@
 [trait Locker](#locker)\
 [struct Once](#once)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): Once](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(self, f: fn\(\)\)](#do)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(\*self, f: fn\(\)\)](#do)\
 [struct WaitGroup](#waitgroup)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;WaitGroup](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut self, delta: int\)](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Done\(mut self\)](#done)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut self\)](#wait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, delta: int\)](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Done\(mut \*self\)](#done)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut \*self\)](#wait)\
 [struct RWMutex](#rwmutex)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn RLock\(self\)](#rlock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn TryRLock\(self\): bool](#tryrlock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn RUnlock\(self\)](#runlock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(self\)](#lock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock\(self\): bool](#trylock)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(self\)](#unlock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RLock\(\*self\)](#rlock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn TryRLock\(\*self\): bool](#tryrlock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RUnlock\(\*self\)](#runlock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(\*self\)](#lock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock\(\*self\): bool](#trylock)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(\*self\)](#unlock)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RLocker\(mut &amp;self\): Locker](#rlocker)\
 [struct Cond](#cond)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(l: Locker\): &amp;Cond](#new-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(self\)](#lock-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(self\)](#unlock-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(self\)](#wait-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Signal\(self\)](#signal)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Broadcast\(self\)](#broadcast)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(\*self\)](#lock-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(\*self\)](#unlock-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)](#wait-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Signal\(\*self\)](#signal)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Broadcast\(\*self\)](#broadcast)\
 [struct Mutex](#mutex)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(self\)](#lock-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock\(self\): bool](#trylock-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(self\)](#unlock-2)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Lock\(\*self\)](#lock-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn TryLock\(\*self\): bool](#trylock-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(\*self\)](#unlock-2)
 
 
 
 ## Locker
 ```jule
 trait Locker {
-	fn Lock(self)
-	fn Unlock(self)
+	fn Lock(*self)
+	fn Unlock(*self)
 }
 ```
 Represents an object that can be locked and unlocked\.
@@ -58,7 +58,7 @@ Returns new instance for Once\.
 
 ### Do
 ```jule
-fn Do(self, f: fn())
+fn Do(*self, f: fn())
 ```
 Calls the function f if and only if Do is being called for the first time for this instance of Once\. In other words, given
 
@@ -94,7 +94,7 @@ Returns new \[WaitGroup\] instance\.
 
 ### Add
 ```jule
-fn Add(mut self, delta: int)
+fn Add(mut *self, delta: int)
 ```
 Adds delta, which may be negative, to the \[WaitGroup\] counter\. If the counter becomes zero, all threads blocked on \[WaitGroup\.Wait\] are released\. If the counter goes negative, Add panics\.
 
@@ -102,13 +102,13 @@ Note that calls with a positive delta that occur when the counter is zero must h
 
 ### Done
 ```jule
-fn Done(mut self)
+fn Done(mut *self)
 ```
 Decrements the \[WaitGroup\] counter by one\.
 
 ### Wait
 ```jule
-fn Wait(mut self)
+fn Wait(mut *self)
 ```
 Blocks until the \[WaitGroup\] counter is zero\.
 
@@ -132,7 +132,7 @@ The n&#39;th call to \[RWMutex\.Unlock\] “synchronizes before” the m&#39;th 
 
 ### RLock
 ```jule
-fn RLock(self)
+fn RLock(*self)
 ```
 Locks for reading\.
 
@@ -140,7 +140,7 @@ It should not be used for recursive read locking; a blocked Lock call excludes n
 
 ### TryRLock
 ```jule
-fn TryRLock(self): bool
+fn TryRLock(*self): bool
 ```
 Tries to lock for reading and reports whether it succeeded\.
 
@@ -148,19 +148,19 @@ Note that while correct uses of TryRLock do exist, they are rare, and use of Try
 
 ### RUnlock
 ```jule
-fn RUnlock(self)
+fn RUnlock(*self)
 ```
 RUnlock undoes a single \[RWMutex\.RLock\] call; it does not affect other simultaneous readers\. It is a run\-time error if it is not locked for reading on entry to RUnlock\.
 
 ### Lock
 ```jule
-fn Lock(self)
+fn Lock(*self)
 ```
 Locks for writing\. If the lock is already locked for reading or writing, Lock blocks until the lock is available\.
 
 ### TryLock
 ```jule
-fn TryLock(self): bool
+fn TryLock(*self): bool
 ```
 Tries to lock for writing and reports whether it succeeded\.
 
@@ -168,7 +168,7 @@ Note that while correct uses of TryLock do exist, they are rare, and use of TryL
 
 ### Unlock
 ```jule
-fn Unlock(self)
+fn Unlock(*self)
 ```
 Unlocks for writing\. It is a run\-time error if it is not locked for writing on entry to Unlock\.
 
@@ -200,19 +200,19 @@ Returns a new Cond with locker l\.
 
 ### Lock
 ```jule
-fn Lock(self)
+fn Lock(*self)
 ```
 Locks the locker\.
 
 ### Unlock
 ```jule
-fn Unlock(self)
+fn Unlock(*self)
 ```
 Unlocks the locker\.
 
 ### Wait
 ```jule
-fn Wait(self)
+fn Wait(*self)
 ```
 Atomically unlocks the locker and suspends execution of the calling thread\. After later resuming execution, Wait locks the locker before returning\. Unlike in other systems, Wait cannot return unless awoken by \[Cond\.Broadcast\] or \[Cond\.Signal\]\.
 
@@ -230,7 +230,7 @@ self.Unlock()
 
 ### Signal
 ```jule
-fn Signal(self)
+fn Signal(*self)
 ```
 Wakes one thread waiting on the condition, if there is any\.
 
@@ -240,7 +240,7 @@ Signal\(\) does not affect thread scheduling priority; if other threads are atte
 
 ### Broadcast
 ```jule
-fn Broadcast(self)
+fn Broadcast(*self)
 ```
 Broadcast wakes all threads waiting on the condition\.
 
@@ -264,13 +264,13 @@ Mutexes are not implemented using API of operating system\. Implemented in pure 
 
 ### Lock
 ```jule
-fn Lock(self)
+fn Lock(*self)
 ```
 Locks mutex\. If the lock is already in use, the calling thread blocks until the mutex is available\.
 
 ### TryLock
 ```jule
-fn TryLock(self): bool
+fn TryLock(*self): bool
 ```
 Tries to lock mutwx and reports whether it succeeded\.
 
@@ -278,6 +278,6 @@ Note that while correct uses of TryLock do exist, they are rare, and use of TryL
 
 ### Unlock
 ```jule
-fn Unlock(self)
+fn Unlock(*self)
 ```
 Unlocks mutex\. It is a runtime error if mutex is not locked on entry to Unlock\.

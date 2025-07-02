@@ -46,33 +46,33 @@
 [fn Compare\(a: str, b: str\): int](#compare)\
 [struct Replacer](#replacer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(self, s: str\): str](#replace-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(self, s: str, mut w: io::StrWriter\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(\*self, s: str\): str](#replace-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(\*self, s: str, mut w: io::StrWriter\)\!: \(n: int\)](#writestr)\
 [struct Reader](#reader)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: str\): &amp;Reader](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(self\): int](#len)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(self\): i64](#size)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(self, mut b: \[\]byte\)\!: \(n: int\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAt\(self, mut b: \[\]byte, off: i64\)\!: \(n: int\)](#readat)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadByte\(mut self\)\!: \(byte, int\)](#readbyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn UnreadByte\(self\)\!](#unreadbyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadRune\(self\)\!: \(ch: rune, size: int\)](#readrune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn UnreadRune\(self\)\!](#unreadrune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(self, offset: i64, whence: int\)\!: i64](#seek)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut self, s: str\)](#reset)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(\*self\): i64](#size)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(\*self, mut b: \[\]byte\)\!: \(n: int\)](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAt\(\*self, mut b: \[\]byte, off: i64\)\!: \(n: int\)](#readat)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadByte\(mut \*self\)\!: \(byte, int\)](#readbyte)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UnreadByte\(\*self\)\!](#unreadbyte)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadRune\(\*self\)\!: \(ch: rune, size: int\)](#readrune)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UnreadRune\(\*self\)\!](#unreadrune)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(\*self, offset: i64, whence: int\)\!: i64](#seek)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(\*self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self, s: str\)](#reset)\
 [struct Builder](#builder)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut self, b: \[\]byte\)\!: \(n: int\)](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut self, s: str\)\!: \(n: int\)](#writestr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut self, b: byte\)\!](#writebyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut self, r: rune\)\!: \(n: int\)](#writerune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Grow\(mut self, n: int\)](#grow)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Clear\(mut self\)](#clear)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(self\): int](#len-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(self\): int](#cap)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn Buf\(mut self\): \[\]byte](#buf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn SetBuf\(mut self, mut buf: \[\]byte\)](#setbuf)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, b: \[\]byte\)\!: \(n: int\)](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut \*self, b: byte\)\!](#writebyte)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut \*self, r: rune\)\!: \(n: int\)](#writerune)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Grow\(mut \*self, n: int\)](#grow)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Clear\(mut \*self\)](#clear)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(\*self\): int](#cap)\
+&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn Buf\(mut \*self\): \[\]byte](#buf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)
 
 
 
@@ -386,13 +386,13 @@ Panics if given an odd number of arguments\.
 
 ### Replace
 ```jule
-fn Replace(self, s: str): str
+fn Replace(*self, s: str): str
 ```
 Replaces s and returns the result\.
 
 ### WriteStr
 ```jule
-fn WriteStr(self, s: str, mut w: io::StrWriter)!: (n: int)
+fn WriteStr(*self, s: str, mut w: io::StrWriter)!: (n: int)
 ```
 Applies replace on s and writes result to w\. Forwards any exception if any\.
 
@@ -421,67 +421,67 @@ Returns a new Reader reading from s\.
 
 ### Len
 ```jule
-fn Len(self): int
+fn Len(*self): int
 ```
 Returns the number of bytes of the unread portion of the string\.
 
 ### Size
 ```jule
-fn Size(self): i64
+fn Size(*self): i64
 ```
 Returns the original length of the underlying string\. Size is the number of bytes available for reading via ReadAt\. The returned value is always the same and is not affected by calls to any other method\.
 
 ### Read
 ```jule
-fn Read(self, mut b: []byte)!: (n: int)
+fn Read(*self, mut b: []byte)!: (n: int)
 ```
 Implements the io::Reader trait\.
 
 ### ReadAt
 ```jule
-fn ReadAt(self, mut b: []byte, off: i64)!: (n: int)
+fn ReadAt(*self, mut b: []byte, off: i64)!: (n: int)
 ```
 Implements the io::ReaderAt trait\.
 
 ### ReadByte
 ```jule
-fn ReadByte(mut self)!: (byte, int)
+fn ReadByte(mut *self)!: (byte, int)
 ```
 Implements the io::ByteReader trait\.
 
 ### UnreadByte
 ```jule
-fn UnreadByte(self)!
+fn UnreadByte(*self)!
 ```
 Implements the io::ByteScanner trait\.
 
 ### ReadRune
 ```jule
-fn ReadRune(self)!: (ch: rune, size: int)
+fn ReadRune(*self)!: (ch: rune, size: int)
 ```
 Implements the io::RuneReader trait\.
 
 ### UnreadRune
 ```jule
-fn UnreadRune(self)!
+fn UnreadRune(*self)!
 ```
 Implements the io::RuneScanner trait\.
 
 ### Seek
 ```jule
-fn Seek(self, offset: i64, whence: int)!: i64
+fn Seek(*self, offset: i64, whence: int)!: i64
 ```
 Implements the io::Seeker trait\.
 
 ### WriteTo
 ```jule
-fn WriteTo(self, mut w: io::Writer)!: (n: i64)
+fn WriteTo(*self, mut w: io::Writer)!: (n: i64)
 ```
 Implements the io:\.WriterTo trait\.
 
 ### Reset
 ```jule
-fn Reset(mut self, s: str)
+fn Reset(mut *self, s: str)
 ```
 Resets the Reader to be reading from s\.
 
@@ -504,66 +504,66 @@ A Builder must not be copied after first use\.
 
 ### Write
 ```jule
-fn Write(mut self, b: []byte)!: (n: int)
+fn Write(mut *self, b: []byte)!: (n: int)
 ```
 Writes bytes to buffer\. Never throws an exceptional\.
 
 ### WriteStr
 ```jule
-fn WriteStr(mut self, s: str)!: (n: int)
+fn WriteStr(mut *self, s: str)!: (n: int)
 ```
 Writes bytes to buffer\. Never throws an exceptional\.
 
 ### WriteByte
 ```jule
-fn WriteByte(mut self, b: byte)!
+fn WriteByte(mut *self, b: byte)!
 ```
 Writes byte to buffer\. Never throws an exceptional\.
 
 ### WriteRune
 ```jule
-fn WriteRune(mut self, r: rune)!: (n: int)
+fn WriteRune(mut *self, r: rune)!: (n: int)
 ```
 Writes rune into buffer\. Returns written byte count\. Never throws an exceptional\.
 
 ### Grow
 ```jule
-fn Grow(mut self, n: int)
+fn Grow(mut *self, n: int)
 ```
 Grows b&#39;s capacity, if necessary, to guarantee space for another n bytes\. After Grow\(n\), at least n bytes can be written to b without another allocation\. If n is negative, panics\.
 
 ### Str
 ```jule
-fn Str(self): str
+fn Str(*self): str
 ```
 Returns buffer as string\. Will not reset the underlying content\.
 
 ### Clear
 ```jule
-fn Clear(mut self)
+fn Clear(mut *self)
 ```
 Clears buffer\. After calling this function, write calls will allocate new buffer\.
 
 ### Len
 ```jule
-fn Len(self): int
+fn Len(*self): int
 ```
 Returns length of buffer\.
 
 ### Cap
 ```jule
-fn Cap(self): int
+fn Cap(*self): int
 ```
 Returns capacity of buffer\.
 
 ### Buf
 ```jule
-unsafe fn Buf(mut self): []byte
+unsafe fn Buf(mut *self): []byte
 ```
 Returns mutable buffer for low\-level interactions\.
 
 ### SetBuf
 ```jule
-unsafe fn SetBuf(mut self, mut buf: []byte)
+unsafe fn SetBuf(mut *self, mut buf: []byte)
 ```
 Sets mutable internal buffer for low\-level interactions\.
