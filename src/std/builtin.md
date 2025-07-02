@@ -235,7 +235,7 @@ In the example code above, x will be sliced with mutable memory.
 So copy operation will directly affect the x array.
 
 This only applies to the last sliced array.
-Previous slicings may result in memory allocation, and changes may not be reflected.
+Previous slicing may result in memory allocation, and changes may not be reflected.
 
 For example:
 
