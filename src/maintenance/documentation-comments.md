@@ -42,7 +42,7 @@ It is an empty comment line. It is used to create content that helps with docume
 
 Doc comments are written only as single-line comments. Range comments are not considered as documentation comments in any way.
 
-When writing documentation comments within the main scope, at most one ASCII whitespace can be used. If there is any whitespace, it is ignored. All space characters (such as ASCII whitespace or tabs) are considered as indentation.
+When writing documentation comments within the main scope, at most one ASCII whitespace can be used. If there is any whitespace, it is ignored. All space characters (except whitespaces) (such as tabs) are considered as indentation.
 
 The suggested documentation approach is to write the main scopes starting with a single whitespace, and indent each sub-scope with a tab.
 
