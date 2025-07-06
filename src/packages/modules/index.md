@@ -1,6 +1,6 @@
 # Modules
 
-Modules include programs that contain a set of packages and their sub-packages. It mostly serves to enable a program to use its own packages or to make a package available to other users. In the common scenario it is a set of packages that you import in your code.
+Modules are the most common and recommended way to organize a Jule project. A module defines the structure of the project and safely groups all packages within the project to achieve modularization. This allows you to have subpackages in any project and organize code effectively. It is also important when designing third-party packages, as it provides the organization for the package.
 
 Modules standardize your code and outline its main structure. Your module file is a type specifier, the directory where the file is located is considered the parent directory of your module and your compiler processes your code accordingly.
 
@@ -23,7 +23,7 @@ It is useful to use modules. It is more difficult to test your projects without 
 
 For most programs it is necessary to write subpackages. It is important for a streamlined and maintainable development experience. You also need to use a module to access sub-packages.
 
-Modules can access sub-packages from the main package through their own package import behavior. This applies to all modules.
+Modules can access sub-packages from the main package through their own package import behavior. This applies to all modules. In a [use declaration](/packages/using-packages), to import any subpackage, the name of the current module in that scope must be used first. Import paths that do not start with the module name are considered invalid.
 
 For example:
 ```
@@ -31,14 +31,12 @@ project/
 ├─ foo/
 │  ├─ bar/
 │  │  └─ bar.jule
-│  │
 │  └─ foo.jule
-│
 ├─ jule.mod
 └─ main.jule
 ```
 
-In the project structure above, the `main.jule` file must use `foo::bar` to access the `bar` package of module. This is because the module directory is the `project` directory. Likewise, the `foo` package should use `foo::bar` instead of `bar`.
+In the project structure above, the `main.jule` file must use `"project/foo/bar"` to use the `bar` package of module. This is because the module directory is the `project` directory. Likewise, the `foo` package should use `"project/foo/bar"` instead of `bar`.
 
 ## Nested Modules
 
@@ -50,14 +48,12 @@ project/
 ├─ foo/
 │  ├─ bar/
 │  │  └─ bar.jule
-│  │
 │  ├─ foo.jule
 │  └─ jule.mod
-│
 ├─ jule.mod
 └─ main.jule
 ```
 
-In the example above, since `main.jule` has a module file, it will import the `bar` package with `foo::bar`. However, since the `foo` package has a module within itself, it is its main package. So it uses `bar` to import the `bar` package.
+In the example above, since `main.jule` has a module file, it will import the `bar` package with `"package/foo/bar"`. However, since the `foo` package has a module within itself, it is its main package. So it uses `"foo/bar"` to import the `bar` package.
 
 In this way, the `foo` package was designed as a separate module and became more portable. It should be easy to move to different locations due to its intuitive imports thanks to the module file.
