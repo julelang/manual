@@ -13,13 +13,14 @@ Import paths is data used to import packages. It is written between double quote
 
 For a path to be valid, it must comply with some rules:
 - Cannot contain `_`. So `_/...`, `.../_/...` or `.../_` are invalid.
+- Cannot contain path control runes (`.` or `..`). So `foo/./bar`, `foo/../../baz` or `foo/.` are invalid.
 - Each subpackage is separated from each other by the `/` character. There cannot be an empty distinction, so `//` is invalid. Cannot start or end with `/` also.
 
 Jule processes these import paths accordingly and reads the packages by converting them to the file system path.
 
 ### Standard Library
 
-To import standard library packages, the import path must start with `std/...`. Any package that starts this way is considered a standard library package.
+To import standard library packages, the import path must start with `std/`. Any package that starts this way is considered a standard library package.
 
 For example:
 - `std/conv`
@@ -40,10 +41,8 @@ head/
 │  ├─ bar/
 │  │  ├─ README.md
 │  │  └─ bar.jule
-│  │
 │  ├─ README.md
 │  └─ foo.jule
-│
 ├─ jule.mod
 ├─ LICENSE
 └─ main.jule
@@ -52,8 +51,8 @@ As you can see in your project tree, your main package `head` directory has `foo
 
 Using your subpackages is simple, here is an example:
 ```jule
-use "foo"
-use "foo/bar"
+use "head/foo"
+use "head/foo/bar"
 ```
 As you can see in the example above, each subpackage in your main package represents a chain of packages that you can use. This means that in your subpackages you will follow the same syntax when you try to use your other subpackages. The packages you can import start from your main module, where your module file is located.
 
@@ -80,7 +79,6 @@ For example, some import paths and their parts used as alias:
 - `bar/foo`: `foo`
 - `foo/bar/baz`: `baz`
 - `foo/_bar_`: `_bar_`
-- `foo/123`: `123`
 
 When processing an alias automatically, some rules are observed. For example, the namespace must be a valid identifier. Therefore, if the final package representation does not provide a valid alias identifier, your compiler will prompt you to manually assign a valid one.
 
