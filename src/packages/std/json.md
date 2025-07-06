@@ -55,7 +55,7 @@ For example:
 ```jule
 json := []byte(`{"ID":123,"Name":"John","Email":"john@example.com"}`)
 mut u := User{}
-json::Decode(json, u)!
+json::Decode(json, &u)!
 println(u)
 ```
 In the example above, an instance of the `User` structure from previous example is decoded to variable `u` from the JSON representation.
@@ -77,7 +77,7 @@ For example:
 ```jule
 json := []byte(`{"ID":123,"Name":"John","Email":"john@example.com"}`)
 mut v := json::Value(nil)
-json::Decode(json, v)!
+json::Decode(json, &v)!
 u := v.(json::Object)
 println(u["ID"])
 println(u["Name"])
