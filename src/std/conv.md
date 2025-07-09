@@ -6,6 +6,7 @@
 [fn ParseBool\(s: str\)\!: bool](#parsebool)\
 [fn FormatBool\(b: bool\): str](#formatbool)\
 [fn AppendBool\(mut dst: \[\]byte, b: bool\): \[\]byte](#appendbool)\
+[fn ParseCmplx\(mut s: str, bitSize: int\)\!: cmplx128](#parsecmplx)\
 [fn FormatFloat\(f: f64, fmt: byte, prec: int, bitSize: int\): str](#formatfloat)\
 [fn AppendFloat\(mut dst: \[\]byte, f: f64, fmt: byte, prec: int, bitSize: int\): \[\]byte](#appendfloat)\
 [fn ParseUint\(mut s: str, mut base: int, mut bitSize: int\)\!: u64](#parseuint)\
@@ -28,6 +29,7 @@
 [fn QuotedPrefix\(s: str\)\!: str](#quotedprefix)\
 [fn Unquote\(s: str\)\!: str](#unquote)\
 [fn IsGraphic\(r: rune\): bool](#isgraphic)\
+[fn FormatCmplx\(c: cmplx128, fmt: byte, prec: int, mut bitSize: int\): str](#formatcmplx)\
 [fn ParseFloat\(s: str, bitSize: int\)\!: f64](#parsefloat)\
 [fn FormatUint\(i: u64, base: int\): str](#formatuint)\
 [fn FormatInt\(i: i64, base: int\): str](#formatint)\
@@ -75,6 +77,20 @@ Returns &#34;true&#34; or &#34;false&#34; according to the value of b\.
 fn AppendBool(mut dst: []byte, b: bool): []byte
 ```
 Appends &#34;true&#34; or &#34;false&#34;, according to the value of b, to dst and returns the extended buffer\.
+
+## ParseCmplx
+```jule
+fn ParseCmplx(mut s: str, bitSize: int)!: cmplx128
+```
+Converts the string s to a complex number with the precision specified by bitSize: 64 for cmplx64, or 128 for cmplx128\. When bitSize=64, the result still has type cmplx128, but it will be convertible to cmplx64 without changing its value\.
+
+The number represented by s must be of the form N, Ni, or N±Ni, where N stands for a floating\-point number as recognized by \[ParseFloat\], and i is the imaginary component\. If the second N is unsigned, a \+ sign is required between the two components as indicated by the ±\. If the second N is NaN, only a \+ sign is accepted\. The form may be parenthesized and cannot contain any spaces\. The resulting complex number consists of the two components converted by ParseFloat\.
+
+The errors that it returns have concrete type \[&amp;NumError\] and include err\.Num = s\.
+
+If s is not syntactically well\-formed, it returns err\.Err = ErrSyntax\.
+
+If s is syntactically well\-formed but either component is more than 1/2 ULP away from the largest floating point number of the given component&#39;s size, it returns err\.Err = ErrRange and c = ±Inf for the respective component\.
 
 ## FormatFloat
 ```jule
@@ -206,12 +222,8 @@ fn UnquoteChar(mut s: str, quote: byte)!: (value: rune, multibyte: bool, tail: s
 ```
 Decodes the first character or byte in the escaped string or character literal represented by the string s\. It returns four values:
 
-```
-1. value, the decoded Unicode code point or byte value;
-2. multibyte, a boolean indicating whether the decoded character requires a multibyte UTF-8 representation;
-3. tail, the remainder of the string after the character; and
-4. an error that will be nil if the character is syntactically valid.
-```
+1\. value, the decoded Unicode code point or byte value; 2\. multibyte, a boolean indicating whether the decoded character requires a multibyte UTF\-8 representation; 3\. tail, the remainder of the string after the character; and 4\. an error that will be nil if the character is syntactically valid\.
+
 The second argument, quote, specifies the type of literal being parsed and therefore which escaped quote character is permitted\. If set to a single quote, it permits the sequence \\&#39; and disallows unescaped &#39;\. If set to a double quote, it permits \\&#34; and disallows unescaped &#34;\. If set to zero, it does not permit either escape and allows both quote characters to appear unescaped\.
 
 ## QuotedPrefix
@@ -231,6 +243,14 @@ Interprets s as a single\-quoted, double\-quoted, or backquoted Jule string lite
 fn IsGraphic(r: rune): bool
 ```
 Reports whether the rune is defined as a Graphic by Unicode\. Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, and Zs\.
+
+## FormatCmplx
+```jule
+fn FormatCmplx(c: cmplx128, fmt: byte, prec: int, mut bitSize: int): str
+```
+Converts the complex number c to a string of the form \(a\+bi\) where a and b are the real and imaginary parts, formatted according to the format fmt and precision prec\.
+
+The format fmt and precision prec have the same meaning as in \[FormatFloat\]\. It rounds the result assuming that the original was obtained from a complex value of bitSize bits, which must be 64 for cmplx64 and 128 for cmplx128\.
 
 ## ParseFloat
 ```jule

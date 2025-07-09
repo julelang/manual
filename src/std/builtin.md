@@ -13,6 +13,8 @@
 [type u64](#u64)\
 [type f32](#f32)\
 [type f64](#f64)\
+[type cmplx64](#cmplx64)\
+[type cmplx128](#cmplx128)\
 [type int](#int)\
 [type uint](#uint)\
 [type uintptr](#uintptr)\
@@ -31,7 +33,10 @@
 [fn cap(T): int](#cap)\
 [fn delete(mut map[K]V, ...)](#delete)\
 [fn new(T, ...T): &T](#new)\
-[fn close(c: chan<- T)](#close)
+[fn close(c: chan<- T)](#close)\
+[fn real(c: Cmplx): Float](#real)\
+[fn imag(c: Cmplx): Float](#imag)\
+[fn cmplx(r: Float, i: Float): Cmplx](#cmplx)
 
 ## Variables
 
@@ -113,6 +118,18 @@ type f32: f32
 type f64: f64
 ```
 64-bit floating-point.
+
+## cmplx64
+```jule
+type cmplx64: cmplx64
+```
+32-bit floating-point complex number.
+
+## cmplx128
+```jule
+type cmplx128: cmplx128
+```
+64-bit floating-point complex number.
 
 ## int
 ```jule
@@ -310,3 +327,21 @@ Returns new smart pointer for T initialized with default for type. It may take t
 fn close(c: chan<- T)
 ```
 Closes channel c. It should be executed only by the sender, never the receiver, and has the effect of shutting down the channel after the last sent value is received. After the last value has been received from a closed channel c, any receive from c will succeed without blocking, returning the zero value for the channel element.
+
+## real
+```jule
+fn real(c: Cmplx): Float
+```
+Returns the real part of the complex number c. The return value will be floating point type corresponding to the type of c.
+
+## imag
+```jule
+fn imag(c: Cmplx): Float
+```
+Returns the imaginary part of the complex number c. The return value will be floating point type corresponding to the type of c.
+
+## cmplx
+```jule
+fn complex(r: Float, i: Float): Cmplx
+```
+Constructs a complex value from two floating-point values. The real and imaginary parts must be of the same size, either f32 or f64 (or assignable to them), and the return value will be the corresponding complex type (cmplx64 for f32, cmplx128 for f64).

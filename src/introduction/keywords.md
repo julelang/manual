@@ -6,13 +6,13 @@ Keywords have been pre-reserved in the language and are not allowed to be used a
 
 **List of Keywords**
 ```jule
-map      type      impl      self
-trait    struct    enum      fn
-const    let       mut       for
-in       break     continue  goto
-match    fall      if        else
-ret      error     use       co
-cpp      unsafe    defer     chan
+map      type      impl        self
+trait    struct    enum        fn
+const    let       mut         for
+in       break     continue    goto
+match    fall      if          else
+ret      error     use         co
+cpp      unsafe    defer       chan
 select
 ```
 
@@ -38,14 +38,15 @@ As seen in the example above, the variable `a` is defined as `int` type. At firs
 **List of Imaginary Keywords**
 
 ```jule
-int       uint      uintptr    i8
-i16       i32       i64        u8
-u16       u32       u64        f32
-f64       bool      str        any
-rune      byte      new        make
-copy      append    out        outln
-delete    cap       len        panic
-true      false     nil        iota
+int    uint      uintptr     i8
+i16    i32       i64         u8
+u16    u32       u64         f32
+f64    cmplx64   cmplx128    bool
+str    any       rune        byte
+new    make      copy        append
+out    outln     delete      cap
+len    panic     true        false
+nil    iota
 ```
 
 ::: info

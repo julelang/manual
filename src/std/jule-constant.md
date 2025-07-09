@@ -9,25 +9,30 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewBool\(x: bool\): &amp;Const](#newbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewStr\(x: str\): &amp;Const](#newstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewF64\(x: f64\): &amp;Const](#newf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NewCmplx128\(x: cmplx128\): &amp;Const](#newcmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewNil\(\): &amp;Const](#newnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(\*self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(\*self\): bool](#readbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(\*self\): str](#readstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadF64\(\*self\): f64](#readf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadCmplx128\(\*self\): cmplx128](#readcmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsI64\(\*self\): i64](#asi64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsU64\(\*self\): u64](#asu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsF64\(\*self\): f64](#asf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AsCmplx128\(\*self\): cmplx128](#ascmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetInt\(mut \*self, x: big::Int\)](#setint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetI64\(mut \*self, x: i64\)](#seti64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetU64\(mut \*self, x: u64\)](#setu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetBool\(mut \*self, x: bool\)](#setbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetStr\(mut \*self, x: str\)](#setstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetF64\(mut \*self, x: f64\)](#setf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetCmplx128\(mut \*self, x: cmplx128\)](#setcmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetNil\(mut \*self\)](#setnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInt\(\*self\): bool](#isint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsBool\(\*self\): bool](#isbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStr\(\*self\): bool](#isstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsF64\(\*self\): bool](#isf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsCmplx128\(\*self\): bool](#iscmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AreSameTypes\(\*self, x: Const\): bool](#aresametypes)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn And\(\*self, x: Const\): bool](#and)\
@@ -96,6 +101,12 @@ fn NewF64(x: f64): &Const
 ```
 Returns new constant value instance from 64\-bit floating\-point\.
 
+### NewCmplx128
+```jule
+fn NewCmplx128(x: cmplx128): &Const
+```
+Returns new constant value instance from 128\-bit floating\-point complex\.
+
 ### NewNil
 ```jule
 fn NewNil(): &Const
@@ -126,6 +137,12 @@ fn ReadF64(*self): f64
 ```
 Reads 64\-bit floating\-point data\. Returns 0 if data is not 64\-bit floating\-point\.
 
+### ReadCmplx128
+```jule
+fn ReadCmplx128(*self): cmplx128
+```
+Reads 128\-bit floating\-point complex data\. Returns 0 if data is not 128\-bit floating\-point complex\.
+
 ### AsI64
 ```jule
 fn AsI64(*self): i64
@@ -143,6 +160,12 @@ Reads data as 64\-bit unsigned integer\. Returns 0 if data is string, bool or wh
 fn AsF64(*self): f64
 ```
 Reads data as 64\-bit floating\-point\. Returns 0 if data is string, bool or which is not numeric\.
+
+### AsCmplx128
+```jule
+fn AsCmplx128(*self): cmplx128
+```
+Reads data as 128\-bit floating\-point complex\. Returns 0 if data is string, bool or which is not numeric\.
 
 ### SetInt
 ```jule
@@ -180,6 +203,12 @@ fn SetF64(mut *self, x: f64)
 ```
 Sets constant value from 64\-bit floating\-point\.
 
+### SetCmplx128
+```jule
+fn SetCmplx128(mut *self, x: cmplx128)
+```
+Sets constant value from 128\-bit floating\-point complex\.
+
 ### SetNil
 ```jule
 fn SetNil(mut *self)
@@ -209,6 +238,12 @@ Reports whether data is string\.
 fn IsF64(*self): bool
 ```
 Reports whether data is 64\-bit floating\-point\.
+
+### IsCmplx128
+```jule
+fn IsCmplx128(*self): bool
+```
+Reports whether data is 128\-bit floating\-point complex\.
 
 ### IsNil
 ```jule

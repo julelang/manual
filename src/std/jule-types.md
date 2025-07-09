@@ -24,6 +24,7 @@
 [fn IsUnsigInt\(mut k: str\): bool](#isunsigint)\
 [fn IsInt\(k: str\): bool](#isint)\
 [fn IsFloat\(k: str\): bool](#isfloat)\
+[fn IsCmplx\(k: str\): bool](#iscmplx)\
 [fn IsNum\(k: str\): bool](#isnum)\
 [fn IsSigNum\(k: str\): bool](#issignum)
 
@@ -87,22 +88,24 @@ Integer limit values\.
 
 ```jule
 const (
-	I8      = "i8"
-	I16     = "i16"
-	I32     = "i32"
-	I64     = "i64"
-	U8      = "u8"
-	U16     = "u16"
-	U32     = "u32"
-	U64     = "u64"
-	F32     = "f32"
-	F64     = "f64"
-	Uint    = "uint"
-	Int     = "int"
-	Uintptr = "uintptr"
-	Bool    = "bool"
-	Str     = "str"
-	Any     = "any"
+	I8       = "i8"
+	I16      = "i16"
+	I32      = "i32"
+	I64      = "i64"
+	U8       = "u8"
+	U16      = "u16"
+	U32      = "u32"
+	U64      = "u64"
+	F32      = "f32"
+	F64      = "f64"
+	Cmplx64  = "cmplx64"
+	Cmplx128 = "cmplx128"
+	Uint     = "uint"
+	Int      = "int"
+	Uintptr  = "uintptr"
+	Bool     = "bool"
+	Str      = "str"
+	Any      = "any"
 )
 ```
 Type kinds of primitive types\. These kinds are must match keyword form itself\.
@@ -251,6 +254,12 @@ Reports whether kind is signed/unsigned integer\.
 fn IsFloat(k: str): bool
 ```
 Reports whether kind is float\.
+
+## IsCmplx
+```jule
+fn IsCmplx(k: str): bool
+```
+Reports whether kind is complex\.
 
 ## IsNum
 ```jule

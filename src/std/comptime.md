@@ -103,6 +103,8 @@ const (
 	Func        // Function
 	Tuple       // Tuple
 	Chan        // Channel
+	Cmplx64     // cmplx64
+	Cmplx128    // cmplx128
 )
 ```
 Type kinds.

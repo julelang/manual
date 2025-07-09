@@ -192,13 +192,6 @@ Enables special optimizations for the `std/strings` package.
 
 - Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WRiteStr` methods of the `Builder` struct.
 
----
-
-`--opt-math-cmplx`\
-Enables special optimizations for the `std/math/cmplx` package.
-
-- Makes computations mutable instead creating new complex number and assigning to existing complex number.
-
 ## Optimization Levels
 
 It can be a hassle to pass all flags one by one to send most optimizations to the compiler.
@@ -214,7 +207,7 @@ The optimization levels are as follows:
 
 - `L0`: The default optimization level: no special optimizations.
 - `L1`: passes all `L0` flags with `--opt-zcopy`, `--opt-zappend`, `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
-- `L2`: passes all `L1` flags with `--opt-std-strings`, `--opt-std-math-cmplx`
+- `L2`: passes all `L1` flags with `--opt-std-strings`
 
 ## Production Compilation
 

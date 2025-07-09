@@ -112,7 +112,7 @@
 		},
 		"imaginaryKeywords": {
 			"name": "storage.type",
-			"match": "\\b(int|uint|uintptr|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|bool|str|any|byte|rune)\\b"
+			"match": "\\b(int|uint|uintptr|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|cmplx64|cmplx128|bool|str|any|byte|rune)\\b"
 		},
 		"storage": {
 			"name": "storage.modifier.jule",
@@ -344,6 +344,7 @@
 			]
 		},
 		"numbers": {
+			"match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.])|(?<=[eEpP])[+-])*",
 			"captures": {
 				"0": {
 					"patterns": [
@@ -352,6 +353,7 @@
 							"end": "(?:\\n|$)",
 							"patterns": [
 								{
+									"match": "(?:(?:(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?:(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$)|\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|\\G((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?:(?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))",
 									"captures": {
 										"1": {
 											"name": "constant.numeric.decimal.jule",
@@ -361,6 +363,45 @@
 													"name": "punctuation.separator.constant.numeric.jule"
 												}
 											]
+										},
+										"2": {
+											"name": "punctuation.separator.constant.numeric.jule"
+										},
+										"3": {
+											"name": "constant.numeric.decimal.point.jule"
+										},
+										"4": {
+											"name": "constant.numeric.decimal.jule",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.jule"
+												}
+											]
+										},
+										"5": {
+											"name": "punctuation.separator.constant.numeric.jule"
+										},
+										"6": {
+											"name": "keyword.other.unit.exponent.decimal.jule"
+										},
+										"7": {
+											"name": "keyword.operator.plus.exponent.decimal.jule"
+										},
+										"8": {
+											"name": "keyword.operator.minus.exponent.decimal.jule"
+										},
+										"9": {
+											"name": "constant.numeric.exponent.decimal.jule",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.jule"
+												}
+											]
+										},
+										"10": {
+											"name": "keyword.other.unit.imaginary.jule"
 										},
 										"11": {
 											"name": "constant.numeric.decimal.jule",
@@ -392,6 +433,9 @@
 												}
 											]
 										},
+										"17": {
+											"name": "keyword.other.unit.imaginary.jule"
+										},
 										"18": {
 											"name": "constant.numeric.decimal.point.jule"
 										},
@@ -403,9 +447,6 @@
 													"name": "punctuation.separator.constant.numeric.jule"
 												}
 											]
-										},
-										"2": {
-											"name": "punctuation.separator.constant.numeric.jule"
 										},
 										"20": {
 											"name": "punctuation.separator.constant.numeric.jule"
@@ -428,6 +469,9 @@
 												}
 											]
 										},
+										"25": {
+											"name": "keyword.other.unit.imaginary.jule"
+										},
 										"26": {
 											"name": "keyword.other.unit.hexadecimal.jule"
 										},
@@ -445,9 +489,6 @@
 										},
 										"29": {
 											"name": "constant.numeric.hexadecimal.jule"
-										},
-										"3": {
-											"name": "constant.numeric.decimal.point.jule"
 										},
 										"30": {
 											"name": "constant.numeric.hexadecimal.jule",
@@ -479,6 +520,9 @@
 												}
 											]
 										},
+										"36": {
+											"name": "keyword.other.unit.imaginary.jule"
+										},
 										"37": {
 											"name": "keyword.other.unit.hexadecimal.jule"
 										},
@@ -493,15 +537,6 @@
 										},
 										"39": {
 											"name": "punctuation.separator.constant.numeric.jule"
-										},
-										"4": {
-											"name": "constant.numeric.decimal.jule",
-											"patterns": [
-												{
-													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
-													"name": "punctuation.separator.constant.numeric.jule"
-												}
-											]
 										},
 										"40": {
 											"name": "keyword.other.unit.exponent.hexadecimal.jule"
@@ -520,6 +555,9 @@
 													"name": "punctuation.separator.constant.numeric.jule"
 												}
 											]
+										},
+										"44": {
+											"name": "keyword.other.unit.imaginary.jule"
 										},
 										"45": {
 											"name": "keyword.other.unit.hexadecimal.jule"
@@ -542,9 +580,6 @@
 										"49": {
 											"name": "keyword.other.unit.exponent.hexadecimal.jule"
 										},
-										"5": {
-											"name": "punctuation.separator.constant.numeric.jule"
-										},
 										"50": {
 											"name": "keyword.operator.plus.exponent.hexadecimal.jule"
 										},
@@ -560,28 +595,13 @@
 												}
 											]
 										},
-										"6": {
-											"name": "keyword.other.unit.exponent.decimal.jule"
-										},
-										"7": {
-											"name": "keyword.operator.plus.exponent.decimal.jule"
-										},
-										"8": {
-											"name": "keyword.operator.minus.exponent.decimal.jule"
-										},
-										"9": {
-											"name": "constant.numeric.exponent.decimal.jule",
-											"patterns": [
-												{
-													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
-													"name": "punctuation.separator.constant.numeric.jule"
-												}
-											]
+										"53": {
+											"name": "keyword.other.unit.imaginary.jule"
 										}
-									},
-									"match": "(?:(?:(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])(\\d(?:\\d|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=\\d)\\.|\\.(?=\\d)))(\\d(?:\\d|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?:(?<!_)([eE])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$)|\\G(?=[0-9.])(?!0[xXbBoO])(\\d(?:\\d|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([eE])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|\\G((?:(?<=\\d)\\.|\\.(?=\\d)))(\\d(?:\\d|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?:(?<!_)([eE])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?(?<!_)([pP])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))|(\\G0[xX])((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(?<!_)([pP])(\\+?)(-?)((?:\\d(?:\\d|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*))(i(?!\\w))?(?:\\n|$))"
+									}
 								},
 								{
+									"match": "(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$)|(\\G0[bB])_?([01](?:[01]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))|(\\G0[oO]?)_?((?:[0-7]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))+)(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))",
 									"captures": {
 										"1": {
 											"name": "constant.numeric.decimal.jule",
@@ -592,26 +612,11 @@
 												}
 											]
 										},
-										"10": {
-											"name": "punctuation.separator.constant.numeric.jule"
-										},
-										"12": {
-											"name": "keyword.other.unit.hexadecimal.jule"
-										},
-										"13": {
-											"name": "constant.numeric.hexadecimal.jule",
-											"patterns": [
-												{
-													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
-													"name": "punctuation.separator.constant.numeric.jule"
-												}
-											]
-										},
-										"14": {
-											"name": "punctuation.separator.constant.numeric.jule"
-										},
 										"2": {
 											"name": "punctuation.separator.constant.numeric.jule"
+										},
+										"3": {
+											"name": "keyword.other.unit.imaginary.jule"
 										},
 										"4": {
 											"name": "keyword.other.unit.binary.jule"
@@ -628,6 +633,9 @@
 										"6": {
 											"name": "punctuation.separator.constant.numeric.jule"
 										},
+										"7": {
+											"name": "keyword.other.unit.imaginary.jule"
+										},
 										"8": {
 											"name": "keyword.other.unit.octal.jule"
 										},
@@ -639,9 +647,32 @@
 													"name": "punctuation.separator.constant.numeric.jule"
 												}
 											]
+										},
+										"10": {
+											"name": "punctuation.separator.constant.numeric.jule"
+										},
+										"11": {
+											"name": "keyword.other.unit.imaginary.jule"
+										},
+										"12": {
+											"name": "keyword.other.unit.hexadecimal.jule"
+										},
+										"13": {
+											"name": "constant.numeric.hexadecimal.jule",
+											"patterns": [
+												{
+													"match": "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])",
+													"name": "punctuation.separator.constant.numeric.jule"
+												}
+											]
+										},
+										"14": {
+											"name": "punctuation.separator.constant.numeric.jule"
+										},
+										"15": {
+											"name": "keyword.other.unit.imaginary.jule"
 										}
-									},
-									"match": "(?:(?:(?:\\G(?=[0-9.])(?!0[xXbBoO])(\\d(?:\\d|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$)|(\\G0[bB])_?([01](?:[01]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))|(\\G0[oO]?)_?((?:[0-7]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))+)(i(?!\\w))?(?:\\n|$))|(\\G0[xX])_?([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)(i(?!\\w))?(?:\\n|$))"
+									}
 								},
 								{
 									"match": "(?:(?:[0-9a-zA-Z_\\.])|(?<=[eEpP])[+-])+",
@@ -651,8 +682,7 @@
 						}
 					]
 				}
-			},
-			"match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.])|(?<=[eEpP])[+-])*"
+			}
 		},
 		"operators": {
 			"patterns": [

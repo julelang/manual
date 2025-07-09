@@ -43,6 +43,7 @@ const (
 	INT   // integer literal
 	STR   // string literal
 	RUNE  // rune literal
+	IMAG  // imaginary part literal
 
 	RET      // ret
 	CONST    // const

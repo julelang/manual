@@ -2,24 +2,26 @@
 Jule is designed strongly typed. Therefore, the data-types of all values must be specified during compilation. In this section we will look at the builtin types offered by the compiler. 
 
 ## Primitive Types
-| Type    | Typical Bit Width  | Typical Value                                                       |
-|---------|--------------------|---------------------------------------------------------------------|
-| i8      | 1 byte             | -128 to 127                                                         |
-| i16     | 2 bytes            | -32768 to 32767                                                     |
-| i32     | 4 bytes            | -2147483648 to 2147483647                                           |
-| i64     | 8 bytes            | -9223372036854775808 to 9223372036854775807                         |
-| int     | Platform dependent | Platform dependent (signed)                                         |
-| u8      | 1 byte             | 0 to 255                                                            |
-| u16     | 2 bytes            | 0 to 65535                                                          |
-| u32     | 4 bytes            | 0 to 4294967295                                                     |
-| u64     | 8 bytes            | 0 to 18446744073709551615                                           |
-| uint    | Platform dependent | Platform dependent (unsigned)                                       |
-| uintptr | Platform dependent | It is a unsigned integer type that is big enough to hold a pointer. |
-| f32     | 4 bytes            | -3.4028234663852886e+38 to 3.4028234663852886e+38                   |
-| f64     | 8 bytes            | -1.797693134862315708e+308 to 1.797693134862315708e+308             |
-| bool    | -                  | `true` or `false`                                                   |
-| str     | -                  | UTF-8 byte encoded character string.                                |
-| any     | -                  | Any data.                                                           |
+| Type     | Typical Bit Width  | Typical Value                                                       |
+|----------|--------------------|---------------------------------------------------------------------|
+| i8       | 1 byte             | -128 to 127                                                         |
+| i16      | 2 bytes            | -32768 to 32767                                                     |
+| i32      | 4 bytes            | -2147483648 to 2147483647                                           |
+| i64      | 8 bytes            | -9223372036854775808 to 9223372036854775807                         |
+| int      | Platform dependent | Platform dependent (signed)                                         |
+| u8       | 1 byte             | 0 to 255                                                            |
+| u16      | 2 bytes            | 0 to 65535                                                          |
+| u32      | 4 bytes            | 0 to 4294967295                                                     |
+| u64      | 8 bytes            | 0 to 18446744073709551615                                           |
+| uint     | Platform dependent | Platform dependent (unsigned)                                       |
+| uintptr  | Platform dependent | It is a unsigned integer type that is big enough to hold a pointer. |
+| f32      | 4 bytes            | -3.4028234663852886e+38 to 3.4028234663852886e+38                   |
+| f64      | 8 bytes            | -1.797693134862315708e+308 to 1.797693134862315708e+308             |
+| cmplx64  | 8 bytes            | complex number with 32-bit floating-point real and imaginary parts  |
+| cmplx128 | 16 bytes           | complex number with 64-bit floating-point real and imaginary parts  |
+| bool     | -                  | `true` or `false`                                                   |
+| str      | -                  | UTF-8 byte encoded character string.                                |
+| any      | -                  | Any data.                                                           |
 
 ## Integer Literals
 
@@ -56,8 +58,6 @@ Binary literals are literals that begin with `0b`. Only the digits [0, 1] can be
 Octal literals are literals that begin with `0o` or `0`. Only the digits [0, 7] can be used in these literals. Using `0` alone is interpreted as a decimal number.
 ```jule
 0455
-```
-```jule
 0o455
 ```
 
@@ -74,47 +74,36 @@ All floating-point literals are `f64` by default.
 
 Dividing floating-point numbers by zero results in `Inf`. If either the divisor or the dividend is negative, the result will be `-Inf`; otherwise, it will be `Inf`.
 
+#### Example Literals
 ```jule
 3.14
-```
-```jule
 32.60
-```
-```jule
 032.60
-```
-```jule
 3.
-```
-```jule
 .3
-```
-```jule
 0.3
-```
-```jule
 1E2
-```
-```jule
 .12345E+6
-```
-```jule
 1.e+0
-```
-```jule
 0x1p-2
-```
-```jule
 0x2.p10
-```
-```jule
 0x1.Fp+0
-```
-```jule
 0X.8p-0
-```
-```jule
 0x1fffp-16
+```
+
+## Complex Number Literals
+
+Complex numbers are built-in types in Jule. The real and imaginary parts are represented using floating-point types. The type `cmplx64` is used for real and imaginary parts of type `f32`, and `cmplx128` is used for parts of type `f64`.
+
+Complex number literals consist of two parts: a real part and an imaginary part. These can also be used independently. For example, when the literal `5` is used as a complex number, it is technically equivalent to `5+0i`. Similarly, the literal `5i` (where the `i` suffix indicates the imaginary part) is technically equivalent to `0+5i`.
+
+#### Example Literals
+```jule
+4
+2i
+2 + 5i
+5i + 2
 ```
 
 ## Underscore & Numeric Literals

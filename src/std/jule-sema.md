@@ -55,6 +55,9 @@
 [struct BuiltinDeleteCallExpr](#builtindeletecallexpr)\
 [struct BuiltinCopyCallExpr](#builtincopycallexpr)\
 [struct BuiltinErrorCallExpr](#builtinerrorcallexpr)\
+[struct BuiltinRealCallExpr](#builtinrealcallexpr)\
+[struct BuiltinImagCallExpr](#builtinimagcallexpr)\
+[struct BuiltinCmplxCallExpr](#builtincmplxcallexpr)\
 [struct SizeofExpr](#sizeofexpr)\
 [struct AlignofExpr](#alignofexpr)\
 [struct RuneExpr](#runeexpr)\
@@ -212,6 +215,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsU64\(\*self\): bool](#isu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsF32\(\*self\): bool](#isf32)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsF64\(\*self\): bool](#isf64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsCmplx64\(\*self\): bool](#iscmplx64)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsCmplx128\(\*self\): bool](#iscmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInt\(\*self\): bool](#isint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUint\(\*self\): bool](#isuint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUintptr\(\*self\): bool](#isuintptr)\
@@ -851,6 +856,31 @@ struct BuiltinErrorCallExpr {
 }
 ```
 Expression Model: for built\-in error function calls\.
+
+## BuiltinRealCallExpr
+```jule
+struct BuiltinRealCallExpr {
+	Cmplx: &Value
+}
+```
+Expression Model: for built\-in real function calls\.
+
+## BuiltinImagCallExpr
+```jule
+struct BuiltinImagCallExpr {
+	Cmplx: &Value
+}
+```
+Expression Model: for built\-in imag function calls\.
+
+## BuiltinCmplxCallExpr
+```jule
+struct BuiltinCmplxCallExpr {
+	Real: &Value
+	Imag: &Value
+}
+```
+Expression Model: for built\-in imag function calls\.
 
 ## SizeofExpr
 ```jule
@@ -2164,6 +2194,18 @@ fn IsF64(*self): bool
 ```
 Reports whether type is primitive f64\.
 
+### IsCmplx64
+```jule
+fn IsCmplx64(*self): bool
+```
+Reports whether type is primitive cmplx64\.
+
+### IsCmplx128
+```jule
+fn IsCmplx128(*self): bool
+```
+Reports whether type is primitive cmplx128\.
+
 ### IsInt
 ```jule
 fn IsInt(*self): bool
@@ -2414,6 +2456,9 @@ enum Expr: type {
 	&BuiltinCapCallExpr,
 	&BuiltinDeleteCallExpr,
 	&BuiltinErrorCallExpr,
+	&BuiltinRealCallExpr,
+	&BuiltinImagCallExpr,
+	&BuiltinCmplxCallExpr,
 	&SizeofExpr,
 	&AlignofExpr,
 	&RuneExpr,
