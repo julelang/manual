@@ -45,7 +45,9 @@ Your compiler has some built-in constraint statements to make things easier. The
 | -------------|----------------------------------------------------------------|
 | `signed`     | Signed number types                                            |
 | `unsigned`   | Unsigned number types                                          |
+| `integer`    | Integer number types                                           |
 | `float`      | Floating-point number types                                    |
+| `cmplx`      | Complex number types                                           |
 | `numeric`    | All numeric types                                              |
 | `mutable`    | Mutable types                                                  |
 | `immutable`  | Immutable types                                                |
