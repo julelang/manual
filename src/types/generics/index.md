@@ -81,6 +81,15 @@ For example:
 let pos: Position[int]
 ```
 
+## Generics for Strict Type Aliases
+
+Strict type aliases support generics. There is no additional syntax to use it. Combine only what you know with the strict type declaration declaration.
+
+For example:
+```jule
+type Slice[T]: []T
+```
+
 ## Dynamic Generic Type Annotation
 Dynamic generic annotation can be used if all generic types are detectable by the compiler.
 
