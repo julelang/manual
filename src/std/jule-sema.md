@@ -5,6 +5,7 @@
 [Variables](#variables)\
 [fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]log::Log\)](#analyzepackage)\
 [fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]log::Log\)](#analyzefile)\
+[fn Fastmemcopy\(mut t: &amp;Type\): \(r: bool\)](#fastmemcopy)\
 [trait Importer](#importer)\
 [trait Kind](#kind)\
 [trait Lookup](#lookup)\
@@ -305,6 +306,12 @@ You can pass nil to importer, but panics if importer is nil and
 semantic analyzer used nil importer.
 ```
 
+
+## Fastmemcopy
+```jule
+fn Fastmemcopy(mut t: &Type): (r: bool)
+```
+Reports whether type supports fastmemcopy implementation\. Which is highly optimized variant of the built\-in copy function\.
 
 ## Importer
 ```jule
@@ -1913,7 +1920,7 @@ struct TypeAlias {
 	Token:    &token::Token
 	Name:     str
 	TypeSym:  &TypeSym
-	Generics: []&TypeAlias // See developer reference (1).
+	Generics: []&ast::Generic // See the developer reference (3).
 }
 ```
 Type alias\.
