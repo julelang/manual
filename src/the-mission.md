@@ -1,65 +1,66 @@
 # The Mission
 
-There are many programming languages ​​today. Some of these are truly successful and deserve appreciation. Jule is also inspired by these successful languages ​​and appreciates the problems they solve.
+There are many programming languages today. Some of them are truly successful and deserve appreciation. Jule is inspired by these successful languages and acknowledges the problems they solve.
 
-Jule is designed as a general-purpose programming language focusing on systems programming. It aims to be fast, efficient and safe.
+Jule is a general-purpose programming language focused on systems programming. It aims to be fast, efficient, and safe.
 
-It overlaps with the goals of many other languages, so why a new language?
+Its goals may overlap with those of many other language. So why create a new one? Because different languages make different trade-offs between simplicity, safety, and performance. Jule explores a new balance based on its own design goals.
 
-Even though we have many languages, there are so many ideas and approaches. Jule designed according to its own goals and ideas, inspired by some programming languages.
+Even though there are many languages, there are also many ideas and philosophies. Jule is designed based on its own goals and perspectives, drawing inspiration from existing languages.
 
-Some of these are explained here.
+Some of these goals are explained below.
 
 ## Simplicity and Maintainability
 
-When it comes to simplicity and maintainability, Jule is heavily influenced by Go. Go achieves this well with its simple and readable experience. Jule tries to achieve this as much as possible.
+In terms of simplicity and maintainability, Jule is heavily influenced by Go. Go succeeds in providing a simple and readable experience. Jule aims to achieve this as much as possible.
+Some languages introduce design elements that increase the time cost for developers, usually for the sake of safety or other features such as Rust. Rust achieves its goals well, but its learning curve is steep and it may not be ideal for rapid development. Go, on the other hand, performs better in this regard.
 
-Some programming languages ​​have some designs that increase the time cost of developers due to safety and some other reasons. For example, Rust. Rust does what it wants to achieve quite well, but its learning curve is high and it is not suitable for fast production. But Go is successful in this regard.
+When programming in Go, developers generally don't worry much about how the compiler will judge their algorithm, because the language doesn't impose algorithm-shaping constraints. You mostly write code the way you think, and Go guarantees memory safety for you, the experience is simple.
 
-When using the Go programming language, you generally do not care much about what the compiler will say your algorithm because language have not algorithm-shaping rules. So you mostly code as you think, and Go guarantees memory safety for you and the experience is simple.
-
-This is the experience Jule wants to provide. Jule's design should to be such that it avoids imposing constraints that increase time costs of developers, or having to think about the rules they must frequently follow when designing their algorithms. Design choices for safety or performance must be made without adding significant complexity to the Jule at the same time.
+This is the kind of experience Jule aims to provide. Its design avoids imposing rules that increase the time cost for developers or require them to constantly consider constraints while writing algorithms. Design decisions regarding safety or performance must be made without introducing significant complexity to the language.
 
 ## Efficiency and Performance
 
-To be efficient, Jule should try to behave in a way that uses the least memory consumption with performance balance. In addition, it should be high-performance and be able to create fast software. Instead of relying entirely on the backend compiler that will be used when the IR is created, it should have an optimizing reference compiler to generate the best IR. See [why Jule have an optimizing compiler](/some-questions#why-jule-have-an-optimizing-compiler).
+To be efficient, Jule is designed to minimize memory usage while balancing performance. It should support high-performance development and enable the creation of fast software.
+Rather than relying entirely on the backend compiler for optimization when generating IR, Jule includes an optimizing reference compiler to generate high-quality IR.
+(See: [Why Jule has an optimizing compiler](/some-questions#why-does-jule-have-its-own-compiler-optimizations))
 
-Of course, some important choices must be made to ensure memory efficiency. For example, not adding memory-intensive capabilities such as runtime-reflection. Of course, such important and powerful features should have alternatives that are as satisfactory as possible.
+To achieve memory efficiency, some decisions must be made such as avoiding features like runtime reflection that are typically memory-intensive. However, Jule aims to provide satisfactory alternatives such as compile-time reflection for such powerful features.
 
 ## Safety
 
-Rust is very strict about safety, and it does it well. However, as we said, there are many ideas and approaches. Jule is not as rigid as Rust in this regard, designed to be more flexible. It is similar to Go in this regard.
+Rust is known for its strict safety guarantees, and it does an excellent job. However, as mentioned before, there are many different approaches.
+Jule is not as rigid as Rust; it's designed to be more flexible, similar to Go.
 
-Go is safe at runtime. It catches situations like boundary checking, nil pointer dereferencing, etc., but it doesn't even make a special effort to guarantee that there won't be a data race like Rust, even though concurrency is one of its main focuses. This is essentially like assuming the developer will be smart and careful enough.
+Go provides runtime safety, catching errors like boundary violations and nil pointer dereferencing. However, it doesn’t enforce data race safety, even though concurrency is a key feature. This assumes the developer will act carefully and responsibly.
 
-Jule designed like Go in this regard. It assumes that developers will be careful enough about issues such as data race. This is of course a choice to avoid significant analysis that would increase compilation time and to maintain simplicity.
+Jule adopts a similar philosophy but is slightly stricter than Go. While it assumes developers will avoid issues like data races, it also performs some static safety analysis at compile-time.
 
-Although Go is taken as an example in this regard, Jule is somewhere between Go and Rust. While not as strict as Rust, it is more stringent than Go in some respects and performs more safety analysis at compile time.
+Like Go, Jule checks for boundary overflows and nil dereferences at runtime. But it also introduces compile-time checks for additional safety.
 
-Just like Go, Jule checks for boundary or nil dereferencing errors that may occur at runtime. But it also performs some important analysis at compile time, the main reason for this is that Jule includes some additional security measures compared to Go.
+A major difference is that Jule adopts a immutable-by-default approach, similar to Rust. Variables are immutable unless explicitly declared otherwise. Under Safe Jule, the compiler enforces this strictly, immutable memory cannot be mutated.
 
-The most obvious of these measures is that Jule has an immutable by default approach, just like Rust. Jule defines variables as immutable by default and is stubborn about it. Under Safe Jule, your compiler will never allow you to mutate immutable memory.
+Additionally, Jule introduces safe reference pointers. They are raw-pointers that are statically verified to be safe at compile-time. Go allows raw-pointers directly without such guarantees. In contrast, Jule performs static checks to ensure the safety of reference pointers, enhancing memory safety at the language level.
 
-Of course, there are some additional measures too, but some of them are that Jule has some abilities that Go does not have. For example, references. References are simply raw pointers that are guaranteed to be safe at compile time. Accordingly, Jule performs additional analysis to ensure this at compile time. Since Go has raw pointers directly, it doesn't take any additional precautions in this regard. Raw pointers are a fundamental part of Go code.
+## Less Common Goals
 
-## Non-Common Goals
-
-The reasons above are the goals that many modern programming languages ​​address and try to achieve in different ways. Jule also tries to achieve some less common things.
+The previous goals are shared by many modern programming languages. But Jule also pursues some less common objectives.
 
 ### Empowered Compile-Time
 
-Jule aims to provide a good compile time. This compile time provides basic capabilities such as evaluation of constant expressions, as well as comptime-reflection as a powerful alternative to shortcomings such as runtime-reflection.
+Jule emphasizes compile-time capabilities. This includes constant expression evaluation and compile-time reflection, offered as a powerful alternative to runtime reflection.
+It supports iteration and pattern matching at compile-time. Combined with features like generics, this allows developers to write advanced compile-time algorithms, reducing runtime overhead.
 
-It provides functionalities such as iterations and pattern matching at compile time. It aims to make some algorithms that require runtime-reflection as implementable as possible, with additional capabilities such as the generics.
-
-It also provides a compile-time interface to the semantic analyzer to ensure that the source code and program structure can be examined at compile time.
+Jule also exposes an interface to the semantic analyzer at compile-time, enabling inspection of program structure and source code during compilation.
 
 ### High C and C++ Interoperability
 
-Jule aims to provide good interoperability with C/C++ programming languages. To achieve this, Jule compiles its code to C++ code in the background and supports powerful backend compilers such as GNU Compiler Collection and Clang to compile generated C++ code.
+Jule is designed for interoperability with C and C++.
+To achieve this, Jule compiles its code to C++ as an intermediate step and leverages powerful backend compilers like GCC and Clang.
 
-Jule tries to optimize performance and efficiency by optimizing this generated C++ IR code as much as possible with its optimizing compiler.
+But Jule doesn't stop at code translation. It provides built-in features to simplify interoperability.
+(See: [Integrated Jule](/integrated-jule/))
 
-There are languages ​​that compile to C and C++ in the background. But Jule doesn't try to achieve this by simply compiling it to C++ code in the background. It also provides built-in support for this. See [Integrated Jule](/integrated-jule/), it aims to make C/C++ interoperability as painless and easy as possible. Jule also provides API for [Jule runtime](/runtime/).
+Jule offers an official API for its [runtime](/runtime/) in C++. This makes it easier to extend Jule or integrate it with native C++ code.
 
-So unlike most languages that aim to provide interoperability, Jule has some efforts built in to support interoperability and make it more effortless. It also provides an API written in C++, in this way, it becomes easier to extend Jule by writing C++ using API.
+In short, unlike many other languages that merely provide interop hooks, Jule is designed with interoperability in mind from the ground up.
