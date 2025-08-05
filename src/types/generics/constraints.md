@@ -73,8 +73,7 @@ But this is only applied for the `f64` type, not for `int`.
 The tilde `~` operator enables deep matching for only single mask, where it used.
 
 ::: info
-When the tilde `~` operator used, the mask type should be a primitive type.
-Strict type aliases, builtin constraints, structs ant others will not be accepted as mask.
+When the tilde `~` operator used, the mask type should be a primitive, slice, array, map, chan or pointer type. Strict type aliases, builtin constraints, structs and others will not be accepted as mask.
 :::
 
 ## Builtin Constraints
