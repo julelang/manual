@@ -38,6 +38,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsEmpty\(\*self\): bool](#isempty-1)\
 [struct IndexExpr](#indexexpr)\
 [struct SlicingExpr](#slicingexpr)\
+[struct ConstraintMask](#constraintmask)\
 [struct Constraint](#constraint)\
 [struct Generic](#generic)\
 [struct Label](#label)\
@@ -417,10 +418,19 @@ struct SlicingExpr {
 ```
 Slicing expression\.
 
+## ConstraintMask
+```jule
+struct ConstraintMask {
+	Deep: bool // Whether the operator ~ used.
+	Type: &Expr
+}
+```
+Single mask value for a constraint\.
+
 ## Constraint
 ```jule
 struct Constraint {
-	Mask: []&Expr
+	Mask: []ConstraintMask
 }
 ```
 Constraint\.
@@ -711,13 +721,14 @@ Condition chain\.
 ## TypeAlias
 ```jule
 struct TypeAlias {
-	Scope:  &ScopeTree
-	Public: bool
-	Bind:   bool
-	Token:  &token::Token
-	Name:   str
-	Strict: bool
-	Type:   &Expr
+	Scope:    &ScopeTree
+	Public:   bool
+	Bind:     bool
+	Token:    &token::Token
+	Name:     str
+	Strict:   bool
+	Type:     &Expr
+	Generics: []&Generic
 }
 ```
 Type alias declaration\.
