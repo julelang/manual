@@ -21,6 +21,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
 [struct Time](#time)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unix\(\*self\): i64](#unix-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMilli\(\*self\): i64](#unixmilli)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMicro\(\*self\): i64](#unixmicro)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn UnixNano\(\*self\): i64](#unixnano)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UTC\(\*self\): Time](#utc)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Local\(\*self\): Time](#local)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Zone\(\*self\): \(name: str, offset: int\)](#zone)\
@@ -377,7 +380,25 @@ Using the == operator when comparing a Time instance is often not what is desire
 ```jule
 fn Unix(*self): i64
 ```
-Returns time in Unix time\.
+Returns time as a Unix time, the number of seconds elapsed since January 1, 1970 UTC\. The result does not depend on the location associated with self\. Unix\-like operating systems often record time as a 32\-bit count of seconds, but since the method here returns a 64\-bit value it is valid for billions of years into the past or future\.
+
+### UnixMilli
+```jule
+fn UnixMilli(*self): i64
+```
+Returns time as a Unix time, the number of milliseconds elapsed since January 1, 1970 UTC\. The result is undefined if the Unix time in milliseconds cannot be represented by an i64 \(a date more than 292 million years before or after 1970\)\. The result does not depend on the location associated with self\.
+
+### UnixMicro
+```jule
+fn UnixMicro(*self): i64
+```
+Returns time as a Unix time, the number of microseconds elapsed since January 1, 1970 UTC\. The result is undefined if the Unix time in microseconds cannot be represented by an i64 \(a date before year \-290307 or after year 294246\)\. The result does not depend on the location associated with self\.
+
+### UnixNano
+```jule
+fn UnixNano(*self): i64
+```
+Returns time as a Unix time, the number of nanoseconds elapsed since January 1, 1970 UTC\. The result is undefined if the Unix time in nanoseconds cannot be represented by an i64 \(a date before the year 1678 or after 2262\)\. Note that this means the result of calling UnixNano on the zero Time is undefined\. The result does not depend on the location associated with self\.
 
 ### UTC
 ```jule
