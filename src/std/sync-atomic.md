@@ -3,11 +3,11 @@
 ## Index
 
 [Variables](#variables)\
-[fn Swap\[T: int \| uint \| i8 \| i16 \| i32 \| i64 \| u8 \| u16 \| u32 \| u64 \| uintptr\]\(mut &amp;addr: \*T, new: T, order: memoryOrder\): \(old: T\)](#swap)\
-[fn CompareAndSwap\[T: int \| uint \| i8 \| i16 \| i32 \| i64 \| u8 \| u16 \| u32 \| u64 \| uintptr\]\(mut &amp;addr: \*T, old: T, new: T, order: memoryOrder\): \(swapped: bool\)](#compareandswap)\
-[fn Add\[T: int \| uint \| i8 \| i16 \| i32 \| i64 \| u8 \| u16 \| u32 \| u64 \| uintptr\]\(mut &amp;addr: \*T, delta: T, order: memoryOrder\): \(new: T\)](#add)\
-[fn Load\[T: int \| uint \| i8 \| i16 \| i32 \| i64 \| u8 \| u16 \| u32 \| u64 \| uintptr\]\(&amp;addr: \*T, order: memoryOrder\): T](#load)\
-[fn Store\[T: int \| uint \| i8 \| i16 \| i32 \| i64 \| u8 \| u16 \| u32 \| u64 \| uintptr\]\(mut &amp;addr: \*T, val: T, order: memoryOrder\)](#store)\
+[fn Swap\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, new: T, order: memoryOrder\): \(old: T\)](#swap)\
+[fn CompareAndSwap\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, old: T, new: T, order: memoryOrder\): \(swapped: bool\)](#compareandswap)\
+[fn Add\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, delta: T, order: memoryOrder\): \(new: T\)](#add)\
+[fn Load\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(&amp;addr: \*T, order: memoryOrder\): T](#load)\
+[fn Store\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, val: T, order: memoryOrder\)](#store)\
 [type I8](#i8)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Swap\(mut \*self, new: i8, order: memoryOrder\): \(old: i8\)](#swap-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn CompareAndSwap\(mut \*self, old: i8, new: i8, order: memoryOrder\): \(swapped: bool\)](#compareandswap-1)\
@@ -114,31 +114,31 @@ Atomic memory orders\.
 
 ## Swap
 ```jule
-fn Swap[T: int | uint | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | uintptr](mut &addr: *T, new: T, order: memoryOrder): (old: T)
+fn Swap[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](mut &addr: *T, new: T, order: memoryOrder): (old: T)
 ```
 Atomically stores new into addr and returns the previous addr value\. Only integer types are supported\.
 
 ## CompareAndSwap
 ```jule
-fn CompareAndSwap[T: int | uint | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | uintptr](mut &addr: *T, old: T, new: T, order: memoryOrder): (swapped: bool)
+fn CompareAndSwap[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](mut &addr: *T, old: T, new: T, order: memoryOrder): (swapped: bool)
 ```
 Executes the compare\-and\-swap operation for value\. Only integer types are supported\.
 
 ## Add
 ```jule
-fn Add[T: int | uint | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | uintptr](mut &addr: *T, delta: T, order: memoryOrder): (new: T)
+fn Add[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](mut &addr: *T, delta: T, order: memoryOrder): (new: T)
 ```
 Atomically adds delta to addr and returns the new addr value\. Only integer types are supported\.
 
 ## Load
 ```jule
-fn Load[T: int | uint | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | uintptr](&addr: *T, order: memoryOrder): T
+fn Load[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](&addr: *T, order: memoryOrder): T
 ```
 Atomically loads addr\. Only integer types are supported\.
 
 ## Store
 ```jule
-fn Store[T: int | uint | i8 | i16 | i32 | i64 | u8 | u16 | u32 | u64 | uintptr](mut &addr: *T, val: T, order: memoryOrder)
+fn Store[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](mut &addr: *T, val: T, order: memoryOrder)
 ```
 Atomically stores val into addr\. Only integer types are supported\.
 
