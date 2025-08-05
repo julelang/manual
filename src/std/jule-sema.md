@@ -171,10 +171,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsConst\(\*self\): bool](#isconst)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn GoodOperand\(\*self, mut other: &amp;Value\): bool](#goodoperand)\
 [struct ValueSym](#valuesym)\
+[struct ConstraintMask](#constraintmask)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-7)\
 [struct InsGeneric](#insgeneric)\
 [struct TypeAlias](#typealias)\
 [struct Type](#type)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-7)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-8)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-5)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(\*self\): bool](#bind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil-1)\
@@ -203,7 +205,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Tuple\(mut \*self\): &amp;Tuple](#tuple)\
 [struct TypeSym](#typesym)\
 [struct Prim](#prim-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-8)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-9)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-6)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsConstraint\(\*self\): bool](#isconstraint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsI8\(\*self\): bool](#isi8)\
@@ -225,25 +227,25 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStr\(\*self\): bool](#isstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAny\(\*self\): bool](#isany)\
 [struct Chan](#chan-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-9)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-10)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-7)\
 [struct Sptr](#sptr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-10)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-11)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-8)\
 [struct Slice](#slice-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-11)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-12)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-9)\
 [struct Tuple](#tuple-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-12)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-13)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-10)\
 [struct Map](#map-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-13)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-14)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-11)\
 [struct Array](#array-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-14)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-15)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-12)\
 [struct Ptr](#ptr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-15)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-16)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-13)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe\(\*self\): bool](#isunsafe)\
 [enum Expr: type ](#expr)\
@@ -1899,11 +1901,26 @@ struct ValueSym {
 ```
 Value\.
 
+## ConstraintMask
+```jule
+struct ConstraintMask {
+	Deep: bool // Whether the operator ~ used.
+	Type: &Type
+}
+```
+Single mask value for a constraint\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+
+
 ## InsGeneric
 ```jule
 struct InsGeneric {
 	Type:       &Type
-	Constraint: []&Type
+	Constraint: []ConstraintMask
 }
 ```
 Generic type for instance types\.
