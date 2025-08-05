@@ -8,7 +8,7 @@
 [type BoolFlag](#boolflag)\
 [type StrFlag](#strflag)\
 [trait CommonFlag](#commonflag)\
-[struct Flag](#flag)\
+[struct Flag\[T\]](#flag)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn What\(\*self\): str](#what)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset)\
@@ -20,8 +20,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut \*self\): \[\]CommonFlag](#flags)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, args: \[\]str\)\!: \[\]str](#parse)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut \*self, name: str, short: rune, default: T, what: str\): &amp;T](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: i64 \| u64 \| f64 \| bool \| str\]\(mut \*self, mut var: &amp;T, name: str, short: rune, what: str\)](#addvar)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~str\]\(mut \*self, name: str, short: rune, default: T, what: str\): &amp;T](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~str\]\(mut \*self, mut var: &amp;T, name: str, short: rune, what: str\)](#addvar)
 
 
 
@@ -175,12 +175,12 @@ Resets all flags to default value\.
 
 ### Add
 ```jule
-fn Add[T: i64 | u64 | f64 | bool | str](mut *self, name: str, short: rune, default: T, what: str): &T
+fn Add[T: ~i64 | ~u64 | ~f64 | ~bool | ~str](mut *self, name: str, short: rune, default: T, what: str): &T
 ```
 Adds new flag and returns allocated reference variable\. Panics if name or short name is alreadys exist\. Zero \(0\) short names will be ignored\. Panics if used unsupported type\.
 
 ### AddVar
 ```jule
-fn AddVar[T: i64 | u64 | f64 | bool | str](mut *self, mut var: &T, name: str, short: rune, what: str)
+fn AddVar[T: ~i64 | ~u64 | ~f64 | ~bool | ~str](mut *self, mut var: &T, name: str, short: rune, what: str)
 ```
 Same with the Add method but do not allocates new reference, uses existing\.
