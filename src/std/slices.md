@@ -10,8 +10,9 @@
 [fn Replace\[S: \~\[\]E, E: comparable\]\(mut s: S, old: E, mut new: E\): \(n: int\)](#replace)\
 [fn Reverse\[S: \~\[\]E, E\]\(mut s: S\)](#reverse)\
 [fn Sort\[S: \~\[\]E, E: ordered\]\(mut s: S\)](#sort)\
+[fn SortFunc\[S: \~\[\]E, E\]\(mut x: S, cmp: fn\(a: E, b: E\): int\)](#sortfunc)\
+[fn SortStableFunc\[S: \~\[\]E, E\]\(mut x: S, cmp: fn\(a: E, b: E\): int\)](#sortstablefunc)\
 [fn IsSorted\[S: \~\[\]E, E: ordered\]\(mut s: S\): bool](#issorted)\
-[fn SortFunc\[S: \~\[\]E, E\]\(mut s: S, cmp: fn\(a: E, b: E\): int\)](#sortfunc)\
 [fn Insert\[S: \~\[\]E, E\]\(mut s: S, i: int, mut v: \.\.\.E\): S](#insert)
 
 
@@ -64,19 +65,25 @@ fn Sort[S: ~[]E, E: ordered](mut s: S)
 ```
 Sorts a slice of any ordered type in ascending order\. When sorting floating\-point numbers, NaNs are ordered before other values\.
 
+## SortFunc
+```jule
+fn SortFunc[S: ~[]E, E](mut x: S, cmp: fn(a: E, b: E): int)
+```
+Sorts the slice x in ascending order as determined by the cmp function\. This sort is not guaranteed to be stable\. cmp\(a, b\) should return a negative number when a &lt; b, a positive number when a &gt; b and zero when a == b or a and b are incomparable in the sense of a strict weak ordering\.
+
+Ir requires that cmp is a strict weak ordering\. See https://en\.wikipedia\.org/wiki/Weak\_ordering\#Strict\_weak\_orderings\. The function should return 0 for incomparable items\.
+
+## SortStableFunc
+```jule
+fn SortStableFunc[S: ~[]E, E](mut x: S, cmp: fn(a: E, b: E): int)
+```
+Sorts the slice x while keeping the original order of equal elements, using cmp to compare elements in the same way as \[SortFunc\]\.
+
 ## IsSorted
 ```jule
 fn IsSorted[S: ~[]E, E: ordered](mut s: S): bool
 ```
 Reports whether x is sorted in ascending order\.
-
-## SortFunc
-```jule
-fn SortFunc[S: ~[]E, E](mut s: S, cmp: fn(a: E, b: E): int)
-```
-Sorts the slice s in ascending order as determined by the cmp function\. This sort is not guaranteed to be stable\. cmp\(a, b\) should return a negative number when a &lt; b, a positive number when a &gt; b and zero when a == b\.
-
-SortFunc requires that cmp is a strict weak ordering\. See https://en\.wikipedia\.org/wiki/Weak\_ordering\#Strict\_weak\_orderings\.
 
 ## Insert
 ```jule
