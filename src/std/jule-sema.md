@@ -88,6 +88,7 @@
 [struct Impl](#impl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(\*self\): bool](#istraitimpl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(\*self\): bool](#isstructimpl)\
+[type ScopeTrait](#scopetrait)\
 [struct Scope](#scope)\
 [struct Use](#use)\
 [struct If](#if)\
@@ -100,6 +101,7 @@
 [struct Continue](#continue)\
 [struct Break](#break)\
 [struct Label](#label)\
+[type Direction](#direction)\
 [struct Goto](#goto)\
 [struct Postfix](#postfix)\
 [struct Assign](#assign)\
@@ -262,6 +264,28 @@ const (
 )
 ```
 Flags for semantic analysis\.
+
+---
+
+```jule
+const (
+	// Scope is an infinite scope.
+	// This passed when scope owner is exactly and infinite iteration,
+	// or while-next iteration with no condition.
+	ST_INFINITE: ScopeTrait = 1 << iota
+)
+```
+Scope traits\.
+
+---
+
+```jule
+const (
+	UP: Direction = iota
+	DOWN
+)
+```
+Directions\.
 
 ## AnalyzePackage
 ```jule
@@ -1138,9 +1162,17 @@ fn IsStructImpl(*self): bool
 ```
 Reports whether implementation type is append to destination structure\.
 
+## ScopeTrait
+```jule
+type ScopeTrait: int
+```
+Represents traits of a scope\.
+
 ## Scope
 ```jule
 struct Scope {
+	Traits:   ScopeTrait
+	Owner:    uintptr // Memory address of the owner.
 	Parent:   &Scope
 	Unsafe:   bool
 	Deferred: bool
@@ -1256,14 +1288,21 @@ struct Label {
 ```
 Label\.
 
+## Direction
+```jule
+type Direction: int
+```
+Basic direction flags\.
+
 ## Goto
 ```jule
 struct Goto {
-	Name:  str
-	Token: &token::Token
-	Label: &Label
-	Scope: &Scope // Owner scope.
-	Index: int    // Index of statement.
+	Name:      str
+	Token:     &token::Token
+	Label:     &Label
+	Scope:     &Scope // Owner scope.
+	Index:     int    // Index of statement.
+	Direction: Direction
 }
 ```
 Goto statement\.
