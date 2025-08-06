@@ -63,6 +63,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn ReadDir\(path: str\)\!: \(dirents: \[\]DirEntry\)](#readdir)\
 [fn Mkdir\(path: str\)\!](#mkdir)\
 [fn Rmdir\(path: str\)\!](#rmdir)\
+[fn Hostname\(\)\!: str](#hostname)\
 [fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Open\(path: str\)\!: &amp;File](#open)\
 [fn OpenFile\(path: str, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
@@ -195,6 +196,12 @@ Creates directory\.
 fn Rmdir(path: str)!
 ```
 Removes empty directory\.
+
+## Hostname
+```jule
+fn Hostname()!: str
+```
+Returns the host name reported by the kernel\.
 
 ## IsPathSeparator
 ```jule
