@@ -45,7 +45,7 @@ clang++ -Wno-everything --std=c++17 -fwrapv -ffloat-store -fno-fast-math -fexces
 
 Recommended compile command (Windows):
 ```sh
-clang++ -Wno-everything --std=c++17 -fwrapv -ffloat-store -fno-fast-math -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -fuse-ld=lld -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o bin/julec.exe ir.cpp -lws2_32 -lshell32
+clang++ -Wno-everything --std=c++17 -fwrapv -ffloat-store -fno-fast-math -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -fuse-ld=lld -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o bin/julec.exe ir.cpp -lws2_32 -lshell32 -liphlpapi
 ```
 
 ::: warning
