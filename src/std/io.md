@@ -10,6 +10,8 @@
 [fn WriteStr\(mut w: Writer, s: str\)\!: \(n: int\)](#writestr)\
 [fn WriteByte\(mut w: Writer, b: byte\)\!: \(n: int\)](#writebyte)\
 [fn ReadAll\(mut r: Reader\)\!: \[\]byte](#readall)\
+[fn ReadAtLeast\(mut r: Reader, mut buf: \[\]byte, min: int\)\!: \(n: int\)](#readatleast)\
+[fn ReadFull\(mut r: Reader, mut buf: \[\]byte\)\!: \(n: int\)](#readfull)\
 [trait Reader](#reader)\
 [trait Writer](#writer)\
 [trait StrWriter](#strwriter)\
@@ -68,6 +70,13 @@ Seek whence values\.
 ---
 
 ```jule
+const EOF = -1
+```
+EOF read count for the Reader trait\.
+
+---
+
+```jule
 let mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
@@ -116,6 +125,18 @@ fn ReadAll(mut r: Reader)!: []byte
 ```
 Reads from r until an error or EOF and returns the data it read\. A successful call throws no exception\.
 
+## ReadAtLeast
+```jule
+fn ReadAtLeast(mut r: Reader, mut buf: []byte, min: int)!: (n: int)
+```
+Reads from r into buf until it has read at least min bytes\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading fewer than min bytes, exception is ErrUnexpectedEOF\. If min is greater than the length of buf, exception is ErrShortBuffer\. On return, n &gt;= min if and only if err == nil\. If r returns an error having read at least min bytes, the error is dropped\.
+
+## ReadFull
+```jule
+fn ReadFull(mut r: Reader, mut buf: []byte)!: (n: int)
+```
+Reads exactly len\(buf\) bytes from r into buf\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading some but not all the bytes, exception is ErrUnexpectedEOF\. On return, n == len\(buf\) if and only if err == nil\. If r returns an error having read at least len\(buf\) bytes, the error is dropped\.
+
 ## Reader
 ```jule
 trait Reader {
@@ -126,7 +147,7 @@ Implements the basic Read method\.
 
 Reads up to len\(buf\) bytes into buf\. It returns the number of bytes read \(0 &lt;= n &lt;= len\(buf\)\)\. Even if Read returns n &lt; len\(buf\), it may use all of buf as scratch space during the call\. If some data is available but not len\(buf\) bytes, Read conventionally returns what is available instead of waiting for more\.
 
-If len\(buf\) == 0, Read should always return n == 0\. Implementations of Read are should return zero byte count for EOF\. If len\(buf\) \!= 0 and EOF reached, should return zero byte count to represent EOF\.
+If len\(buf\) == 0, Read should always return n == 0\. Implementations of Read are should return io::EOF for EOF\. If len\(buf\) \!= 0 and EOF reached, should return io::EOF to represent EOF\. Negative read count values are undefined, but io::EOF may be negative\.
 
 The Read method mutable because implementation may should do mutable operations, or this method may called needed from the mutable method, which is not cannot be internally mutable\. Such a mutable behaviors should be documented by the implementation\.
 
@@ -164,7 +185,7 @@ trait ByteReader {
 ```
 Implements the basic ReadByte method\.
 
-It should read byte and return one for n without throwing exceptional if success\. It should return zero n for EOF, the EOF byte is implementation\-dependent\. If read failed, should throw exceptional\.
+It should read byte and return one for n without throwing exceptional if success\. It should return n as io:EOF for EOF, the EOF byte is implementation\-dependent\. If read failed, should throw exceptional\.
 
 The ReadByte method mutable because of same reasons of the \`Reader\` trait\.
 
@@ -190,7 +211,7 @@ trait RuneReader {
 ```
 Implements the basic ReadRune method\.
 
-It reads a single encoded Unicode character and returns the rune and its size in bytes\. It should return zero size for EOF, the EOF rune is implementation\-dependent\.
+It reads a single encoded Unicode character and returns the rune and its size in bytes\. It should return size as io::EOF for EOF, the EOF rune is implementation\-dependent\.
 
 The ReadRune method mutable because of same reasons of the \`Reader\` trait\.
 
@@ -238,7 +259,7 @@ If n &lt; len\(p\), it throws an exception explaining why more bytes were not re
 
 Even if n &lt; len\(p\), it may use all of p as scratch space during the call\. If some data is available but not len\(p\) bytes, it blocks until either all the data is available or an error occurs\. In this respect ReadAt is different from Read\.
 
-It should return zero n for EOF\.
+It should return io::EOF for EOF\.
 
 If it is reading from an input source with a seek offset, it should not affect nor be affected by the underlying seek offset\.
 
