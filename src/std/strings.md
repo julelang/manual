@@ -46,8 +46,8 @@
 [fn Compare\(a: str, b: str\): int](#compare)\
 [struct Replacer](#replacer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(\*self, s: str\): str](#replace-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(\*self, s: str, mut w: io::StrWriter\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(&amp;self, s: str\): str](#replace-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(&amp;self, mut w: io::Writer, s: str\)\!: \(n: int\)](#writestr)\
 [struct Reader](#reader)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: str\): &amp;Reader](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len)\
@@ -71,8 +71,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Clear\(mut \*self\)](#clear)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(\*self\): int](#cap)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn Buf\(mut \*self\): \[\]byte](#buf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Buf\(mut \*self\): \[\]byte](#buf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)
 
 
 
@@ -386,15 +386,15 @@ Panics if given an odd number of arguments\.
 
 ### Replace
 ```jule
-fn Replace(*self, s: str): str
+fn Replace(&self, s: str): str
 ```
-Replaces s and returns the result\.
+Returns a copy of s with all replacements performed\.
 
 ### WriteStr
 ```jule
-fn WriteStr(*self, s: str, mut w: io::StrWriter)!: (n: int)
+fn WriteStr(&self, mut w: io::Writer, s: str)!: (n: int)
 ```
-Applies replace on s and writes result to w\. Forwards any exception if any\.
+Writes s to w with all replacements performed\.
 
 ## Reader
 ```jule
