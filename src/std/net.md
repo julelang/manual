@@ -9,7 +9,9 @@
 [fn ListenUDP\(network: Network, addr: str\)\!: &amp;UDPConn](#listenudp)\
 [fn Dial\(network: Network, addr: str\)\!: Conn](#dial)\
 [fn DialTimeout\(network: Network, addr: str, timeout: time::Duration\)\!: Conn](#dialtimeout)\
+[fn LookupIP\(mut network: Network, address: str\)\!: \[\]&amp;IPAddr](#lookupip)\
 [fn IPv4\(a: byte, b: byte, c: byte, d: byte\): IP](#ipv4)\
+[fn ParseIP\(s: str\): IP](#parseip)\
 [trait Addr](#addr)\
 [trait Conn](#conn)\
 [trait Listener](#listener)\
@@ -29,17 +31,22 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-1)\
-[struct TCPAddr](#tcpaddr)\
+[struct IPAddr](#ipaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;TCPAddr](#resolve)\
-[struct UDPAddr](#udpaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;IPAddr](#resolve)\
+[struct TCPAddr](#tcpaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, addr: str\)\!: &amp;UDPAddr](#resolve-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;TCPAddr](#resolve-1)\
+[struct Resolver](#resolver)\
+[struct UDPAddr](#udpaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;UDPAddr](#resolve-2)\
 [type HardwareAddr](#hardwareaddr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
 [struct UDPConn](#udpconn)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
@@ -47,19 +54,21 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-5)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-2)\
+[struct DNSError](#dnserror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)\
 [type IP](#ip)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\): IP](#empty)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\*self\): bool](#empty-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(\*self, other: IP\): bool](#equal)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(\*self, x: IP\): bool](#equal)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnspecified\(\*self\): bool](#isunspecified)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsLoopback\(\*self\): bool](#isloopback)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(\*self\): bool](#isprivate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut \*self\): IP](#to4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut \*self\): IP](#to16)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
-[enum Network](#network-5)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-6)\
+[enum Network](#network-6)
 
 ## Variables
 
@@ -68,6 +77,13 @@ let mut ErrInvalidTimeout = errors::New("timeout value is not valid, duration is
 let mut ErrTimeout = errors::New("connection timed out")
 ```
 Common errors of net package\. Mutation is undefined behavior\.
+
+---
+
+```jule
+let mut DefaultResolver = Resolver{ ... }
+```
+Default DNS resolver of the package\.
 
 ---
 
@@ -239,11 +255,24 @@ fn DialTimeout(network: Network, addr: str, timeout: time::Duration)!: Conn
 ```
 Same as Dial, but uses timeout\. For UDP networks, timeout will be ignored\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be ignored\.
 
+## LookupIP
+```jule
+fn LookupIP(mut network: Network, address: str)!: []&IPAddr
+```
+Looks up host using the local resolver\. It returns a slice of that host&#39;s IPv4 and IPv6 addresses by network\. Network must be IP, IP4 or IP6\. Looks up for IPv4 addresses only, if network is IP4\. Looks up for IPv6 addresses only, if network is IP6\. Looks up for IPv4 and IPv6 addresses, if network is IP\.
+
 ## IPv4
 ```jule
+#disable boundary
 fn IPv4(a: byte, b: byte, c: byte, d: byte): IP
 ```
 Returns the IP address \(in 16\-byte form\) of the IPv4 address a\.b\.c\.d\.
+
+## ParseIP
+```jule
+fn ParseIP(s: str): IP
+```
+Parses s as an IP address, returning the result\. The string s can be in IPv4 dotted decimal \(&#34;192\.0\.2\.1&#34;\), IPv6 \(&#34;2001:db8::68&#34;\), or IPv4\-mapped IPv6 \(&#34;::ffff:192\.0\.2\.1&#34;\) form\. If s is not a valid textual representation of an IP address, it returns nil\. The returned address is always 16 bytes, IPv4 addresses are returned in IPv4\-mapped IPv6 form\.
 
 ## Addr
 ```jule
@@ -400,6 +429,41 @@ fn Close(mut *self)!
 ```
 Closes connection\.
 
+## IPAddr
+```jule
+struct IPAddr {
+	IP:   IP
+	Zone: str // IPv6 scoped addressing zone
+}
+```
+Represents the address of an IP end point\.
+
+### Implemented Traits
+
+- `Addr`
+
+### Network
+```jule
+fn Network(*self): str
+```
+Returns the address&#39;s network name, &#34;ip&#34;\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns string form of address\.
+
+### Resolve
+```jule
+fn Resolve(mut network: Network, address: str)!: &IPAddr
+```
+Returns an address of IP end point\. The network must be a IP network name\.
+
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of IP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
+
 ## TCPAddr
 ```jule
 struct TCPAddr {
@@ -428,11 +492,33 @@ Returns string form of address\.
 
 ### Resolve
 ```jule
-fn Resolve(mut network: Network, addr: str)!: &TCPAddr
+fn Resolve(mut network: Network, address: str)!: &TCPAddr
 ```
 Returns an address of TCP end point\. The network must be a TCP network name\.
 
-See the \[Dial\] function for a description of the network and addr parameters\.
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of TCP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
+
+## Resolver
+```jule
+struct Resolver {
+	// When it is true, it forces to use pure Jule DNS resolver.
+	// Otherwise, DNS resolver of the operating system will be used, if it is available.
+	// Pure Jule implementation might be slow compared to the operating system implementation.
+	// Disabled by default.
+	PreferJule: bool
+
+	// Enables forced parallel DNS lookups in Jule's resolver.
+	// This overrides the DNS configuration's default sequential behavior.
+	// Parallel lookups are only performed when beneficial,
+	// such as simultaneous IPv4 and IPv6 queries.
+	// For single-protocol lookups (IPv4-only or IPv6-only),
+	// the resolver may still use sequential processing.
+	ForceParallel: bool
+}
+```
+DNS resolver configuration\.
 
 ## UDPAddr
 ```jule
@@ -462,11 +548,13 @@ Returns string form of address\.
 
 ### Resolve
 ```jule
-fn Resolve(mut network: Network, addr: str)!: &UDPAddr
+fn Resolve(mut network: Network, address: str)!: &UDPAddr
 ```
 Returns an address of UDP end point\. The network must be a UDP network name\.
 
-See the \[Dial\] function for a description of the network and addr parameters\.
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of UDP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
 
 ## HardwareAddr
 ```jule
@@ -567,6 +655,22 @@ fn Close(mut *self)!
 ```
 Closes connection\.
 
+## DNSError
+```jule
+struct DNSError {
+	Err:    str // description of the error
+	Name:   str // name looked for
+	Server: str // server used
+}
+```
+Represents a DNS lookup error\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+
+
 ## IP
 ```jule
 type IP: []byte
@@ -591,7 +695,7 @@ Reports whether IP is empty\.
 
 ### Equal
 ```jule
-fn Equal(*self, other: IP): bool
+fn Equal(*self, x: IP): bool
 ```
 Reports wherher IPs are points to the same address\. An IPv4 address and that same address in IPv6 from are considered to be equal\.
 
@@ -609,18 +713,21 @@ Reports whether IP is a loopback address\.
 
 ### IsPrivate
 ```jule
+#disable boundary
 fn IsPrivate(*self): bool
 ```
 Reports whether IP is a private address according to RFC 1918 \(for IPv4\) and RFC 4193 \(for IPv6\)\.
 
 ### To4
 ```jule
+#disable boundary
 fn To4(mut *self): IP
 ```
 Converts the IPv4 address to a 4\-byte representation\. Returns empty if IP is not an IPv4 address\. Returned IP may use the common mutable allocation with self\.
 
 ### To16
 ```jule
+#disable boundary
 fn To16(mut *self): IP
 ```
 Converts the IP address to a 16\-byte representation\. Returns empty if address is not an IP address \(it is the wrong length\)\.
@@ -639,6 +746,9 @@ Returns string form of the IP address\. It returns one of 4 forms:<br>
 ## Network
 ```jule
 enum Network: str {
+	IP: "ip",
+	IP4: "ip4",
+	IP6: "ip6",
 	TCP: "tcp",
 	TCP4: "tcp4",
 	TCP6: "tcp6",
