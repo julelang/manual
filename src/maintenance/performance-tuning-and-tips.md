@@ -110,6 +110,21 @@ fn foo(mut x: []int) {
 ```
 The directive `#disable boundary` in the example above disables the boundary checks for the function `foo`. This can allow your program to avoid the cost of boundary checking subsequent accesses.
 
+## Disable Nil Pointer Dereferencing Checking
+
+When the relevant compiler optimizations are turned on, you can skip some nil pointer dereferencing checks. But compiler's static analysis may be not enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
+
+The [`disable`](/compiler/directives#directive-disable) directive provides this functionality.
+
+For example:
+```jule
+#disable nilptr
+fn foo(mut &x: *int) {
+	*x += 20
+}
+```
+The directive `#disable nilptr` in the example above disables the nil pointer dereferencing checks for the function `foo`. This can allow your program to avoid the cost of nil pointer dereferencing subsequent accesses.
+
 ## Comptime
 
 ### Accessing Fields
