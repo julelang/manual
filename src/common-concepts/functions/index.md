@@ -220,3 +220,8 @@ let myFunction: fn(int, int): int
 The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
 
 The fact that functions can be used as data types makes it possible to use and store [anonymous functions and closures](/common-concepts/functions/anonymous-functions) with type safety.
+
+## Addresses and Conversions
+
+When you need function address for low-level purposes, you can cast to the `uintptr` type.
+Casting functions to `uintptr`, gives the memory address of the function as integer.
