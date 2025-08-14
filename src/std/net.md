@@ -83,7 +83,7 @@ Common errors of net package\. Mutation is undefined behavior\.
 ```jule
 let mut DefaultResolver = Resolver{ ... }
 ```
-Default DNS resolver of the package\.
+Default DNS resolver of the package\. Mutating this variable is not thread\-safe by default\. Most programs only need to configure it once, so performing configuration before introducing concurrency is the most common approach\. Otherwise, atomic access is required for Read/Write operations\.
 
 ---
 
