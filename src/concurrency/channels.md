@@ -20,9 +20,11 @@ Channels are `nil` by default and must be initialized before use. The built-in `
 
 A channel type is defined with the `chan` keyword, followed by the type of the channel's value. For example: `chan int`, `chan bool`, or `chan &Foo`.
 
+Jule channels are optimized for high performance and high-frequency messaging. As a result, they largely avoid parking threads. This can lead to inefficient CPU usage in low-frequency messaging scenarios, which cause long pauses. See specific channel types for more information about behavior.
+
 ## Unbuffered Channels
 
-Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is paused until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the thread gains control of channel, it sends the data to the channel and pauses execution until the data is received.
+Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is paused until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the thread gains control of channel, it sends the data to the channel and pauses execution until the data is received. Pausing execution is done through thread parking. This manages the CPU efficiently during long wait times.
 
 To initialize an unbuffered channel, the `make` function can be used by providing the desired channel type.
 For example:
@@ -77,6 +79,8 @@ If the capacity is not full, send operations do not block the program's executio
 If the buffer is full, the execution is blocked until space becomes available.
 For receive operations, if there is data waiting to be read in the buffer, the program's execution does not block, and it reads the data and continues immediately.
 If there is no data, the execution is blocked until data is sent.
+
+Buffered channels do not park the thread to pause execution. Instead, they actively spin while waiting. This behavior is optimized for high-frequency channel communication. If a pause is required, it is based on the assumption that it will be brief. However, unlike unbuffered channels, the lack of thread parking can lead to CPU waste in low-frequency channel messaging scenarios.
 
 Buffered channels create a queue for the sent and waiting-to-be-read data.
 This queue operates as a FIFO (First In, First Out) queue, where received data is taken from the queue in FIFO order.
@@ -223,6 +227,20 @@ For example:
 ```jule
 select{}
 ```
+
+### Implementation Notes
+
+> This section is not important documentation for users. It is technical documentation focusing on how `select` statements are implemented.
+
+Empty select statements directly park the thread, and this thread is never unparked. In other words, it never regains CPU time or executes again. The yield operation is permanently performed only once.
+
+For non-blocking select statements, each case is checked once, and if all fail, execution continues through the default case. Since buffered channels are lock-free and based on an MPMC queue, they continuously attempt operations and may try for up to 1 millisecond to complete successfully. If success is not achieved within this time, the attempt is terminated. In unbuffered channels, because the sender and receiver are paired, it is checked only once whether a waiting sender or receiver exists.
+
+In blocking select statements, if there is only a single case, it is equivalent to that case directly. In other words, if there is only one receive/send attempt, it is directly equivalent to that receive/send statement. The select statement is not compiled within a retry loop.
+
+If there are multiple cases, it is compiled as a retry loop. Each retry loop follows the same logic as a non-blocking select statement. Within a single CPU time slice, five retry steps are performed, and in each step, all cases are attempted. If all five attempts fail, the CPU is yielded but not parked. This approach, like in buffered channels, is based on the optimization assumption that any pause will be brief.
+
+If multiple cases are ready, a random offset is determined in each attempt to mimic the behavior of selecting one at random. All cases are tried sequentially using this random offset, meaning the starting point changes with each attempt. This allows attempts to begin from any position in the case list.
 
 ## Range Iterations over Channels
 
