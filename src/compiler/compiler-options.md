@@ -43,7 +43,7 @@ Values: `cpp14`, `cpp17`, `cpp20`
 ---
 
 `-o <file>` `--out <file>` \
-Write output to `<file>`. If compiling for Windows, if the extension of path is not `.exe`, compiler will add it.
+Write output to `<file>`. If compiling for Windows, if the extension of path is not `.exe`, compiler will add it. If output file name is empty or unspecified, compiler will use `main` by default.
 
 ---
 
