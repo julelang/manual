@@ -81,6 +81,7 @@ export default defineConfig({
           text: 'Getting Started',
           link: '/getting-started/',
           items: [
+            { text: 'Minimum Requirements', link: '/getting-started/minimum-requirements', },
             {
               text: 'Installation',
               link: '/getting-started/installation/',
