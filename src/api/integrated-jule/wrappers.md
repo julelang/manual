@@ -49,10 +49,10 @@ private:
 public:
     Vector<T>(void) {}
 
-    jule::Int size(void) const
+    __jule_Int size(void) const
     { return this->buffer.size(); }
 
-    jule::Int capacity(void) const
+    __jule_Int capacity(void) const
     { return this->buffer.capacity(); }
 };
 ```
@@ -71,13 +71,13 @@ private:
 public:
     Vector<T>(void) {}
 
-    jule::Int size(void) const
+    __jule_Int size(void) const
     { return this->buffer.size(); }
 
-    jule::Int capacity(void) const
+    __jule_Int capacity(void) const
     { return this->buffer.capacity(); }
 
-    void append(const jule::Slice<T> &items) {
+    void append(const __jule_Slice<T> &items) {
         for (const T &item: items)
             this->buffer.push_back(item);
     }

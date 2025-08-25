@@ -32,7 +32,7 @@ The `namespace` directive can be a kind of trick that can also be used to achiev
 
 For example:
 ```jule
-#namespace "std::numeric_limits<jule::Int>"
+#namespace "std::numeric_limits<__jule_Int>"
 cpp fn max(): int
 
 fn main() {
@@ -41,4 +41,4 @@ fn main() {
 }
 ```
 
-In the example above, the `max` function actually points to the `jule::Int` (ie Jule's type `int`) instance of `std::numeric_limits`. So calls to the `max` function actually happen as `std::numeric_limits<jule::Int>::max()`.
+In the example above, the `max` function actually points to the `__jule_Int` (ie Jule's type `int`) instance of `std::numeric_limits`. So calls to the `max` function actually happen as `std::numeric_limits<__jule_Int>::max()`.

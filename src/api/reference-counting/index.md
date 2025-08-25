@@ -6,7 +6,7 @@ Jule's reference counting functionality for allocations is provided in the API. 
 
 ```cpp
 template<typename T>
-jule::Ptr<T> new_ptr(void);
+__jule_Ptr<T> __jule_new_ptr(void);
 ```
 Equavelent of Jule's `new(T)` call.
 
@@ -14,7 +14,7 @@ Equavelent of Jule's `new(T)` call.
 
 ```cpp
 template<typename T>
-jule::Ptr<T> new_ptr(const T &init);
+__jule_Ptr<T> __jule_new_ptr(const T &init);
 ```
 
 Equavelent of Jule's `new(T, EXPR)` call.
@@ -31,15 +31,15 @@ Wrapper structure for raw pointer of JuleC. This structure is the used by Jule r
 ### Statics
 
 ```cpp
-static jule::Ptr<T>
-make(T *ptr, jule::Uint *ref);
+static __jule_Ptr<T>
+make(T *ptr, __jule_Uint *ref);
 ```
 Creates new reference from allocation and reference counting allocation. Reference does not counted if reference count allocation is null, so allocation never will be deallocated by Ptr. The ref pointer should be allocated by the runtime `__jule_RCNew` function.
 
 ---
 
 ```cpp
-static jule::Ptr<T>
+static __jule_Ptr<T>
 make(T *ptr);
 ```
 Creates new reference from allocation. Allocates new allocation for reference counting data and starts counting to reference counting delta of runtime.

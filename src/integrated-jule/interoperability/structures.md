@@ -43,7 +43,7 @@ For example:
 Our `mystruct.hpp` file:
 ```cpp
 struct MyStruct {
-    jule::Str text;
+    __jule_Str text;
 
     void my_method(void) {
         std::cout << "My text is: " << text << std::endl;
@@ -87,8 +87,8 @@ The C++ class:
 ```cpp
 class MyClass {
 public:
-    jule::Str data;
-    jule::Str magic_data;
+    __jule_Str data;
+    __jule_Str magic_data;
 };
 ```
 

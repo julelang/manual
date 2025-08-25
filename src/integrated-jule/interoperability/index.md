@@ -21,9 +21,9 @@ cpp.myFunction(x, y, z)
 ```cpp
 #include "api/jule.hpp"
 
-jule::Int sum(const jule::Slice<jule::Int> slice) {
-    jule::Int total = 0;
-    for (const jule::Int x: slice)
+__jule_Int sum(const __jule_Slice<__jule_Int> slice) {
+    __jule_Int total = 0;
+    for (const __jule_Int x: slice)
         total += x;
     return total;
 }

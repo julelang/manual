@@ -30,11 +30,11 @@ The `magicheader.hpp`:
 #include <iostream>
 #include "api/jule.hpp"
 
-jule::Int magic_calculation(jule::Int, jule::Int);
+__jule_Int magic_calculation(__jule_Int, __jule_Int);
 
 void printMagic() {
-	jule::Int x = 42;
-	jule::Int y = 89;
+	__jule_Int x = 42;
+	__jule_Int y = 89;
 	std::cout << magic_calculation(x, y) << std::endl;
 }
 

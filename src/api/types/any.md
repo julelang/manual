@@ -2,50 +2,52 @@
 
 The Jule's `any` type implemented in C++ from scratch. It is not uses `std::any` which is provided by STL.
 
-Using the `jule::Any` might be pretty expensive development approach. Because this type implementation have low-level implementation with low abstraction. It is designed as compiler-oriented, not developer-oriented.
+Using the `__jule_Any` might be pretty expensive development approach. Because this type implementation have low-level implementation with low abstraction. It is designed as compiler-oriented, not developer-oriented.
 
 You should pass type info structure manually for each type and they should be correct pointer.
 
-Also if you passing the `jule::Ptr` to the `jule::Any`, you should use special algorithms for that.
+Also if you passing the `__jule_Ptr` to the `__jule_Any`, you should use special algorithms for that.
 
 For example:
 ```cpp
-void type_int_dealloc(jule::Ptr<jule::Uintptr> &p) {
-    p.as<jule::Int>().dealloc();
+#define __JULE_ENABLE__PRODUCTION
+
+void type_int_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
+    p.as<__jule_Int>().dealloc();
 }
 
-jule::Bool type_int_eq(void *alloc, void *other) {
-    return *(jule::Int*)alloc == *(jule::Int*)other;
+__jule_Bool type_int_eq(void *alloc, void *other) {
+    return *(__jule_Int*)alloc == *(__jule_Int*)other;
 }
 
-jule::Str type_int_to_str(const void *alloc) {
-    return jule::to_str(*(jule::Int*)alloc);
+__jule_Str type_int_to_str(void *alloc) {
+    return std::to_string(*(__jule_Int*)alloc);
 }
 
-jule::Any::Type type_int{
+__jule_TypeMeta type_int{
     .dealloc=type_int_dealloc,
     .eq=type_int_eq,
     .to_str=type_int_to_str,
 };
 
-void type_intptr_dealloc(jule::Ptr<jule::Uintptr> &p) {
-    p.as<jule::F64>().dealloc();
+void type_intptr_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
+    p.as<__jule_F64>().dealloc();
 }
 
-jule::Any::Type type_f64ptr{
+__jule_TypeMeta type_f64ptr{
     .dealloc=type_intptr_dealloc,
-    .eq=jule::ptr_equal,
-    .to_str=jule::ptr_to_str,
+    .eq=__jule_ptrEqual,
+    .to_str=__jule_ptrToStr,
 };
 
 int main() {
-    jule::Int x = 20;
-    auto any_x = jule::Any(x, &type_int);
-    std::cout << any_x.cast<jule::Int>(&type_int) << std::endl;
+    __jule_Int x = 20;
+    auto any_x = __jule_Any(x, &type_int);
+    std::cout << any_x.cast<__jule_Int>(&type_int) << std::endl;
 
-    auto y = jule::Ptr<jule::F64>::make(89);
-    auto any_y = jule::Any(y, &type_f64ptr);
-    std::cout << any_y.cast_ptr<jule::F64>(&type_f64ptr) << std::endl;
+    auto y = __jule_Ptr<__jule_F64>::make(89);
+    auto any_y = __jule_Any(y, &type_f64ptr);
+    std::cout << *any_y.cast_ptr<__jule_F64>(&type_f64ptr) << std::endl;
 
     return 0;
 }
@@ -57,26 +59,26 @@ The example above is written in production mode. If you are writing non-producti
 
 ## Internal Data
 
-The internal data uses `jule::Ptr<jule::Uintptr>` to store internal allocation of type. The data accessible via the `data` field of the `jule::Any` type.
+The internal data uses `__jule_Ptr<__jule_Uintptr>` to store internal allocation of type. The data accessible via the `data` field of the `__jule_Any` type.
 
-If the type is `jule::Ptr`, internal data is the reinterpreted version of original type.
+If the type is `__jule_Ptr`, internal data is the reinterpreted version of original type.
 
 For example:
 ```cpp
-void type_intptr_dealloc(jule::Ptr<jule::Uintptr> &p) {
-    p.as<jule::F64>().dealloc();
+void type_intptr_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
+    p.__as<__jule_F64>().dealloc();
 }
 
-jule::Any::Type type_f64ptr{
+__jule_TypeMeta type_f64ptr{
     .dealloc=type_intptr_dealloc,
-    .eq=jule::ptr_equal,
-    .to_str=jule::ptr_to_str,
+    .eq=__jule_ptrEqual,
+    .to_str=__jule_ptrToStr,
 };
 
 int main() {
-    auto y = jule::Ptr<jule::F64>::make(89);
-    auto any_y = jule::Any(y, &type_f64ptr);
-    *(jule::F64*)any_y.data.alloc += 11;
+    auto y = __jule_Ptr<__jule_F64>::make(89);
+    auto any_y = __jule_Any(y, &type_f64ptr);
+    *(__jule_F64*)any_y.data.alloc += 11;
     std::cout << *y << std::endl;
     return 0;
 }

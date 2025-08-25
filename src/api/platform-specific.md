@@ -4,16 +4,16 @@ If you want to do platform specific programming, the API provides a number of me
 
 ## Operating System
 Defines these macros by condition:
-- `OS_WINDOWS`: if platform is Windows.
-- `OS_LINUX`: if platform is Linux.
-- `OS_DARWIN`: if platform is Darwin.
-- `OS_UNIX`: if platform is Linux or Darwin.
+- `__JULE_OS_WINDOWS`: if platform is Windows.
+- `__JULE_OS_LINUX`: if platform is Linux.
+- `__JULE_OS_DARWIN`: if platform is Darwin.
+- `__JULE_OS_UNIX`: if platform is Linux or Darwin.
 
 ## Architecture
 Defines these macros by condition:
-- `ARCH_AMD64`: if architecture is AMD64.
-- `ARCH_ARM`: if architecture is ARM.
-- `ARCH_ARM64`: if architecture is ARM64.
-- `ARCH_I386`: if architecture is intel 386.
-- `ARCH_X64`: if architecture is AMD64 or ARM64.
-- `ARCH_X32`: if architecture is ARM or intel 386.
+- `__JULE_ARCH_AMD64`: if architecture is AMD64.
+- `__JULE_ARCH_ARM`: if architecture is ARM.
+- `__JULE_ARCH_ARM64`: if architecture is ARM64.
+- `__JULE_ARCH_I386`: if architecture is intel 386.
+- `__JULE_ARCH_X64`: if architecture is AMD64 or ARM64.
+- `__JULE_ARCH_X32`: if architecture is ARM or intel 386.

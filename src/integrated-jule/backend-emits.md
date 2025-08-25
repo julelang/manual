@@ -37,10 +37,10 @@ use integ "std/jule/integrated"
 
 fn main() {
     let x = unsafe {
-        integ::Emit[f64](`jule::MAX_F64`)
+        integ::Emit[f64](`0.3`)
     }
     println(x)
-    println(x == f64.Max)
+    println(x == 0.3)
 }
 ```
 

@@ -12,97 +12,97 @@ Equivalent of Jule's `nil`
 ## Type Aliases
 
 ```cpp
-jule::I8;
+__jule_I8;
 ```
 Equivalent of Jule's `i8` type.
 
 ---
 
 ```cpp
-jule::I16;
+__jule_I16;
 ```
 Equivalent of Jule's `i16` type.
 
 ---
 
 ```cpp
-jule::I32;
+__jule_I32;
 ```
 Equivalent of Jule's `i32` type.
 
 ---
 
 ```cpp
-jule::I64;
+__jule_I64;
 ```
 Equivalent of Jule's `i64` type.
 
 ---
 
 ```cpp
-jule::U8;
+__jule_U8;
 ```
 Equivalent of Jule's `u8` type.
 
 ---
 
 ```cpp
-jule::U16;
+__jule_U16;
 ```
 Equivalent of Jule's `u16` type.
 
 ---
 
 ```cpp
-jule::U32;
+__jule_U32;
 ```
 Equivalent of Jule's `u32` type.
 
 ---
 
 ```cpp
-jule::U64;
+__jule_U64;
 ```
 Equivalent of Jule's `u64` type.
 
 ---
 
 ```cpp
-jule::F32;
+__jule_F32;
 ```
 Equivalent of Jule's `f32` type.
 
 ---
 
 ```cpp
-jule::F64;
+__jule_F64;
 ```
 Equivalent of Jule's `f64` type.
 
 ---
 
 ```cpp
-jule::Bool;
+__jule_Bool;
 ```
 Equivalent of Jule's `bool` type.
 
 ---
 
 ```cpp
-jule::Uint;
+__jule_Uint;
 ```
 Equivalent of Jule's `uint` type.
 
 ---
 
 ```cpp
-jule::Int;
+__jule_Int;
 ```
 Equivalent of Jule's `int` type.
 
 ---
 
 ```cpp
-jule::Uintptr;
+__jule_Uintptr;
 ```
 Equivalent of Jule's `uintptr` type.
