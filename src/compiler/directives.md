@@ -70,7 +70,7 @@ Here is an example code via `build` directive:
 
 ## Directive: `pass`
 Directive pass is a top directive.
-Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals. Pass directives adds to command-lines after source files
+Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals. Pass directives adds to command-lines after source files.
 
 ::: info
 There are no issue if you are using same passes.
@@ -87,6 +87,9 @@ fn main() {
     // ...
 }
 ```
+
+The `#pass` directive treats its expression strictly as a single argument. This means that if you try to pass multiple arguments within a single directive, the compiler will not split them for you. For example, according to the case above, `#pass "-framework Foundation -framework Cocoa"` is **not** the same as using two separate directives. It will be passed to the back-end compiler as a single argument, which can lead to compilation issues.
+
 
 ## Directive: `build`
 
