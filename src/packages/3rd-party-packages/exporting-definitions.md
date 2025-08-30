@@ -10,7 +10,6 @@ Exportion supported definitions:
 - Global
 - Function
 - Enum (Items will use modifier of owner enum)
-- Type Enum (Items will use modifier of owner enum)
 - Struct
 - Struct Method
 - Struct Field
