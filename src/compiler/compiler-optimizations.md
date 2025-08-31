@@ -7,6 +7,10 @@ These changes are promised to provide gains in various aspects (eg runtime perfo
 Compiler optimizations are turned off by default.
 Optimizations are enabled with options in the build command.
 
+::: info
+Some optimizations (including production compilation) may affect numerical computation results. For example, floating-point arithmetic results may differ at different optimization levels due to optimized FMA expressions, etc. For numerical algorithms, it is recommended that tests be written for specific optimizations. Otherwise, tests with different optimizations may fail.
+:::
+
 ## Always Enabled Optimizations
 
 Some optimizations may be enabled by default and it may not be possible to disable them. These optimizations are mostly things that will not affect you if they are turned on even when you want to turn off all optimizations for your debugging.
