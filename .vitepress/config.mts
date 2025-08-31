@@ -107,13 +107,26 @@ export default defineConfig({
           text: 'Compiler',
           link: '/compiler/',
           items: [
-            { text: 'Platform Support', link: '/compiler/platform-support' },
-            { text: 'Directives', link: '/compiler/directives' },
-            { text: 'Specific Programming', link: '/compiler/specific-programming' },
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
-            { text: 'Cross Compilation', link: '/compiler/cross-compilation' },
+            {
+              text: 'Compiling',
+              link: '/compiler/compiling/',
+              items: [
+                { text: 'Using JuleC', link: '/compiler/compiling/using-julec' },
+                { text: 'Using Backend Compiler', link: '/compiler/compiling/using-backend-compiler' },
+              ],
+            },
+            { text: 'Directives', link: '/compiler/directives' },
+            {
+              text: 'Platform Support',
+              link: '/compiler/platform-support',
+              items: [
+                { text: 'Specific Programming', link: '/compiler/specific-programming' },
+                { text: 'Cross Compilation', link: '/compiler/cross-compilation' },
+              ]
+            },
             {
               text: 'Backend',
               link: '/compiler/backend/',
@@ -126,14 +139,6 @@ export default defineConfig({
                     { text: 'GNU Compiler Collection', link: '/compiler/backend/cpp-backend-compilers/gnu-compiler-collection' },
                   ],
                 },
-              ],
-            },
-            {
-              text: 'Compiling',
-              link: '/compiler/compiling/',
-              items: [
-                { text: 'Using JuleC', link: '/compiler/compiling/using-julec' },
-                { text: 'Using Backend Compiler', link: '/compiler/compiling/using-backend-compiler' },
               ],
             },
           ],
