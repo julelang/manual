@@ -1,12 +1,12 @@
 # Modules
 
-Modules are the most common and recommended way to organize a Jule project. A module defines the structure of the project and safely groups all packages within the project to achieve modularization. This allows you to have subpackages in any project and organize code effectively. It is also important when designing third-party packages, as it provides the organization for the package.
+Modules are the recommended way to organize a Jule project. A module defines the project’s structure and groups related packages in a safe, modular fashion. This enables the use of subpackages, helps maintain clean organization, and is especially useful when designing third-party packages.
 
-Modules standardize your code and outline its main structure. Your module file is a type specifier, the directory where the file is located is considered the parent directory of your module and your compiler processes your code accordingly.
+Modules standardize code layout and establish the main structure of a project. The module file acts as the entry point: the directory containing it is treated as the module’s root, and the compiler processes your code accordingly.
 
 ## Initialize a Module
 
-To create a module, run the required compiler command in your targeted directory. This will create the necessary files for you and designate your current working directory as your main module package.
+To create a module, run the compiler command in the target directory. This generates the required files and marks the current working directory as the root of your module.
 
 For example:
 ```
@@ -15,15 +15,15 @@ $ julec mod init
 
 ## Module Files
 
-Module files ensure that the directory in which they are located is determined as the main module directory. A module file is called `jule.mod` and acts as a file that provides you with all the required functionality of your module.
+A module is defined by a file named `jule.mod`. Its presence marks the directory as the root of the module and provides the necessary functionality for modular development.
 
 ## Using Modules
 
-It is useful to use modules. It is more difficult to test your projects without using a module because you cannot use Jule's testing functions without a module. Actually maybe you can test it, but using a module is more functional. See [writing tests](/debugging/testing/writing-tests#modules) for more information for that.
+Modules are not optional if you want to use Jule’s testing features—without them, testing becomes more difficult and less functional. See [writing tests](/debugging/testing/writing-tests#modules) for details.
 
-For most programs it is necessary to write subpackages. It is important for a streamlined and maintainable development experience. You also need to use a module to access sub-packages.
+For most projects, subpackages are essential to maintainable development. Modules are required to organize and import these subpackages.
 
-Modules can access sub-packages from the main package through their own package import behavior. This applies to all modules. In a [use declaration](/packages/using-packages), to import any subpackage, the name of the current module in that scope must be used first. Import paths that do not start with the module name are considered invalid.
+Modules resolve subpackages relative to the module root. In a [use declaration](/packages/using-packages), every import path must begin with the module name. Any import path that does not start with the module name is considered invalid.
 
 For example:
 ```
@@ -36,11 +36,13 @@ project/
 └─ main.jule
 ```
 
-In the project structure above, the `main.jule` file must use `"project/foo/bar"` to use the `bar` package of module. This is because the module directory is the `project` directory. Likewise, the `foo` package should use `"project/foo/bar"` instead of `bar`.
+Here, `main.jule` must import the `bar` package as `"project/foo/bar"`, because the module root is `project/`. Likewise, the `foo` package must also use `"project/foo/bar"`, not just `bar`.
 
 ## Nested Modules
 
-Nested modules are supported. In a common scenario, when importing third-party packages, the package also has its own module outside of your own module. In nested modules, the main module for the package is considered its own module. In this way, import paths of packages etc. Sensitive matters are kept safe.
+Nested modules are supported. This is common when importing third-party packages, which define their own modules independently of your project.
+
+In such cases, each module treats its own `jule.mod` as the root. This ensures safe and predictable import paths.
 
 For example:
 ```
@@ -54,6 +56,6 @@ project/
 └─ main.jule
 ```
 
-In the example above, since `main.jule` has a module file, it will import the `bar` package with `"package/foo/bar"`. However, since the `foo` package has a module within itself, it is its main package. So it uses `"foo/bar"` to import the `bar` package.
+In this structure `main.jule` located in the root module, imports bar as `"project/foo/bar"`. The` foo` package, however, contains its own `jule.mod`, making it a separate module. Inside `foo`, the `bar` package is imported as `"foo/bar"`.
 
-In this way, the `foo` package was designed as a separate module and became more portable. It should be easy to move to different locations due to its intuitive imports thanks to the module file.
+This design makes the `foo` package self-contained and portable. Thanks to its own module file, it can be moved or reused in different projects without breaking imports.
