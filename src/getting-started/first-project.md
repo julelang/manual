@@ -10,7 +10,7 @@ fn main() {
 	println("hello world")
 }
 ```
-Once you've written your code in the `main.jule` file, you’re ready to compile. With the compiler, you perform package-based compilation. [Packages](/packages) are a core part of Jule’s project management. The directory you compile from is treated as the main package of your program.
+Once you've written your code in the `main.jule` file, you’re ready to compile. With the compiler, you perform package-based compilation. [Packages](/packages/) are a core part of Jule’s project management. The directory you compile from is treated as the main package of your program.
 
 To compile your project with the compiler, you can use a command like the following:
 ```
