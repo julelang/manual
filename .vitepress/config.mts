@@ -101,6 +101,7 @@ export default defineConfig({
                 },
               ]
             },
+            { text: 'First Project', link: '/getting-started/first-project', },
           ],
         },
         {
