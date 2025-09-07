@@ -10,8 +10,6 @@ Also if you passing the `__jule_Ptr` to the `__jule_Any`, you should use special
 
 For example:
 ```cpp
-#define __JULE_ENABLE__PRODUCTION
-
 void type_int_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
     p.as<__jule_Int>().dealloc();
 }
@@ -52,10 +50,6 @@ int main() {
     return 0;
 }
 ```
-
-::: info
-The example above is written in production mode. If you are writing non-production code, code might be needs some changes.
-:::
 
 ## Internal Data
 

@@ -10,6 +10,11 @@ You may not implement some safety algorithms of the API. There is a preprocessor
 
 To do this, define the `__JULE_DISABLE__SAFETY` macro before include relevant headers.
 
+::: tip
+API provides safety measures separately, so you can use unsafe versions where it needed.
+So you can avoid to disable safety for the whole program.
+:::
+
 For example:
 ```cpp
 #define __JULE_DISABLE__SAFETY

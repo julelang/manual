@@ -1,8 +1,6 @@
 # Production
 
-Jule API provides debug implementation by default. Debug implementation may require additional information arguments at points such as function calls. In this context, there is a code difference between the production implementation and the debug implementation, so you may need to adapt to this.
-
-If you want to use the Production implementation, define the `__JULE_ENABLE__PRODUCTION` macro before importing the relevant API sections.
+If you want to use the Production implementation, define the `__JULE_ENABLE__PRODUCTION` macro before importing the relevant API sections. It will not change any signature in the API, it may change the underlying implementation.
 
 For example:
 

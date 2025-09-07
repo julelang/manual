@@ -194,7 +194,7 @@ Enables special optimizations for dynamic programming features.
 `--opt-std-strings`\
 Enables special optimizations for the `std/strings` package.
 
-- Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WRiteStr` methods of the `Builder` struct.
+- Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WriteStr` methods of the `Builder` struct.
 
 ## Optimization Levels
 
