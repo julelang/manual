@@ -1,6 +1,12 @@
 # Basic Commands
 The basics of compiler commands.
 
+## build
+Compiles a program.
+```
+$ julec build <args>
+```
+
 ## help
 Shows help about of commands. 
 ```

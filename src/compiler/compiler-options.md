@@ -13,7 +13,7 @@ It doesn't matter if the options are in mixed order. They can be completely at t
 \
 For example:
 ```
-$ julec -t --compiler clang .
+$ julec build -t --compiler clang .
 ```
 The example code above means: "Hey compiler, transpile main.jule's content using the clang compiler standard." 
 

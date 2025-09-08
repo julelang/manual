@@ -11,7 +11,7 @@ fn main() {
 \
 For compile Jule code, we just give current directory path to JuleC:
 ```
-julec .
+julec build .
 ```
 
 And compiler is transpile our Jule code to C++ code.
@@ -50,7 +50,7 @@ To do this, pass the flag that you activate the transpile mode in your compiler.
 For example:
 
 ```
-julec --transpile .
+julec build --transpile .
 ```
 
 ## Why JuleC Needs Directory Path Instead File Path?

@@ -7,7 +7,7 @@ This example also accepts you already have JuleC in global path.
 :::
 
 ```
-julec -o ./bin/julec ./src/julec
+julec build -o ./bin/julec ./src/julec
 ```
 
 ## Compile Tips

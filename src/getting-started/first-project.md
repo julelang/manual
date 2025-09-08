@@ -14,7 +14,7 @@ Once you've written your code in the `main.jule` file, you’re ready to compile
 
 To compile your project with the compiler, you can use a command like the following:
 ```
-julec .
+julec build .
 ```
 This command treats the `.` directory, meaning your current working directory, as the main package and compiles it. This build is not an optimized, production-ready build. Instead, it is a debug-oriented build you can use to test and observe your program.
 
