@@ -32,7 +32,7 @@ To achieve memory efficiency, some decisions must be made such as avoiding featu
 Rust is known for its strict safety guarantees, and it does an excellent job. However, as mentioned before, there are many different approaches.
 Jule is not as rigid as Rust; it's designed to be more flexible, similar to Go.
 
-Go provides runtime safety, catching errors like boundary violations and nil pointer dereferencing. However, it doesn’t enforce data race safety, even though concurrency is a key feature. This assumes the developer will act carefully and responsibly.
+Go provides runtime safety, catching errors like boundary violations and nil pointer dereferencing. However, it doesn't enforce data race safety, even though concurrency is a key feature. This assumes the developer will act carefully and responsibly.
 
 Jule adopts a similar philosophy but is slightly stricter than Go. While it assumes developers will avoid issues like data races, it also performs some static safety analysis at compile-time.
 

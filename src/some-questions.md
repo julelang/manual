@@ -318,4 +318,4 @@ fn main() {
 	foo(fn|mut x| { *x++ })
 }
 ```
-In the example above, the `foo` function takes an anonymous function as a parameter and allows the `x` parameter to be used mutably. However, if you look at the first call in the example, you’ll see it actually only makes a `println` call. In this case, there is no need for the parameter to be mutable, and this does not compromise Jule's mutability safety. However, in the second call, the value of the `x` parameter is modified, so mutability is required.
+In the example above, the `foo` function takes an anonymous function as a parameter and allows the `x` parameter to be used mutably. However, if you look at the first call in the example, you'll see it actually only makes a `println` call. In this case, there is no need for the parameter to be mutable, and this does not compromise Jule's mutability safety. However, in the second call, the value of the `x` parameter is modified, so mutability is required.

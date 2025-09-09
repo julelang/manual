@@ -337,6 +337,7 @@ export default defineConfig({
               link: '/packages/modules/',
               items: [
                 { text: 'Internal Packages', link: '/packages/modules/internal-packages' },
+                { text: 'Specification', link: '/packages/modules/specification' },
               ],
             },
             { text: 'Using Packages', link: '/packages/using-packages' },
