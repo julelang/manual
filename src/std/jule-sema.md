@@ -342,18 +342,16 @@ Reports whether type supports fastmemcopy implementation\. Which is highly optim
 ## Importer
 ```jule
 trait Importer {
-	// Set current module path.
-	// Path should be valid directory.
-	// Set to empty string if module is not exist.
-	fn SetModPath(mut *self, path: str)
+	// Set current module.
+	// Set to nil if module is not exist.
+	fn SetMod(mut *self, mut mod: &mod::Mod)
 
-	// Returns current module path.
-	// Path should be valid directory.
-	// Returns empty string if module is not exist.
-	fn GetModPath(*self): str
+	// Returns current module.
+	// Returns nil if module is not exist.
+	fn GetMod(mut *self): &mod::Mod
 
 	// Returns module path by identity.
-	fn ModById(*self, id: int): str
+	fn ModById(mut *self, id: mod::ID): &mod::Mod
 
 	// Returns &ImportInfo by path.
 	// This function accepted as returns already imported and checked package.
@@ -1669,7 +1667,7 @@ struct ImportInfo {
 	Package: &Package
 
 	// Module identity.
-	ModId: int
+	ModId: mod::ID
 }
 ```
 Import information\. Represents imported package by use declaration\.
