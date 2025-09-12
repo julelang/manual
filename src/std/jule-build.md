@@ -11,6 +11,7 @@
 [fn PathWd\(\): str](#pathwd)\
 [fn PathAPI\(\): str](#pathapi)\
 [fn SetEnv\(exec: str, wd: str\)](#setenv)\
+[fn ModStdlib\(\): &amp;mod::Mod](#modstdlib)\
 [fn IsJule\(path: str\): bool](#isjule)
 
 ## Variables
@@ -47,6 +48,13 @@ Target operating system\. Set to runtime operating system by default\.
 let mut Arch = runtime::Arch
 ```
 Target architecture\. Set to runtime architecture by default\.
+
+---
+
+```jule
+const ModStdlibID: mod::ID = 0
+```
+Reserved module identity for the standard library module\.
 
 ---
 
@@ -111,6 +119,12 @@ fn SetEnv(exec: str, wd: str)
 Sets the environment variables of the compiler\. The exec should hold the path of the compiler&#39;s executable path\. The wd should hold the path of working directory\. SetEnv panics is exec or wd is empty and will not check if paths are exist and appropriate for compiler\. Therefore, any misinformation for environment variables may cause analysis issues\.
 
 SetEnv is a mandatory call if you need to use package sema\. Because semantic analysis and all relevant behavior relies to environment variables\. Therefore, there might be analysis issues if environment variables will not be initialized before\.
+
+## ModStdlib
+```jule
+fn ModStdlib(): &mod::Mod
+```
+Returns the reserved module instance of the standard library module\. Returns nil if not initialized by \[SetEnv\]\.
 
 ## IsJule
 ```jule
