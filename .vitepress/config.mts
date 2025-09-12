@@ -559,6 +559,7 @@ export default defineConfig({
                 { text: 'std/jule/importer', link: '/std/jule-importer' },
                 { text: 'std/jule/integrated', link: '/std/jule-integrated' },
                 { text: 'std/jule/log', link: '/std/jule-log' },
+                { text: 'std/jule/mod', link: '/std/jule-mod' },
                 { text: 'std/jule/parser', link: '/std/jule-parser' },
                 { text: 'std/jule/sema', link: '/std/jule-sema' },
                 { text: 'std/jule/token', link: '/std/jule-token' },
