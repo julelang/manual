@@ -13,3 +13,7 @@ module mylib
 In the example above, the module name is specified as `mylib`.
 
 A module name may only consist of letters, digits, `_`, or `.` characters. The first character must be either a letter or an `_`.
+
+::: warning
+The `std` is a reserved name and cannot be used for modules as a name.
+:::
