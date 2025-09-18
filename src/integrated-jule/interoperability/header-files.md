@@ -1,5 +1,7 @@
 # Header Files
 
+To bind interoperable files, you must initialize a module for the project. See the [Modules](/packages/modules/) section. The import paths must start with the module name like ordinary use declarations. See [Using Packages](/packages/using-packages) section for more information.
+
 ## Linking Header Files
 The use declarations of Jule are used to include C++ headers in the Jule code to be generated. It's just a little different. A use declaration should be told that this is a C++ include and the path should be given as a string.
 
@@ -11,7 +13,7 @@ cpp use "<stdlib.h>"
 cpp use "<iostream>"
 ```
 ```jule
-cpp use "header.hpp"
+cpp use "modulename/header.hpp"
 ```
 The correctness and validity of the file path is checked by the compiler.
 Valid header extensions; `.h`, `.hh`, `.hpp`, `.hxx`
@@ -25,10 +27,10 @@ You may not write your header files to include all the code (with implementation
 
 For example:
 ```jule
-cpp use "myfile.cpp"
+cpp use "modulename/myfile.cpp"
 ```
 ```jule
-cpp use "implementation.cxx"
+cpp use "modulename/implementation.cxx"
 ```
 The correctness and validity of the file path is checked by the compiler.
 Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.c`, `.mm`
