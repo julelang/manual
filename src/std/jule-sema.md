@@ -1667,7 +1667,7 @@ struct ImportInfo {
 	Package: &Package
 
 	// Module identity.
-	ModId: mod::ID
+	ModID: mod::ID
 }
 ```
 Import information\. Represents imported package by use declaration\.
