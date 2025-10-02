@@ -2,15 +2,15 @@
 
 ## Index
 
+[fn NewInt\(i: big::Int\): &amp;Const](#newint)\
+[fn NewI64\(x: i64\): &amp;Const](#newi64)\
+[fn NewU64\(x: u64\): &amp;Const](#newu64)\
+[fn NewBool\(x: bool\): &amp;Const](#newbool)\
+[fn NewStr\(x: str\): &amp;Const](#newstr)\
+[fn NewF64\(x: f64\): &amp;Const](#newf64)\
+[fn NewCmplx128\(x: cmplx128\): &amp;Const](#newcmplx128)\
+[fn NewNil\(\): &amp;Const](#newnil)\
 [struct Const](#const)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewInt\(i: big::Int\): &amp;Const](#newint)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewI64\(x: i64\): &amp;Const](#newi64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewU64\(x: u64\): &amp;Const](#newu64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewBool\(x: bool\): &amp;Const](#newbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewStr\(x: str\): &amp;Const](#newstr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewF64\(x: f64\): &amp;Const](#newf64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewCmplx128\(x: cmplx128\): &amp;Const](#newcmplx128)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NewNil\(\): &amp;Const](#newnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(\*self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(\*self\): bool](#readbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(\*self\): str](#readstr)\
@@ -35,26 +35,74 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsCmplx128\(\*self\): bool](#iscmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AreSameTypes\(\*self, x: Const\): bool](#aresametypes)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn And\(\*self, x: Const\): bool](#and)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Or\(\*self, x: Const\): bool](#or)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Eq\(\*self, x: Const\): bool](#eq)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lt\(\*self, x: Const\): bool](#lt)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn LtEq\(\*self, x: Const\): bool](#lteq)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Gt\(\*self, x: Const\): bool](#gt)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GtEq\(\*self, x: Const\): bool](#gteq)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, x: Const\): bool](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Sub\(mut \*self, x: Const\): bool](#sub)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mul\(mut \*self, x: Const\): bool](#mul)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(mut \*self, x: Const\): bool](#div)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Mod\(mut \*self, x: Const\): bool](#mod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn BitwiseAnd\(mut \*self, x: Const\): bool](#bitwiseand)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn BitwiseOr\(mut \*self, x: Const\): bool](#bitwiseor)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Xor\(mut \*self, x: Const\): bool](#xor)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Lshift\(mut \*self, x: Const\): bool](#lshift)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Rshift\(mut \*self, x: Const\): bool](#rshift)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn LAND\(\*self, x: Const\): bool](#land)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn LOR\(\*self, x: Const\): bool](#lor)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn EQL\(\*self, x: Const\): bool](#eql)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn LSS\(\*self, x: Const\): bool](#lss)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn LEQ\(\*self, x: Const\): bool](#leq)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GTR\(\*self, x: Const\): bool](#gtr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GEQ\(\*self, x: Const\): bool](#geq)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ADD\(mut \*self, x: Const\): bool](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SUB\(mut \*self, x: Const\): bool](#sub)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn MUL\(mut \*self, x: Const\): bool](#mul)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DIV\(mut \*self, x: Const\): bool](#div)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn REM\(mut \*self, x: Const\): bool](#rem)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AND\(mut \*self, x: Const\): bool](#and)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn OR\(mut \*self, x: Const\): bool](#or)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn XOR\(mut \*self, x: Const\): bool](#xor)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SHL\(mut \*self, x: Const\): bool](#shl)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SHR\(mut \*self, x: Const\): bool](#shr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
 
 
+
+## NewInt
+```jule
+fn NewInt(i: big::Int): &Const
+```
+Returns new constant value instance from big\-integer\.
+
+## NewI64
+```jule
+fn NewI64(x: i64): &Const
+```
+Returns new constant value instance from 64\-bit signed integer\. Value will have big\-integer precision\.
+
+## NewU64
+```jule
+fn NewU64(x: u64): &Const
+```
+Returns new constant value instance from 64\-bit unsigned integer\. Value will have big\-integer precision\.
+
+## NewBool
+```jule
+fn NewBool(x: bool): &Const
+```
+Returns new constant value instance from boolean\.
+
+## NewStr
+```jule
+fn NewStr(x: str): &Const
+```
+Returns new constant value instance from string\.
+
+## NewF64
+```jule
+fn NewF64(x: f64): &Const
+```
+Returns new constant value instance from 64\-bit floating\-point\.
+
+## NewCmplx128
+```jule
+fn NewCmplx128(x: cmplx128): &Const
+```
+Returns new constant value instance from 128\-bit floating\-point complex\.
+
+## NewNil
+```jule
+fn NewNil(): &Const
+```
+Returns new constant value instance with nil\.
 
 ## Const
 ```jule
@@ -63,55 +111,7 @@ struct Const {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Constant data\. Use Const\.new\_nil function instead of Const\{\} for nil literal\.
-
-### NewInt
-```jule
-fn NewInt(i: big::Int): &Const
-```
-Returns new constant value instance from big\-integer\.
-
-### NewI64
-```jule
-fn NewI64(x: i64): &Const
-```
-Returns new constant value instance from 64\-bit signed integer\.
-
-### NewU64
-```jule
-fn NewU64(x: u64): &Const
-```
-Returns new constant value instance from 64\-bit unsigned integer\.
-
-### NewBool
-```jule
-fn NewBool(x: bool): &Const
-```
-Returns new constant value instance from boolean\.
-
-### NewStr
-```jule
-fn NewStr(x: str): &Const
-```
-Returns new constant value instance from string\.
-
-### NewF64
-```jule
-fn NewF64(x: f64): &Const
-```
-Returns new constant value instance from 64\-bit floating\-point\.
-
-### NewCmplx128
-```jule
-fn NewCmplx128(x: cmplx128): &Const
-```
-Returns new constant value instance from 128\-bit floating\-point complex\.
-
-### NewNil
-```jule
-fn NewNil(): &Const
-```
-Returns new constant value instance with nil\.
+Constant data\. Use NewNil function instead of Const\{\} for nil literal\.
 
 ### ReadInt
 ```jule
@@ -257,27 +257,27 @@ fn AreSameTypes(*self, x: Const): bool
 ```
 Reports whether self and x has same type\.
 
-### And
+### LAND
 ```jule
-fn And(*self, x: Const): bool
+fn LAND(*self, x: Const): bool
 ```
 Reports whether self and x are true\. Returns false if type is not supported\.
 
-### Or
+### LOR
 ```jule
-fn Or(*self, x: Const): bool
+fn LOR(*self, x: Const): bool
 ```
 Reports whether self or x is true\. Returns false if type is not supported\.
 
-### Eq
+### EQL
 ```jule
-fn Eq(*self, x: Const): bool
+fn EQL(*self, x: Const): bool
 ```
 Reports whether self and x are equals\. Returns false if type is not supported\.
 
-### Lt
+### LSS
 ```jule
-fn Lt(*self, x: Const): bool
+fn LSS(*self, x: Const): bool
 ```
 Reports whether self less than x\. Returns false if type is unsupported by operation\.
 
@@ -288,9 +288,9 @@ Supported types are:<br>
 - 64\-bit unsigned integer
 - 64\-bit floating\-point
 
-### LtEq
+### LEQ
 ```jule
-fn LtEq(*self, x: Const): bool
+fn LEQ(*self, x: Const): bool
 ```
 Reports whether self less than or equals to x\. Returns false if type is unsupported by operation\.
 
@@ -301,9 +301,9 @@ Supported types are:<br>
 - 64\-bit unsigned integer
 - 64\-bit floating\-point
 
-### Gt
+### GTR
 ```jule
-fn Gt(*self, x: Const): bool
+fn GTR(*self, x: Const): bool
 ```
 Reports whether self greater than x\. Returns false if type is unsupported by operation\.
 
@@ -314,9 +314,9 @@ Supported types are:<br>
 - 64\-bit unsigned integer
 - 64\-bit floating\-point
 
-### GtEq
+### GEQ
 ```jule
-fn GtEq(*self, x: Const): bool
+fn GEQ(*self, x: Const): bool
 ```
 Reports whether self greater than or equals to x\. Returns false if type is unsupported by operation\.
 
@@ -327,27 +327,27 @@ Supported types are:<br>
 - 64\-bit unsigned integer
 - 64\-bit floating\-point
 
-### Add
+### ADD
 ```jule
-fn Add(mut *self, x: Const): bool
+fn ADD(mut *self, x: Const): bool
 ```
 Adds x&#39;s value to itself value\. Reports whether operation is success\.
 
-### Sub
+### SUB
 ```jule
-fn Sub(mut *self, x: Const): bool
+fn SUB(mut *self, x: Const): bool
 ```
 Subs x&#39;s value from itself value\. Reports whether operation is success\.
 
-### Mul
+### MUL
 ```jule
-fn Mul(mut *self, x: Const): bool
+fn MUL(mut *self, x: Const): bool
 ```
 Multiplies x&#39;s value to c&#39;s value\. Reports whether operation is success\.
 
-### Div
+### DIV
 ```jule
-fn Div(mut *self, x: Const): bool
+fn DIV(mut *self, x: Const): bool
 ```
 Divides itself value to x&#39;s value\. Reports whether operation is success\. Reports false if divided\-by\-zero\.
 
@@ -357,39 +357,39 @@ This operation makes constant value is floating-point.
 ```
 
 
-### Mod
+### REM
 ```jule
-fn Mod(mut *self, x: Const): bool
+fn REM(mut *self, x: Const): bool
 ```
 Mods itself value to x&#39;s value\. Reports whether operation is success\. Reports false if divided\-by\-zero\.
 
-### BitwiseAnd
+### AND
 ```jule
-fn BitwiseAnd(mut *self, x: Const): bool
+fn AND(mut *self, x: Const): bool
 ```
 Bitwise and itself value to x&#39;s value\. Reports whether operation is success\.
 
-### BitwiseOr
+### OR
 ```jule
-fn BitwiseOr(mut *self, x: Const): bool
+fn OR(mut *self, x: Const): bool
 ```
 Bitwise or itself value to x&#39;s value\. Reports whether operation is success\.
 
-### Xor
+### XOR
 ```jule
-fn Xor(mut *self, x: Const): bool
+fn XOR(mut *self, x: Const): bool
 ```
 Bitwise xor itself value to x&#39;s value\. Reports whether operation is success\.
 
-### Lshift
+### SHL
 ```jule
-fn Lshift(mut *self, x: Const): bool
+fn SHL(mut *self, x: Const): bool
 ```
 Left shifts itself value to x&#39;s value\. Reports whether operation is success\.
 
-### Rshift
+### SHR
 ```jule
-fn Rshift(mut *self, x: Const): bool
+fn SHR(mut *self, x: Const): bool
 ```
 Right shifts itself value to x&#39;s value\. Reports whether operation is success\.
 
