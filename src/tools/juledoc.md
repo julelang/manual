@@ -12,10 +12,10 @@ JuleDoc can process data from different sources. If a directory is given as an a
 
 For example:
 ```
-$ juledoc <directory>
+$ juledoc [arguments] <directory>
 ```
 ```
-$ juledoc <file>
+$ juledoc [arguments] <file>
 ```
 
 ### Formatter Options
