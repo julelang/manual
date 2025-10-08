@@ -87,7 +87,7 @@ Enables special optimizations for mathematical operations.
 - Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
 - Converts modulo by 2 expressions to equivalent bitwise operation.
 - Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
-- Eliminates runtime overflow checking for binary shifing expressions if right operand is constant.
+- Eliminates runtime overflow checking for binary shifting expressions if right operand is constant.
 - Eliminates cost of the `x^0`, `0^x`, `x|0`, or `0|x` computations. It will be simplified to `x` expression.
 - Eliminates cost of the `x&0`, `0&x` computations. It will be simplified to `0` expression.
 - Simplifies expressions such as `x+x` to `x<<1` if possible.
@@ -107,7 +107,7 @@ Enables special optimizations for memory accessing.
 ---
 
 `--opt-inline` \
-Enables special optimizatons for inlining.
+Enables special optimizations for inlining.
 
 - The IR is generated includes encourage inline optimizations of the backend compiler.
 

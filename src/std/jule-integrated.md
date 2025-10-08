@@ -136,7 +136,7 @@ Returns the string of s, with a terminating NULL removed\. Returns empty string 
 ```jule
 fn StrToBytes(s: str): []byte
 ```
-Returns s as NULL terminated byte slice which is able to be used safely as NULL terminated string pointer\. If s contatins NULL termination at any location, accepts NULL termination is the end of s and skips following bytes\.
+Returns s as NULL terminated byte slice which is able to be used safely as NULL terminated string pointer\. If s contains NULL termination at any location, accepts NULL termination is the end of s and skips following bytes\.
 
 ## Char
 ```jule

@@ -30,7 +30,7 @@ Write result to (source) file instead of stdout.
 	- If a different parameter follows on the same line, that last comment is moved to the beginning of the other parameter.
 	- Comments that start on the same line as the scope are transferred into the scope.
 - In while iterations, comments before the statement are preserved. Followers are transferred into the scope.
-- All inline comments in Inifity iterations are passed into scope.
+- All inline comments in Infinity iterations are passed into scope.
 - In binary expressions, if it is necessary to go to the next line, the indentation is increased only once and the following part is provided by this entry.
 	- If this happens in a new expression with parentheses, indentation is applied in the same way. For indentation that continues after the parentheses, the previous indentation level is used, no alignment is performed.
 	- If there is a shift to the bottom line in a binary expression, comments are exempt from any alignment process.

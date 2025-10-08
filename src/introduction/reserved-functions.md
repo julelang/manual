@@ -42,7 +42,7 @@ This function can be thought of as a kind of constructor function of packages.
 Therefore, all initializer functions are called before the entry point of program.
 
 Init functions can be declared more than one, unlike entry point.
-So your source code can include many initiliazer function.
+So your source code can include many initializer function.
 This might be helpful for large code bases or platform specific programming cases.
 If source code includes many init function, calling order is not deterministic.
 So if you carry about calling order of init functions, you should be aware of that.
