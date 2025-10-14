@@ -261,3 +261,18 @@ fn main() {
 }
 ```
 In the above code example, the iteration receives all the values from the buffer in sequence and then terminates because the channel is closed, meaning no more data can be received.
+
+## Built-in Cap Function
+
+The built-in cap function returns capacity of the channel. If the channel is unbuffered or nil, returns 0.
+
+Example:
+```jule
+mut ch := make(chan int, 90)
+println(cap(ch)) // 90
+ch = make(chan int)
+println(cap(ch)) // 0
+ch = nil
+println(cap(ch)) // 0
+```
+In the example above, the `cap` function returns `90` for the channel `ch`, because it is buffered channel with size `90`. Following calls returns zero because channel is unbuffered or nil.
