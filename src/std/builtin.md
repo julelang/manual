@@ -310,6 +310,12 @@ Returns capacity of slice, aka possible maximum count of slice elements without
 expanding buffer.
 ```
 
+For channels:
+```
+Returns capacity of channel, aka possible maximum count of waiting data in the queue before blocking.
+Returns zero for nil or unbuffered channels.
+```
+
 ## delete
 ```jule
 fn delete(mut map[K]V, ...)
