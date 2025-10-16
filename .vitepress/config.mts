@@ -310,6 +310,7 @@ export default defineConfig({
           text: 'Concurrency',
           link: "/concurrency/",
           items: [
+            { text: 'Concurrency Model', link: '/concurrency/concurrency-model' },
             { text: 'Threads', link: '/concurrency/threads' },
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
