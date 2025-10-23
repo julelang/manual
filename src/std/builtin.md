@@ -229,6 +229,21 @@ Capacities smaller than zero result in a panic.
 If capacity is equals to zero, then an unbuffered channel will be created.
 ```
 
+Maps:
+```
+Allocates a new map with optional hint size.
+If only the map type is provided, it creates an empty default map instance.
+If the optional second parameter, the hint size, is provided,
+the map is created by considering the given size.
+The importance of this is to be prepared for future scenarios,
+for example, when a very large number of new entries will be added,
+the process can be made more efficient by reducing new and recurring allocations.
+
+The reason it is called hint size is that the map is not guaranteed to
+always be allocated according to the given size. The Jule runtime decides this,
+and the actual allocation might be for fewer or more entries.
+```
+
 ## copy
 ```jule
 fn copy(mut dest: Dest, mut src: Src): int
