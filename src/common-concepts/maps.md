@@ -20,6 +20,18 @@ The example above shows how a map is defined and its data-type representation. T
 In iterations, the first variable is the key and the second variable is the value.
 :::
 
+## Allocating Maps
+
+Slices may be allocated with the built-in `make` function. It returns an map instance with optional hint size. If only the map type is provided, it creates an empty default map instance. If the optional second parameter, the hint size, is provided, the map is created by considering the given size. The importance of this is to be prepared for future scenarios, for example, when a very large number of new entries will be added, the process can be made more efficient by reducing new and recurring allocations.
+
+The reason it is called hint size is that the map is not guaranteed to always be allocated according to the given size. The Jule runtime decides this, and the actual allocation might be for fewer or more entries.
+
+For example:
+```jule
+make(map[int]str)
+make(map[int]str, 2000)
+```
+
 ## Map Literals with Explicit Type
 
 You can combine casting and map literals for explicit typed map literals.
@@ -32,7 +44,7 @@ x := (map[int]str)({
 })
 ```
 
-Also you can use instantiation literal directly.
+Also you can use it as literal directly.
 
 For example:
 ```jule
