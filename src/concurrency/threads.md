@@ -19,7 +19,7 @@ fn main() {
 	}
 }
 ```
-The simple example code above makes concurrent calls to the `task` function, equal to the number of CPUs. Dividing tasks like this into the number of CPUs or another optimal number can be beneficial for maximizing resource utilization and improving performance.
+The simple example code above uses the keyword `co` (which stands for `concurrent`) to make concurrent calls to the `task` function equal to the number of CPUs. Dividing such tasks by the number of CPUs or some other optimal number can be useful for maximizing resource utilization and improving performance.
 
 ### Stack Size of Threads
 
