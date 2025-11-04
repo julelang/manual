@@ -20,45 +20,18 @@ paru -S julec
 
 ## Nix
 
-JuleC is available in [Nixpkgs](https://search.nixos.org/packages?channel=unstable&show=julec). The package can be installed with:
+There is an official [flake](https://github.com/julelang/jule/blob/master/flake.nix) and a [Nixpkgs package](https://search.nixos.org/packages?show=julec) available.<br>
+You can install Jule using one of these methods:
 
-<details>
-<summary>nix-env</summary>
-
-On NixOs:
-```bash
-nix-env -iA nixos.julec
-```
-
-On Non NixOs:
-```bash
-# without flakes:
-nix-env -iA nixpkgs.julec
-# with flakes:
-nix profile install nixpkgs#julec
-```
-
-</details>
-
-<details>
-<summary>NixOS Configuration</summary>
-
-```nix
-environment.systemPackages = [
-  pkgs.julec
-];
-```
-
-</details>
-
-<details>
-<summary>nix-shell</summary>
+### Flakes
 
 ```bash
-nix-shell -p julec
+nix profile install github:julelang/jule
 ```
 
-</details>
+### Nixpkgs
+
+Refer to the [NixOS Search entry](https://search.nixos.org/packages?show=julec) for example installation methods.
 
 ## Pre-compiled Binaries
 
