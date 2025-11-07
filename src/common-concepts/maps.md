@@ -1,7 +1,7 @@
 # Maps
 Maps are hashmap. Maps a unique key value to a value. Key type always must met the key type constraint: comparable.
 ::: info
-Map values ​​are not kept in the inserted order. Hence iterations etc. It's very likely that you don't get a sequential output in actions.
+The iteration order over maps is unspecified and is not guaranteed to be the same from one iteration to the next. If an entry that has not yet been reached during iteration is removed, the corresponding iteration value may still be produced. If a map entry is created during iteration, that entry may or may not be produced during the iteration. The choice may vary for each created entry and from one iteration to another. If the map is `nil`, the iteration count is 0.
 :::
 
 Example to maps:
