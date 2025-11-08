@@ -51,7 +51,7 @@ fn main()
 ## Statements
 
 Statements are separated by a statement terminator: the semicolon (`;`).\
-However, unless you're writing two or more statements on the same line, you don't need to include it, because JuleC will insert it automatically.
+However, unless there is more than one statement on the same line, you don't need to include it, because JuleC will insert it automatically.
 
 For example:
 ```jule
