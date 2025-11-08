@@ -49,11 +49,9 @@ fn main()
 ```
 
 ## Statements
-Statements separates with statement terminator.\
-The statement terminator of Jule is the semicolon (`;`).\
-Also, we sayed each statement separates with statement terminator and it is true. But statement terminator is always necessary? No.\
-You can use statement terminator if you want write two or more statement as side-by-side. Except that, not necessary.\
-Well, how we separate statements? Easy, please skip to next line or finish write.
+
+Statements are separated by a statement terminator: the semicolon (`;`).\
+However, unless you're writing two or more statements on the same line, you don't need to include it, because JuleC will insert it automatically.
 
 For example:
 ```jule
