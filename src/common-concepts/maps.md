@@ -83,7 +83,7 @@ For example:
 ```jule
 mymap[3] = "HDD"
 ```
-If the key does not exist when you assign it, the key is generated and matched with the value you assigned. 
+If the key does not exist when you assign it, the key is generated and matched with the value you assigned.
 
 ## Delete Keys
 
