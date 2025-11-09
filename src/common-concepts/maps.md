@@ -83,11 +83,11 @@ For example:
 ```jule
 mymap[3] = "HDD"
 ```
-If the key does not exist when you assign it, the key is generated and matched with the value you assigned. 
+If the key does not exist when you assign it, the key is generated and matched with the value you assigned.
 
 ## Delete Keys
 
-The built-in `delete` function deletes relevant key from map. Takes two argument, the first one is the map, second one is the key to delete.
+The built-in `delete` function deletes the relevant key from the map. It takes two arguments: the map and the key to delete.
 
 For example:
 ```jule
@@ -98,14 +98,14 @@ fn main() {
         2: "FooBar"
     }
     delete(myMap, 2)
-    println(len(m))
+    println(len(myMap)) // 2
 }
 ```
-At the example above, the `delete` call will remove `2:"FooBar"` pair from the map.
+In the example above, the `delete` call will remove the `2:"FooBar"` pair from the map.
 
 ---
 
-If you want remove all keys without deallocating internal buffer memory, just give the map without key.
+If you want to remove all keys without deallocating the internal buffer memory, just give the map without key.
 
 For example:
 ```jule
@@ -115,11 +115,11 @@ fn main() {
         1: "Bar",
         2: "FooBar"
     }
-    delete(myMap, 2)
-    println(len(m))
+    delete(myMap)
+    println(len(myMap)) // 0
 }
 ```
-At the example above, the `delete` call will remove all keys of the map without deallocating buffer. It is efficient way to clear map for make ready to reuse or something like that.
+It is an efficient way to make the map ready for reuse.
 
 ## Lookup Assignments
 
