@@ -8,7 +8,7 @@ Integrated Jule is an essential part of C/C++ interoperability.
 
 ## Library
 
-The `std/jule/integrated` standard library is a major supporter of Integrated Jule's interoperability pillar. It provides a standard for widely used C/C++ definitions. This makes it possible to spend less time on C/C++ definitions that link to Jule code. In addition, it can not only make things easier, but also improve and simplify the implementation by providing algorithms for a number of tasks.
+The `std/integ` standard library is a major supporter of Integrated Jule's interoperability pillar. It provides a standard for widely used C/C++ definitions. This makes it possible to spend less time on C/C++ definitions that link to Jule code. In addition, it can not only make things easier, but also improve and simplify the implementation by providing algorithms for a number of tasks.
 
 ## API
 

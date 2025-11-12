@@ -79,19 +79,19 @@ auto kernel32_GetModuleFileName = (DWORD(*)(void *, char *, DWORD))(GetProcAddre
 
 `main.jule`:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ/c"
 
 cpp use "mylib.hpp"
 
 cpp fn kernel32_ExitProcess(c: uint)
-cpp fn kernel32_GetModuleFileName(*unsafe, *integ::Char, u32): u32
+cpp fn kernel32_GetModuleFileName(*unsafe, *c::Char, u32): u32
 
 fn main() {
 	mut path := make([]byte, 1024)
 	size := u32(len(path))
 	r := unsafe {
 		cpp.kernel32_GetModuleFileName(
-			nil, (*integ::Char)(&path[0]), size)
+			nil, (*c::Char)(&path[0]), size)
 	}
 	if r == 0 {
 		cpp.kernel32_ExitProcess(1)
@@ -117,7 +117,6 @@ auto kernel32_GetModuleFileName = GetProcAddress(kernel32, "GetModuleFileNameA")
 
 `main.jule`:
 ```jule
-use integ "std/jule/integrated"
 use "std/sys"
 
 cpp use "mylib.hpp"

@@ -21,20 +21,20 @@ auto libSystem_NSGetExecutablePath = (int (*)(char *, unsigned int *))(dlsym(lib
 `main.jule`:
 ```jule
 use "std/bytes"
-use integ "std/jule/integrated"
+use "std/integ/c"
 
 cpp use "mylib.hpp"
 
-cpp fn libSystem_exit(c: integ::Int)
-cpp fn libSystem_NSGetExecutablePath(*integ::Char, *integ::UnsignedInt): integ::Int
+cpp fn libSystem_exit(c: c::Int)
+cpp fn libSystem_NSGetExecutablePath(*c::Char, *c::UnsignedInt): c::Int
 
 fn main() {
 	mut path := make([]byte, 1024)
 	mut size := u32(len(path))
 	r := unsafe {
 		cpp.libSystem_NSGetExecutablePath(
-			(*integ::Char)(&path[0]),
-			(*integ::UnsignedInt)(&size))
+			(*c::Char)(&path[0]),
+			(*c::UnsignedInt)(&size))
 	}
 	if r > 0 {
 		cpp.libSystem_exit(1)
@@ -62,7 +62,7 @@ void *libSystem_NSGetExecutablePath = dlsym(libSystem, "_NSGetExecutablePath");
 `main.jule`:
 ```jule
 use "std/bytes"
-use integ "std/jule/integrated"
+use "std/integ/c"
 use "std/sys"
 
 cpp use "mylib.hpp"
@@ -74,7 +74,7 @@ fn main() {
 	mut path := make([]byte, 1024)
 	mut size := u32(len(path))
 	r := unsafe {
-		sys::Addrcall[integ::Int](
+		sys::Addrcall[c::Int](
 			uintptr(cpp.libSystem_NSGetExecutablePath),
 			&path[0], &size)
 	}

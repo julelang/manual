@@ -1,23 +1,13 @@
-# std/jule/integrated
+# std/integ/c
 
-This packages includes some built-in powered functions:
-- [Emit](/integrated-jule/backend-emits)
+Supplementer package for C interoperability of Integrated Jule. Provides helper API to make C interoperability easy and defines standards for common operations. Most C interoperable programs should use this package to make the program reliable and standardized. This is an elementary package to write C interoperable programs and packages with any scale.
 
 ## Index
 
 [fn Malloc\(size: uint\): \*unsafe](#malloc)\
 [fn Calloc\(size: uint, n: uint\): \*unsafe](#calloc)\
-[unsafe fn Realloc\(mut ptr: \*unsafe, size: uint\): \*unsafe](#realloc)\
-[unsafe fn Free\(mut ptr: \*unsafe\)](#free)\
-[fn New\[T\]\(\): \*T](#new)\
-[fn NewArray\[T\]\(size: int\): \*T](#newarray)\
-[unsafe fn Delete\[T\]\(heap: \*T\)](#delete)\
-[unsafe fn DeleteArray\[T\]\(heap: \*T\)](#deletearray)\
-[fn UTF16FromStr\(mut s: str\): \[\]u16](#utf16fromstr)\
-[fn UTF16ToStr\(s: \[\]u16\): str](#utf16tostr)\
-[unsafe fn UTF16PtrToStr\(s: \*u16\): str](#utf16ptrtostr)\
-[unsafe fn BytePtrToStr\(s: \*byte\): str](#byteptrtostr)\
-[fn StrToBytes\(s: str\): \[\]byte](#strtobytes)\
+[fn Realloc\(mut ptr: \*unsafe, size: uint\): \*unsafe](#realloc)\
+[fn Free\(mut ptr: \*unsafe\)](#free)\
 [type Char](#char)\
 [type Wchar](#wchar)\
 [type SignedChar](#signedchar)\
@@ -48,7 +38,10 @@ This packages includes some built-in powered functions:
 [type Float](#float)\
 [type Double](#double)\
 [type LongDouble](#longdouble)\
-[type Bool](#bool)
+[type Size](#size)\
+[type Uintptr](#uintptr)\
+[type Intptr](#intptr)\
+[type Ptrdiff](#ptrdiff)
 
 
 
@@ -58,7 +51,7 @@ fn Malloc(size: uint): *unsafe
 ```
 Allocates size bytes of memory\. Memory does not initialize\. Returns pointer to allocation if success, nil if not\.
 
-This function is part of the C\-style memory management\. It can be very dangerous\.
+This function is part of the C\-style memory management\. It might be very dangerous\.
 
 ## Calloc
 ```jule
@@ -70,7 +63,7 @@ This function is part of the C\-style memory management\. It can be very dangero
 
 ## Realloc
 ```jule
-unsafe fn Realloc(mut ptr: *unsafe, size: uint): *unsafe
+fn Realloc(mut ptr: *unsafe, size: uint): *unsafe
 ```
 Re\-allocates the previously allocated block in ptr, making the new block size bytes long\. Returns pointer to allocation if success, nil if not\.
 
@@ -78,65 +71,11 @@ This function is part of the C\-style memory management\. It can be very dangero
 
 ## Free
 ```jule
-unsafe fn Free(mut ptr: *unsafe)
+fn Free(mut ptr: *unsafe)
 ```
 Free a block allocated by malloc, realloc or calloc\. ptr is not set as nil by function, therefore ptr is dangling after free\. Set ptr as nil after free for more safety\.
 
 This function is part of the C\-style memory management\. It can be very dangerous\.
-
-## New
-```jule
-fn New[T](): *T
-```
-Allocates new memory\. Equivalent to: new T in C\+\+
-
-## NewArray
-```jule
-fn NewArray[T](size: int): *T
-```
-Allocates new array memory\. Equivalent to: new T\[size\] in C\+\+
-
-## Delete
-```jule
-unsafe fn Delete[T](heap: *T)
-```
-Deallocates memory allocation\. Equivalent to: delete heap in C\+\+
-
-## DeleteArray
-```jule
-unsafe fn DeleteArray[T](heap: *T)
-```
-Deallocates array memory allocation\. Equivalent to: delete\[\] heap in C\+\+
-
-## UTF16FromStr
-```jule
-fn UTF16FromStr(mut s: str): []u16
-```
-Returns the UTF\-16 encoding of the UTF\-8 string s, with a terminating NULL added\. If s includes NULL character at any location, ignores followed characters\.
-
-## UTF16ToStr
-```jule
-fn UTF16ToStr(s: []u16): str
-```
-Returns the UTF\-8 encoding of the UTF\-16 sequence s, with a terminating NULL removed\. Returns empty string if s is nil\.
-
-## UTF16PtrToStr
-```jule
-unsafe fn UTF16PtrToStr(s: *u16): str
-```
-Returns the UTF\-8 encoding of the UTF\-16 sequence s in \*u16 form, with a terminating NULL removed\. Returns empty string if s is nil\.
-
-## BytePtrToStr
-```jule
-unsafe fn BytePtrToStr(s: *byte): str
-```
-Returns the string of s, with a terminating NULL removed\. Returns empty string if pointer is nil\.
-
-## StrToBytes
-```jule
-fn StrToBytes(s: str): []byte
-```
-Returns s as NULL terminated byte slice which is able to be used safely as NULL terminated string pointer\. If s contains NULL termination at any location, accepts NULL termination is the end of s and skips following bytes\.
 
 ## Char
 ```jule
@@ -144,20 +83,11 @@ type Char: cpp.char
 ```
 Type alias for char type\.
 
-Supports casting for:<br>
-
-- byte / u8
-- i8
-
 ## Wchar
 ```jule
 type Wchar: cpp.wchar_t
 ```
 Type alias for wchar\_t type\.
-
-Supports casting for:<br>
-
-- u16
 
 ## SignedChar
 ```jule
@@ -327,8 +257,26 @@ type LongDouble: cpp.__jule_long_double
 ```
 Type alias for long double type\.
 
-## Bool
+## Size
 ```jule
-type Bool: cpp.__jule_bool
+type Size: cpp.size_t
 ```
-Type alias for bool type\.
+Type alias for size\_t type\.
+
+## Uintptr
+```jule
+type Uintptr: cpp.uintptr_t
+```
+Type alias for uintptr\_t type\.
+
+## Intptr
+```jule
+type Intptr: cpp.intptr_t
+```
+Type alias for intptr\_t type\.
+
+## Ptrdiff
+```jule
+type Ptrdiff: cpp.ptrdiff_t
+```
+Type alias for ptrdiff\_t type\.

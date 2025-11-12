@@ -112,19 +112,20 @@ If you are going to use C strings, use length-based functions, such as `strncmp`
 
 For example:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ"
+use "std/integ/c"
 
-cpp unsafe fn printf(s: *integ::Char)
+cpp unsafe fn printf(s: *c::Char)
 
 fn main() {
     s := "hello world"
-    sb := integ::StrToBytes(s)
+    sb := integ::BytesFromStr(s)
     unsafe {
-        cpp.printf((*integ::Char)(&sb[0]))
+        cpp.printf((*c::Char)(&sb[0]))
     }
 }
 ```
-The above example includes a simple C-string compatibility conversion. The `StrToBytes` function returns the given string as a null terminated byte-slice. Since this is compatible with the `char*` type, it can be safely used as a C-string with a pointer.
+The above example includes a simple C-string compatibility conversion. The `BytesFromStr` function returns the given string as a null terminated byte-slice. Since this is compatible with the `char*` type, it can be safely used as a C-string with a pointer.
 
 Considering that strings are UTF-8 byte encoded, you can also use string pointers directly if your strings are NULL-terminated to avoid unnecessary allocations.
 
@@ -132,7 +133,7 @@ For example:
 ```jule
 s := "hello world\x00"
 unsafe {
-    cpp.printf((*integ::Char)(&s[0]))
+    cpp.printf((*c::Char)(&s[0]))
 }
 ```
 The version of the above example using string. While this is not recommended, it is something that can be done for important reasons such as efficiency and performance concerns, but Jule does not guarantee this and the responsibility lies with the developer.

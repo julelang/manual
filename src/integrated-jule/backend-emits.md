@@ -1,6 +1,6 @@
 # Backend Emits
 
-Your compiler allows you to emit backend code wherever you want. Integrated Jule should be used for this. The `std/jule/integrated` standard library included in Jule provides you with useful tools and functionalities for Integrated Jule. The `Emit` function in the library allows you to emit backend code with Unsafe Jule.
+Your compiler allows you to emit backend code wherever you want. Integrated Jule should be used for this. The `std/integ` standard library included in Jule provides you with useful tools and functionalities for Integrated Jule. The `Emit` function in the library allows you to emit backend code with Unsafe Jule.
 
 When working with Integrated Jule, sometimes using use declarations and linking definitions may not be useful, or you may want to write as much Jule code as possible, in which case emitting backend code with the `Emit` function can help you.
 
@@ -18,7 +18,7 @@ To emit backend code, use Unsafe Jule to call the `Emit` function as the code yo
 
 For example:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ"
 
 fn main() {
     unsafe {
@@ -33,7 +33,7 @@ To emit backend code and read result, use Unsafe Jule to call the `emit` functio
 
 For example:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ"
 
 fn main() {
     let x = unsafe {
@@ -52,7 +52,7 @@ The arguments you pass are evaluated by your compiler as they are in the backend
 
 For example:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ"
 
 fn main() {
     let y = 40;

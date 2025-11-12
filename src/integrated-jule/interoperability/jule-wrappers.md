@@ -71,12 +71,13 @@ A simple `Person` struct definition is given above. Let's develop a wrapper for 
 
 Our Jule code:
 ```jule
-use integ "std/jule/integrated"
+use "std/integ"
+use "std/integ/c"
 
 #typedef
 cpp struct Person {
-	name:    *integ::Char
-	surname: *integ::Char
+	name:    *c::Char
+	surname: *c::Char
 }
 
 struct Person {
@@ -87,8 +88,8 @@ impl Person {
 	fn new(name: str, surname: str): Person {
 		ret Person{
 			buffer: cpp.Person{
-				name: unsafe { (*integ::Char)(&name[0]) },
-				surname: unsafe { (*integ::Char)(&surname[0]) },
+				name: unsafe { (*c::Char)(&name[0]) },
+				surname: unsafe { (*c::Char)(&surname[0]) },
 			},
 		}
 	}

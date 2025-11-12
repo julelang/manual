@@ -541,6 +541,13 @@ export default defineConfig({
               ],
             },
             { text: 'std/html', link: '/std/html' },
+            {
+              text: 'std/integ',
+              link: '/std/integ',
+              items: [
+                { text: 'std/integ/c', link: '/std/integ-c' }
+              ]
+            },
             { text: 'std/io', link: '/std/io' },
             {
               text: 'std/jule',
@@ -558,7 +565,6 @@ export default defineConfig({
                 { text: 'std/jule/directive', link: '/std/jule-directive' },
                 { text: 'std/jule/dist', link: '/std/jule-dist' },
                 { text: 'std/jule/importer', link: '/std/jule-importer' },
-                { text: 'std/jule/integrated', link: '/std/jule-integrated' },
                 { text: 'std/jule/log', link: '/std/jule-log' },
                 { text: 'std/jule/mod', link: '/std/jule-mod' },
                 { text: 'std/jule/parser', link: '/std/jule-parser' },
