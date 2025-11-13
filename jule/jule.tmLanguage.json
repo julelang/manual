@@ -65,7 +65,7 @@
 		"identifiersBegin": {
 			"patterns": [
 				{
-					"begin": "^(\\bcpp\\s)?\\s*(struct|type)\\b",
+					"begin": "^(\\extern\\s)?\\s*(struct|type)\\b",
 					"beginCaptures": {
 						"0": {
 							"name": "keyword.jule"
@@ -148,12 +148,12 @@
 					]
 				},
 				{
-					"begin": "(cpp\\.|::)(?=c(\b|)(?=\\())",
+					"begin": "(extern\\.|::)(?=c(\b|)(?=\\())",
 					"beginCaptures": {
 						"0": {
 							"patterns": [
 								{
-									"match": "\\b(cpp)\\b",
+									"match": "\\b(extern)\\b",
 									"name": "keyword.jule"
 								},
 								{
@@ -203,7 +203,7 @@
 		},
 		"keywords2": {
 			"name": "keyword.jule",
-			"match": "\\b(cpp)\\b"
+			"match": "\\b(extern)\\b"
 		},
 		"identifiers": {
 			"match": "(\\p{L}|_)[\\p{L}_0-9]*",
