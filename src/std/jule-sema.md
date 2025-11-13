@@ -66,10 +66,10 @@
 [struct AddrcallExpr](#addrcallexpr)\
 [struct SymTab](#symtab)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, selector: fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_bind: bool\): &amp;Var](#findvar)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_bind: bool\): &amp;TypeAlias](#findtypealias)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_bind: bool\): &amp;Struct](#findstruct)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_bind: bool\): &amp;Func](#findfunc)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_extern: bool\): &amp;Var](#findvar)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_extern: bool\): &amp;TypeAlias](#findtypealias)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_extern: bool\): &amp;Struct](#findstruct)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_extern: bool\): &amp;Func](#findfunc)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: str\): &amp;Trait](#findtrait)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: str\): &amp;Enum](#findenum)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum)\
@@ -152,10 +152,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum-1)\
 [struct Package](#package)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_bind: bool\): &amp;Var](#findvar-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_bind: bool\): &amp;TypeAlias](#findtypealias-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_bind: bool\): &amp;Struct](#findstruct-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_bind: bool\): &amp;Func](#findfunc-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_extern: bool\): &amp;Var](#findvar-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_extern: bool\): &amp;TypeAlias](#findtypealias-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_extern: bool\): &amp;Struct](#findstruct-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_extern: bool\): &amp;Func](#findfunc-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: str\): &amp;Trait](#findtrait-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: str\): &amp;Enum](#findenum-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum-2)\
@@ -180,7 +180,7 @@
 [struct Type](#type)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-8)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-5)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(\*self\): bool](#bind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Extern\(\*self\): bool](#extern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Void\(\*self\): bool](#void)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ActualKind\(mut \*self\): Kind](#actualkind)\
@@ -394,21 +394,21 @@ trait Lookup {
 	// Returns nil if did not found any match.
 	fn SelectPackage(mut *self, selector: fn(&ImportInfo): bool): &ImportInfo
 
-	// Find variable by identifier and bind state.
+	// Find variable by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindVar(mut *self, name: str, _bind: bool): &Var
+	fn FindVar(mut *self, name: str, _extern: bool): &Var
 
-	// Find type alias by identifier and bind state.
+	// Find type alias by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindTypeAlias(mut *self, name: str, _bind: bool): &TypeAlias
+	fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
 
-	// Find structure by identifier and bind state.
+	// Find structure by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindStruct(mut *self, name: str, _bind: bool): &Struct
+	fn FindStruct(mut *self, name: str, _extern: bool): &Struct
 
-	// Find function by identifier and bind state.
+	// Find function by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindFunc(mut *self, name: str, _bind: bool): &Func
+	fn FindFunc(mut *self, name: str, _extern: bool): &Func
 
 	// Find trait by identifier.
 	// Returns nil if did not found any match.
@@ -443,7 +443,7 @@ Field\.
 ## Struct
 ```jule
 struct Struct {
-	// This structure depended to these structures, except binded ones.
+	// This structure depended to these structures, except external ones.
 	// Only stores plain identifier references such as A, B, and MyStruct.
 	// Not includes non-plain identifier references such as *A, &B, and []MyStruct.
 	//
@@ -456,7 +456,7 @@ struct Struct {
 	Fields:     []&Field
 	Methods:    []&Func
 	Public:     bool
-	Bind:       bool
+	Extern:     bool
 	Directives: []&ast::Directive
 	Generics:   []&ast::Generic
 	Implements: []&Trait
@@ -988,27 +988,27 @@ Returns imported package by selector\. Returns nil if selector returns false for
 
 ### FindVar
 ```jule
-fn FindVar(mut *self, name: str, _bind: bool): &Var
+fn FindVar(mut *self, name: str, _extern: bool): &Var
 ```
-Returns variable by identifier and bind state\. Returns nil if refenrece not exist any variable in this identifier\.
+Returns variable by identifier and external state\. Returns nil if refenrece not exist any variable in this identifier\.
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut *self, name: str, _bind: bool): &TypeAlias
+fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
 ```
-Returns type alias by identifier and bind state\. Returns nil if not exist any type alias in this identifier\.
+Returns type alias by identifier and external state\. Returns nil if not exist any type alias in this identifier\.
 
 ### FindStruct
 ```jule
-fn FindStruct(mut *self, name: str, _bind: bool): &Struct
+fn FindStruct(mut *self, name: str, _extern: bool): &Struct
 ```
-Returns struct by identifier and bind state\. Returns nil if not exist any struct in this identifier\.
+Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
 ### FindFunc
 ```jule
-fn FindFunc(mut *self, name: str, _bind: bool): &Func
+fn FindFunc(mut *self, name: str, _extern: bool): &Func
 ```
-Returns function by identifier and bind state\. Returns nil if not exist any function in this identifier\.
+Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
 ### FindTrait
 ```jule
@@ -1442,7 +1442,7 @@ struct Func {
 	Global:      bool
 	Unsafe:      bool
 	Public:      bool
-	Bind:        bool
+	Extern:      bool
 	Static:      bool
 	Exceptional: bool
 	HasDefer:    bool // Whether function has at least one deferred scope.
@@ -1657,13 +1657,13 @@ struct ImportInfo {
 	// True if imported with Importer.GetImport function.
 	Duplicate: bool
 
-	// Is binded use declaration.
-	Bind: bool
+	// Is external use declaration.
+	Extern: bool
 
 	// Is standard library package.
 	Std: bool
 
-	// Nil if package is cpp header.
+	// Nil if package is external header.
 	Package: &Package
 
 	// Module identity.
@@ -1686,9 +1686,9 @@ Returns always nil\.
 ```jule
 fn FindVar(mut *self, name: str, _: bool): &Var
 ```
-Returns variable by identifier and bind state\. Returns nil if not exist any variable in this identifier\.
+Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
 
-Lookups by import way such as identifier selection\. Just lookups non\-bind defines\.
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
 
 ### FindTypeAlias
 ```jule
@@ -1696,23 +1696,23 @@ fn FindTypeAlias(mut *self, name: str, _: bool): &TypeAlias
 ```
 Returns type alias by identifier\. Returns nil if not exist any type alias in this identifier\.
 
-Lookups by import way such as identifier selection\. Just lookups non\-bind defines\.
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
 
 ### FindStruct
 ```jule
 fn FindStruct(mut *self, name: str, _: bool): &Struct
 ```
-Returns struct by identifier and bind state\. Returns nil if not exist any struct in this identifier\.
+Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
-Lookups by import way such as identifier selection\. Just lookups non\-bind defines\.
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
 
 ### FindFunc
 ```jule
 fn FindFunc(mut *self, name: str, _: bool): &Func
 ```
-Returns function by identifier and bind state\. Returns nil if not exist any function in this identifier\.
+Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
-Lookups by import way such as identifier selection\. Just lookups non\-bind defines\.
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
 
 ### FindTrait
 ```jule
@@ -1759,27 +1759,27 @@ Returns always nil\.
 
 ### FindVar
 ```jule
-fn FindVar(mut *self, name: str, _bind: bool): &Var
+fn FindVar(mut *self, name: str, _extern: bool): &Var
 ```
-Returns variable by identifier and bind state\. Returns nil if not exist any variable in this identifier\.
+Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut *self, name: str, _bind: bool): &TypeAlias
+fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
 ```
-Returns type alias by identifier and bind state\. Returns nil if not exist any type alias in this identifier\.
+Returns type alias by identifier and external state\. Returns nil if not exist any type alias in this identifier\.
 
 ### FindStruct
 ```jule
-fn FindStruct(mut *self, name: str, _bind: bool): &Struct
+fn FindStruct(mut *self, name: str, _extern: bool): &Struct
 ```
-Returns struct by identifier and bind state\. Returns nil if not exist any struct in this identifier\.
+Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
 ### FindFunc
 ```jule
-fn FindFunc(mut *self, name: str, _bind: bool): &Func
+fn FindFunc(mut *self, name: str, _extern: bool): &Func
 ```
-Returns function by identifier and bind state\. Returns nil if not exist any function in this identifier\.
+Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
 ### FindTrait
 ```jule
@@ -1805,7 +1805,7 @@ struct Var {
 	Scope:      &Scope
 	Token:      &token::Token
 	Name:       str
-	Bind:       bool
+	Extern:     bool
 	Constant:   bool
 	Mutable:    bool
 	Public:     bool
@@ -1968,7 +1968,7 @@ struct TypeAlias {
 	Scope:    &ast::ScopeTree
 	Strict:   bool
 	Public:   bool
-	Bind:     bool
+	Extern:   bool
 	Used:     bool
 	Generic:  bool
 	Token:    &token::Token
@@ -2006,11 +2006,11 @@ fn Equal(&self, other: &Type): bool
 ```
 Reports whether types are same\.
 
-### Bind
+### Extern
 ```jule
-fn Bind(*self): bool
+fn Extern(*self): bool
 ```
-Reports whether type is bind kind\.
+Reports whether type is external kind\.
 
 ### IsNil
 ```jule
