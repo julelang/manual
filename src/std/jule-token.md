@@ -15,7 +15,7 @@
 [struct FileSet](#fileset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str\): &amp;FileSet](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut \*self, data: \[\]byte\)](#fill)\
-&nbsp;&nbsp;&nbsp;&nbsp;[unsafe fn FillMut\(mut \*self, mut data: \[\]byte\)](#fillmut)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FillMut\(mut \*self, mut data: \[\]byte\)](#fillmut)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(\*self\): str](#dir)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(\*self\): uintptr](#addr)\
@@ -35,6 +35,7 @@ const (
 	HASH      // #
 	ELLIPSIS  // ...
 	QMARK     // ?
+	TILDE     // ~
 
 	COMMENT // /*..*/ or //...
 	NAME    // identifier
@@ -64,7 +65,7 @@ const (
 	TRAIT    // trait
 	IMPL     // impl
 	CHAN     // chan
-	BIND     // cpp
+	EXTERN   // extern
 	FALL     // fall
 	FN       // fn
 	LET      // let
