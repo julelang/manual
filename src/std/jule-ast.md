@@ -251,9 +251,9 @@ Unsafe expression\.
 ## NameExpr
 ```jule
 struct NameExpr {
-	Token: &token::Token // Token of identifier.
-	Name:  str           // The name.
-	Bind:  bool          // It is in the bind namespace.
+	Token:  &token::Token // Token of identifier.
+	Name:   str           // The name.
+	Extern: bool          // It is in the extern namespace.
 }
 ```
 Identifier expression\.
@@ -563,7 +563,7 @@ struct Func {
 	Global:      bool
 	Unsafe:      bool
 	Public:      bool
-	Bind:        bool
+	Extern:      bool
 	Short:       bool // Whether this function is an anonymous function, defined by short literal.
 	Static:      bool
 	Exceptional: bool
@@ -602,7 +602,7 @@ struct Var {
 	Token:      &token::Token
 	Op:         &token::Token // Expression assign operator token.
 	Name:       str
-	Bind:       bool
+	Extern:     bool
 	Public:     bool
 	Mutable:    bool
 	Const:      bool
@@ -723,7 +723,7 @@ Condition chain\.
 struct TypeAlias {
 	Scope:    &ScopeTree
 	Public:   bool
-	Bind:     bool
+	Extern:   bool
 	Token:    &token::Token
 	Name:     str
 	Strict:   bool
@@ -774,10 +774,10 @@ Select statement\.
 ## Use
 ```jule
 struct Use {
-	Token: &token::Token
-	Path:  &token::Token // Use declaration path token.
-	Alias: &token::Token // Custom alias. Nil if not given.
-	Bind:  bool          // Bind use declaration.
+	Token:  &token::Token
+	Path:   &token::Token // Use declaration path token.
+	Alias:  &token::Token // Custom alias. Nil if not given.
+	Extern: bool          // External use declaration.
 }
 ```
 Use declaration statement\.
@@ -859,7 +859,7 @@ struct Struct {
 	Name:       str
 	Fields:     []&Field
 	Public:     bool
-	Bind:       bool
+	Extern:     bool
 	Directives: []&Directive
 	Generics:   []&Generic
 }
