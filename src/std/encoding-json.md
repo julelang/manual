@@ -29,7 +29,7 @@ Implements encoding of JSON as defined in RFC 7159\.
 
 The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\. Also this function is no\-overhead guaranteed\. So just implements plain encoding algorithm without unnecessary algorithms such as indentation handling\.
 
-Implementation supports only Jule types, excluding binded types\.
+Implementation supports only Jule types, excluding external types\.
 
 Encoding details:<br>
 ```
@@ -108,7 +108,7 @@ Implements decoding of JSON as defined in RFC 7159\.
 
 The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\.
 
-Implementation supports only Jule types, excluding binded types\.
+Implementation supports only Jule types, excluding external types\.
 
 Decoding details:<br>
 ```
