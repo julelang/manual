@@ -23,21 +23,21 @@ auto libSystem_NSGetExecutablePath = (int (*)(char *, unsigned int *))(dlsym(lib
 use "std/bytes"
 use "std/integ/c"
 
-cpp use "mylib.hpp"
+extern use "mylib.hpp"
 
-cpp fn libSystem_exit(c: c::Int)
-cpp fn libSystem_NSGetExecutablePath(*c::Char, *c::UnsignedInt): c::Int
+extern fn libSystem_exit(c: c::Int)
+extern fn libSystem_NSGetExecutablePath(*c::Char, *c::UnsignedInt): c::Int
 
 fn main() {
 	mut path := make([]byte, 1024)
 	mut size := u32(len(path))
 	r := unsafe {
-		cpp.libSystem_NSGetExecutablePath(
+		extern.libSystem_NSGetExecutablePath(
 			(*c::Char)(&path[0]),
 			(*c::UnsignedInt)(&size))
 	}
 	if r > 0 {
-		cpp.libSystem_exit(1)
+		extern.libSystem_exit(1)
 	}
 	path = path[:bytes::IndexByte(path, 0)]
 	println(str(path))
@@ -65,21 +65,21 @@ use "std/bytes"
 use "std/integ/c"
 use "std/sys"
 
-cpp use "mylib.hpp"
+extern use "mylib.hpp"
 
-cpp let libSystem_exit: *unsafe
-cpp let libSystem_NSGetExecutablePath: *unsafe
+extern let libSystem_exit: *unsafe
+extern let libSystem_NSGetExecutablePath: *unsafe
 
 fn main() {
 	mut path := make([]byte, 1024)
 	mut size := u32(len(path))
 	r := unsafe {
 		sys::Addrcall[c::Int](
-			uintptr(cpp.libSystem_NSGetExecutablePath),
+			uintptr(extern.libSystem_NSGetExecutablePath),
 			&path[0], &size)
 	}
 	if r > 0 {
-		sys::Addrcall(uintptr(cpp.libSystem_exit), i32(1))
+		sys::Addrcall(uintptr(extern.libSystem_exit), i32(1))
 	}
 	path = path[:bytes::IndexByte(path, 0)]
 	println(str(path))

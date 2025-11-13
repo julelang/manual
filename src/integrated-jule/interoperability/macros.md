@@ -10,9 +10,9 @@ For example:\
 ```
 **sum.jule**
 ```jule
-cpp use "tickrate.hpp"
+extern use "tickrate.hpp"
 
-cpp let TICKRATE: int
+extern let TICKRATE: int
 ```
 
 ---
@@ -34,9 +34,9 @@ For example:\
 ```
 **sum.jule**
 ```jule
-cpp use "sum.hpp"
+extern use "sum.hpp"
 
 #cdef
-cpp fn SUM(int, int): int
+extern fn SUM(int, int): int
 ```
 The `cdef` attribute must be used for correct parsing of preprocessor defines.

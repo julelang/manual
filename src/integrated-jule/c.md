@@ -4,4 +4,4 @@ The C programming language is a language that is used in many systems and has a 
 
 Jule and C can work together, but you should remember that your compiler will probably evaluate your C code according to C++ rules. If you have C code that is incompatible with C++, you may need to make changes in the relevant sections of code.
 
-Use the `cpp` keyword to use your C definitions. This still remains a common keyword. Everything required for interoperability is the same.
+Use the `extern` keyword to use your external C definitions. This still remains a common keyword. Everything required for interoperability is the same.

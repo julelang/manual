@@ -81,20 +81,20 @@ auto kernel32_GetModuleFileName = (DWORD(*)(void *, char *, DWORD))(GetProcAddre
 ```jule
 use "std/integ/c"
 
-cpp use "mylib.hpp"
+extern use "mylib.hpp"
 
-cpp fn kernel32_ExitProcess(c: uint)
-cpp fn kernel32_GetModuleFileName(*unsafe, *c::Char, u32): u32
+extern fn kernel32_ExitProcess(c: uint)
+extern fn kernel32_GetModuleFileName(*unsafe, *c::Char, u32): u32
 
 fn main() {
 	mut path := make([]byte, 1024)
 	size := u32(len(path))
 	r := unsafe {
-		cpp.kernel32_GetModuleFileName(
+		extern.kernel32_GetModuleFileName(
 			nil, (*c::Char)(&path[0]), size)
 	}
 	if r == 0 {
-		cpp.kernel32_ExitProcess(1)
+		extern.kernel32_ExitProcess(1)
 	}
 	println(str(path[:r]))
 }
@@ -119,21 +119,21 @@ auto kernel32_GetModuleFileName = GetProcAddress(kernel32, "GetModuleFileNameA")
 ```jule
 use "std/sys"
 
-cpp use "mylib.hpp"
+extern use "mylib.hpp"
 
-cpp let kernel32_ExitProcess: *unsafe
-cpp let kernel32_GetModuleFileName: *unsafe
+extern let kernel32_ExitProcess: *unsafe
+extern let kernel32_GetModuleFileName: *unsafe
 
 fn main() {
 	mut path := make([]byte, 1024)
 	size := u32(len(path))
 	r := unsafe {
 		sys::Addrcall[u32](
-			uintptr(cpp.kernel32_GetModuleFileName),
+			uintptr(extern.kernel32_GetModuleFileName),
 			(*unsafe)(nil), &path[0], size)
 	}
 	if r == 0 {
-		sys::Addrcall(uintptr(cpp.kernel32_ExitProcess), uint(1))
+		sys::Addrcall(uintptr(extern.kernel32_ExitProcess), uint(1))
 	}
 	println(str(path[:r]))
 }

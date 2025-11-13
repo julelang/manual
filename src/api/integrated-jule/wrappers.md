@@ -90,17 +90,17 @@ You can integrate and use your wrappers by linking them to your Jule code accord
 
 Integrating the STL Vector wrapper described above with Jule would look like this:
 ```jule
-cpp use "vector.hpp"
+extern use "vector.hpp"
 
 #typedef
-cpp struct Vector[T] {
+extern struct Vector[T] {
     size:     fn(): int
     capacity: fn(): int
     append:   fn(items: []T)
 }
 
 fn main() {
-    let mut vec = cpp.Vector[int]{}
+    let mut vec = extern.Vector[int]{}
     vec.append([1,2,3,4,5,6,7,8,9,10])
     println(vec.size())
     println(vec.capacity())

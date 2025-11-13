@@ -17,11 +17,11 @@ Addrcalls are low-level calls to a function address. An addrcall takes address t
 ```jule
 use "std/sys"
 
-cpp let write: *unsafe
+extern let write: *unsafe
 
 fn main() {
 	m := "hello, world"
-	sys::Addrcall(uintptr(cpp.write), i32(1), &m[0], len(m))
+	sys::Addrcall(uintptr(extern.write), i32(1), &m[0], len(m))
 }
 ```
 In the example above, the `write` function accessed with C is linked as if it were a pointer. Technically, functions are pointers. Then, its address is taken as an integer with uintptr and called with `Addrcall`. A simple `Hello, world` example.
@@ -38,11 +38,11 @@ For example:
 ```jule
 use "std/sys"
 
-cpp let write: *unsafe
+extern let write: *unsafe
 
 fn main() {
 	m := "hello, world\n"
-	n := sys::Addrcall[i32](uintptr(cpp.write), i32(1), &m[0], len(m))
+	n := sys::Addrcall[i32](uintptr(extern.write), i32(1), &m[0], len(m))
 	println(n)
 }
 ```

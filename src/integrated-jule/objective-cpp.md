@@ -38,14 +38,14 @@ Our `main.jule`:
 ```jule
 #pass "-framework Foundation"
 
-cpp use "log.hpp"
-cpp use "log.mm"
+extern use "log.hpp"
+extern use "log.mm"
 
-cpp type char: byte
-cpp unsafe fn Log(text: *cpp.char)
+extern type char: byte
+extern unsafe fn Log(text: *extern.char)
 
 fn Log(text: str) {
-    unsafe { cpp.Log((*cpp.char)(&text[0])) }
+    unsafe { extern.Log((*extern.char)(&text[0])) }
 }
 
 fn main() {
@@ -54,5 +54,5 @@ fn main() {
 ```
 
 ::: tip
-The above code also has wrapper in a Jule for binded function. This increases safety and makes it easier to maintain the relevant function.
+The above code also has wrapper in a Jule for external function. This increases safety and makes it easier to maintain the relevant function.
 :::

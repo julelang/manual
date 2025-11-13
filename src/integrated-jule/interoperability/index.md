@@ -1,18 +1,18 @@
 # Interoperability
 Jule can interop with C++. A code written in C++ compatible with Jule can be transferred to Jule, used and compiled without any problems. Everything needed is readily available, as JuleC imports APIs by default to every generated code.
 
-## Using Binded Definitions
-C++ links are stored separately. So to access C++ definitions it is necessary to use the C++ scope. The keyword `cpp` is used to use the C++ scope. The binded identifier can be used after the expression `cpp.`.
+## Using External Definitions
+C++ links are stored separately. So to access C++ definitions it is necessary to use the C++ scope. The keyword `extern` is used to use the C++ scope. The external identifier can be used after the expression `extern.`.
 
 For example:
 ```jule
-cpp.myVariable
+extern.myVariable
 ```
 ```jule
-cpp.myStruct{}
+extern.myStruct{}
 ```
 ```jule
-cpp.myFunction(x, y, z)
+extern.myFunction(x, y, z)
 ```
 
 ## Example to Interoperability
@@ -30,13 +30,13 @@ __jule_Int sum(const __jule_Slice<__jule_Int> slice) {
 ```
 **main.jule**
 ```jule
-cpp use "sum.hpp"
+extern use "sum.hpp"
 
-cpp fn sum([]int): int
+extern fn sum([]int): int
 
 fn main() {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8]
-    let total = cpp.sum(numbers)
+    let total = extern.sum(numbers)
     println(total)
 }
 ```

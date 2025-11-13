@@ -6,5 +6,5 @@ After the header file containing the C++ variables is passed to Jule, C++ variab
 
 For example:
 ```jule
-cpp let tickrate: int
+extern let tickrate: int
 ```

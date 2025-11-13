@@ -51,10 +51,10 @@ Write result to (source) file instead of stdout.
 	- Spaces between use declarations are ignored and they are all listed one under the other.
 	- Any encountered comment until the last use declaration will be moved above the all use declarations.
 	- If there is a comment left after the Use declaration, it is considered to belong to the general scope.
-	- Binded use declarations comes after ordinary use declarations and ordered with the path by the `strings::Compare` function of the `std/strings` package.
-	- Ordinary use declarations ordered by the path with the `strings::Compare` function as well as binded use declarations.
+	- External use declarations comes after ordinary use declarations and ordered with the path by the `strings::Compare` function of the `std/strings` package.
+	- Ordinary use declarations ordered by the path with the `strings::Compare` function as well as external use declarations.
 	- In ordinary use declarations, standard library packages comes after other packages.
-	- In binded use declarations, standard headers comes before other headers.
+	- In external use declarations, standard headers comes before other headers.
 - The spaces between the top directives are ignored and they are all listed one under the other.
 - A single directive is written along a single line. Even if it is passed down to lower lines, it is combined into a single line.
 - The output is produced without using the statement terminator.

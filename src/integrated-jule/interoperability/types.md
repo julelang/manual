@@ -1,11 +1,11 @@
 # Types
 
 ## Linking Types
-Type statements are used to bind types. They can only bind in the global scope. A bind type alias must always be a strict type alias. For Bind, put the keyword `cpp` at the beginning.
+Type statements are used to external types. They can only bind in the global scope. An external type alias must always be a strict type alias. To bind, put the keyword `extern` at the beginning.
 
 For example:
 ```jule
-cpp type char: byte
+extern type char: byte
 ```
 
 ::: tip
@@ -14,18 +14,18 @@ If the types you use do not belong to Jule, if you are linking from C/C++, make 
 
 ## Type Safety
 
-For type safety reasons, binded types are only compatible with binded types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a binded `char` type, or vice versa, even if you have binded the `char` type as `byte`. To do this, if you have binded with a compatible type, you can cast it.
+For type safety reasons, external types are only compatible with external types. Cannot be used directly with any Jule type. For example, you cannot assign a `byte` type to a external `char` type, or vice versa, even if you have external the `char` type as `byte`. To do this, if you have external type with a compatible type, you can cast it.
 
-In addition, each casting process is within the scope of Unsafe Jule and cannot be performed with Safe Jule. Because incompatible types can be incorrectly binded and cast, Jule has no responsibility for this, so it is considered an unsafe action.
+In addition, each casting process is within the scope of Unsafe Jule and cannot be performed with Safe Jule. Because incompatible types can be incorrectly bound and cast, Jule has no responsibility for this, so it is considered an unsafe action.
 
 For example:
 ```jule
-cpp type char: byte
+extern type char: byte
 
-cpp fn get_char(): cpp.char
+extern fn get_char(): extern.char
 
 fn main() {
-	b := unsafe { byte(cpp.get_char()) }
+	b := unsafe { byte(extern.get_char()) }
 	println(b)
 }
 ```
@@ -42,12 +42,12 @@ To achieve full compatibility with C types, your compiler encourages you to use 
 
 For example:
 ```jule
-cpp type char: byte
+extern type char: byte
 
-cpp unsafe fn printf(*cpp.char)
+extern unsafe fn printf(*extern.char)
 
 fn cprint(s: str) {
-    unsafe { cpp.printf((*cpp.char)(&s[0])) }
+    unsafe { extern.printf((*extern.char)(&s[0])) }
 }
 
 fn main() {
@@ -55,7 +55,7 @@ fn main() {
 }
 ```
 
-The code above prevents you from passing the `*byte` type directly to `*cpp.char` as your compiler encourages you to be safe. This is an important incentive to make the generated IR compilable. If your compiler didn't do this and considered it compatible, the backend-compiler would have told you that the type `__jule_U8*` and `char*` are not compatible.
+The code above prevents you from passing the `*byte` type directly to `*extern.char` as your compiler encourages you to be safe. This is an important incentive to make the generated IR compilable. If your compiler didn't do this and considered it compatible, the backend-compiler would have told you that the type `__jule_U8*` and `char*` are not compatible.
 
 ## Type Compatibility
 
@@ -75,17 +75,17 @@ public:
 
 Jule code:
 ```jule
-cpp use "myclass.hpp"
+extern use "myclass.hpp"
 
 #typedef
-cpp struct MyClass {
+extern struct MyClass {
     data:       str
     magic_data: str
     c_data:     str
 }
 
 fn main() {
-    let mc = cpp.MyClass{
+    let mc = extern.MyClass{
         data: "my data",
         magic_data: "hello world",
         c_data: "hello c strings",
@@ -96,7 +96,7 @@ fn main() {
 }
 ```
 
-In the above example, your compiler does not detect the types of fields of the binded class and generates code accordingly, your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
+In the above example, your compiler does not detect the types of fields of the external class and generates code accordingly, your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
 
 While this type compatibility may work well (but risky for some types lile strings) with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes or etc.
 
@@ -115,13 +115,13 @@ For example:
 use "std/integ"
 use "std/integ/c"
 
-cpp unsafe fn printf(s: *c::Char)
+extern unsafe fn printf(s: *c::Char)
 
 fn main() {
     s := "hello world"
     sb := integ::BytesFromStr(s)
     unsafe {
-        cpp.printf((*c::Char)(&sb[0]))
+        extern.printf((*c::Char)(&sb[0]))
     }
 }
 ```
@@ -133,7 +133,7 @@ For example:
 ```jule
 s := "hello world\x00"
 unsafe {
-    cpp.printf((*c::Char)(&s[0]))
+    extern.printf((*c::Char)(&s[0]))
 }
 ```
 The version of the above example using string. While this is not recommended, it is something that can be done for important reasons such as efficiency and performance concerns, but Jule does not guarantee this and the responsibility lies with the developer.

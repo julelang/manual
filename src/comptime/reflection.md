@@ -134,7 +134,7 @@ fn main() {
 ```jule
 use "std/comptime"
 
-cpp type Int: int
+extern type Int: int
 
 fn IsNumeric[T](): bool {
     const t = comptime::TypeOf(T)
@@ -157,7 +157,7 @@ fn IsNumeric[T](): bool {
 fn IsValidType[T](): bool {
     const t = comptime::TypeOf(T)
     const match {
-    | t.Bind():
+    | t.Extern():
         ret false
     |:
         ret IsNumeric[T]()
@@ -170,7 +170,7 @@ fn main() {
     println(IsValidType[uintptr]())
     println(IsValidType[u8]())
     println(IsValidType[i32]())
-    println(IsValidType[cpp.Int]())
+    println(IsValidType[extern.Int]())
 }
 ```
 

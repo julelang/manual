@@ -8,9 +8,9 @@ Jule makes the `export` directive available only for global variables and functi
 
 Here's an example to develop API for your Jule code for the backend:
 ```jule
-cpp use "magicheader.hpp"
+extern use "magicheader.hpp"
 
-cpp fn printMagic()
+extern fn printMagic()
 
 #export "magic_calculation"
 fn magicCalculation(x: int, y: int): int {
@@ -18,7 +18,7 @@ fn magicCalculation(x: int, y: int): int {
 }
 
 fn main() {
-	cpp.printMagic()
+	extern.printMagic()
 }
 ```
 

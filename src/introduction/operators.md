@@ -18,7 +18,7 @@ The equality operators == and != apply to operands of comparable types. The orde
 
 A comparison of two dynamic values with identical dynamic types causes a run-time panic if that type is not comparable. This behavior applies not only to direct dynamic value comparisons but also when comparing arrays of dynamic values or structs with dynamic-valued fields.
 
-Binded types, slice, map, and function types are not comparable. However, as a special case, a slice, map, or function value may be compared to the predeclared identifier nil. Comparison of pointer, channel, and dynamic values to nil is also allowed and follows from the general rules above.
+External types, slice, map, and function types are not comparable. However, as a special case, a slice, map, or function value may be compared to the predeclared identifier nil. Comparison of pointer, channel, and dynamic values to nil is also allowed and follows from the general rules above.
 
 A type is strictly comparable if it is comparable and not an dynamic type nor composed of dynamic types. Specifically:
 

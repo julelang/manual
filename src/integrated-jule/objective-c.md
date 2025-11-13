@@ -44,13 +44,13 @@ Our `main.jule`:
 ```jule
 #pass "-framework Cocoa"
 
-cpp use "cocoa.h"
-cpp use "cocoa.mm"
+extern use "cocoa.h"
+extern use "cocoa.mm"
 
-cpp fn GetBitsPerPixel(index: int): int
+extern fn GetBitsPerPixel(index: int): int
 
 fn main() {
-    let depth = cpp.GetBitsPerPixel(0)
+    let depth = extern.GetBitsPerPixel(0)
     println(depth)
 }
 ```

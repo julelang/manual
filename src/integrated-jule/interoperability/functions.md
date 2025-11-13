@@ -7,6 +7,6 @@ To declare a C++ function, it must be stated that it is a C++ declaration. Then 
 
 For example:
 ```jule
-cpp fn myFunction(int, int): f64
+extern fn myFunction(int, int): f64
 ```
-Binded functions can only be used within the respective package and can't overload. 
+External functions can only be used within the respective package and can't overload. 

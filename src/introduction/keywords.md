@@ -12,7 +12,7 @@ const    let       mut         for
 in       break     continue    goto
 match    fall      if          else
 ret      error     use         co
-cpp      unsafe    defer       chan
+extern   unsafe    defer       chan
 select
 ```
 

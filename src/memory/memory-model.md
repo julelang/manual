@@ -24,9 +24,9 @@ A struct field can have a special default initialization value. In this case, yo
 
 For example, accordingly, if a function increases a static integer memory every time it is called, the relevant static variable is mutated as it will be called during each default initialization.
 
-### Interoperability and Binded Types
+### Interoperability and External Types
 
-Since the types cannot be known with certainty regarding interoperability, binded types are not treated like Jule types. Binded types are independent of default initialization rules, that is, they are not initialized automatically. When using interoperability, problems may occur due to uninitialized memory.
+Since the types cannot be known with certainty regarding interoperability, external types are not treated like Jule types. External types are independent of default initialization rules, that is, they are not initialized automatically. When using interoperability, problems may occur due to uninitialized memory.
 
 ## Dynamic Types
 
