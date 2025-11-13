@@ -18,7 +18,7 @@
 [struct comptimeDecl](#comptimeDecl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): str](#name-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Public(\*self): bool](#public)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind(\*self): bool](#bind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Extern(\*self): bool](#extern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Exceptional(\*self): bool](#exceptional)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(\*self): bool](#mutable)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Variadic(\*self): bool](#variadic)\
@@ -40,7 +40,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Params(\*self): comptimeParams](#params-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Types(\*self): comptimeTypeInfos](#types)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Result(\*self): comptimeTypeInfo](#result)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind(\*self): bool](#bind-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Extern(\*self): bool](#extern-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Ordered(\*self): bool](#ordered)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Comparable(\*self): bool](#comparable)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(\*self): bool](#mutable-1)\
@@ -226,11 +226,11 @@ fn Public(*self): bool
 ```
 Reports whether type is public as constant expression.
 
-### Bind
+### Extern
 ```jule
-fn Bind(*self): bool
+fn Extern(*self): bool
 ```
-Reports whether type is bind as constant expression.
+Reports whether type is external as constant expression.
 
 ### Exceptional
 ```jule
@@ -394,11 +394,11 @@ fn Result(*self): comptimeTypeInfo
 ```
 Returns compile-time information data for result type of function. Only supports function types.
 
-### Bind
+### Extern
 ```jule
-fn Bind(*self): bool
+fn Extern(*self): bool
 ```
-Reports whether type is bind as constant expression.
+Reports whether type is external as constant expression.
 
 ### Ordered
 ```jule
