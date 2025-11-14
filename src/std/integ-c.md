@@ -2,6 +2,10 @@
 
 Supplementer package for C interoperability of Integrated Jule. Provides helper API to make C interoperability easy and defines standards for common operations. Most C interoperable programs should use this package to make the program reliable and standardized. This is an elementary package to write C interoperable programs and packages with any scale.
 
+::: danger
+This package contains low-level implementations and is under the terms of the [Unsafe Jule](/unsafe-jule/). Be careful using API of this package.
+:::
+
 ## Index
 
 [fn Malloc\(size: uint\): \*unsafe](#malloc)\
