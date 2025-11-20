@@ -219,6 +219,29 @@ fn main() {
 ```
 In the above code example, a blocking select statement attempts to receive data from two channels. The result could be either of the two channels. After one case is executed, the program will terminate, meaning the expected behavior is that data will be received from at least one channel and one case will be executed.
 
+In the code above, the values received in `receive` operations are inaccessible. If you want to process the received data, you can define a local variable or assign it to existing memory.
+
+For example:
+```jule
+fn main() {
+	x := make(chan int)
+	co fn() {
+		x <- 56
+	}()
+
+	let mut z: int
+	select {
+	| w := <-x:
+		println(w)
+	| z = <-x:
+		println(z / 2)
+	}
+	println(z)
+}
+```
+In the code above, an attempt is made to receive data from the same channel. Any case may execute. If the first case runs, nothing is written to the `z` variable, and the output is `56` and `0`. If the second case runs, `56` is written to the `z` variable, and the output is `28` and `56`.
+
+
 ### Empty Select Statement
 
 An empty select statement results in a CPU yield, meaning it stops the current thread and switches to executing a different thread. Thread will not continue to execute following statements after an empty statement.
