@@ -1,6 +1,6 @@
 # Concurrency Model
 
-The concurrency model defines how Jule handles memory in concurrency. Any behavior contrary to the model is `undefined` and may cause the program not to work as expected.
+The concurrency model defines how Jule handles memory and thread management in concurrency. Any behavior contrary to the model is `undefined` and may cause the program not to work as expected.
 
 ## References
 
@@ -22,3 +22,9 @@ Methods can be used to make concurrent calls. But your compiler can only use sma
 ## Data Races
 
 Data races are undefined and must be prevented by the developer. Any data race present in the program can be handled by the compiler in any way. In some cases, this can lead the compiler to apply optimizations by relying on the data with the data race. Some optimizations can also make debugging difficult. Therefore, data race situations in concurrent programming must be carefully considered and synchronized.
+
+## Channels
+
+Channels are designed with the assumption that they will be closed once data transmission is complete. For this reason, when all sender threads finish their work, the channel must be closed. Otherwise, receiver threads may remain asleep indefinitely. Closing the channel wakes any waiting receiver threads. Failing to close the channel can cause the program to behave unexpectedly.
+
+If you are certain that the usage is strictly synchronous, you may choose not to close the channel, for example, when using an unbuffered channel solely to signal that a thread has finished. However, even in such cases, closing the channel is still recommended. Otherwise, undefined program behavior may occur.

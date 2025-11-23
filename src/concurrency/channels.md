@@ -20,11 +20,9 @@ Channels are `nil` by default and must be initialized before use. The built-in `
 
 A channel type is defined with the `chan` keyword, followed by the type of the channel's value. For example: `chan int`, `chan bool`, or `chan &Foo`.
 
-Jule channels are optimized for high performance and high-frequency messaging. As a result, they largely avoid parking threads. This can lead to inefficient CPU usage in low-frequency messaging scenarios, which cause long pauses. See specific channel types for more information about behavior.
-
 ## Unbuffered Channels
 
-Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is paused until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the thread gains control of channel, it sends the data to the channel and pauses execution until the data is received. Pausing execution is done through thread parking. This manages the CPU efficiently during long wait times.
+Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is blocked until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the thread gains control of channel, it sends the data to the channel and blocks execution until the data is received.
 
 To initialize an unbuffered channel, the `make` function can be used by providing the desired channel type.
 For example:
@@ -80,8 +78,6 @@ If the buffer is full, the execution is blocked until space becomes available.
 For receive operations, if there is data waiting to be read in the buffer, the program's execution does not block, and it reads the data and continues immediately.
 If there is no data, the execution is blocked until data is sent.
 
-Buffered channels do not park the thread to pause execution. Instead, they actively spin while waiting. This behavior is optimized for high-frequency channel communication. If a pause is required, it is based on the assumption that it will be brief. However, unlike unbuffered channels, the lack of thread parking can lead to CPU waste in low-frequency channel messaging scenarios.
-
 Buffered channels create a queue for the sent and waiting-to-be-read data.
 This queue operates as a FIFO (First In, First Out) queue, where received data is taken from the queue in FIFO order.
 Similarly, sent data is added to the end of the queue.
@@ -112,7 +108,7 @@ The main thread reads as many values from the channel as the number of threads c
 The advantage of using a buffer here is that the threads can write data and terminate directly without blocking each other.
 
 The main thread waits until all the data is received and then terminates by printing the result to stdout.
-In this program, synchronization is achieved without the need for a WaitGroup or any similar structure.
+In this program, synchronization is achieved without the need for a `WaitGroup` or any similar structure.
 
 ## Closing Channels
 
@@ -131,6 +127,8 @@ If you attempt to receive data from a channel, unbuffered channels will return t
 In buffered channels, if there are pending items in the queue, you will continue receiving data from the queue. However, once all the data in the queue has been received, it will return the default value, just like unbuffered channels.
 
 Calling `close` on a channel that is already closed does not result in a panic. However, attempting to close a `nil` channel will result in a panic.
+
+As explained in the [Concurrency Model](/concurrency/concurrency-model) section, when all sender threads that send data to a channel finish their work, they must close the channel. This ensures that the receiver threads operate correctly. Closing the channel sends a signal to the receivers and wakes up those that are sleeping. Otherwise, they may remain asleep forever.
 
 ### Receiving Data with Status
 
@@ -185,9 +183,9 @@ When a receive expression (e.g., `<-c`) is used as a case in a select statement,
 
 Select statements are categorized into two types: non-blocking select and blocking select. If a select statement includes a default case, it is a non-blocking select. If it does not have a default case, it is a blocking select.
 
-Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and pauses the program's execution until at least one case becomes eligible.
+Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and blocks the program's execution until at least one case becomes eligible.
 
-Nil channels do not cause errors such as runtime panics. Select statements simply ignore nil channels.
+Expressions of each case will be evaluated once before the select statement and will be used again when an attempt is made to select a case. Nil channels do not cause errors such as runtime panics, select statements simply ignore them.
 
 Using a select statement is similar to using a match statement and is written almost the same way. However, unlike match statements, select statements can use `break` statements but do not support `fall` statements.
 
@@ -241,29 +239,14 @@ fn main() {
 ```
 In the code above, an attempt is made to receive data from the same channel. Any case may execute. If the first case runs, nothing is written to the `z` variable, and the output is `56` and `0`. If the second case runs, `56` is written to the `z` variable, and the output is `28` and `56`.
 
-
 ### Empty Select Statement
 
-An empty select statement results in a CPU yield, meaning it stops the current thread and switches to executing a different thread. Thread will not continue to execute following statements after an empty statement.
+An empty select statement results in a CPU yield, meaning it parks the current thread and switches to executing a different thread. Thread will not continue to execute following statements after an empty statement.
 
 For example:
 ```jule
 select{}
 ```
-
-### Implementation Notes
-
-> This section is not important documentation for users. It is technical documentation focusing on how `select` statements are implemented.
-
-Empty select statements directly park the thread, and this thread is never unparked. In other words, it never regains CPU time or executes again. The yield operation is permanently performed only once.
-
-For non-blocking select statements, each case is checked once, and if all fail, execution continues through the default case. Since buffered channels are lock-free and based on an MPMC queue, they continuously attempt operations and may try for up to 1 millisecond to complete successfully. If success is not achieved within this time, the attempt is terminated. In unbuffered channels, because the sender and receiver are paired, it is checked only once whether a waiting sender or receiver exists.
-
-In blocking select statements, if there is only a single case, it is equivalent to that case directly. In other words, if there is only one receive/send attempt, it is directly equivalent to that receive/send statement. The select statement is not compiled within a retry loop.
-
-If there are multiple cases, it is compiled as a retry loop. Each retry loop follows the same logic as a non-blocking select statement. Within a single CPU time slice, five retry steps are performed, and in each step, all cases are attempted. If all five attempts fail, the CPU is yielded but not parked. This approach, like in buffered channels, is based on the optimization assumption that any pause will be brief.
-
-If multiple cases are ready, a random offset is determined in each attempt to mimic the behavior of selecting one at random. All cases are tried sequentially using this random offset, meaning the starting point changes with each attempt. This allows attempts to begin from any position in the case list.
 
 ## Range Iterations over Channels
 
