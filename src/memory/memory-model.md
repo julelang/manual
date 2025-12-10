@@ -2,6 +2,10 @@
 
 The Jule memory model is a documentation describing general approaches to how Jule handles memory. Additionally, it includes technical details that explain how the compiler is implemented and how things work behind the scenes.
 
+::: warning
+The information and behavior described here explain how Jule's guaranteed behavior is achieved. The guaranteed behavior remains consistent across versions, but how it's achieved may change. The compiler might rely on different memory configurations or algorithms. Any low-level algorithm relying on the compiler behavior could break in future versions.
+:::
+
 ## Value Initialization
 
 Jule automatically initializes memory for memory safety. If memory is not initialized with a value, it initializes it with the default value of the type to eliminate the risk of uninitialized memory. The default value is determined by the compiler and is constant for each type.
