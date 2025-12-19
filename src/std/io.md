@@ -3,7 +3,7 @@
 ## Index
 
 [Variables](#variables)\
-[fn LimitReader\(mut r: Reader, n: i64\): Reader](#limitreader)\
+[fn NopCloser\(mut r: Reader\): ReadCloser](#nopcloser)\
 [fn CopyN\(mut dst: Writer, mut src: Reader, n: i64\)\!: \(written: i64\)](#copyn)\
 [fn Copy\(mut dst: Writer, mut src: Reader\)\!: \(written: i64\)](#copy)\
 [fn CopyBuffer\(mut dst: Writer, mut src: Reader, mut buf: \[\]byte\)\!: \(written: i64\)](#copybuffer)\
@@ -12,21 +12,31 @@
 [fn ReadAll\(mut r: Reader\)\!: \[\]byte](#readall)\
 [fn ReadAtLeast\(mut r: Reader, mut buf: \[\]byte, min: int\)\!: \(n: int\)](#readatleast)\
 [fn ReadFull\(mut r: Reader, mut buf: \[\]byte\)\!: \(n: int\)](#readfull)\
+[fn MultiReader\(mut readers: \.\.\.Reader\): Reader](#multireader)\
 [trait Reader](#reader)\
 [trait Writer](#writer)\
 [trait StrWriter](#strwriter)\
 [trait ByteReader](#bytereader)\
+[trait ByteScanner](#bytescanner)\
 [trait ByteWriter](#bytewriter)\
 [trait RuneReader](#runereader)\
+[trait RuneScanner](#runescanner)\
 [trait RuneWriter](#runewriter)\
 [trait Closer](#closer)\
 [trait ReaderAt](#readerat)\
+[trait ReaderFrom](#readerfrom)\
 [trait WriterTo](#writerto)\
 [trait Seeker](#seeker)\
 [trait ReadCloser](#readcloser)\
+[trait ReadSeeker](#readseeker)\
 [trait WriteCloser](#writecloser)\
+[trait WriteSeeker](#writeseeker)\
 [trait ReadWriter](#readwriter)\
-[trait Stream](#stream)
+[trait ReadWriteCloser](#readwritecloser)\
+[trait ReadWriteSeeker](#readwriteseeker)\
+[struct LimitedReader](#limitedreader)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: Reader, n: i64\): Reader](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut p: \[\]byte\)\!: \(n: int\)](#read)
 
 ## Variables
 
@@ -81,11 +91,11 @@ let mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
 
-## LimitReader
+## NopCloser
 ```jule
-fn LimitReader(mut r: Reader, n: i64): Reader
+fn NopCloser(mut r: Reader): ReadCloser
 ```
-Returns a Reader that reads from r but stops like EOF after n bytes\.
+Returns a \[ReadCloser\] with a no\-op Close method wrapping the provided \[Reader\] r\.
 
 ## CopyN
 ```jule
@@ -136,6 +146,12 @@ Reads from r into buf until it has read at least min bytes\. It returns the numb
 fn ReadFull(mut r: Reader, mut buf: []byte)!: (n: int)
 ```
 Reads exactly len\(buf\) bytes from r into buf\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading some but not all the bytes, exception is ErrUnexpectedEOF\. On return, n == len\(buf\) if and only if err == nil\. If r returns an error having read at least len\(buf\) bytes, the error is dropped\.
+
+## MultiReader
+```jule
+fn MultiReader(mut readers: ...Reader): Reader
+```
+Returns a Reader that&#39;s the logical concatenation of the provided input readers\. They&#39;re read sequentially\. Once all inputs have returned EOF, Read will return EOF\.  If any of the readers return a non\-nil, non\-EOF error, Read will return that error\.
 
 ## Reader
 ```jule
@@ -191,6 +207,17 @@ The ReadByte method mutable because of same reasons of the \`Reader\` trait\.
 
 Exceptionals are not standardized\. Should be documented by implementations\.
 
+## ByteScanner
+```jule
+trait ByteScanner {
+	ByteReader
+	fn UnreadByte(mut *self)!
+}
+```
+Implements the UnreadByte method to the basic ReadByte method of ByteReader\.
+
+It causes the next call to ReadByte to return the last byte read\. If the last operation was not a successful call to ReadByte, UnreadByte may throw an error, unread the last byte read \(or the byte prior to the last\-unread byte\), or \(in implementations that support the \[Seeker\] interface\) seek to one byte before the current offset\.
+
 ## ByteWriter
 ```jule
 trait ByteWriter {
@@ -216,6 +243,17 @@ It reads a single encoded Unicode character and returns the rune and its size in
 The ReadRune method mutable because of same reasons of the \`Reader\` trait\.
 
 Exceptionals are not standardized\. Should be documented by implementations\.
+
+## RuneScanner
+```jule
+trait RuneScanner {
+	RuneReader
+	fn UnreadRune(mut *self)!
+}
+```
+Implements the UnreadRune method to the basic ReadRune method of RuneReader\.
+
+It causes the next call to ReadRune to return the last rune read\. If the last operation was not a successful call to ReadRune, UnreadRune may throw an error, unread the last rune read \(or the rune prior to the last\-unread rune\), or \(in implementations that support the \[Seeker\] interface\) seek to the start of the rune before the current offset\.
 
 ## RuneWriter
 ```jule
@@ -269,6 +307,18 @@ The ReadAt method mutable because of same reasons of the \`Reader\` trait\.
 
 Implementations must not retain p\. Exceptionals are not standardized\. Should be documented by implementations\.
 
+## ReaderFrom
+```jule
+trait ReaderFrom {
+	fn ReadFrom(mut *self, mut r: Reader)!: (n: i64)
+}
+```
+The trait that wraps the basic ReadFrom method\.
+
+It reads data from r until EOF or error\. The return value n is the number of bytes read\. Any error encountered during the read is also forwarded\.
+
+It should return io::EOF for EOF\.
+
 ## WriterTo
 ```jule
 trait WriterTo {
@@ -308,6 +358,15 @@ trait ReadCloser {
 ```
 Inheritance group for the Reader and Closer traits\.
 
+## ReadSeeker
+```jule
+trait ReadSeeker {
+	Reader
+	Seeker
+}
+```
+Inheritance group for the Reader and Seeker traits\.
+
 ## WriteCloser
 ```jule
 trait WriteCloser {
@@ -316,6 +375,15 @@ trait WriteCloser {
 }
 ```
 Inheritance group for the Writer and Closer traits\.
+
+## WriteSeeker
+```jule
+trait WriteSeeker {
+	Writer
+	Seeker
+}
+```
+Inheritance group for the Writer and Seeker traits\.
 
 ## ReadWriter
 ```jule
@@ -326,10 +394,9 @@ trait ReadWriter {
 ```
 Inheritance group for the Reader and Writer traits\.
 
-## Stream
+## ReadWriteCloser
 ```jule
-trait Stream {
-	Reader
+trait ReadWriteCloser {
 	ReadCloser
 	Writer
 	WriteCloser
@@ -338,3 +405,39 @@ trait Stream {
 }
 ```
 Inheritance group for the Reader, ReadCloser, Writer, WriteCloser, ReadWriter and Closer traits\.
+
+## ReadWriteSeeker
+```jule
+trait ReadWriteSeeker {
+	Reader
+	ReadSeeker
+	Writer
+	WriteSeeker
+	Seeker
+}
+```
+ReadWriteSeeker is the interface that groups the basic Read, Write and Seek methods\. Inheritance group for the Reader, ReadSeeker, Writer, WriteSeeker, and Seeker traits\.
+
+## LimitedReader
+```jule
+struct LimitedReader {
+	R: Reader // underlying reader
+	N: i64    // max bytes remaining
+}
+```
+Reads from R but limits the amount of data returned to just N bytes\. Each call to Read updates N to reflect the new amount remaining\. Read returns EOF when N &lt;= 0 or when the underlying R returns EOF\.
+
+### Implemented Traits
+
+- `Reader`
+
+### New
+```jule
+fn New(mut r: Reader, n: i64): Reader
+```
+Returns a LimitedReader that reads from r but stops like EOF after n bytes\.
+
+### Read
+```jule
+fn Read(mut *self, mut p: []byte)!: (n: int)
+```
