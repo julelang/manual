@@ -63,17 +63,14 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn ReadDir\(path: str\)\!: \(dirents: \[\]DirEntry\)](#readdir)\
 [fn Mkdir\(path: str\)\!](#mkdir)\
 [fn Rmdir\(path: str\)\!](#rmdir)\
-[fn Hostname\(\)\!: str](#hostname)\
-[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Open\(path: str\)\!: &amp;File](#open)\
 [fn OpenFile\(path: str, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
 [fn Remove\(path: str\)\!](#remove)\
 [fn Create\(path: str\)\!: &amp;File](#create)\
 [fn ReadFile\(path: str\)\!: \[\]byte](#readfile)\
 [fn WriteFile\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefile)\
+[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Pipe\(\)\!: \(r: &amp;File, w: &amp;File\)](#pipe)\
-[fn Stat\(path: str\)\!: FileInfo](#stat)\
-[fn Lstat\(path: str\)\!: FileInfo](#lstat)\
 [fn Exit\(code: int\)](#exit)\
 [fn Executable\(\): str](#executable)\
 [fn Args\(\): \[\]str](#args)\
@@ -83,10 +80,12 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Getenv\(key: str\): str](#getenv)\
 [fn LookupEnv\(key: str\): \(value: str, found: bool\)](#lookupenv)\
 [fn Setenv\(key: str, value: str\)\!](#setenv)\
+[fn Stat\(path: str\)\!: FileInfo](#stat)\
+[fn Lstat\(path: str\)\!: FileInfo](#lstat)\
 [fn Stdin\(\): &amp;File](#stdin)\
 [fn Stdout\(\): &amp;File](#stdout)\
 [fn Stderr\(\): &amp;File](#stderr)\
-[struct DirEntry](#direntry)\
+[fn Hostname\(\)\!: str](#hostname)\
 [struct Cmd](#cmd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(\*self, mut r: &amp;File\)\!](#stdin-1)\
@@ -98,6 +97,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(\*self\)\!](#start)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(\*self\)\!](#run)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
+[struct DirEntry](#direntry)\
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
@@ -106,30 +106,20 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut \*self\)\!](#sync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut \*self, size: i64\)\!](#truncate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
-[type FileMode](#filemode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(\*self\): bool](#isregular)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(\*self\): FileMode](#perm)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(\*self\): FileMode](#type)\
 [struct FileInfo](#fileinfo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(\*self\): FileMode](#mode)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ModTime\(\*self\): time::Time](#modtime)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(\*self\): i64](#size)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(\*self, fi2: FileInfo\): bool](#samefile)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(\*self, fi2: FileInfo\): bool](#samefile)\
+[type FileMode](#filemode)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(\*self\): bool](#isregular)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(\*self\): FileMode](#perm)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(\*self\): FileMode](#type)
 
 ## Variables
-
-```jule
-const (
-	PathSeparator     = filepathlite::Separator     // OS-specific path separator
-	PathListSeparator = filepathlite::ListSeparator // OS-specific path list separator
-)
-```
-
-
----
 
 ```jule
 const DevNull = devNull
@@ -151,6 +141,16 @@ const (
 )
 ```
 Flags to OpenFile wrapping those of the underlying system\. Not all flags may be implemented on a given system\.
+
+---
+
+```jule
+const (
+	PathSeparator     = filepathlite::Separator     // OS-specific path separator
+	PathListSeparator = filepathlite::ListSeparator // OS-specific path list separator
+)
+```
+
 
 ---
 
@@ -197,18 +197,6 @@ fn Rmdir(path: str)!
 ```
 Removes empty directory\.
 
-## Hostname
-```jule
-fn Hostname()!: str
-```
-Returns the host name reported by the kernel\.
-
-## IsPathSeparator
-```jule
-fn IsPathSeparator(c: byte): bool
-```
-Reports whether c is a directory separator character\.
-
 ## Open
 ```jule
 fn Open(path: str)!: &File
@@ -245,25 +233,17 @@ fn WriteFile(path: str, data: []byte, perm: FileMode)!
 ```
 Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any exceptional\.
 
+## IsPathSeparator
+```jule
+fn IsPathSeparator(c: byte): bool
+```
+Reports whether c is a directory separator character\.
+
 ## Pipe
 ```jule
 fn Pipe()!: (r: &File, w: &File)
 ```
 Pipe returns a connected pair of Files; reads from r return bytes written to w\. The Windows handles underlying the returned files are marked as inheritable by child processes\.
-
-## Stat
-```jule
-fn Stat(path: str)!: FileInfo
-```
-Returns a \[FileInfo\] describing the named file\.
-
-## Lstat
-```jule
-fn Lstat(path: str)!: FileInfo
-```
-Returns a \[FileInfo\] describing the named file\. If the file is a symbolic link, the returned FileInfo describes the symbolic link\. It makes no attempt to follow the link\.
-
-On Windows, if the file is a reparse point that is a surrogate for another named entity \(such as a symbolic link or mounted folder\), the returned FileInfo describes the reparse point, and makes no attempt to resolve it\.
 
 ## Exit
 ```jule
@@ -319,6 +299,20 @@ fn Setenv(key: str, value: str)!
 ```
 Sets the value of the environment variable named by the key\.
 
+## Stat
+```jule
+fn Stat(path: str)!: FileInfo
+```
+Returns a \[FileInfo\] describing the named file\.
+
+## Lstat
+```jule
+fn Lstat(path: str)!: FileInfo
+```
+Returns a \[FileInfo\] describing the named file\. If the file is a symbolic link, the returned FileInfo describes the symbolic link\. It makes no attempt to follow the link\.
+
+On Windows, if the file is a reparse point that is a surrogate for another named entity \(such as a symbolic link or mounted folder\), the returned FileInfo describes the reparse point, and makes no attempt to resolve it\.
+
 ## Stdin
 ```jule
 fn Stdin(): &File
@@ -337,14 +331,11 @@ fn Stderr(): &File
 ```
 Returns File for the standard error file descriptor\.
 
-## DirEntry
+## Hostname
 ```jule
-struct DirEntry {
-	Name: str
-	Stat: FileInfo
-}
+fn Hostname()!: str
 ```
-Directory entry\.
+Returns the host name reported by the kernel\.
 
 ## Cmd
 ```jule
@@ -446,6 +437,15 @@ fn Wait(*self)!: int
 ```
 Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
 
+## DirEntry
+```jule
+struct DirEntry {
+	Name: str
+	Stat: FileInfo
+}
+```
+Directory entry\.
+
 ## File
 ```jule
 struct File {
@@ -465,7 +465,10 @@ There may be system call differences and performance differences for console han
 - `io::Writer`
 - `io::WriteCloser`
 - `io::ReadWriter`
-- `io::Stream`
+- `io::ReadWriteCloser`
+- `io::ReadWriteSeeker`
+- `io::ReadSeeker`
+- `io::WriteSeeker`
 - `io::Seeker`
 - `io::StrWriter`
 
@@ -511,42 +514,6 @@ fn Close(mut *self)!
 ```
 Closes file handle\.
 
-## FileMode
-```jule
-type FileMode: u32
-```
-Represents a file&#39;s mode and permission bits\. The bits have the same definition on all systems, so that information about files can be moved from one system to another portably\. Not all bits apply to all systems\. The only required bit is \[ModeDir\] for directories\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-
-
-### IsDir
-```jule
-fn IsDir(*self): bool
-```
-Reports whether self describes a directory\. That is, it tests for the \[ModeDir\] bit being set in self\.
-
-### IsRegular
-```jule
-fn IsRegular(*self): bool
-```
-Reports whether self describes a regular file\. That is, it tests that no mode type bits are set\.
-
-### Perm
-```jule
-fn Perm(*self): FileMode
-```
-Returns the Unix permission bits in self \(self &amp; \[ModePerm\]\)\.
-
-### Type
-```jule
-fn Type(*self): FileMode
-```
-Returns type bits in self \(self &amp; \[ModeType\]\)\.
-
 ## FileInfo
 ```jule
 struct FileInfo {
@@ -586,3 +553,39 @@ fn SameFile(*self, fi2: FileInfo): bool
 Reports whether self and fi2 describe the same file\. For example, on Unix this means that the device and inode fields of the two underlying structures are identical; on other systems the decision may be based on the path names\.
 
 It only applies to results returned by this package&#39;s \[Stat\]\. It returns false in other cases\.
+
+## FileMode
+```jule
+type FileMode: u32
+```
+Represents a file&#39;s mode and permission bits\. The bits have the same definition on all systems, so that information about files can be moved from one system to another portably\. Not all bits apply to all systems\. The only required bit is \[ModeDir\] for directories\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+
+
+### IsDir
+```jule
+fn IsDir(*self): bool
+```
+Reports whether self describes a directory\. That is, it tests for the \[ModeDir\] bit being set in self\.
+
+### IsRegular
+```jule
+fn IsRegular(*self): bool
+```
+Reports whether self describes a regular file\. That is, it tests that no mode type bits are set\.
+
+### Perm
+```jule
+fn Perm(*self): FileMode
+```
+Returns the Unix permission bits in self \(self &amp; \[ModePerm\]\)\.
+
+### Type
+```jule
+fn Type(*self): FileMode
+```
+Returns type bits in self \(self &amp; \[ModeType\]\)\.
