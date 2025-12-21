@@ -5,59 +5,19 @@
 [Variables](#variables)\
 [fn JoinHostPort\(host: str, port: str\): str](#joinhostport)\
 [fn SplitHostPort\(hostport: str\)\!: \(host: str, port: str\)](#splithostport)\
+[fn IPv4\(a: byte, b: byte, c: byte, d: byte\): IP](#ipv4)\
+[fn ParseIP\(s: str\): IP](#parseip)\
+[fn LookupIP\(mut network: Network, address: str\)\!: \[\]&amp;IPAddr](#lookupip)\
 [fn Listen\(network: Network, addr: str\)\!: Listener](#listen)\
 [fn ListenUDP\(network: Network, addr: str\)\!: &amp;UDPConn](#listenudp)\
 [fn Dial\(network: Network, addr: str\)\!: Conn](#dial)\
 [fn DialTimeout\(network: Network, addr: str, timeout: time::Duration\)\!: Conn](#dialtimeout)\
-[fn LookupIP\(mut network: Network, address: str\)\!: \[\]&amp;IPAddr](#lookupip)\
-[fn IPv4\(a: byte, b: byte, c: byte, d: byte\): IP](#ipv4)\
-[fn ParseIP\(s: str\): IP](#parseip)\
 [trait Addr](#addr)\
 [trait Conn](#conn)\
 [trait Listener](#listener)\
+[struct Resolver](#resolver)\
 [struct AddrError](#addrerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-[struct TCPListener](#tcplistener)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(\*self\)\!: Conn](#accept)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
-[struct TCPConn](#tcpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-1)\
-[struct IPAddr](#ipaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;IPAddr](#resolve)\
-[struct TCPAddr](#tcpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-3)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;TCPAddr](#resolve-1)\
-[struct Resolver](#resolver)\
-[struct UDPAddr](#udpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;UDPAddr](#resolve-2)\
-[type HardwareAddr](#hardwareaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
-[struct UDPConn](#udpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-5)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-2)\
-[struct DNSError](#dnserror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)\
 [type IP](#ip)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\): IP](#empty)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\*self\): bool](#empty-1)\
@@ -67,23 +27,65 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(\*self\): bool](#isprivate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut \*self\): IP](#to4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut \*self\): IP](#to16)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+[struct IPAddr](#ipaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;IPAddr](#resolve)\
+[type HardwareAddr](#hardwareaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+[struct DNSError](#dnserror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
+[struct TCPAddr](#tcpaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;TCPAddr](#resolve-1)\
+[struct TCPConn](#tcpconn)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
+[struct TCPListener](#tcplistener)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(\*self\)\!: Conn](#accept)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-1)\
+[struct UDPAddr](#udpaddr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-6)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;UDPAddr](#resolve-2)\
+[struct UDPConn](#udpconn)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-5)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-2)\
 [enum Network](#network-6)
 
 ## Variables
+
+```jule
+let mut DefaultResolver = Resolver{ ... }
+```
+Default DNS resolver of the package\. Mutating this variable is not thread\-safe by default\. Most programs only need to configure it once, so performing configuration before introducing concurrency is the most common approach\. Otherwise, atomic access is required for Read/Write operations\.
+
+---
 
 ```jule
 let mut ErrInvalidTimeout = errors::New("timeout value is not valid, duration is out of range")
 let mut ErrTimeout = errors::New("connection timed out")
 ```
 Common errors of net package\. Mutation is undefined behavior\.
-
----
-
-```jule
-let mut DefaultResolver = Resolver{ ... }
-```
-Default DNS resolver of the package\. Mutating this variable is not thread\-safe by default\. Most programs only need to configure it once, so performing configuration before introducing concurrency is the most common approach\. Otherwise, atomic access is required for Read/Write operations\.
 
 ---
 
@@ -187,6 +189,25 @@ A literal IPv6 address in hostport must be enclosed in square brackets, as in &#
 
 See the \[Dial\] function for a description of the hostport parameter, and host and port results\.
 
+## IPv4
+```jule
+#disable boundary
+fn IPv4(a: byte, b: byte, c: byte, d: byte): IP
+```
+Returns the IP address \(in 16\-byte form\) of the IPv4 address a\.b\.c\.d\.
+
+## ParseIP
+```jule
+fn ParseIP(s: str): IP
+```
+Parses s as an IP address, returning the result\. The string s can be in IPv4 dotted decimal \(&#34;192\.0\.2\.1&#34;\), IPv6 \(&#34;2001:db8::68&#34;\), or IPv4\-mapped IPv6 \(&#34;::ffff:192\.0\.2\.1&#34;\) form\. If s is not a valid textual representation of an IP address, it returns nil\. The returned address is always 16 bytes, IPv4 addresses are returned in IPv4\-mapped IPv6 form\.
+
+## LookupIP
+```jule
+fn LookupIP(mut network: Network, address: str)!: []&IPAddr
+```
+Looks up host using the local resolver\. It returns a slice of that host&#39;s IPv4 and IPv6 addresses by network\. Network must be IP, IP4 or IP6\. Looks up for IPv4 addresses only, if network is IP4\. Looks up for IPv6 addresses only, if network is IP6\. Looks up for IPv4 and IPv6 addresses, if network is IP\.
+
 ## Listen
 ```jule
 fn Listen(network: Network, addr: str)!: Listener
@@ -255,25 +276,6 @@ fn DialTimeout(network: Network, addr: str, timeout: time::Duration)!: Conn
 ```
 Same as Dial, but uses timeout\. For UDP networks, timeout will be ignored\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be ignored\.
 
-## LookupIP
-```jule
-fn LookupIP(mut network: Network, address: str)!: []&IPAddr
-```
-Looks up host using the local resolver\. It returns a slice of that host&#39;s IPv4 and IPv6 addresses by network\. Network must be IP, IP4 or IP6\. Looks up for IPv4 addresses only, if network is IP4\. Looks up for IPv6 addresses only, if network is IP6\. Looks up for IPv4 and IPv6 addresses, if network is IP\.
-
-## IPv4
-```jule
-#disable boundary
-fn IPv4(a: byte, b: byte, c: byte, d: byte): IP
-```
-Returns the IP address \(in 16\-byte form\) of the IPv4 address a\.b\.c\.d\.
-
-## ParseIP
-```jule
-fn ParseIP(s: str): IP
-```
-Parses s as an IP address, returning the result\. The string s can be in IPv4 dotted decimal \(&#34;192\.0\.2\.1&#34;\), IPv6 \(&#34;2001:db8::68&#34;\), or IPv4\-mapped IPv6 \(&#34;::ffff:192\.0\.2\.1&#34;\) form\. If s is not a valid textual representation of an IP address, it returns nil\. The returned address is always 16 bytes, IPv4 addresses are returned in IPv4\-mapped IPv6 form\.
-
 ## Addr
 ```jule
 trait Addr {
@@ -295,6 +297,7 @@ trait Conn {
 	fn SetReadTimeout(mut *self, timeout: time::Duration)!
 	fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 	fn Network(*self): Network
+	fn RawFD(*self): u64
 }
 ```
 Common connection behavior\. Inherits the io::Reader, io::Writer, and io::Closer traits\.
@@ -308,197 +311,6 @@ trait Listener {
 }
 ```
 Common listener behavior\. Inherits the io::Closer trait\.
-
-## AddrError
-```jule
-struct AddrError {
-	Err:  str
-	Addr: str
-}
-```
-Common type of address errors\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-
-
-## TCPListener
-```jule
-struct TCPListener {
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-TCP listener\. In most cases, represents TCP server\.
-
-### Implemented Traits
-
-- `Listener`
-
-### Bind
-```jule
-fn Bind(addr: str)!: &TCPListener
-```
-Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
-
-See the \[Dial\] function for a description of the addr parameter\.
-
-### Dial
-```jule
-fn Dial(addr: str)!: &TCPConn
-```
-Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
-
-See the \[Dial\] function for a description of the addr parameter\.
-
-### DialTimeout
-```jule
-fn DialTimeout(addr: str, timeout: time::Duration)!: &TCPConn
-```
-Same as TCPListener\.Dial, but uses timeout\.
-
-### Accept
-```jule
-fn Accept(*self)!: Conn
-```
-Accepts incoming connection, returns &amp;TCPConn\. Panics if connection is closed\.
-
-### Network
-```jule
-fn Network(*self): Network
-```
-Returns network name which is listening\. If connection closed, returns Network\.TCP as a general network\.
-
-### Close
-```jule
-fn Close(mut *self)!
-```
-Closes connection\.
-
-## TCPConn
-```jule
-struct TCPConn {
-	Addr:   &TCPAddr
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-TCP connection\. In most cases, represents TCP client\.
-
-### Implemented Traits
-
-- `Conn`
-- `io::Reader`
-- `io::Writer`
-- `io::Stream`
-- `io::WriteCloser`
-
-### Read
-```jule
-fn Read(mut *self, mut buf: []byte)!: int
-```
-Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\. If connection is closed by server, it returns zero and sets connection state as closed\. So if you try read again, function will panic because of connection state is closed\.
-
-### Write
-```jule
-fn Write(mut *self, buf: []byte)!: int
-```
-Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
-
-### SetReadTimeout
-```jule
-fn SetReadTimeout(mut *self, timeout: time::Duration)!
-```
-Sets read timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
-
-### SetWriteTimeout
-```jule
-fn SetWriteTimeout(mut *self, timeout: time::Duration)!
-```
-Sets write timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
-
-### Network
-```jule
-fn Network(*self): Network
-```
-Returns network name which is connected\. If connection closed, returns Network\.TCP as a general network\.
-
-### Close
-```jule
-fn Close(mut *self)!
-```
-Closes connection\.
-
-## IPAddr
-```jule
-struct IPAddr {
-	IP:   IP
-	Zone: str // IPv6 scoped addressing zone
-}
-```
-Represents the address of an IP end point\.
-
-### Implemented Traits
-
-- `Addr`
-
-### Network
-```jule
-fn Network(*self): str
-```
-Returns the address&#39;s network name, &#34;ip&#34;\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns string form of address\.
-
-### Resolve
-```jule
-fn Resolve(mut network: Network, address: str)!: &IPAddr
-```
-Returns an address of IP end point\. The network must be a IP network name\.
-
-If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of IP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
-
-See the \[Dial\] function for a description of the network and address parameters\.
-
-## TCPAddr
-```jule
-struct TCPAddr {
-	IP:   IP
-	Port: int
-	Zone: str // IPv6 scoped addressing zone.
-}
-```
-Represents the address of a TCP end point\.
-
-### Implemented Traits
-
-- `Addr`
-
-### Network
-```jule
-fn Network(*self): str
-```
-Returns the address&#39;s network name\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns string form of address\.
-
-### Resolve
-```jule
-fn Resolve(mut network: Network, address: str)!: &TCPAddr
-```
-Returns an address of TCP end point\. The network must be a TCP network name\.
-
-If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of TCP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
-
-See the \[Dial\] function for a description of the network and address parameters\.
 
 ## Resolver
 ```jule
@@ -520,150 +332,14 @@ struct Resolver {
 ```
 DNS resolver configuration\.
 
-## UDPAddr
+## AddrError
 ```jule
-struct UDPAddr {
-	IP:   IP
-	Port: int
-	Zone: str // IPv6 scoped addressing zone.
+struct AddrError {
+	Err:  str
+	Addr: str
 }
 ```
-Represents the address of a UDP end point\.
-
-### Implemented Traits
-
-- `Addr`
-
-### Network
-```jule
-fn Network(*self): str
-```
-Returns the address&#39;s network name\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns string form of address\.
-
-### Resolve
-```jule
-fn Resolve(mut network: Network, address: str)!: &UDPAddr
-```
-Returns an address of UDP end point\. The network must be a UDP network name\.
-
-If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of UDP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
-
-See the \[Dial\] function for a description of the network and address parameters\.
-
-## HardwareAddr
-```jule
-type HardwareAddr: []byte
-```
-Physical hardware address\.
-
-### Parse
-```jule
-fn Parse(s: str)!: HardwareAddr
-```
-Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over InfiniBand link\-layer address using one of the following formats:<br>
-```
-00:00:5e:00:53:01
-02:00:5e:10:00:00:00:01
-00:00:00:00:fe:80:00:00:00:00:00:00:02:00:5e:10:00:00:00:01
-00-00-5e-00-53-01
-02-00-5e-10-00-00-00-01
-00-00-00-00-fe-80-00-00-00-00-00-00-02-00-5e-10-00-00-00-01
-0000.5e00.5301
-0200.5e10.0000.0001
-0000.0000.fe80.0000.0000.0000.0200.5e10.0000.0001
-```
-Exceptional is always will be AddrError\.Unable\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns address in string form\.
-
-## UDPConn
-```jule
-struct UDPConn {
-	Addr:          &UDPAddr
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-UDP connection\. This structure represents server and client connections\.
-
-### Implemented Traits
-
-- `Conn`
-- `io::Reader`
-- `io::Writer`
-- `io::Stream`
-- `io::WriteCloser`
-
-### Bind
-```jule
-fn Bind(addr: str)!: &UDPConn
-```
-Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
-
-See the \[Dial\] function for a description of the addr parameter\.
-
-### Dial
-```jule
-fn Dial(addr: str)!: &UDPConn
-```
-Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
-
-See the \[Dial\] function for a description of the addr parameter\.
-
-### Read
-```jule
-fn Read(mut *self, mut buf: []byte)!: (n: int)
-```
-Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
-
-### Write
-```jule
-fn Write(mut *self, buf: []byte)!: (n: int)
-```
-Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
-
-### SetReadTimeout
-```jule
-fn SetReadTimeout(mut *self, timeout: time::Duration)!
-```
-Sets read timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
-
-### SetWriteTimeout
-```jule
-fn SetWriteTimeout(mut *self, timeout: time::Duration)!
-```
-Sets write timeout for connection\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be accepted as zero\. The zero timeout, clears current timeout if exist\.
-
-### Network
-```jule
-fn Network(*self): Network
-```
-Returns network name which is connected or listening\. If connection closed, returns Network\.UDP as a general network\.
-
-### Close
-```jule
-fn Close(mut *self)!
-```
-Closes connection\.
-
-## DNSError
-```jule
-struct DNSError {
-	Err:    str // description of the error
-	Name:   str // name looked for
-	Server: str // server used
-}
-```
-Represents a DNS lookup error\.
+Common type of address errors\.
 
 ### Str
 ```jule
@@ -742,6 +418,345 @@ Returns string form of the IP address\. It returns one of 4 forms:<br>
 - dotted decimal \(&#34;192\.0\.2\.1&#34;\), if ip is an IPv4 or IP4\-mapped IPv6 address
 - IPv6 conforming to RFC 5952 \(&#34;2001:db8::1&#34;\), if ip is a valid IPv6 address
 - the hexadecimal form of ip, without punctuation, if no other cases apply
+
+## IPAddr
+```jule
+struct IPAddr {
+	IP:   IP
+	Zone: str // IPv6 scoped addressing zone
+}
+```
+Represents the address of an IP end point\.
+
+### Implemented Traits
+
+- `Addr`
+
+### Network
+```jule
+fn Network(*self): str
+```
+Returns the address&#39;s network name, &#34;ip&#34;\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns string form of address\.
+
+### Resolve
+```jule
+fn Resolve(mut network: Network, address: str)!: &IPAddr
+```
+Returns an address of IP end point\. The network must be a IP network name\.
+
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of IP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
+
+## HardwareAddr
+```jule
+type HardwareAddr: []byte
+```
+Physical hardware address\.
+
+### Parse
+```jule
+fn Parse(s: str)!: HardwareAddr
+```
+Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over InfiniBand link\-layer address using one of the following formats:<br>
+```
+00:00:5e:00:53:01
+02:00:5e:10:00:00:00:01
+00:00:00:00:fe:80:00:00:00:00:00:00:02:00:5e:10:00:00:00:01
+00-00-5e-00-53-01
+02-00-5e-10-00-00-00-01
+00-00-00-00-fe-80-00-00-00-00-00-00-02-00-5e-10-00-00-00-01
+0000.5e00.5301
+0200.5e10.0000.0001
+0000.0000.fe80.0000.0000.0000.0200.5e10.0000.0001
+```
+Exceptional is always will be AddrError\.Unable\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns address in string form\.
+
+## DNSError
+```jule
+struct DNSError {
+	Err:    str // description of the error
+	Name:   str // name looked for
+	Server: str // server used
+}
+```
+Represents a DNS lookup error\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+
+
+## TCPAddr
+```jule
+struct TCPAddr {
+	IP:   IP
+	Port: int
+	Zone: str // IPv6 scoped addressing zone.
+}
+```
+Represents the address of a TCP end point\.
+
+### Implemented Traits
+
+- `Addr`
+
+### Network
+```jule
+fn Network(*self): str
+```
+Returns the address&#39;s network name\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns string form of address\.
+
+### Resolve
+```jule
+fn Resolve(mut network: Network, address: str)!: &TCPAddr
+```
+Returns an address of TCP end point\. The network must be a TCP network name\.
+
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of TCP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
+
+## TCPConn
+```jule
+struct TCPConn {
+	Addr:   &TCPAddr
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+TCP connection\. In most cases, represents TCP client\.
+
+### Implemented Traits
+
+- `Conn`
+- `io::Reader`
+- `io::Writer`
+- `io::ReadWriteCloser`
+- `io::WriteCloser`
+
+### Read
+```jule
+fn Read(mut *self, mut buf: []byte)!: int
+```
+Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\. If connection is closed by server, it returns zero and sets connection state as closed\. So if you try read again, function will panic because of connection state is closed\.
+
+### Write
+```jule
+fn Write(mut *self, buf: []byte)!: int
+```
+Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
+
+### SetReadTimeout
+```jule
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
+```
+Sets read timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
+
+### SetWriteTimeout
+```jule
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
+```
+Sets write timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
+
+### Network
+```jule
+fn Network(*self): Network
+```
+Returns network name which is connected\. If connection closed, returns Network\.TCP as a general network\.
+
+### RawFD
+```jule
+fn RawFD(*self): u64
+```
+Returns raw socket/file\-descriptor of the connection\. Intended for low\-level use\. Just borrow, do not close or something else\.
+
+### Close
+```jule
+fn Close(mut *self)!
+```
+Closes connection\.
+
+## TCPListener
+```jule
+struct TCPListener {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+TCP listener\. In most cases, represents TCP server\.
+
+### Implemented Traits
+
+- `Listener`
+
+### Bind
+```jule
+fn Bind(addr: str)!: &TCPListener
+```
+Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+
+See the \[Dial\] function for a description of the addr parameter\.
+
+### Dial
+```jule
+fn Dial(addr: str)!: &TCPConn
+```
+Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+
+See the \[Dial\] function for a description of the addr parameter\.
+
+### DialTimeout
+```jule
+fn DialTimeout(addr: str, timeout: time::Duration)!: &TCPConn
+```
+Same as TCPListener\.Dial, but uses timeout\.
+
+### Accept
+```jule
+fn Accept(*self)!: Conn
+```
+Accepts incoming connection, returns &amp;TCPConn\. Panics if connection is closed\.
+
+### Network
+```jule
+fn Network(*self): Network
+```
+Returns network name which is listening\. If connection closed, returns Network\.TCP as a general network\.
+
+### Close
+```jule
+fn Close(mut *self)!
+```
+Closes connection\.
+
+## UDPAddr
+```jule
+struct UDPAddr {
+	IP:   IP
+	Port: int
+	Zone: str // IPv6 scoped addressing zone.
+}
+```
+Represents the address of a UDP end point\.
+
+### Implemented Traits
+
+- `Addr`
+
+### Network
+```jule
+fn Network(*self): str
+```
+Returns the address&#39;s network name\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns string form of address\.
+
+### Resolve
+```jule
+fn Resolve(mut network: Network, address: str)!: &UDPAddr
+```
+Returns an address of UDP end point\. The network must be a UDP network name\.
+
+If the host in the address parameter is not a literal IP address or the port is not a literal port number, it resolves the address to an address of UDP end point\. Otherwise, it parses the address as a pair of literal IP address and port number\. The address parameter can use a host name, but this is not recommended, because it will return at most one of the host name&#39;s IP addresses\.
+
+See the \[Dial\] function for a description of the network and address parameters\.
+
+## UDPConn
+```jule
+struct UDPConn {
+	Addr:          &UDPAddr
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+UDP connection\. This structure represents server and client connections\.
+
+### Implemented Traits
+
+- `Conn`
+- `io::Reader`
+- `io::Writer`
+- `io::ReadWriteCloser`
+- `io::WriteCloser`
+
+### Bind
+```jule
+fn Bind(addr: str)!: &UDPConn
+```
+Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+
+See the \[Dial\] function for a description of the addr parameter\.
+
+### Dial
+```jule
+fn Dial(addr: str)!: &UDPConn
+```
+Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+
+See the \[Dial\] function for a description of the addr parameter\.
+
+### Read
+```jule
+fn Read(mut *self, mut buf: []byte)!: (n: int)
+```
+Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
+
+### Write
+```jule
+fn Write(mut *self, buf: []byte)!: (n: int)
+```
+Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
+
+### SetReadTimeout
+```jule
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
+```
+Sets read timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
+
+### SetWriteTimeout
+```jule
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
+```
+Sets write timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
+
+### Network
+```jule
+fn Network(*self): Network
+```
+Returns network name which is connected or listening\. If connection closed, returns Network\.UDP as a general network\.
+
+### RawFD
+```jule
+fn RawFD(*self): u64
+```
+Returns raw socket/file\-descriptor of the connection\. Intended for low\-level use\. Just borrow, do not close or something else\.
+
+### Close
+```jule
+fn Close(mut *self)!
+```
+Closes connection\.
 
 ## Network
 ```jule
