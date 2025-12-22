@@ -3,39 +3,19 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsStdHeaderPath\(p: str\): bool](#isstdheaderpath)\
-[fn IsValidHeaderExt\(ext: str\): bool](#isvalidheaderext)\
-[fn IsValidCppExt\(ext: str\): bool](#isvalidcppext)\
 [fn PathStdlib\(\): str](#pathstdlib)\
 [fn PathExec\(\): str](#pathexec)\
 [fn PathWd\(\): str](#pathwd)\
 [fn PathAPI\(\): str](#pathapi)\
 [fn SetEnv\(exec: str, wd: str\)](#setenv)\
 [fn ModStdlib\(\): &amp;mod::Mod](#modstdlib)\
+[fn IsStdHeaderPath\(p: str\): bool](#isstdheaderpath)\
+[fn IsValidHeaderExt\(ext: str\): bool](#isvalidheaderext)\
+[fn IsValidCppExt\(ext: str\): bool](#isvalidcppext)\
+[fn IsValidAssemblyExt\(ext: str\): bool](#isvalidassemblyext)\
 [fn IsJule\(path: str\): bool](#isjule)
 
 ## Variables
-
-```jule
-let CppHeaderExts: [...]str = [ ... ]
-```
-Valid extensions of C\+\+ headers\.
-
----
-
-```jule
-let CppExts: [...]str = [ ... ]
-```
-Valid extensions of C\+\+ source files\.
-
----
-
-```jule
-let ObjectiveCppExts: [...]str = [ ... ]
-```
-Valid extensions of Objective\-C\+\+ source files\.
-
----
 
 ```jule
 let mut OS = runtime::OS
@@ -59,6 +39,34 @@ Reserved module identity for the standard library module\.
 ---
 
 ```jule
+let CppHeaderExts: [...]str = [ ... ]
+```
+Valid extensions of C\+\+ headers\.
+
+---
+
+```jule
+let CppExts: [...]str = [ ... ]
+```
+Valid extensions of C\+\+ source files\.
+
+---
+
+```jule
+let AssemblyExts: [...]str = [ ... ]
+```
+Valid extensions of Assembly source files\.
+
+---
+
+```jule
+let ObjectiveCppExts: [...]str = [ ... ]
+```
+Valid extensions of Objective\-C\+\+ source files\.
+
+---
+
+```jule
 const Api = "api"
 ```
 Directory name of Jule C\+\+ API\.
@@ -69,24 +77,6 @@ Directory name of Jule C\+\+ API\.
 const Stdlib = "std"
 ```
 Directory name of standard library\.
-
-## IsStdHeaderPath
-```jule
-fn IsStdHeaderPath(p: str): bool
-```
-Reports whether path is C\+\+ std library path\.
-
-## IsValidHeaderExt
-```jule
-fn IsValidHeaderExt(ext: str): bool
-```
-Reports whether C\+\+ header extension is valid\.
-
-## IsValidCppExt
-```jule
-fn IsValidCppExt(ext: str): bool
-```
-Reports whether C\+\+ extension is valid\.
 
 ## PathStdlib
 ```jule
@@ -125,6 +115,30 @@ SetEnv is a mandatory call if you need to use package sema\. Because semantic an
 fn ModStdlib(): &mod::Mod
 ```
 Returns the reserved module instance of the standard library module\. Returns nil if not initialized by \[SetEnv\]\.
+
+## IsStdHeaderPath
+```jule
+fn IsStdHeaderPath(p: str): bool
+```
+Reports whether path is C\+\+ std library path\.
+
+## IsValidHeaderExt
+```jule
+fn IsValidHeaderExt(ext: str): bool
+```
+Reports whether C\+\+ header extension is valid\.
+
+## IsValidCppExt
+```jule
+fn IsValidCppExt(ext: str): bool
+```
+Reports whether C\+\+ extension is valid\.
+
+## IsValidAssemblyExt
+```jule
+fn IsValidAssemblyExt(ext: str): bool
+```
+Reports whether Assembly extension is valid\.
 
 ## IsJule
 ```jule
