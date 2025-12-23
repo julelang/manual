@@ -615,7 +615,13 @@ export default defineConfig({
               ],
             },
             { text: 'std/sys', link: '/std/sys' },
-            { text: 'std/testing', link: '/std/testing', },
+            {
+              text: 'std/testing',
+              link: '/std/testing',
+              items: [
+                { text: 'std/testing/iotest', link: '/std/testing-iotest' }
+              ],
+            },
             { text: 'std/time', link: '/std/time', },
             {
               text: 'std/unicode',
