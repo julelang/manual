@@ -76,36 +76,36 @@ unsafe fn _RCLoad(p: _RCPtr): _RCType
 ```
 Reads reference counting data. Passing nil pointer is not safe.
 
-Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+Implemented with no concurrency-safety by default. If concurrency-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
 
 ```jule
 unsafe fn _RCLoadAtomic(p: _RCPtr): _RCType
 ```
-Same as `_RCLoad` but have thread-safe implementation.
+Same as `_RCLoad` but have concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCAdd(mut p: _RCPtr)
 ```
 Adds strong reference to reference pointer. Passing nil pointer is not safe.
 
-Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+Implemented with no concurrency-safety by default. If concurrency-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
 
 ```jule
 unsafe fn _RCAddAtomic(mut p: _RCPtr)
 ```
-Same as `_RCAdd` but have thread-safe implementation.
+Same as `_RCAdd` but have concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCDrop(mut p: _RCPtr): bool
 ```
 Drops strong reference from reference pointer. Passing nil pointer is not safe. Reports whether allocation still alive.
 
-Implemented with no thread-safety by default. If thread-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+Implemented with no concurrency-safety by default. If concurrency-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
 
 ```jule
 unsafe fn _RCDropAtomic(mut p: _RCPtr): bool
 ```
-Same as `_RCDrop` but have thread-safe implementation.
+Same as `_RCDrop` but have concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCFree(p: _RCPtr)
@@ -166,11 +166,6 @@ Converts `rune` to `str`.
 unsafe fn runeStep(s: *byte, n: int, mut r: *rune, mut outLen: *int)
 ```
 Designed for `[]rune(s)` iterations. Takes pointer to string withl length and sets output pointers by first rune of string. Passing nil pointer for any parameter is not safe except `r`.
-
-```jule
-unsafe fn coSpawn(func: *unsafe, args: *unsafe)
-```
-A low level API function for threads. It doesn't provide much abstraction. It just creates and detaches a thread using API. Reports whether the thread created successfully. The created thread is a native-thread. The `func` parameter should point to the valid function for operating system thread API. The `args` parameter may be nil and should point to the argument data. The thread data, should be fit into the threadData struct. So, the head fields of the thread data should be matched fields of the threadData.
 
 ```jule
 fn runeCount(s: str): int

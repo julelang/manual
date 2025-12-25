@@ -25,7 +25,11 @@ Partial support may not be available for all platforms and is broad in scope. Th
 
 C++ support and support status of the Jule release standards.
 
-### Jule 0.0.11 and Higher
+### Jule 0.2.0 and Higher Versions
+
+Supports compilation only for C++20.
+
+### From Jule 0.0.11 to Jule 0.1.7
 
 Supports compilation for C++14, C++17, C++20 standards. As for the standard, it uses C++17 by default and additionally allows the standard to be set between the three as a compiler option.
 
@@ -33,7 +37,7 @@ Supports compilation for C++14, C++17, C++20 standards. As for the standard, it 
 
 It fixes compilation errors that caused by API when using C++14 standard.
 
-### Beta 0.0.7, Jule 0.0.8 and Jule 0.0.9
+### From Beta 0.0.7 to Jule 0.0.9
 
 Supports compilation for C++14, C++17, C++20 standards. As for the standard, it uses C++17 by default and additionally allows the standard to be set between the three as a compiler option.
 
@@ -45,7 +49,7 @@ You might be have some compilation errors caused by API when using C++14.
 
 Beta 0.0.6 continues to adopt the C++17 standard by default. In addition, the C++20 problems encountered especially with GCC have been resolved with this release.
 
-### Beta 0.0.3 - Beta 0.0.5
+### From Beta 0.0.3 to Beta 0.0.5
 
 > In these versions, GCC may create compilation problems with C++20 and above.
 
@@ -61,16 +65,16 @@ These tests were performed on Linux. When we tested GCC compilation on Windows w
 
 ## Windows API Compatibility
 
-### Jule 0.1.4 and Higher
+### Jule 0.1.4 and Higher Versions
 
 Jule supports Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. In Jule 0.1.4, the `std/sys` package and whole standard library implemented using Windows API.
 
 If you encounter issues about Windows support, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
 
-### Jule 0.0.14, Jule 0.0.15, Jule 0.1.0, Jule 0.1.2, Jule 0.1.3
+### From Jule 0.0.14 to Jule 0.1.3
 
 Jule supports Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. However, Windows API support is not guaranteed to work as expected. When using Windows API your program may able to compile successfully, but may need to additional actions like linking missing libraries. If you encounter issues like that, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
 
-### Jule 0.0.13 and Before
+### Jule 0.0.13 and Older Versions
 
 Jule does not supports Windows API. This is why you won't have an official Windows API support. We ran into issues when we tried IR's support of Clang (not MinGW) experimentally. Our standard libraries such as `std/sys` contain code that is not compatible with Windows API. We had a problem when we tried to compile JuleC IR with Clang (not MinGW). So even if you want to do that, you're probably going to have to put effort into MinGW dependencies.

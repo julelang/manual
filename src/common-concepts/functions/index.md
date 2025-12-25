@@ -171,25 +171,6 @@ fn main() {
 You can't use multiple returnable functions combined with normal multiple assignments.
 :::
 
-## Concurrent Calls
-Concurrency works on performing multiple tasks at the same time. This means that you are working on multiple tasks simultaneously in one time frame. However, you can only do one task for the same time. This tends to happen in programs where a task is waiting and the program has determined to run another task at idle time.
-
-The keyword `co` is used to do a concurrent call.
-
-For example:
-```jule
-fn helloWorld() { println("Hello World") }
-
-fn main() {
-    co helloWorld()
-}
-```
-::: warning
-The concurrent calls spawns real threads that managed by kernel and the program does not automatically wait for the execution of concurrent calls to terminate.
-:::
-
-Please see [concurrency](/concurrency/) page of manual for more information.
-
 ## Valid Return Statements
 A return expression need not always be specified in the main scope of the function. The only criterion is that the function returns under all conditions. Return statements in inner scopes are considered valid if they guarantee the return under all conditions.
 

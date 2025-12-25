@@ -148,21 +148,21 @@ In the example above, the function `exceptional1` return the result and forwards
 One thing to remember is that your compiler may place a temporary expression there for correct backend compilation. However, this shouldn't affect how your program runtime behavior; it may just be a must-have knowledge for extreme memory efficiency requirements.
 :::
 
-## Concurrency
+## Coroutines
 
-Exceptions cannot be used in concurrent calls. It is recommended to use an anonymous function or define a separate function for their handling.
+Exceptions cannot be used in coroutine calls. It is recommended to use an anonymous function or define a separate function for their handling.
 
 For example:
 
 ```jule
-fn myExceptional()! {
-    error("my error")
+async fn myExceptional()! {
+	error("my error")
 }
 
-fn main() {
-    co fn() {
-        myExceptional()!
-    }()
+async fn main() {
+	co async fn() {
+		myExceptional().await!
+	}()
 }
 ```
 

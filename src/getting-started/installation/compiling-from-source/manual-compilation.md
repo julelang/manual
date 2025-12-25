@@ -17,20 +17,15 @@ Considering these recommendations can help the JuleC build you use during develo
 
 ### C++ Standard
 
-Instead of the default standard, it would be better for you to use ``c++17``.
-JuleC is dependent on several headers from ``c++17``.
-Even if you can compile with ``c++14``, compiling with ``c++17`` can provide a smoother experience for you.
-
-::: tip
-Pass ``--std=c++17`` flag for compile with C++17, if you are using Clang, GCC or something like this.
-:::
+Compile with `c++20`.\
+This is the the minimum required C++ version.
 
 ### Optimization Level
 
 Jule compiles at zero optimization (``O0``) level by default.
 But this is not recommended if you are compiling for use.
 Zero optimization level will produce the dumbest code possible and you can suffer serious performance losses.
-It is recommended to compile JuleC's C++ IR with ``O3`` or ``Ofast`` to get the fastest and most performing JuleC compilation.
+It is recommended to compile JuleC's C++ IR with ``O3`` to get the fastest and most performing JuleC compilation.
 
 #### Notice about `Ofast` Optimization Level
 

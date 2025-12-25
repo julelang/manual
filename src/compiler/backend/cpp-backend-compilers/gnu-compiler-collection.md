@@ -18,7 +18,7 @@ GCC can sometimes document an error like `File too big` or `Too Many Sections` w
 
 Our command looked like this:
 ```
-g++ -Wa,-mbig-obj -O0 --std=c++17 -w -o .\bin\julec.exe .\ir.cpp
+g++ -Wa,-mbig-obj -O0 --std=c++20 -w -o .\bin\julec.exe .\ir.cpp
 ```
 
 ## New Linker May Cause Problems (macOS Only)

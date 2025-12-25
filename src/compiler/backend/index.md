@@ -10,6 +10,8 @@ Backend compiler refers to your compiler that you use to compile IR codes. This 
 
 | Jule Version | Windows                 | macOS | Linux |
 |--------------|-------------------------|-------|-------|
+| jule0.2.0    | Clang                   | Clang | Clang |
+| jule0.1.7    | Clang                   | Clang | Clang |
 | jule0.1.6    | Clang                   | Clang | Clang |
 | jule0.1.5    | Clang                   | Clang | Clang |
 | jule0.1.4    | Clang                   | Clang | Clang |

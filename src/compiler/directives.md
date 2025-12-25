@@ -53,8 +53,6 @@ Here is the list of variables and their existence:
 - `test`: compiling for testing
 - `clang`: backend compiler is Clang
 - `gcc`: backend compiler is GCC
-- `cpp14`: using C++14 standard
-- `cpp17`: using C++17 standard
 - `cpp20`: using C++20 standard
 
 ### Examples

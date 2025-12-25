@@ -13,7 +13,7 @@ in       break     continue    goto
 match    fall      if          else
 ret      error     use         co
 extern   unsafe    defer       chan
-select
+select   async     await
 ```
 
 ## Imaginary Keywords

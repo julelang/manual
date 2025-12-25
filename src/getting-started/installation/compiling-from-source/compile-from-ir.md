@@ -36,16 +36,16 @@ The include directories of the IR codes are set to be in the root directory of t
 
 Of course you need a C++ compiler to compile the IR code. At this point it is recommended to use one of the officially supported compilers. You can check [relevant manual page](/compiler/backend/) for more details.
 
-We recommend compiling JuleC's IR codes with Clang and C++17. The recommended build command below is built accordingly. You can change the optimization level as you wish. -O0 is recommended for debugging. If you're using it to get the most up-to-date compiler in the main branch, you can still use -O0 to get the fastest build time, but it may also result in a JuleC build with a higher transpilation time. But in the general scenario you wait less time than you would expect for the -O3 optimization level.
+We recommend compiling JuleC's IR codes with Clang and C++20. The recommended build command below is built accordingly. You can change the optimization level as you wish. -O0 is recommended for debugging. If you're using it to get the most up-to-date compiler in the main branch, you can still use -O0 to get the fastest build time, but it may also result in a JuleC build with a higher transpilation time. But in the general scenario you wait less time than you would expect for the -O3 optimization level.
 
 Recommended compile command (Unix):
 ```sh
-clang++ -Wno-everything --std=c++17 -fwrapv -ffloat-store -fno-fast-math -fexcess-precision=standard -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o ./bin/julec ir.cpp
+clang++ -Wno-everything --std=c++20 -fwrapv -ffloat-store -fno-fast-math -fexcess-precision=standard -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o ./bin/julec ir.cpp
 ```
 
 Recommended compile command (Windows):
 ```sh
-clang++ -Wno-everything --std=c++17 -fwrapv -ffloat-store -fno-fast-math -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -fuse-ld=lld -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o bin/julec.exe ir.cpp -lws2_32 -lshell32 -liphlpapi
+clang++ -Wno-everything --std=c++20 -fwrapv -ffloat-store -fno-fast-math -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -fuse-ld=lld -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o bin/julec.exe ir.cpp -lws2_32 -lshell32 -liphlpapi -lsynchronization
 ```
 
 ::: warning

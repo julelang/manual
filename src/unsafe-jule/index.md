@@ -16,7 +16,7 @@ Benefits of Unsafe Jule:
 - Cast raw pointers
 - Get smart pointer from raw pointer
 - Call unsafe functions or methods
-- Concurrent calls with reference parameters
+- Coroutine calls with reference parameters
 - Pass pointer to reference
 - Access reference from parent scope
 - Cast external types

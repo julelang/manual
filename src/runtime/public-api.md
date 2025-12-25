@@ -5,7 +5,9 @@ The runtime library is not completely internal, also provides a public API. This
 ## Index
 
 [Variables](#variables)\
-[fn NumCPU(): int](#numcpu)
+[fn COMAXPROCS(): int](#comaxprocs)\
+[fn NumCPU(): int](#numcpu)\
+[async fn Yield()](#yield)
 
 ## Variables
 
@@ -36,6 +38,12 @@ const RCDelta: untyped integer
 ```
 The reference counting data delta value that must occur per each reference counting operation.
 
+## COMAXPROCS
+```jule
+fn COMAXPROCS(): int
+```
+Returns the maximum number of CPUs that can be executing simultaneously.
+
 ## NumCPU
 ```jule
 fn NumCPU(): int
@@ -43,3 +51,10 @@ fn NumCPU(): int
 Returns the number of logical CPUs usable by the current process.
 
 The set of available CPUs is checked by querying the operating system at process startup. Changes to operating system CPU allocation after process startup are not reflected.
+
+## Yield
+```jule
+async fn Yield()
+```
+// Yields the processor, allowing other coroutines to run. It does not
+// suspend the current coroutine, so execution resumes automatically.

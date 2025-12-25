@@ -102,7 +102,7 @@
 			"patterns": [
 				{
 					"name": "keyword.jule",
-					"match": "\\b(map|type|impl|trait|struct|enum|fn|co|unsafe|chan)\\b"
+					"match": "\\b(map|type|impl|trait|struct|enum|fn|co|unsafe|chan|async|await)\\b"
 				},
 				{
 					"name": "keyword.control.jule",
@@ -143,7 +143,7 @@
 					"patterns": [
 						{
 							"match": "[\\p{L}_]\\w*",
-							"name": "support.function.jule"
+							"name": "entity.name.function.jule"
 						}
 					]
 				},
@@ -166,7 +166,7 @@
 					"patterns": [
 						{
 							"match": "[\\p{L}_]\\w*(\b|)(?=\\()",
-							"name": "support.function.jule"
+							"name": "entity.name.function.jule"
 						}
 					]
 				},
@@ -191,7 +191,7 @@
 						},
 						{
 							"match": "[\\p{L}_]\\w*(\b|)(?=\\()",
-							"name": "support.function.jule"
+							"name": "entity.name.function.jule"
 						}
 					]
 				}
@@ -199,7 +199,7 @@
 		},
 		"functions": {
 			"match": "[\\p{L}_]\\w*(\b|)(?=\\()",
-			"name": "support.function.jule"
+			"name": "entity.name.function.jule"
 		},
 		"keywords2": {
 			"name": "keyword.jule",
@@ -687,6 +687,10 @@
 		"operators": {
 			"patterns": [
 				{
+					"name": "keyword.operator.new.jule",
+					"match": ":="
+				},
+				{
 					"name": "keyword.operator.arithmetic.jule",
 					"match": "(\\+|\\-|\\*|\\/|\\%|\\+\\+|\\-\\-|\\>\\>|\\<\\<)"
 				},
@@ -705,10 +709,6 @@
 				{
 					"name": "keyword.operator.logical.jule",
 					"match": "(\\&\\&|\\|\\||\\!)"
-				},
-				{
-					"name": "keyword.operator.new.jule",
-					"match": ":="
 				}
 			]
 		},
@@ -728,7 +728,7 @@
 				},
 				{
 					"name": "punctuation.separator.key-value.colon.jule",
-					"match": ":"
+					"match": ":(?!\\=)"
 				},
 				{
 					"name": "punctuation.definition.other.semicolon.jule",
