@@ -30,4 +30,5 @@ However, in the Jule async runtime, each `await` only represents a *potential* s
 
 A suspension can occur only in the following cases:
 - The coroutine is parked by the runtime (for example, when acquiring a mutex, waiting for a message from a channel, or performing I/O).
+- The coroutine is implicitly yielded by the runtime during `co` calls.
 - The coroutine is explicitly yielded by the developer.
