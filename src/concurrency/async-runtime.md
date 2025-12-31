@@ -81,3 +81,48 @@ This means it is not a debugging mechanism but rather an auxiliary hint. If a pr
 ### Scheduling of The Main Coroutine
 
 The scheduler considers the program finished when the main coroutine returns. Any other coroutines are ignored; once the main coroutine ends, the program exits. Other coroutines may be terminated without ever being executed or while they are still running.
+
+### Blocking Tasks
+
+As a developer, it is your responsibility to keep performance optimal and to prevent the scheduler from experiencing starvation due to blocking operations. The scheduler assumes that a coroutine will typically yield when appropriate.
+
+The scheduler does not detect blocking operations. If an M attempts to perform a blocking operation, the scheduler does not try to hide or tolerate it. This may be efficient for short-lived blocking operations (for example, I/O on a small file), but for long-running operations it can cause an M to remain blocked for an extended period of time and significantly degrade performance.
+
+To prevent this, the runtime provides an additional multi-threaded environment: a blocking-operation thread pool. This is typically a thread pool with a theoretically unbounded job queue. Worker threads execute jobs one by one, and when a job completes, the corresponding coroutine is resumed. All executed jobs are synchronous and do not interact with the scheduler.
+
+To dispatch a blocking task to the thread pool, you use the `Blocking` function provided by the runtime.
+
+Example:
+```jule
+runtime::Blocking(myJob).await
+```
+In the example above, you can see that the call is awaited. This is required because the `Blocking` function is asynchronous.
+
+This is necessary for the following reasons:
+- Prevents it from being called from synchronous functions
+- Ensures that the coroutine yields after enqueuing the job
+- Allows it to be used as a separate coroutine if needed
+
+Example program:
+```jule
+use "std/runtime"
+use "std/sync"
+
+async fn main() {
+	mut wg := sync::WaitGroup.New()
+	mut i := 0
+	for i < 64; i++ {
+		wg.Add(1)
+		co runtime::Blocking(fn() {
+			// blocking job...
+			wg.Done()
+		})
+	}
+	wg.Wait().await
+}
+```
+The example program above invokes `runtime::Blocking` calls as separate coroutines. The reason for this is that if they were awaited, each blocking job would only be enqueued after the previous one completed. This is because if you do not treat it as a coroutine, you must `await` it, which means waiting for the job to finish. Depending on the scenario, either approach may be the most optimal choice.
+
+::: warning
+The blocking thread pool can be quite aggressive in creating threads and is based on the assumption that jobs in the queue will block for a while. In other words, it is not optimized for short and fast blocking tasks. Having a very large number of blocking jobs can cause the queue to grow, leading to increased memory consumption.
+:::
