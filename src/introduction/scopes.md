@@ -46,6 +46,9 @@ In the code above, the deferred scope inside the iteration records the current v
 \- [Anonymous Functions and Closures](/common-concepts/functions/anonymous-functions)\
 \- [Memory Model of Deferred Scopes](/memory/memory-model#deferred-scopes)
 
+> Deferred scopes are always synchronous.
+> They execute just before function return and cannot be async.
+
 ## Unsafe Scopes
 Unsafe scopes allows to use Unsafe Jule. Declares with the `unsafe` keyword.
 
