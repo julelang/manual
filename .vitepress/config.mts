@@ -469,7 +469,13 @@ export default defineConfig({
           text: 'API',
           link: '/api/',
           items: [
-            { text: 'Runtime API', link: '/api/runtime-api' },
+            {
+              text: 'Runtime API',
+              link: '/api/runtime-api/',
+              items: [
+                { text: 'Async Runtime', link: '/api/runtime-api/async-runtime' },
+              ],
+            },
             {
               text: 'Implementation',
               link: '/api/implementation/',
