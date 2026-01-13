@@ -41,3 +41,7 @@ fn main() {
 }
 ```
 The above example demonstrates the interoperability of Jule with a C++ function that returns total of all values of an integer slice. The C++ header file is written entirely using the Jule API. The `Int`, and `Slice` types used are part of the API. The `Int` data type is equally sensitive to system architecture as in Jule. The Jule source code declares to use `sum.hpp` first and binds the C++ function in it to Jule accordingly. Then a call is made from Jule and the result of the function is written to the command line.
+
+## Error Handling
+
+The language you are using may have its own error-handling mechanism, such as C++ exceptions, but these are undefined from Jule's perspective. You must not let any error-handling mechanisms leak into Jule side. If Jule runtime encounters this kind of behavior, the behavior is undefined.
