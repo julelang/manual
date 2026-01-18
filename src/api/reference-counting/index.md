@@ -26,7 +26,7 @@ template<typename T>
 struct Ptr;
 ```
 
-Wrapper structure for raw pointer of JuleC. This structure is the used by Jule references for reference-counting and memory management.
+Wrapper structure for raw pointer of julec. This structure is the used by Jule references for reference-counting and memory management.
 
 ### Statics
 

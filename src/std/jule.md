@@ -11,7 +11,7 @@
 ```jule
 const Version = `jule0.1.8 @master`
 ```
-Version of package and sub\-packages\. This version represents also JuleC version\.
+Version of package and sub\-packages\. This version represents also julec version\.
 
 ---
 

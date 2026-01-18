@@ -16,7 +16,7 @@ Using GCC 14 resolved these issues.
 
 ### File Too Big or Too Many Sections
 
-GCC can sometimes document an error like `File too big` or `Too Many Sections` when compiling IR codes. We encountered this while compiling the JuleC IR when we tried to build a CI on GitHub Actions. We solved this by adding `-Wa,-mbig-obj` to the compile command.
+GCC can sometimes document an error like `File too big` or `Too Many Sections` when compiling IR codes. We encountered this while compiling the julec IR when we tried to build a CI on GitHub Actions. We solved this by adding `-Wa,-mbig-obj` to the compile command.
 
 Our command looked like this:
 ```
@@ -32,4 +32,4 @@ Passing this argument to GCC might solve the problem: `-Wl,-ld_classic`. This ar
 ### Unexpected Runtime (Windows Only)
 > **Jule 0.0.13 and Older Versions**
 
-We were successful when we compiled JuleC itself on Windows with GCC. But we had some problems. For example, when we wanted to transpile the JuleC source code with JuleC, we couldn't do it. This can be an important indication that GCC may have some issues with its runtime. As far as we tested, we did not experience this issue on Linux and macOS operating systems. Everything was as expected.
+We were successful when we compiled julec itself on Windows with GCC. But we had some problems. For example, when we wanted to transpile the julec source code with julec, we couldn't do it. This can be an important indication that GCC may have some issues with its runtime. As far as we tested, we did not experience this issue on Linux and macOS operating systems. Everything was as expected.

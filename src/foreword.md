@@ -9,7 +9,7 @@ Dear Julenour, welcome to the Jule community!
 
 ## Version Specific
 
-This version of the text assumes you're using the latest version of the JuleC compiler (compiled from source).
+This version of the text assumes you're using the latest version of the julec compiler (compiled from source).
 
 If you want to see the current manual version for the release, you can select the relevant version from the list below. But for this you will be redirected to the source code on GitHub and you will need to read the content from markdown.
 

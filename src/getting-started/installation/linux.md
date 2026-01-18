@@ -1,6 +1,6 @@
 # Linux Installation
 
-JuleC is available on Linux through various package managers.<br>
+julec is available on Linux through various package managers.<br>
 If you don't see your distribution listed below, check the [pre-compiled binaries](#pre-compiled-binaries) section.
 
 See manual page about [packages](/getting-started/installation/packages).

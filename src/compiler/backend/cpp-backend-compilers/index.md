@@ -1,6 +1,6 @@
 # C++ Backend Compilers
 
-JuleC commits that the codes it produces can be successfully compiled by the GNU Compiler Collection and Clang. Likewise, JuleC undertakes that the API it has and openly offers can be compiled with these compilers. While this preference is entirely left to the developers, JuleC has primarily embraced generating Clang compatible code, so it is recommended that Clang be the primary choice.
+julec commits that the codes it produces can be successfully compiled by the GNU Compiler Collection and Clang. Likewise, julec undertakes that the API it has and openly offers can be compiled with these compilers. While this preference is entirely left to the developers, julec has primarily embraced generating Clang compatible code, so it is recommended that Clang be the primary choice.
 
 Even if you can compile code generated outside of official support compilers with a different compiler, it is not under official support and there is no commitment that the code will be compiled. Regardless of whether you use Clang to compile the code or a compiler with or without official support, make sure that you either support or use a version of compiler that does support the C++ standard that Jule created.
 
@@ -53,7 +53,7 @@ Beta 0.0.6 continues to adopt the C++17 standard by default. In addition, the C+
 
 > In these versions, GCC may create compilation problems with C++20 and above.
 
-JuleC accepts the default C++ standard as C++17, along with the beta 0.0.3 release standard. It also generates code that is quite compatible with C++20 standard. According to our tests, the beta 0.0.3 release standard works well with C++14, C++17, and C++20. However, recommended standard is C++17 which is default standard for beta 0.0.3 release standard.
+julec accepts the default C++ standard as C++17, along with the beta 0.0.3 release standard. It also generates code that is quite compatible with C++20 standard. According to our tests, the beta 0.0.3 release standard works well with C++14, C++17, and C++20. However, recommended standard is C++17 which is default standard for beta 0.0.3 release standard.
 
 ### Beta 0.0.2 and Older Versions
 
@@ -77,4 +77,4 @@ Jule supports Windows API. Our GitHub Action workflows use Clang (not MinGW) on 
 
 ### Jule 0.0.13 and Older Versions
 
-Jule does not supports Windows API. This is why you won't have an official Windows API support. We ran into issues when we tried IR's support of Clang (not MinGW) experimentally. Our standard libraries such as `std/sys` contain code that is not compatible with Windows API. We had a problem when we tried to compile JuleC IR with Clang (not MinGW). So even if you want to do that, you're probably going to have to put effort into MinGW dependencies.
+Jule does not supports Windows API. This is why you won't have an official Windows API support. We ran into issues when we tried IR's support of Clang (not MinGW) experimentally. Our standard libraries such as `std/sys` contain code that is not compatible with Windows API. We had a problem when we tried to compile julec IR with Clang (not MinGW). So even if you want to do that, you're probably going to have to put effort into MinGW dependencies.

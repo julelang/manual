@@ -1,12 +1,12 @@
-# JuleFmt
+# julefmt
 
 The official source code formatter for the Jule programming language.
 
-JuleFmt is a source code formatter for Jule developed using the Jule programming language. It helps keep your Jule code in a consistent format. Except for the code formatting algorithms, it relies heavily on [`std/jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also.
+julefmt is a source code formatter for Jule developed using the Jule programming language. It helps keep your Jule code in a consistent format. Except for the code formatting algorithms, it relies heavily on [`std/jule`](/std/jule) and it's sub packages, which is the standard library packages used by the reference compiler also.
 
 ## Using
 
-JuleFmt can process data from different sources and output it in different ways. When run alone, it reads data from stdin and when EOF, it formats the Jule source code received as input and writes it to stdout. If a directory is given as an argument, it formats all Jule source code files located under the directory (not deep) and writes the output to stdout. If a file path is given, it formats the file and writes the output to stdout. Whenever there is any error, it will be written to stderr, exit code always will be zero.
+julefmt can process data from different sources and output it in different ways. When run alone, it reads data from stdin and when EOF, it formats the Jule source code received as input and writes it to stdout. If a directory is given as an argument, it formats all Jule source code files located under the directory (not deep) and writes the output to stdout. If a file path is given, it formats the file and writes the output to stdout. Whenever there is any error, it will be written to stderr, exit code always will be zero.
 
 For example:
 ```

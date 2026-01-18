@@ -39,7 +39,7 @@ Module commands.\
 Read the [modules](/packages/modules/) section for more information.
 
 ## version
-Shows version of the JuleC.
+Shows version of the julec.
 ```
 $ julec version
 ```

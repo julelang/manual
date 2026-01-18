@@ -1,9 +1,9 @@
 # API
-API of JuleC for C++. Jule API is an API written in C++. While it includes many Jule features such as built-in definitions, it also offers additional features for writing integrated Jule code for interoperability.
+API of julec for C++. Jule API is an API written in C++. While it includes many Jule features such as built-in definitions, it also offers additional features for writing integrated Jule code for interoperability.
 
-JuleC presents all the C++ content it implements and owns for Jule in header files. These header files come automatically imported in every code compiled by JuleC.
+julec presents all the C++ content it implements and owns for Jule in header files. These header files come automatically imported in every code compiled by julec.
 
-With this API, you can use the definitions of JuleC in C++ codes and adapt functions written for C++ to Jule.
+With this API, you can use the definitions of julec in C++ codes and adapt functions written for C++ to Jule.
 
 [See API source codes](https://github.com/julelang/jule/tree/master/api)
 

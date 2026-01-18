@@ -6,7 +6,7 @@ Arguments are indicated in their full form using two hyphens `--`. However, some
 Some options may require value.
 
 ## Using Options
-Options are written as command-line arguments when executing the compiler. Some options are only used, but an option may have to take value. Options that receive value must see its value after it. So, after JuleC sees an option that should take a value, it evaluates the following command-line argument as the option's value.
+Options are written as command-line arguments when executing the compiler. Some options are only used, but an option may have to take value. Options that receive value must see its value after it. So, after julec sees an option that should take a value, it evaluates the following command-line argument as the option's value.
 
 It doesn't matter if the options are in mixed order. They can be completely at the end of the command, at the beginning, in the middle, or in a complex way. The recommended order is to write the options first and then give the compiler inputs.
 

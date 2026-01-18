@@ -115,7 +115,7 @@ export default defineConfig({
               text: 'Compiling',
               link: '/compiler/compiling/',
               items: [
-                { text: 'Using JuleC', link: '/compiler/compiling/using-julec' },
+                { text: 'Using julec', link: '/compiler/compiling/using-julec' },
                 { text: 'Using Backend Compiler', link: '/compiler/compiling/using-backend-compiler' },
               ],
             },
@@ -650,9 +650,9 @@ export default defineConfig({
           items: [
             {
               items: [
-                { text: 'JuleC', link: '/tools/julec' },
-                { text: 'JuleFmt', link: '/tools/julefmt' },
-                { text: 'JuleDoc', link: '/tools/juledoc' },
+                { text: 'julec', link: '/tools/julec' },
+                { text: 'julefmt', link: '/tools/julefmt' },
+                { text: 'juledoc', link: '/tools/juledoc' },
               ],
             },
           ],

@@ -1,5 +1,5 @@
 # Interoperability
-Jule can interop with C++. A code written in C++ compatible with Jule can be transferred to Jule, used and compiled without any problems. Everything needed is readily available, as JuleC imports APIs by default to every generated code.
+Jule can interop with C++. A code written in C++ compatible with Jule can be transferred to Jule, used and compiled without any problems. Everything needed is readily available, as julec imports APIs by default to every generated code.
 
 ## Using External Definitions
 C++ links are stored separately. So to access C++ definitions it is necessary to use the C++ scope. The keyword `extern` is used to use the C++ scope. The external identifier can be used after the expression `extern.`.

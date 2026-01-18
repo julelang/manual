@@ -3,9 +3,9 @@
 Documentation comments (aka doc comments) are the standardized comment lines used when documenting Jule source code. With this standard, Jule code can be documented and read using a universal style.
 
 ::: tip
-By using doc comments, you can create separate documentation content for your code, such as Markdown documents, with [JuleDoc](/tools/juledoc).
+By using doc comments, you can create separate documentation content for your code, such as Markdown documents, with [juledoc](/tools/juledoc).
 
-If you're documenting with JuleDoc (and it is recommended to document according to JuleDoc standards), pay attention to how JuleDoc interprets doc comments and generates output.
+If you're documenting with juledoc (and it is recommended to document according to juledoc standards), pay attention to how juledoc interprets doc comments and generates output.
 :::
 
 ## Context Types of Doc Comments
@@ -23,7 +23,7 @@ Lists can only be used in the main context and cannot have sub-lists. Any type o
 If you do not want to move to a new line and end the list item, end the previous line with a comma ",". In this case, following line is considered part of the previous list item. But a new list mark (it is `-`) appears, it starts a new list item context. Indentation will not break the list item handling, so you can any space to align comment.
 
 ::: info
-With indentation, you might make it appear as if it's part of a sub-scope or sub-list. However, JuleDoc does not evaluate it this way. If the list is within the main scope, it is treated as a list. If it is inside a sub-scope, it is treated as part of the text within that sub-scope.
+With indentation, you might make it appear as if it's part of a sub-scope or sub-list. However, juledoc does not evaluate it this way. If the list is within the main scope, it is treated as a list. If it is inside a sub-scope, it is treated as part of the text within that sub-scope.
 :::
 
 ### Grouped Documentation and Subscopes
@@ -31,7 +31,7 @@ With indentation, you might make it appear as if it's part of a sub-scope or sub
 Documentation in groups and subscopes is treated as a separate main scope for the documentation within the main scope, having its own subscopes.
 
 ::: info
-JuleDoc does not process all scopes individually. It evaluates the first sub-scope separately and treats all content within it as text belonging to that scope.
+juledoc does not process all scopes individually. It evaluates the first sub-scope separately and treats all content within it as text belonging to that scope.
 :::
 
 ### Separator Line
@@ -55,8 +55,8 @@ Here is an example documentation that uses all context types as described:
 //
 //	This is a subscope because it uses tab for indentation.
 //		This is a subscope for a previous subscope because it uses 2 tab.
-//		- Looks like-list item but JuleDoc handles as a text in this subscope.
-//		- Looks like list-item but JuleDoc handles as a text in this subscope.
+//		- Looks like-list item but juledoc handles as a text in this subscope.
+//		- Looks like list-item but juledoc handles as a text in this subscope.
 //
 //- This is a list item.
 // - This is a list item.
@@ -70,10 +70,10 @@ Documentation must always come before the definition it belongs to, and any spac
 For example:
 ```jule
 // This is a documentation comment.
-// But it will not appear in the JuleDoc output.
+// But it will not appear in the juledoc output.
 // Because whitespace will break the documentation group.
 
-// This line and following lines will be appear in the JuleDoc output.
+// This line and following lines will be appear in the juledoc output.
 // Foo is a type for a magical use case.
 // Just used to make an example.
 type Foo: int
@@ -81,7 +81,7 @@ type Foo: int
 
 ### Internal Doc Comments
 
-If you are using JuleDoc and want to write comments that won't appear in the documentation output, you can use range comments before all the doc comments.
+If you are using juledoc and want to write comments that won't appear in the documentation output, you can use range comments before all the doc comments.
 
 Although they are ignored, it is recommended to write range comments according to the doc comment rules as well.
 
@@ -90,7 +90,7 @@ For example:
 /*
 This is an internal comment.
 Because written using range comments.
-This part will be ignored from JuleDoc output.
+This part will be ignored from juledoc output.
 */
 // Foo is a type for a magical use case.
 // Just used to make an example.
