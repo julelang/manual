@@ -1,6 +1,6 @@
 # Runtime API
 
-The runtime library provides some definitions as APIs to be used in the backend. This section includes which functions are provided as APIs and their documentation. If you want to see how they are declared in the backend, see the [API](/api/runtime-api) documentation.
+The runtime library provides some definitions as APIs to be used in the backend. This section includes which functions are provided as APIs and their documentation. If you want to see how they are declared in the backend, see the [API](/api/runtime-api/) documentation.
 
 ## Globals
 
