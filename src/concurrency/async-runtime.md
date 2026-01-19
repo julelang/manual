@@ -55,9 +55,13 @@ The scheduler is designed according to the C:M:P model:
 
 When a coroutine is created, the scheduler automatically enqueues it and schedules it for execution. Jule provides a set of concurrency primitives that are integrated with the scheduler. In other words, the scheduler tries to do as much work as possible to make your job easier: when necessary, it can suspend a coroutine at a safe point (for example, when contending on a mutex) and reschedule it later. However, because the scheduler is cooperative, it may still require additional help from the developer.
 
-### Yield
+### Fairness
 
 The scheduler is cooperative, which means there is no preemption. As a result, long-running or CPU-bound tasks may cause starvation for other coroutines. To avoid this, it is the developer’s responsibility to yield at appropriate points.
+
+However, the scheduler follows a best-effort approach to provide fairness. The standard library works in integration with the scheduler and helps enforce and improve fairness guarantees.
+
+#### Yield
 
 A yield operation temporarily suspends the currently running coroutine and gives the scheduler an opportunity to run other coroutines. You can do this with the `std/runtime` package.
 
@@ -65,6 +69,21 @@ Here is an example of yielding:
 ```jule
 runtime::Yield().await
 ```
+
+#### Budget System
+
+The budget system is a mechanism provided by the scheduler to ensure fairness. The standard library works integrated with the budget system whenever possible and helps maintain fairness.
+
+In the budget system, when a coroutine starts running, the scheduler assigns it a budget. This budget is used in situations where a coroutine could monopolize the CPU and cause starvation/fairness issues. When the budget reaches zero, even if further progress is possible, the coroutine is forced to yield execution to allow other coroutines to run. This approach aims to prevent the CPU from staying on specific coroutines for long periods and blocking others from getting execution time.
+
+How large the budget is, how it is refreshed, and where it is applied may vary between Jule versions. This is mostly an internal detail specific to the Jule runtime and standard library.
+
+Commonly, the following components are integrated with the budget system:
+
+* I/O functions (file or network read/write, socket accept, etc.)
+* Synchronization primitives (Mutex, RWMutex, WaitGroup, etc.)
+* Channels and select statements
+
 
 ### Deadlock Analysis
 
