@@ -28,8 +28,17 @@
 
 ### Why another language?
 
-Please read "[The Mission](/the-mission)".\
-TL;DR: Jule has its own unique ideas and goals.
+We love the simplicity and developer experience of Go.
+
+We love the efficiency and performance of C.
+
+We recognize and respect the safety goals addressed by Rust, but we believe that safety should not require constantly fighting the compiler.
+
+We want a language that delivers the productivity of Go while achieving the performance characteristics of C. A language that is safe by default, yet flexible enough to stay out of your way when you need full control.
+
+Most importantly, we refuse to abandon existing C and C++ codebases or rewrite thousands of lines of proven code just to adopt a new language. We want more than temporary bridges or fragile workarounds. We want interoperability to be a first-class, intentional part of the language design.
+
+Please read "[The Mission](/the-mission)" for more information.
 
 ### What about future of Jule?
 
