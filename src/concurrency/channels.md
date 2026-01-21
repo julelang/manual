@@ -173,6 +173,10 @@ Send-only channels can only send data to the channel. They also have the permiss
 
 For detailed information on channels and mutability, please refer to the main section titled [Mutability](/memory/mutability#channels).
 
+## Send/Recv on nil Channels
+
+Any send or receive operation on a `nil` channel will block execution of the coroutine indefinitely.
+
 ## Select Statement
 
 Select statements are similar to match statements but are specialized for channels and are ideal for managing conditional situations. They are particularly preferred when multiple channels are involved.
@@ -185,7 +189,7 @@ Select statements are categorized into two types: non-blocking select and blocki
 
 Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and blocks the program's execution until at least one case becomes eligible.
 
-Expressions of each case will be evaluated once before the select statement and will be used again when an attempt is made to select a case. Nil channels do not cause errors such as runtime panics, select statements simply ignore them.
+Expressions of each case will be evaluated once before the select statement and will be used again when an attempt is made to select a case. Nil channels do not cause errors such as runtime panics, select statements simply ignore them. If all channels are nil or closed, blocking select statements will block indefinitely.
 
 Using a select statement is similar to using a match statement and is written almost the same way. However, unlike match statements, select statements can use `break` statements but do not support `fall` statements.
 
