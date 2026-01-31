@@ -181,3 +181,11 @@ fn main() {
 The reference count cycle is broken as one of the parties causing the cycle is removed, so there shouldn't be any memory leaks in the above code.
 
 Software developers may not always have code that they can cycle through. But when cycles do occur, they can be difficult to spot and locate. So just being a little more careful when there are potential cycle situations can make things a lot safer.
+
+## Concurrency
+
+Smart pointers guarantee that the reference counter is updated atomically in concurrent programming. This allows multiple smart pointer copies that share the same object to be safely passed across coroutines. Thanks to atomic reference counting, the lifetime of the object is tracked correctly and the memory is freed exactly once when the reference count drops to zero. When used correctly, this mechanism guarantees prevention of errors such as UAF (use-after-free) and double-free.
+
+However, atomic reference counting does not prevent data races on the smart pointer object itself. In other words, performing concurrent read-write or write-write operations on the same smart pointer variable is a data race and results in undefined behavior. The issue is not that the reference counter is non-atomic, but that the smart pointer structure as a whole is not copied or updated atomically. If one coroutine is copying a smart pointer while another coroutine concurrently modifies the same variable, a partially copied or inconsistent pointer state may occur. Even if the reference counting algorithm is correct, this can effectively invalidate lifetime guarantees and lead to UAF or double-free-like errors.
+
+If a smart pointer-related UAF or double-free is observed during debugging with tools such as ASan, the root cause is usually not the reference counting algorithm itself, but unsynchronized concurrent access to the smart pointer variable. These kinds of errors are especially common in lock-free data structures or when performing non-atomic pointer swaps.
