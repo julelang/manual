@@ -53,6 +53,15 @@ See more about [cross-compilation](/compiler/cross-compilation).
 
 ---
 
+`--COMAXPROCS <value>` \
+Sets the maximum number of Ps that can execute coroutines concurrently.
+Pass "default" to explicitly use the runtime default.
+The value must be a valid integer and at least 1.
+The default may vary by machine and is a reasonable choice for most programs,
+optimized for overall concurrency.
+
+---
+
 `--shadowing`\
 Enable variable shadowing.
 
