@@ -68,7 +68,9 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Remove\(path: str\)\!](#remove)\
 [fn Create\(path: str\)\!: &amp;File](#create)\
 [fn ReadFile\(path: str\)\!: \[\]byte](#readfile)\
+[fn ReadFileSync\(path: str\)\!: \[\]byte](#readfilesync)\
 [fn WriteFile\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefile)\
+[fn WriteFileSync\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefilesync)\
 [fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Pipe\(\)\!: \(r: &amp;File, w: &amp;File\)](#pipe)\
 [fn Exit\(code: int\)](#exit)\
@@ -99,13 +101,17 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
 [struct DirEntry](#direntry)\
 [struct File](#file)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ShouldAsync\(\*self\): bool](#shouldasync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteSync\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#writesync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSync\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#readsync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut \*self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut \*self\)\!](#sync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut \*self, size: i64\)\!](#truncate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn CloseSync\(mut \*self\)\!](#closesync)\
 [struct FileInfo](#fileinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(\*self\): FileMode](#mode)\
@@ -223,15 +229,27 @@ Creates or truncates the named file\. If the file already exists, it is truncate
 
 ## ReadFile
 ```jule
-fn ReadFile(path: str)!: []byte
+async fn ReadFile(path: str)!: []byte
 ```
 Reads bytes of file\. First, learns byte\-size of file\. Then reads bytes and returns buffer\.
 
+## ReadFileSync
+```jule
+fn ReadFileSync(path: str)!: []byte
+```
+Sync variant of \[ReadFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
+
 ## WriteFile
 ```jule
-fn WriteFile(path: str, data: []byte, perm: FileMode)!
+async fn WriteFile(path: str, data: []byte, perm: FileMode)!
 ```
 Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any exceptional\.
+
+## WriteFileSync
+```jule
+fn WriteFileSync(path: str, data: []byte, perm: FileMode)!
+```
+Sync variant of \[WriteFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
 ## IsPathSeparator
 ```jule
@@ -429,13 +447,13 @@ Starts the specified command but does not wait for it to complete\. After a succ
 ```jule
 fn Run(*self)!
 ```
-Starts the specified command and waits for it to complete\.
+Starts the specified command and waits for it to complete\. Wait operation is blocking\.
 
 ### Wait
 ```jule
 fn Wait(*self)!: int
 ```
-Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
+Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\. Wait operation is blocking\.
 
 ## DirEntry
 ```jule
@@ -458,6 +476,12 @@ It works like a wrapper when it comes to console handle like stdin, stdout or st
 
 There may be system call differences and performance differences for console handlers depending on the operating system\. For example, Windows has an overhead for UTF\-16 processing\.
 
+File operations are blocking and do not use true asynchronous I/O\. While some systems, such as Linux, allow non\-blocking behavior for pipes, regular file I/O is generally blocking and any asynchronous behavior is platform\-specific and not guaranteed\.
+
+If the program is running on async runtime, the file descriptor will exhibit non\-blocking behavior whenever possible\. If \`Async\` is reported as true for an fd, it must be used with the async API\. Using non\-blocking file descriptors with the sync API is undefined and may result in \`EAGAIN\` errors being propagated\.
+
+A file descriptor is only guaranteed to exhibit blocking behavior when the program is running on sync runtime\. The async runtime always prefers non\-blocking behavior whenever possible\.
+
 ### Implemented Traits
 
 - `io::Reader`
@@ -472,47 +496,71 @@ There may be system call differences and performance differences for console han
 - `io::Seeker`
 - `io::StrWriter`
 
+### ShouldAsync
+```jule
+fn ShouldAsync(*self): bool
+```
+Reports whether treating the file descriptor as async is the correct approach\. If the fd has the potential to exhibit non\-blocking behavior, it should be handled with async API\. Behavior in sync API is undefined\. However, this is not a definitive guarantee that the fd is non\-blocking\.
+
 ### Write
 ```jule
-fn Write(mut *self, buf: []byte)!: (n: int)
+async fn Write(mut *self, buf: []byte)!: (n: int)
 ```
 Writes bytes to handle and returns written byte count\. The number of bytes written can never exceed the length of the buf\.
 
+### WriteSync
+```jule
+fn WriteSync(mut *self, buf: []byte)!: (n: int)
+```
+Sync variant of \[Write\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
+
 ### WriteStr
 ```jule
-fn WriteStr(mut *self, s: str)!: (n: int)
+async fn WriteStr(mut *self, s: str)!: (n: int)
 ```
 Like Write, but writes the contents of string s rather than a slice of bytes\.
 
 ### Read
 ```jule
-fn Read(mut *self, mut buf: []byte)!: (n: int)
+async fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
 Read bytes to buffer from handle and returns read byte count\. The number of bytes read can never exceed the length of the buf\. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow\. Offset will be shifted by the number of bytes read\.
 
+### ReadSync
+```jule
+fn ReadSync(mut *self, mut buf: []byte)!: (n: int)
+```
+Sync variant of \[Write\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
+
 ### Seek
 ```jule
-fn Seek(mut *self, offset: i64, whence: int)!: i64
+async fn Seek(mut *self, offset: i64, whence: int)!: i64
 ```
 Sets offset to next Read/Write operation and returns the new offset\. whence: 0 \(io::SeekStart\) means, relative to the whence of the file, 1 \(io::SeekCurrent\) means relative to the current offset, and 2 \(io::SeekEnd\) means relative to end\.
 
 ### Sync
 ```jule
-fn Sync(mut *self)!
+async fn Sync(mut *self)!
 ```
 Commits the current contents of the file to stable storage\. Typically, this means flushing the file system&#39;s in\-memory copy of recently written data to disk\.
 
 ### Truncate
 ```jule
-fn Truncate(mut *self, size: i64)!
+async fn Truncate(mut *self, size: i64)!
 ```
 Changes the size of the file\. It does not change the I/O offset\.
 
 ### Close
 ```jule
-fn Close(mut *self)!
+async fn Close(mut *self)!
 ```
 Closes file handle\.
+
+### CloseSync
+```jule
+fn CloseSync(mut *self)!
+```
+Sync variant of \[Close\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
 ## FileInfo
 ```jule
