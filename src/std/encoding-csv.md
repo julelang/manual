@@ -2,39 +2,226 @@
 
 ## Index
 
-[Variables](#variables)\
-[struct ParseError](#parseerror)\
+[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
+[fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
+[fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
+[fn Valid\(data: \[\]byte\): bool](#valid)\
+[type Object](#object)\
+[type Array](#array)\
+[type Bool](#bool)\
+[type Number](#number)\
+[type String](#string)\
+[struct UnsupportedTypeError](#unsupportedtypeerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-[struct Reader](#reader)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Reader](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(\*self\): i64](#inputoffset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self\)\!: \(record: \[\]str\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FieldPos\(\*self, field: int\): \(line: int, column: int\)](#fieldpos)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut \*self\)\!: \(records: \[\]\[\]str\)](#readall)\
-[struct Writer](#writer)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, record: \[\]str\)\!](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut \*self, records: \[\]\[\]str\)\!](#writeall)
+[struct UnsupportedValueError](#unsupportedvalueerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+[struct EncodeError](#encodeerror)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+[enum Value: type ](#value)
 
-## Variables
 
+
+## Decode
 ```jule
-let mut ErrBareQuote = errors::New("bare \" in non-quoted-field")
-let mut ErrQuote = errors::New("extraneous or missing \" in quoted-field")
-let mut ErrFieldCount = errors::New("wrong number of fields")
+fn Decode[T](data: []byte, mut &t: *T)!
 ```
-These are the errors that can be returned in \[ParseError\.Err\]\. Mutation is undefined behavior\.
+Implements decoding of JSON as defined in RFC 7159\.
 
-## ParseError
+The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\.
+
+Implementation supports only Jule types, excluding external types\.
+
+Decoding details:<br>
+```
+Since this function designed for comptime type analysis, the type [T] should
+be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
+Any unsupported type causes exceptional with [UnsupportedTypeError].
+Any incompatible value for type, invalid literal or something else causes
+exceptional with [UnsupportedTypeError].
+
+Signed/Unsigned Integers, Floating-Points:
+	Decode as JSON numbers.
+
+Booleans:
+	Decode as JSON booleans.
+
+Strings:
+	Decode as JSON strings. Invalid UTF-8 or invalid UTF-16 surrogate pairs
+	are not treated as an exception. Instead, they are replaced by the
+	Unicode replacement character U+FFFD.
+
+Structs:
+	Decode as JSON objects with only visible fields of struct.
+
+	The private and anonymous fields will be ignored.
+	If the field is public, the field name will be used.
+	If the field have a json tag, the json tag will be used even if field is private or anonymous.
+	If the field have json tag but it is duplicate, the field will be ignored.
+	A valid JSON tag must contain only Unicode letter, digit or punctuation
+	except quote chars and backslash.
+
+Arrays:
+	Decode as JSON array.
+	If array size is larger than JSON array, algorithm will change the
+	remain data to zero-value for data-type.
+
+Slices:
+	Decode as JSON array.
+	For the []byte type, decodes strings as a base64-encoded string if the input
+	is string, otherwise decodes as JSON array.
+
+Maps:
+	Decode as JSON object.
+	Map's key type only can be: signed integer, unsigned integer and string.
+	Other types will cause exceptional with [UnsupportedTypeError].
+
+Smart Pointers:
+	If smart pointer is nil, will be allocated by the algorithm for decoding.
+	Otherwise, will decode into dereferenced value.
+```
+Dynamic decoding details:<br>
+```
+Dynamic JSON decoding uses dynamic JSON types:
+Value, Object, Array, Bool, Number, and String.
+No dynamic decoding can be achieved outside of these types;
+for example, the [any] type is not supported.
+If you want to obtain any JSON value, use [Value] instead.
+
+Dynamic decoding will always decode using dynamic types;
+	nil    -> for JSON null
+	Object -> for JSON object
+	Array  -> for JSON array
+	Bool   -> for JSON boolean
+	Number -> for JSON number
+	String -> for JSON string
+
+If you use Value as destination type, it may store any JSON value,
+and the type will be determined dynamically based on the JSON value.
+```
+Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+
+Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
+```
+JSONDecoder, TextDecoder
+```
+
+
+## Encode
 ```jule
-struct ParseError {
-	StartLine: int // Line where the record starts
-	Line:      int // Line where the error occurred
-	Column:    int // Column (1-based byte index) where the error occurred
-	Err:       any // The actual error
+fn Encode[T](t: T)!: []byte
+```
+Implements encoding of JSON as defined in RFC 7159\.
+
+The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\. Also this function is no\-overhead guaranteed\. So just implements plain encoding algorithm without unnecessary algorithms such as indentation handling\.
+
+Implementation supports only Jule types, excluding external types\.
+
+Encoding details:<br>
+```
+Since this function designed for comptime type analysis, the type [T] should
+be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
+Any unsupported type causes exceptional with [UnsupportedTypeError].
+
+Signed/Unsigned Integers, Floating-Points:
+	Encode as JSON numbers.
+	For floating-points, NaN or ±Inf will cause exceptional with [UnsupportedValueError].
+
+Booleans:
+	Encode as JSON booleans.
+
+Strings:
+	Encode as JSON strings coerced to valid UTF-8, replacing invalid bytes
+	with the Unicode replacement rune. So that the JSON will be safe to embed
+	inside HTML <script> tags, the string is encoded using [HTMLEscape],
+	which replaces "<", ">", "&", U+2028, and U+2029 are escaped
+	to "\u003c", "\u003e", "\u0026", "\u2028", and "\u2029".
+
+Structs:
+	Encode as JSON objects with only visible fields of struct.
+
+	The private and anonymous fields will be ignored.
+	If the field is public, the field name will be used.
+	If the field have a json tag, the json tag will be used even if field is private or anonymous.
+	If the field have json tag but it is duplicate, the field will be ignored.
+	A valid JSON tag must contain only Unicode letter, digit or punctuation
+	except quote chars and backslash.
+
+Arrays:
+	Encode as JSON array.
+
+Slices:
+	Encode as JSON array.
+	If slice is nil, encode as empty array [] JSON value.
+	For the []byte type, encodes as a base64-encoded string.
+
+Maps:
+	Encode as JSON object.
+	If map is nil, encode as empty object {} JSON value.
+	The keys of the map always will be quoted.
+	Also map's key type only can be: signed integer, unsigned integer and string.
+	Other types will cause exceptional with [UnsupportedTypeError].
+
+Smart Pointers:
+	If smart pointer is nil, encode as null JSON value.
+	Otherwise, will encode dereferenced value.
+```
+Encode cannot represent cyclic data structures and does not handle them\. Passing cyclic structures for encoding will result in an cycle at runtime\. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+
+Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
+```
+JSONEncoder, TextEncoder
+```
+
+
+## EncodeIndent
+```jule
+fn EncodeIndent[T](t: T, indent: str)!: []byte
+```
+Same as Encode\[T\] function but enables indentation\.
+
+## Valid
+```jule
+fn Valid(data: []byte): bool
+```
+Reports whether data is a valid JSON\.
+
+## Object
+```jule
+type Object: map[str]Value
+```
+Dynamic JSON object type\.
+
+## Array
+```jule
+type Array: []Value
+```
+Dynamic JSON array type\.
+
+## Bool
+```jule
+type Bool: bool
+```
+Dynamic JSON boolean type\.
+
+## Number
+```jule
+type Number: f64
+```
+Dynamic JSON number type\.
+
+## String
+```jule
+type String: str
+```
+Dynamic JSON string type\.
+
+## UnsupportedTypeError
+```jule
+struct UnsupportedTypeError {
+	Type: str
 }
 ```
-A ParseError is returned for parsing errors\. Line and column numbers are 1\-indexed\.
+Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value type\.
 
 ### Str
 ```jule
@@ -42,119 +229,44 @@ fn Str(*self): str
 ```
 
 
-## Reader
+## UnsupportedValueError
 ```jule
-struct Reader {
-	// The field delimiter.
-	// It is set to comma (',') by [Reader.New].
-	// Comma must be a valid rune and must not be \r, \n,
-	// or the Unicode replacement character (0xFFFD).
-	Comma: rune
+struct UnsupportedValueError {
+	Value: str
+}
+```
+Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value\.
 
-	// Comment, if not 0, is the comment character. Lines beginning with the
-	// Comment character without preceding whitespace are ignored.
-	// With leading whitespace the Comment character becomes part of the
-	// field, even if TrimLeadingSpace is true.
-	// Comment must be a valid rune and must not be \r, \n,
-	// or the Unicode replacement character (0xFFFD).
-	// It must also not be equal to comma.
-	Comment: rune
+### Str
+```jule
+fn Str(*self): str
+```
 
-	// The number of expected fields per record.
-	// If FieldsPerRecord is positive, read requires each record to
-	// have the given number of fields. If FieldsPerRecord is 0, read sets it to
-	// the number of fields in the first record, so that future records must
-	// have the same field count. If FieldsPerRecord is negative, no check is
-	// made and records may have a variable number of fields.
-	FieldsPerRecord: int
 
-	// If it is true, a quote may appear in an unquoted field and a
-	// non-doubled quote may appear in a quoted field.
-	LazyQuotes: bool
-
-	// If it is true, leading white space in a field is ignored.
-	// This is done even if the field delimiter, comma, is white space.
-	TrimLeadingSpace: bool
-
-	// Controls whether calls to read may return a slice sharing
-	// the backing array of the previous call's returned slice for performance.
-	// By default, each call to read returns newly allocated memory owned by the caller.
-	ReuseRecord: bool
-
+## EncodeError
+```jule
+struct EncodeError {
+	Type:       str
+	Err:        any
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-A Reader reads records from a CSV\-encoded file\.
+Represents an error from calling a reserved \[EncodeText\] method\.
 
-As returned by \[new\], a Reader expects input conforming to RFC 4180\. The exported fields can be changed to customize the details before the first call to \[Reader\.Read\] or \[Reader\.ReadAll\]\.
-
-The Reader converts all \\r\\n sequences in its input to plain \\n, including in multiline field values, so that the returned data does not depend on which line\-ending convention an input file uses\.
-
-### New
+### Str
 ```jule
-fn New(mut r: io::Reader): &Reader
+fn Str(*self): str
 ```
-Returns new Reader instance that reads r\.
 
-### InputOffset
+
+## Value
 ```jule
-fn InputOffset(*self): i64
-```
-Returns the input stream byte offset of the current reader position\. The offset gives the location of the end of the most recently read row and the beginning of the next row\.
-
-### Read
-```jule
-async fn Read(mut *self)!: (record: []str)
-```
-Reads one record \(a slice of fields\) from r\. If the record has an unexpected number of fields, read returns the \[ErrFieldCount\] as exception\. If there is no data left to be read, read returns nil\. If \[self\.ReuseRecord\] is true, the returned slice may be shared between multiple calls to read\.
-
-### FieldPos
-```jule
-fn FieldPos(*self, field: int): (line: int, column: int)
-```
-Returns the line and column corresponding to the start of the field with the given index in the slice most recently returned by \[read\]\. Numbering of lines and columns starts at 1; columns are counted in bytes, not runes\.
-
-If this is called with an out\-of\-bounds index, it panics\.
-
-### ReadAll
-```jule
-async fn ReadAll(mut *self)!: (records: [][]str)
-```
-Reads all the remaining records from r\. Each record is a slice of fields\.
-
-## Writer
-```jule
-struct Writer {
-	Comma:   rune // Field delimiter (set to ',' by new)
-	UseCRLF: bool // True to use \r\n as the line terminator
-
-	// NOTE: contains filtered hidden or unexported fields
+enum Value: type {
+	Object,
+	Array,
+	Bool,
+	Number,
+	String,
 }
 ```
-A Writer writes records using CSV encoding\.
-
-As returned by new, a Writer writes records terminated by a newline and uses &#39;,&#39; as the field delimiter\. The exported fields can be changed to customize the details before the first call to write or write\_all\.
-
-Comma is the field delimiter\.
-
-If UseCRLF is true, the Writer ends each output line with \\r\\n instead of \\n\.
-
-The writes of individual records are buffered\. After all data has been written, the client should call the Flush method to guarantee all data has been forwarded to the underlying io::Writer\.
-
-### New
-```jule
-fn New(mut w: io::Writer): &Writer
-```
-Returns new Writer instance that writes w\.
-
-### Write
-```jule
-async fn Write(mut *self, record: []str)!
-```
-Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
-
-### WriteAll
-```jule
-async fn WriteAll(mut *self, records: [][]str)!
-```
-Writes multiple CSV records using \[Writer\.Write\]\.
+Dynamic JSON value type\. Can store any JSON value\.
