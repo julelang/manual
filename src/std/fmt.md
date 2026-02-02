@@ -16,19 +16,19 @@
 
 ## Fprint
 ```jule
-fn Fprint(mut w: io::Writer, args: ...any)!
+async fn Fprint(mut w: io::Writer, args: ...any)!
 ```
 Prints arguments to w with default formatting\. See documentation of the \[Sprint\] function for formatting\. Forwards exceptions, if any\.
 
 ## Fprintln
 ```jule
-fn Fprintln(mut w: io::Writer, args: ...any)!
+async fn Fprintln(mut w: io::Writer, args: ...any)!
 ```
 Prints arguments to w with default formatting\. Prints new\-line after arguments\. See documentation of the \[Sprint\] function for formatting\. Forwards exceptions, if any\.
 
 ## Fprintf
 ```jule
-fn Fprintf(mut w: io::Writer, fmt: str, args: ...any)!
+async fn Fprintf(mut w: io::Writer, fmt: str, args: ...any)!
 ```
 Prints result of formatting to w\. See documentation of the \[Sprint\] function for formatting\. Forwards exceptions, if any\.
 
