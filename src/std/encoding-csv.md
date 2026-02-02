@@ -46,7 +46,7 @@ fn Str(*self): str
 ```jule
 struct Reader {
 	// The field delimiter.
-	// It is set to comma (',') by NewReader.
+	// It is set to comma (',') by [Reader.New].
 	// Comma must be a valid rune and must not be \r, \n,
 	// or the Unicode replacement character (0xFFFD).
 	Comma: rune
@@ -104,7 +104,7 @@ Returns the input stream byte offset of the current reader position\. The offset
 
 ### Read
 ```jule
-fn Read(mut *self)!: (record: []str)
+async fn Read(mut *self)!: (record: []str)
 ```
 Reads one record \(a slice of fields\) from r\. If the record has an unexpected number of fields, read returns the \[ErrFieldCount\] as exception\. If there is no data left to be read, read returns nil\. If \[self\.ReuseRecord\] is true, the returned slice may be shared between multiple calls to read\.
 
@@ -118,7 +118,7 @@ If this is called with an out\-of\-bounds index, it panics\.
 
 ### ReadAll
 ```jule
-fn ReadAll(mut *self)!: (records: [][]str)
+async fn ReadAll(mut *self)!: (records: [][]str)
 ```
 Reads all the remaining records from r\. Each record is a slice of fields\.
 
@@ -149,12 +149,12 @@ Returns new Writer instance that writes w\.
 
 ### Write
 ```jule
-fn Write(mut *self, record: []str)!
+async fn Write(mut *self, record: []str)!
 ```
 Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
 
 ### WriteAll
 ```jule
-fn WriteAll(mut *self, records: [][]str)!
+async fn WriteAll(mut *self, records: [][]str)!
 ```
 Writes multiple CSV records using \[Writer\.Write\]\.
