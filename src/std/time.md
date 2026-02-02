@@ -3,23 +3,37 @@
 ## Index
 
 [Variables](#variables)\
+[fn Sleep\(mut dur: Duration\)](#sleep)\
+[fn Parse\(layout: str, value: str\)\!: Time](#parse)\
+[fn ParseInLocation\(layout: str, value: str, loc: &amp;Location\)\!: Time](#parseinlocation)\
+[fn ParseDuration\(mut s: str\): \(Duration, bool\)](#parseduration)\
 [fn Now\(\): Time](#now)\
 [fn Unix\(mut sec: i64, mut nsec: i64\): Time](#unix)\
 [fn Since\(t: Time\): Duration](#since)\
 [fn Until\(t: Time\): Duration](#until)\
 [fn UnixAbs\(sec: i64\): AbsTime](#unixabs)\
 [fn Date\(year: int, month: Month, day: int, hour: int, minute: int, second: int, nsecond: int, loc: &amp;Location\): \(t: Time\)](#date)\
-[fn LoadLocationFromTZData\(name: str, mut data: \[\]byte\): \(&amp;Location, ok: bool\)](#loadlocationfromtzdata)\
-[fn Sleep\(mut dur: Duration\)](#sleep)\
 [fn FixedZone\(name: str, offset: int\): &amp;Location](#fixedzone)\
-[fn Parse\(layout: str, value: str\)\!: Time](#parse)\
-[fn ParseInLocation\(layout: str, value: str, loc: &amp;Location\)\!: Time](#parseinlocation)\
-[fn ParseDuration\(mut s: str\): \(Duration, bool\)](#parseduration)\
-[type Month](#month)\
+[fn LoadLocationFromTZData\(name: str, mut data: \[\]byte\): \(&amp;Location, ok: bool\)](#loadlocationfromtzdata)\
+[type Duration](#duration)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanoseconds\(\*self\): Duration](#nanoseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Microseconds\(\*self\): Duration](#microseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Milliseconds\(\*self\): Duration](#milliseconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seconds\(\*self\): f64](#seconds)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Minutes\(\*self\): f64](#minutes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Hours\(\*self\): f64](#hours)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(\*self\): Duration](#abs)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-[type Weekday](#weekday)\
+[struct ParseError](#parseerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+[type Month](#month)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+[type Weekday](#weekday)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
 [struct Time](#time)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(\*self, mut b: \[\]byte, layout: str\): \[\]byte](#appendformat)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, layout: str\): str](#format)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unix\(\*self\): i64](#unix-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMilli\(\*self\): i64](#unixmilli)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMicro\(\*self\): i64](#unixmicro)\
@@ -47,60 +61,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendText\(\*self, mut b: \[\]byte\)\!: \[\]byte](#appendtext)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EncodeText\(\*self\)\!: \[\]byte](#encodetext)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeText\(mut \*self, data: \[\]byte\)\!](#decodetext)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(\*self, mut b: \[\]byte, layout: str\): \[\]byte](#appendformat)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, layout: str\): str](#format)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
 [struct AbsTime](#abstime)\
-[type Duration](#duration)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Nanoseconds\(\*self\): Duration](#nanoseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Microseconds\(\*self\): Duration](#microseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Milliseconds\(\*self\): Duration](#milliseconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seconds\(\*self\): f64](#seconds)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Minutes\(\*self\): f64](#minutes)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Hours\(\*self\): f64](#hours)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(\*self\): Duration](#abs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
 [struct Location](#location)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
-[struct ParseError](#parseerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)
 
 ## Variables
-
-```jule
-const (
-	January: Month = 1 + iota
-	February
-	March
-	April
-	May
-	June
-	July
-	August
-	September
-	October
-	November
-	December
-)
-```
-
-
----
-
-```jule
-const (
-	Sunday: Weekday = iota
-	Monday
-	Tuesday
-	Wednesday
-	Thursday
-	Friday
-	Saturday
-)
-```
-
-
----
 
 ```jule
 const Nanosecond = Duration(runtime::_Nanosecond)
@@ -141,20 +106,6 @@ Nanoseconds in minute\. How many nanoseconds are in minute\.
 const Hour = Duration(runtime::_Hour)
 ```
 Nanoseconds in hour\. How many nanoseconds are in hour\.
-
----
-
-```jule
-let UTC = unsafe { (&Location)(&utcLoc) }
-```
-Represents Universal Coordinated Time \(UTC\)\.
-
----
-
-```jule
-let Local = unsafe { (&Location)(&localLoc) }
-```
-Represents the system&#39;s local time zone\. On Unix systems, Local consults the TZ environment variable to find the time zone to use\. No TZ means use the system default /etc/localtime\. TZ=&#34;&#34; means use UTC\. TZ=&#34;foo&#34; means use file foo in the system timezone directory\.
 
 ---
 
@@ -242,6 +193,95 @@ A comma or decimal point followed by one or more zeros represents a fractional s
 
 Some valid layouts are invalid time values for time::Parse, due to formats such as \_ for space padding and Z for zone information\.
 
+---
+
+```jule
+const (
+	January: Month = 1 + iota
+	February
+	March
+	April
+	May
+	June
+	July
+	August
+	September
+	October
+	November
+	December
+)
+```
+
+
+---
+
+```jule
+const (
+	Sunday: Weekday = iota
+	Monday
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Saturday
+)
+```
+
+
+---
+
+```jule
+let UTC = unsafe { (&Location)(&utcLoc) }
+```
+Represents Universal Coordinated Time \(UTC\)\.
+
+---
+
+```jule
+let Local = unsafe { (&Location)(&localLoc) }
+```
+Represents the system&#39;s local time zone\. On Unix systems, Local consults the TZ environment variable to find the time zone to use\. No TZ means use the system default /etc/localtime\. TZ=&#34;&#34; means use UTC\. TZ=&#34;foo&#34; means use file foo in the system timezone directory\.
+
+## Sleep
+```jule
+async fn Sleep(mut dur: Duration)
+```
+Stops execution of the caller coroutine by stated duration\. This function only affects execution of caller coroutine, not process\. If duration is &lt;=0, function will return immediately\. It guarantees sleeping at least for the stated duration\.
+
+## Parse
+```jule
+fn Parse(layout: str, value: str)!: Time
+```
+Parses a formatted string and returns the time value it represents\. See the documentation for the constant called \[Layout\] to see how to represent the format\. The second argument must be parseable using the format string \(layout\) provided as the first argument\.
+
+The example for \[Time\.Format\] demonstrates the working of the layout string in detail and is a good reference\.
+
+When parsing \(only\), the input may contain a fractional second field immediately after the seconds field, even if the layout does not signify its presence\. In that case either a comma or a decimal point followed by a maximal series of digits is parsed as a fractional second\. Fractional seconds are truncated to nanosecond precision\.
+
+Elements omitted from the layout are assumed to be zero or, when zero is impossible, one, so parsing &#34;3:04pm&#34; returns the time corresponding to Jan 1, year 0, 15:04:00 UTC \(note that because the year is 0, this time is before the zero Time\)\. Years must be in the range 0000\.\.9999\. The day of the week is checked for syntax but it is otherwise ignored\.
+
+For layouts specifying the two\-digit year 06, a value NN &gt;= 69 will be treated as 19NN and a value NN &lt; 69 will be treated as 20NN\.
+
+The remainder of this comment describes the handling of time zones\.
+
+In the absence of a time zone indicator, Parse returns a time in UTC\.
+
+When parsing a time with a zone offset like \-0700, if the offset corresponds to a time zone used by the current location \(\[Local\]\), then Parse uses that location and zone in the returned time\. Otherwise it records the time as being in a fabricated location with time fixed at the given zone offset\.
+
+When parsing a time with a zone abbreviation like MST, if the zone abbreviation has a defined offset in the current location, then that offset is used\. The zone abbreviation &#34;UTC&#34; is recognized as UTC regardless of location\. If the zone abbreviation is unknown, Parse records the time as being in a fabricated location with the given zone abbreviation and a zero offset\. This choice means that such a time can be parsed and reformatted with the same layout losslessly, but the exact instant used in the representation will differ by the actual zone offset\. To avoid such problems, prefer time layouts that use a numeric zone offset, or use \[ParseInLocation\]\.
+
+## ParseInLocation
+```jule
+fn ParseInLocation(layout: str, value: str, loc: &Location)!: Time
+```
+Like Parse but differs in two important ways\. First, in the absence of time zone information, Parse interprets a time as UTC; ParseInLocation interprets the time as in the given location\. Second, when given a zone offset or abbreviation, Parse tries to match it against the Local location; ParseInLocation uses the given location\.
+
+## ParseDuration
+```jule
+fn ParseDuration(mut s: str): (Duration, bool)
+```
+Parses a duration string and reports whether it successful\. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as &#34;300ms&#34;, &#34;\-1\.5h&#34; or &#34;2h45m&#34;\. Valid time units are &#34;ns&#34;, &#34;us&#34; \(or &#34;µs&#34;\), &#34;ms&#34;, &#34;s&#34;, &#34;m&#34;, &#34;h&#34;\.
+
 ## Now
 ```jule
 fn Now(): Time
@@ -288,57 +328,89 @@ The month, day, hour, minute, second, and nsecond values may be outside their us
 
 A daylight savings time transition skips or repeats times\. For example, in the United States, March 13, 2011 2:15am never occurred, while November 6, 2011 1:15am occurred twice\. In such cases, the choice of time zone, and therefore the time, is not well\-defined\. Date returns a time that is correct in one of the two zones involved in the transition, but it does not guarantee which\.
 
-## LoadLocationFromTZData
-```jule
-fn LoadLocationFromTZData(name: str, mut data: []byte): (&Location, ok: bool)
-```
-Returns a Location with the given name initialized from the IANA Time Zone database\-formatted data\. The data should be in the format of a standard IANA time zone file \(for example, the content of /etc/localtime on Unix systems\)\.
-
-## Sleep
-```jule
-fn Sleep(mut dur: Duration)
-```
-Stops execution of the caller thread by stated duration\. This function only affects execution of caller thread, not process\. If duration is &lt;=0, function will return immediately\. It guarantees sleeping at least for the stated duration\.
-
 ## FixedZone
 ```jule
 fn FixedZone(name: str, offset: int): &Location
 ```
 Returns a \[Location\] that always uses the given zone name and offset \(seconds east of UTC\)\.
 
-## Parse
+## LoadLocationFromTZData
 ```jule
-fn Parse(layout: str, value: str)!: Time
+fn LoadLocationFromTZData(name: str, mut data: []byte): (&Location, ok: bool)
 ```
-Parses a formatted string and returns the time value it represents\. See the documentation for the constant called \[Layout\] to see how to represent the format\. The second argument must be parseable using the format string \(layout\) provided as the first argument\.
+Returns a Location with the given name initialized from the IANA Time Zone database\-formatted data\. The data should be in the format of a standard IANA time zone file \(for example, the content of /etc/localtime on Unix systems\)\.
 
-The example for \[Time\.Format\] demonstrates the working of the layout string in detail and is a good reference\.
-
-When parsing \(only\), the input may contain a fractional second field immediately after the seconds field, even if the layout does not signify its presence\. In that case either a comma or a decimal point followed by a maximal series of digits is parsed as a fractional second\. Fractional seconds are truncated to nanosecond precision\.
-
-Elements omitted from the layout are assumed to be zero or, when zero is impossible, one, so parsing &#34;3:04pm&#34; returns the time corresponding to Jan 1, year 0, 15:04:00 UTC \(note that because the year is 0, this time is before the zero Time\)\. Years must be in the range 0000\.\.9999\. The day of the week is checked for syntax but it is otherwise ignored\.
-
-For layouts specifying the two\-digit year 06, a value NN &gt;= 69 will be treated as 19NN and a value NN &lt; 69 will be treated as 20NN\.
-
-The remainder of this comment describes the handling of time zones\.
-
-In the absence of a time zone indicator, Parse returns a time in UTC\.
-
-When parsing a time with a zone offset like \-0700, if the offset corresponds to a time zone used by the current location \(\[Local\]\), then Parse uses that location and zone in the returned time\. Otherwise it records the time as being in a fabricated location with time fixed at the given zone offset\.
-
-When parsing a time with a zone abbreviation like MST, if the zone abbreviation has a defined offset in the current location, then that offset is used\. The zone abbreviation &#34;UTC&#34; is recognized as UTC regardless of location\. If the zone abbreviation is unknown, Parse records the time as being in a fabricated location with the given zone abbreviation and a zero offset\. This choice means that such a time can be parsed and reformatted with the same layout losslessly, but the exact instant used in the representation will differ by the actual zone offset\. To avoid such problems, prefer time layouts that use a numeric zone offset, or use \[ParseInLocation\]\.
-
-## ParseInLocation
+## Duration
 ```jule
-fn ParseInLocation(layout: str, value: str, loc: &Location)!: Time
+type Duration: runtime::sleepDuration
 ```
-Like Parse but differs in two important ways\. First, in the absence of time zone information, Parse interprets a time as UTC; ParseInLocation interprets the time as in the given location\. Second, when given a zone offset or abbreviation, Parse tries to match it against the Local location; ParseInLocation uses the given location\.
+A Duration represents the elapsed time between two instants as an i64 nanosecond count\. The representation limits the largest representable duration to approximately 290 years\.
 
-## ParseDuration
+### Nanoseconds
 ```jule
-fn ParseDuration(mut s: str): (Duration, bool)
+fn Nanoseconds(*self): Duration
 ```
-Parses a duration string and reports whether it successful\. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as &#34;300ms&#34;, &#34;\-1\.5h&#34; or &#34;2h45m&#34;\. Valid time units are &#34;ns&#34;, &#34;us&#34; \(or &#34;µs&#34;\), &#34;ms&#34;, &#34;s&#34;, &#34;m&#34;, &#34;h&#34;\.
+Returns duration as nanoseconds\.
+
+### Microseconds
+```jule
+fn Microseconds(*self): Duration
+```
+Returns duration as microseconds\.
+
+### Milliseconds
+```jule
+fn Milliseconds(*self): Duration
+```
+Returns duration as milliseconds\.
+
+### Seconds
+```jule
+fn Seconds(*self): f64
+```
+Returns duration as floating\-point seconds\.
+
+### Minutes
+```jule
+fn Minutes(*self): f64
+```
+Returns duration as floating\-point minutes\.
+
+### Hours
+```jule
+fn Hours(*self): f64
+```
+Returns duration as floating\-point hours\.
+
+### Abs
+```jule
+fn Abs(*self): Duration
+```
+Returns absolute value of duration\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns a string representing the duration in the form &#34;72h3m0\.5s&#34;\. Leading zero units are omitted\. As a special case, durations less than one second format use a smaller unit \(milli\-, micro\-, or nanoseconds\) to ensure that the leading digit is non\-zero\. The zero duration formats as 0s\.
+
+## ParseError
+```jule
+struct ParseError {
+	Layout:     str
+	Value:      str
+	LayoutElem: str
+	ValueElem:  str
+	Message:    str
+}
+```
+Describes a problem parsing a time string\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+
 
 ## Month
 ```jule
@@ -375,6 +447,31 @@ A Time represents an instant in time with nanosecond precision\.
 Zero\-value indicates the beginning of Unix time, i\.e\. zero seconds\. This means the date January 1, 1970\. Implementation can also handle the Unix time in the negative plane\. For example, \-10 seconds should be equivalent to Wed Dec 31 1969 23:59:50 UTC\+0000\.
 
 Using the == operator when comparing a Time instance is often not what is desired\. Because this compares not only the time, but also things like the memory address of the location data\.
+
+### AppendFormat
+```jule
+fn AppendFormat(*self, mut b: []byte, layout: str): []byte
+```
+Like \[Time\.Format\] but appends the textual representation to b and returns the extended buffer\.
+
+### Format
+```jule
+fn Format(*self, layout: str): str
+```
+Returns a textual representation of the time value formatted according to the layout defined by the argument\. See the documentation for the constant called \[Layout\] to see how to represent the layout format\.
+
+The executable example for \[Time\.Format\] demonstrates the working of the layout string in detail and is a good reference\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns the time formatted using the format string
+
+```
+"2006-01-02 15:04:05.999999999 -0700 MST"
+```
+
 
 ### Unix
 ```jule
@@ -540,31 +637,6 @@ fn DecodeText(mut *self, data: []byte)!
 ```
 Implements the custom text decoder method\. The time must be in the RFC 3339 format\.
 
-### AppendFormat
-```jule
-fn AppendFormat(*self, mut b: []byte, layout: str): []byte
-```
-Like \[Time\.Format\] but appends the textual representation to b and returns the extended buffer\.
-
-### Format
-```jule
-fn Format(*self, layout: str): str
-```
-Returns a textual representation of the time value formatted according to the layout defined by the argument\. See the documentation for the constant called \[Layout\] to see how to represent the layout format\.
-
-The executable example for \[Time\.Format\] demonstrates the working of the layout string in detail and is a good reference\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns the time formatted using the format string
-
-```
-"2006-01-02 15:04:05.999999999 -0700 MST"
-```
-
-
 ## AbsTime
 ```jule
 struct AbsTime {
@@ -579,60 +651,6 @@ struct AbsTime {
 }
 ```
 Absolute time\.
-
-## Duration
-```jule
-type Duration: runtime::sleepDuration
-```
-A Duration represents the elapsed time between two instants as an i64 nanosecond count\. The representation limits the largest representable duration to approximately 290 years\.
-
-### Nanoseconds
-```jule
-fn Nanoseconds(*self): Duration
-```
-Returns duration as nanoseconds\.
-
-### Microseconds
-```jule
-fn Microseconds(*self): Duration
-```
-Returns duration as microseconds\.
-
-### Milliseconds
-```jule
-fn Milliseconds(*self): Duration
-```
-Returns duration as milliseconds\.
-
-### Seconds
-```jule
-fn Seconds(*self): f64
-```
-Returns duration as floating\-point seconds\.
-
-### Minutes
-```jule
-fn Minutes(*self): f64
-```
-Returns duration as floating\-point minutes\.
-
-### Hours
-```jule
-fn Hours(*self): f64
-```
-Returns duration as floating\-point hours\.
-
-### Abs
-```jule
-fn Abs(*self): Duration
-```
-Returns absolute value of duration\.
-
-### Str
-```jule
-fn Str(*self): str
-```
-Returns a string representing the duration in the form &#34;72h3m0\.5s&#34;\. Leading zero units are omitted\. As a special case, durations less than one second format use a smaller unit \(milli\-, micro\-, or nanoseconds\) to ensure that the leading digit is non\-zero\. The zero duration formats as 0s\.
 
 ## Location
 ```jule
@@ -649,20 +667,3 @@ Location is used to provide a time zone in a printed Time value and for calculat
 fn Str(*self): str
 ```
 Returns a descriptive name for the time zone information\.
-
-## ParseError
-```jule
-struct ParseError {
-	Layout:     str
-	Value:      str
-	LayoutElem: str
-	ValueElem:  str
-	Message:    str
-}
-```
-Describes a problem parsing a time string\.
-
-### Str
-```jule
-fn Str(*self): str
-```
