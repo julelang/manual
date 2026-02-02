@@ -83,31 +83,31 @@ This function is part of the C\-style memory management\. It can be very dangero
 
 ## Char
 ```jule
-type Char: cpp.char
+type Char: extern.char
 ```
 Type alias for char type\.
 
 ## Wchar
 ```jule
-type Wchar: cpp.wchar_t
+type Wchar: extern.wchar_t
 ```
 Type alias for wchar\_t type\.
 
 ## SignedChar
 ```jule
-type SignedChar: cpp.__jule_signed_char
+type SignedChar: extern.__jule_signed_char
 ```
 Type alias for signed char type\.
 
 ## UnsignedChar
 ```jule
-type UnsignedChar: cpp.__jule_unsigned_char
+type UnsignedChar: extern.__jule_unsigned_char
 ```
 Type alias for signed char type\.
 
 ## Short
 ```jule
-type Short: cpp.short
+type Short: extern.short
 ```
 Type alias for short type\.
 
@@ -131,7 +131,7 @@ Type alias for signed short int type\.
 
 ## UnsignedShort
 ```jule
-type UnsignedShort: cpp.__jule_unsigned_short
+type UnsignedShort: extern.__jule_unsigned_short
 ```
 Type alias for unsigned short type\.
 
@@ -143,7 +143,7 @@ Type alias for unsigned short int type\.
 
 ## Int
 ```jule
-type Int: cpp.signed
+type Int: extern.signed
 ```
 Type alias for int type\.
 
@@ -161,7 +161,7 @@ Type alias for signed int type\.
 
 ## Unsigned
 ```jule
-type Unsigned: cpp.unsigned
+type Unsigned: extern.unsigned
 ```
 Type alias for unsigned type\.
 
@@ -173,7 +173,7 @@ Type alias for unsigned int type\.
 
 ## Long
 ```jule
-type Long: cpp.long
+type Long: extern.long
 ```
 Type alias for long type\.
 
@@ -197,7 +197,7 @@ Type alias for signed long int type\.
 
 ## UnsignedLong
 ```jule
-type UnsignedLong: cpp.__jule_unsigned_long
+type UnsignedLong: extern.__jule_unsigned_long
 ```
 Type alias for unsigned long type\.
 
@@ -209,7 +209,7 @@ Type alias for unsigned long int type\.
 
 ## LongLong
 ```jule
-type LongLong: cpp.__jule_unsigned_long
+type LongLong: extern.__jule_unsigned_long
 ```
 Type alias for long long type\.
 
@@ -233,7 +233,7 @@ Type alias for signed long long int type\.
 
 ## UnsignedLongLong
 ```jule
-type UnsignedLongLong: cpp.__jule_unsigned_long_long
+type UnsignedLongLong: extern.__jule_unsigned_long_long
 ```
 Type alias for unsigned long long type\.
 
@@ -245,42 +245,42 @@ Type alias for unsigned long long int type\.
 
 ## Float
 ```jule
-type Float: cpp.float
+type Float: extern.float
 ```
 Type alias for float type\.
 
 ## Double
 ```jule
-type Double: cpp.double
+type Double: extern.double
 ```
 Type alias for double type\.
 
 ## LongDouble
 ```jule
-type LongDouble: cpp.__jule_long_double
+type LongDouble: extern.__jule_long_double
 ```
 Type alias for long double type\.
 
 ## Size
 ```jule
-type Size: cpp.size_t
+type Size: extern.size_t
 ```
 Type alias for size\_t type\.
 
 ## Uintptr
 ```jule
-type Uintptr: cpp.uintptr_t
+type Uintptr: extern.uintptr_t
 ```
 Type alias for uintptr\_t type\.
 
 ## Intptr
 ```jule
-type Intptr: cpp.intptr_t
+type Intptr: extern.intptr_t
 ```
 Type alias for intptr\_t type\.
 
 ## Ptrdiff
 ```jule
-type Ptrdiff: cpp.ptrdiff_t
+type Ptrdiff: extern.ptrdiff_t
 ```
 Type alias for ptrdiff\_t type\.
