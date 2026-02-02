@@ -7,11 +7,18 @@
 [fn FormatBool\(b: bool\): str](#formatbool)\
 [fn AppendBool\(mut dst: \[\]byte, b: bool\): \[\]byte](#appendbool)\
 [fn ParseCmplx\(mut s: str, bitSize: int\)\!: cmplx128](#parsecmplx)\
-[fn FormatFloat\(f: f64, fmt: byte, prec: int, bitSize: int\): str](#formatfloat)\
-[fn AppendFloat\(mut dst: \[\]byte, f: f64, fmt: byte, prec: int, bitSize: int\): \[\]byte](#appendfloat)\
+[fn ParseFloat\(s: str, bitSize: int\)\!: f64](#parsefloat)\
 [fn ParseUint\(mut s: str, mut base: int, mut bitSize: int\)\!: u64](#parseuint)\
 [fn ParseInt\(mut s: str, base: int, mut bitSize: int\)\!: i64](#parseint)\
 [fn Atoi\(mut s: str\)\!: int](#atoi)\
+[fn FormatCmplx\(c: cmplx128, fmt: byte, prec: int, mut bitSize: int\): str](#formatcmplx)\
+[fn FormatFloat\(f: f64, fmt: byte, prec: int, bitSize: int\): str](#formatfloat)\
+[fn AppendFloat\(mut dst: \[\]byte, f: f64, fmt: byte, prec: int, bitSize: int\): \[\]byte](#appendfloat)\
+[fn FormatUint\(i: u64, base: int\): str](#formatuint)\
+[fn FormatInt\(i: i64, base: int\): str](#formatint)\
+[fn AppendInt\(mut dst: \[\]byte, i: i64, base: int\): \[\]byte](#appendint)\
+[fn AppendUint\(mut dst: \[\]byte, i: u64, base: int\): \[\]byte](#appenduint)\
+[fn Itoa\(i: int\): str](#itoa)\
 [fn Quote\(s: str\): str](#quote)\
 [fn AppendQuote\(mut dst: \[\]byte, s: str\): \[\]byte](#appendquote)\
 [fn QuoteToASCII\(s: str\): str](#quotetoascii)\
@@ -29,17 +36,17 @@
 [fn QuotedPrefix\(s: str\)\!: str](#quotedprefix)\
 [fn Unquote\(s: str\)\!: str](#unquote)\
 [fn IsGraphic\(r: rune\): bool](#isgraphic)\
-[fn FormatCmplx\(c: cmplx128, fmt: byte, prec: int, mut bitSize: int\): str](#formatcmplx)\
-[fn ParseFloat\(s: str, bitSize: int\)\!: f64](#parsefloat)\
-[fn FormatUint\(i: u64, base: int\): str](#formatuint)\
-[fn FormatInt\(i: i64, base: int\): str](#formatint)\
-[fn AppendInt\(mut dst: \[\]byte, i: i64, base: int\): \[\]byte](#appendint)\
-[fn AppendUint\(mut dst: \[\]byte, i: u64, base: int\): \[\]byte](#appenduint)\
-[fn Itoa\(i: int\): str](#itoa)\
 [struct NumError](#numerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
 
 ## Variables
+
+```jule
+const IntSize = intSize
+```
+Is the size in bits of an int or uint value\.
+
+---
 
 ```jule
 let mut ErrSyntax = errors::New("invalid syntax")
@@ -52,13 +59,6 @@ Indicates that a value does not have the right syntax for the target type\. Muta
 let mut ErrRange = errors::New("value out of range")
 ```
 That a value is out of range for the target type\. Mutation is undefined behavior\.
-
----
-
-```jule
-const IntSize = intSize
-```
-Is the size in bits of an int or uint value\.
 
 ## ParseBool
 ```jule
@@ -92,21 +92,23 @@ If s is not syntactically well\-formed, it returns err\.Err = ErrSyntax\.
 
 If s is syntactically well\-formed but either component is more than 1/2 ULP away from the largest floating point number of the given component&#39;s size, it returns err\.Err = ErrRange and c = ±Inf for the respective component\.
 
-## FormatFloat
+## ParseFloat
 ```jule
-fn FormatFloat(f: f64, fmt: byte, prec: int, bitSize: int): str
+fn ParseFloat(s: str, bitSize: int)!: f64
 ```
-Converts the floating\-point number f to a string, according to the format fmt and precision prec\. It rounds the result assuming that the original was obtained from a floating\-point value of bitSize bits \(32 for f32, 64 for f64\)\.
+Converts the string s to a floating\-point number with the precision specified by bitSize: 32 for f32, or 64 for f64\. When bitSize=32, the result still has type f64, but it will be convertible to f32 without changing its value\.
 
-The format fmt is one of &#39;b&#39; \(\-ddddp±ddd, a binary exponent\), &#39;e&#39; \(\-d\.dddde±dd, a decimal exponent\), &#39;E&#39; \(\-d\.ddddE±dd, a decimal exponent\), &#39;f&#39; \(\-ddd\.dddd, no exponent\), &#39;g&#39; \(&#39;e&#39; for large exponents, &#39;f&#39; otherwise\), &#39;G&#39; \(&#39;E&#39; for large exponents, &#39;f&#39; otherwise\), &#39;x&#39; \(\-0xd\.ddddp±ddd, a hexadecimal fraction and binary exponent\), or &#39;X&#39; \(\-0Xd\.ddddP±ddd, a hexadecimal fraction and binary exponent\)\.
+It accepts decimal and hexadecimal floating\-point numbers as defined by the Jule syntax for \[floating\-point literals\]\. If s is well\-formed and near a valid floating\-point number, it returns the nearest floating\-point number rounded using IEEE754 unbiased rounding\. \(Parsing a hexadecimal floating\-point value only rounds when there are more bits in the hexadecimal representation than will fit in the mantissa\.\)
 
-The precision prec controls the number of digits \(excluding the exponent\) printed by the &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;g&#39;, &#39;G&#39;, &#39;x&#39;, and &#39;X&#39; formats\. For &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;x&#39;, and &#39;X&#39;, it is the number of digits after the decimal point\. For &#39;g&#39; and &#39;G&#39; it is the maximum number of significant digits \(trailing zeros are removed\)\. The special precision \-1 uses the smallest number of digits necessary such that ParseFloat will return f exactly\.
+The errors that it returns have concrete type &amp;NumError and include err\.Num = s\.
 
-## AppendFloat
-```jule
-fn AppendFloat(mut dst: []byte, f: f64, fmt: byte, prec: int, bitSize: int): []byte
-```
-Appends the string form of the floating\-point number f, as generated by \[FormatFloat\], to dst and returns the extended buffer\.
+If s is not syntactically well\-formed, it returns err\.Err = ErrSyntax\.
+
+If s is syntactically well\-formed but is more than 1/2 ULP away from the largest floating point number of the given size, it returns f = ±Inf, err\.Err = ErrRange\.
+
+It recognizes the string &#34;NaN&#34;, and the \(possibly signed\) strings &#34;Inf&#34; and &#34;Infinity&#34; as their respective special floating point values\. It ignores case when matching\.
+
+\[floating\-point literals\]: https://manual\.jule\.dev/introduction/data\-types\.html\#floating\-point\-literals
 
 ## ParseUint
 ```jule
@@ -137,6 +139,60 @@ The errors that it returns have concrete type \[&amp;NumError\] and include err\
 fn Atoi(mut s: str)!: int
 ```
 Is equivalent to ParseInt\(s, 10, 0\), converted to int\.
+
+## FormatCmplx
+```jule
+fn FormatCmplx(c: cmplx128, fmt: byte, prec: int, mut bitSize: int): str
+```
+Converts the complex number c to a string of the form \(a\+bi\) where a and b are the real and imaginary parts, formatted according to the format fmt and precision prec\.
+
+The format fmt and precision prec have the same meaning as in \[FormatFloat\]\. It rounds the result assuming that the original was obtained from a complex value of bitSize bits, which must be 64 for cmplx64 and 128 for cmplx128\.
+
+## FormatFloat
+```jule
+fn FormatFloat(f: f64, fmt: byte, prec: int, bitSize: int): str
+```
+Converts the floating\-point number f to a string, according to the format fmt and precision prec\. It rounds the result assuming that the original was obtained from a floating\-point value of bitSize bits \(32 for f32, 64 for f64\)\.
+
+The format fmt is one of &#39;b&#39; \(\-ddddp±ddd, a binary exponent\), &#39;e&#39; \(\-d\.dddde±dd, a decimal exponent\), &#39;E&#39; \(\-d\.ddddE±dd, a decimal exponent\), &#39;f&#39; \(\-ddd\.dddd, no exponent\), &#39;g&#39; \(&#39;e&#39; for large exponents, &#39;f&#39; otherwise\), &#39;G&#39; \(&#39;E&#39; for large exponents, &#39;f&#39; otherwise\), &#39;x&#39; \(\-0xd\.ddddp±ddd, a hexadecimal fraction and binary exponent\), or &#39;X&#39; \(\-0Xd\.ddddP±ddd, a hexadecimal fraction and binary exponent\)\.
+
+The precision prec controls the number of digits \(excluding the exponent\) printed by the &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;g&#39;, &#39;G&#39;, &#39;x&#39;, and &#39;X&#39; formats\. For &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;x&#39;, and &#39;X&#39;, it is the number of digits after the decimal point\. For &#39;g&#39; and &#39;G&#39; it is the maximum number of significant digits \(trailing zeros are removed\)\. The special precision \-1 uses the smallest number of digits necessary such that ParseFloat will return f exactly\.
+
+## AppendFloat
+```jule
+fn AppendFloat(mut dst: []byte, f: f64, fmt: byte, prec: int, bitSize: int): []byte
+```
+Appends the string form of the floating\-point number f, as generated by \[FormatFloat\], to dst and returns the extended buffer\.
+
+## FormatUint
+```jule
+fn FormatUint(i: u64, base: int): str
+```
+Returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values &gt;= 10\.
+
+## FormatInt
+```jule
+fn FormatInt(i: i64, base: int): str
+```
+Returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values &gt;= 10\.
+
+## AppendInt
+```jule
+fn AppendInt(mut dst: []byte, i: i64, base: int): []byte
+```
+Appends the string form of the integer i, as generated by \[FormatInt\], to dst and returns the extended buffer\.
+
+## AppendUint
+```jule
+fn AppendUint(mut dst: []byte, i: u64, base: int): []byte
+```
+Appends the string form of the unsigned integer i, as generated by \[FormatUint\], to dst and returns the extended buffer\.
+
+## Itoa
+```jule
+fn Itoa(i: int): str
+```
+Is equivalent to \[FormatInt\]\(i64\(i\), 10\)\.
 
 ## Quote
 ```jule
@@ -243,62 +299,6 @@ Interprets s as a single\-quoted, double\-quoted, or backquoted Jule string lite
 fn IsGraphic(r: rune): bool
 ```
 Reports whether the rune is defined as a Graphic by Unicode\. Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, and Zs\.
-
-## FormatCmplx
-```jule
-fn FormatCmplx(c: cmplx128, fmt: byte, prec: int, mut bitSize: int): str
-```
-Converts the complex number c to a string of the form \(a\+bi\) where a and b are the real and imaginary parts, formatted according to the format fmt and precision prec\.
-
-The format fmt and precision prec have the same meaning as in \[FormatFloat\]\. It rounds the result assuming that the original was obtained from a complex value of bitSize bits, which must be 64 for cmplx64 and 128 for cmplx128\.
-
-## ParseFloat
-```jule
-fn ParseFloat(s: str, bitSize: int)!: f64
-```
-Converts the string s to a floating\-point number with the precision specified by bitSize: 32 for f32, or 64 for f64\. When bitSize=32, the result still has type f64, but it will be convertible to f32 without changing its value\.
-
-It accepts decimal and hexadecimal floating\-point numbers as defined by the Jule syntax for \[floating\-point literals\]\. If s is well\-formed and near a valid floating\-point number, it returns the nearest floating\-point number rounded using IEEE754 unbiased rounding\. \(Parsing a hexadecimal floating\-point value only rounds when there are more bits in the hexadecimal representation than will fit in the mantissa\.\)
-
-The errors that it returns have concrete type &amp;NumError and include err\.Num = s\.
-
-If s is not syntactically well\-formed, it returns err\.Err = ErrSyntax\.
-
-If s is syntactically well\-formed but is more than 1/2 ULP away from the largest floating point number of the given size, it returns f = ±Inf, err\.Err = ErrRange\.
-
-It recognizes the string &#34;NaN&#34;, and the \(possibly signed\) strings &#34;Inf&#34; and &#34;Infinity&#34; as their respective special floating point values\. It ignores case when matching\.
-
-\[floating\-point literals\]: https://manual\.jule\.dev/introduction/data\-types\.html\#floating\-point\-literals
-
-## FormatUint
-```jule
-fn FormatUint(i: u64, base: int): str
-```
-Returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values &gt;= 10\.
-
-## FormatInt
-```jule
-fn FormatInt(i: i64, base: int): str
-```
-Returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values &gt;= 10\.
-
-## AppendInt
-```jule
-fn AppendInt(mut dst: []byte, i: i64, base: int): []byte
-```
-Appends the string form of the integer i, as generated by \[FormatInt\], to dst and returns the extended buffer\.
-
-## AppendUint
-```jule
-fn AppendUint(mut dst: []byte, i: u64, base: int): []byte
-```
-Appends the string form of the unsigned integer i, as generated by \[FormatUint\], to dst and returns the extended buffer\.
-
-## Itoa
-```jule
-fn Itoa(i: int): str
-```
-Is equivalent to \[FormatInt\]\(i64\(i\), 10\)\.
 
 ## NumError
 ```jule
