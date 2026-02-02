@@ -45,8 +45,6 @@ Standard back\-end compilers\.
 ## CppStd
 ```jule
 enum CppStd: str {
-	Cpp14: "cpp14",
-	Cpp17: "cpp17",
 	Cpp20: "cpp20",
 }
 ```
