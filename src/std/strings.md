@@ -2,6 +2,7 @@
 
 ## Index
 
+[fn Compare\(a: str, b: str\): int](#compare)\
 [fn Count\(s: str, substr: str\): int](#count)\
 [fn Contains\(s: str, substr: str\): bool](#contains)\
 [fn ContainsAny\(s: str, chars: str\): bool](#containsany)\
@@ -43,14 +44,22 @@
 [fn ToUpper\(s: str\): str](#toupper)\
 [fn ToLower\(s: str\): str](#tolower)\
 [fn Clone\(s: str\): str](#clone)\
-[fn Compare\(a: str, b: str\): int](#compare)\
-[struct Replacer](#replacer)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(&amp;self, s: str\): str](#replace-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(&amp;self, mut w: io::Writer, s: str\)\!: \(n: int\)](#writestr)\
-[struct Reader](#reader)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: str\): &amp;Reader](#new-1)\
+[struct Builder](#builder)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, b: \[\]byte\)\!: \(n: int\)](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut \*self, b: byte\)\!](#writebyte)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut \*self, r: rune\)\!: \(n: int\)](#writerune)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Grow\(mut \*self, n: int\)](#grow)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Clear\(mut \*self\)](#clear)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(\*self\): int](#cap)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Buf\(mut \*self\): \[\]byte](#buf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Async\(mut &amp;self\): asyncBuilder](#async)\
+[struct Reader](#reader)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: str\): &amp;Reader](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(\*self\): i64](#size)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(\*self, mut b: \[\]byte\)\!: \(n: int\)](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAt\(\*self, mut b: \[\]byte, off: i64\)\!: \(n: int\)](#readat)\
@@ -61,20 +70,21 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(\*self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(\*self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self, s: str\)](#reset)\
-[struct Builder](#builder)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, b: \[\]byte\)\!: \(n: int\)](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut \*self, b: byte\)\!](#writebyte)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut \*self, r: rune\)\!: \(n: int\)](#writerune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Grow\(mut \*self, n: int\)](#grow)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Clear\(mut \*self\)](#clear)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(\*self\): int](#cap)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Buf\(mut \*self\): \[\]byte](#buf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Async\(mut &amp;self\): asyncReader](#async-1)\
+[struct Replacer](#replacer)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.str\): &amp;Replacer](#new-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(&amp;self, s: str\): str](#replace-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(&amp;self, mut w: io::Writer, s: str\)\!: \(n: int\)](#writestr-1)
 
 
+
+## Compare
+```jule
+fn Compare(a: str, b: str): int
+```
+Returns an integer comparing two strings lexicographically\. The result will be 0 if a == b, \-1 if a &lt; b, and \+1 if a &gt; b\.
+
+Use compare when you need to perform a three\-way comparison \(with \[slices::SortFunc\], for example\)\. It is usually clearer and always faster to use the built\-in string comparison operators ==, &lt;, &gt;, and so on\.
 
 ## Count
 ```jule
@@ -360,131 +370,6 @@ fn Clone(s: str): str
 ```
 Returns a fresh copy of s\. It guarantees to make a copy of s into a new allocation, which can be important when retaining only a small substring of a much larger string\. Using Clone can help such programs use less memory\. Of course, since using Clone makes a copy, overuse of Clone can make programs use more memory\. Clone should typically be used only rarely, and only when profiling indicates that it is needed\. For strings of length zero the string &#34;&#34; will be returned and no allocation is made\.
 
-## Compare
-```jule
-fn Compare(a: str, b: str): int
-```
-Returns an integer comparing two strings lexicographically\. The result will be 0 if a == b, \-1 if a &lt; b, and \+1 if a &gt; b\.
-
-Use compare when you need to perform a three\-way comparison \(with \[slices::SortFunc\], for example\)\. It is usually clearer and always faster to use the built\-in string comparison operators ==, &lt;, &gt;, and so on\.
-
-## Replacer
-```jule
-struct Replacer {
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-Replaces a list of strings with replacements\. It is more efficient than Replace function for multiple replacements on one string\. It is safe for concurrent use by multiple threads\.
-
-### New
-```jule
-fn New(oldnew: ...str): &Replacer
-```
-Returns a new \[Replacer\] from a list of old, new string pairs\. Replacements are performed in the order they appear in the target string, without overlapping matches\. The old string comparisons are done in argument order\.
-
-Panics if given an odd number of arguments\.
-
-### Replace
-```jule
-fn Replace(&self, s: str): str
-```
-Returns a copy of s with all replacements performed\.
-
-### WriteStr
-```jule
-fn WriteStr(&self, mut w: io::Writer, s: str)!: (n: int)
-```
-Writes s to w with all replacements performed\.
-
-## Reader
-```jule
-struct Reader {
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-Implements the io::Reader, io::ReaderAt, io::ByteReader, io::RuneReader, io::Seeker, and io::WriterTo traits by reading from a string\. The zero value for Reader operates like a Reader of an empty string\.
-
-### Implemented Traits
-
-- `io::Reader`
-- `io::ReaderAt`
-- `io::ByteReader`
-- `io::RuneReader`
-- `io::Seeker`
-- `io::WriterTo`
-
-### New
-```jule
-fn New(s: str): &Reader
-```
-Returns a new Reader reading from s\.
-
-### Len
-```jule
-fn Len(*self): int
-```
-Returns the number of bytes of the unread portion of the string\.
-
-### Size
-```jule
-fn Size(*self): i64
-```
-Returns the original length of the underlying string\. Size is the number of bytes available for reading via ReadAt\. The returned value is always the same and is not affected by calls to any other method\.
-
-### Read
-```jule
-fn Read(*self, mut b: []byte)!: (n: int)
-```
-Implements the io::Reader trait\.
-
-### ReadAt
-```jule
-fn ReadAt(*self, mut b: []byte, off: i64)!: (n: int)
-```
-Implements the io::ReaderAt trait\.
-
-### ReadByte
-```jule
-fn ReadByte(mut *self)!: (byte, int)
-```
-Implements the io::ByteReader trait\.
-
-### UnreadByte
-```jule
-fn UnreadByte(*self)!
-```
-Implements the io::ByteScanner trait\.
-
-### ReadRune
-```jule
-fn ReadRune(*self)!: (ch: rune, size: int)
-```
-Implements the io::RuneReader trait\.
-
-### UnreadRune
-```jule
-fn UnreadRune(*self)!
-```
-Implements the io::RuneScanner trait\.
-
-### Seek
-```jule
-fn Seek(*self, offset: i64, whence: int)!: i64
-```
-Implements the io::Seeker trait\.
-
-### WriteTo
-```jule
-fn WriteTo(*self, mut w: io::Writer)!: (n: i64)
-```
-Implements the io:\.WriterTo trait\.
-
-### Reset
-```jule
-fn Reset(mut *self, s: str)
-```
-Resets the Reader to be reading from s\.
-
 ## Builder
 ```jule
 struct Builder {
@@ -494,13 +379,6 @@ struct Builder {
 String builder for efficient concatenation\. Optimized for single string building not for repeated use\.
 
 A Builder must not be copied after first use\.
-
-### Implemented Traits
-
-- `io::Writer`
-- `io::ByteWriter`
-- `io::RuneWriter`
-- `io::StrWriter`
 
 ### Write
 ```jule
@@ -567,3 +445,123 @@ Returns mutable buffer for low\-level interactions\.
 unsafe fn SetBuf(mut *self, mut buf: []byte)
 ```
 Sets mutable internal buffer for low\-level interactions\.
+
+### Async
+```jule
+fn Async(mut &self): asyncBuilder
+```
+Returns async wrapper for the Builder\. Useful to satisfy behavior implemented \`io\` traits\.
+
+## Reader
+```jule
+struct Reader {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+Implements the io::Reader, io::ReaderAt, io::ByteReader, io::RuneReader, io::Seeker, and io::WriterTo traits by reading from a string\. The zero value for Reader operates like a Reader of an empty string\.
+
+### New
+```jule
+fn New(s: str): &Reader
+```
+Returns a new Reader reading from s\.
+
+### Len
+```jule
+fn Len(*self): int
+```
+Returns the number of bytes of the unread portion of the string\.
+
+### Size
+```jule
+fn Size(*self): i64
+```
+Returns the original length of the underlying string\. Size is the number of bytes available for reading via ReadAt\. The returned value is always the same and is not affected by calls to any other method\.
+
+### Read
+```jule
+fn Read(*self, mut b: []byte)!: (n: int)
+```
+Implements behavior the io::Reader trait\.
+
+### ReadAt
+```jule
+fn ReadAt(*self, mut b: []byte, off: i64)!: (n: int)
+```
+Implements behavior the io::ReaderAt trait\.
+
+### ReadByte
+```jule
+fn ReadByte(mut *self)!: (byte, int)
+```
+Implements behavior the io::ByteReader trait\.
+
+### UnreadByte
+```jule
+fn UnreadByte(*self)!
+```
+Implements behavior the io::ByteScanner trait\.
+
+### ReadRune
+```jule
+fn ReadRune(*self)!: (ch: rune, size: int)
+```
+Implements behavior the io::RuneReader trait\.
+
+### UnreadRune
+```jule
+fn UnreadRune(*self)!
+```
+Implements behavior the io::RuneScanner trait\.
+
+### Seek
+```jule
+fn Seek(*self, offset: i64, whence: int)!: i64
+```
+Implements behavior of the io::Seeker trait\.
+
+### WriteTo
+```jule
+async fn WriteTo(*self, mut w: io::Writer)!: (n: i64)
+```
+Implements behavior the io::WriterTo trait\.
+
+### Reset
+```jule
+fn Reset(mut *self, s: str)
+```
+Resets the Reader to be reading from s\.
+
+### Async
+```jule
+fn Async(mut &self): asyncReader
+```
+Returns async wrapper for the Reader\. Useful to satisfy behavior implemented \`io\` traits\.
+
+## Replacer
+```jule
+struct Replacer {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+Replaces a list of strings with replacements\. It is more efficient than Replace function for multiple replacements on one string\. It is safe for concurrent use by multiple coroutines\.
+
+### New
+```jule
+fn New(oldnew: ...str): &Replacer
+```
+Returns a new \[Replacer\] from a list of old, new string pairs\. Replacements are performed in the order they appear in the target string, without overlapping matches\. The old string comparisons are done in argument order\.
+
+Panics if given an odd number of arguments\.
+
+### Replace
+```jule
+fn Replace(&self, s: str): str
+```
+Returns a copy of s with all replacements performed\.
+
+### WriteStr
+```jule
+async fn WriteStr(&self, mut w: io::Writer, s: str)!: (n: int)
+```
+Writes s to w with all replacements performed\.
