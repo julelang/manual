@@ -2,17 +2,18 @@
 
 ## Index
 
-[fn ParseFile\(path: str\): \(&amp;Mod, \[\]log::Log\)](#parsefile)\
+[fn ParseFile\(path: str, options: ParseOptions\): \(&amp;Mod, \[\]log::Log\)](#parsefile)\
 [fn IsName\(name: str\): bool](#isname)\
 [type ID](#id)\
 [struct Mod](#mod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Mod\): bool](#equal)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Mod\): bool](#equal)\
+[struct ParseOptions](#parseoptions)
 
 
 
 ## ParseFile
 ```jule
-fn ParseFile(path: str): (&Mod, []log::Log)
+fn ParseFile(path: str, options: ParseOptions): (&Mod, []log::Log)
 ```
 Parse module from the module file path\.
 
@@ -20,7 +21,7 @@ Parse module from the module file path\.
 ```jule
 fn IsName(name: str): bool
 ```
-Reports whether the name is valid to become module name\.
+Reports whether the name is valid to become module name\. It does not checks for reserved names\.
 
 ## ID
 ```jule
@@ -43,3 +44,12 @@ A module\.
 fn Equal(&self, other: &Mod): bool
 ```
 Reports whether the mods are same module directory\. Reports true if self and other is nil\.
+
+## ParseOptions
+```jule
+struct ParseOptions {
+	// Allows using the reserved "std" module name.
+	AllowStd: bool
+}
+```
+Options for the module file parsing\.
