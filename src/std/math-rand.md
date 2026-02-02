@@ -2,6 +2,7 @@
 
 ## Index
 
+[fn NewPCG\(seed1: u64, seed2: u64\): &amp;PCG](#newpcg)\
 [fn New\(src: Source\): &amp;Rand](#new)\
 [fn I64\(\): i64](#i64)\
 [fn U32\(\): u32](#u32)\
@@ -20,13 +21,16 @@
 [fn Perm\(n: int\): \[\]int](#perm)\
 [fn Shuffle\(n: int, swap: fn\(i: int, j: int\)\)](#shuffle)\
 [fn NormF64\(\): f64](#normf64)\
-[fn ExpFloat64\(\): f64](#expfloat64)\
+[fn ExpF64\(\): f64](#expf64)\
 [fn NewZipf\(r: &amp;Rand, s: f64, v: f64, imax: u64\): &amp;Zipf](#newzipf)\
-[fn NewPCG\(seed1: u64, seed2: u64\): &amp;PCG](#newpcg)\
 [trait Source](#source)\
-[struct Rand](#rand)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn NormF64\(\*self\): f64](#normf64-1)\
+[struct PCG](#pcg)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Seed\(\*self, seed1: u64, seed2: u64\)](#seed)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64-1)\
+[struct Rand](#rand)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ExpF64\(\*self\): f64](#expf64-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn NormF64\(\*self\): f64](#normf64-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn U32\(\*self\): u32](#u32-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn I64\(\*self\): i64](#i64-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn I32\(\*self\): i32](#i32-1)\
@@ -42,14 +46,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn F32\(\*self\): f32](#f32-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(\*self, n: int\): \[\]int](#perm-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Shuffle\(\*self, n: int, swap: fn\(i: int, j: int\)\)](#shuffle-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ExpF64\(\*self\): f64](#expf64)\
 [struct Zipf](#zipf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64-2)\
-[struct PCG](#pcg)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Seed\(\*self, seed1: u64, seed2: u64\)](#seed)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64-3)
 
 
+
+## NewPCG
+```jule
+fn NewPCG(seed1: u64, seed2: u64): &PCG
+```
+Returns a new PCG seeded with the given values\.
 
 ## New
 ```jule
@@ -164,9 +170,9 @@ sample = NormF64() * desiredStdDev + desiredMean
 ```
 
 
-## ExpFloat64
+## ExpF64
 ```jule
-fn ExpFloat64(): f64
+fn ExpF64(): f64
 ```
 Returns an exponentially distributed f64 in the range \(0, \+f64\.Max\] with an exponential distribution whose rate parameter \(lambda\) is 1 and whose mean is 1/lambda \(1\) from the default Source\. To produce a distribution with a different rate parameter, callers can adjust the output using:
 
@@ -181,12 +187,6 @@ fn NewZipf(r: &Rand, s: f64, v: f64, imax: u64): &Zipf
 ```
 Returns a Zipf variate generator\. The generator generates values k ∈ \[0, imax\] such that P\(k\) is proportional to \(v \+ k\) \*\* \(\-s\)\. Requirements: s &gt; 1 and v &gt;= 1\.
 
-## NewPCG
-```jule
-fn NewPCG(seed1: u64, seed2: u64): &PCG
-```
-Returns a new PCG seeded with the given values\.
-
 ## Source
 ```jule
 trait Source {
@@ -195,7 +195,31 @@ trait Source {
 ```
 A Source is a source of uniformly\-distributed pseudo\-random u64 values in the range \[0, 1&lt;&lt;64\)\.
 
-It is not safe for concurrent use by multiple threads\.
+It is not safe for concurrent use by multiple coroutines\.
+
+## PCG
+```jule
+struct PCG {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+A PCG is a PCG generator with 128 bits of internal state\. A zero PCG is equivalent to NewPCG\(0, 0\)\.
+
+### Implemented Traits
+
+- `Source`
+
+### Seed
+```jule
+fn Seed(*self, seed1: u64, seed2: u64)
+```
+Resets the PCG to behave the same way as NewPCG\(seed1, seed2\)\.
+
+### U64
+```jule
+fn U64(*self): u64
+```
+Return a uniformly\-distributed random u64 value\.
 
 ## Rand
 ```jule
@@ -204,6 +228,17 @@ struct Rand {
 }
 ```
 Implements a type of pseudo random number generator \(PRNG\)\. Outputs might be easily predictable regardless of how it&#39;s seeded\. For random numbers suitable for security\-sensitive work, it is not recommended\.
+
+### ExpF64
+```jule
+fn ExpF64(*self): f64
+```
+Returns an exponentially distributed f64 in the range \(0, \+f64\.Max\] with an exponential distribution whose rate parameter \(lambda\) is 1 and whose mean is 1/lambda \(1\) from the default Source\. To produce a distribution with a different rate parameter, callers can adjust the output using:
+
+```
+sample = ExpF64() / desiredRateParameter
+```
+
 
 ### NormF64
 ```jule
@@ -312,17 +347,6 @@ fn Shuffle(*self, n: int, swap: fn(i: int, j: int))
 ```
 Shuffle pseudo\-randomizes the order of elements\. n is the number of elements\. It panics if n &lt; 0\. swap swaps the elements with indexes i and j\.
 
-### ExpF64
-```jule
-fn ExpF64(*self): f64
-```
-Returns an exponentially distributed f64 in the range \(0, \+f64\.Max\] with an exponential distribution whose rate parameter \(lambda\) is 1 and whose mean is 1/lambda \(1\) from the default Source\. To produce a distribution with a different rate parameter, callers can adjust the output using:
-
-```
-sample = ExpF64() / desiredRateParameter
-```
-
-
 ## Zipf
 ```jule
 struct Zipf {
@@ -340,27 +364,3 @@ A Zipf generates Zipf distributed variates\.
 fn U64(*self): u64
 ```
 Returns a value drawn from the Zipf distribution described by the Zipf object\.
-
-## PCG
-```jule
-struct PCG {
-	// NOTE: contains filtered hidden or unexported fields
-}
-```
-A PCG is a PCG generator with 128 bits of internal state\. A zero PCG is equivalent to NewPCG\(0, 0\)\.
-
-### Implemented Traits
-
-- `Source`
-
-### Seed
-```jule
-fn Seed(*self, seed1: u64, seed2: u64)
-```
-Resets the PCG to behave the same way as NewPCG\(seed1, seed2\)\.
-
-### U64
-```jule
-fn U64(*self): u64
-```
-Return a uniformly\-distributed random u64 value\.
