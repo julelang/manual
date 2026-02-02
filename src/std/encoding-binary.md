@@ -2,7 +2,7 @@
 
 ## Index
 
-[struct LittleEndian](#littleendian)\
+[struct BigEndian](#bigendian)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn PutU16\(mut b: \[\]byte, x: u16\)](#putu16)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendU16\(mut b: \[\]byte, x: u16\): \[\]byte](#appendu16)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeU16\(b: \[\]byte\): u16](#decodeu16)\
@@ -12,7 +12,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn PutU64\(mut b: \[\]byte, x: u64\)](#putu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendU64\(mut b: \[\]byte, x: u64\): \[\]byte](#appendu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeU64\(b: \[\]byte\): u64](#decodeu64)\
-[struct BigEndian](#bigendian)\
+[struct LittleEndian](#littleendian)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn PutU16\(mut b: \[\]byte, x: u16\)](#putu16-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendU16\(mut b: \[\]byte, x: u16\): \[\]byte](#appendu16-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeU16\(b: \[\]byte\): u16](#decodeu16-1)\
@@ -25,11 +25,11 @@
 
 
 
-## LittleEndian
+## BigEndian
 ```jule
-struct LittleEndian{}
+struct BigEndian{}
 ```
-Binary encoding implementation for little\-endian order\.
+Binary encoding implementation for big\-endian order\.
 
 ### PutU16
 ```jule
@@ -85,11 +85,11 @@ fn DecodeU64(b: []byte): u64
 ```
 Decodes unsigned 64\-bit integer from 8\-bytes\.
 
-## BigEndian
+## LittleEndian
 ```jule
-struct BigEndian{}
+struct LittleEndian{}
 ```
-Binary encoding implementation for big\-endian order\.
+Binary encoding implementation for little\-endian order\.
 
 ### PutU16
 ```jule
