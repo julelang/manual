@@ -18,9 +18,9 @@ The main context contains the primary content of the documentation. It includes 
 
 ### Lists
 
-Lists can only be used in the main context and cannot have sub-lists. Any type of list always appears in the main context. A list item is defined by the `-` character (ASCII code 45) and accepts a single line of content. Any new line signifies the end of a list item.
+Lists can only be used in the main context and cannot have sub-lists. Any type of list always appears in the main context. Lists start with `-` (ASCII 45) or with numbers (for example `123.`, `42.`) and accepts a single line of content by default.
 
-If you do not want to move to a new line and end the list item, end the previous line with a comma ",". In this case, following line is considered part of the previous list item. But a new list mark (it is `-`) appears, it starts a new list item context. Indentation will not break the list item handling, so you can any space to align comment.
+If you do not want to move to a new line and end the list item, the next line must be indented properly to continue to the list's content. In this case, following line is considered part of the previous list item. But a new list mark (it is `-` or numeric pattern described above) appears, it starts a new list item context. Indentation will not break the list item handling, so you can any space or tabs to align comment.
 
 ::: info
 With indentation, you might make it appear as if it's part of a sub-scope or sub-list. However, juledoc does not evaluate it this way. If the list is within the main scope, it is treated as a list. If it is inside a sub-scope, it is treated as part of the text within that sub-scope.
@@ -55,14 +55,19 @@ Here is an example documentation that uses all context types as described:
 //
 //	This is a subscope because it uses tab for indentation.
 //		This is a subscope for a previous subscope because it uses 2 tab.
-//		- Looks like-list item but juledoc handles as a text in this subscope.
+//		- Looks like list-item but juledoc handles as a text in this subscope.
 //		- Looks like list-item but juledoc handles as a text in this subscope.
 //
 //- This is a list item.
 // - This is a list item.
 // - This is a list item,
-//   And this line is a part of the previous list item,
-//   and this is too. Because lines ends with comma.
+//   And this line is a part of the previous list item.
+// This is not a part of the list item.
+//
+// 1. This is a numerated list item.
+// 2. This is a second numerated list item.
+//   And this line is a part of the previous list item.
+//	And this is too, event it is tab indented.
 ```
 
 Documentation must always come before the definition it belongs to, and any spaces or invalid comments (such as range comments) will break the documentation sequence. Therefore, using a separator for spaces is recommended.
