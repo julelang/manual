@@ -333,6 +333,7 @@ struct CallExpr {
 	Args:      []&Expr    // Function arguments, or nil.
 	Exception: &ScopeTree // Exception handling scope, or nil.
 	IsCo:      bool       // Whether this is the concurrent call.
+	Await:     bool       // Awaited.
 }
 ```
 Function call expression kind\.
@@ -561,6 +562,7 @@ Reports whether self \(receiver\) parameter is reference pointer\.
 struct Func {
 	Token:       &token::Token
 	Global:      bool
+	Async:       bool
 	Unsafe:      bool
 	Public:      bool
 	Extern:      bool
@@ -740,8 +742,14 @@ struct Case {
 	Scope: &ScopeTree
 
 	// Holds expression.
-	// Expressions holds *Type if If type matching.
+	// Expressions holds *Type if case is for type matching.
 	X: []&Expr
+
+	// Expression might be &Var or &Assign if case is for select statement.
+	//	- `&Var` represents: x := <-chan
+	//	- `&Assign` represents: x = <-x
+	Stmt:      StmtData
+	StmtToken: &token::Token
 }
 ```
 Case of match\-case\.
