@@ -15,18 +15,18 @@
 [fn BitSizeOfInt\(x: i64\): int](#bitsizeofint)\
 [fn BitSizeOfUint\(x: u64\): int](#bitsizeofuint)\
 [fn UpdateTarget\(\)](#updatetarget)\
-[fn MinI\(mut k: str\): i64](#mini)\
-[fn MaxI\(mut k: str\): i64](#maxi)\
-[fn MaxU\(mut k: str\): u64](#maxu)\
-[fn Min\(mut k: str\): f64](#min)\
-[fn Max\(mut k: str\): f64](#max)\
 [fn IsSigInt\(mut k: str\): bool](#issigint)\
 [fn IsUnsigInt\(mut k: str\): bool](#isunsigint)\
 [fn IsInt\(k: str\): bool](#isint)\
 [fn IsFloat\(k: str\): bool](#isfloat)\
 [fn IsCmplx\(k: str\): bool](#iscmplx)\
 [fn IsNum\(k: str\): bool](#isnum)\
-[fn IsSigNum\(k: str\): bool](#issignum)
+[fn IsSigNum\(k: str\): bool](#issignum)\
+[fn MinI\(mut k: str\): i64](#mini)\
+[fn MaxI\(mut k: str\): i64](#maxi)\
+[fn MaxU\(mut k: str\): u64](#maxu)\
+[fn Min\(mut k: str\): f64](#min)\
+[fn Max\(mut k: str\): f64](#max)
 
 ## Variables
 
@@ -48,6 +48,32 @@ Signed integer kind of target architecture\. Is equivalent to &#34;int&#34;, but
 let SysUint = ""
 ```
 Unsigned integer kind of target architecture\. Is equivalent to &#34;uint&#34; and &#34;uintptr&#34;, but specific bit\-sized integer kind\. Initialized using build::Arch by the package when imported\.
+
+---
+
+```jule
+const (
+	I8       = "i8"
+	I16      = "i16"
+	I32      = "i32"
+	I64      = "i64"
+	U8       = "u8"
+	U16      = "u16"
+	U32      = "u32"
+	U64      = "u64"
+	F32      = "f32"
+	F64      = "f64"
+	Cmplx64  = "cmplx64"
+	Cmplx128 = "cmplx128"
+	Uint     = "uint"
+	Int      = "int"
+	Uintptr  = "uintptr"
+	Bool     = "bool"
+	Str      = "str"
+	Any      = "any"
+)
+```
+Type kinds of primitive types\. These kinds are must match keyword form itself\.
 
 ---
 
@@ -83,32 +109,6 @@ const (
 )
 ```
 Integer limit values\.
-
----
-
-```jule
-const (
-	I8       = "i8"
-	I16      = "i16"
-	I32      = "i32"
-	I64      = "i64"
-	U8       = "u8"
-	U16      = "u16"
-	U32      = "u32"
-	U64      = "u64"
-	F32      = "f32"
-	F64      = "f64"
-	Cmplx64  = "cmplx64"
-	Cmplx128 = "cmplx128"
-	Uint     = "uint"
-	Int      = "int"
-	Uintptr  = "uintptr"
-	Bool     = "bool"
-	Str      = "str"
-	Any      = "any"
-)
-```
-Type kinds of primitive types\. These kinds are must match keyword form itself\.
 
 ## RealKindOf
 ```jule
@@ -201,36 +201,6 @@ fn UpdateTarget()
 ```
 Updates platform\-specific information based on the target\. If you will update target configuration, you should call this function\. In other words, new configurations is not applied for types\.
 
-## MinI
-```jule
-fn MinI(mut k: str): i64
-```
-Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
-
-## MaxI
-```jule
-fn MaxI(mut k: str): i64
-```
-Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
-
-## MaxU
-```jule
-fn MaxU(mut k: str): u64
-```
-Returns maximum value of unsigned integer kinds\. Panics if kind is invalid\.
-
-## Min
-```jule
-fn Min(mut k: str): f64
-```
-Returns minimum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
-
-## Max
-```jule
-fn Max(mut k: str): f64
-```
-Returns maximum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
-
 ## IsSigInt
 ```jule
 fn IsSigInt(mut k: str): bool
@@ -272,3 +242,33 @@ Reports whether kind is numeric\.
 fn IsSigNum(k: str): bool
 ```
 Reports whether kind is signed numeric\.
+
+## MinI
+```jule
+fn MinI(mut k: str): i64
+```
+Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
+
+## MaxI
+```jule
+fn MaxI(mut k: str): i64
+```
+Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
+
+## MaxU
+```jule
+fn MaxU(mut k: str): u64
+```
+Returns maximum value of unsigned integer kinds\. Panics if kind is invalid\.
+
+## Min
+```jule
+fn Min(mut k: str): f64
+```
+Returns minimum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
+
+## Max
+```jule
+fn Max(mut k: str): f64
+```
+Returns maximum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
