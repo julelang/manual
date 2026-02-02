@@ -144,7 +144,7 @@ Discards any buffered data, resets all state, and switches the buffered reader t
 
 ### Peek
 ```jule
-fn Peek(mut *self, mut n: int)!: (data: []byte, full: bool, eof: bool)
+async fn Peek(mut *self, mut n: int)!: (data: []byte, full: bool, eof: bool)
 ```
 Returns the next n bytes without advancing the reader\. The bytes stop being valid at the next read call\. If necessary, it will read more bytes into the buffer in order to make n bytes available\. If it reads fewer than n bytes, it throws an error explaining why the read is short\. If n is larger than Reader&#39;s buffer size, reports it with full and returns all the data in the buffer\.
 
@@ -152,7 +152,7 @@ Calling Peek prevents a \[Reader\.UnreadByte\] or \[Reader\.UnreadRune\] call fr
 
 ### Discard
 ```jule
-fn Discard(mut *self, n: int)!: (discarded: int)
+async fn Discard(mut *self, n: int)!: (discarded: int)
 ```
 Skips the next n bytes, returning the number of bytes discarded\.
 
@@ -160,19 +160,19 @@ If Discard skips fewer than n bytes, it throws an error\. If 0 &lt;= n &lt;= sel
 
 ### Read
 ```jule
-fn Read(mut *self, mut p: []byte)!: (n: int)
+async fn Read(mut *self, mut p: []byte)!: (n: int)
 ```
 Reads data into p\. It returns the number of bytes read into p\. The bytes are taken from at most one Read on the underlying \[Reader\], hence n may be less than len\(p\)\. To read exactly len\(p\) bytes, use io::ReadFull\(self, p\)\. If the underlying \[Reader\] can return a non\-zero count, then this Read method can do so as well; see the \[io::Reader\] docs\.
 
 ### ReadByte
 ```jule
-fn ReadByte(mut *self)!: (byte, int)
+async fn ReadByte(mut *self)!: (byte, int)
 ```
 Reads and returns a single byte\. If no byte is available, returns an error\.
 
 ### UnreadByte
 ```jule
-fn UnreadByte(mut *self)!
+async fn UnreadByte(mut *self)!
 ```
 Unreads the last byte\. Only the most recently read byte can be unread\.
 
@@ -180,13 +180,13 @@ Returns an error if the most recent method called on the \[Reader\] was not a re
 
 ### ReadRune
 ```jule
-fn ReadRune(mut *self)!: (r: rune, size: int)
+async fn ReadRune(mut *self)!: (r: rune, size: int)
 ```
 Reads a single UTF\-8 encoded Unicode character and returns the rune and its size in bytes\. If the encoded rune is invalid, it consumes one byte and returns unicode\.ReplacementChar \(U\+FFFD\) with a size of 1\.
 
 ### UnreadRune
 ```jule
-fn UnreadRune(mut *self)!
+async fn UnreadRune(mut *self)!
 ```
 Unreads the last rune\. If the most recent method called on the \[Reader\] was not a \[Reader\.ReadRune\], \[Reader\.UnreadRune\] returns an error\. \(In this regard it is stricter than \[Reader\.UnreadByte\], which will unread the last byte from any read operation\.\)
 
@@ -198,13 +198,13 @@ Returns the number of bytes that can be read from the current buffer\.
 
 ### ReadSlice
 ```jule
-fn ReadSlice(mut *self, delim: byte)!: (line: []byte, full: bool, eof: bool)
+async fn ReadSlice(mut *self, delim: byte)!: (line: []byte, full: bool, eof: bool)
 ```
 Reads until the first occurrence of delim in the input, returning a slice pointing at the bytes in the buffer\. The bytes stop being valid at the next read\. If it encounters an error before finding a delimiter, forwards it\. It fails with full=true if the buffer fills without a delim\. Because the data returned from ReadSlice will be overwritten by the next I/O operation, most clients should use \[Reader\.ReadBytes\] or ReadStr instead\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\.
 
 ### ReadLine
 ```jule
-fn ReadLine(mut *self)!: (line: []byte, isPrefix: bool, eof: bool)
+async fn ReadLine(mut *self)!: (line: []byte, isPrefix: bool, eof: bool)
 ```
 Low\-level line\-reading primitive\. Most callers should use \[Reader\.ReadBytes\]\(&#39;\\n&#39;\) or \[Reader\.ReadStr\]\(&#39;\\n&#39;\) instead or use a \[Scanner\]\.
 
@@ -214,19 +214,19 @@ The text returned from ReadLine does not include the line end \(&#34;\\r\\n&#34;
 
 ### ReadBytes
 ```jule
-fn ReadBytes(mut *self, delim: byte)!: (buf: []byte, eof: bool)
+async fn ReadBytes(mut *self, delim: byte)!: (buf: []byte, eof: bool)
 ```
 Reads until the first occurrence of delim in the input, returning a slice containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. Returns zero\-length slice for EOF\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. For simple uses, a Scanner may be more convenient\.
 
 ### ReadStr
 ```jule
-fn ReadStr(mut *self, delim: byte)!: (str, eof: bool)
+async fn ReadStr(mut *self, delim: byte)!: (str, eof: bool)
 ```
 Reads until the first occurrence of delim in the input, returning a string containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. Returns empty string for EOF\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. For simple uses, a Scanner may be more convenient\.
 
 ### WriteTo
 ```jule
-fn WriteTo(mut *self, mut w: io::Writer)!: (n: i64)
+async fn WriteTo(mut *self, mut w: io::Writer)!: (n: i64)
 ```
 Implements io::WriterTo\. This may make multiple calls to the \[Reader\.Read\] method of the underlying \[Reader\]\.
 
@@ -272,7 +272,7 @@ Discards any unflushed buffered data, clears any error, and resets writer to wri
 
 ### Flush
 ```jule
-fn Flush(mut *self)!
+async fn Flush(mut *self)!
 ```
 Writes any buffered data to the underlying \[io::Writer\]\.
 
@@ -296,31 +296,31 @@ Returns the number of bytes that have been written into the current buffer\.
 
 ### Write
 ```jule
-fn Write(mut *self, p: []byte)!: (nn: int)
+async fn Write(mut *self, p: []byte)!: (nn: int)
 ```
 Writes the contents of p into the buffer\. It returns the number of bytes written\. If nn &lt; len\(p\), it throws for short\-write reason\.
 
 ### WriteByte
 ```jule
-fn WriteByte(mut *self, c: byte)!
+async fn WriteByte(mut *self, c: byte)!
 ```
 Writes a single byte\.
 
 ### WriteRune
 ```jule
-fn WriteRune(mut *self, r: rune)!: (size: int)
+async fn WriteRune(mut *self, r: rune)!: (size: int)
 ```
 Writes a single Unicode code point, returning the number of bytes written and throws any error\.
 
 ### WriteStr
 ```jule
-fn WriteStr(mut *self, mut s: str)!: int
+async fn WriteStr(mut *self, mut s: str)!: int
 ```
 Writes a string\. It returns the number of bytes written\. If the count is less than len\(s\), it throws an error explaining why the write is short\.
 
 ### ReadFrom
 ```jule
-fn ReadFrom(mut *self, mut r: io::Reader)!: (n: i64)
+async fn ReadFrom(mut *self, mut r: io::Reader)!: (n: i64)
 ```
 Implements \[io::ReaderFrom\]\.
 
@@ -382,7 +382,7 @@ Reports whether scanner has reached EOF\.
 
 ### Scan
 ```jule
-fn Scan(mut *self)!: bool
+async fn Scan(mut *self)!: bool
 ```
 Advances the \[Scanner\] to the next token, which will then be available through the \[Scanner\.Token\] or \[Scanner\.Text\] method\. It returns false when there are no more tokens, either by reaching the end of the input or an exceptional\. After Scan returns false, without any exceptional, it means EOF\. Any exceptional will be forwarded\. Scan panics if the split function returns too many empty tokens without advancing the input\. This is a common error mode for scanners\.
 
