@@ -1,7 +1,7 @@
 # Directives
 Compiler directives (or pragmas) are statements that describe how the compiler should handle source code. Directives are safe to use. It is checked by the compiler and incorrect usage is warned.
 
-For a directive to be valid, it must be used correctly in the right place. The directive must be strt with the `#` prefix.
+For a directive to be valid, it must be used correctly in the right place. The directive must be start with the `#` prefix.
 
 \
 For example to directives:
