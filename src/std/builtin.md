@@ -363,6 +363,6 @@ Returns the imaginary part of the complex number c. The return value will be flo
 
 ## cmplx
 ```jule
-fn complex(r: Float, i: Float): Cmplx
+fn cmplx(r: Float, i: Float): Cmplx
 ```
 Constructs a complex value from two floating-point values. The real and imaginary parts must be of the same size, either f32 or f64 (or assignable to them), and the return value will be the corresponding complex type (cmplx64 for f32, cmplx128 for f64).
