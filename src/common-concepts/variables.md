@@ -139,9 +139,9 @@ x, y, z = true, 1, -400
 ```
 The logic remains the same. Let's not forget that these variables must already exist. Of course, due to static type principles, the value you show to it must be compatible with the data type of the variable.
 
-### Ignore Identifier
+### Blank Identifier
 
-Additionally, you can skip some values with ignore identifier: `_`.
+Additionally, you can skip some values with blank identifier: `_`.
 For example:
 ```jule
 x, _, z = true, 1, -400
@@ -153,7 +153,7 @@ This way you ignore some values.
 
 ---
 
-Additionally, if you have a tuple expression and want to ignore all expressions with an ignore identifier, you do not need to write ignore identifier for each expression individually. You can ignore the entire tuple expression by using a single ignore identifier.
+Additionally, if you have a tuple expression and want to ignore all expressions with an blank identifier, you do not need to write blank identifier for each expression individually. You can ignore the entire tuple expression by using a single blank identifier.
 
 For example:
 ```jule
