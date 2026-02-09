@@ -1,8 +1,7 @@
 # Comptime Iterations
 
 <div class="warning-badge">experimental</div>
-
-Comptime iterations are compile-time repeated and range-based iterations. To iterate in compile-time you should use iterable compile-time expressions. 
+Comptime iterations are compile-time repeated and range-based iterations. To iterate in compile-time, you should use iterable compile-time expressions. 
 
 Iteration variables are useable and they will be constant. You can use relevant variables to access iterated data.
 
@@ -28,11 +27,11 @@ fn main() {
 }
 ```
 
-The example program above will prints names of `MyStruct`'s fields. In compile-time, fields are iterated and created new sub scope for each iteration. This may will increase your executable size because of code duplication, use it carefully.
+The example program above will prints names of `MyStruct`'s fields. In compile-time, fields are iterated, and a new sub-scope is created for each iteration. This may increase your executable size because of code duplication; use it carefully.
 
 ## Slice Literals
 
-Slice literals also supported by comptime iterations. All values of the slice literal should be constant (values supported by constant evaluation). When this slice literals used for comptime iterations, iteration will iterate each constant element sequentially.
+Slice literals are also supported by comptime iterations. All values of the slice literal should be constant (values supported by constant evaluation). When this slice is used for comptime iterations, it will iterate over each constant element sequentially.
 
 For example:
 ```jule

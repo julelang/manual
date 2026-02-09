@@ -1,6 +1,6 @@
 # Addrcalls
 
-Addrcalls are low-level calls to a function address. An addrcall takes address to the destion function and calls it. It is different from Jule function calls. For anonymous functions, Jule runtime may store implicit data for closures and etc. Addrcalls just passes arguments.
+Addrcalls are low-level calls to a function address. An addrcall takes the address of the destination function and calls it. It is different from Jule function calls. For anonymous functions, the Jule runtime may store implicit data for closures, etc. Addrcalls just passes arguments.
 
 **Jule Calls vs Addrcalls**
 

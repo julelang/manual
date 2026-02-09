@@ -18,9 +18,9 @@ select   async     await
 
 ## Imaginary Keywords
 
-Imaginary keywords are words that are not keywords for Jule, but are recommended for developers to treat as if they were a keyword. These words are mostly aliases for built-in types, reserved names for some functions or constant variables.
+Imaginary keywords are words that are not keywords for Jule, but are recommended for developers to treat as if they were keywords. These words are mostly aliases for built-in types, reserved names for some functions, or constant variables.
 
-Developers can use these words as identifiers to functions and other definitions if they wish, but this can lead to a variety of development issues and readability challenges. Because relevant word now points to a new definition defined by the developer instead of its commonly used built-in definition.
+Developers can use these words as identifiers to functions and other definitions if they wish, but this can lead to a variety of development issues and readability challenges. Because the relevant word now points to a new definition defined by the developer instead of its commonly used built-in definition.
 
 For example:
 

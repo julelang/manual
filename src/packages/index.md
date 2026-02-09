@@ -18,5 +18,5 @@ fn main() {
 ```
 As shown in the example above, since both files are located in the same directory, they are considered the same package and therefore have access to each other's definitions.
 ::: warning
-Be careful to design the packages according to their definition order, otherwise you may not get the result you expect.
+Be careful to design the packages according to their definition order; you may not get the result you expect.
 :::

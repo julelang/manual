@@ -13,7 +13,7 @@ Structures are most commonly used to work with JSON data. By default, Jule struc
 
 ## Encoding
 
-The [Encode](/std/encoding-json#encode) function will encode the type and return the data in bytes. This is an exceptional function, so error handling needed.
+The [Encode](/std/encoding-json#encode) function will encode the type and return the data in bytes. This is an exceptional function, so error handling is needed.
 
 For example:
 ```jule
@@ -39,13 +39,13 @@ In the example above, an instance of the `User` structure is encoded into JSON a
 
 ### Encoding with Indentation
 
-The [EncodeIndent](/std/encoding-json#encodeindent) function will encode like the Encode function, but it will adds indentation where it needed. The indentation string determined by the function caller. Tabs or spaces are recommended for indentation.
+The [EncodeIndent](/std/encoding-json#encodeindent) function will encode like the Encode function, but it will add indentation where needed. The indentation string is determined by the function caller. Tabs or spaces are recommended for indentation.
 
 For example:
 ```jule
 json::EncodeIndent(u, "\t")!
 ```
-In the example above, an instance of the `User` structure from previous example is encoded into JSON and the resulting output is written to stdout as a string. But the output will be more pretty and indented with tabs.
+In the example above, an instance of the `User` structure from the previous example is encoded into JSON, and the resulting output is written to stdout as a string. But the output will be prettier and indented with tabs.
 
 ## Decoding
 
@@ -58,7 +58,7 @@ mut u := User{}
 json::Decode(json, &u)!
 println(u)
 ```
-In the example above, an instance of the `User` structure from previous example is decoded to variable `u` from the JSON representation.
+In the example above, an instance of the `User` structure from the previous example is decoded to the variable `u` from the JSON representation.
 
 ### Dynamic JSON Types
 
@@ -83,7 +83,7 @@ println(u["ID"])
 println(u["Name"])
 println(u["Email"])
 ```
-In the example above, an instance of the `User` structure from previous example is decoded to variable `v` from the JSON representation. As shown in the example, the `v` variable uses the `json::Value` type. This makes it suitable for dynamically decoding any kind of JSON data. Subsequently, the `u` variable is assigned the `json::Object` value obtained from `v`. This is because the incoming JSON data is an object, and the `json::Value` type represents it internally using the `json::Object` dynamic type. Then, by using string key names, the field values can be accessed as `json::Value`. In this case, the `ID` field will be of type `json::Number`, while the `Name` and `Email` fields will be of type `json::String`.
+In the example above, an instance of the `User` structure from the previous example is decoded to variable `v` from the JSON representation. As shown in the example, the `v` variable uses the `json::Value` type. This makes it suitable for dynamically decoding any kind of JSON data. Subsequently, the `u` variable is assigned the `json::Object` value obtained from `v`. This is because the incoming JSON data is an object, and the `json::Value` type represents it internally using the `json::Object` dynamic type. Then, by using string key names, the field values can be accessed as `json::Value`. In this case, the `ID` field will be of type `json::Number`, while the `Name` and `Email` fields will be of type `json::String`.
 
 If it is known that the incoming type is an object, the `v` variable could be used directly as a `json::Object`. The decoder will successfully return as long as the incoming JSON data is an object. However, if the incoming JSON is not an object, the decoding will fail.
 
@@ -118,4 +118,4 @@ In the example above, the fields of the `User` struct will be encoded and decode
 
 Tags must follow specific rules. JSON key names can include any punctuation marks except for backslashes (`\`) and quotation marks (`"`), which are reserved and therefore not allowed. Beyond that, key names should consist of Unicode letters and numbers. Additionally, tags must be unique within the same struct—no two fields should share the same JSON key name to avoid duplication and conflict during encoding or decoding.
 
-If a field's JSON key name is duplicated, all fields sharing that same key name will be ignored during encoding and decoding. If you assign a tag name to a non-public (unexported) field, it will still be included in the encode and decode processes despite being non-public. If you use the tag `json:"-"`, the field will be explicitly ignored and excluded from both encoding and decoding. If your tag is not valid, falling back to default naming and visibility behavior.
+If a field's JSON key name is duplicated, all fields sharing that same key name will be ignored during encoding and decoding. If you assign a tag name to a non-public (unexported) field, it will still be included in the encode and decode processes despite being non-public. If you use the tag `json:"-"`, the field will be explicitly ignored and excluded from both encoding and decoding. If your tag is not valid, fall back to the default naming and visibility behavior.

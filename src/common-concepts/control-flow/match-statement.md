@@ -1,5 +1,5 @@
 # Match Statements
-If you need to make a selection and run an algorithm based on that selection, `match` is a good choice. The operator `|` is used for each case. For a block to be executed if not exist any match, don't give any expression to one case, aka default case. The default case should be last case.
+If you need to make a selection and run an algorithm based on that selection, `match` is a good choice. The operator `|` is used for each case. For a block to be executed if not exist any match, don't give any expression to one case, aka the default case. The default case should be the last case.
 
 **Syntax**
 ```jule
@@ -105,7 +105,7 @@ Default
 ```
 
 ### Type Matching
-The `any` or `trait` data type may contain any data and you may want to execute different algorithms based on this data, in which case type matching is useful. You can also determine types of trait's data. Type matching is easy. Just use the keyword `type` and then use the data type in case to match.
+The `any` or `trait` data type may contain any data, and you may want to execute different algorithms based on this data, in which case type matching is useful. You can also determine the types of trait data. Type matching is easy. Just use the keyword `type` and then use the data type in case to match.
 
 For example:
 ```jule

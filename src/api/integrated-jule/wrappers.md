@@ -14,7 +14,7 @@ A tutorial for wrapper development to prepare existing code for integrating into
 
 ### Setup Environment
 
-First of all, you need to provide the appropriate conditions in order to use the structure you wrote wrapper and to provide the experience. And for a basic start, most of the time you need to have an instance of the structure you are wrapping.
+First of all, you need to provide the appropriate conditions in order to use the structure you wrote the wrapper for and to provide the experience. And for a basic start, most of the time you need to have an instance of the structure you are wrapping.
 
 For example:
 ```cpp
@@ -34,9 +34,9 @@ public:
 
 ### Add Functionalities
 
-Existing common functions or all functions that need to be added/planned must be defined by making them compatible with API types. For example `size` and `capacity` methods that STL vector has.
+Existing common functions or all functions that need to be added/planned must be defined by making them compatible with API types. For example, `size` and `capacity` methods that STL vector has.
 
-The identifiers of the wrapped definitions do not have to be the same as the identifiers of the corresponding definitions of the wrapped structure. But in most cases it is recommended to be the same.
+The identifiers of the wrapped definitions do not have to be the same as the identifiers of the corresponding definitions of the wrapped structure. But in most cases, it is recommended to be the same.
 
 For example:
 

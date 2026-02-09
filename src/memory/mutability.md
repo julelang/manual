@@ -1,6 +1,6 @@
 # Mutability
 
-Mutability is the opposite of immutability. Mutable memory areas are allowed to be changed. It must be specified that a identified memory area is mutable, otherwise every identified memory area is considered immutable. Mutability for an identified field is achieved using the `mut` keyword.
+Mutability is the opposite of immutability. Mutable memory areas are allowed to be changed. It must be specified that an identified memory area is mutable; every identified memory area is considered immutable. Mutability for an identified field is achieved using the `mut` keyword.
 
 ## Mutable Variables
 Let's learn to say how we want a variable that is immutable by default to be mutable. The keyword `mut` is used for this. Before defining a variable, declare it mutable with this keyword. Then you will have a mutable variable.
@@ -13,7 +13,7 @@ fn main() {
     println(x)
 }
 ```
-The example above is absolutely wrong. Because the variable `x` we have is an immutable variable. And the `x++` statement definitely breaks immutability. In this case, compiler will give error. Now let's repeat the same example using a mutable variable. 
+The example above is absolutely wrong. Because the variable `x` we have is an immutable variable. And the `x++` statement definitely breaks immutability. In this case, the compiler will give an error. Now let's repeat the same example using a mutable variable.
 ```jule
 fn main() {
     let mut x = 20
@@ -27,7 +27,7 @@ All literals and received pointers are considered mutable.
 :::
 
 ## Mutable Structures
-Mutable structures are risky structures that can break immutability when directly copied. For a structure to be mutable, one of its fields must have an explicitly mutable data type. When a struct is mutable, it loses its ability to be copied. In this case, if you try to assign an immutable mutable struct instance to a mutable definition, you will fail because there is no copy and you risk breaking immutability.
+Mutable structures are risky structures that can break immutability when directly copied. For a structure to be mutable, one of its fields must have an explicitly mutable data type. When a struct is mutable, it loses its ability to be copied. In this case, if you try to assign an immutable struct instance to a mutable definition, you will fail because there is no copy, and you risk breaking immutability.
 
 See the example below for better understanding:
 ```jule
@@ -43,16 +43,16 @@ fn main() {
     println(y.slc[0])
 }
 ```
-This structure is a mutable structure because it has a field with a mutable type. The slice that the structure contains is mutable when the structure is copied, and if the main structure is immutable, it risks this immutability of the structure. This is because the mutable copy points to the same address and the changes will affect the other copy.
+This structure is a mutable structure because it has a field with a mutable type. The slice that the structure contains is mutable when the structure is copied, and if the main structure is immutable, it risks losing the immutability of the structure. This is because the mutable copy points to the same address, and the changes will affect the other copy.
 
 The variable `x` in the example shows the case of keeping the mutable structure in an immutable variable. Then the `x` variable is copied and assigned to the mutable `y` variable, but this is a risky and unsafe operation as explained.
 
 ## Interior Mutability
-When an instance of a struct is immutable, you cannot use it with mutable methods because this compromises its immutability guarantee. However, you may still need to change the fields of an immutable structure. For this you need to use interior mutability. Since you cannot call a mutable method, your method will remain immutable, but thanks to interior mutability, you will be able to obtain the fields you want as mutable.
+When an instance of a struct is immutable, you cannot use it with mutable methods because this compromises its immutability guarantee. However, you may still need to change the fields of an immutable structure. For this, you need to use interior mutability. Since you cannot call a mutable method, your method will remain immutable, but thanks to interior mutability, you will be able to obtain the fields you want as mutable.
 
-It is recommended that fields within interior mutability not be public, although the compiler leaves this to the discretion of the developer. Because when interior mutability fields vary in an immutable instance, the developer using this immutable copy may encounter a change even though it does not expect a change on the copy. Therefore, if fields within interior mutability need to be accessible, it is recommended to use wrapper methods.
+It is recommended that fields within interior mutability not be public, although the compiler leaves this to the discretion of the developer. Because when interior mutability fields vary in an immutable instance, the developer using this immutable copy may encounter a change even though they do not expect a change in the copy. Therefore, if fields within interior mutability need to be accessible, it is recommended to use wrapper methods.
 
-Now let's take a look at how interior mutability is achieved. Actually, this is a pretty simple. If you are a developer who has used C++ before, you may be familiar with the `mutable` keyword in this regard. Similarly, Jule uses the already existing keyword mut for mutability. For interior mutability, the relevant field must be declared with the mut keyword. This means that field can exhibit interior mutability.
+Now, let's take a look at how interior mutability is achieved. Actually, this is pretty simple. If you are a developer who has used C++ before, you may be familiar with the `mutable` keyword in this regard. Similarly, Jule uses the already existing keyword mut for mutability. For interior mutability, the relevant field must be declared with the mut keyword. This means that the field can exhibit interior mutability.
 
 For example:
 ```jule
@@ -105,7 +105,7 @@ fn main() {
 
 In the example above, struct `Foo` has `n` fields which are interior mutable. Although the 'Print' method uses an immutable receiver, it can change the value of the 'n' field within itself, thanks to interior mutability.
 
-The method not only mutates its own instance, but also can mutate different instances defined in its algorithm, even if they are immutable. The same rule applies for different instances. This is supportive of internal data sharing.
+The method not only mutates its own instance, but also can mutate different instances defined in its algorithm, even if they are immutable. The same rule applies to different instances. This is supportive of internal data sharing.
 
 For example:
 ```jule
@@ -136,7 +136,7 @@ In the example above, the `Next` method of the `Fib` structure defines the immut
 
 ### Mutability Encapsulation
 
-In short, mutability encapsulation means hiding from mutability analysis and provide access to a structure field within the scope of interior immutability, regardless of whether it is mutable or immutable receiver.
+In short, mutability encapsulation means hiding from mutability analysis and providing access to a structure field within the scope of interior immutability, regardless of whether it is a mutable or an immutable receiver.
 
 In some cases, you may want to ensure mutability while preserving immutability. There may be various reasons for this, for example, you can provide the internal mutable buffer via an immutable copy. There may be a low-level intervention opportunity provided within the scope of unsafe in the interior of this structure.
 
@@ -174,9 +174,9 @@ fn main() {
 
 In the example above, the `Foo` structure has a field called `buf` which is within the scope of interior mutability. Additionally, the `Foo` structure provides the unsafe `Buf` method to enable low-level access to the internal buffer.
 
-Thus, for an algorithm that will only use the buffer for reading, there is no need to qualify the immutable `Foo` structure instance as mutable. Even with any immutable receiver this low level can be accessed and used for the relevant algorithms.
+Thus, for an algorithm that will only use the buffer for reading, there is no need to qualify the immutable `Foo` structure instance as mutable. Even with an immutable receiver, this low-level can be accessed and used for the relevant algorithms.
 
-Mutability encapsulation can be effective for purposes such as preventing all copies from being considered mutable for reasons such as methods that require sharing internal data in structures designed to be useable with immutable copies.
+Mutability encapsulation can be effective for purposes such as preventing all copies from being considered mutable for reasons such as methods that require sharing internal data in structures designed to be usable with immutable copies.
 
 ::: warning
 It is recommended that such functions be well documented.
@@ -184,7 +184,7 @@ It is recommended that such functions be well documented.
 
 ### Sharing Internal Data
 
-One of the most important areas of use of interior mutability is sharing internal data between instances. Copies can copy mutable data that is within the scope of interior mutability. This means that a mutable data sharing is possible for each copy.
+One of the most important areas of use of interior mutability is sharing internal data between instances. Copies can copy mutable data that is within the scope of interior mutability. This means that mutable data sharing is possible for each copy.
 
 For example:
 ```jule
@@ -203,26 +203,27 @@ The above code creates a new copy of `Foo` for the variable `foo2` using the `fo
 
 #### Rules of Sharing Mutable Data
 
-Within the scope of interior mutability, sharing mutable data between copies can offer many opportunities. But remember that this happens within the some rules:
-1. If the new copy is created in the methods of the structure that implements interior mutability, this copy is allowed under interior mutability no matter what.
+Within the scope of interior mutability, sharing mutable data between copies can offer many opportunities. But remember that this happens within the same rules:
+
+1. If the new copy is created in the methods of the structure that implements interior mutability, this copy is allowed under interior mutability, no matter what.
 2. If the field of ​​the structure within the scope of interior mutability is not an immutable type, that is, it does not pose a mutability risk, it does not prevent copying.
-3. If the structure has an interior mutable field while copying and this field has a mutable type, it is considered to be at mutbility risk.
+3. If the structure has an interior mutable field while copying, and this field has a mutable type, it is considered to be at mutability risk.
    - Your compiler won't complain if the 1. and 2. rules are met.
    - If the copy is made to an immutable memory, there is no risk.
    - If the copy is being created for mutable memory from immutable memory, there should be no access to that field. If the structure has an interior mutable field and there is access to this field within the scope of copying, after copying to a mutable memory, that copy may break the mutability by mutating the interior mutable field. This is not allowed.
 
-Under the rule 3, the reason why areas within the scope of interior mutability are recommended to be private is more clear. If the field is public, developers may experience problems when creating new copies when accessing from external packages. Having the structure field private supports easier copies in external packages and easier data sharing.
+Under Rule 3, the reason why areas within the scope of interior mutability are recommended to be private is clearer. If the field is public, developers may experience problems when creating new copies when accessing from external packages. Having the structure field private supports easier copies in external packages and easier data sharing.
 
 If you want mutable data to be shared between copies and want to make this data available, keep the data private and share it through methods with [Mutability Encapsulation](#mutability-encapsulation).
 
 ## Channels
 
-Whether a channel is mutable or immutable is not only related to whether the variable holding the channel is mutable or not. It also determines the mutability of the data that the channel will sent or deliver.
+Whether a channel is mutable or immutable is not only related to whether the variable holding the channel is mutable or not. It also determines the mutability of the data that the channel will receive or send.
 
 Regardless of whether a channel is immutable or mutable, it can send both immutable and mutable data. When data is received, if the channel is mutable, the data is received as mutable; if the channel is immutable, the data is received as immutable.
 
 If the channel is immutable but the received data is intended to be assigned to mutable memory, types that do not carry mutability risks (such as basic arithmetic types) support this, while types that carry mutability risks (such as slices or smart pointers) can only be stored in immutable memory.
 
 ::: tip
-If the variable storing the channel does not need to be mutable, and the channel will not send a mutable type or the sent data will not be used with mutability, it is recommended to store channel in an immutable variable.
+If the variable storing the channel does not need to be mutable, and the channel will not send a mutable type or the sent data will not be used with mutability, it is recommended to store the channel in an immutable variable.
 :::

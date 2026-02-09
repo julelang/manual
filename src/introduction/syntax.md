@@ -81,7 +81,7 @@ if (x == 10 ||
 
 ### Contiguous expressions
 
-Binary expressions try to check from the next line if they need an operand even without parentheses. Therefore, with correct use, you can proceed to the next lines with a binary expression. It is often considered a more readable approach than parentheses.
+Binary expressions try to check from the next line if they need an operand, even without parentheses. Therefore, with correct use, you can proceed to the next line with a binary expression. It is often considered a more readable approach than parentheses.
 
 For example:
 

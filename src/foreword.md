@@ -1,9 +1,9 @@
 # Foreword
-This manual is updated following the source code, according to the latest version of Jule. Some content may be not released yet, so it may be already documented here, but not yet available in the latest compiler release.
+This manual is updated following the source code, according to the latest version of Jule. Some content may not be released yet, so it may already be documented here, but not yet available in the latest compiler release.
 
 The explanations in this documentation assume that you already know programming. Therefore, everything is not explained from the very beginning. If you are completely new to programming, it may be better to learn programming from the most basic sources. If you already know programming, you can easily learn Jule with this documentation.
 
-With this manual, it is possible to improve your Jule knowledge, programming, and adopt your analytical skills to Jule.
+With this manual, it is possible to improve your Jule knowledge and programming, and apply your analytical skills to Jule.
 
 Dear Julenour, welcome to the Jule community!
 
@@ -11,7 +11,7 @@ Dear Julenour, welcome to the Jule community!
 
 This version of the text assumes you're using the latest version of the julec compiler (compiled from source).
 
-If you want to see the current manual version for the release, you can select the relevant version from the list below. But for this you will be redirected to the source code on GitHub and you will need to read the content from markdown.
+If you want to see the current manual version for the release, you can select the relevant version from the list below. But for this, you will be redirected to the source code on GitHub, and you will need to read the content from the markdown.
 
 List of manual version for each Jule releases:
 - [Jule 0.2.0](https://github.com/julelang/manual/tree/jule0.2.0/src)

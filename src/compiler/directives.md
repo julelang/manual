@@ -24,7 +24,7 @@ For example:
 
 ## Directive Expressions
 
-Some directives are evaluates the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return boolean. Expressions are only logical. So the variables you will use are boolean and the binary operations you can do are only logical and and logical or.
+Some directives evaluate the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return a boolean. Expressions are only logical. So the variables you will use are boolean, and the binary operations you can do are only logical and, and logical or.
 
 Your variables are set automatically by your compiler. The variables you can use are the same as in file annotation. They are variables that are also described in the [platform support](/compiler/platform-support) documentation.
 
@@ -34,7 +34,7 @@ Evaluation results in `false` on any syntax errors and empty expressions.
 
 ### Syntax
 
-The syntax is simple and easy to learn. The logical and operator is `&&` and the logical or operator is `||`. These are exactly the same as Jule. The precedence of these operators is also the same. First, the logical or (`||`) operator is evaluated, then the logical and (`&&`) operator is evaluated. You also have parentheses. The parentheses, of course, are evaluated first. In addition to these, logical not (`!`) operator is also available.
+The syntax is simple and easy to learn. The logical and operator is `&&` and the logical or operator is `||`. These are the same as Jule. The precedence of these operators is also the same. First, the logical or (`||`) operator is evaluated, then the logical and (`&&`) operator is evaluated. You also have parentheses. The parentheses, of course, are evaluated first. In addition to these, the logical not (`!`) operator is also available.
 
 ### Variables
 
@@ -68,7 +68,7 @@ Here is an example code via `build` directive:
 
 ## Directive: `pass`
 Directive pass is a top directive.
-Passes compiler flags to generated compile command for compiling source code. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals. Pass directives adds to command-lines after source files.
+Passes compiler flags to the generated compile command for compiling source code. Uses a string literal as an argument, but literals are not processed; it accepts it directly. So, you can't use escape sequences like original string literals. Pass directives add to command lines after source files.
 
 ::: info
 There are no issue if you are using same passes.
@@ -87,7 +87,6 @@ fn main() {
 ```
 
 The `#pass` directive treats its expression strictly as a single argument. This means that if you try to pass multiple arguments within a single directive, the compiler will not split them for you. For example, according to the case above, `#pass "-framework Foundation -framework Cocoa"` is **not** the same as using two separate directives. It will be passed to the back-end compiler as a single argument, which can lead to compilation issues.
-
 
 ## Directive: `build`
 

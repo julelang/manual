@@ -1,7 +1,7 @@
 # Async Runtime
 <div class="warning-badge">experimental</div>
 
-The async runtime is the core of Jule’s concurrency programming model. It is built directly into the language, meaning it is designed so that you can start writing asynchronous code without relying on any external libraries. Everything you need, including the scheduler, is provided by the Jule runtime.
+The async runtime is the core of Jule's concurrency programming model. It is built directly into the language, meaning it is designed so that you can start writing asynchronous code without relying on any external libraries. Everything you need, including the scheduler, is provided by the Jule runtime.
 
 ## async / await
 
@@ -33,7 +33,7 @@ Working with asynchronous functions is based on the following fundamental princi
 
 ## Using Async Runtime
 
-In the section above, one of the rules stated that async functions can only be called from another async function. This may raise the question: what should you do if your program’s `main` function is not `async`?
+In the section above, one of the rules stated that async functions can only be called from another async function. This may raise the question: what should you do if your program's `main` function is not `async`?
 
 By default, Jule has a synchronous `main` function. However, you can also define it as async. A `main` function defined as async is treated as a [coroutine](/concurrency/coroutines) at runtime.
 
@@ -57,7 +57,7 @@ When a coroutine is created, the scheduler automatically enqueues it and schedul
 
 ### Fairness
 
-The scheduler is cooperative, which means there is no preemption. As a result, long-running or CPU-bound tasks may cause starvation for other coroutines. To avoid this, it is the developer’s responsibility to yield at appropriate points.
+The scheduler is cooperative, which means there is no preemption. As a result, long-running or CPU-bound tasks may cause starvation for other coroutines. To avoid this, it is the developer's responsibility to yield at appropriate points.
 
 However, the scheduler follows a best-effort approach to provide fairness. The standard library works in integration with the scheduler and helps enforce and improve fairness guarantees.
 

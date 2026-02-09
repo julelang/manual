@@ -24,7 +24,7 @@ When a coroutine call is made, the arguments are stored in a heap-allocated area
 
 ## Suspension of Coroutines
 
-According to the principles of Jule’s async runtime, the root async function is always a coroutine. This means that an `async main` function is effectively equivalent to a coroutine created with `co`. At the lowest level of the program, the runtime scheduler is always present. When a coroutine is suspended, control returns to the scheduler that is executing it; in other words, the scheduler is the final return point of every `await` chain.
+According to the principles of Jule's async runtime, the root async function is always a coroutine. This means that an `async main` function is effectively equivalent to a coroutine created with `co`. At the lowest level of the program, the runtime scheduler is always present. When a coroutine is suspended, control returns to the scheduler that is executing it; in other words, the scheduler is the final return point of every `await` chain.
 
 However, in the Jule async runtime, each `await` only represents a *potential* suspension point. When an async function is called, its execution begins immediately. If no suspension occurs, the function continues executing in a synchronous manner.
 

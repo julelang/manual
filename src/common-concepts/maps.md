@@ -15,14 +15,14 @@ fn main() {
     println(mymap)
 }
 ```
-The example above shows how a map is defined and its data-type representation. To describe a map, curly braces are opened after the data type. Each key-value pair is separated by a comma. Keys and values are separated by colons, the key comes first, then the value.
+The example above shows how a map is defined and its data type representation. To describe a map, curly braces are opened after the data type. Each key-value pair is separated by a comma. Keys and values are separated by colons, the key comes first, then the value.
 ::: tip
 In iterations, the first variable is the key and the second variable is the value.
 :::
 
 ## Allocating Maps
 
-Slices may be allocated with the built-in `make` function. It returns an map instance with optional hint size. If only the map type is provided, it creates an empty default map instance. If the optional second parameter, the hint size, is provided, the map is created by considering the given size. The importance of this is to be prepared for future scenarios, for example, when a very large number of new entries will be added, the process can be made more efficient by reducing new and recurring allocations.
+Slices may be allocated with the built-in `make` function. It returns a map instance with an optional hint size. If only the map type is provided, it creates an empty default map instance. If the optional second parameter, the hint size, is provided, the map is created by considering the given size. The importance of this is to be prepared for future scenarios, for example, when a very large number of new entries will be added, the process can be made more efficient by reducing new and recurring allocations.
 
 The reason it is called hint size is that the map is not guaranteed to always be allocated according to the given size. The Jule runtime decides this, and the actual allocation might be for fewer or more entries.
 

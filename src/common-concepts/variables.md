@@ -1,7 +1,7 @@
 # Variables
 There is more than one way in Jule to define a variable. 
 
-Jule is uses the `let` and `const` keywords for variable declarations. Jule uses the `:` operator for type annotations. When you don't use `:` operator, you report you want the type to be detect automatically by compiler. The type is set by the compiler based on the data. Aka type inference.
+Jule uses the `let` and `const` keywords for variable declarations. Jule uses the `:` operator for type annotations. When you don't use the `:` operator, you report that you want the type to be detected automatically by the compiler. The type is set by the compiler based on the data. Aka type inference.
 
 For example:
 ```jule
@@ -91,9 +91,9 @@ See relevant [comptime documentations](/comptime/comptime-evaluation) for inform
 
 ## Shadowing
 
-In the basic sense, shadowing is when a definition with the same identifier shadows a define with the same identifier before it in scope. This is made possible by performing a new definition in subscopes of a scope with the name of a definition defined in that parent scope, or by using the identifier of a global definition in the main scope of a function.
+In the basic sense, shadowing is when a definition with the same identifier shadows a definition with the same identifier before it in scope. This is made possible by performing a new definition in subscopes of a scope with the name of a definition defined in that parent scope, or by using the identifier of a global definition in the main scope of a function.
 
-Shadowing can cause various developer errors and make reading code more complicated. Therefore, by default your compiler does not allow shadowing. However, you can enable this by passing the `--shadowing` option to your compiler.
+Shadowing can cause various developer errors and make reading code more complicated. Therefore, by default, your compiler does not allow shadowing. However, you can enable this by passing the `--shadowing` option to your compiler.
 
 ### What if Shadowing Enabled
 
@@ -111,16 +111,16 @@ fn main() {
 ```
 In the above example, the main scope of the function has a child scope. This scope has a variable with the same identifier as the variable `a` in the main scope. This variable replaces and shadows the parent scope's variable `a` in it and its child scopes.
 
-Can a definition in the same scope be shadowed, how does the compiler behave about it? Obviously, you can't. The compiler will never allow two identifiers in the same scope. Therefore, you cannot have definitions with the same identifier in the same scope.
+Can a definition in the same scope be shadowed? How does the compiler behave about it? Obviously, you can't. The compiler will never allow two identifiers in the same scope. Therefore, you cannot have definitions with the same identifier in the same scope.
 
 ## Multiple Assignment / Declaration
-You can multiple variable assignment or declaration. What? Sure, you can use two type in same statement. You know how to declare variable, okay it is same. The single difference, identifiers and expressions separate with comma.
+You can have multiple variable assignments or declarations. You can use two types in the same statement. You know how to declare a variable, okay, it is the same. The single difference, identifiers and expressions separate with comma.
 
 For example:
 ```jule
 let (x, y, z) = true, 1, -400
 ```
-Yes, there is we declare three new variable named as `x`, `y` and `z` with auto-type detection. Variable values are; `x` is `true`, `y` is `1` and `y` is `-400`. As you can see, the order in which the variable is defined is associated with the expression in the same order. Remember that, you can't use type annotation in this case.
+Yes, there is. We declare three new variables named `x`, `y ', and `z` with auto-type detection. Variable values are: `x` is `true`, `y` is `1`, and `y` is `-400`. As you can see, the order in which the variable is defined is associated with the expression in the same order. Remember that you can't use type annotation in this case.
 
 Use the `mut` keyword for mutable declaration.
 
@@ -130,14 +130,14 @@ let (mut x, y, mut z) = true, 1, -400
 ```
 The `x` and `z` variables are mutable.
 
-So how do we do the assignment thing?\
-We're essentially just removing the declaration things that indicates that the variable is a new variable. Actually, only the name of the variable needs to remain, remember value assignment statement.
+So, how do we do the assignment thing?\
+We're essentially just removing the declaration things that indicate that the variable is a new variable. Actually, only the name of the variable needs to remain; remember the value assignment statement.
 
 For example:
 ```jule
 x, y, z = true, 1, -400
 ```
-The logic remains the same. Let's not forget that these variables must already exist, of course, due to static type principles, the value you show to it must be compatible with the data type of the variable.
+The logic remains the same. Let's not forget that these variables must already exist. Of course, due to static type principles, the value you show to it must be compatible with the data type of the variable.
 
 ### Ignore Identifier
 
@@ -153,7 +153,7 @@ This way you ignore some values.
 
 ---
 
-Additionally, if you have a tuple expression and want to ignore all expressions with ignore identifier, you do not need to write ignore identifier for each expression individually. You can ignore the entire tuple expression by using a single ignore identifier.
+Additionally, if you have a tuple expression and want to ignore all expressions with an ignore identifier, you do not need to write ignore identifier for each expression individually. You can ignore the entire tuple expression by using a single ignore identifier.
 
 For example:
 ```jule
@@ -162,9 +162,9 @@ _ = a, b, c
 ```
 
 ### Assignment and Definition Simultaneously
-Script: You have multiple assignments, but some of your variables need to be defined for the first time while some of your variables are assigned.
+Script: You have multiple assignments, but some of your variables need to be defined for the first time, while some of your variables are assigned.
 
-Jule's approach in this regard is that both can occur simultaneously if certain rules are met. If you are using a variable defined in the same scope, the variable will not be evaluated according to the definition rules. This will not cause you to get an error about it. Your variable is handled according to the assignment rules. So the errors we can get will be typical assignment errors like mutability or type safety.
+Jule's approach in this regard is that both can occur simultaneously if certain rules are met. If you are using a variable defined in the same scope, the variable will not be evaluated according to the definition rules. This will not cause you to get an error about it. Your variable is handled according to the assignment rules. So the errors we can get will be typical assignment errors, like mutability or type safety.
 
 For example:
 ```jule
@@ -178,7 +178,7 @@ fn main() {
 ```
 In the example above, the variable `x` is set to mutable. Since it is again in a multiple assignment within the same scope, it is treated according to the assignment rules, not the rebuild rules. While assigning to the `x` variable, the `z` variable does not exist, so it is newly created.
 
-The point that should not be missed is that the relevant variable must be in exactly the same scope. If a variable from the global scope is used, it will not be considered as assignment. Likewise, if the variable comes from parent scopes, it is still not considered an assignment.
+The point that should not be missed is that the relevant variable must be in the same scope. If a variable from the global scope is used, it will not be considered an assignment. Likewise, if the variable comes from parent scopes, it is still not considered an assignment.
 
 For example:
 ```jule
@@ -193,9 +193,9 @@ fn main() {
     println(x) // 100
 }
 ```
-In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement. The above example cannot be done by default, this requires allowing shadowing.
+In the above example, the variable `x` is not considered an assignment because it comes from the parent scope. If you want to perform an assignment, you must use a clean assignment statement. The above example cannot be done by default; this requires allowing shadowing.
 
-Also if you want to perform an assignment, but not to a variable but to a pointer etc. You can do this.
+Also, if you want to perform an assignment, but not to a variable, but to a pointer, etc. You can do this.
 
 For example:
 ```jule
@@ -214,9 +214,9 @@ This can make the statement very complex and impair readability. For this reason
 
 Short declaration is a language feature that allows you to declare variables with a shorter and simpler syntax without using the `let` keyword.
 
-The syntax is almost the same as the `let` keyword and the same rules apply.
+The syntax is almost the same as the `let` keyword, and the same rules apply.
 
-The `:=` operator is used to define a short declaration statement. This operator means that it is a declarative assignment expression, not an assignment. That is, it is a semantic shortcut equivalent to `let (...) =` and and are handled in the same way.
+The `:=` operator is used to define a short declaration statement. This operator means that it is a declarative assignment expression, not an assignment. That is, it is a semantic shortcut equivalent to `let (...) =` and is handled in the same way.
 
 For example:
 ```jule
@@ -268,7 +268,7 @@ const e = 50
 
 ### Enumeration
 
-The enumeration automatically assigns constant values to variables. If a variable within the group does not have an initialization value, it is automatically assigned to enumerated value.
+The enumeration automatically assigns constant values to variables. If a variable within the group does not have an initialization value, it is automatically assigned to an enumerated value.
 
 The first constant variable in the group must be explicitly initialized. Its type and value will be copied to the following non-initialized variables accordingly. If any variable within the group has a type annotation, it must be explicitly initialized.
 
@@ -312,7 +312,7 @@ In the example above, the variable `a` is initialized with a value using the `io
 
 The `f` and `g` variables will be assigned the value `89` because the `e` variable is initialized with the value `89`. As explained, this ends the incremental enumeration, and since the `e` variable does not use the `iota` variable, the `f` and `g` variables will copy the value of `e` directly instead of being assigned an incremented value based on `e`.
 
-Note that incremental enumeration uses the same expression with latest `iota` value for the following members. So if you're expecting an increment of one, your expression needs to accommodate that. If you have an expression like binary shifting, the value may increase exponentially.
+Note that incremental enumeration uses the same expression with the latest `iota` value for the following members. So if you're expecting an increment of one, your expression needs to accommodate that. If you have an expression like binary shifting, the value may increase exponentially.
 
 For example:
 ```jule
@@ -323,4 +323,4 @@ const (
 	d
 )
 ```
-In the example above, the variable `a` is initialized with a value using the  `iota` variable. This value is result of a binary shifting. Following members use incremental enumeration and result will be changed by the `iota` variable value. As explained, the members will take the values `1`, `2`, `4`, and `8` because expression is applied for the each member with their `iota` value.
+In the example above, the variable `a` is initialized with a value using the  `iota` variable. This value is the result of a binary shift. Following members use incremental enumeration, and the result will be changed by the `iota` variable value. As explained, the members will take the values `1`, `2`, `4`, and `8` because the expression is applied for each member with their `iota` value.

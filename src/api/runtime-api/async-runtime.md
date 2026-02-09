@@ -25,7 +25,7 @@ __jule_Async<__jule_Int> mydiv(__jule_Int x, __jule_Int y) {
 	__jule_AsyncRet x + y;
 }
 ```
-Alright, this is not a real "async" example, but it is sufficient to understand the concept. This is the code for a simple division function that checks for division by zero. As shown, `__jule_AsyncAwait` is used to wait for the async `checkdiv` function, which is equivalent to the Jule's `await` keyword. Both functions use `__jule_AsyncRet`. Although `checkdiv` does not actually return a value, you might think this is optional, but it is in fact mandatory.
+Alright, this is not a real "async" example, but it is sufficient to understand the concept. This is the code for a simple division function that checks for division by zero. As shown, `__jule_AsyncAwait` is used to wait for the async `checkdiv` function, which is equivalent to Jule's `await` keyword. Both functions use `__jule_AsyncRet`. Although `checkdiv` does not actually return a value, you might think this is optional, but it is in fact mandatory.
 
 For C++ interoperability, Jule async functions are lowered to C++20 coroutines at the code-generation level. As a result, the generated C++ code relies on standard coroutine state machinery.
 

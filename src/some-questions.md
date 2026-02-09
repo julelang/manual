@@ -63,9 +63,9 @@ Only two languages: Go and Rust. Mostly Go.
 
 ### Why does Jule use exceptionals instead of other error handling methods?
 
-Exceptional handling is considered to be more efficient and safer in using an alternative value or handling exceptional and returning in elegant.
+Exceptional handling is considered to be more efficient and safer in using an alternative value or handling exceptional cases and returning elegantly.
 
-Exceptionals were evaluated as more suitable in terms of readability and safety. Optional types can be checked at any time. Exceptionals are particularly useful for error handling and can be used somewhat like optionals. It is required to be checked by the developer and this must be done instantly, that is, the check is not postponed, unlike optional types.
+Exceptionals were evaluated as more suitable in terms of readability and safety. Optional types can be checked at any time. Exceptionals are particularly useful for error handling and can be used somewhat like optionals. It is required to be checked by the developer, and this must be done instantly; that is, the check is not postponed, unlike optional types.
 
 Exceptionals are typically similar to Go's `error` returns. However, in Go, error returns can be easily ignored, and it is easy to forget this because it is necessary to know the return type to understand that the ignored return is an error. Although this is especially true for functions that do not return errors and always return a nil error because they implement an interface, such as `strings.Builder`, the relevant function may return an error in future implementations. Ignoring this may cause various problems when switching between versions. This is also an uncertainty for new contributors until they look at the documentation.
 
@@ -87,7 +87,7 @@ Calls to exceptional functions must always form the entire expression. They cann
 
 #### Simplicity
 
-Allowing exceptional calls without restrictions opens the door to having overly complex expressions. Honestly, we want to ensure that exceptional functions are only used in specific ways, as this is one of the most straightforward ways to keep error handling understandable and simple. Therefore, exceptional functions are only permitted under certain conditions, such as being used as a return expression, as a standalone call, as an assignment, or as part of an use statement.
+Allowing exceptional calls without restrictions opens the door to having overly complex expressions. Honestly, we want to ensure that exceptional functions are only used in specific ways, as this is one of the most straightforward ways to keep error handling understandable and simple. Therefore, exceptional functions are only permitted under certain conditions, such as being used as a return expression, as a standalone call, as an assignment, or as part of a use statement.
 
 For example:
 
@@ -142,31 +142,31 @@ Calls to exceptional functions must be handled immediately. As a result, the com
 
 ### Will Jule always use C++ as backend?
 
-It's hard to say anything about this. The C++ backend allows Jule to support many different features. For example, using Clang for LLVM backend. In this case, it is debatable what benefits would be gained from creating a custom LLVM backend.
+It's hard to say anything about this. The C++ backend allows Jule to support many different features. For example, using Clang for the LLVM backend. In this case, it is debatable what benefits would be gained from creating a custom LLVM backend.
 
-Native backend may be an exception. Native backend can be added for supported platforms. However, since Jule aims to be fast, the native backend must be well optimized and creating a good enough native backend requires a lot of time and knowledge.
+Native backend may be an exception. Native backend can be added for supported platforms. However, since Jule aims to be fast, the native backend must be well optimized, and creating a good enough native backend requires a lot of time and knowledge.
 
 Only time can give a definitive answer to this question.
 
 ### Why does not Jule have built-in methods?
 
-Jule has built-in functions for some critical operations such as memory allocation, but not built-in methods because those are generally considered a bad design choice. Having methods for built-in types is vague and resembles functional programming and Jule is not a functional language.
+Jule has built-in functions for some critical operations, such as memory allocation, but not built-in methods because those are generally considered a bad design choice. Having methods for built-in types is vague and resembles functional programming, and Jule is not a functional language.
 
-Some languages do this plausibly. For example, C# has methods of type `string`, but these are not built-in. They are actually an alias for `System.String` and are an implemented class. So the algorithm is truly reviewable, there is no runtime algorithm provided by the compiler in the background.
+Some languages do this plausibly. For example, C# has methods of type `string`, but these are not built-in. They are actually an alias for `System.String` and are an implemented class. So the algorithm is truly reviewable; there is no runtime algorithm provided by the compiler in the background.
 
-Jule is not like C#, `str` is just a type, not an alias for a different implementation. In this case, the `myStr.bytes()` method or something similar that will be added to it is a method implemented in the background.
+Jule is not like C#; `str` is just a type, not an alias for a different implementation. In this case, the `myStr.bytes()` method or something similar that will be added to it is a method implemented in the background.
 
-We think it is more reasonable to do this by casting instead of doing it this way, for example: `[]byte("hello")`. The standard library `std/strings` package designed for the remaining common algorithms. This is exactly what many other languages do, see: Go, Nim, or Odin.
+We think it is more reasonable to do this by casting instead of doing it this way, for example: `[]byte("hello")`. The standard library `std/strings` package is designed for the remaining common algorithms. This is exactly what many other languages do, see: Go, Nim, or Odin.
 
 ### Why are null values allowed?
 
-In most cases it is similar to optional types, but requires trust that the developer will be careful enough. Check before use. Go, which Jule is heavily inspired by, also allows null values, and frankly, it doesn't feel bad in terms of experience.
+In most cases, it is similar to optional types, but requires trust that the developer will be careful enough. Check before use. Go, which Jule is heavily inspired by, also allows null values, and frankly, it doesn't feel bad in terms of experience.
 
 If you prefer optional types, take a look at Jule's exceptionals.
 
-Besides these, null values are a fundamental mechanism for Jule. For example, it is guaranteed that every memory area will be automatically initialized, including pointers and some other types. Jule has two types of pointers: smart pointers and raw pointers. By default, there must be a value that can be assigned to them, and the most logical option for this is a null value. Using an optional or maybe monad even for pointers would make things unnecessarily more complex. Moreover, these types are quite common in Jule, especially since the standard library frequently uses smart pointers.
+Besides these, null values are a fundamental mechanism for Jule. For example, it is guaranteed that every memory area will be automatically initialized, including pointers and some other types. Jule has two types of pointers: smart pointers and raw pointers. By default, there must be a value that can be assigned to them, and the most logical option for this is a null value. Using an optional or maybe monad, even for pointers, would make things unnecessarily more complex. Moreover, these types are quite common in Jule, especially since the standard library frequently uses smart pointers.
 
-In the interoperability side, null values clearly support flexibility in C/C++ interoperability in a positive way and make it significantly easier.
+On the interoperability side, null values clearly support flexibility in C/C++ interoperability in a positive way and make it significantly easier.
 
 ### Why is shadowing allowed for global scope?
 
@@ -181,8 +181,9 @@ In our opinion, adding function overloading will make the language more complex 
 
 ### Will different memory management methods be added?
 
-Not plannded but may be.
-Jule supports smart pointers and they are suitable for many different memory management methods such as Tracing GC or even ownership.
+Not planned, but may be.
+
+Jule supports smart pointers, and they are suitable for many different memory management methods, such as Tracing GC or even ownership.
 
 ### Will runtime reflection be added?
 
@@ -194,13 +195,13 @@ Jule aims to be memory efficient. Runtime reflection can make this significantly
 
 ### Why does Jule have its own compiler optimizations?
 
-It must. Jule aims to be fast and efficient. It provides an infrastructure to optimize the code in the future when different backends are supported such as native. But that's not the only reason, even if Jule always uses C++ as a backend, it inevitably needs an optimizing compiler.
+It must. Jule aims to be fast and efficient. It provides an infrastructure to optimize the code in the future when different backends are supported, such as native. But that's not the only reason, even if Jule always uses C++ as a backend, it inevitably needs an optimizing compiler.
 
-Jule can't achieve its performance goals by relying on a backend compiler alone. Obviously, the most languages can't achieve this if they are using a language as backend. Yes, advanced and mature backend compilers like Clang are very good at optimizing C++ code, but that's exactly the problem: they optimize **C++** code, not **Jule** code.
+Jule can't achieve its performance goals by relying on a backend compiler alone. Obviously, most languages can't achieve this if they are using a language as a backend. Yes, advanced and mature backend compilers like Clang are very good at optimizing C++ code, but that's exactly the problem: they optimize **C++** code, not **Jule** code.
 
-Languages using another language as a backend often have different design ideas than their backends. Although compiler tries to create code that is as efficient as possible, it is not possible to create code that is good enough for the backend compiler without additional optimizations.
+Languages using another language as a backend often have different design ideas than their backends. Although the compiler tries to create code that is as efficient as possible, it is not possible to create code that is good enough for the backend compiler without additional optimizations.
 
-In short, the backend compiler may be good at optimizing the code it generates, but it won't do it knowing it's Jule code, it will do it for the language used as the backend language. In this case, some problems arise; Behaviors that are possible to optimize for Jule may not be possible for that language.
+In short, the backend compiler may be good at optimizing the code it generates, but it won't do it knowing it's Jule code; it will do it for the language used as the backend language. In this case, some problems arise; Behaviors that are possible to optimize for Jule may not be possible for that language.
 
 Let's take a closer look at this with some Jule code:
 
@@ -211,7 +212,7 @@ for i in arr {
 }
 ```
 
-There is a simple iteration in the simple code above. Typically, Jule needs to check that the `i` variable is within the boundary to ensure safety. However, with a simple inference, it can be understood that the variable `i` is always within the boundary. This type of checks can lead to a significant performance loss, especially in very large iterations and similar situations. If Jule wasn't optimizing this and bypassing safety checks, would the backend compiler optimize this?
+There is a simple iteration in the simple code above. Typically, Jule needs to check that the `i` variable is within the boundary to ensure safety. However, with a simple inference, it can be understood that the variable `i` is always within the boundary. This type of check can lead to a significant performance loss, especially in very large iterations and similar situations. If Jule wasn't optimizing this and bypassing safety checks, would the backend compiler optimize this?
 
 Let's look at a different, more complex example:
 
@@ -240,10 +241,10 @@ fn Exist(s: str, c: any): bool {
 The above Jule code could probably be considered bad practice in most cases, but it's not bad to discuss. Assuming the Jule compiler has all its optimizations turned on. For the code above, Jule applies some optimizations. These optimizations are aimed at reducing memory usage and improving performance.
 
 Some optimizations are (based on Jule 0.0.15):
-- Iteration obviously requires converting the string variable `s` into a rune slice. But Jule prevents this. There is no need to create a new allocation for runes and deallocate it after iteration. May be the entire slice won't even be handled in the iteration. So instead of actually doing a `[]rune` conversion in the background, Jule iterates through the string's runes as needed. This eliminates memory allocation and means it will process the required rune at each iteration step.
-- It is often not possible to know at compile time what type of data the `any` type stores. Therefore, it requires type checking at run time for operations such as casting. But there are some ways to know. In the example code, the algorithm already checks the type and then performs a casting. In this case there is no need to do type checking for casting. This is a different little optimization.
+- Iteration obviously requires converting the string variable `s` into a rune slice. But Jule prevents this. There is no need to create a new allocation for runes and deallocate it after iteration. Maybe the entire slice won't even be handled in the iteration. So instead of actually doing a `[]rune` conversion in the background, Jule iterates through the string's runes as needed. This eliminates memory allocation and means it will process the required rune at each iteration step.
+- It is often not possible to know at compile time what type of data the `any` type stores. Therefore, it requires type checking at run time for operations such as casting. But there are some ways to know. In the example code, the algorithm already checks the type and then performs a casting. In this case, there is no need to do type checking for casting. This is a different little optimization.
 
-The above two optimizations are also possible to be done by the Jule compiler. The Jule compiler has mastered understanding Jule, and that is undoubtedly its job. Of course the backend compiler cannot do this because it is not optimized for Jule like the Jule compiler and cannot think in terms of Jule at compile time. In this case it is not possible to have the optimizations applied.
+The above two optimizations are also possible to be done by the Jule compiler. The Jule compiler has mastered understanding Jule, and that is undoubtedly its job. Of course, the backend compiler cannot do this because it is not optimized for Jule like the Jule compiler and cannot think in terms of Jule at compile time. In this case, it is not possible to have the optimizations applied.
 
 ### Does Jule have a runtime?
 
@@ -255,13 +256,13 @@ If you want to know more about this package, read the [Runtime](/runtime/) secti
 
 In languages like Go, the developer provides the name of the receiver parameter. This can sometimes lead to writing shorter code with shorter names. Consistent naming is the developer's own effort. A simple renaming can be painful when applied to every method, especially in large structs.
 
-For reasons like these, Jule chose the `self` keyword to eliminate developer thinking cost for receiver name and always ensure a consistent receiver parameter name. This is also useful to keep the receiver parameter declaration shorter and gain some syntactical possibilities.
+For reasons like these, Jule chose the `self` keyword to eliminate developer thinking cost for the receiver name and always ensure a consistent receiver parameter name. This is also useful to keep the receiver parameter declaration shorter and gain some syntactical possibilities.
 
 ### Why are some packages in the standard library adopted from Go?
 
 Due to Jule being largely influenced by Go, many Go codes can be easily adapted to Jule. Go and Jule share very similar semantics. Implementing existing code is not too difficult.
 
-That is, time cost. Designing and developing well-implemented algorithms takes time. Go has enough well-implemented algorithms, so it makes sense to adopt them. Not all packages were adopted from Go, just specific ones that play well with Jule. Many algorithms are implemented from scratch for Jule.
+That is, the time cost. Designing and developing well-implemented algorithms takes time. Go has enough well-implemented algorithms, so it makes sense to adopt them. Not all packages were adopted from Go, just specific ones that play well with Jule. Many algorithms are implemented from scratch for Jule.
 
 ### Why were default field values removed?
 
@@ -284,7 +285,7 @@ Compiler can handle it instead of developer.
 
 Because of safety. Jule doesn't have certain things to avoid adding too much responsibility to the runtime. One of these is to decide which variable in your runtime will be moved to the heap or not.
 
-For example, let's say a closure accesses variables within its scope by reference. If closure's lifetime is ended before the scope in which it is defined, it is safe. However, if the closure lives longer, a special runtime must be relied upon. However, if the shutdown takes longer, a special operating time must be relied upon. Because figuring out at compile time whether the closure will last longer may be completely impossible/require too much static analysis or involve adding significant complexity to the language. Therefore, there must be a runtime trust in the background.
+For example, let's say a closure accesses variables within its scope by reference. If the closure's lifetime ends before the scope in which it is defined, it is safe. However, if the closure lives longer, a special runtime must be relied upon. However, if the shutdown takes longer, a special operating time must be relied upon. Because figuring out at compile time whether the closure will last longer may be completely impossible/require too much static analysis, or involve adding significant complexity to the language. Therefore, there must be a runtime trust in the background.
 
 To prevent these problems, Jule captures all variables by copying instead of references. However, capturing with references may be possible if you know what you are doing. Jule has reference variables. For safety reasons, they cannot be used with Safe Jule from within the closure, but they can eliminate the need to capture by reference.
 
@@ -312,7 +313,7 @@ When adding short literals to the language, the way to support readability as mu
 
 ### Why mutability is not handled automatically for parameters of short function literals?
 
-Due to Jule's immutable-by-default approach, this had to be the case. Developers should explicitly specify what needs to be mutable. However, this is not only a design choice based on principles but also to preserve the flexibility provided to developers and to prevent unnecessary mutability.
+Due to Jule's immutable-by-default approach, this had to be the case. Developers should explicitly specify what needs to be mutable. However, this is not only a design choice based on principles, but also to preserve the flexibility provided to developers and to prevent unnecessary mutability.
 
 If a function type defines mutable parameters, developers can still use immutable parameters if they want. Jule allows this. To preserve this, developers are allowed to have their own preferences regarding mutability.
 

@@ -4,7 +4,7 @@ On Windows, shared libraries are used as DLL files. To dynamically load and acce
 
 ## Using Pure Jule
 
-The [`std/sys`](/std/sys) package provides API for loading DLL files. The `LoadDLL` function loads DLL, it is an exceptional function. For the global scope, you can use the `MustLoadDLL` function, which is non-exceptional function, it panics when any error appeared.
+The [`std/sys`](/std/sys) package provides an API for loading DLL files. The `LoadDLL` function loads DLL, it is an exceptional function. For the global scope, you can use the `MustLoadDLL` function, which is a non-exceptional function; it panics when any error appears.
 
 To access any proc, you can use the DLL object returned from the `LoadDLL` or `MustLoadDLL` function. The `FindProc` method searches for the proc and returns it. Since this is an exceptional-function, you may need to use the `MustFindProc` method for the global scope, like `MustLoadDLL`.
 
@@ -30,9 +30,9 @@ fn main() {
 ```
 In the example above, the `ExitProcess` and `GetmoduleFileNameA` functions are linked from `kernel32.dll`, which is dynamically linked with the `MustLoadDLL` function. Too call linked DLL procs, the `Addrcall` function is used.
 
-Addrcalls are flexible and sign-free low-level abstractions for address-based function calls. But they are may be complex or not easy-to-use enough, to support maintainability and type safety, wrapper functions are recommended.
+Addrcalls are flexible and sign-free low-level abstractions for address-based function calls. But they may be complex or not easy-to-use enough to support maintainability and type safety, wrapper functions are recommended.
 
-Just wrap relevant addrcall with the Jule function. Make code more maintainable, easy-to-use and type-safe.
+Just wrap the relevant addrcall with the Jule function. Make code more maintainable, easy-to-use, and type-safe.
 
 For example:
 ```jule
@@ -60,7 +60,7 @@ fn main() {
 	println(str(path[:r]))
 }
 ```
-In the example above, the `ExitProcess` and `GetModuleFileName` functions are wrappers for the corresponding DLL procs. No need to update all calls for any change, just update the wrapper. Jule's compiler will check type-safety for you. Basically, low-level addrcalls becomes more safe and reliable in this approach. **Highly recommended**.
+In the example above, the `ExitProcess` and `GetModuleFileName` functions are wrappers for the corresponding DLL procs. No need to update all calls for any change, just update the wrapper. Jule's compiler will check type-safety for you. Basically, low-level addrcalls become safer and more reliable in this approach. **Highly recommended**.
 
 ## Using C/C++
 

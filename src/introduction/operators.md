@@ -30,9 +30,9 @@ For other binary operators, the operand types must be identical unless the opera
 
 Untyped boolean, numeric, and string constants may be used as operands wherever it is legal to use an operand of boolean, numeric, or string type, respectively.
 
-A constant comparison always yields an untyped boolean constant. If the left operand of a constant shift expression is an untyped constant, the result is an integer constant; otherwise it is a constant of the same type as the left operand, which must be of integer type.
+A constant comparison always yields an untyped boolean constant. If the left operand of a constant shift expression is an untyped constant, the result is an integer constant; otherwise, it is a constant of the same type as the left operand, which must be of integer type.
 
-Any other operation on untyped constants results in an untyped constant of the same kind; that is, a boolean, integer, floating-point, or string constant. If the untyped operands of a binary operation (other than a shift) are of different kinds, the result is of the operand's kind that appears later in this list: integer, rune, floating-point. For example, an untyped integer constant divided by an untyped floating-point constant yields an untyped floating-point constant.
+Any other operation on untyped constants results in an untyped constant of the same kind; that is, a boolean, integer, floating-point, or string constant. If the untyped operands of a binary operation (other than a shift) are of different kinds, the result is of the operand's kind that appears later in this list: integer, rune, or floating-point. For example, an untyped integer constant divided by an untyped floating-point constant yields an untyped floating-point constant.
 
 Except for shift operations, if one operand is an untyped constant and the other operand is not, the constant is implicitly converted to the type of the other operand.
 

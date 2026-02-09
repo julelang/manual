@@ -1,7 +1,7 @@
 # Raw Pointers
 Each location at memory have an address. These addresses points to location at memory. Pointers (aka raw pointers) are variables can store this memory addresses.
 
-To declare a pointer data-type, use `*` operator.
+To declare a pointer data type, use `*` operator.
 
 For example:
 ```jule
@@ -73,9 +73,9 @@ fn main() {
 ```
 
 ## Unsafe Pointers
-Developers who have previously worked with programming languages such as C and C++ are probably familiar with void pointers. Jule has void pointers. To obtain a void pointer, an unsafe pointer is used. Unsafe pointers can receive assignments from any pointer type. It is general purpose. Unsafe pointer is not an explicit pointer, it cannot be used with postfix and cannot be dereference.
+Developers who have previously worked with programming languages such as C and C++ are probably familiar with void pointers. Jule has void pointers. To obtain a void pointer, an unsafe pointer is used. Unsafe pointers can receive assignments from any pointer type. It is general-purpose. An unsafe pointer is not an explicit pointer; it cannot be used with postfix and cannot be dereferenced.
 
-These pointers are known as unsafe pointers in Jule because they are actually more unsafe than regular pointers. This is mainly because they are not a pointer to a data type. It is assumed that they simply point to a memory location. Therefore, there is no guarantee that it is correct, even if cast to a datatype pointer. The developer must know the data type at the pointed address. Unsafe pointers are not helpful in this regard.
+These pointers are known as unsafe pointers in Jule because they are actually more unsafe than regular pointers. This is mainly because they are not pointers to a data type. It is assumed that they simply point to a memory location. Therefore, there is no guarantee that it is correct, even if cast to a datatype pointer. The developer must know the data type at the pointed address. Unsafe pointers are not helpful in this regard.
 
 For example:
 ```jule

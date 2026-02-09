@@ -3,7 +3,7 @@ Generic programming is an approach that offers instantiation for more than one t
 
 If you don't use a generic function at all, you'll only get AST generation errors and will not be included in compilation like other unused definitions.
 
-There are no restrictions; variadic parameters or recursive calls. It behaves like a normal function.
+There are no restrictions on variadic parameters or recursive calls. It behaves like a normal function.
 
 ::: tip
 Generic types are also assumed to be local in-scope type aliases. Therefore, they can be used for type annotation in variable and similar definitions in scope.
@@ -13,15 +13,15 @@ Generics are never supports shadowing.
 :::
 
 ## Runtime Cost of Generics
-Short answer: Generics hasn't any cost for runtime.
+Short answer: Generics have no cost for runtime.
 
-The cost of generics is that they typically add potentially additional time to compile times. When generics are evaluated as compile-time, there may be a cost, but the same is not true for runtime. Jule's generics cost nothing to runtime, you have no losses.
+The cost of generics is that they typically add additional time to compile times. When generics are evaluated at compile-time, there may be a cost, but the same is not true for runtime. Jule's generics cost nothing at runtime; you have no losses.
 
-The generated code is created specifically for each generic combination, and each combination uses its own unique algorithms. There is no difference in runtime. Each generic type is determined at compile time and is compiled accordingly preserving the static type. So even if you use generic types at runtime, you get the performance of no-generic definitions at no cost. 
+The generated code is created specifically for each generic combination, and each combination uses its own unique algorithms. There is no difference in runtime. Each generic type is determined at compile time and is compiled accordingly, preserving the static type. So even if you use generic types at runtime, you get the performance of no-generic definitions at no cost. 
 
 ## Generics for Functions
 ::: warning
-Genericed functions never can used as type annotation.
+Generic functions never can used as type annotation.
 :::
 ```jule
 fn sum[T](a: T, b: T) T {
@@ -46,7 +46,7 @@ fn exampleFunc[T1, T2](a: T1, b: T2) {}
 
 ### Using Generic Functions as Anonymous Function
 
-To use genericed functions as anonymous function, you should instantiate. Since instantiated genericed functions have an implemented algorithm for relevant types, you can use them like anonymous functions.
+To use generic functions as an anonymous function, you should instantiate. Since instantiated generic functions have an implemented algorithm for relevant types, you can use them like anonymous functions.
 
 For example:
 ```jule
@@ -73,7 +73,7 @@ struct Position[T] {
 }
 ```
 
-### Genericed Structure Type Representation
+### Generic Structure Type Representation
 Generic types must also be specified to specify an instance of a specific type of the position structure. Doing this is like calling a function.
 
 For example:
@@ -83,7 +83,7 @@ let pos: Position[int]
 
 ## Generics for Strict Type Aliases
 
-Strict type aliases support generics. There is no additional syntax to use it. Combine only what you know with the strict type declaration declaration.
+Strict type aliases support generics. There is no additional syntax to use it. Combine only what you know with the strict type declaration.
 
 For example:
 ```jule
@@ -112,4 +112,4 @@ fn main() {
     printMap(myMap)
 }
 ```
-Dynamic generic annotation is used in the above example. Generic types are automatically detected from the data type of argument by compiler.
+Dynamic generic annotation is used in the above example. Generic types are automatically detected from the data type of the argument by the compiler.

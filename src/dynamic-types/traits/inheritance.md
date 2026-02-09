@@ -1,6 +1,6 @@
 # Inheritance
 
-Traits that exhibit the same common behavior can inherit other traits that characterize the same common behavior. Inherited traits must have the same definitions for the same identifiers, any mismatches will prevent inheritance.
+Traits that exhibit the same common behavior can inherit other traits that characterize the same common behavior. Inherited traits must have the same definitions for the same identifiers; any mismatches will prevent inheritance.
 
 To inherit a trait, type the trait you want to inherit when defining a trait.
 

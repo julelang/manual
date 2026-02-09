@@ -18,7 +18,7 @@ As seen in the example above, there is an enum definition. Enum types default to
 
 ## Value Assignments
 
-The value assignments are based on previous field. The first element is assigned to zero by default. If you give an expression to a field, the next field is uses your expression after increased once.
+The value assignments are based on the previous field. The first element is assigned to zero by default. If you give an expression to a field, the next field uses your expression after increased once.
 
 For example:
 ```jule
@@ -66,9 +66,9 @@ You can use only signed/unsigned integer or str data types.
 ## Default Values
 Enums should always define a default value for safety reasons. This default value is the first field of the enum. The first field always represents the default value, and your compiler will initialize an enum type with its default value when necessary.
 
-The first member of an enum with no custom expression is always have a default value, unlike enumeration of grouped variables. If you are using a numeric type, this default value is `iota`. If you are using a string, the default value will be directly the same as the identifier of the first field. Other fields will evaluated based on the first member's expressions, following the explained behavior in the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section.
+The first member of an enum with no custom expression always has a default value, unlike the enumeration of grouped variables. If you are using a numeric type, this default value is `iota`. If you are using a string, the default value will be the same as the identifier of the first field. Other fields will be evaluated based on the first member's expressions, following the explained behavior in the [Grouped Variables and Enumeration](/common-concepts/variables#grouped-variables-and-enumeration) section.
 
-Your compiler does not automatically define the default field. Therefore, every time you define an enum, it must have at least one field and this field will be used as the default field.
+Your compiler does not automatically define the default field. Therefore, every time you define an enum, it must have at least one field, and this field will be used as the default field.
 
 ## Casting
 You may want to cast your enum for various reasons. Normal casting rules apply here. When casting an enum value, it is based on the enum value type. This means you can cast to all types supported by the base type. 
@@ -85,7 +85,7 @@ fn main() {
 ```
 
 ## Type Safety
-Enums consider themselves a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments and comparisons should always be of their own type.
+Enums are considered a data type. Therefore, even an enum with an int data type cannot be handled directly with an int data type. Enum type only considers itself as a valid type. Assignments and comparisons should always be of their own type.
 
 ### Maps
 

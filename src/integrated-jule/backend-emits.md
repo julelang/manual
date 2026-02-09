@@ -2,14 +2,14 @@
 
 Your compiler allows you to emit backend code wherever you want. Integrated Jule should be used for this. The `std/integ` standard library included in Jule provides you with useful tools and functionalities for Integrated Jule. The `Emit` function in the library allows you to emit backend code with Unsafe Jule.
 
-When working with Integrated Jule, sometimes using use declarations and linking definitions may not be useful, or you may want to write as much Jule code as possible, in which case emitting backend code with the `Emit` function can help you.
+When working with Integrated Jule, sometimes using declarations and linking definitions may not be useful, or you may want to write as much Jule code as possible, in which case emitting backend code with the `Emit` function can help you.
 
 ::: danger
-This is not a recommended way to use C++ code in Jule. For more safe approach, see the [wrappers](/integrated-jule/interoperability/jule-wrappers). This is just might be useful for a minimal use cases, but mid/large scale C++ codes should be use wrappers for safety and maintainability.
+This is not a recommended way to use C++ code in Jule. For a safer approach, see the [wrappers](/integrated-jule/interoperability/jule-wrappers). This might be useful for minimal use cases, but mid/large-scale C++ codes should use wrappers for safety and maintainability.
 
-- Your error messages might be confusing for your emitted C++ code. For example, the line numbers of the error messages cannot be predictable since the emitted code placed in the IR.
+- Your error messages might be confusing for your emitted C++ code. For example, the line numbers of the error messages cannot be predictable since the emitted code is placed in the IR.
 - Hard to maintain and investigate emitted C++ code in the IR. You cannot predict the output of the code completely and where the emitted code be placed in the IR. Your emitted C++ code may unexpectedly mix with the Jule.
-- You will lost tools, editor/IDE support and other things for your C++ code. This means you will no longer have static analysis, code completion and others. Using separate C++ source files can still provide editor and tool support, which is more safe and maintainable.
+- You will lose tools, editor/IDE support, and other things for your C++ code. This means you will no longer have static analysis, code completion, and others. Using separate C++ source files can still provide editor and tool support, which is safer and more maintainable.
 :::
 
 ## Emit Backend Code
@@ -46,9 +46,9 @@ fn main() {
 
 ## Emit from Jule Source Code
 
-You may also want to use the variables or types you wrote in the Jule code in the emit. In this context, pass what you want by using the variadic parameter. In such a case your code will be assumed to be a format, the same formatting rules provided by standard [`std/fmt`](/std/fmt) library will apply.
+You may also want to use the variables or types you wrote in the Jule code in the emit. In this context, pass what you want by using the variadic parameter. In such a case, your code will be assumed to be a format; the same formatting rules provided by the standard [`std/fmt`](/std/fmt) library will apply.
 
-The arguments you pass are evaluated by your compiler as they are in the backend, and placed in your emit code.
+The arguments you pass are evaluated by your compiler as they are in the backend, and placed in your emitted code.
 
 For example:
 ```jule

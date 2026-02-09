@@ -1,8 +1,8 @@
 # Cross Compilation
 
-Cross compilation allows you to compile your Jule code for different platforms. For example, you have ARM64 architecture and macOS, you can target Windows and AMD64 architecture on this system.
+Cross compilation allows you to compile your Jule code for different platforms. For example, if you have ARM64 architecture and macOS, you can target Windows and AMD64 architecture on this system.
 
-To do this, you need to specifically specify the target platform in your compiler's build command. You can do this with passing the ``--target`` option to compile. Your target notation should be in a special binary format.
+To do this, you need to specifically specify the target platform in your compiler's build command. You can do this by passing the ``--target`` option to compile. Your target notation should be in a special binary format.
 This format is: ``<os>-<arch>``.
 
 But what if you want to use your OS as your current OS and only change your target architecture?

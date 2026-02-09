@@ -35,7 +35,7 @@ In the example above, the variable `x` is defined with the `String` type and ini
 
 #### Untyped Integers
 
-Integers constants represent exact values of arbitrary precision and do not overflow. Integer literals are handled at compile time using the `Int` structure provided by the `std/math/big` package. As long as they remain untyped, they can represent arbitrarily big numbers. However, when they need to be used with a specific type, they must fit within the limits of that type.
+Integer constants represent exact values of arbitrary precision and do not overflow. Integer literals are handled at compile time using the `Int` structure provided by the `std/math/big` package. As long as they remain untyped, they can represent arbitrarily big numbers. However, when they need to be used with a specific type, they must fit within the limits of that type.
 
 An untyped integer literal can be stored as untyped in an untyped constant variable. However, in cases where it needs to be treated as a typed value while still being untyped, it will always attempt to default to the `int` type. If the untyped value overflows the `int`, this will result in a compiler error.
 
@@ -57,7 +57,7 @@ Arbitrary big literals are not technically unlimited. They are constrained to en
 
 Casting is handled differently for untyped and typed constants.
 
-If an untyped constant is cast, it will no longer remain untyped and will instead adopt the cast type. If the untyped value overflows the cast type, this will result in a compiler error. An untyped value must always be compatible with the cast type. When untyped integers are cast to floating-point types, the `Int` type (provided by `std/math/big`) uses its `F64` method and accuracy always should be `Exact`. For the `f32` type, first, it is cast to the `f64` type in the same way and then cast to the `f32` type. If the cast results in NaN or ±Inf, the `f64` value must also be NaN or ±Inf; otherwise, the casting will result in a compilation error. Otherwise, the result of the casting is not expected to be the same and may be rounded.
+If an untyped constant is cast, it will no longer remain untyped and will instead adopt the cast type. If the untyped value overflows the cast type, this will result in a compiler error. An untyped value must always be compatible with the cast type. When untyped integers are cast to floating-point types, the `Int` type (provided by `std/math/big`) uses its `F64` method, and accuracy should always be `Exact`. For the `f32` type, first, it is cast to the `f64` type in the same way and then cast to the `f32` type. If the cast results in NaN or ±Inf, the `f64` value must also be NaN or ±Inf; otherwise, the casting will result in a compilation error. Otherwise, the result of the casting is not expected to be the same and may be rounded.
 
 When casting typed constant values, it does not cause an error if the constant value overflows the cast type. At comptime, Jule arithmetic will yield the same result with runtime. For example, the expression `u32(i32(-12))` will result in a `u32` type with `4294967284`.
 
@@ -65,11 +65,11 @@ When casting typed constant values, it does not cause an error if the constant v
 
 > **aka Comptime Variables**
 
-The value of the runtime variables can change (with mutability), then they can be updated with a different value to match the data type. Since comptime variables are constant, takes a constant expressions and never change again. Constant expressions do not exist as a variable in memory at runtime. Constant expressions used are copied exactly where they are used. Constant expressions are all evaluated at comptime.
+The value of the runtime variables can change (with mutability), and then they can be updated with a different value to match the data type. Since comptime variables are constant, takes a constant expressions and never change again. Constant expressions do not exist as a variable in memory at runtime. Constant expressions used are copied exactly where they are used. Constant expressions are all evaluated at comptime.
 
 You can store and use any comptime expression with constant variables. Your compiler allows you to use these expressions as if they were variables until the compilation process finishes.
 
-Constant variables are declared with the `const` keyword and they should be initialized when declared even with type annotated.
+Constant variables are declared with the `const` keyword, and they should be initialized when declared, even with type annotations.
 
 For example: 
 ```jule
@@ -79,7 +79,7 @@ const age = 18
 const age: int = 18
 ```
 
-In addition to being used to store certain computations at compile time, constant variables are also a essential part of comptime functionality and can be appear implicitly. For example, the variables you will have in comptime iterations will also be constant.
+In addition to being used to store certain computations at compile time, constant variables are also an essential part of comptime functionality and can appear implicitly. For example, the variables you will have in comptime iterations will also be constant.
 
 They can also be used to store primitive types as well as supported types provided by the comptime package.
 

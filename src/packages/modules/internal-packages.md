@@ -16,4 +16,4 @@ project/
 └─ main.jule
 ```
 
-The `foo` package has its own module (`foo/jule.mod`), making `foo` the root of its module. The `internal` package under `foo` is internal to this module. All code within the `foo` module can access it. The `main.jule` file belongs to a different module (the project root module) and cannot access `foo/internal` directory, even though it can import the `foo` package itself.
+The `foo` package has its own module (`foo/jule.mod`), making `foo` the root of its module. The `internal` package under `foo` is internal to this module. All code within the `foo` module can access it. The `main.jule` file belongs to a different module (the project root module) and cannot access the `foo/internal` directory, even though it can import the `foo` package itself.

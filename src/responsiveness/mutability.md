@@ -1,6 +1,6 @@
 # Responsive Mutability
 
-Responsive mutability is the state of protection immutability when immutability is guaranteed. For example, if a slice is guaranteed to have an immutable memory area at the time it is created, it is allowed to have mutable types stored in the immutable memory area, even though it is a mutable type.
+Responsive mutability is the state of protected immutability when immutability is guaranteed. For example, if a slice is guaranteed to have an immutable memory area at the time it is created, it is allowed to have mutable types stored in the immutable memory area, even though it is a mutable type.
 
 For example:
 ```jule
@@ -53,8 +53,6 @@ In functions, to provide flexibility and avoid unnecessary mutability requiremen
 
 In some cases, mutability is evaluated more loosely. For instance, if the parameter poses no mutability risk (e.g., the parameter type is immutable), whether the parameter is mutable or immutable does not result in a type mismatch.
 
-
-
 For example:
 ```jule
 fn main() {
@@ -63,7 +61,7 @@ fn main() {
 	a = fn(a: int) {}
 }
 ```
-In the code above, there is no type compatibility issue even if the function parameters exhibit different mutability, and the code compiles successfully. This is because the parameter is not a reference and its type is the immutable `int`. Therefore, whether the parameter is mutable or not has no effect on the original data (which passed as argument to the function) and is entirely specific to the function's body.
+In the code above, there is no type compatibility issue even if the function parameters exhibit different mutability, and the code compiles successfully. This is because the parameter is not a reference and its type is the immutable `int`. Therefore, whether the parameter is mutable or not has no effect on the original data (which passed as an argument to the function) and is entirely specific to the function's body.
 
 Even if the type is mutable, you will not encounter a type mismatch issue when using an immutable parameter. This is because the wrapper type specifies that the parameter is mutable, ensuring safety and indicating mutability. However, not every anonymous function is required to adhere to this, allowing immutable parameters to be used when desired.
 

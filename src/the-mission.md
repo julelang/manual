@@ -33,7 +33,7 @@ To achieve memory efficiency, Jule avoids certain runtime-heavy features, such a
 
 Rust is widely known for its strict and comprehensive safety guarantees, and it addresses safety concerns effectively. However, strictness is only one possible approach.
 
-Jule follows a more flexible safety model, closer to Go’s philosophy, while still being stricter in key areas. Like Go, Jule performs runtime checks for boundary violations and nil dereferencing, ensuring baseline memory safety.
+Jule follows a more flexible safety model, closer to Go's philosophy, while still being stricter in key areas. Like Go, Jule performs runtime checks for boundary violations and nil dereferencing, ensuring baseline memory safety.
 
 At the same time, Jule introduces additional compile-time safety analysis. While it assumes that developers will act responsibly in areas such as concurrency and data races, it performs static checks to catch common classes of errors early.
 

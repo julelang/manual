@@ -29,9 +29,9 @@ fn main() {
     printInt(50)
 }
 ```
-It is similar to normal function definition. Parameters are written between parentheses If there is more than one parameter, they are separated by commas. The name of the parameter is written first, followed by the data-type.
+It is similar to a normal function definition. Parameters are written between parentheses. If there is more than one parameter, they are separated by commas. The name of the parameter is written first, followed by the data type.
 
-When calling the function, as seen in the example in the entry point, arguments are written in parentheses, and if they are more than one, they are separated from each other with commas. The given arguments must be compatible with the data-type of the corresponding parameters.
+When calling the function, as seen in the example in the entry point, arguments are written in parentheses, and if there are more than one, they are separated from each other with commas. The given arguments must be compatible with the data type of the corresponding parameters.
 
 ### Mutable Parameters
 Parameters are immutable by default. For mutability, use the `mut` keyword.
@@ -82,7 +82,7 @@ The `div` function divides the two parameters and returns the result as a value.
 Return values are written with the `ret` keyword. Although the keyword `return` is widely used, `ret` was considered as an alternative to this keyword, which is both shorter and without losing its meaning.
 
 ## Multiple Returnable Functions
-Functions can returns more then one values. For that, specify return data-type with multiple type.
+Functions can returns more then one values. For that, specify return data type with multiple type.
 
 For example:
 ```jule
@@ -119,7 +119,7 @@ In the example above, the functions `foo` and `bar` return the same types. There
 ### Return Type Identifiers
 To give an identifier to the return types, it's enough to make them look like multiple returns. The only addition is to give that return value an identifier before the return type.
 
-Each identifier is treated as a mutable variable declaration and is declared and initialized at the beginning of the function for the scope of the function. They are mutable variables because of some of compiler obsessions. Please refer to the [immutability documentations](/memory/immutability) if you don't know anything about it.
+Each identifier is treated as a mutable variable declaration and is declared and initialized at the beginning of the function for the scope of the function. They are mutable variables because of some of the compiler's obsessions. Please refer to the [immutability documentations](/memory/immutability) if you don't know anything about it.
 
 For example:
 ```jule
@@ -198,7 +198,7 @@ For example:
 ```jule
 let myFunction: fn(int, int): int
 ```
-The example at above, is a variable definition with function data type. The compatible function values is a have two `int` parameter and returns `int` value.
+The example above is a variable definition with a function data type. The compatible function values is a have two `int` parameters and returns `int` value.
 
 The fact that functions can be used as data types makes it possible to use and store [anonymous functions and closures](/common-concepts/functions/anonymous-functions) with type safety.
 

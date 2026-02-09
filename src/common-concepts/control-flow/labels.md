@@ -32,9 +32,9 @@ fn main() {
     }
 }
 ```
-An infinite iteration appears in this example. The `break` keyword inside the match expression breaks the match expression. This way there is no way to break the infinite loop. Maybe alternative solutions like using a goto label outside of the iteration could be adopted but this is confusion.
+An infinite iteration appears in this example. The `break` keyword inside the match expression breaks the match expression. This way, there is no way to break the infinite loop. Maybe alternative solutions like using a goto label outside of the iteration could be adopted, but this is confusing.
 
-Again, label can be used to clear up this confusion. This is a more maintainable and clearer solution. Labels defined before an iteration and match expression can be used for targeting.
+Again, a label can be used to clear up this confusion. This is a more maintainable and clearer solution. Labels defined before an iteration and a match expression can be used for targeting.
 
 For example:
 ```jule

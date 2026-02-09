@@ -1,7 +1,7 @@
 # Casting
 Casting is an explicit conversion from one type to another between supported types.
 
-To make a cast, you need to write the target data type you want to cast in parentheses, then you need to write the expression you want to cast. The expression to be cast should be declared in parentheses. A casting expression evaluates expression of between parentheses for itself.
+To make a cast, you need to write the target data type you want to cast in parentheses, then you need to write the expression you want to cast. The expression to be cast should be declared in parentheses. A casting expression evaluates an expression between parentheses for itself.
 
 Example: `(int)(3.14)`
 
@@ -14,7 +14,7 @@ fn main() {
     println(y)            // Prints 3
 }
 ```
-As you can see, the variable `x` is of type `f32` and the variable `y` is of type `int`. Normally, variable `y` cannot take variable `x` as a value. However, as seen for example, we can accept the value as `int` by explicitly casting. 
+As you can see, the variable `x` is of type `f32` and the variable `y` is of type `int`. Normally, variable `y` cannot take variable `x` as a value. However, as seen, for example, we can accept the value as `int` by explicitly casting.
 
 ---
 

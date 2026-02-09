@@ -32,7 +32,7 @@ The While loops use boolean expressions. As seen in the example above, the expre
 ## While-Next Iterations
 If you've ever used a programming language, you're probably familiar with for loops. Jule doesn't have the classic for loops. The main reason for this is that it does not look stylish and is not readable. The first of the three iteration statements almost always serves to define a scope-specific variable. The main reason for use is a conditional iteration and a post-iteration step. For this reason, Jule has a different iteration that is more readable and is thought to serve the purpose better: while-next
 
-While-next is almost the same as a classic while iteration. In this, the only addition is to be able to write an expression that will happen after the iteration step. While-next's statement is separated by the statement terminator. First comes the condition expression, then statement.
+While-next is almost the same as a classic while iteration. In this, the only addition is to be able to write an expression that will happen after the iteration step. While-next's statement is separated by the statement terminator. First comes the condition expression, then the statement.
 
 For example:
 ```jule
@@ -89,7 +89,7 @@ fn main() {
 ```
 As you can see, it is possible to use the ignore operator for unused fields.
 ::: tip
-Jule assign variables data types by automatically by collection. Similar to type inferred variables. If the index variable is be numeric, Jule's auto data type is `int` type.
+Jule assign variables data types automatically by collection. Similar to type-inferred variables. If the index variable is numeric, Jule's auto data type is `int` type.
 :::
 
 ---

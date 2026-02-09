@@ -1,10 +1,11 @@
 # Exporting Definitions
-Packages have access to any definition they have. But this does not apply to packages that use a package. Only exported definitions are accessible when a package is used. This is a kind of safety. When publicly-closed/internal package definitions that should not be used are not exported, they cannot be accessed from the outside and this possibility is eliminated. This is the most basic purpose of the export mechanism.
+Packages have access to any definition they have. But this does not apply to packages that use a package. Only exported definitions are accessible when a package is used. This is a kind of safety. When publicly-closed/internal package definitions that should not be used are not exported, they cannot be accessed from the outside, and this possibility is eliminated. This is the most basic purpose of the export mechanism.
 
-To define as public, use an identifier which is starts with capital letter. Otherwise, all definitions are private by default.
+To define as public, use an identifier that starts with a capital letter. Otherwise, all definitions are private by default.
 
-External definitions are not supported. All external definitions will be private by default all time.\
-Some external definitions might be exception, these exceptions will be described at relevant sections.
+External definitions are not supported. All external definitions will be private by default at all times.\
+
+Some external definitions might be exceptions; these exceptions will be described in relevant sections.
 
 Exportion supported definitions:
 - Global
@@ -53,4 +54,4 @@ fn main() {
     println(ms.Number)
 }
 ```
-As shown in the example above, your code accessed a private struct via a public function and used the public field. This means that that definition is implicitly exported. 
+As shown in the example above, your code accessed a private struct via a public function and used the public field. This means that the definition is implicitly exported.

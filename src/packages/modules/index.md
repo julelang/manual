@@ -1,6 +1,6 @@
 # Modules
 
-Modules are the recommended way to organize a Jule project. A module defines the project's structure and groups related packages in a safe, modular fashion. This enables the use of subpackages, helps maintain clean organization, and is especially useful when designing third-party packages.
+Modules are the recommended way to organize a Jule project. A module defines the project's structure and groups related packages in a safe, modular fashion. This enables the use of subpackages, helps maintain a clean organization, and is especially useful when designing third-party packages.
 
 Modules standardize code layout and establish the main structure of a project. The module file acts as the entry point: the directory containing it is treated as the module's root, and the compiler processes your code accordingly.
 
@@ -36,7 +36,7 @@ project/
 └─ main.jule
 ```
 
-Here a module with name `baz`, the file `main.jule` must import the `bar` package as `"baz/foo/bar"`, because the module name is `baz`. Likewise, the `foo` package must also use `"baz/foo/bar"`, not just `bar`.
+Here, a module with the name `baz`, the file `main.jule` must import the `bar` package as `"baz/foo/bar"`, because the module name is `baz`. Likewise, the `foo` package must also use `"baz/foo/bar"`, not just `bar`.
 
 ## Nested Modules
 
@@ -56,6 +56,6 @@ project/
 └─ main.jule
 ```
 
-In this structure `main.jule` located in the root module, imports bar as `"baz/foo/bar"`. The `foo` package, however, contains its own `jule.mod`, making it a separate module. Inside `foo`, the `bar` package is imported as `"foo/bar"`.
+In this structure, `main.jule` located in the root module, imports bar as `"baz/foo/bar"`. The `foo` package, however, contains its own `jule.mod`, making it a separate module. Inside `foo`, the `bar` package is imported as `"foo/bar"`.
 
 This design makes the `foo` package self-contained and portable. Thanks to its own module file, it can be moved or reused in different projects without breaking imports.

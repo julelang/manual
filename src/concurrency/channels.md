@@ -152,7 +152,7 @@ One-way channels are restricted channels designed for safer channel usage. By re
 
 In the type declaration of one-way channels, just like in data sending and receiving, the channel operator (arrow) indicates the direction of the data.
 
-Channels can be implicitly converted to one another, but they must have the required permissions. For example, a regular both-way channel can be implicitly converted to receive-only or send-only channel. However, a receive-only channel cannot be converted back to regular both-way or send-only channel because it lacks send permissions.
+Channels can be implicitly converted to one another, but they must have the required permissions. For example, a regular two-way channel can be implicitly converted to a receive-only or send-only channel. However, a receive-only channel cannot be converted back to a regular both-way or send-only channel because it lacks send permissions.
 
 ### Receive-Only Channels
 
@@ -183,13 +183,13 @@ Select statements are similar to match statements but are specialized for channe
 
 A select statement's case can only take a single expression, and this expression must always involve either receiving data from a channel or sending data to a channel. The select statement evaluates each given expression and uses the first case that is eligible. If multiple cases are eligible, one of the eligible cases is chosen randomly.
 
-When a receive expression (e.g., `<-c`) is used as a case in a select statement, the select checks if data can be received from the channel. If data is available to be receive, the select statement evaluates this case as eligible. Similarly, if a send expression (e.g., `c <-`) is used, the select checks if data can be sent to the channel. If the channel can receive data, the select statement evaluates this case as eligible.
+When a receive expression (e.g., `<-c`) is used as a case in a select statement, the select checks if data can be received from the channel. If data is available to be received, the select statement evaluates this case as eligible. Similarly, if a send expression (e.g., `c <-`) is used, the select checks if data can be sent to the channel. If the channel can receive data, the select statement evaluates this case as eligible.
 
 Select statements are categorized into two types: non-blocking select and blocking select. If a select statement includes a default case, it is a non-blocking select. If it does not have a default case, it is a blocking select.
 
 Non-blocking select statements check all cases only once, and if none are ready, they fall back to the default case. A blocking select, on the other hand, checks all cases and blocks the program's execution until at least one case becomes eligible.
 
-Expressions of each case will be evaluated once before the select statement and will be used again when an attempt is made to select a case. Nil channels do not cause errors such as runtime panics, select statements simply ignore them. If all channels are nil or closed, blocking select statements will block indefinitely.
+Expressions of each case will be evaluated once before the select statement and will be used again when an attempt is made to select a case. Nil channels do not cause errors such as runtime panics; select statements simply ignore them. If all channels are nil or closed, blocking select statements will block indefinitely.
 
 Using a select statement is similar to using a match statement and is written almost the same way. However, unlike match statements, select statements can use `break` statements but do not support `fall` statements.
 

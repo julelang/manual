@@ -15,8 +15,8 @@ extern struct my_struct {
 ```
 
 ::: warning
-- External structure's fields are public by default all time. So if you want export your external structure, use type alias. No worry, fields will be available. It is useful for write low-level APIs.
-- Your compiler will not automatically initialize with default value to fields that are not assigned in the struct literal for external structs.
+- External structure's fields are public by default at all times. So if you want to export your external structure, use a type alias. No worry, the fields will be available. It is useful for writing low-level APIs.
+- Your compiler will not automatically initialize with a default value to fields that are not assigned in the struct literal for external structs.
 - If the external structures have a constructor, the generated IR may have compilation errors.
 :::
 
@@ -79,7 +79,7 @@ extern struct my_struct {}
 
 ## Classes
 
-In C++, structs and classes are almost the same thing. A structure linking is typically class compatible. In other words, interoperability can also be used with classes struct linking.
+In C++, structs and classes are almost the same thing. A structure linking is typically class-compatible. In other words, interoperability can also be used with class struct linking.
 
 For example:
 
@@ -112,7 +112,7 @@ extern struct Foo {
 	Baz: int `#export:"baz"`
 }
 ```
-In th examople above, the `Bar` and `Baz` fields of the structure `Foo` will be exported as `bar` and `baz` in the C++ code. Note that they are unchecked semantically and unlimited, even you can use an empty tag as an identifier.
+In the example above, the `Bar` and `Baz` fields of the structure `Foo` will be exported as `bar` and `baz` in the C++ code. Note that they are unchecked semantically and unlimited, and you can even use an empty tag as an identifier.
 
 ::: warning
 This directive will be applied only for external structures, not for Pure Jule.

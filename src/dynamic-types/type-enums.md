@@ -1,6 +1,6 @@
 # Type Enums
 
-Type enums give you sum type functionality. Sum types are actually treated as `any`, but they are safer. Just like an `any` type, its default value is always `nil` and nil must be checked. Only data compatible with the types set are allowed to be retained, other data types are not accepted. It is strict about type safety, even implicit casting is not accepted, type must be explicitly compatible.
+Type enums give you sum type functionality. Sum types are actually treated as `any`, but they are safer. Just like an `any` type, its default value is always `nil`, and nil must be checked. Only data compatible with the types set are allowed to be retained; other data types are not accepted. It is strict about type safety; even implicit casting is not accepted, and the type must be explicitly compatible.
 
 Declaring a type-enum is easy. Declare it just like an enum, with the minor difference that type-enums do not support named fields, and they take type declarations instead of constant values.
 
@@ -14,7 +14,7 @@ enum Signed: type {
 }
 ```
 
-There must always be at least one field. Each field must be an explicit type declaration. For type safety, any of the fields are not allowed to point to type `any`.
+There must always be at least one field. Each field must be an explicit type declaration. For type safety, none of the fields are allowed to point to type `any`.
 
 They can be used in match-type expressions. But they can only map to the types they support. Likewise, cast expressions can only be cast with the types they support.
 
@@ -22,7 +22,7 @@ In binary expressions, only compatible types can be used. And the only supported
 
 ## Type Inheritance
 
-Type enums can inherit each other. To do this, give a type enum a different type enum as a field. From this point on, the other type enum will be supported directly and all fields of the other type enum will also be supported by inheriting.
+Type enums can inherit from each other. To do this, give a type enum a different type enum as a field. From this point on, the other type enum will be supported directly, and all fields of the other type enum will also be supported by inheriting.
 
 For example:
 ```jule

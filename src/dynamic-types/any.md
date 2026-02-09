@@ -1,8 +1,8 @@
 # Any
 
-The any type is a built-in type and is represented by the `any` keyword. It can be hold any data type and might be `nil`. Because its type is ambiguous at comptime, it can accept assignments from different types and, once assigned, can be reassigned with a different type.
+The `any` type is a built-in type and is represented by the `any` keyword. It can hold any data type and might be `nil`. Because its type is ambiguous at comptime, it can accept assignments from different types and, once assigned, can be reassigned with a different type.
 
-It only supports equals (`==`) and not equals (`!=`) operators. Panics if type is uncomparable.
+It only supports equals (`==`) and not equals (`!=`) operators. Panics if the type is incomparable.
 
 `x == nil`: true if `any` is `nil`, not checks whether data is `nil`\
 `x == y`: true if x and y is `nil`\
@@ -17,7 +17,7 @@ let x = (int)(myAny)
 ```
 
 `any` type protects itself against mutability if necessary.
-For example, you have slice value holds by any-typed variable.
+For example, you have a slice value held by any-typed variable.
 And your variable is immutable.
-So, if you cast your value to slice for assign to mutable variable, you will get error.
-Because of slice is mutable type, so it's breaking immutability.
+So, if you cast your value to slice for assignment to a mutable variable, you will get an error.
+Because a slice is a mutable type, it's breaking immutability.

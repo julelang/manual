@@ -4,7 +4,7 @@ Objective-C++ implements Objective-C's plugins for C++. In this way, it becomes 
 
 ## Using
 
-You can create your header files with the extension `.h` in the standard way. But we recommended o use `.hpp` extension for C++ headers. These are does not pose any compatibility issues as it is one of the standard extensions supported by Jule.
+You can create your header files with the extension `.h` in the standard way. But we recommended to use `.hpp` extension for C++ headers. These are does not pose any compatibility issues as it is one of the standard extensions supported by Jule.
 
 For recommended development experience, declarations should be in the header file and implementation in another source code file. In this context, let's say we have Objective-C++ code like this:
 

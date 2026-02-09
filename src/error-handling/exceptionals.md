@@ -1,14 +1,14 @@
 # Exceptionals
 
-Exceptions are a standard way of error handling for Jule. It can be considered like Optional types. An exceptional function must be specified as exceptional, otherwise it is not considered as exceptional. Exceptions are not related to return values. An exceptional function may return or throw an exception, but not both.
+Exceptions are a standard way of error handling for Jule. It can be considered like Optional types. An exceptional function must be specified as exceptional; it is not considered exceptional. Exceptions are not related to return values. An exceptional function may return or throw an exception, but not both.
 
-Exceptions must be handled. The runtime cost is until the end of the call. After the call, if there is an exception, your program will panic or the handler will be executed. All relevant exceptional data then goes out of memory.
+Exceptions must be handled. The runtime cost is until the end of the call. After the call, if there is an exception, your program will panic, or the handler will be executed. All relevant exceptional data then goes out of memory.
 
 ::: tip
 This section focuses on explaining exceptional functions. Be sure to check out the [Errors](/error-handling/errors) section to learn how to use exceptional functions for error handling in the recommended way.
 :::
 
-Exceptional functions must be used alone, it does not supports combining such as binary or unary expressions. It just returns the result and handles the exception.
+Exceptional functions must be used alone; they do not support combining, such as binary or unary expressions. It just returns the result and handles the exception.
 
 You can use exceptionals in;
 - Assignment to variable
@@ -35,7 +35,7 @@ fn myExceptional()!: int { /* ... */ }
 
 ## Exceptions
 
-An exceptional has a special `error` keyword designed for lifetime use of an exceptional. The `error` keyword is used to throw an exception within an exceptional scope. The ordinary return statements mean a healthy return without exception. No return statement is required to throw an exception, return statements cannot throw an exception. You just need to use the `error` keyword keyword to do this.
+An exceptional has a special `error` keyword designed for the lifetime use of an exceptional. The `error` keyword is used to throw an exception within an exceptional scope. The ordinary return statements mean a healthy return without exception. No return statement is required to throw an exception; return statements cannot throw an exception. You just need to use the `error` keyword to do this.
 
 For example:
 ```jule
@@ -66,7 +66,7 @@ If things don't go as expected and an exception occurs, your program will panic.
 
 ### Handling Errors
 
-`else` scopes are used to handle errors for exceptional calls. These scopes are considered a sub-scope of the same scope and after the handler scopes are executed, the scope statements will continue to execute. The special `error` keyword still exists here. In this context, it represents the exception if used like expression rather than call. So if you want to get the exception, you use the `error` keyword as a variable.
+`else` scopes are used to handle errors for exceptional calls. These scopes are considered a sub-scope of the same scope, and after the handler scopes are executed, the scope statements will continue to execute. The special `error` keyword still exists here. In this context, it represents the exception if used as an expression rather than a call. So if you want to get the exception, you use the `error` keyword as a variable.
 
 For example:
 ```jule
@@ -84,7 +84,7 @@ In the example code above, `println` call will print value of the exception.
 
 #### Handling with Returns Values
 
-Regarding the handling of return values of exceptional calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and not required `ret` keyword, just write `use` keyword instead of `ret` keyword.
+Regarding the handling of return values of exceptional calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and do not require the `ret` keyword; just write the `use` keyword instead of the `ret` keyword.
 
 For example:
 ```jule
@@ -130,7 +130,7 @@ fn main() {
 
 In the code above, the `exceptional1` function is explicitly forwarding the exception of the `exceptional0` function call. In fact, the return statement requires an integer, but thanks to forwarding, the current function eliminates this requirement by forwarding the exception.
 
-If your exceptional function will not handle error, just forwards it, then you can forward the exception in shorter way. With the question-mark operator, you can forward exceptional directly.
+If your exceptional function will not handle an error, just forward it, then you can forward the exception in a shorter way. With the question-mark operator, you can forward exceptional directly.
 
 For example:
 ```jule
@@ -145,7 +145,7 @@ fn exceptional1()!: int {
 In the example above, the function `exceptional1` return the result and forwards exception of the `exceptional0` function.
 
 ::: info
-One thing to remember is that your compiler may place a temporary expression there for correct backend compilation. However, this shouldn't affect how your program runtime behavior; it may just be a must-have knowledge for extreme memory efficiency requirements.
+One thing to remember is that your compiler may place a temporary expression there for correct backend compilation. However, this shouldn't affect how your program's runtime behavior; it may just be a must-have knowledge for extreme memory efficiency requirements.
 :::
 
 ## Coroutines

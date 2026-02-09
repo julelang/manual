@@ -1,6 +1,6 @@
 # Performance Tuning and Tips
 
-This section contains suggestions and tips to help you write Jule code more effectively. The suggestions and tips in the data are not a guarantee that you will achieve significant gains in performance or efficiency, they are just supportive guidelines to help you achieve better. However, in some cases there may be suggestions that can lead to unexpectedly significant improvements. Always test your own situations for best results.
+This section contains suggestions and tips to help you write Jule code more effectively. The suggestions and tips in the data are not a guarantee that you will achieve significant gains in performance or efficiency; they are just supportive guidelines to help you achieve better. However, in some cases there may be suggestions that can lead to unexpectedly significant improvements. Always test your own situations for the best results.
 
 These suggestions and recommendations will result in positive improvements in common cases. In more specific cases, results may vary. Before following the recommendations, consider whether they are suitable for you.
 
@@ -8,15 +8,15 @@ These suggestions and recommendations will result in positive improvements in co
 
 ### Conversions
 
-Converting between byte slice and string can have a significant impact on memory usage in some cases. To avoid this, you can avoid allocations by implicitly passing allocations that you will not use again to the other type. The package `std/unsafe` provides some very useful functionality for this.
+Converting between byte slices and strings can have a significant impact on memory usage in some cases. To avoid this, you can avoid allocations by implicitly passing allocations that you will not use again to the other type. The package `std/unsafe` provides some very useful functionality for this.
 
-For example, you have a byte slice and this byte slice should be returned as a string from the function. Also, that slice can no longer be changed, it becomes inaccessible after it is returned from the function, etc., so it is safe to return it as a string. In this case, the function `unsafe::StrFromBytes` will convert it to string for you without any allocation and preserve GC. There is also a `unsafe::BytesFromStr` function for the opposite case.
+For example, you have a byte slice, and this byte slice should be returned as a string from the function. Also, that slice can no longer be changed; it becomes inaccessible after it is returned from the function, etc., so it is safe to return it as a string. In this case, the function `unsafe::StrFromBytes` will convert it to a string for you without any allocation and preserve GC. There is also an `unsafe::BytesFromStr` function for the opposite case.
 
 If mutability is not required if conversion is needed temporarily, the `unsafe::StrBytes` or `unsafe::BytesStr` functions can also be used for a simpler conversion without GC, if it is considered safe.
 
 ### Comparing Byte Slices
 
-Comparing byte slices can be efficient and simple when compiler optimizations are turned on. No package dependencies or algorithms are needed. Just convert to string and compare. If the relevant compiler optimizations are enabled, this does not cause a string to be allocated.
+Comparing byte slices can be efficient and simple when compiler optimizations are turned on. No package dependencies or algorithms are needed. Just convert to a string and compare. If the relevant compiler optimizations are enabled, this does not cause a string to be allocated.
 
 For example:
 ```jule
@@ -37,7 +37,7 @@ for i, r in []rune(myStr) {
 	// ...
 }
 ```
-In the example above, when the relevant compiler optimizations are turned on, the loop is optimized and the rune slice transform is converted to an implicit loop. At each loop step the next rune is processed, thus avoiding allocation.
+In the example above, when the relevant compiler optimizations are turned on, the loop is optimized, and the rune slice transform is converted to an implicit loop. At each loop step, the next rune is processed, thus avoiding allocation.
 
 ::: info
 Please refer to the [compiler's optimizations](/compiler/compiler-optimizations) documentation to find out which optimizations can achieve this.
@@ -45,7 +45,7 @@ Please refer to the [compiler's optimizations](/compiler/compiler-optimizations)
 
 ## Extending Types with Strict Type Aliases
 
-You can use strict type aliases to extend existing types and add some additional features. This is also something that will help in making related types available with traits if they don't support to do this.
+You can use strict type aliases to extend existing types and add some additional features. This is also something that will help in making related types available with traits if they don't support doing this.
 
 For example:
 ```jule
@@ -67,7 +67,7 @@ fn main() {
 	println(n)
 }
 ```
-In the example above, the type `Str` is a strict type aliased to the primitive type `str`. If you want to access additional properties as if it were a method since there is no cast cost, this method might be what you are looking for.
+In the example above, the type `Str` is a strict type aliased to the primitive type `str`. If you want to access additional properties as if they were a method, since there is no cast cost, this method might be what you are looking for.
 
 ## Enable Boundary Optimizations
 
@@ -84,9 +84,9 @@ fn foo(x: []byte): bool {
 ```
 The line `_ = x[2]` in the example above lets the compiler know that access to `x[2]` is controlled, meaning that this and fewer valid directories are within the limits. This can allow the compiler to avoid the cost of boundary checking subsequent accesses. Thus, with a single boundary check, you can make multiple accesses at a lower cost.
 
-If you don't want to write such a informative line, you can also get it by checking the largest index first, for example by sorting the conditions in the return expression from 2 to 0 by index.
+If you don't want to write such an informative line, you can also get it by checking the largest index first, for example, by sorting the conditions in the return expression from 2 to 0 by index.
 
-When applying this method, make sure that the information you provide is meaningful to the compiler and will make it possible to apply optimizations. Otherwise the compiler may not apply the optimizations for that.
+When applying this method, make sure that the information you provide is meaningful to the compiler and will make it possible to apply optimizations. Otherwise, the compiler may not apply the optimizations for that.
 
 ::: info
 Please refer to the [compiler's optimizations](/compiler/compiler-optimizations) documentation to find out which optimizations can achieve this.
@@ -94,7 +94,7 @@ Please refer to the [compiler's optimizations](/compiler/compiler-optimizations)
 
 ## Disable Boundary Checking
 
-When the relevant compiler optimizations are turned on, you can skip some bounds checks. But compiler's static analysis may be not enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
+When the relevant compiler optimizations are turned on, you can skip some bounds checks. But compiler's static analysis may not be enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
 
 The [`disable`](/compiler/directives#directive-disable) directive provides this functionality.
 
@@ -112,7 +112,7 @@ The directive `#disable boundary` in the example above disables the boundary che
 
 ## Disable Nil Pointer Dereferencing Checking
 
-When the relevant compiler optimizations are turned on, you can skip some nil pointer dereferencing checks. But compiler's static analysis may be not enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
+When the relevant compiler optimizations are turned on, you can skip some nil pointer dereferencing checks. But a compiler's static analysis may not be enough for some performance-critical systems. In such cases, you can disable boundary checking for the specific section of the source code, without disabling safety measures for the whole program.
 
 The [`disable`](/compiler/directives#directive-disable) directive provides this functionality.
 
@@ -129,7 +129,7 @@ The directive `#disable nilptr` in the example above disables the nil pointer de
 
 ### Accessing Fields
 
-When using Jule's comptime capabilities, you may encounter some problems when working with structures that have fields with a blan identifier. For example, if you want to read the value of a field and you try to do it with the `Field` field of `comptimeValue`, you can have conflicts. This method returns the first match, so if you have more than one field with a blank identifier you will always read the first match. To avoid this, access fields with index as much as possible. You can use the `FieldByIndex` function to do this.
+When using Jule's comptime capabilities, you may encounter some problems when working with structures that have fields with a blank identifier. For example, if you want to read the value of a field and you try to do it with the `Field` field of `comptimeValue`, you can have conflicts. This method returns the first match, so if you have more than one field with a blank identifier, you will always read the first match. To avoid this, access fields with an index as much as possible. You can use the `FieldByIndex` function to do this.
 
 For example:
 ```jule
@@ -151,4 +151,4 @@ fn main() {
 ```
 The example above successfully reads the value of all fields correctly. However, if it had read with `Field` instead of `FieldByIndex`, it would always get `10` because it would always read the first field with the first match.
 
-This method is also safer and less costly than doing unsafe conversions to access such fields, you can access the fields directly with indexes at comptime. This way you don't abandon safe Jule and avoid additional cost.
+This method is also safer and less costly than doing unsafe conversions to access such fields; you can access the fields directly with indexes at compile time. This way you don't abandon safe Jule and avoid additional cost.

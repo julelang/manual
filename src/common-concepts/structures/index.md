@@ -1,7 +1,7 @@
 # Structures
-Structures (aka structs) are a good way to collect many variables in one spot. Every declaration within the structure is called a member (aka field). The difference from a slice or array is that they contain values of the same data-type, while each of the struct fields can have a different data type. Also, the fields of structures are accessed with an identifier.
+Structures (aka structs) are a good way to collect many variables in one spot. Every declaration within the structure is called a member (aka field). The difference from a slice or array is that they contain values of the same data type, while each of the struct fields can have a different data type. Also, the fields of structures are accessed with an identifier.
 
-For example to declaration a struct:
+For example, to declare a struct:
 ```jule
 struct Employee {
     name:   str
@@ -63,7 +63,7 @@ There are two types of receiver parameters;
 Smart Pointer receivers require the function to be a reference. The function can only be called from a reference instance of the structure.
 
 **Receiver Parameter**
-Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. Assigning to the self parameter will cause mutation in the same way. This is because, the self parameter is treated as a [reference pointer variable](/memory/raw-pointers/reference-pointers). Therefore, assignments made directly to the self variable will be written to the memory of the instance calling the method.
+Receivers, on the other hand, allow changes made within the function to be reflected in the structure if the receiver is mutable. Assigning to the self parameter will cause mutation in the same way. This is because the self parameter is treated as a [reference pointer variable](/memory/raw-pointers/reference-pointers). Therefore, assignments made directly to the self variable will be written to the memory of the instance calling the method.
 
 ### Syntax
 ```
@@ -191,7 +191,7 @@ Even though special characters can be used in tags, it is recommended that key n
 
 ### Compiler Tags
 
-You can give some directives to the compiler using field tags. This kind of tags must be start with the hash, like `#export`. Leading hash symbol is not recommended for common use, this is compiler specific. But also it allowed for common use, to make things easy. For example, your package needs `#export` directive, but not for itself, for the compiler. It's ok. There is no limitation or difference about handling compiler directive file tags.
+You can give some directives to the compiler using field tags. These kinds of tags must start with the hash, like `#export`. Leading hash symbol is not recommended for common use; this is compiler-specific. But also, it allowed for common use, to make things easy. For example, your package needs a `#export` directive, but not for itself, for the compiler. It's ok. There is no limitation or difference in handling compiler directive file tags.
 
 Note that they are not semantically checked and limited, every tag with a leading hash is not a compiler directive. Here is list of the compiler directive field tags:
 - [`#export`](/integrated-jule/interoperability/structures#using-different-field-identifiers)

@@ -2,7 +2,7 @@
 
 Generic type constraints are a kind of mask that tells which types the generic type will be compatible with. Generic strains will not accept any strain that is not compatible with this mask. Any generic type that does not contain a constraint by default will accept any type.
 
-To define a constraint, use colon after the generic type and specify the mask. To give more than one mask, define the masks with the `|` operator. Each mask separated by `|` means a separate acceptability. That is, the constraint does not expect it to match all of them, if any of the masks are valid it ensures the match.
+To define a constraint, use a colon after the generic type and specify the mask. To give more than one mask, define the masks with the `|` operator. Each mask, separated by `|`, means a separate acceptability. That is, the constraint does not expect it to match all of them; if any of the masks are valid, it ensures the match.
 
 For example:
 ```jule
@@ -40,12 +40,12 @@ In some cases, this usage may result in impractical attributions. The software d
 ## Masking with Deep Match
 
 By default, a constraint mask is only compatible with the mask type.
-But sometimes strict type aliases should be able to pass the constraint.
-Since strict type aliases considered totally a different type, using an ordinary mask in the constraint is not proper for that.
-Because type will not be matched.
+But sometimes, strict type aliases should be able to pass the constraint.
+Since strict type aliases are considered totally a different type, using an ordinary mask in the constraint is not proper for that.
+Because the type will not be matched.
 
-To achieve this, jule provides the tilde `~` operator.
-This operator enables the deep matching for the mask.
+To achieve this, Jule provides the tilde `~` operator.
+This operator enables deep matching for the mask.
 So strict type aliases can pass the constraint.
 
 For example:
@@ -58,7 +58,7 @@ fn main() {
 	foo[Float]()
 }
 ```
-In the example above, the compiler will complain about constraint of the type `T`.
+In the example above, the compiler will complain about the constraint of the type `T`.
 Because the strict type alias `Float` will not pass the constraint.
 For the proper use, type `T` must be `f64`.
 
@@ -68,12 +68,12 @@ For example:
 ```jule
 fn foo[T: int | ~f64]() {}
 ```
-In the example above, the `Float` type can pass the costraint thanks to the tilde `~` operator.
+In the example above, the `Float` type can pass the constraint thanks to the tilde `~` operator.
 But this is only applied for the `f64` type, not for `int`.
-The tilde `~` operator enables deep matching for only single mask, where it used.
+The tilde `~` operator enables deep matching for only a single mask, where it is used.
 
 ::: info
-When the tilde `~` operator used, the mask type should be a primitive, slice, array, map, chan or pointer type. Strict type aliases, builtin constraints, structs and others will not be accepted as mask.
+When the tilde `~` operator is used, the mask type should be a primitive, slice, array, map, chan, or pointer type. Strict type aliases, built-in constraints, structs, and others will not be accepted as masks.
 :::
 
 ## Builtin Constraints

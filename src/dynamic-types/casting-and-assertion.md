@@ -144,7 +144,7 @@ When such an assertion expression fails, it typically means that the asserted ty
 
 In Jule runtime, asserting a dynamic type to an incorrect type results in a panic. To prevent this, methods such as the `type match` statement can be used. However, type assertion provides a more elegant and simpler way to achieve this. It is often a better choice than solutions like `type match`, especially when only a small number of types need to be handled.
 
-Assertion type with status means that a assertion expression returns two values. One of these values is the actual value held by the dynamic type if the assertion is successful, while the other is a boolean indicating whether the assertion was successful or not.
+Assertion type with status means that an assertion expression returns two values. One of these values is the actual value held by the dynamic type if the assertion is successful, while the other is a boolean indicating whether the assertion was successful or not.
 
 For example:
 ```jule

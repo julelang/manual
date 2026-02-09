@@ -9,7 +9,7 @@ These examples are the recommended style, not mandatory.
 
 Jule uses camelCase and PascalCase, with exceptions.
 
-To choose between camelCase and PascalCase, public modifier status must be observed. If your definition is exportable and you want it, use PascalCase, otherwise use camelCase.
+To choose between camelCase and PascalCase, the public modifier status must be observed. If your definition is exportable and you want it, use PascalCase, use camelCase.
 
 If there is no risk of your definition being exported, use PascalCase for constant variables. Use camelCase for local variables.
 

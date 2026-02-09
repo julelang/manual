@@ -6,8 +6,8 @@ When this is activated, the `__JULE_DISABLE__REFERENCE_COUNTING` configuration o
 
 ## Memory Leaks
 
-This may lead to memory leaks for you. Because this disables automatic release. Since Jule can no longer track the references, it doesn't know which one should be released where. The program does not intervene so as not to affect your behavior. Therefore your allocations will leak.
+This may lead to memory leaks for you, because it disables automatic release. Since Jule can no longer track the references, it doesn't know which one should be released where. The program does not intervene so as not to affect your behavior. Therefore, your allocations will leak.
 
 ::: warning
-Disabling RC is not accepted as standard behavior. The standard library uses RC and designed accordingly. Therefore, standard library algorithms will trust to RC instead of releasing internal allocations. So you have anyhow memory leak risk when you are using standard library.
+Disabling RC is not accepted as standard behavior. The standard library uses RC and is designed accordingly. Therefore, standard library algorithms will trust RC instead of releasing internal allocations. So you have a memory leak risk anyhow when you are using the standard library.
 :::

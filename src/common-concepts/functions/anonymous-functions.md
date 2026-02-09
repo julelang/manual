@@ -26,7 +26,7 @@ Anonymous functions can be portable and used without losing type safety thanks t
 
 Closures are similar to anonymous functions. However, they can access variables within the scope in which they are defined. Necessary variables are captured and stored with the anonymous function. It can access the captured variables even if the scope of the function defined in it ends.
 
-Closures are syntactically no different from anonymous functions. When an anonymous function is defined, the compiler can determine whether it is a closure or not. Every time you define an anonymous function, you have access to the variables of the scope you define. If you use any of the variables you have access to, the anonymous function becomes a closure and your compiler captures the necessary variables for you.
+Closures are syntactically no different from anonymous functions. When an anonymous function is defined, the compiler can determine whether it is a closure or not. Every time you define an anonymous function, you have access to the variables of the scope you define. If you use any of the variables you have access to, the anonymous function becomes a closure, and your compiler captures the necessary variables for you.
 
 For example:
 ```jule
@@ -46,7 +46,7 @@ fn main() {
     }
 }
 ```
-The example above contains an example of fibonacci closure. The `fib` variable returns a new fibonacci closure. This closure uses the variables `a` and `b` defined in the scope of the `fib` function. Since Closure carries this scope within itself, mutations will be preserved in every subsequent invocation. In this way, the next Fibonacci number can be computed each time the returned closure is called. Based on this the above program computes the first 20 fibonacci numbers.
+The example above contains an example of Fibonacci closure. The `fib` variable returns a new Fibonacci closure. This closure uses the variables `a` and `b` defined in the scope of the `fib` function. Since Closure carries this scope within itself, mutations will be preserved in every subsequent invocation. In this way, the next Fibonacci number can be computed each time the returned closure is called. Based on this, the above program computes the first 20 Fibonacci numbers.
 
 ### Capturing
 
@@ -133,7 +133,7 @@ In the example above, short literals have a scope and are not limited to a singl
 
 The use of short literals in generic types is limited. Short literals are not supported for constraints; even if the only constraint is a function type, the use of short literals is not allowed.
 
-If the type is partially known, short literals are allowed. For this, the type must be explicit function type, the parameter types of the function, if any, must be known. Type inference is permitted only for the return type.
+If the type is partially known, short literals are allowed. For this, the type must be an explicit function type; the parameter types of the function, if any, must be known. Type inference is permitted only for the return type.
 
 For example:
 ```jule

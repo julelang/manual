@@ -3,7 +3,7 @@
 To bind interoperable files, you must initialize a module for the project. See the [Modules](/packages/modules/) section. The import paths must start with the module name like ordinary use declarations. See [Using Packages](/packages/using-packages) section for more information.
 
 ## Linking Header Files
-The use declarations of Jule are used to include C++ headers in the Jule code to be generated. It's just a little different. A use declaration should be told that this is a C++ include and the path should be given as a string.
+The use declarations of Jule are used to include C++ headers in the Jule code to be generated. It's just a little different. A use declaration should be told that this is a C++ include, and the path should be given as a string.
 
 For example:
 ```jule
@@ -37,4 +37,4 @@ Valid source file extensions; `.cpp`, `.cc`, `.cxx`, `.c`, `.mm`
 
 ## Important Notes
 
-Header files are handled with absolute path at backend. Some compiler backends may not support include paths which is contains unicode characters. Jule will not handle that. So, your backend compiler may will not compile your IR.
+Header files are handled with an absolute path at backend. Some compiler backends may not support include paths which is contains unicode characters. Jule will not handle that. So, your backend compiler may not compile your IR.

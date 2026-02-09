@@ -1,6 +1,6 @@
 # Condition Variables
 
-Condition variables allow one or more coroutines to wait until a specific condition is met. They are a concurrency primitive provided by the Jule standard library via `sync::Cond`. A condition variable must be created using `Cond.New` and associated with a `Locker` during creation. This `Locker` is often a primitive like,`sync::Mutex`. Once a condition variable is used, it should not be copied again, as this could lead to inconsistencies and unexpected outcomes.
+Condition variables allow one or more coroutines to wait until a specific condition is met. They are a concurrency primitive provided by the Jule standard library via `sync::Cond`. A condition variable must be created using `Cond.New` and associated with a `Locker` during creation. This `Locker` is often a primitive like `sync::Mutex`. Once a condition variable is used, it should not be copied again, as this could lead to inconsistencies and unexpected outcomes.
 
 The `Signal` method is used to send a signal to a single waiting coroutine, while the `Broadcast` method is used to signal all waiting coroutines. To wait for a signal, the `Wait` method is used.
 
@@ -36,7 +36,7 @@ async fn main() {
 ```
 In the example code above, a `WaitGroup` and a condition variable are used to wait and signal for coroutines. As recommended, the locking mechanism to be used with the condition variable (in this case, a `sync::Mutex`) is directly associated and used through the condition variable. The coroutine 1 waits for a signal with the `Wait` call, while coroutine 2 sends this signal with the `Signal` call. As a result, coroutine 1 is awakened and continues execution.
 
-When waiting for a condition, the `Wait` method should called within a loop which checks the condition. This ensures that unexpected wakeups or notifications are handled correctly (see: [Spurious Wakeups](https://en.wikipedia.org/wiki/Spurious_wakeup)). A `Wait` call, considers the associated `Locker` is locked. Releases the locking mechanism and waits until it is notified by a signal. After being notified, it tries to reacquire the lock.
+When waiting for a condition, the `Wait` method should be called within a loop that checks the condition. This ensures that unexpected wakeups or notifications are handled correctly (see: [Spurious Wakeups](https://en.wikipedia.org/wiki/Spurious_wakeup)). A `Wait` call considers the associated `Locker` is locked. Releases the locking mechanism and waits until it is notified by a signal. After being notified, it tries to reacquire the lock.
 
 For example:
 ```jule

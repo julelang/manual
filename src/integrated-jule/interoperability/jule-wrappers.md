@@ -3,7 +3,7 @@
 Jule wrappers are a recommended approach for linking C/C++ definitions. This approach has several advantages and disadvantages. In this section, these will be discussed.
 
 **Jule wrappers are highly recommended when:**
-- Unsimple usage: an external function takes arguments when calling it and too much casting etc. requires
+- Unsimple usage: an external function takes arguments when calling it, and too much casting etc., requires
 - Type dependency: You have definitions that depend on external types
 - High usage: The external definition is used in various and many places in your Jule code
 
@@ -50,9 +50,9 @@ fn main() {
 }
 ```
 
-There is a wrapper function for `sayHello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and readable. It takes Jule's `str` type as an argument and allows to get rid of the `unsafe` qualifier.
+There is a wrapper function for `sayHello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and read. It takes Jule's `str` type as an argument and allows us to get rid of the `unsafe` qualifier.
 
-Wrapper Jule takes the `str` type and passes it to the function it wraps accordingly. Jule strings are in byte encoded UTF-8 format, so taking the pointer to the first byte gives you a simple byte pointer. They are the same as `char*` in size. For this reason, a correct and trouble-free usage is displayed by casting. In addition, we maintain type safety.
+Wrapper Jule takes the `str` type and passes it to the function, which wraps accordingly. Jule strings are in byte-encoded UTF-8 format, so taking the pointer to the first byte gives you a simple byte pointer. They are the same as `char*` in size. For this reason, a correct and trouble-free usage is displayed by casting. In addition, we maintain type safety.
 
 ### Structures
 
@@ -113,7 +113,7 @@ fn main() {
 }
 ```
 
-The code looks long. That's because it's literally written as a clean wrapper. C/C++ types were preserved and manual algorithms were written for compatible conversions. In addition, it seems that the wrapper offers new capabilities with a method by adding the `getFullName` method. In addition, there are `name` and `surname` methods to obtain the `name` and `surname` fields of the wrapped structure.
+The code looks long. That's because it's literally written as a clean wrapper. C/C++ types were preserved, and manual algorithms were written for compatible conversions. In addition, it seems that the wrapper offers new capabilities with a method by adding the `getFullName` method. In addition, there are `name` and `surname` methods to obtain the `name` and `surname` fields of the wrapped structure.
 
 You may not want to write such neat wrappers, though. In this context, it is also possible to benefit from the compatibility of API types as much as possible. For example, in our example case, we can make the code less dimensional by stretching the type safety by taking advantage of the implicit conversion compatibility of the `char*` type and Jule's `str` type.
 
@@ -155,7 +155,7 @@ fn main() {
 
 #### Methods
 
-Methods can be attached to constructs by the methods described in the interoperability section. Likewise, they can be presented over the wrapper. You can either explicitly keep type safety or choose to advantage of implicit conversion support if it is available for parameters and return types of function.
+Methods can be attached to constructs by the methods described in the interoperability section. Likewise, they can be presented over the wrapper. You can either explicitly keep type safety or choose to take advantage of implicit conversion support if it is available for parameters and return types of functions.
 
 Let's assume there is a `say_hi` method for the `Person` structure above:
 ```cpp

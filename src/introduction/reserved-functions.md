@@ -34,19 +34,20 @@ fn init() {
 
 The entry point is the main entry point of your program.
 The program starts executing from here.
-Without the entry point your code will not compile.
+Without the entry point, your code will not compile.
 
 The initializer function is part of Jule's package system.
 The difference is that the initializer functions are called automatically when the package is imported.
 This function can be thought of as a kind of constructor function of packages.
-Therefore, all initializer functions are called before the entry point of program.
+Therefore, all initializer functions are called before the entry point of the program.
 
-Init functions can be declared more than one, unlike entry point.
-So your source code can include many initializer function.
-This might be helpful for large code bases or platform specific programming cases.
-If source code includes many init function, calling order is not deterministic.
-So if you carry about calling order of init functions, you should be aware of that.
+Initializer functions can be declared more than once, unlike the entry point.
+So your source code can include many initialization functions.
+This might be helpful for large code bases or platform-specific programming cases.
+If the source code includes many init function, the calling order is not deterministic.
+So if you care about calling the order of initialization functions, you should be aware of that.
 
-Init functions are cannot evaluate, unlike entry point.
-So you can call entry point from any point of source code, but init functions technically is not exist for evaluation.
+
+Initializer functions cannot be evaluated, unlike the entry point.
+So you can call the entry point from any point of the source code, but the init functions technically do not exist for evaluation.
 So you cannot invoke init functions.

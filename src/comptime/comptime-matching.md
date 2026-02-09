@@ -1,8 +1,8 @@
 # Comptime Matching
 
-Comptime matching refers to matching at compile time using match statements without runtime costs. The first matching case will be placed in the code and the rest will be ignored. In this way, special algorithms can be placed in the code according to certain situations.
+Comptime matching refers to matching at compile time using match statements without runtime costs. The first matching case will be placed in the code, and the rest will be ignored. In this way, special algorithms can be placed in the code according to certain situations.
 
-A comptime matching is defined like a typical matching statements. However, in addition, the `const` keyword must be included at the beginning of the definition. This declares that the iteration will be executed comptime. The `fall` keyword cannot be used in comptime matching.
+A comptime matching is defined like a typical matching statement. However, in addition, the `const` keyword must be included at the beginning of the definition. This declares that the iteration will be executed comptime. The `fall` keyword cannot be used in comptime matching.
 
 ## Conditional Matching
 
@@ -45,9 +45,9 @@ In the example above, matched with the `MagicNumber` variable, since it's value 
 
 ## Type Matching
 
-Comptime type-matching statements can be used to implement different algorithms for types. There is no runtime cost, matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches and you will prevent semantic analysis errors for mismatched cases.
+Comptime type-matching statements can be used to implement different algorithms for types. There is no runtime cost; matches are checked at compile time. Cases that do not match are not checked, so you will not encounter problems such as type mismatches, and you will prevent semantic analysis errors for mismatched cases.
 
-Types must always match exactly. For example, when checking a trait, not all types that implement the trait are accepted. Matching is always done with exactly the same types.
+Types must always match exactly. For example, when checking a trait, not all types that implement the trait are accepted. Matching is always done with the same types.
 
 For example:
 
@@ -86,7 +86,7 @@ The above code maps the type returned from the `comptime::TypeOf` call for type 
 
 ## Compile-Time Panic
 
-Comptime matching statements provides compile-time panic calls. You can issue a compile error with a panic call to prevent improper matches and fail the compilation. To call compile-time panic on inappropriate matches, call panic only in that case and do it using a constant string value.
+Comptime matching statements provide compile-time panic calls. You can issue a compile error with a panic call to prevent improper matches and fail the compilation. To call compile-time panic on inappropriate matches, call panic only in that case and do it using a constant string value.
 
 For example:
 

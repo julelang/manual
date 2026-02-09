@@ -1,6 +1,6 @@
 # Debugging
 
-Debugging is the process of understanding, detecting and solving bugs in computer software systems. There are many different methods for debugging, such as unit testing and control flow analysis.
+Debugging is the process of understanding, detecting, and solving bugs in computer software systems. There are many different methods for debugging, such as unit testing and control flow analysis.
 
 ## Compile for Debugging
 

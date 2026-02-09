@@ -1,5 +1,5 @@
 # Data Types
-Jule is designed strongly typed. Therefore, the data-types of all values must be specified during compilation. In this section we will look at the builtin types offered by the compiler. 
+Jule is designed strongly typed. Therefore, the data types of all values must be specified during compilation. In this section we will look at the builtin types offered by the compiler. 
 
 ## Primitive Types
 | Type     | Typical Bit Width  | Typical Value                                                       |
@@ -130,7 +130,7 @@ Example to underscored literals:
 
 ## Byte and Rune Literals
 
-A byte or rune literal is represented by a single character between single quotes. Since it is typically a string element, it supports the same escape sequences. Literal can be evaluated in two ways, these are byte literal and rune literal. If your character is small enough to be a byte (0 <= b <= 255) it is treated as a byte, otherwise it is treated as a rune.
+A byte or rune literal is represented by a single character between single quotes. Since it is typically a string element, it supports the same escape sequences. A literal can be evaluated in two ways; byte literal and a rune literal. If your character is small enough to be a byte (0 <= b <= 255), it is treated as a byte, it is treated as a rune.
 
 For example:
 

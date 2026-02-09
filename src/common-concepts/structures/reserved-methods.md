@@ -1,10 +1,10 @@
 # Reserved Methods
 
-Reserved methods are methods that standardize certain functions of structures. When the appropriate pattern is provided, the reserved method provides the functionality it is set to the structure.
+Reserved methods are methods that standardize certain functions of structures. When the appropriate pattern is provided, the reserved method provides the functionality that is set to the structure.
 
-In order for the reserved method to be implemented by the compiler, the pattern must be followed. This pattern can affect many points such as the name of the method, number of parameters, and return type.
+In order for the reserved method to be implemented by the compiler, the pattern must be followed. This pattern can affect many points, such as the name of the method, the number of parameters, and the return type.
 
-Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore they do not cause any compiler errors.
+Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore, they do not cause any compiler errors.
 
 ## `fn Str(*self): str`
 

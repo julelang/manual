@@ -4,7 +4,7 @@ Jule allows defining type aliases to use existing types. The behavior of such al
 
 ## Soft Type Aliases
 
-Soft type aliases is an alias for existing types defined by developer. When these aliases are used, they qualify the types they represent.
+Soft type aliases is an alias for existing types defined by the developer. When these aliases are used, they qualify the types they represent.
 
 For example:
 ```jule
@@ -17,16 +17,16 @@ fn main() {
 ```
 As seen in the example above, there is an alias definition of `int32` for the `i32` data type. The keyword `type` comes first to define an alias. Then comes the name you want to give and which type it will represent. This alias will now represent `i32` when used.
 
-In addition, it seems that this alias is used in variable definition. This is because the compiler recognizes the default types builtin. If your type alias represents a builtin definition, your type alias will not be detected as a type. For this reason, it is a more useful approach to specify specifically.
+In addition, it seems that this alias is used in a variable definition. This is because the compiler recognizes the default types built-in. If your type alias represents a built-in definition, your type alias will not be detected as a type. For this reason, it is a more useful approach to specify specifically.
 
 Conspicuously, the equal sign is used in the syntax. This is actually an intuitive design choice that indicates that this type alias is directly equivalent to the type it represents.
 
 ## Strict Type Aliases
 <div class="warning-badge">experimental</div>
 
-Strict type aliases are different from soft type aliases. Technically, they are considered a new and independent genre, even though they use the genre they refer to as a basis. That is, they are not directly equal to the type on which they are based. So they have a strict difference in type safety compared to soft type aliases, there is not even implicit casting between underlying types, explicit casting is required.
+Strict type aliases are different from soft type aliases. Technically, they are considered a new and independent genre, even though they use the genre they refer to as a basis. That is, they are not directly equal to the type on which they are based. So they have a strict difference in type safety compared to soft type aliases; there is not even implicit casting between underlying types, explicit casting is required.
 
-Defining a strict type alias is just like defining a soft type alias. However, colon should be used instead of equal sign.
+Defining a strict type alias is just like defining a soft type alias. However, the colon should be used instead of the equal sign.
 
 For example:
 ```jule
@@ -67,13 +67,13 @@ If the source type is a structure, it inherits the structure's fields, although 
 Any static field of source type, such as type constants or enum fields, will not be derived.
 
 ## Scopes
-In global scope, type aliases can refer to each other without error. Except some special cases such as cyclic aliases.
+In a global scope, type aliases can refer to each other without error. Except for some special cases, such as cyclic aliases.
 
 For example:
 ```jule
 type A: B
 type B: int
 ```
-In the code example above, it is valid use of type aliases.
+In the code example above, it is a valid use of type aliases.
 
-But in the scopes, such as function scope, they must be ordered. A type alias cannot refer th type alias which is not defined yet. So, when the code example above used in such a scope, type alias `A` will cause an error about `B` is not exist yet, since `B` is not defined yet.
+But in the scopes, such as the function scope, they must be ordered. A type alias cannot refer th type alias that is not defined yet. So, when the code example above is used in such a scope, type alias `A` will cause an error because `B` does not exist yet, since `B` is not defined yet.

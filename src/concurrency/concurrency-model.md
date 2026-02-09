@@ -4,7 +4,7 @@ The concurrency model defines how Jule handles memory and coroutine management i
 
 ## References
 
-You cannot use any function that has reference parameters for concurrency. At least with Safe Jule. Because the scopes of the references must be traceable by compiler, a kind of safety obsession of compiler. Coroutine calls break this. During concurrency, your reference may fall into a dangling position, which can be a serious problem. To avoid this, Safe Jule does not allow this, but if you are aware of what you are doing, Unsafe Jule will allow you to use a function with reference parameters for concurrency.
+You cannot use any function that has reference parameters for concurrency. At least with Safe Jule. Because the scopes of the references must be traceable by the compiler, a kind of safety obsession with the compiler. Coroutine calls break this. During concurrency, your reference may fall into a dangling position, which can be a serious problem. To avoid this, Safe Jule does not allow this, but if you are aware of what you are doing, Unsafe Jule will allow you to use a function with reference parameters for concurrency.
 
 For example:
 ```jule
@@ -21,7 +21,7 @@ Methods can be used to make coroutine calls. But your compiler can only use smar
 
 ## Data Races
 
-Data races are undefined and must be prevented by the developer. Any data race present in the program can be handled by the compiler in any way. In some cases, this can lead the compiler to apply optimizations by relying on the data with the data race. Some optimizations can also make debugging difficult. Therefore, data race situations in concurrent programming must be carefully considered and synchronized.
+Data races are undefined and must be prevented by the developer. Any data race present in the program can be handled by the compiler in any way. In some cases, this can lead the compiler to apply optimizations by relying on the data with a data race. Some optimizations can also make debugging difficult. Therefore, data race situations in concurrent programming must be carefully considered and synchronized.
 
 ## Channels
 

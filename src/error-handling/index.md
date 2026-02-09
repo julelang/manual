@@ -1,2 +1,2 @@
 # Error Handling
-The program should naturally generate and check for errors in some cases. This core topic deals with error handling. Jule uses panics and the error structure. Catching panics and handling errors happens through them. It is plain and simple. 
+The program should naturally generate and check for errors in some cases. This core topic deals with error handling. Jule uses panics and the error structure. Catching panics and handling errors happens through them. It is plain and simple.
