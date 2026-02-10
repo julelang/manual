@@ -1,17 +1,17 @@
 # Directives
-Compiler directives (or pragmas) are statements that describe how the compiler should handle source code. Directives are safe to use. It is checked by the compiler and incorrect usage is warned.
+Compiler directives (or pragmas) are statements that describe how the compiler should handle source code. Directives are safe to use. They are checked by the compiler and incorrect usage is warned.
 
-For a directive to be valid, it must be used correctly in the right place. The directive must be start with the `#` prefix.
+For a directive to be valid, it must be used correctly in the right place. The directive must start with the `#` prefix.
 
 \
-For example to directives:
+An example to directives:
 ```jule
 #typedef
 ```
 
 ## Top Directives
-Top directives are must be placed at top of source file.
-Usually contains specific compiler configurations for file or package.
+Top directives must be placed at top of a source file.
+Usually contains specific compiler configurations for files or packages.
 
 ## Arguments
 The arguments of the directives are separated by spaces. The directive must be followed by the required arguments, separated by spaces.
@@ -24,7 +24,7 @@ For example:
 
 ## Directive Expressions
 
-Some directives evaluate the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return a boolean. Expressions are only logical. So the variables you will use are boolean, and the binary operations you can do are only logical and, and logical or.
+Some directives evaluate the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expressions must always return a boolean. Expressions are only logical, so the variables you will use are boolean, and the binary operations you can do are only logical and, and logical or.
 
 Your variables are set automatically by your compiler. The variables you can use are the same as in file annotation. They are variables that are also described in the [platform support](/compiler/platform-support) documentation.
 
@@ -38,7 +38,7 @@ The syntax is simple and easy to learn. The logical and operator is `&&` and the
 
 ### Variables
 
-Here is the list of variables and their existence:
+Here is the list of variables and their meanings:
 
 - `windows`: operating system is windows
 - `darwin`: operating system is darwin
@@ -57,7 +57,7 @@ Here is the list of variables and their existence:
 
 ### Examples
 
-Here is an example code via `build` directive:
+Here is an example code with the `build` directive:
 
 ```jule
 #build (darwin || windows) && x64
@@ -67,11 +67,11 @@ Here is an example code via `build` directive:
 ```
 
 ## Directive: `pass`
-Directive pass is a top directive.
+The `pass` directive is a top directive.
 Passes compiler flags to the generated compile command for compiling source code. Uses a string literal as an argument, but literals are not processed; it accepts it directly. So, you can't use escape sequences like original string literals. Pass directives add to command lines after source files.
 
 ::: info
-There are no issue if you are using same passes.
+There are no issues if you are using similar passes.
 The compiler will eliminate duplicate passes.
 :::
 
@@ -90,12 +90,12 @@ The `#pass` directive treats its expression strictly as a single argument. This 
 
 ## Directive: `build`
 
-The `build` directive is a top directive. Different way of specific programming such as platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
+The `build` directive is a top directive. Different way of specific programming, such as platform specific programming. It can be used with or instead of file annotation. Unlike file annotation, it is a directive, not a naming convention.
 
 Please look at the [specific programming](/compiler/specific-programming) section for more information.
 
 ## Directive: `typedef`
-In external structs, if the structure is a `typedef` use this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
+In external structs, if the structure is a `typedef` using this will configure code generation correctly. Otherwise, the struct will be treated as a classical structures.
 
 ## Directive: `cdef`
 In external functions, if the function is a `#define`, it configures code generation to be compatible.
