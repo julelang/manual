@@ -148,7 +148,7 @@ Native backend may be an exception. Native backend can be added for supported pl
 
 Only time can give a definitive answer to this question.
 
-### Why does not Jule have built-in methods?
+### Why doesn't Jule have built-in methods?
 
 Jule has built-in functions for some critical operations, such as memory allocation, but not built-in methods because those are generally considered a bad design choice. Having methods for built-in types is vague and resembles functional programming, and Jule is not a functional language.
 
@@ -181,7 +181,7 @@ In our opinion, adding function overloading will make the language more complex 
 
 ### Will different memory management methods be added?
 
-Not planned, but may be.
+Not planned, but it is a possibility.
 
 Jule supports smart pointers, and they are suitable for many different memory management methods, such as Tracing GC or even ownership.
 
@@ -276,12 +276,12 @@ In the future, a feature for assigning default values to structs may be reintrod
 >>
 > Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
 
-### Why do not captured variables of closures need to be specified?
+### Why don't captured variables of closures need to be specified?
 
 Because it is not simple. \
 Compiler can handle it instead of developer.
 
-### Why do not allow choose how to capture variables of closures?
+### Why is choosing how to capture variables of closures not allowed?
 
 Because of safety. Jule doesn't have certain things to avoid adding too much responsibility to the runtime. One of these is to decide which variable in your runtime will be moved to the heap or not.
 
@@ -307,11 +307,11 @@ fn main() {
 ```
 In the above example, we know that the closure will live shorter than the scope and we want to capture by reference. A child scope is created, but this is not necessary. This is an improvement to prevent the reference variables we created for the variables we want to capture by reference from surviving in the rest of the scope. The `ri` variable is used to reference the `i` variable and is mutated with Unsafe Jule in the closure. In this way, the `i` variable is also affected.
 
-### Why the function keyword needed for short function literals?
+### Why is the function keyword needed for short function literals?
 
 When adding short literals to the language, the way to support readability as much as possible seemed to be clearly indicating that the literal is definitely a function.
 
-### Why mutability is not handled automatically for parameters of short function literals?
+### Why is mutability not handled automatically for parameters of short function literals?
 
 Due to Jule's immutable-by-default approach, this had to be the case. Developers should explicitly specify what needs to be mutable. However, this is not only a design choice based on principles, but also to preserve the flexibility provided to developers and to prevent unnecessary mutability.
 
