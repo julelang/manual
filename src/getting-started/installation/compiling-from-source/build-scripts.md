@@ -8,7 +8,7 @@ These examples assume you are in the source code `(src/julec)` directory of the 
 :::
 
 ::: warning
-The build scripts designed for developers. \
+The build scripts were designed for developers. \
 Compiles julec with zero optimization.
 :::
 

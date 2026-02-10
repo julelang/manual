@@ -14,12 +14,12 @@ If this code does not allow you to get the latest julec build, you can get a lat
 
 ## How to Compile an IR
 
-### Using Script
+### Using a script
 
 A script has been designed to automate this. It automatically obtains the latest Jule@master source code, makes adjustments, selects the right IR distribution for your operating system and architecture, and creates an optimized ready-to-use julec build.
 
 ::: warning
-Script will use Clang.
+The script will use Clang.
 :::
 
 
@@ -32,7 +32,7 @@ bash <(curl -s https://raw.githubusercontent.com/julelang/julec-ir/main/compile-
 
 You need the Jule source codes to compile the IR code. IR codes have dependencies like some header files in API and standard library. Therefore, you must have obtained the Jule source code to compile the IR code. In most cases, it shouldn't be a problem for you to compile the most recent C++ headers in the main branch. However, for the most guaranteed experience, it is recommended to obtain the source tree of the commit where these IR codes were generated. The commit IR uses is mentioned above of repository.
 
-The include directories of the IR codes are set to be in the root directory of the Jule source code of the IR code. So put your IR code inside the root directory of Jule source tree you got and build in that directory. If you want a different directory, you need to change the include directories of IR.
+The include directories of the IR codes are set to be in the root directory of the Jule source code of the IR code. So put your IR code inside the root directory of the Jule source tree you got and build in that directory. If you want a different directory, you need to change the include directories of IR.
 
 Of course you need a C++ compiler to compile the IR code. At this point it is recommended to use one of the officially supported compilers. You can check [relevant manual page](/compiler/backend/) for more details.
 
