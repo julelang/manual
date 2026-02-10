@@ -2,8 +2,8 @@
 julec is written in Jule!
 
 ::: warning
-These example assume you are in the root directory of the julec.
-This example also accepts you already have julec in global path.
+These examples assume you are in the root directory of julec.
+This example also assumes you already have julec in the global path variable.
 :::
 
 ```
@@ -29,6 +29,6 @@ It is recommended to compile julec's C++ IR with ``O3`` to get the fastest and m
 
 #### Notice about `Ofast` Optimization Level
 
-The `Ofast` optimization is quite an aggressive level and can break language standards. For example, it has been observed that a julec build with `Ofast` produces different numbers than expected due to probably math optimizations.
+The `Ofast` optimization is quite an aggressive level and can break language standards. For example, it has been observed that a julec build with `Ofast` produces different numbers than expected, probably due to math optimizations.
 
 Therefore, we recommend using `O3` as the highest optimization level to get a more reliable build.

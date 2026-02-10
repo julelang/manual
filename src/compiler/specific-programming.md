@@ -42,7 +42,7 @@ You can use this directive for platform specific programming or compilation spec
 
 ### Variables
 
-Your variables are set automatically by your compiler. There are variables for many situations. You can also read the [variables](/compiler/directives#variables) section to get more ideas about platform specific variables.
+Your variables are set automatically by your compiler. There are variables for many situations. You can also read the [variables](/compiler/directives#variables) section to get more idea about platform specific variables.
 
 ### Examples
 

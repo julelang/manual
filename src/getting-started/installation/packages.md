@@ -16,5 +16,5 @@ If you see a maintainer with the `✔` mark, it means they are officially recogn
 | [sebaguardian](https://github.com/sebaguardian) |         | Nixpkgs:      `jule`, `julefmt`, `juledoc`                                 |
 
 ::: warning
-Still, keep in mind that these packages are not official packages. Jule maintainers do not accept any responsibility and does not ensure any update promises. For any issue, please contact the package maintainers.
+Still, keep in mind that these packages are not official packages. Jule maintainers do not accept any responsibility and do not ensure any update promises. For any issue, please contact the package maintainers.
 :::

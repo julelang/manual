@@ -26,13 +26,13 @@ Some optimizations may not be applied for some scopes and expressions.
 :::
 
 `--opt-zcopy` \
-Enabled special optimizations for the built-in copy function.
+Enables special optimizations for the built-in copy function.
 - If the source slice is an array slicing, it avoids allocating a new slice by making the slicing mutable. This only applies to the last sliced ​​array of expression.
 
 ---
 
 `--opt-zappend` \
-Enabled special optimizations for the built-in append function.
+Enables special optimizations for the built-in append function.
 
 - If the element slice is an array slicing, it avoids allocating a new slice by making the slicing mutable. This only applies to the last sliced ​​array of expression.
 
@@ -66,17 +66,17 @@ It eliminates dead (unused / unreachable) codes from object code.
 ---
 
 `--opt-append` \
-Enables special optimizations for built-in `append` function.
+Enables special optimizations for the built-in `append` function.
 
-- It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append used at single assignment statement.
+- It prevents the allocating and destruction of a new slice by adding slice literals element-by-element if append is used at single assignment statement.
 
 ---
 
 `--opt-len` \
-Enables special optimizations for built-in `len` function.
+Enables special optimizations for the built-in `len` function.
 
 - Simplifies expressions such as `len([]byte(myStr))` to `len(myStr)`.
-- Converts expressions such as `len([]rune(myStr))` to more efficient variant which is avoids making allocation.
+- Converts expressions such as `len([]rune(myStr))` to a more efficient variant which avoids making allocation.
 
 ---
 
@@ -85,9 +85,9 @@ Enables special optimizations for mathematical operations.
 
 - Skips the divide-by-zero check for division when operand is constant.
 - Skips the divide-by-zero check for modulo when operand is constant.
-- Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integer, multiplier is constant and power of 2.
+- Converts multiplications to bit shifting if possible. Good conditions for this optimization: operands are integers, multiplier is constant and power of 2.
 - Converts modulo by 2 expressions to equivalent bitwise operation.
-- Eliminates neutral binary expressions such as such as addition/subtraction with the constant-zero.
+- Eliminates neutral binary expressions such as addition/subtraction with the constant-zero.
 - Eliminates runtime overflow checking for binary shifting expressions if right operand is constant.
 - Eliminates cost of the `x^0`, `0^x`, `x|0`, or `0|x` computations. It will be simplified to `x` expression.
 - Eliminates cost of the `x&0`, `0&x` computations. It will be simplified to `0` expression.
@@ -99,8 +99,8 @@ Enables special optimizations for mathematical operations.
 `--opt-access` \
 Enables special optimizations for memory accessing.
 
-- Skips safety checks such as boundary checking if accessed to array via constant index expression.
-- Removes the cost of boundary checking of expressions like `array[i&(len(array)-1)]` for arrays whose length is power of two.
+- Skips safety checks such as boundary checking if accessed an array via constant index expression.
+- Removes the cost of boundary checking of expressions like `array[i&(len(array)-1)]` for arrays whose length is a power of two.
 - If in a range iteration the iterated variable referred to by a immutable index variable is indexed, it is optimized as direct access and the cost of safety measures such as boundary checking is bypassed. <div class="warning-badge">experimental</div>
 - If it can be understood that the index value used in any indexing process is within the boundaries, it removes the cost of boundary checking. <div class="warning-badge">experimental</div>
 - If it can be understood that the smart pointer or reference pointer is not nil, it removes the cost of nil dereferencing. <div class="warning-badge">experimental</div>
@@ -110,7 +110,7 @@ Enables special optimizations for memory accessing.
 `--opt-inline` \
 Enables special optimizations for inlining.
 
-- The IR is generated includes encourage inline optimizations of the backend compiler.
+- The IR-generated includes encourage inline optimizations of the backend compiler.
 
 ---
 
@@ -125,21 +125,21 @@ Enables special optimizations for pointers.
 Enables special optimizations for conditional expressions and structures.
 
 - Removes unreachable if-else chain cases such as having constant false expressions. Applied for if-else chains, and match-cases.
-- Remove unnecessary trailing cases that comes after constant true case. Applied for if-else chains, and match-cases.
+- Removes unnecessary trailing cases that come after constant true case. Applied for if-else chains, and match-cases.
 - Removes condition eval overhead of constant true cases. Applied for if-else chains, and match-cases.
-- Avoids using wrapper for strings if string compared with literal.
-- Eliminates and simplifies predictable boolean expressions. Such as `if (x || true)` will be handled as `if (true)` or `if (x && false)` will be handled as `if (false)`.
-- Eliminates predictable comparison expressions. Such as `if (x > x)` will be handles ad `if (false)` or `if (x == x)` will be handled as `if (true)`.
+- Avoids using a wrapper for a string if the string is compared with a literal.
+- Eliminates and simplifies predictable boolean expressions. Such as `if (x || true)` will be handled as `if (true)` and `if (x && false)` will be handled as `if (false)`.
+- Eliminates predictable comparison expressions. Such as `if (x > x)` will be handled as `if (false)` and `if (x == x)` will be handled as `if (true)`.
 
 ---
 
 `--opt-str` \
 Enables special optimizations for string operations.
 
-- Converts string comparison with empty literal to `len(s) == 0` check.
-- Erases relevant ranges of string's itself instead of making allocation for substring and assignment if string gets assignment with substring from itself.
+- Converts string comparison with empty literal to a `len(s) == 0` check.
+- Erases relevant ranges of the string itself instead of making allocation for substring and assignment, if the string gets assigned with a substring from itself.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
-- Optimizes allocations of the string concatenations if possible.
+- Optimizes allocations of string concatenations if possible.
 - Optimizes string and bytes conversions of binary expressions such as `str([]byte) == str([]byte)`.
 
 ---
@@ -147,7 +147,7 @@ Enables special optimizations for string operations.
 `--opt-slice` \
 Enables special optimizations for slice operations.
 
-- Erases relevant ranges of slice's itself instead of making allocation for subslice and assignment if slice gets assignment with subslice from itself.
+- Erases relevant ranges of the slice itself instead of making allocation for subslice and assignment, if a slice gets assigned with a subslice from itself.
 
 ---
 
@@ -161,10 +161,10 @@ Enables special optimizations for array operations.
 `--opt-assign`\
 Enables special optimizations for assignments.
 
-It's will not check deeply whether expressions are same. So if you want take advantage of this optimization, keep simple your assignments.
+It will not check deeply whether expressions are same. So if you want take advantage of this optimization, keep your assignments simple.
 
 - Removes self assignments such as `a = a` or `a, b = a, b`.
-- Optimize swap assignments such as `a, b = b, a`.
+- Optimizes swap assignments such as `a, b = b, a`.
 
 ---
 
@@ -181,21 +181,21 @@ Enables special optimizations for iterations.
 
 - Removes casting if non-constant string casted to byte slice for range iteration. Uses string's bytes directly.
 - Removes casting if non-constant string casted to rune slice for range iteration. Avoids making allocation for temporary rune slice, iterates runes of string directly.
-- Makes array the slice literal expressions of the range iterations.
+- Makes arrays the slice literal expressions of the range iterations.
 
 ---
 
 `--opt-dynamic`\
 Enables special optimizations for dynamic programming features.
 
-- If it can be understood that the `<any>` is the type `x` and not nil, it removes the cost of not-nil and type compatibility checking for type assertion expressions with type `t`. <div class="warning-badge">experimental</div>
+- If it can be understood that `<any>` is the type of `x` and it isn't nil, it removes the cost of not-nil and type compatibility checking for type assertion expressions with type `t`. <div class="warning-badge">experimental</div>
 
 ---
 
 `--opt-std-strings`\
 Enables special optimizations for the `std/strings` package.
 
-- Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WriteStr` methods of the `Builder` struct.
+- Removes exceptional handling costs, if possible, of the `Write`, `WriteByte`, `WriteRune`, and `WriteStr` methods of the `Builder` struct.
 
 ## Optimization Levels
 
@@ -211,8 +211,8 @@ Set optimization level to `<level>`.
 The optimization levels are as follows:
 
 - `L0`: The default optimization level: no special optimizations.
-- `L1`: passes all `L0` flags with `--opt-zcopy`, `--opt-zappend`, `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
-- `L2`: passes all `L1` flags with `--opt-std-strings`
+- `L1`: passes all `L0` flags along with `--opt-zcopy`, `--opt-zappend`, `--opt-copy`, `--opt-deadcode`, `--opt-append`, `--opt-math`, `--opt-access`, `--opt-inline`, `--opt-ptr`, `--opt-cond`, `--opt-str`, `--opt-slice`, `--opt-assign`, `--opt-iter`, `--opt-dynamic`, `--opt-array`, `--opt-len`
+- `L2`: passes all `L1` flags along with `--opt-std-strings`
 
 ## Production Compilation
 
@@ -235,21 +235,21 @@ Pros of enabling production compilation:
 Cons of enabling production compilation:
 - Harder debugging.
 - Longer compile time.
-- Some subtle bugs can only occur with optimizations enabled by production compilation and can cause the executable to behave differently than expected. It is mostly related to the codes you write or use when using C/C++ interoperability.
+- Some subtle bugs can only occur with optimizations enabled by production compilation and can cause the executable to behave differently than expected. It is mostly related to the code you write or use when using C/C++ interoperability.
 - If the backend compiler you are using has some new optimizations or contains bugs, your code may run fast but not as expected. These types of optimization-related bugs can be difficult to track down.
 
 ## Optimization Options vs Production Compilation
 
-Optimization options and production compilation focus on different things. Optimization options focus on achieving optimizations on the IR generated by your compiler. It doesn't interfere with anything else. Production compilation now focuses on compiling the IR you get when you want to compile software that is ready for production. Production compiler never enables the optimization flag. It focuses solely on compiling IR for production. If necessary, IR can remove things that are not required for production, but these changes are not improvements provided by optimization options. For best performance and optimization in production, optimization options and production compilation should be used together.
+Optimization options and production compilation focus on different things. Optimization options focus on achieving optimizations on the IR generated by your compiler. It doesn't interfere with anything else. Production compilation focuses on compiling the IR you get when you want to compile software that is ready for production. Production compiler never enables the optimization flag. It focuses solely on compiling IR for production. If necessary, IR can remove things that are not required for production, but these changes are not improvements provided by optimization options. For best performance and optimization in production, optimization options and production compilation should be used together.
 
 ### Optimization Options
 
-- Focus to code generation optimizations, better IR.
-- Never do not touch backend compiler.
+- Focus on code generation optimizations, better IR.
+- Never interact with backend compiler.
 
 ### Production Compilation
 
-- Focus to faster executables as possible.
+- Focus on the fastest executable possible.
 - Optimize code generation for better IR if necessary.
 - Enable optimizations of backend compiler.
 - Generate production-ready IR.

@@ -13,11 +13,11 @@ Even if you can compile code generated outside of official support compilers wit
 
 ### Primary Support
 
-Primary support are primarily supported, most important and most recommended compilers. When a problem occurs in these compilers, priority is given to the solution and it is tried to be solved quickly.
+Primary support is the primarily supported, most important and most recommended compilers. When a problem occurs in these compilers, priority is given to the solution and it is tried to be solved quickly.
 
 ### Partial Support
 
-Partial support is compilers that are officially supported but not always guaranteed to be as accurate as primary supported compilers. Even if they can compile your code, there is also no guarantee that the executable will execute as expected.
+Partial support is compilers that are officially supported but not always guaranteed to be as accurate as primary support compilers. Even if they can compile your code, there is no guarantee that the executable will run as expected.
 
 Partial support may not be available for all platforms and is broad in scope. Therefore, please read the relevant compiler's manual to find out why the associated compiler qualifies as partial support.
 
@@ -35,7 +35,7 @@ Supports compilation for C++14, C++17, C++20 standards. As for the standard, it 
 
 ### Jule 0.0.10
 
-It fixes compilation errors that caused by API when using C++14 standard.
+It fixes compilation errors that are caused by the API when using C++14 standard.
 
 ### From Beta 0.0.7 to Jule 0.0.9
 
@@ -67,13 +67,13 @@ These tests were performed on Linux. When we tested GCC compilation on Windows w
 
 ### Jule 0.1.4 and Higher Versions
 
-Jule supports Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. In Jule 0.1.4, the `std/sys` package and whole standard library implemented using Windows API.
+Jule supports Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. In Jule 0.1.4, the `std/sys` package and standard library were implemented using Windows API.
 
-If you encounter issues about Windows support, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
+If you encounter issues with Windows support, please report them to us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
 
 ### From Jule 0.0.14 to Jule 0.1.3
 
-Jule supports the Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. However, Windows API support is not guaranteed to work as expected. When using the Windows API,, your program may be able to compile successfully, but may need to take additional actions like linking missing libraries. If you encounter issues like that, please report us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
+Jule supports the Windows API. Our GitHub Action workflows use Clang (not MinGW) on Windows machines to compile Jule programs. However, Windows API support is not guaranteed to work as expected. When using the Windows API, your program may be able to compile successfully, but it may need to take additional actions like linking missing libraries. If you encounter issues like that, please report them to us via [Jule Issue Tracker](https://github.com/julelang/jule/issues).
 
 ### Jule 0.0.13 and Older Versions
 

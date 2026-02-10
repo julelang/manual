@@ -9,7 +9,7 @@ fn main() {
 ```
 
 \
-For compile Jule code, we just give current directory path to julec:
+To compile Jule code, we just give the current directory path to julec:
 ```
 julec build .
 ```
@@ -18,7 +18,7 @@ The compiler translates our Jule code to C++ code.
 
 In compile mode, julec will show you the build command itself on the command line, which is used during compilation. You can also set the mod to transpile and choose to compile manually, or you can write a script that compiles the code after you have it in C++ form, using the transpile mode to experience compile mode.
 
-As result we have a executable machine code result of our program.
+As a result we have an executable machine code result of our program.
 
 ## Backend Compiler Optimizations
 
@@ -41,7 +41,7 @@ For example to enable Clang's `O3` optimizations:
 
 ### Transpile and Compile Manually
 
-You can transpile your code and compile your IR code with your desired optimization setting by customizing the suggested compile command by compiler or with a completely custom compile command.
+You can transpile your code and compile your IR code with your desired optimization setting by customizing the suggested compile command by the compiler or with a completely custom compile command.
 
 ## Transpilation
 
@@ -54,7 +54,7 @@ For example:
 julec build --transpile .
 ```
 
-## Why julec Needs Directory Path Instead File Path?
+## Why does julec need a Directory Path instead of a File Path?
 In Jule, each program is also a package. Jule source codes in the directory are accepted within the package. Accordingly, every directory is actually a potential Jule package. The directory of the program you will compile should be the main package of your program.
 
 This also eliminates the need to link individual source codes to the compiler and significantly avoids the occurrence of long compiler commands. It makes it easy to understand which of the source codes are in the main program; the answer is simple: all the Jule source codes in the directory. Because of this approach, each Jule program is kept in a separate directory as a package, causing optimistic pressure on the project organization.

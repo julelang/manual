@@ -10,7 +10,7 @@ fn main() {
 	sys::Write(1, []byte("hello world"))!
 }
 ```
-In the example above, consider this program will compile for linux. The `sys` package provides `write` function with minimal abstraction. The example code prints `hello world` to stdout.
+In the example above, consider this program will compile for linux. The `sys` package provides a `write` function with minimal abstraction. The example code prints `hello world` to stdout.
 
 The equivalent C code:
 ```c
