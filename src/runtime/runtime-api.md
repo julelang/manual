@@ -64,24 +64,24 @@ Reads from stdin. Returns read byte count if success, `-1` otherwise.
 ```jule
 fn ptrEqual(a: *unsafe, b: *unsafe): bool
 ```
-Reports whether pointer allocations are points to same address.
+Reports whether pointer allocations are pointing to same address.
 
 ```jule
 fn _RCNew(): _RCPtr
 ```
-Returns new initialized ready-to-use reference counting data allocation pointer.
+Returns a new initialized ready-to-use reference counting data allocation pointer.
 
 ```jule
 unsafe fn _RCLoad(p: _RCPtr): _RCType
 ```
 Reads reference counting data. Passing nil pointer is not safe.
 
-Implemented with no concurrency-safety by default. If concurrency-safety necessary, compiler will update implementation implicitly. See memory model of concurrency.
+Implemented with no concurrency-safety by default. If concurrency-safety is necessary, compiler will update implementation implicitly. See memory model of concurrency.
 
 ```jule
 unsafe fn _RCLoadAtomic(p: _RCPtr): _RCType
 ```
-Same as `_RCLoad` but have concurrency-safe implementation.
+Same as `_RCLoad` but has a concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCAdd(mut p: _RCPtr)
@@ -93,7 +93,7 @@ Implemented with no concurrency-safety by default. If concurrency-safety necessa
 ```jule
 unsafe fn _RCAddAtomic(mut p: _RCPtr)
 ```
-Same as `_RCAdd` but have concurrency-safe implementation.
+Same as `_RCAdd` but has a concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCDrop(mut p: _RCPtr): bool
@@ -105,17 +105,12 @@ Implemented with no concurrency-safety by default. If concurrency-safety necessa
 ```jule
 unsafe fn _RCDropAtomic(mut p: _RCPtr): bool
 ```
-Same as `_RCDrop` but have concurrency-safe implementation.
+Same as `_RCDrop` but has a concurrency-safe implementation.
 
 ```jule
 unsafe fn _RCFree(p: _RCPtr)
 ```
 Deallocates reference counting data allocation.
-
-```jule
-unsafe fn panic1(m: *byte, n: int)
-```
-The built-in panic call.
 
 ```jule
 unsafe fn panic1(m: *byte, n: int)
@@ -165,7 +160,7 @@ Converts `rune` to `str`.
 ```jule
 unsafe fn runeStep(s: *byte, n: int, mut r: *rune, mut outLen: *int)
 ```
-Designed for `[]rune(s)` iterations. Takes pointer to string withl length and sets output pointers by first rune of string. Passing nil pointer for any parameter is not safe except `r`.
+Designed for `[]rune(s)` iterations. Takes a pointer to string with length l and sets output pointers by first rune of string. Passing a nil pointer for any parameter except `r` is not safe.
 
 ```jule
 fn runeCount(s: str): int
@@ -175,7 +170,7 @@ Returns rune count of the string.
 ```jule
 fn pseudoMalloc(n: i64, size: uint)
 ```
-Pseudo memory allocation, for allocation checking and documentation purposes. Any runtime allocation must be follow this implementation documentation. Pseudo allocates linear memory on the heap. The |n| is non-negative count of elements. The |size| is size in bytes of the single instance of a type which is will be allocated. Panics if |n*size > maxAlloc || n > max(int)|, also panics if allocation failed. Returns pointer to the allocation (pointer to the first cell if n>1). The allocated memory will not be initialized by default.
+Pseudo memory allocation, for allocation checking and documentation purposes. Any runtime allocation must follow this implementation documentation. Pseudo allocates linear memory on the heap. The |n| is a non-negative count of elements. The |size| is the size in bytes of the single instance of a type which will be allocated. Panics if |n*size > maxAlloc || n > max(int)|, also panics if allocation failed. Returns pointer to the allocation (pointer to the first cell if n>1). The allocated memory will not be initialized by default.
 
 Calling this function, performs allocation size checking as described and panics if conditions are met.
 
