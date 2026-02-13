@@ -9,6 +9,7 @@
 [fn Files(): comptimeFiles](#files)\
 [fn TypeOf(t: Type): comptimeTypeInfo](#typeof)\
 [fn ValueOf(v: V): comptimeValue](#valueof)\
+[fn IncludeBytes(path: str): []str](#includebytes)\
 [struct comptimeFiles](#comptimeFiles)\
 [struct comptimeFile](#comptimeFile)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Path(\*self): str](#path)\
@@ -162,6 +163,18 @@ In the example code above, the ByteSlice type is a strict type alias. But we can
 fn ValueOf(v: V): comptimeValue
 ```
 Returns compile-time value information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine and handle value in compile-time and will not executed at runtime.
+
+## IncludeBytes
+```jule
+fn IncludeBytes(path: str): []byte
+```
+Returns the contents of the file at path as a byte slice. The file path is resolved relative to the file path of the package in which the function is called. In other words, the file is searched for in the directory of the package that contains the source file calling the function.
+
+## IncludeStr
+```jule
+fn IncludeStr(path: str): []byte
+```
+Returns the contents of the file at path as constant string. The file path is resolved relative to the file path of the package in which the function is called. In other words, the file is searched for in the directory of the package that contains the source file calling the function.
 
 ## comptimeFiles
 ```jule
