@@ -50,7 +50,7 @@ fn main()
 
 ## Statements
 
-Statements are separated by a statement terminator: the semicolon (`;`).\
+Statements must be terminated by a statement terminator: the semicolon (`;`).\
 However, unless there is more than one statement on the same line, you don't need to include it, because julec will insert it automatically.
 
 For example:
