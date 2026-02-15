@@ -328,6 +328,7 @@ export default defineConfig({
             { text: 'Comptime Matching', link: '/comptime/comptime-matching' },
             { text: 'Comptime Iterations', link: '/comptime/comptime-iterations' },
             { text: 'Reflection', link: '/comptime/reflection' },
+            { text: 'Embed', link: '/comptime/embed' },
           ],
         },
         {
