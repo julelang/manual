@@ -189,3 +189,17 @@ Smart pointers guarantee that the reference counter is updated atomically in con
 However, atomic reference counting does not prevent data races on the smart pointer object itself. In other words, performing concurrent read-write or write-write operations on the same smart pointer variable is a data race and results in undefined behavior. The issue is not that the reference counter is non-atomic, but that the smart pointer structure as a whole is not copied or updated atomically. If one coroutine is copying a smart pointer while another coroutine concurrently modifies the same variable, a partially copied or inconsistent pointer state may occur. Even if the reference counting algorithm is correct, this can effectively invalidate lifetime guarantees and lead to UAF or double-free-like errors.
 
 If a smart pointer-related UAF or double-free is observed during debugging with tools such as ASan, the root cause is usually not the reference counting algorithm itself, but unsynchronized concurrent access to the smart pointer variable. These kinds of errors are especially common in lock-free data structures or when performing non-atomic pointer swaps.
+
+## Handling Deep Reference-Counted Structures
+
+In systems utilizing **Reference Counting (RC)** for memory management, a common but often overlooked "edge case" is a **Stack Overflow** occurring during the destruction of deeply nested or linked data structures. This typically manifests as a **Segmentation Fault (segfault)** when the last reference to the root of a long chain is released.
+
+When an object's reference count reaches zero, its **destructor** (or deallocator) is invoked. If that object owns another reference-counted object, the destruction process becomes recursive:
+1.  Object `A` is destroyed.
+2.  `A`'s destructor decrements the count of its child, Object `B`.
+3.  If `B`'s count hits zero, `B`'s destructor is called *from within the scope of `A`'s destructor*.
+4.  This continues down the chain: `A -> B -> C -> ... -> Z`.
+
+If the chain is sufficiently long, the CPU's **call stack** exceeds its limit because each destructor call adds a new frame to the stack before the previous one can finish.
+
+Jule does not attempt to automatically mitigate or prevent these. Such structures should be designed to avoid this, and doing so is recommended.
