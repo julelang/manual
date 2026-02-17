@@ -1,6 +1,6 @@
 # Public API
 
-The runtime library is not completely internal, also provides a public API. This API is mostly safe, and they may influence common runtime behavior or provide some additional opportunities.
+The runtime library is not completely internal, it provides a public API. This API is mostly safe, and it may influence common runtime behavior or provide some additional opportunities.
 
 ## Index
 
@@ -32,7 +32,7 @@ To view possible combinations of OS, run `julec tool distos`
 const Arch: str
 ```
 The running program's architecture target: one of i386, amd64 and so on.\
-To view possible combinations of OS, run `julec tool distarch`
+To view possible combinations of architectures, run `julec tool distarch`
 
 ```jule
 const RCDelta: untyped integer
@@ -51,7 +51,7 @@ fn NumCPU(): int
 ```
 Returns the number of logical CPUs usable by the current process.
 
-The set of available CPUs is checked by querying the operating system at process startup. Changes to operating system CPU allocation after process startup are not reflected.
+The set of available CPUs is checked by querying the operating system at process startup. Changes to operating system CPU allocation after process startup is not reflected.
 
 ## Yield
 ```jule

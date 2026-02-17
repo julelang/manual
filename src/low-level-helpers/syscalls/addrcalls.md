@@ -8,7 +8,7 @@ Addrcalls are low-level calls to a function address. An addrcall takes the addre
 |--------------------------------------------------|-------------------------------------------------------------------|
 | Based on pointer with function type wrapper      | Based on raw pointer/memory address                               |
 | Safety checks before call, like nil pointer      | No safety checks, immediately jumps to function                   |
-| May be implicit arguments like closure data      | No hidden arguments, just explicit ones                           |
+| May have implicit arguments like closure data    | No hidden arguments, just explicit ones                           |
 | Explicit sign, static type analysis              | Implicit sign, flexible, no static type analysis                  |
 | Suitable for Jule functions and interoperability | Suitable for syscalls, low-level calls, advanced interoperability |
 
@@ -24,15 +24,15 @@ fn main() {
 	sys::Addrcall(uintptr(extern.write), i32(1), &m[0], len(m))
 }
 ```
-In the example above, the `write` function accessed with C is linked as if it were a pointer. Technically, functions are pointers. Then, its address is taken as an integer with uintptr and called with `Addrcall`. A simple `Hello, world` example.
+In the example above, the `write` function accessed with C is linked as if it were a pointer (Technically, functions are pointers). Then, its address is taken as an integer with uintptr and called with `Addrcall`. A simple `Hello, world` example.
 
 The `Addrcall` function prototypes the called function according to the arguments.
 Remember, the types must be correct. Any type mismatch can cause various problems.
 
 ### Return Values
 
-Any `Addrcall` is void by default. So does not return value.
-If your function return value, you can specify it with the single generic type.
+Any `Addrcall` is returns void by default. So it does not return a value.
+If your function returns a value, you can specify it with the single generic type.
 
 For example:
 ```jule
@@ -46,5 +46,5 @@ fn main() {
 	println(n)
 }
 ```
-In the example above is basically same as the previous example.
-But it reads return value of the `write` function.
+The example above is basically the same as the previous example.
+But it reads the return value of the `write` function.

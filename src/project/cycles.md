@@ -21,4 +21,4 @@ struct A {
     a: A
 }
 ```
-In the example above, structure refers directly to itself. This is an illegal cycle. 
+In the example above, a structure refers directly to itself. This is an illegal cycle. 
