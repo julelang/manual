@@ -301,8 +301,13 @@ export default defineConfig({
           text: 'Error Handling',
           link: '/error-handling/',
           items: [
-            { text: 'Exceptionals', link: '/error-handling/exceptionals' },
-            { text: 'Errors', link: '/error-handling/errors' },
+            {
+              text: 'Exceptionals',
+              link: '/error-handling/exceptionals/',
+              items: [
+                { text: 'Errors', link: '/error-handling/exceptionals/errors' },
+              ],
+            },
             { text: 'Panics', link: '/error-handling/panics' },
           ],
         },
