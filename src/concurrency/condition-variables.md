@@ -4,7 +4,7 @@ Condition variables allow one or more coroutines to wait until a specific condit
 
 The `Signal` method is used to send a signal to a single waiting coroutine, while the `Broadcast` method is used to signal all waiting coroutines. To wait for a signal, the `Wait` method is used.
 
-Additionally, `sys::Cond` provides the `Lock` and `Unlock` methods for the associated `Locker`. For consistency, it is recommended to use these methods to manage the locking mechanism, even if the mechanism is stored in a separate variable. Furthermore, unless absolutely necessary—which is rare—it is advised not to store the locking mechanism associated with the condition variable separately.
+Additionally, `sys::Cond` provides the `Lock` and `Unlock` methods for the associated `Locker`. For consistency, it is recommended to use these methods to manage the locking mechanism, even if the mechanism is stored in a separate variable. Furthermore, unless absolutely necessary-which is rare-it is advised not to store the locking mechanism associated with the condition variable separately.
 
 For example:
 ```jule

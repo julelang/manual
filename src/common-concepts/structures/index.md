@@ -170,7 +170,7 @@ For more detailed information about tags, please read the section below.
 
 ### Tag Syntax and Semantics
 
-Tags are represented using string literals. Leading and trailing whitespace characters in the literals are invalid and will be evaluated like key:value pairs. Key-value pairs must be separated by exactly one whitespace character. A colon (`:`) is used to separate the key and value in a tag pair, and there must be no whitespace between them. Keys are considered valid if they contain any characters except Unicode whitespace characters and the tag separator character (`:`). Values must always be string literals—raw string literals are not supported, so double quotes (`"`) must always be used. The string literals used for values are processed the same way as Jule string literals, meaning escape sequences and similar syntax are supported.
+Tags are represented using string literals. Leading and trailing whitespace characters in the literals are invalid and will be evaluated like key:value pairs. Key-value pairs must be separated by exactly one whitespace character. A colon (`:`) is used to separate the key and value in a tag pair, and there must be no whitespace between them. Keys are considered valid if they contain any characters except Unicode whitespace characters and the tag separator character (`:`). Values must always be string literals-raw string literals are not supported, so double quotes (`"`) must always be used. The string literals used for values are processed the same way as Jule string literals, meaning escape sequences and similar syntax are supported.
 
 **Example tag literals**
 | Tag Literal                | Represented Tags       |

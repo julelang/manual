@@ -86,7 +86,7 @@ The runtime cost for Inheritance only occurs when converting between inherited t
 #### Type Offsets and Mapping
 Although trait types and `any` types share common data, the offset for each type differs from that of the `any` type. Trait types can be implemented for the types they are applied to in two ways: `Type` and `&Type`. This means they can accept both the type directly and a smart pointer referencing that type. To create shared data, an `any` data type is generated for both `Type` and `&Type` possibilities of a trait type. These types of data are later utilized by other type data, which also includes the specialized data created for the trait.
 
-Type offsets come into play here. Since each type implemented for a trait can be stored in two forms within the trait —`Type` and `&Type`— each type corresponds to 2 type offsets.
+Type offsets come into play here. Since each type implemented for a trait can be stored in two forms within the trait -`Type` and `&Type`- each type corresponds to 2 type offsets.
 
 For example, if a trait is implemented for the types `Foo` and `Bar`, the type offsets would be structured as follows: (1) `Foo`, (2) `&Foo`, (3) `Bar`, (4) `&Bar`. As explained, each type corresponds to a total of 2 offsets.
 
@@ -191,7 +191,7 @@ In buffered channels, an array is preallocated and used as a ring buffer. To kee
 
 Because buffered channels are not fully synchronized via a mutex and are optimized for high-frequency messaging, they also minimize mutex usage for waking coroutines. Parked receiver coroutines are *not* woken by a sender when data is written. They are unparked only in two cases: when the channel is closed, or when the queue becomes full.
 
-This is, in fact, one of the fundamental reasons mentioned in the [Concurrency Model](/concurrency/concurrency-model#channels) section, why failing to close a channel can lead to unexpected results. In an example scenario, a receiver attempting to receive from the channel may fail and park itself. When a sender sends data, it will not wake the receiver until the queue becomes full, so that the receiver may never wake. Because the capacity might never be filled—even after the last value is sent, closing the channel becomes essential once no more data will be sent. Based on the assumption that this is done correctly, buffered channels minimize coroutine management and tend to provide very good performance at very high messaging frequencies.
+This is, in fact, one of the fundamental reasons mentioned in the [Concurrency Model](/concurrency/concurrency-model#channels) section, why failing to close a channel can lead to unexpected results. In an example scenario, a receiver attempting to receive from the channel may fail and park itself. When a sender sends data, it will not wake the receiver until the queue becomes full, so that the receiver may never wake. Because the capacity might never be filled-even after the last value is sent, closing the channel becomes essential once no more data will be sent. Based on the assumption that this is done correctly, buffered channels minimize coroutine management and tend to provide very good performance at very high messaging frequencies.
 
 Channels can experience spurious wakeups, which are essentially unexpected wake events that occur before a hand-off takes place.
 
@@ -205,7 +205,7 @@ In select statements, an execution record is created first. Each expression is e
 
 The select then proceeds to its first phase by attempting all cases. If any case succeeds, it returns immediately. If all fail and a default case exists, the default case is executed. If there is no default case, the coroutine parks itself.
 
-After being unparked, the select chooses one of the cases that is ready and returns. If no case is ready—meaning it was a spurious wakeup- the select retries all channels. If the retry fails again, it parks itself once more. This loop continues until a case succeeds.
+After being unparked, the select chooses one of the cases that is ready and returns. If no case is ready-meaning it was a spurious wakeup- the select retries all channels. If the retry fails again, it parks itself once more. This loop continues until a case succeeds.
 
 As explained above, closing a channel causes a spurious wakeup, but this counts as a failed "received" state for the receiver coroutines. Still, because it is technically in a "received" state, a `select` statement may choose the case with the failed "received" state.
 

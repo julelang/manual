@@ -25,6 +25,7 @@
 - [Why do not allow choose how to capture variables of closures?](#why-do-not-allow-choose-how-to-capture-variables-of-closures)
 - [Why the function keyword needed for short function literals?](#why-the-function-keyword-needed-for-short-function-literals)
 - [Why mutability is not handled automatically for parameters of short function literals?](#why-mutability-is-not-handled-automatically-for-parameters-of-short-function-literals)
+- [Why doesn't Jule perform stack unwinding in panic situations?](#why-doesn-t-jule-perform-stack-unwinding-in-panic-situations)
 
 ### Why another language?
 
@@ -329,3 +330,26 @@ fn main() {
 }
 ```
 In the example above, the `foo` function takes an anonymous function as a parameter and allows the `x` parameter to be used mutably. However, if you look at the first call in the example, you'll see it actually only makes a `println` call. In this case, there is no need for the parameter to be mutable, and this does not compromise Jule's mutability safety. However, in the second call, the value of the `x` parameter is modified, so mutability is required.
+
+### Why doesn't Jule perform stack unwinding in panic situations?
+
+Jule defines the concept of a panic not as part of the error-handling mechanism, but as an **irrecoverable state** indicating that the program can no longer continue safely.
+
+For this reason, panic is not used to control program flow and is never treated as a recoverable error. All recoverable situations must be modeled through exceptional functions, which represent explicit and expected failures. This establishes a strict distinction between errors and program violations:
+
+- **Exceptional conditions**: Failures that may occur during normal execution and are expected to be handled by the caller.
+- **Panic conditions**: Indicate a violation of a contract, an internal invariant, or the program’s logic. At this point, correct continuation of execution can no longer be guaranteed.
+
+Jule does **not perform stack unwinding** during a panic. A panic causes the runtime to terminate the program immediately. This is a deliberate design decision and reflects that panic is not a recovery mechanism, but by definition a terminating signal.
+
+This approach has several technical consequences:
+
+- No unwind tables, exception metadata, or related code generation are required.
+- Smaller and more predictable binary outputs are produced.
+- The compiler can perform more aggressive optimizations without exception-safety constraints.
+- The runtime remains minimal, reducing maintenance and verification costs.
+- No user code is executed along the panic path; resource cleanup is left to the operating system or higher-level system architecture.
+
+Rather than solving failure recovery through implicit control-flow mechanisms at the language level, Jule favors explicit error handling combined with system-level supervision (such as process restarts or isolation strategies). In this model, panic is not a flow-control tool, but a definitive signal that the program is no longer reliable.
+
+In summary, Jule positions panic not as an "exception", but as a **program violation**, building its error model entirely on explicit, visible, and controllable constructs.

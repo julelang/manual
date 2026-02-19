@@ -1,13 +1,18 @@
 # Panics
-Panics abruptly stop program execution and "abort" it. If you're talking about an issue that will cause the program to crash while executing, using panic would be a good choice. The panic function is the built-in function. See the [builtin documentations](/std/builtin).
+Panics immediately terminate program execution by aborting the process. If an issue represents a condition that will inevitably crash the program at runtime, using `panic` is appropriate. `panic` is provided as a built-in function ([see the builtin documentation](/std/builtin#panic)).
 
-Panic situations do not use naïve approaches such as stack unwinding, so there is no chance to recover from them. There is no guarantee that things like defer scopes will run, and there is no cleanup guarantee. The program is terminated directly with an “abort”.
+Panic handling deliberately avoids mechanisms such as stack unwinding. As a result, panic situations are not recoverable: there is no guarantee that `defer` scopes will run, and no cleanup is guaranteed. The program is terminated directly via an abort.
 
-The reason for this is that Jule's primary mechanism for error handling is exceptional functions. Panic cases should only be used when the program state is corrupted/undefined and attempting recovery is no longer meaningful.
+This design reflects Jule's philosophy that the primary mechanism for error handling is *exceptional functions*. A panic should only be used when the program state is corrupted or undefined, and attempting recovery would be meaningless or unsafe.
 
-In addition to `panic` calls triggered by the programmer, the compiler will also generally use panic for unrecoverable errors. The most common examples are nil pointer dereferencing, boundary violations, or an ignored exceptional function error.
+In addition to explicit `panic` calls written by the programmer, the compiler may also emit panics for unrecoverable runtime errors. Common examples include nil-pointer dereferencing, out-of-bounds access, or ignoring the result of an exceptional function.
 
-In practice, a `panic` situation is something that should never occur, because when a program hits a panic it means it has encountered a state that was never supposed to happen. For recoverable situations, error-handling approaches such as exceptional functions should always be used instead.
+In practice, a panic represents a condition that should never occur in a correct program. If a situation is recoverable, it must be handled using standard error-handling mechanisms such as exceptional functions-not panic.
+
+::: tip
+Relevant Questions:
+- [Why doesn't Jule perform stack unwinding in panic situations?](/some-questions#why-doesn-t-jule-perform-stack-unwinding-in-panic-situations)
+:::
 
 For example:
 ```jule

@@ -199,7 +199,11 @@ This function same with the out function. One difference, prints new line after 
 ```jule
 fn panic(message: str)
 ```
-Panics program with given error message. This panics are not recoverable.
+Terminates the program immediately, signaling an unrecoverable program violation.
+
+It is used to report conditions that must never occur during correct execution, such as broken invariants, invalid internal state, or contract violations. It is not an error-handling mechanism and must not be used for recoverable failures. Recoverable conditions should be handled using exceptional functions instead.
+
+It does not run deferred or cleanup code. Transfers control directly to the runtime, which aborts execution. No guarantee for user code execution after panic is invoked. Resource cleanup is delegated to the operating system or external supervisors. Because panic is a terminating operation, functions that call panic do not return.
 
 ## make
 ```jule

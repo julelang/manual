@@ -19,7 +19,7 @@ A module is defined by a file named `jule.mod`. Its presence marks the directory
 
 ## Using Modules
 
-Modules are not optional if you want to use Jule's testing features—without them, testing becomes more difficult and less functional. See [writing tests](/debugging/testing/writing-tests#modules) for details.
+Modules are not optional if you want to use Jule's testing features-without them, testing becomes more difficult and less functional. See [writing tests](/debugging/testing/writing-tests#modules) for details.
 
 For most projects, subpackages are essential to maintainable development. Modules are required to organize and import these subpackages.
 

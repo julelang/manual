@@ -116,6 +116,6 @@ In the example above, the fields of the `User` struct will be encoded and decode
 
 ### Rules of Tags
 
-Tags must follow specific rules. JSON key names can include any punctuation marks except for backslashes (`\`) and quotation marks (`"`), which are reserved and therefore not allowed. Beyond that, key names should consist of Unicode letters and numbers. Additionally, tags must be unique within the same struct—no two fields should share the same JSON key name to avoid duplication and conflict during encoding or decoding.
+Tags must follow specific rules. JSON key names can include any punctuation marks except for backslashes (`\`) and quotation marks (`"`), which are reserved and therefore not allowed. Beyond that, key names should consist of Unicode letters and numbers. Additionally, tags must be unique within the same struct-no two fields should share the same JSON key name to avoid duplication and conflict during encoding or decoding.
 
 If a field's JSON key name is duplicated, all fields sharing that same key name will be ignored during encoding and decoding. If you assign a tag name to a non-public (unexported) field, it will still be included in the encode and decode processes despite being non-public. If you use the tag `json:"-"`, the field will be explicitly ignored and excluded from both encoding and decoding. If your tag is not valid, fall back to the default naming and visibility behavior.
