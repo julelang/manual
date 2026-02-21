@@ -51,7 +51,7 @@ fn cprint(s: str) {
 }
 
 fn main() {
-    cprint("Hello World\n")
+    cprint("Hello World\n\x00")
 }
 ```
 
@@ -118,7 +118,7 @@ use "std/integ/c"
 extern unsafe fn printf(s: *c::Char)
 
 fn main() {
-    s := "hello world"
+    s := "hello world\n"
     sb := integ::BytesFromStr(s)
     unsafe {
         extern.printf((*c::Char)(&sb[0]))
@@ -131,7 +131,7 @@ Considering that strings are UTF-8 byte encoded, you can also use string pointer
 
 For example:
 ```jule
-s := "hello world\x00"
+s := "hello world\n\x00"
 unsafe {
     extern.printf((*c::Char)(&s[0]))
 }
