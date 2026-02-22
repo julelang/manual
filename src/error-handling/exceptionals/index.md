@@ -5,7 +5,7 @@ Exceptions are a standard way of error handling for Jule. It can be considered l
 Exceptions must be handled. The runtime cost is until the end of the call. After the call, if there is an exception, your program will panic, or the handler will be executed. All relevant exceptional data then goes out of memory.
 
 ::: tip
-This section focuses on explaining exceptional functions. Be sure to check out the [Errors](/error-handling/errors) section to learn how to use exceptional functions for error handling in the recommended way.
+This section focuses on explaining exceptional functions. Be sure to check out the [Errors](/error-handling/exceptionals/) section to learn how to use exceptional functions for error handling in the recommended way.
 :::
 
 Exceptional functions must be used alone; they do not support combining, such as binary or unary expressions. It just returns the result and handles the exception.
