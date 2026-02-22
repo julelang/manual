@@ -16,38 +16,65 @@ The above example shows an anonymous scope contained within the scope of the `ma
 
 ## Deferred Scopes
 
-A deferred scope defers the execution of statements until the surrounding function returns.
+Deferred scopes are scopes whose execution is postponed until the end of the scope in which they are defined. They run at the end of the scope, or in any situation that requires that scope to terminate, such as a return statement. The execution order is LIFO (Last-In, First-Out).
 
-The deferred scope variables evaluated immediately, but statements is not executed until the surrounding function returns.
+In Jule, defer scopes are typically used for resource management as a form of RAII. Closing files or releasing a mutex are among the most common examples.
 
-Deferred scopes are pushed onto a stack. When a function returns, its deferred calls are executed in LIFO (last-in-first-out) order.
-
-For example:
+A pseudo code example to help you understand how they work:
 ```jule
-use "std/fmt"
-
-fn main() {
-	defer { fmt::Println("\nAll numbers printed.") }
-	mut i := 0
-	for i < 10; i++ {
-		defer { fmt::Printf(" {}", i) }
-	}
-	fmt::Print("Numbers:")
+fn readFile(path: str): []byte {
+	ioMutex.Lock()
+	defer { ioMutex.Unlock() }
+	mut f := OpenFile(path)?
+	defer { f.Close() }
+	ret f.Read()?
 }
-
-/* OUTPUT:
-Numbers: 9 8 7 6 5 4 3 2 1 0
-All numbers printed.
-*/
 ```
-In the code above, the deferred scope inside the iteration records the current value of the variable `i` each time, effectively capturing a snapshot of the state. Before the function returns, it writes `Numbers:` to stdout. Then, as the function terminates, the statements in the deferred scopes start executing in LIFO (Last In, First Out) order. Accordingly, the deferred scopes inside the iteration are executed first, and finally, the initial deferred scope at the beginning of the function is executed.
+In the example above, releasing the mutex and closing the file are guaranteed by the defer scopes. This prevents an edge case where one of them might be forgotten in a future change.
 
-**See Also**\
-\- [Anonymous Functions and Closures](/common-concepts/functions/anonymous-functions)\
-\- [Memory Model of Deferred Scopes](/memory/memory-model#deferred-scopes)
+This example code compiles to the following:
+```jule
+fn readFile(path: str): []byte {
+	ioMutex.Lock()
+	mut f := OpenFile(path) else {
+		ioMutex.Unlock()
+		error(error)
+	}
+	mut data := f.Read() else {
+		f.Close()
+		ioMutex.Unlock()
+		error(error)
+	}
+	f.Close()
+	ioMutex.Unlock()
+	ret data
+}
+```
 
-> Deferred scopes are always synchronous.
-> They execute just before function return and cannot be async.
+Defer scopes are technically not closures. They refer to all variables within the scope by reference. That is, they do not use copies; they modify the actual variables directly. Return values and use values are not affected by this. In other words, when you write `ret x`, even if a defer scope that runs after the return statement changes the value of `x`, the return value does not change. There is one exception: if the return values themselves are variables, then the return value is affected.
+
+For example, in this code, the defer scope will not affect the value returned by the function:
+```jule
+fn myfunc(x: int, y: int): int {
+	mut r := 0
+	defer { r *= 2 }
+	r = x + y
+	ret r
+}
+```
+The return value does not change because when the variable `r` is used for return, its value at that moment is recorded for the return. Therefore, when the defer scope later changes the value of `r`, it does not affect the returned value.
+
+However, in this example, it does affect the return value:
+```jule
+fn myfunc(x: int, y: int): (r: int) {
+	defer { r *= 2 }
+	r = x + y
+	ret
+}
+```
+In this case, the return value is affected because there is a variable name designated for the return value. It is guaranteed that this variable will be used as the return value. Therefore, when the defer scope changes the value of that variable, it also changes the return value.
+
+This is not only true for assignments; the same would apply even if `ret x + y` were used directly, because the compiler uses that variable as the memory for the return value. In other words, it is guaranteed that the value will be written there, and that any mutation to that memory will affect the return value.
 
 ## Unsafe Scopes
 Unsafe scopes allows to use Unsafe Jule. Declares with the `unsafe` keyword.

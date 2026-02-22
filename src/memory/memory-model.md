@@ -243,18 +243,7 @@ A few additional instructions are added to the closure to handle this parameter.
 
 ## Deferred Scopes
 
-Deferred scopes are essentially anonymous functions and, depending on the situation, are considered closures. The variables used are stored just like in a closure. When the function returns, the functions stored in the stack are called one by one in LIFO order.
-
-The thing used as a stack is actually a slice. The slice can automatically grow each time a deferred scope is added. In other words, each deferred scope leads to the creation of an anonymous function, and these functions are stored in a slice that acts as a stack. When the function returns, the deferred scope functions stored in this slice are called in LIFO order.
-
-A deferred scope is not executed in every possible return scenario of the function. Certain behaviors trigger it. Falling outside of these behaviors may result in deferred scopes not being executed.
-
-**List of deferred scope execution triggers**:
-- Reaching end of the function's main scope.
-- Return statements.
-- In exceptionals, calling `error` function.
-
-Accordingly, a `panic`, `os::Exit` or something like that calls will not trigger the execution of deferred scopes.
+It is automatically emitted by the compiler at the required locations during compile time. In other words, they have no additional cost at runtime other than the algorithm they implement.
 
 ## Concurrency
 
