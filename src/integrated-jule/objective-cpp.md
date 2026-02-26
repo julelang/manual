@@ -36,7 +36,7 @@ Then we link the definitions we want to use by linking the relevant header file 
 
 Our `main.jule`:
 ```jule
-#pass "-framework Foundation"
+#pass "-framework" "Foundation"
 
 extern use "log.hpp"
 extern use "log.mm"

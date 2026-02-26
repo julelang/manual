@@ -42,7 +42,7 @@ For example:
 
 Our `main.jule`:
 ```jule
-#pass "-framework Cocoa"
+#pass "-framework" "Cocoa"
 
 extern use "cocoa.h"
 extern use "cocoa.mm"

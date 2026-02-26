@@ -70,16 +70,18 @@ Here is an example code via `build` directive:
 Directive pass is a top directive.
 Passes compiler flags to the generated compile command for compiling source code. Uses a string literal as an argument, but literals are not processed; it accepts it directly. So, you can't use escape sequences like original string literals. Pass directives add to command lines after source files.
 
+In a `pass` directive, it may be necessary to provide multiple arguments. For example, passing `-framework Cocoa` as a single argument directly to the back-end compiler may not work as expected. For this reason, you can split the `pass` directive into separate arguments. Each one will be forwarded to the back-end compiler as an individual argument.
+
 ::: info
 There are no issue if you are using same passes.
-The compiler will eliminate duplicate passes.
+The compiler may eliminate duplicate passes.
 :::
 
 \
 For example:
 ```jule
-#pass "-framework Foundation"
-#pass "-framework Cocoa"
+#pass "-framework" "Foundation"
+#pass "-framework" "Cocoa"
 
 fn main() {
     // ...
