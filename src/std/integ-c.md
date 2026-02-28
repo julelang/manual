@@ -12,6 +12,7 @@ This package contains low-level implementations and is under the terms of the [U
 [fn Calloc\(size: uint, n: uint\): \*unsafe](#calloc)\
 [fn Realloc\(mut ptr: \*unsafe, size: uint\): \*unsafe](#realloc)\
 [fn Free\(mut ptr: \*unsafe\)](#free)\
+[type ConstChar](#constchar)\
 [type Char](#char)\
 [type Wchar](#wchar)\
 [type SignedChar](#signedchar)\
@@ -43,6 +44,7 @@ This package contains low-level implementations and is under the terms of the [U
 [type Double](#double)\
 [type LongDouble](#longdouble)\
 [type Size](#size)\
+[type SSize](#ssize)\
 [type Uintptr](#uintptr)\
 [type Intptr](#intptr)\
 [type Ptrdiff](#ptrdiff)
@@ -80,6 +82,12 @@ fn Free(mut ptr: *unsafe)
 Free a block allocated by malloc, realloc or calloc\. ptr is not set as nil by function, therefore ptr is dangling after free\. Set ptr as nil after free for more safety\.
 
 This function is part of the C\-style memory management\. It can be very dangerous\.
+
+## ConstChar
+```jule
+type ConstChar: extern.__jule_const_char
+```
+Type alias for const char type\.
 
 ## Char
 ```jule
@@ -266,6 +274,12 @@ Type alias for long double type\.
 type Size: extern.size_t
 ```
 Type alias for size\_t type\.
+
+## SSize
+```jule
+type SSize: extern.ssize_t
+```
+Type alias for ssize\_t type\.
 
 ## Uintptr
 ```jule
