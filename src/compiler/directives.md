@@ -24,9 +24,9 @@ For example:
 
 ## Directive Expressions
 
-Some directives evaluate the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return a boolean. Expressions are only logical. So the variables you will use are boolean, and the binary operations you can do are only logical and, and logical or.
+Some directives evaluate the expression you wrote with a custom syntax, and if the expression returns `true` as a result, your file will be included in the build. Expression must always return a boolean. Expressions are only logical. So the tags you will use are boolean, and the binary operations you can do are only logical and, and logical or.
 
-Your variables are set automatically by your compiler. The variables you can use are the same as in file annotation. They are variables that are also described in the [platform support](/compiler/platform-support) documentation.
+While some tags are automatically set by the compiler, others are passed using the `--tags` option in the compilation command. The tags you can use are the same as in file annotation. They are tags that are also described in the [platform support](/compiler/platform-support) documentation.
 
 ::: warning
 Evaluation results in `false` on any syntax errors and empty expressions.
@@ -36,9 +36,9 @@ Evaluation results in `false` on any syntax errors and empty expressions.
 
 The syntax is simple and easy to learn. The logical and operator is `&&` and the logical or operator is `||`. These are the same as Jule. The precedence of these operators is also the same. First, the logical or (`||`) operator is evaluated, then the logical and (`&&`) operator is evaluated. You also have parentheses. The parentheses, of course, are evaluated first. In addition to these, the logical not (`!`) operator is also available.
 
-### Variables
+### Tags
 
-Here is the list of variables and their existence:
+Here is the list of tags and their existence:
 
 - `windows`: operating system is windows
 - `darwin`: operating system is darwin

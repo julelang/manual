@@ -62,6 +62,19 @@ optimized for overall concurrency.
 
 ---
 
+`--tags <value>` \
+Declares the custom tags for the compilation. Tags will be available in the directive expressions as logical expressions to enable custom compile processes in your program or package. For example, you can define a separate implementation depending on tags mylib_stable and mylib_experimental, which may implement the stable or experimental code for the types or some of the functions.
+
+The compiler may declare some tags by default, depending on your target, current system, and other factors. This option will not filter the reserved tags, allowing you to define some of them as you wish. But in general, this leads to compile issues. For example, declaring the windows tag when compiling for darwin, may enable the windows-specific implementation, not available on darwin.
+
+Your tags must be a valid identifier according to the Jule specification. You can declare multiple tags, separating them with spaces. You can't declare blank identifier (`_`) as tag.
+
+Examples:
+- `--tags mylib_stable`, to declare `mylib_stable` tag
+- `--tags "mylib_stable abclib_opengl_backend"`, to declare `mylib_stable`, and `abclib_opengl_backend` tags
+
+---
+
 `--shadowing`\
 Enable variable shadowing.
 
