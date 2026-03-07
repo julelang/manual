@@ -2,7 +2,7 @@
 
 ## Index
 
-[fn New\(info: CompileInfo\): sema::Importer](#new)\
+[fn New\(mut info: CompileInfo\): sema::Importer](#new)\
 [struct CompileInfo](#compileinfo)\
 [enum Compiler](#compiler)\
 [enum CppStd](#cppstd)
@@ -11,7 +11,7 @@
 
 ## New
 ```jule
-fn New(info: CompileInfo): sema::Importer
+fn New(mut info: CompileInfo): sema::Importer
 ```
 Returns new default Jule package importer by the compile information\.
 
@@ -29,6 +29,9 @@ struct CompileInfo {
 
 	// C++ standard to use.
 	CppStd: CppStd
+
+	// Tags passed.
+	Tags: []str
 }
 ```
 Compile information\.
