@@ -26,11 +26,11 @@ A simple example:
 use "std/io"
 use "std/os"
 
-fn main() {
+async fn main() {
 	cmd := os::Cmd.New("ls", "-l")
 	mut r := cmd.StdoutPipe()!
 	cmd.Start()!
-	data := io::ReadAll(r)!
+	data := io::ReadAll(r).await!
 	cmd.Wait()!
 	println(str(data))
 }
@@ -42,14 +42,14 @@ If you want to redirect a different pipe;
 use "std/io"
 use "std/os"
 
-fn main() {
+async fn main() {
 	mut r, mut w := os::Pipe()!
 	cmd := os::Cmd.New("ls", "-l")
 	cmd.Stdout(w)!
 	cmd.Run()!
-	w.Close()!
-	data := io::ReadAll(r)!
-	r.Close()!
+	w.Close().await!
+	data := io::ReadAll(r).await!
+	r.Close().await!
 	println(str(data))
 }
 ```
