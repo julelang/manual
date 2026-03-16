@@ -120,4 +120,4 @@ Disables some default configuration options of the language for specific areas o
 
 List of arguments:
 - `boundary`: Disables boundary checking for slice and array index expressions. It also disables nil checking for slices.
-- `nilptr`: Disables nil pointer dereferencing checking for reference pointer and smart pointer dereferencing expressions.
+- `nilptr`: Disables nil pointer dereferencing checking for reference pointer dereferencing, smart pointer dereferencing, and anonymous function call expressions.
