@@ -119,5 +119,5 @@ For more information, read the [API development](/integrated-jule/api/api-develo
 Disables some default configuration options of the language for specific areas of the source code. Supported by only functions. Supports multiple arguments.
 
 List of arguments:
-- `boundary`: Disables boundary checking for slice and array index expressions. It also disables nil checking for slices.
+- `boundary`: Disables boundary checking for slice and array index/slice expressions. It also disables nil checking for slices.
 - `nilptr`: Disables nil pointer dereferencing checking for reference pointer dereferencing, smart pointer dereferencing, and anonymous function call expressions.
