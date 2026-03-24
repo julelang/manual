@@ -11,9 +11,9 @@ trait    struct    enum        fn
 const    let       mut         for
 in       break     continue    goto
 match    fall      if          else
-ret      error     use         co
-extern   unsafe    defer       chan
-select   async     await
+ret      error     throw       use
+co       extern    unsafe      defer
+chan     select    async       await
 ```
 
 ## Imaginary Keywords
