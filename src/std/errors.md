@@ -2,12 +2,26 @@
 
 ## Index
 
-[fn New\(e: str\): any](#new)
+[fn New\(err: str\): &amp;Error](#new)\
+[type Error](#error)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
 
 
 
 ## New
 ```jule
-fn New(e: str): any
+fn New(err: str): &Error
 ```
-Returns error with message\. The returned type is an anonymous, meaning it cannot obtain any underlying type\.
+Returns an error instance with message\. The returned type is an anonymous, meaning it cannot obtain any underlying type\.
+
+## Error
+```jule
+type Error: str
+```
+Internal type for anonymous errors\.
+
+### Str
+```jule
+fn Str(*self): str
+```
+Returns error as string\.
