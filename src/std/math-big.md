@@ -40,6 +40,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sign\(\*self\): int](#sign)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Cmp\(\*self, &amp;y: \*Int\): \(r: int\)](#cmp)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn CmpAbs\(\*self, &amp;y: \*Int\): int](#cmpabs)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetBytes\(mut \*self, buf: \[\]byte\)](#setbytes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FillBytes\(\*self, mut buf: \[\]byte\): \[\]byte](#fillbytes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bytes\(\*self\): \[\]byte](#bytes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendBytes\(\*self, mut buf: \[\]byte\): \[\]byte](#appendbytes)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetU64\(mut \*self, x: u64\)](#setu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetI64\(mut \*self, x: i64\)](#seti64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetStr\(mut \*self, mut s: str, base: int\): \(ok: bool\)](#setstr)\
@@ -353,6 +357,34 @@ Returns 0 if |self| == |y|
 Returns -1 if |self| < |y|
 ```
 
+
+### SetBytes
+```jule
+fn SetBytes(mut *self, buf: []byte)
+```
+Interprets buf as the bytes of a big\-endian unsigned integer, sets self to that value\.
+
+### FillBytes
+```jule
+fn FillBytes(*self, mut buf: []byte): []byte
+```
+Sets buf to the absolute value of self, storing it as a zero\-extended big\-endian byte slice, and returns buf\.
+
+If the absolute value of self doesn&#39;t fit in buf, FillBytes will panic\.
+
+### Bytes
+```jule
+fn Bytes(*self): []byte
+```
+Returns the absolute value of self as a big\-endian byte slice\.
+
+To use a fixed length slice, or a preallocated one, use \[Int\.FillBytes\]\.
+
+### AppendBytes
+```jule
+fn AppendBytes(*self, mut buf: []byte): []byte
+```
+Appends the absolute value of self to buf as a big\-endian byte slice\.
 
 ### SetU64
 ```jule
