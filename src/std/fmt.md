@@ -36,19 +36,19 @@ Prints result of formatting to w\. See documentation of the \[Sprint\] function 
 ```jule
 fn Printf(fmt: str, args: ...any)
 ```
-Prints result of formatting to stdout\. See documentation of the \[Sprint\] function for formatting\. Panics if any exception appears\.
+Prints result of formatting to stdout\. See documentation of the \[Sprint\] function for formatting\. Panics if any exception appears\. Write operation is blocking\.
 
 ## Print
 ```jule
 fn Print(args: ...any)
 ```
-Prints arguments with default formatting to stdout\. Panics if any exception appears\.
+Prints arguments with default formatting to stdout\. Panics if any exception appears\. Write operation is blocking\.
 
 ## Println
 ```jule
 fn Println(args: ...any)
 ```
-Prints arguments with default formatting to stdout\. Prints new\-line after arguments\. Panics if any exception appears\.
+Prints arguments with default formatting to stdout\. Prints new\-line after arguments\. Panics if any exception appears\. Write operation is blocking\.
 
 ## Sprint
 ```jule
