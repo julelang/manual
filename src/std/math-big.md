@@ -16,6 +16,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sqrt\(mut \*self, &amp;x: \*Int\)](#sqrt)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn QuoRem\(mut \*self, &amp;x: \*Int, &amp;y: \*Int, mut &amp;r: \*Int\)](#quorem)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Quo\(mut \*self, &amp;x: \*Int, &amp;y: \*Int\)](#quo)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Rem\(mut \*self, &amp;x: \*Int, &amp;y: \*Int\)](#rem)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Div\(mut \*self, &amp;x: \*Int, &amp;y: \*Int\)](#div)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mod\(mut \*self, &amp;x: \*Int, &amp;y: \*Int\)](#mod)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DivMod\(mut \*self, mut &amp;x: \*Int, mut &amp;y: \*Int\): \(q: Int, m: Int\)](#divmod)\
@@ -171,6 +172,12 @@ r = x - y*q
 fn Quo(mut *self, &x: *Int, &y: *Int)
 ```
 Sets self to the quotient x/y for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\. Implements truncated division \(like Jule\); see \[Int\.QuoRem\] for more details\.
+
+### Rem
+```jule
+fn Rem(mut *self, &x: *Int, &y: *Int)
+```
+Sets self to the remainder x%y for y \!= 0\. If y == 0, a division\-by\-zero run\-time panic occurs\. Implements truncated modulus \(like Jule\); see \[Int\.QuoRem\] for more details\.
 
 ### Div
 ```jule
