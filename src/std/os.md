@@ -101,6 +101,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
 [struct DirEntry](#direntry)\
 [struct File](#file)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ShouldAsync\(\*self\): bool](#shouldasync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteSync\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#writesync)\
@@ -162,19 +163,19 @@ const (
 
 ```jule
 const (
-	ModeDir:        FileMode = 1 << (32 - 1 - iota) // d: is a directory
-	ModeAppend                                      // a: append-only
-	ModeExclusive                                   // l: exclusive use
-	ModeTemporary                                   // T: temporary file; Plan 9 only
-	ModeSymlink                                     // L: symbolic link
-	ModeDevice                                      // D: device file
-	ModeNamedPipe                                   // p: named pipe (FIFO)
-	ModeSocket                                      // S: Unix domain socket
-	ModeSetuid                                      // u: setuid
-	ModeSetgid                                      // g: setgid
-	ModeCharDevice                                  // c: Unix character device, when ModeDevice is set
-	ModeSticky                                      // t: sticky
-	ModeIrregular                                   // ?: non-regular file; nothing else is known about this file
+	ModeDir:       FileMode = 1 << (32 - 1 - iota) // d: is a directory
+	ModeAppend                                     // a: append-only
+	ModeExclusive                                  // l: exclusive use
+	ModeTemporary                                  // T: temporary file; Plan 9 only
+	ModeSymlink                                    // L: symbolic link
+	ModeDevice                                     // D: device file
+	ModeNamedPipe                                  // p: named pipe (FIFO)
+	ModeSocket                                     // S: Unix domain socket
+	ModeSetuid                                     // u: setuid
+	ModeSetgid                                     // g: setgid
+	ModeCharDevice                                 // c: Unix character device, when ModeDevice is set
+	ModeSticky                                     // t: sticky
+	ModeIrregular                                  // ?: non-regular file; nothing else is known about this file
 
 	// Mask for the type bits. For regular files, none will be set.
 	ModeType = ModeDir | ModeSymlink | ModeNamedPipe | ModeSocket | ModeDevice | ModeCharDevice | ModeIrregular
@@ -495,6 +496,12 @@ A file descriptor is only guaranteed to exhibit blocking behavior when the progr
 - `io::WriteSeeker`
 - `io::Seeker`
 - `io::StrWriter`
+
+### RawFD
+```jule
+fn RawFD(*self): u64
+```
+Returns raw file\-descriptor\. Intended for low\-level use\. Just borrow, do not close or something else\.
 
 ### ShouldAsync
 ```jule
