@@ -286,7 +286,7 @@ Returns how many bytes are unused in the buffer\.
 ```jule
 fn AvailableBuffer(mut *self): []byte
 ```
-Returns an empty buffer with Reader\.Available\(\) capacity\. This buffer is intended to be appended to and passed to an immediately succeeding \[Writer\.Write\] call\. The buffer is mutable and it si only valid until the next write operation\.
+Returns an empty buffer with Reader\.Available\(\) capacity\. This buffer is intended to be appended to and passed to an immediately succeeding \[Writer\.Write\] call\. The buffer is mutable and it is only valid until the next write operation\.
 
 ### Buffered
 ```jule
