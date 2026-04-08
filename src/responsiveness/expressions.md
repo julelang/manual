@@ -104,13 +104,13 @@ fn main() {
 ```
 In the example above, since the type of the variable `f` is clearly known, it is sufficient to use only braces in the assignment. Brace literal evaluates to type `map[int]str`.
 
-## Exceptional Handler Scopes
+## Error Handler Scopes
 
-If the compiler knows the result of the exceptional handler scope will be assigned to the immutable storage, it allows using immutable expressions in the use statement.
+If the compiler knows the result of the error handler scope will be assigned to the immutable storage, it allows using immutable expressions in the use statement.
 
 For example:
 ```jule
-fn getInt()!: &int { error("foo") }
+fn getInt()!: &int { throw "foo" }
 
 fn main() {
 	y := new(int, 90)

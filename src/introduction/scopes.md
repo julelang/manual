@@ -1,5 +1,5 @@
 # Scopes
-Scopes (aka code blocks or blocks) are indicated by braces, except in exceptional cases. Although a scope is often used to denote an algorithm domain, it is also used for other purposes. 
+Scopes (aka code blocks or blocks) are indicated by braces, except in exceptional cases. Although a scope is often used to denote an algorithm domain, it is also used for other purposes.
 
 ## Anonymous Scopes
 Anonymous scopes are scopes that do not belong to a definition (function, etc.).
@@ -38,12 +38,12 @@ fn readFile(path: str): []byte {
 	ioMutex.Lock()
 	mut f := OpenFile(path) else {
 		ioMutex.Unlock()
-		error(error)
+		throw error
 	}
 	mut data := f.Read() else {
 		f.Close()
 		ioMutex.Unlock()
-		error(error)
+		throw error
 	}
 	f.Close()
 	ioMutex.Unlock()

@@ -7,8 +7,8 @@
 - [Is Jule experimental?](#is-jule-experimental)
 - [What are experimental features?](#what-are-experimental-features)
 - [What languages inspired Jule the most?](#what-languages-inspired-jule-the-most)
-- [Why does Jule use exceptionals instead of other error handling methods?](#why-does-jule-use-exceptionals-instead-of-other-error-handling-methods)
-- [Why do exceptionals not support combining?](#why-do-exceptionals-not-support-combining)
+- [Why does Jule use fallible functions instead of other error handling methods?](#why-does-jule-use-fallible-functions-instead-of-other-error-handling-methods)
+- [Why do fallible functions not support combining?](#why-do-fallible-functions-not-support-combining)
 - [Will Jule always use C++ as backend?](#will-jule-always-use-c-as-backend)
 - [Why does not Jule have built-in methods?](#why-does-not-jule-have-built-in-methods)
 - [Why are null values allowed?](#why-are-null-values-allowed)
@@ -62,33 +62,33 @@ Experimental features are not yet stable or expected to be, and are still in the
 
 Only two languages: Go and Rust. Mostly Go.
 
-### Why does Jule use exceptionals instead of other error handling methods?
+### Why does Jule use fallible functions instead of other error handling methods?
 
-Exceptional handling is considered to be more efficient and safer in using an alternative value or handling exceptional cases and returning elegantly.
+Fallible function handling is considered to be more efficient and safer in using an alternative value or handling exceptional cases and returning elegantly.
 
-Exceptionals were evaluated as more suitable in terms of readability and safety. Optional types can be checked at any time. Exceptionals are particularly useful for error handling and can be used somewhat like optionals. It is required to be checked by the developer, and this must be done instantly; that is, the check is not postponed, unlike optional types.
+Fallible functions were evaluated as more suitable in terms of readability and safety. Optional types can be checked at any time. They are particularly useful for error handling and can be used somewhat like optionals. It is required to be checked by the developer, and this must be done instantly; that is, the check is not postponed, unlike optional types.
 
-Exceptionals are typically similar to Go's `error` returns. However, in Go, error returns can be easily ignored, and it is easy to forget this because it is necessary to know the return type to understand that the ignored return is an error. Although this is especially true for functions that do not return errors and always return a nil error because they implement an interface, such as `strings.Builder`, the relevant function may return an error in future implementations. Ignoring this may cause various problems when switching between versions. This is also an uncertainty for new contributors until they look at the documentation.
+Fallible functions are typically similar to Go's `error` returns. However, in Go, error returns can be easily ignored, and it is easy to forget this because it is necessary to know the return type to understand that the ignored return is an error. Although this is especially true for functions that do not return errors and always return a nil error because they implement an interface, such as `strings.Builder`, the relevant function may return an error in future implementations. Ignoring this may cause various problems when switching between versions. This is also an uncertainty for new contributors until they look at the documentation.
 
-Due to these problems, Jule adopted the exceptionals design. They basically provide a hybrid experience of Go's error-handling method and optional types. Exceptions aim to solve all these problems due to their strict design.
+Due to these problems, Jule adopted the fallible function design. They basically provide a hybrid experience of Go's error-handling method and optional types. Fallible functions aim to solve all these problems due to their strict design.
 
-Its most obvious feature is that even if an exception is not discussed, it remains clear that it is an exception. This solves Go's ignoring issue.
+Its most obvious feature is that even if an error is not discussed, it remains clear that it is an error. This solves Go's ignoring issue.
 
-Simply placing `!` at the end of an exceptional function call indicates that there is no special handling for the exception and that a possible exception should result in a panic. This makes it easy to spot exceptional functions (and potential exceptions) while reading the code.
+Simply placing `!` at the end of an fallible function call indicates that there is no special handling for the error and that a possible error should result in a panic. This makes it easy to spot fallible functions (and potential errors) while reading the code.
 
 #### The Proposal for Go's Error Handling
 
-An issue ([#71203](https://github.com/golang/go/issues/71203)) containing a proposal was opened for the Go language on January 10, 2025 and was later converted to a discussion ([#71460](https://github.com/golang/go/discussions/71460)). This proposal suggests implementing a new syntax for error handling, which would bear similarities to Jule's exceptional syntax, with some important differences. The fact that Jule is largely influenced by Go and the opening of such a proposal supports our belief that adopting the exceptional design for error handling may be a good approach.
+An issue ([#71203](https://github.com/golang/go/issues/71203)) containing a proposal was opened for the Go language on January 10, 2025 and was later converted to a discussion ([#71460](https://github.com/golang/go/discussions/71460)). This proposal suggests implementing a new syntax for error handling, which would bear similarities to Jule's fallible function syntax, with some important differences. The fact that Jule is largely influenced by Go and the opening of such a proposal supports our belief that adopting the fallible function design for error handling may be a good approach.
 
 Although this proposal is not related to Jule, with this proposal and the contributions of Go's large community, we now have more insights into this type of design. Therefore, we thank the Go community.
 
-### Why do exceptionals not support combining?
+### Why do fallible functions not support combining?
 
-Calls to exceptional functions must always form the entire expression. They cannot be used in conjunction with binary expressions, unary expressions, or combined with multiple operators, even for function arguments. There are two reasons for this design choice: simplicity and compiler costs.
+Calls to fallible functions must always form the entire expression. They cannot be used in conjunction with binary expressions, unary expressions, or combined with multiple operators, even for function arguments. There are two reasons for this design choice: simplicity and compiler costs.
 
 #### Simplicity
 
-Allowing exceptional calls without restrictions opens the door to having overly complex expressions. Honestly, we want to ensure that exceptional functions are only used in specific ways, as this is one of the most straightforward ways to keep error handling understandable and simple. Therefore, exceptional functions are only permitted under certain conditions, such as being used as a return expression, as a standalone call, as an assignment, or as part of a use statement.
+Allowing fallible function calls without restrictions opens the door to having overly complex expressions. Honestly, we want to ensure that fallible functions are only used in specific ways, as this is one of the most straightforward ways to keep error handling understandable and simple. Therefore, fallible functions are only permitted under certain conditions, such as being used as a return expression, as a standalone call, as an assignment, or as part of a use statement.
 
 For example:
 
@@ -139,7 +139,7 @@ fn main() {
 
 #### Compiler Costs
 
-Calls to exceptional functions must be handled immediately. As a result, the compiler implicitly places certain control mechanisms at each call site. With this design choice, it is determined where an exceptional function can be called, and the cost of developing the compiler for only those situations is lower. Since it encourages writing code that is less complex and thus doesn't incur higher compilation costs, optimizing the compiler becomes easier.
+Calls to fallible functions must be handled immediately. As a result, the compiler implicitly places certain control mechanisms at each call site. With this design choice, it is determined where a fallible function can be called, and the cost of developing the compiler for only those situations is lower. Since it encourages writing code that is less complex and thus doesn't incur higher compilation costs, optimizing the compiler becomes easier.
 
 ### Will Jule always use C++ as backend?
 
@@ -163,7 +163,7 @@ We think it is more reasonable to do this by casting instead of doing it this wa
 
 In most cases, it is similar to optional types, but requires trust that the developer will be careful enough. Check before use. Go, which Jule is heavily inspired by, also allows null values, and frankly, it doesn't feel bad in terms of experience.
 
-If you prefer optional types, take a look at Jule's exceptionals.
+If you prefer optional types, take a look at Jule's fallible functions.
 
 Besides these, null values are a fundamental mechanism for Jule. For example, it is guaranteed that every memory area will be automatically initialized, including pointers and some other types. Jule has two types of pointers: smart pointers and raw pointers. By default, there must be a value that can be assigned to them, and the most logical option for this is a null value. Using an optional or maybe monad, even for pointers, would make things unnecessarily more complex. Moreover, these types are quite common in Jule, especially since the standard library frequently uses smart pointers.
 
@@ -335,9 +335,9 @@ In the example above, the `foo` function takes an anonymous function as a parame
 
 Jule defines the concept of a panic not as part of the error-handling mechanism, but as an **irrecoverable state** indicating that the program can no longer continue safely.
 
-For this reason, panic is not used to control program flow and is never treated as a recoverable error. All recoverable situations must be modeled through exceptional functions, which represent explicit and expected failures. This establishes a strict distinction between errors and program violations:
+For this reason, panic is not used to control program flow and is never treated as a recoverable error. All recoverable situations must be modeled through fallible functions, which represent explicit and expected failures. This establishes a strict distinction between errors and program violations:
 
-- **Exceptional conditions**: Failures that may occur during normal execution and are expected to be handled by the caller.
+- **Error conditions**: Failures that may occur during normal execution and are expected to be handled by the caller.
 - **Panic conditions**: Indicate a violation of a contract, an internal invariant, or the program’s logic. At this point, correct continuation of execution can no longer be guaranteed.
 
 Jule does **not perform stack unwinding** during a panic. A panic causes the runtime to terminate the program immediately. This is a deliberate design decision and reflects that panic is not a recovery mechanism, but by definition a terminating signal.
@@ -352,4 +352,4 @@ This approach has several technical consequences:
 
 Rather than solving failure recovery through implicit control-flow mechanisms at the language level, Jule favors explicit error handling combined with system-level supervision (such as process restarts or isolation strategies). In this model, panic is not a flow-control tool, but a definitive signal that the program is no longer reliable.
 
-In summary, Jule positions panic not as an "exception", but as a **program violation**, building its error model entirely on explicit, visible, and controllable constructs.
+In summary, Jule positions panic not as an "error", but as a **program violation**, building its error model entirely on explicit, visible, and controllable constructs.

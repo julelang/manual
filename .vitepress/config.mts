@@ -302,10 +302,10 @@ export default defineConfig({
           link: '/error-handling/',
           items: [
             {
-              text: 'Exceptionals',
-              link: '/error-handling/exceptionals/',
+              text: 'Fallible Functions',
+              link: '/error-handling/fallible-functions/',
               items: [
-                { text: 'Errors', link: '/error-handling/exceptionals/errors' },
+                { text: 'Errors', link: '/error-handling/fallible-functions/errors' },
               ],
             },
             { text: 'Panics', link: '/error-handling/panics' },

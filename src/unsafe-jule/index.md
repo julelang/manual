@@ -21,6 +21,7 @@ Benefits of Unsafe Jule:
 - Access reference from parent scope
 - Cast external types
 - [Emit backend code](/integrated-jule/backend-emits)
+- [Throw unsafe (may be `nil`) error values](/error-handling/fallible-functions#throwing-errors)
 
 Note that this does not lead to a completely unsafe use of Jule. Other than the listed unsafe behaviors, Safe Jule will continue to show itself. This means you get a level of safety even with unsafe blocks.
 
