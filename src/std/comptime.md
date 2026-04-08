@@ -20,7 +20,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): str](#name-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Public(\*self): bool](#public)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Extern(\*self): bool](#extern)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Exceptional(\*self): bool](#exceptional)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Fallible(\*self): bool](#fallible)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(\*self): bool](#mutable)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Variadic(\*self): bool](#variadic)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reference(\*self): bool](#reference)\
@@ -245,11 +245,11 @@ fn Extern(*self): bool
 ```
 Reports whether type is external as constant expression.
 
-### Exceptional
+### Fallible
 ```jule
-fn Exceptional(*self): bool
+fn Fallible(*self): bool
 ```
-Reports whether function type is exceptional as constant expression. Only supports function types.
+Reports whether function type is fallible as constant expression. Only supports function types.
 
 ### Mutable
 ```jule
