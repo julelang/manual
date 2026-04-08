@@ -168,11 +168,11 @@ It's will not check deeply whether expressions are same. So if you want take adv
 
 ---
 
-`--opt-exceptional`\
-Enables special optimizations for exceptionals.
+`--opt-fallible`\
+Enables special optimizations for fallible functions.
 
-- Removes the exceptional handling cost and forwards the return data with exceptional directly when an exceptional function calls another exceptional function in its return statement and forwards exceptional.
-- Removes the exceptional handling cost and forwards the exceptional data directly when an exceptional function calls another exceptional function and forwards exceptional. Since the relevant statements are not returns statements, this optimization only applied for the last statements of function algorithm.
+- Removes the error handling cost and forwards the return data directly when a fallible function calls another fallible function in its return statement and forwards error.
+- Removes the error handling cost and forwards the error data directly when a fallible function calls another fallible function and forwards error. Since the relevant statements are not returns statements, this optimization only applied for the last statements of function algorithm.
 
 ---
 
@@ -195,7 +195,7 @@ Enables special optimizations for dynamic programming features.
 `--opt-std-strings`\
 Enables special optimizations for the `std/strings` package.
 
-- Removes exceptional handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WriteStr` methods of the `Builder` struct.
+- Removes error handling cost if possible of the `Write`, `WriteByte`, `WriteRune`, and `WriteStr` methods of the `Builder` struct.
 
 ## Optimization Levels
 
