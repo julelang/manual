@@ -79,7 +79,7 @@ If things don't go as expected and an error occurs, your program will panic.
 
 ### Handling Errors
 
-`else` scopes are used to handle errors for fallible function calls. These scopes are considered a sub-scope of the same scope, and after the handler scopes are executed, the scope statements will continue to execute. The special `error` keyword still exists here. In this context, it represents the error if used as an expression rather than a call. So if you want to get the error, you use the `error` keyword as a variable.
+`else` scopes are used to handle errors for fallible function calls. These scopes are considered a sub-scope of the same scope, and after the handler scopes are executed, the scope statements will continue to execute. The special `error` keyword still exists here. In this context, it represents the error if used as an expression rather than a call. So if you want to get the error, you use the `error` keyword as a read-only variable.
 
 For example:
 ```jule
