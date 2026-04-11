@@ -59,6 +59,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDecl\(\*self\): bool](#isdecl)\
 [struct Var](#var)\
 [struct Ret](#ret)\
+[struct Throw](#throw)\
 [struct Iter](#iter)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInfinite\(\*self\): bool](#isinfinite)\
 [struct WhileKind](#whilekind)\
@@ -104,10 +105,10 @@ Channel directions\.
 ---
 
 ```jule
-let mut Ignored = new(ScopeTree)   // Exception is ignored, like foo()!
-let mut Forwarded = new(ScopeTree) // Exception is forwarded, like foo()?
+let mut Ignored = new(ScopeTree)   // Error is ignored, like foo()!
+let mut Forwarded = new(ScopeTree) // Error is forwarded, like foo()?
 ```
-Special exceptional handler scopes\.
+Special error handler scopes\.
 
 ## Unparen
 ```jule
@@ -328,12 +329,12 @@ Binary operation\.
 ## CallExpr
 ```jule
 struct CallExpr {
-	Token:     &token::Token
-	Func:      &Expr      // Function expression.
-	Args:      []&Expr    // Function arguments, or nil.
-	Exception: &ScopeTree // Exception handling scope, or nil.
-	IsCo:      bool       // Whether this is the concurrent call.
-	Await:     bool       // Awaited.
+	Token:   &token::Token
+	Func:    &Expr      // Function expression.
+	Args:    []&Expr    // Function arguments, or nil.
+	Handler: &ScopeTree // Error handling scope, or nil.
+	IsCo:    bool       // Whether this is the concurrent call.
+	Await:   bool       // Awaited.
 }
 ```
 Function call expression kind\.
@@ -342,7 +343,7 @@ Function call expression kind\.
 ```jule
 fn Unhandled(*self): bool
 ```
-Reports whether exception is not handled\.
+Reports whether error is not handled\.
 
 ## TypedBraceLit
 ```jule
@@ -560,21 +561,21 @@ Reports whether self \(receiver\) parameter is reference pointer\.
 ## Func
 ```jule
 struct Func {
-	Token:       &token::Token
-	Global:      bool
-	Async:       bool
-	Unsafe:      bool
-	Public:      bool
-	Extern:      bool
-	Short:       bool // Whether this function is an anonymous function, defined by short literal.
-	Static:      bool
-	Exceptional: bool
-	Name:        str
-	Directives:  []&Directive
-	Scope:       &ScopeTree
-	Generics:    []&Generic
-	Result:      &RetType
-	Params:      []&Param
+	Token:      &token::Token
+	Global:     bool
+	Async:      bool
+	Unsafe:     bool
+	Public:     bool
+	Extern:     bool
+	Short:      bool // Whether this function is an anonymous function, defined by short literal.
+	Static:     bool
+	Fallible:   bool
+	Name:       str
+	Directives: []&Directive
+	Scope:      &ScopeTree
+	Generics:   []&Generic
+	Result:     &RetType
+	Params:     []&Param
 }
 ```
 Function declaration\. Also represents anonymous function expression and function type declarations\.\. For short function literals, Scope will be deferred to represent one\-line body\.
@@ -629,6 +630,16 @@ struct Ret {
 }
 ```
 Return statement\.
+
+## Throw
+```jule
+struct Throw {
+	Token:  &token::Token
+	Unsafe: bool
+	Error:  &Expr // Error expression.
+}
+```
+Throw statement\.
 
 ## Iter
 ```jule
@@ -985,6 +996,7 @@ enum StmtData: type {
 	&TypeAlias,
 	&UseExpr,
 	&Select,
+	&Throw,
 }
 ```
 Type of Stmt&#39;s data\.
