@@ -621,7 +621,7 @@ Reports whether self and u represent the same time instant\. Two times can be eq
 ```jule
 fn AppendText(*self, mut b: []byte)!: []byte
 ```
-Implements the custom text encoder method which is appends to b\. The time is formatted in RFC 3339 format with sub\-second precision\. If the timestamp cannot be represented as valid RFC 3339 \(e\.g\., the year is out of range\), then throws exception with the ParseError\.InvalidRange\.
+Implements the custom text encoder method which is appends to b\. The time is formatted in RFC 3339 format with sub\-second precision\. If the timestamp cannot be represented as valid RFC 3339 \(e\.g\., the year is out of range\), then throws error with the ParseError\.InvalidRange\.
 
 ### EncodeText
 ```jule
