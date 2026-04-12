@@ -165,7 +165,7 @@ Returns all flags\.
 ```jule
 fn Parse(mut *self, args: []str)!: []str
 ```
-Parse arguments and process flags\. Returns non\-flag content\. Exceptional always is string and holds error message\.
+Parse arguments and process flags\. Returns non\-flag content\. Error is always string and holds error message\.
 
 ### Reset
 ```jule
