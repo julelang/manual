@@ -82,7 +82,6 @@
 [struct BuiltinCapCallExpr](#builtincapcallexpr)\
 [struct BuiltinDeleteCallExpr](#builtindeletecallexpr)\
 [struct BuiltinCopyCallExpr](#builtincopycallexpr)\
-[struct BuiltinErrorCallExpr](#builtinerrorcallexpr)\
 [struct BuiltinRealCallExpr](#builtinrealcallexpr)\
 [struct BuiltinImagCallExpr](#builtinimagcallexpr)\
 [struct BuiltinCmplxCallExpr](#builtincmplxcallexpr)\
@@ -125,6 +124,7 @@
 [struct RangeIter](#rangeiter)\
 [struct Continue](#continue)\
 [struct Break](#break)\
+[struct Throw](#throw)\
 [struct Label](#label)\
 [type Direction](#direction)\
 [struct Goto](#goto)\
@@ -273,6 +273,9 @@ const (
 	// This passed when scope owner is exactly and infinite iteration,
 	// or while-next iteration with no condition.
 	ST_INFINITE: ScopeTrait = 1 << iota
+
+	// Scope is an error handling scope.
+	ST_ERROR_HANDLER
 )
 ```
 Scope traits\.
@@ -614,16 +617,16 @@ struct Func {
 	// It may be nil if function is created by a deferred scope.
 	Token: &token::Token
 
-	Global:      bool
-	Async:       bool
-	Unsafe:      bool
-	Public:      bool
-	Extern:      bool
-	Static:      bool
-	Exceptional: bool
-	HasDefer:    bool // Whether function has at least one deferred scope.
-	Name:        str
-	Directives:  []&ast::Directive
+	Global:     bool
+	Async:      bool
+	Unsafe:     bool
+	Public:     bool
+	Extern:     bool
+	Static:     bool
+	Fallible:   bool
+	HasDefer:   bool // Whether function has at least one deferred scope.
+	Name:       str
+	Directives: []&ast::Directive
 
 	// Scope is the scope of function, aka body.
 	// If this function is created by a deferred scope, the Scope.Deferred will be true.
@@ -877,7 +880,7 @@ struct FuncCallExpr {
 	Await:    bool
 	Expr:     Expr
 	Args:     []Expr
-	Except:   &Scope // Nil for ignored.
+	Handler:  &Scope // Nil for ignored.
 	Assigned: bool
 }
 ```
@@ -1117,15 +1120,6 @@ struct BuiltinCopyCallExpr {
 }
 ```
 Expression Model: for built\-in copy function calls\.
-
-## BuiltinErrorCallExpr
-```jule
-struct BuiltinErrorCallExpr {
-	Func: &FuncIns
-	Err:  &Value
-}
-```
-Expression Model: for built\-in error function calls\.
 
 ## BuiltinRealCallExpr
 ```jule
@@ -1498,6 +1492,15 @@ struct Break {
 ```
 Break statement\.
 
+## Throw
+```jule
+struct Throw {
+	Func:  &FuncIns
+	Error: &Value
+}
+```
+Throw statement\.
+
 ## Label
 ```jule
 struct Label {
@@ -1794,7 +1797,7 @@ Reports whether reference is exist\.
 ```jule
 struct Pass {
 	Token: &token::Token
-	Text:  str
+	Args:  []str
 }
 ```
 Directive pass\.
@@ -2538,7 +2541,6 @@ enum Expr: type {
 	&BuiltinLenCallExpr,
 	&BuiltinCapCallExpr,
 	&BuiltinDeleteCallExpr,
-	&BuiltinErrorCallExpr,
 	&BuiltinRealCallExpr,
 	&BuiltinImagCallExpr,
 	&BuiltinCmplxCallExpr,
@@ -2577,6 +2579,7 @@ enum Stmt: type {
 	&Ret,
 	&Select,
 	&Use,
+	&Throw,
 }
 ```
 Statement type\.
