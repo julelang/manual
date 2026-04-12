@@ -64,7 +64,7 @@ That a value is out of range for the target type\. Mutation is undefined behavio
 ```jule
 fn ParseBool(s: str)!: bool
 ```
-Returns the boolean value represented by the string\. It accepts 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False\. Any other value throws exception\.
+Returns the boolean value represented by the string\. It accepts 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False\. Any other value throws error\.
 
 ## FormatBool
 ```jule
@@ -278,7 +278,10 @@ fn UnquoteChar(mut s: str, quote: byte)!: (value: rune, multibyte: bool, tail: s
 ```
 Decodes the first character or byte in the escaped string or character literal represented by the string s\. It returns four values:
 
-1\. value, the decoded Unicode code point or byte value; 2\. multibyte, a boolean indicating whether the decoded character requires a multibyte UTF\-8 representation; 3\. tail, the remainder of the string after the character; and 4\. an error that will be nil if the character is syntactically valid\.
+1. value, the decoded Unicode code point or byte value;
+2. multibyte, a boolean indicating whether the decoded character requires a multibyte UTF\-8 representation;
+3. tail, the remainder of the string after the character; and
+4. an error that will be nil if the character is syntactically valid\.
 
 The second argument, quote, specifies the type of literal being parsed and therefore which escaped quote character is permitted\. If set to a single quote, it permits the sequence \\&#39; and disallows unescaped &#39;\. If set to a double quote, it permits \\&#34; and disallows unescaped &#34;\. If set to zero, it does not permit either escape and allows both quote characters to appear unescaped\.
 
