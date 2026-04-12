@@ -384,25 +384,25 @@ A Builder must not be copied after first use\.
 ```jule
 fn Write(mut *self, b: []byte)!: (n: int)
 ```
-Writes bytes to buffer\. Never throws an exceptional\.
+Writes bytes to buffer\. Never throws an error\.
 
 ### WriteStr
 ```jule
 fn WriteStr(mut *self, s: str)!: (n: int)
 ```
-Writes bytes to buffer\. Never throws an exceptional\.
+Writes bytes to buffer\. Never throws an error\.
 
 ### WriteByte
 ```jule
 fn WriteByte(mut *self, b: byte)!
 ```
-Writes byte to buffer\. Never throws an exceptional\.
+Writes byte to buffer\. Never throws an error\.
 
 ### WriteRune
 ```jule
 fn WriteRune(mut *self, r: rune)!: (n: int)
 ```
-Writes rune into buffer\. Returns written byte count\. Never throws an exceptional\.
+Writes rune into buffer\. Returns written byte count\. Never throws an error\.
 
 ### Grow
 ```jule
