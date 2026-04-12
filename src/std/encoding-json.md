@@ -2,23 +2,108 @@
 
 ## Index
 
+[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
 [fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
 [fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
 [fn Valid\(data: \[\]byte\): bool](#valid)\
-[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
+[type Object](#object)\
+[type Array](#array)\
+[type Bool](#bool)\
+[type Number](#number)\
+[type String](#string)\
 [struct UnsupportedTypeError](#unsupportedtypeerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
 [struct UnsupportedValueError](#unsupportedvalueerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
 [struct EncodeError](#encodeerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
-[type Object](#object)\
-[type Array](#array)\
-[type Bool](#bool)\
-[type Number](#number)\
-[type String](#string)\
 [enum Value: type ](#value)
 
+
+
+## Decode
+```jule
+fn Decode[T](data: []byte, mut &t: *T)!
+```
+Implements decoding of JSON as defined in RFC 7159\.
+
+The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\.
+
+Implementation supports only Jule types, excluding external types\.
+
+Decoding details:<br>
+```
+Since this function designed for comptime type analysis, the type [T] should
+be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
+Any unsupported type causes error with [UnsupportedTypeError].
+Any incompatible value for type, invalid literal or something else causes
+error with [UnsupportedTypeError].
+
+Signed/Unsigned Integers, Floating-Points:
+	Decode as JSON numbers.
+
+Booleans:
+	Decode as JSON booleans.
+
+Strings:
+	Decode as JSON strings. Invalid UTF-8 or invalid UTF-16 surrogate pairs
+	are not treated as an error. Instead, they are replaced by the
+	Unicode replacement character U+FFFD.
+
+Structs:
+	Decode as JSON objects with only visible fields of struct.
+
+	The private and anonymous fields will be ignored.
+	If the field is public, the field name will be used.
+	If the field have a json tag, the json tag will be used even if field is private or anonymous.
+	If the field have json tag but it is duplicate, the field will be ignored.
+	A valid JSON tag must contain only Unicode letter, digit or punctuation
+	except quote chars and backslash.
+
+Arrays:
+	Decode as JSON array.
+	If array size is larger than JSON array, algorithm will change the
+	remain data to zero-value for data-type.
+
+Slices:
+	Decode as JSON array.
+	For the []byte type, decodes strings as a base64-encoded string if the input
+	is string, otherwise decodes as JSON array.
+
+Maps:
+	Decode as JSON object.
+	Map's key type only can be: signed integer, unsigned integer and string.
+	Other types will cause error with [UnsupportedTypeError].
+
+Smart Pointers:
+	If smart pointer is nil, will be allocated by the algorithm for decoding.
+	Otherwise, will decode into dereferenced value.
+```
+Dynamic decoding details:<br>
+```
+Dynamic JSON decoding uses dynamic JSON types:
+Value, Object, Array, Bool, Number, and String.
+No dynamic decoding can be achieved outside of these types;
+for example, the [any] type is not supported.
+If you want to obtain any JSON value, use [Value] instead.
+
+Dynamic decoding will always decode using dynamic types;
+	nil    -> for JSON null
+	Object -> for JSON object
+	Array  -> for JSON array
+	Bool   -> for JSON boolean
+	Number -> for JSON number
+	String -> for JSON string
+
+If you use Value as destination type, it may store any JSON value,
+and the type will be determined dynamically based on the JSON value.
+```
+Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+
+Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
+```
+JSONDecoder, TextDecoder
+```
 
 
 ## Encode
@@ -35,11 +120,11 @@ Encoding details:<br>
 ```
 Since this function designed for comptime type analysis, the type [T] should
 be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
-Any unsupported type causes exceptional with [UnsupportedTypeError].
+Any unsupported type causes error with [UnsupportedTypeError].
 
 Signed/Unsigned Integers, Floating-Points:
 	Encode as JSON numbers.
-	For floating-points, NaN or ±Inf will cause exceptional with [UnsupportedValueError].
+	For floating-points, NaN or ±Inf will cause error with [UnsupportedValueError].
 
 Booleans:
 	Encode as JSON booleans.
@@ -74,7 +159,7 @@ Maps:
 	If map is nil, encode as empty object {} JSON value.
 	The keys of the map always will be quoted.
 	Also map's key type only can be: signed integer, unsigned integer and string.
-	Other types will cause exceptional with [UnsupportedTypeError].
+	Other types will cause error with [UnsupportedTypeError].
 
 Smart Pointers:
 	If smart pointer is nil, encode as null JSON value.
@@ -98,92 +183,37 @@ Same as Encode\[T\] function but enables indentation\.
 ```jule
 fn Valid(data: []byte): bool
 ```
-Reports whether data is a valid JSON\.
+Reports whether data is a valid JSON encoding\.
 
-## Decode
+## Object
 ```jule
-fn Decode[T](data: []byte, mut &t: *T)!
+type Object: map[str]Value
 ```
-Implements decoding of JSON as defined in RFC 7159\.
+Dynamic JSON object type\.
 
-The algorithm is optimized for efficiency, performance and minimum runtime\. Uses generics and Jule&#39;s comptime\. Type analysis guaranteed to be completed at compile\-time\.
-
-Implementation supports only Jule types, excluding external types\.
-
-Decoding details:<br>
+## Array
+```jule
+type Array: []Value
 ```
-Since this function designed for comptime type analysis, the type [T] should
-be valid type for comptime. The type [any], which is stores dynamic type, is not valid.
-Any unsupported type causes exceptional with [UnsupportedTypeError].
-Any incompatible value for type, invalid literal or something else causes
-exceptional with [UnsupportedTypeError].
+Dynamic JSON array type\.
 
-Signed/Unsigned Integers, Floating-Points:
-	Decode as JSON numbers.
-
-Booleans:
-	Decode as JSON booleans.
-
-Strings:
-	Decode as JSON strings. Invalid UTF-8 or invalid UTF-16 surrogate pairs
-	are not treated as an exception. Instead, they are replaced by the
-	Unicode replacement character U+FFFD.
-
-Structs:
-	Decode as JSON objects with only visible fields of struct.
-
-	The private and anonymous fields will be ignored.
-	If the field is public, the field name will be used.
-	If the field have a json tag, the json tag will be used even if field is private or anonymous.
-	If the field have json tag but it is duplicate, the field will be ignored.
-	A valid JSON tag must contain only Unicode letter, digit or punctuation
-	except quote chars and backslash.
-
-Arrays:
-	Decode as JSON array.
-	If array size is larger than JSON array, algorithm will change the
-	remain data to zero-value for data-type.
-
-Slices:
-	Decode as JSON array.
-	For the []byte type, decodes strings as a base64-encoded string if the input
-	is string, otherwise decodes as JSON array.
-
-Maps:
-	Decode as JSON object.
-	Map's key type only can be: signed integer, unsigned integer and string.
-	Other types will cause exceptional with [UnsupportedTypeError].
-
-Smart Pointers:
-	If smart pointer is nil, will be allocated by the algorithm for decoding.
-	Otherwise, will decode into dereferenced value.
+## Bool
+```jule
+type Bool: bool
 ```
-Dynamic decoding details:<br>
-```
-Dynamic JSON decoding uses dynamic JSON types:
-Value, Object, Array, Bool, Number, and String.
-No dynamic decoding can be achieved outside of these types;
-for example, the [any] type is not supported.
-If you want to obtain any JSON value, use [Value] instead.
+Dynamic JSON boolean type\.
 
-Dynamic decoding will always decode using dynamic types;
-	nil    -> for JSON null
-	Object -> for JSON object
-	Array  -> for JSON array
-	Bool   -> for JSON boolean
-	Number -> for JSON number
-	String -> for JSON string
-
-If you use Value as destination type, it may store any JSON value,
-and the type will be determined dynamically based on the JSON value.
+## Number
+```jule
+type Number: f64
 ```
-Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+Dynamic JSON number type\.
 
-Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
+## String
+```jule
+type String: str
 ```
-JSONDecoder, TextDecoder
-```
-
+Dynamic JSON string type\.
 
 ## UnsupportedTypeError
 ```jule
@@ -228,36 +258,6 @@ Represents an error from calling a reserved \[EncodeText\] method\.
 fn Str(*self): str
 ```
 
-
-## Object
-```jule
-type Object: map[str]Value
-```
-Dynamic JSON object type\.
-
-## Array
-```jule
-type Array: []Value
-```
-Dynamic JSON array type\.
-
-## Bool
-```jule
-type Bool: bool
-```
-Dynamic JSON boolean type\.
-
-## Number
-```jule
-type Number: f64
-```
-Dynamic JSON number type\.
-
-## String
-```jule
-type String: str
-```
-Dynamic JSON string type\.
 
 ## Value
 ```jule
