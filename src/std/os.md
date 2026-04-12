@@ -226,7 +226,7 @@ Removes named file\.
 ```jule
 fn Create(path: str)!: &File
 ```
-Creates or truncates the named file\. If the file already exists, it is truncated\. If the file does not exist, it is created with mode 0666 \(before umask\)\. If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode O\_RDWR\. Calls internally \`File\.Open\` and forwards any exceptional\.
+Creates or truncates the named file\. If the file already exists, it is truncated\. If the file does not exist, it is created with mode 0666 \(before umask\)\. If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode O\_RDWR\. Calls internally \`File\.Open\` and forwards any error\.
 
 ## ReadFile
 ```jule
@@ -244,7 +244,7 @@ Sync variant of \[ReadFile\]\. It is provided for blocking operations and must b
 ```jule
 async fn WriteFile(path: str, data: []byte, perm: FileMode)!
 ```
-Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any exceptional\.
+Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any error\.
 
 ## WriteFileSync
 ```jule
