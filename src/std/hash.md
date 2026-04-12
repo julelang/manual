@@ -12,7 +12,6 @@
 ```jule
 trait Hash {
 	// Implements same method as io::Writer trait.
-	// But it will not throws any exceptional.
 	io::Writer
 
 	// Appends the current hash to b and returns the resulting slice.
