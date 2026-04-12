@@ -213,7 +213,7 @@ Looks up host using the local resolver\. It returns a slice of that host&#39;s I
 ```jule
 async fn Listen(network: Network, addr: str)!: Listener
 ```
-Listens the address on the named network\. It will forward any exceptional from network connectors\.
+Listens the address on the named network\. It will forward any error from network connectors\.
 
 For UDP network, the \[ListenUDP\] function should be used\. If the network parameter is points UDP network, function will panic\.
 
@@ -223,7 +223,7 @@ See the \[Dial\] function for a description of the network and addr parameters\.
 ```jule
 async fn ListenUDP(network: Network, addr: str)!: &UDPConn
 ```
-Listens the address on the named network\. It will forward any exceptional from network connectors\. Just for UDP networks\.
+Listens the address on the named network\. It will forward any error from network connectors\. Just for UDP networks\.
 
 See the \[Dial\] function for a description of the network and addr parameters\.
 
@@ -269,7 +269,7 @@ address is IPv4, will not try to convert IPv6. If network is Udp, it will use Ud
 for empty addresses and try for IPv4 if possible. If address is IPv4 or IPv6 which
 is converted to IPv4 successfully, will use Udp4, otherwise IPv6 and Udp6 preferred.
 ```
-It will forward any exceptional from network connectors\.
+It will forward any error from network connectors\.
 
 ## DialTimeout
 ```jule
@@ -473,11 +473,11 @@ Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over Infini
 00-00-5e-00-53-01
 02-00-5e-10-00-00-00-01
 00-00-00-00-fe-80-00-00-00-00-00-00-02-00-5e-10-00-00-00-01
-0000.5e00.5301
-0200.5e10.0000.0001
-0000.0000.fe80.0000.0000.0000.0200.5e10.0000.0001
+0000. 5e00.5301
+0200. 5e10.0000.0001
+0000. 0000.fe80.0000.0000.0000.0200.5e10.0000.0001
 ```
-Exceptional is always will be AddrError\.Unable\.
+Error is always will be AddrError\.Unable\.
 
 ### Str
 ```jule
@@ -558,7 +558,7 @@ TCP connection\. In most cases, represents TCP client\.
 ```jule
 async fn Dial(addr: str)!: &TCPConn
 ```
-Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
 See the \[Dial\] function for a description of the addr parameter\.
 
@@ -632,7 +632,7 @@ TCP listener\. In most cases, represents TCP server\.
 ```jule
 async fn Bind(addr: str)!: &TCPListener
 ```
-Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse error\. In addition, any bind and listening error will be thrown as error\.
 
 See the \[Dial\] function for a description of the addr parameter\.
 
@@ -711,7 +711,7 @@ UDP connection\. This structure represents server and client connections\.
 ```jule
 async fn Bind(addr: str)!: &UDPConn
 ```
-Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
 See the \[Dial\] function for a description of the addr parameter\.
 
@@ -719,7 +719,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 ```jule
 async fn Dial(addr: str)!: &UDPConn
 ```
-Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse exceptionals\. In addition, any bind and listening error will be return as exceptional\.
+Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
 See the \[Dial\] function for a description of the addr parameter\.
 
