@@ -102,11 +102,11 @@
 			"patterns": [
 				{
 					"name": "keyword.jule",
-					"match": "\\b(map|type|impl|trait|struct|enum|fn|co|unsafe|chan|async|await)\\b"
+					"match": "\\b(map|type|impl|trait|struct|enum|fn|co|unsafe|chan|async|await|error)\\b"
 				},
 				{
 					"name": "keyword.control.jule",
-					"match": "\\b(ret|goto|for|in|break|continue|if|error|else|match|defer|select|fall|use)\\b"
+					"match": "\\b(ret|goto|for|in|break|continue|if|throw|else|match|defer|select|fall|use)\\b"
 				}
 			]
 		},
