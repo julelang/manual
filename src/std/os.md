@@ -99,6 +99,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(\*self\)\!](#start)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(\*self\)\!](#run)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Kill\(\*self\)\!](#kill)\
 [struct DirEntry](#direntry)\
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
@@ -455,6 +456,12 @@ Starts the specified command and waits for it to complete\. Wait operation is bl
 fn Wait(*self)!: int
 ```
 Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\. Wait operation is blocking\.
+
+### Kill
+```jule
+fn Kill(*self)!
+```
+Kills the command\. The command must have been started by \[Cmd\.Start\]\.
 
 ## DirEntry
 ```jule
