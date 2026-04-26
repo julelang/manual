@@ -18,14 +18,11 @@ fn Clean(path: str): str
 ```
 Returns the shortest path name equivalent to path by purely lexical processing\. It applies the following rules iteratively until no further processing can be done:
 
-```
-1. Replace multiple slashes with a single slash.
-2. Eliminate each . path name element (the current directory).
-3. Eliminate each inner .. path name element (the parent directory)
-			along with the non-.. element that precedes it.
-4. Eliminate .. elements that begin a rooted path:
-			that is, replace "/.." by "/" at the beginning of a path.
-```
+1. Replace multiple slashes with a single slash\.
+2. Eliminate each \. path name element \(the current directory\)\.
+3. Eliminate each inner \.\. path name element \(the parent directory\) along with the non\-\.\. element that precedes it\.
+4. Eliminate \.\. elements that begin a rooted path: that is, replace &#34;/\.\.&#34; by &#34;/&#34; at the beginning of a path\.
+
 The returned path ends in a slash only if it is the root &#34;/&#34;\.
 
 If the result of this process is an empty string, returns the string &#34;\.&#34;\.
