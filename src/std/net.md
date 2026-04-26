@@ -572,7 +572,7 @@ Same as TCPListener\.Dial, but uses timeout\.
 ```jule
 async fn Read(mut *self, mut buf: []byte)!: int
 ```
-Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\. If connection is closed by server, it returns zero and sets connection state as closed\. So if you try read again, function will panic because of connection state is closed\.
+Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
 
 ### Write
 ```jule
