@@ -20,10 +20,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadRune\(mut \*self\)\!: \(r: rune, size: int\)](#readrune)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnreadRune\(mut \*self\)\!](#unreadrune)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Buffered\(\*self\): int](#buffered)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSlice\(mut \*self, delim: byte\)\!: \(line: \[\]byte, full: bool, eof: bool\)](#readslice)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadLine\(mut \*self\)\!: \(line: \[\]byte, isPrefix: bool, eof: bool\)](#readline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBytes\(mut \*self, delim: byte\)\!: \(buf: \[\]byte, eof: bool\)](#readbytes)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(mut \*self, delim: byte\)\!: \(str, eof: bool\)](#readstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSlice\(mut \*self, delim: byte\)\!: \(line: \[\]byte, full: bool\)](#readslice)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadLine\(mut \*self\)\!: \(line: \[\]byte, isPrefix: bool\)](#readline)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBytes\(mut \*self, delim: byte\)\!: \(buf: \[\]byte\)](#readbytes)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(mut \*self, delim: byte\)\!: str](#readstr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(mut \*self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
 [struct Writer](#writer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewSize\(mut w: io::Writer, mut size: int\): &amp;Writer](#newsize-1)\
@@ -55,7 +55,6 @@
 ```jule
 let mut ErrInvalidUnreadByte = errors::New("bufio: invalid use of UnreadByte")
 let mut ErrInvalidUnreadRune = errors::New("bufio: invalid use of UnreadRune")
-let mut ErrBufferFull = errors::New("bufio: buffer full")
 let mut ErrNegativeCount = errors::New("bufio: negative count")
 ```
 Any mutation is undefined\.
@@ -198,13 +197,13 @@ Returns the number of bytes that can be read from the current buffer\.
 
 ### ReadSlice
 ```jule
-async fn ReadSlice(mut *self, delim: byte)!: (line: []byte, full: bool, eof: bool)
+async fn ReadSlice(mut *self, delim: byte)!: (line: []byte, full: bool)
 ```
-Reads until the first occurrence of delim in the input, returning a slice pointing at the bytes in the buffer\. The bytes stop being valid at the next read\. If it encounters an error before finding a delimiter, forwards it\. It fails with full=true if the buffer fills without a delim\. Because the data returned from ReadSlice will be overwritten by the next I/O operation, most clients should use \[Reader\.ReadBytes\] or ReadStr instead\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\.
+Reads until the first occurrence of delim in the input, returning a slice pointing at the bytes in the buffer\. The bytes stop being valid at the next read\. If it encounters an error before finding a delimiter, forwards it\. It fails with full=true if the buffer fills without a delim\. Because the data returned from ReadSlice will be overwritten by the next I/O operation, most clients should use \[Reader\.ReadBytes\] or ReadStr instead\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\.
 
 ### ReadLine
 ```jule
-async fn ReadLine(mut *self)!: (line: []byte, isPrefix: bool, eof: bool)
+async fn ReadLine(mut *self)!: (line: []byte, isPrefix: bool)
 ```
 Low\-level line\-reading primitive\. Most callers should use \[Reader\.ReadBytes\]\(&#39;\\n&#39;\) or \[Reader\.ReadStr\]\(&#39;\\n&#39;\) instead or use a \[Scanner\]\.
 
@@ -214,15 +213,15 @@ The text returned from ReadLine does not include the line end \(&#34;\\r\\n&#34;
 
 ### ReadBytes
 ```jule
-async fn ReadBytes(mut *self, delim: byte)!: (buf: []byte, eof: bool)
+async fn ReadBytes(mut *self, delim: byte)!: (buf: []byte)
 ```
-Reads until the first occurrence of delim in the input, returning a slice containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. Returns zero\-length slice for EOF\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. For simple uses, a Scanner may be more convenient\.
+Reads until the first occurrence of delim in the input, returning a slice containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\. For simple uses, a Scanner may be more convenient\.
 
 ### ReadStr
 ```jule
-async fn ReadStr(mut *self, delim: byte)!: (str, eof: bool)
+async fn ReadStr(mut *self, delim: byte)!: str
 ```
-Reads until the first occurrence of delim in the input, returning a string containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. Returns empty string for EOF\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. For simple uses, a Scanner may be more convenient\.
+Reads until the first occurrence of delim in the input, returning a string containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\. For simple uses, a Scanner may be more convenient\.
 
 ### WriteTo
 ```jule
