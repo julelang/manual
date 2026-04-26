@@ -41,6 +41,13 @@
 ## Variables
 
 ```jule
+let mut EOF = errors::New("EOF")
+```
+The error returned by Read when no more input is available\. \(Read must return EOF itself, not an error wrapping EOF, because callers will test for EOF using ==\.\) Functions should return EOF only to signal a graceful end of input\. If the EOF occurs unexpectedly in a structured data stream, the appropriate error is either \[ErrUnexpectedEOF\] or some other error giving more detail\. Mutation is undefined behavior\.
+
+---
+
+```jule
 let mut ErrShortWrite = errors::New("short write")
 ```
 It means that a write accepted fewer bytes than requested but failed to return an explicit error\. Mutation is undefined behavior\.
@@ -80,13 +87,6 @@ Seek whence values\.
 ---
 
 ```jule
-const EOF = -1
-```
-EOF read count for the Reader trait\.
-
----
-
-```jule
 let mut Discard = discard{ ... }
 ```
 A \[Writer\] on which all Write calls succeed without doing anything\.
@@ -107,9 +107,7 @@ Copies n bytes \(or until an error\) from src to dst\. It returns the number of 
 ```jule
 async fn Copy(mut dst: Writer, mut src: Reader)!: (written: i64)
 ```
-Copies from src to dst until either EOF is reached on src or an error occurs\. It returns the number of bytes copied and the first error encountered while copying, if any\.
-
-Forwards any exceptional and may be throw InvalidWrite or ShortWrite\.
+Copies from src to dst until either EOF is reached on src or an error occurs\. It returns the number of bytes copied, if any\. Otherwise, if throws the error, if any\.
 
 ## CopyBuffer
 ```jule
@@ -133,25 +131,25 @@ Writes a single byte to w efficiently\. Guarantees a slice will not be allocated
 ```jule
 async fn ReadAll(mut r: Reader)!: []byte
 ```
-Reads from r until an error or EOF and returns the data it read\. A successful call throws no exception\.
+Reads from r until an error or EOF and returns the data it read\. A successful call throws no error\.
 
 ## ReadAtLeast
 ```jule
 async fn ReadAtLeast(mut r: Reader, mut buf: []byte, min: int)!: (n: int)
 ```
-Reads from r into buf until it has read at least min bytes\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading fewer than min bytes, exception is ErrUnexpectedEOF\. If min is greater than the length of buf, exception is ErrShortBuffer\. On return, n &gt;= min if and only if err == nil\. If r returns an error having read at least min bytes, the error is dropped\.
+Reads from r into buf until it has read at least min bytes\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading fewer than min bytes, error is ErrUnexpectedEOF\. If min is greater than the length of buf, error is ErrShortBuffer\. On return, n &gt;= min if and only if err == nil\. If r returns an error having read at least min bytes, the error is dropped\.
 
 ## ReadFull
 ```jule
 async fn ReadFull(mut r: Reader, mut buf: []byte)!: (n: int)
 ```
-Reads exactly len\(buf\) bytes from r into buf\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading some but not all the bytes, exception is ErrUnexpectedEOF\. On return, n == len\(buf\) if and only if err == nil\. If r returns an error having read at least len\(buf\) bytes, the error is dropped\.
+Reads exactly len\(buf\) bytes from r into buf\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading some but not all the bytes, error is ErrUnexpectedEOF\. On return, n == len\(buf\) if and only if err == nil\. If r returns an error having read at least len\(buf\) bytes, the error is dropped\.
 
 ## MultiReader
 ```jule
 fn MultiReader(mut readers: ...Reader): Reader
 ```
-Returns a Reader that&#39;s the logical concatenation of the provided input readers\. They&#39;re read sequentially\. Once all inputs have returned EOF, Read will return EOF\.  If any of the readers return a non\-nil, non\-EOF error, Read will return that error\.
+Returns a Reader that&#39;s the logical concatenation of the provided input readers\. They&#39;re read sequentially\. Once all inputs have throw EOF, Read will throw EOF\.  If any of the readers return a non\-nil, non\-EOF error, Read will return that error\.
 
 ## Reader
 ```jule
@@ -163,11 +161,11 @@ Implements the basic Read method\.
 
 Reads up to len\(buf\) bytes into buf\. It returns the number of bytes read \(0 &lt;= n &lt;= len\(buf\)\)\. Even if Read returns n &lt; len\(buf\), it may use all of buf as scratch space during the call\. If some data is available but not len\(buf\) bytes, Read conventionally returns what is available instead of waiting for more\.
 
-If len\(buf\) == 0, Read should always return n == 0\. Implementations of Read are should return io::EOF for EOF\. If len\(buf\) \!= 0 and EOF reached, should return io::EOF to represent EOF\. Negative read count values are undefined, but io::EOF may be negative\.
+If len\(buf\) == 0, Read should always return n == 0\. Implementations of Read are should throw io::EOF for EOF\. If len\(buf\) \!= 0 and EOF reached, should throw io::EOF to represent EOF\.
 
 The Read method mutable because implementation may should do mutable operations, or this method may called needed from the mutable method, which is not cannot be internally mutable\. Such a mutable behaviors should be documented by the implementation\.
 
-Implementations must not retain buf\. Exceptionals are not standardized\. Should be documented by implementations\.
+Implementations must not retain buf\. Errors are not standardized\. Should be documented by implementations\.
 
 ## Writer
 ```jule
@@ -179,7 +177,7 @@ Implements the basic Write method\.
 
 Write writes len\(buf\) bytes from buf to the underlying data stream\. It returns the number of bytes written from buf \(0 &lt;= n &lt;= len\(buf\)\) and any error encountered that caused the write to stop early\. Write must remain the slice data without any mutation after call\.
 
-Implementations must not retain buf\. Exceptionals are not standardized\. Should be documented by implementations\.
+Implementations must not retain buf\. Errors are not standardized\. Should be documented by implementations\.
 
 ## StrWriter
 ```jule
@@ -191,7 +189,7 @@ Implements the basic WriteStr method\.
 
 The WriteStr method similar to Writer\.Write method but takes string\. Behavior should be same as the Writer\.Write method\.
 
-Implementations must not retain s\. Exceptionals are not standardized\. Should be documented by implementations\.
+Implementations must not retain s\. Errors are not standardized\. Should be documented by implementations\.
 
 ## ByteReader
 ```jule
@@ -201,11 +199,11 @@ trait ByteReader {
 ```
 Implements the basic ReadByte method\.
 
-It should read byte and return one for n without throwing exceptional if success\. It should return n as io:EOF for EOF, the EOF byte is implementation\-dependent\. If read failed, should throw exceptional\.
+It should read byte and return one for n without throwing error if success\. It should throw io:EOF for EOF\. If read failed, should throw error\.
 
 The ReadByte method mutable because of same reasons of the \`Reader\` trait\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## ByteScanner
 ```jule
@@ -226,9 +224,9 @@ trait ByteWriter {
 ```
 Implements the basic WriteByte method\.
 
-It should write byte and return without throwing exceptional if success\. If write failed, should throw exceptional\.
+It should write byte and return without throwing error if success\. If write failed, should throw error\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## RuneReader
 ```jule
@@ -238,11 +236,11 @@ trait RuneReader {
 ```
 Implements the basic ReadRune method\.
 
-It reads a single encoded Unicode character and returns the rune and its size in bytes\. It should return size as io::EOF for EOF, the EOF rune is implementation\-dependent\.
+It reads a single encoded Unicode character and returns the rune and its size in bytes\. It should throw io:EOF for EOF\.
 
 The ReadRune method mutable because of same reasons of the \`Reader\` trait\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## RuneScanner
 ```jule
@@ -263,11 +261,11 @@ trait RuneWriter {
 ```
 Implements the basic WriteRune method\.
 
-It should write rune and return written count without throwing exceptional if success\. If write failed, should throw exceptional\.
+It should write rune and return written count without throwing error if success\. If write failed, should throw error\.
 
 The return count may be based on bytes or runes by implementation\. For example, for bytes, it may return count of written bytes, or for runes returns one for a single rune\. It should be documented by the implementation\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## Closer
 ```jule
@@ -277,11 +275,11 @@ trait Closer {
 ```
 Implements the basic Close method\.
 
-The behavior of the Close method is not standardized\. Specific implementations should document their own behavior\. After first call the Close method behavior may be undefined, but exceptional throw recommended if any error should be occur\.
+The behavior of the Close method is not standardized\. Specific implementations should document their own behavior\. After first call the Close method behavior may be undefined, but error throw recommended if any error should be occur\.
 
 The Close method mutable because of same reasons of the \`Reader\` trait\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## ReaderAt
 ```jule
@@ -293,11 +291,11 @@ The trait that wraps the basic ReadAt method\.
 
 It reads len\(p\) bytes into p starting at offset off in the underlying input source\. It returns the number of bytes read \(0 &lt;= n &lt;= len\(p\)\) and any error encountered\.
 
-If n &lt; len\(p\), it throws an exception explaining why more bytes were not read\. In this respect, ReadAt is stricter than Read\.
+If n &lt; len\(p\), it throws an error explaining why more bytes were not read\. In this respect, ReadAt is stricter than Read\.
 
 Even if n &lt; len\(p\), it may use all of p as scratch space during the call\. If some data is available but not len\(p\) bytes, it blocks until either all the data is available or an error occurs\. In this respect ReadAt is different from Read\.
 
-It should return io::EOF for EOF\.
+It should throw io:EOF for EOF\.
 
 If it is reading from an input source with a seek offset, it should not affect nor be affected by the underlying seek offset\.
 
@@ -305,7 +303,7 @@ Clients of ReadAt can execute parallel ReadAt calls on the same input source\.
 
 The ReadAt method mutable because of same reasons of the \`Reader\` trait\.
 
-Implementations must not retain p\. Exceptionals are not standardized\. Should be documented by implementations\.
+Implementations must not retain p\. Errors are not standardized\. Should be documented by implementations\.
 
 ## ReaderFrom
 ```jule
@@ -317,7 +315,7 @@ The trait that wraps the basic ReadFrom method\.
 
 It reads data from r until EOF or error\. The return value n is the number of bytes read\. Any error encountered during the read is also forwarded\.
 
-It should return io::EOF for EOF\.
+It should throw io:EOF for EOF\.
 
 ## WriterTo
 ```jule
@@ -331,7 +329,7 @@ It writes data to w until there&#39;s no more data to write or when an error occ
 
 The WriteTo method mutable because of same reasons of the \`Reader\` trait\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## Seeker
 ```jule
@@ -347,7 +345,7 @@ Seeking to an offset before the start of the file is an error\. Seeking to any p
 
 The Seek method mutable because of same reasons of the \`Reader\` trait\.
 
-Exceptionals are not standardized\. Should be documented by implementations\.
+Errors are not standardized\. Should be documented by implementations\.
 
 ## ReadCloser
 ```jule
@@ -425,7 +423,7 @@ struct LimitedReader {
 	N: i64    // max bytes remaining
 }
 ```
-Reads from R but limits the amount of data returned to just N bytes\. Each call to Read updates N to reflect the new amount remaining\. Read returns EOF when N &lt;= 0 or when the underlying R returns EOF\.
+Reads from R but limits the amount of data returned to just N bytes\. Each call to Read updates N to reflect the new amount remaining\. Read throws EOF when N &lt;= 0 or when the underlying R throws EOF\.
 
 ### Implemented Traits
 
