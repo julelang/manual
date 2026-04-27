@@ -14,6 +14,7 @@
 [struct Writer](#writer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, record: \[\]str\)\!](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Flush\(mut \*self\)\!](#flush)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut \*self, records: \[\]\[\]str\)\!](#writeall)
 
 ## Variables
@@ -152,6 +153,12 @@ Returns new Writer instance that writes w\.
 async fn Write(mut *self, record: []str)!
 ```
 Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
+
+### Flush
+```jule
+async fn Flush(mut *self)!
+```
+Writes any buffered data to the underlying io::Writer\.
 
 ### WriteAll
 ```jule
