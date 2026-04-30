@@ -104,6 +104,8 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ShouldAsync\(\*self\): bool](#shouldasync)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteSync\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#writesync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
@@ -515,6 +517,22 @@ Returns raw file\-descriptor\. Intended for low\-level use\. Just borrow, do not
 fn ShouldAsync(*self): bool
 ```
 Reports whether treating the file descriptor as async is the correct approach\. If the fd has the potential to exhibit non\-blocking behavior, it should be handled with async API\. Behavior in sync API is undefined\. However, this is not a definitive guarantee that the fd is non\-blocking\.
+
+### SetReadDeadline
+```jule
+fn SetReadDeadline(mut *self, deadline: time::Duration)!
+```
+Sets or updates a deadline for the future read operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+
+If file does not supports async I/O, throws error\.
+
+### SetWriteDeadline
+```jule
+fn SetWriteDeadline(mut *self, deadline: time::Duration)!
+```
+Sets or updates a deadline for the future write operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+
+If file does not supports async I/O, throws error\.
 
 ### Write
 ```jule
