@@ -9,7 +9,7 @@
 ## Variables
 
 ```jule
-const Version = `jule0.2.1 @master`
+const Version = `jule0.2.2 @master`
 ```
 Version of package and sub\-packages\. This version represents also julec version\.
 
