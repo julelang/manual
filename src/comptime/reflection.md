@@ -182,26 +182,26 @@ fn main() {
 ```jule
 use "std/comptime"
 
-fn Fill[Arr, Value](mut &arr: Arr, mut elem: Value) {
-    const t = comptime::TypeOf(Arr)
-    const match {
-    | t.Kind() != comptime::Array:
-        panic("type Arr is not an array")
-    | t.Value() != comptime::TypeOf(Value):
-        panic("type Value is not same with type Arr's value type")
-    }
-    mut i := 0
-    for i < t.Size(); i++ {
-        arr[i] = elem
-    }
+fn Fill[Arr, Value](mut &arr: *Arr, mut elem: Value) {
+	const t = comptime::TypeOf(Arr)
+	const match {
+	| t.Kind() != comptime::Array:
+		panic("type Arr is not an array")
+	| t.Value() != comptime::TypeOf(Value):
+		panic("type Value is not same with type Arr's value type")
+	}
+	mut i := 0
+	for i < t.Size(); i++ {
+		(*arr)[i] = elem
+	}
 }
 
 fn main() {
-    let mut arr: [5]int
-    Fill(arr, 10)
-    for _, x in arr {
-        println(x)
-    }
+	let mut arr: [5]int
+	Fill(&arr, 10)
+	for _, x in arr {
+		println(x)
+	}
 }
 ```
 
