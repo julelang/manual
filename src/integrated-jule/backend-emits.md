@@ -64,3 +64,5 @@ fn main() {
 ```
 
 In the example above, the variable `x` is defined in the backend. However, its type and value are evaluated by the compiler and placed in the backend. This is a more compatible example of code emitting. What follows is the use of a variable `y` defined in Jule source code in the backend.
+
+Jule does not guarantee that definitions in the source code will be transferred to the backend with their original names. Consequently, the backend identifier or memory location of a variable may change during the compilation process. For this reason, when utilizing Jule types and variables within low-level operations, they must be passed as arguments to the `Emit` call to ensure the compiler correctly maps them to their generated counterparts in the backend.
