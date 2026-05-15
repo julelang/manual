@@ -16,12 +16,15 @@ If this code does not allow you to get the latest julec build, you can get a lat
 
 ### Using Script
 
-A script has been designed to automate this. It automatically obtains the latest Jule@master source code, makes adjustments, selects the right IR distribution for your operating system and architecture, and creates an optimized ready-to-use julec build.
+::: info
+Supported for UNIX-like or Win32/MSYS/Cygwin
+:::
+
+A script has been designed to automate this. It automatically obtains the latest jule@master source code, makes adjustments, selects the right IR distribution for your operating system and architecture, and creates an optimized ready-to-use julec build.
 
 ::: warning
 Script will use Clang.
 :::
-
 
 Execute this command in your terminal:
 ```bash
@@ -38,18 +41,16 @@ Of course you need a C++ compiler to compile the IR code. At this point it is re
 
 We recommend compiling julec's IR codes with Clang and C++20. The recommended build command below is built accordingly. You can change the optimization level as you wish. -O0 is recommended for debugging. If you're using it to get the most up-to-date compiler in the main branch, you can still use -O0 to get the fastest build time, but it may also result in a julec build with a higher transpilation time. But in the general scenario you wait less time than you would expect for the -O3 optimization level.
 
-Recommended compile command (Unix):
-```sh
-clang++ -Wno-everything --std=c++20 -fwrapv -ffloat-store -fno-fast-math -fexcess-precision=standard -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o ./bin/julec ir.cpp
-```
-
-Recommended compile command (Windows):
-```sh
-clang++ -Wno-everything --std=c++20 -fwrapv -ffloat-store -fno-fast-math -fno-rounding-math -ffp-contract=fast -O3 -flto=thin -fuse-ld=lld -DNDEBUG -fomit-frame-pointer -fno-strict-aliasing -o bin/julec.exe ir.cpp -lws2_32 -lshell32 -liphlpapi -lsynchronization
-```
+Recommended compile command for your system:
+- [`windows-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/windows-amd64.txt)
+- [`windows-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/windows-arm64.txt)
+- [`linux-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/linux-amd64.txt)
+- [`linux-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/linux-arm64.txt)
+- [`darwin-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/darwin-amd64.txt)
+- [`darwin-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/darwin-arm64.txt)
 
 ::: warning
-The above build commands may differ from the build commands that will be produced by julec or the official commands used for production builds.
+The commands here are automatically generated and used as defined by [RELEASE.md](https://github.com/julelang/jule/blob/master/RELEASE.md) to retrieve julec's release builds. The relevant compiler may not exist directly or under the same name on your system. Additional effort may be required for such issues.
 :::
 
 ::: tip
