@@ -25,7 +25,7 @@ fn main() {
 	if r == 0 {
 		sys::Addrcall(procExitProcess.Addr(), uint(1))
 	}
-	println(str(path[:r]))
+	println(string(path[:r]))
 }
 ```
 In the example above, the `ExitProcess` and `GetmoduleFileNameA` functions are linked from `kernel32.dll`, which is dynamically linked with the `MustLoadDLL` function. Too call linked DLL procs, the `Addrcall` function is used.
@@ -57,7 +57,7 @@ fn main() {
 	if r == 0 {
 		ExitProcess(1)
 	}
-	println(str(path[:r]))
+	println(string(path[:r]))
 }
 ```
 In the example above, the `ExitProcess` and `GetModuleFileName` functions are wrappers for the corresponding DLL procs. No need to update all calls for any change, just update the wrapper. Jule's compiler will check type-safety for you. Basically, low-level addrcalls become safer and more reliable in this approach. **Highly recommended**.
@@ -96,7 +96,7 @@ fn main() {
 	if r == 0 {
 		extern.kernel32_ExitProcess(1)
 	}
-	println(str(path[:r]))
+	println(string(path[:r]))
 }
 ```
 
@@ -135,6 +135,6 @@ fn main() {
 	if r == 0 {
 		sys::Addrcall(uintptr(extern.kernel32_ExitProcess), uint(1))
 	}
-	println(str(path[:r]))
+	println(string(path[:r]))
 }
 ```

@@ -5,7 +5,7 @@ For example:
 ```jule
 // file: ./hello_print.jule
 
-fn helloPrint(name: str) {
+fn helloPrint(name: string) {
     println("Hello " + name)
 }
 ```

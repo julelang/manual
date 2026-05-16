@@ -74,7 +74,7 @@ For example:
 ```jule
 struct Foo {
 	bar: int
-	baz: str
+	baz: string
 }
 
 fn main() {
@@ -92,7 +92,7 @@ Maps are similar to structures. When the type is clearly known, braces alone wil
 For example:
 ```jule
 fn main() {
-	let mut f: map[int]str
+	let mut f: map[int]string
 	f = {
 		0: "hello",
 		1: " ",
@@ -102,7 +102,7 @@ fn main() {
 	println(f)
 }
 ```
-In the example above, since the type of the variable `f` is clearly known, it is sufficient to use only braces in the assignment. Brace literal evaluates to type `map[int]str`.
+In the example above, since the type of the variable `f` is clearly known, it is sufficient to use only braces in the assignment. Brace literal evaluates to type `map[int]string`.
 
 ## Error Handler Scopes
 
@@ -130,7 +130,7 @@ For example:
 ```jule
 struct Test{
 	a: int
-	b: str
+	b: string
 }
 
 fn main() {

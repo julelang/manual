@@ -2,7 +2,7 @@
 
 In short, comptime evaluation is the evaluation of computations that can be handled at comptime and really basic feature of Jule's comptime. More broadly, comptime evaluation is responsible for evaluating constant literals for supported primitive types, handling constant variables, and executing other constant algorithms. Besides these strict comptime features, some comptime may provide additional facilities for expressions that are not within the scope of evaluation but can be predicted at compile time.
 
-List of supported primitive types: `str`, `bool`, `f32`, `f64`, `i8`, `i16`, `i32`, `i64`, `u8`, `u16`, `u32`, `u64`, `int`, `uint`, `uintptr`
+List of supported primitive types: `string`, `bool`, `f32`, `f64`, `i8`, `i16`, `i32`, `i64`, `u8`, `u16`, `u32`, `u64`, `int`, `uint`, `uintptr`
 
 ### List of Some Effects of Comptime Evaluation
 
@@ -23,15 +23,15 @@ Untyped literals are literals that do not have an exact type. This allows them t
 
 For example:
 ```jule
-type String: str
+type String: string
 
 fn main() {
 	let mut x: String = "hello world"
 	x = "assignment with untyped literal"
-	x = str("assignment with typed literal") // compile error
+	x = string("assignment with typed literal") // compile error
 }
 ```
-In the example above, the variable `x` is defined with the `String` type and initialized with an untyped string literal. The untyped string literal adapts to the `String` type. The following first statement assigns an untyped string literal to the variable `x`, which similarly results in the untyped literal behaving as a `String`, causing no errors. However, the subsequent assignment statement will result in an error because, with casting, the untyped string literal now has an exact type (i.e., `str`), which is incompatible with the `String` type.
+In the example above, the variable `x` is defined with the `String` type and initialized with an untyped string literal. The untyped string literal adapts to the `String` type. The following first statement assigns an untyped string literal to the variable `x`, which similarly results in the untyped literal behaving as a `String`, causing no errors. However, the subsequent assignment statement will result in an error because, with casting, the untyped string literal now has an exact type (i.e., `string`), which is incompatible with the `String` type.
 
 #### Untyped Integers
 

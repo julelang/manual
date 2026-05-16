@@ -22,27 +22,27 @@ Assigned by entry point.
 ## Functions
 
 ```jule
-fn ptrToStr(p: *unsafe): str
+fn ptrToStr(p: *unsafe): string
 ```
 Returns pointer in string form.
 
 ```jule
-fn boolToStr(b: bool): str
+fn boolToStr(b: bool): string
 ```
 Returns boolean in string form.
 
 ```jule
-fn i64ToStr(x: i64): str
+fn i64ToStr(x: i64): string
 ```
 Returns x in decimal string format.
 
 ```jule
-fn u64ToStr(mut x: u64): str
+fn u64ToStr(mut x: u64): string
 ```
 Returns x in decimal string format.
 
 ```jule
-fn f64ToStr(mut f: f64): str
+fn f64ToStr(mut f: f64): string
 ```
 Returns x in decimal string format.
 
@@ -123,44 +123,44 @@ unsafe fn panic1(m: *byte, n: int)
 The built-in panic call.
 
 ```jule
-fn panicStr(m: str)
+fn panicStr(m: string)
 ```
 Calls the panic1 function by m.
 
 ```jule
-fn compareStr(&a: str, &b: str): int
+fn compareStr(&a: string, &b: string): int
 ```
 See `strings::{Compare}` function for documentation.
 
 ```jule
-fn bytesToStr(bytes: []byte): str
+fn bytesToStr(bytes: []byte): string
 ```
-Converts `[]byte` to `str`.
+Converts `[]byte` to `string`.
 
 ```jule
-fn runesToStr(runes: []rune): str
+fn runesToStr(runes: []rune): string
 ```
-Converts `[]rune` to `str`.
+Converts `[]rune` to `string`.
 
 ```jule
-fn strToRunes(s: str): []rune
+fn strToRunes(s: string): []rune
 ```
-Converts `str` to `[]rune`.
+Converts `string` to `[]rune`.
 
 ```jule
-fn strToBytes(s: str): []byte
+fn strToBytes(s: string): []byte
 ```
-Converts `str` to `[]byte`.
+Converts `string` to `[]byte`.
 
 ```jule
-fn strFromByte(b: byte): str
+fn strFromByte(b: byte): string
 ```
-Converts `byte` to `str`.
+Converts `byte` to `string`.
 
 ```jule
-fn strFromRune(r: rune): str
+fn strFromRune(r: rune): string
 ```
-Converts `rune` to `str`.
+Converts `rune` to `string`.
 
 ```jule
 unsafe fn runeStep(s: *byte, n: int, mut r: *rune, mut outLen: *int)
@@ -168,7 +168,7 @@ unsafe fn runeStep(s: *byte, n: int, mut r: *rune, mut outLen: *int)
 Designed for `[]rune(s)` iterations. Takes pointer to string withl length and sets output pointers by first rune of string. Passing nil pointer for any parameter is not safe except `r`.
 
 ```jule
-fn runeCount(s: str): int
+fn runeCount(s: string): int
 ```
 Returns rune count of the string.
 
@@ -180,7 +180,7 @@ Pseudo memory allocation, for allocation checking and documentation purposes. An
 Calling this function, performs allocation size checking as described and panics if conditions are met.
 
 ```jule
-unsafe fn strBytePtr(b: *byte, n: int): str
+unsafe fn strBytePtr(b: *byte, n: int): string
 ```
 Returns string based on b, the parameter b means first byte of string. The returned string uses n as length. Will not perform garbage collection.
 
@@ -190,25 +190,25 @@ unsafe fn sliceBytePtr(mut b: *byte, len: int, cap: int): []byte
 Returns slice based on b, the parameter b means first element of slice. Will not perform garbage collection.
 
 ```jule
-fn strAsSlice(s: str): []byte
+fn strAsSlice(s: string): []byte
 ```
 Equals to sliceBytePtr(&s[0], len(s), len(s)) call.
 Returns nil slice for empty string.
 
 ```jule
-fn sliceAsStr(b: []byte): str
+fn sliceAsStr(b: []byte): string
 ```
-Returns byte slice as str.
+Returns byte slice as string.
 Equals to strBytePtr(&b[0], len(b)) call.
 Returns empty string if len(b) == 0.
 
 ```jule
-fn zprint(s: str)
+fn zprint(s: string)
 ```
 The runtime implementation of the built-in print function.
 
 ```jule
-fn zprintln(s: str)
+fn zprintln(s: string)
 ```
 The runtime implementation of the built-in println function.
 

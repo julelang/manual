@@ -41,7 +41,7 @@ Our Jule code:
 extern type char: byte
 extern unsafe fn sayHello(name: *extern.char)
 
-fn sayHello(name: str) {
+fn sayHello(name: string) {
     unsafe { extern.sayHello((*extern.char)(&name[0])) }
 }
 
@@ -50,9 +50,9 @@ fn main() {
 }
 ```
 
-There is a wrapper function for `sayHello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and read. It takes Jule's `str` type as an argument and allows us to get rid of the `unsafe` qualifier.
+There is a wrapper function for `sayHello` with the same name as shown in the example above. The difference between them is clearly visible. First, the wrapper is easier to access and read. It takes Jule's `string` type as an argument and allows us to get rid of the `unsafe` qualifier.
 
-Wrapper Jule takes the `str` type and passes it to the function, which wraps accordingly. Jule strings are in byte-encoded UTF-8 format, so taking the pointer to the first byte gives you a simple byte pointer. They are the same as `char*` in size. For this reason, a correct and trouble-free usage is displayed by casting. In addition, we maintain type safety.
+Wrapper Jule takes the `string` type and passes it to the function, which wraps accordingly. Jule strings are in byte-encoded UTF-8 format, so taking the pointer to the first byte gives you a simple byte pointer. They are the same as `char*` in size. For this reason, a correct and trouble-free usage is displayed by casting. In addition, we maintain type safety.
 
 ### Structures
 
@@ -85,7 +85,7 @@ struct Person {
 }
 
 impl Person {
-	fn new(name: str, surname: str): Person {
+	fn new(name: string, surname: string): Person {
 		ret Person{
 			buffer: extern.Person{
 				name: unsafe { (*c::Char)(&name[0]) },
@@ -94,15 +94,15 @@ impl Person {
 		}
 	}
 
-	fn name(*self): str {
+	fn name(*self): string {
 		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.name)) }
 	}
 
-	fn surname(*self): str {
+	fn surname(*self): string {
 		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.surname)) }
 	}
 
-	fn getFullName(*self): str {
+	fn getFullName(*self): string {
 		ret self.name() + " " + self.surname()
 	}
 }
@@ -115,14 +115,14 @@ fn main() {
 
 The code looks long. That's because it's literally written as a clean wrapper. C/C++ types were preserved, and manual algorithms were written for compatible conversions. In addition, it seems that the wrapper offers new capabilities with a method by adding the `getFullName` method. In addition, there are `name` and `surname` methods to obtain the `name` and `surname` fields of the wrapped structure.
 
-You may not want to write such neat wrappers, though. In this context, it is also possible to benefit from the compatibility of API types as much as possible. For example, in our example case, we can make the code less dimensional by stretching the type safety by taking advantage of the implicit conversion compatibility of the `char*` type and Jule's `str` type.
+You may not want to write such neat wrappers, though. In this context, it is also possible to benefit from the compatibility of API types as much as possible. For example, in our example case, we can make the code less dimensional by stretching the type safety by taking advantage of the implicit conversion compatibility of the `char*` type and Jule's `string` type.
 
 In this case the wrapper Jule code would look like this:
 ```jule
 #typedef
 extern struct Person {
-	name:    str
-	surname: str
+	name:    string
+	surname: string
 }
 
 struct Person {
@@ -130,7 +130,7 @@ struct Person {
 }
 
 impl Person {
-	fn new(name: str, surname: str): Person {
+	fn new(name: string, surname: string): Person {
 		ret Person{
 			buffer: extern.Person{
 				name: name,
@@ -139,10 +139,10 @@ impl Person {
 		}
 	}
 
-	fn name(*self): str { ret self.buffer.name }
-	fn surname(*self): str { ret self.buffer.surname }
+	fn name(*self): string { ret self.buffer.name }
+	fn surname(*self): string { ret self.buffer.surname }
 
-	fn getFullName(*self): str {
+	fn getFullName(*self): string {
 		ret self.name() + " " + self.surname()
 	}
 }
@@ -168,8 +168,8 @@ And this method is linked to the `Person` in Jule like this:
 ```jule
 #typedef
 extern struct Person {
-    name:    str
-    surname: str
+    name:    string
+    surname: string
     say_hi:  fn()
 }
 ```

@@ -99,7 +99,7 @@ fn printKind[T]() {
         println("type is integer")
     | f64:
         println("type is floating-point")
-    | str:
+    | string:
         println("type is string")
     |:
         panic("printKind[T]: unsupported type")

@@ -16,7 +16,7 @@ use "std/comptime"
 struct MyStruct {
     Foo: int
     Bar: bool
-    Baz: str
+    Baz: string
 }
 
 fn main() {

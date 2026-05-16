@@ -112,7 +112,7 @@
 		},
 		"imaginaryKeywords": {
 			"name": "storage.type",
-			"match": "\\b(int|uint|uintptr|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|cmplx64|cmplx128|bool|str|any|byte|rune)\\b"
+			"match": "\\b(int|uint|uintptr|i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|cmplx64|cmplx128|bool|string|any|byte|rune)\\b"
 		},
 		"storage": {
 			"name": "storage.modifier.jule",

@@ -22,7 +22,7 @@ In Jule, defer scopes are typically used for resource management as a form of RA
 
 A pseudo code example to help you understand how they work:
 ```jule
-fn readFile(path: str): []byte {
+fn readFile(path: string): []byte {
 	ioMutex.Lock()
 	defer { ioMutex.Unlock() }
 	mut f := OpenFile(path)?
@@ -34,7 +34,7 @@ In the example above, releasing the mutex and closing the file are guaranteed by
 
 This example code compiles to the following:
 ```jule
-fn readFile(path: str): []byte {
+fn readFile(path: string): []byte {
 	ioMutex.Lock()
 	mut f := OpenFile(path) else {
 		ioMutex.Unlock()

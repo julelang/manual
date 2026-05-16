@@ -6,7 +6,7 @@ Slices are defined using `[ ]`. Actually, you might remember this from the array
 Example to slices:
 ```jule
 fn main() {
-    let mut mySlice: []str = nil
+    let mut mySlice: []string = nil
     mySlice = ["Hello", "Jule", "slices!"]
     println(mySlice)
 }

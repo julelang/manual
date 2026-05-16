@@ -10,7 +10,7 @@ extern struct my_struct{}
 ```jule
 extern struct my_struct {
     x: int
-    y: str
+    y: string
 }
 ```
 
@@ -30,7 +30,7 @@ For example:
 #typedef
 extern struct my_struct {
     x: int
-    y: str
+    y: string
 }
 ```
 
@@ -57,7 +57,7 @@ extern use "mystruct.hpp"
 
 #typedef
 extern struct MyStruct {
-    text:      str
+    text:      string
     my_method: fn()
 }
 
@@ -96,8 +96,8 @@ The Jule code:
 ```jule
 #typedef
 extern struct MyClass {
-    data:       str
-    magic_data: str
+    data:       string
+    magic_data: string
 }
 ```
 

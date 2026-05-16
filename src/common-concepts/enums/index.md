@@ -60,7 +60,7 @@ fn main() {
 ```
 The above enumeration has the data type `u8`.
 ::: warning
-You can use only signed/unsigned integer or str data types.
+You can use only signed/unsigned integer or string data types.
 :::
 
 ## Default Values

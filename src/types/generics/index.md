@@ -57,7 +57,7 @@ fn foo[T1, T2, T3](t1: T1, t2: T2, t3: T3) {
 }
 
 fn main() {
-    let func: fn(int, bool, str) = foo[int, bool, str]
+    let func: fn(int, bool, string) = foo[int, bool, string]
     func(20, false, "hello")
 }
 ```
@@ -104,7 +104,7 @@ fn printMap[Key, Value](map: map[Key]Value) {
 }
 
 fn main() {
-    let myMap: map[int]str = {
+    let myMap: map[int]string = {
         0: "A",
         1: "B",
         2: "C",

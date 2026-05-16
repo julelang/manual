@@ -5,7 +5,7 @@ Fallible functions are Jule's recommended standard method for error handling. Ho
 To provide flexibility, fallible functions work with the `any` type, meaning any valid type can be thrown as an error. However, Jule has some recommended guidelines for handling errors:
 - If errors need to be handled in a specific way, they should be provided as static global variables or as functions that return a comparable instance of the error. For static global error instances, it should be documented whether the mutation is safe or not.
 - For purposes such as providing more detail, an error may be thrown with a wrapper construct or similar type.
-- If an error is not wrapped by a custom type, it should not be a distinguishable type like `str`. It should be private, and no code outside the package should be able to unwrap its underlying type.
+- If an error is not wrapped by a custom type, it should not be a distinguishable type like `string`. It should be private, and no code outside the package should be able to unwrap its underlying type.
 - The type used for the error must be convertible to a reasonable string. When used in functions such as `fmt::Format` or `println`, it is recommended that the string output be an explanatory text for the error.
 
 ## The `std/errors` Package
@@ -87,18 +87,18 @@ use "std/fmt"
 
 struct ParseError {
 	Column: int
-	Input:  str
-	Err:    str
+	Input:  string
+	Err:    string
 }
 
 impl ParseError {
-	fn Str(*self): str {
+	fn Str(*self): string {
 		ret fmt::Format("{} {}: {}",
-			self.Err, self.Input, str(self.Input[self.Column]))
+			self.Err, self.Input, string(self.Input[self.Column]))
 	}
 }
 
-fn parseNumeric(s: str)!: int {
+fn parseNumeric(s: string)!: int {
 	for i, r in s {
 		if '0' > r || r > '9' {
 			throw &ParseError{

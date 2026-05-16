@@ -155,7 +155,7 @@ Jule has built-in functions for some critical operations, such as memory allocat
 
 Some languages do this plausibly. For example, C# has methods of type `string`, but these are not built-in. They are actually an alias for `System.String` and are an implemented class. So the algorithm is truly reviewable; there is no runtime algorithm provided by the compiler in the background.
 
-Jule is not like C#; `str` is just a type, not an alias for a different implementation. In this case, the `myStr.bytes()` method or something similar that will be added to it is a method implemented in the background.
+Jule is not like C#; `string` is just a type, not an alias for a different implementation. In this case, the `myStr.bytes()` method or something similar that will be added to it is a method implemented in the background.
 
 We think it is more reasonable to do this by casting instead of doing it this way, for example: `[]byte("hello")`. The standard library `std/strings` package is designed for the remaining common algorithms. This is exactly what many other languages do, see: Go, Nim, or Odin.
 
@@ -220,7 +220,7 @@ Let's look at a different, more complex example:
 ```jule
 use "std/unicode/utf8"
 
-fn Exist(s: str, c: any): bool {
+fn Exist(s: string, c: any): bool {
 	for _, r in []rune(s) {
 		match type c {
 		| byte:

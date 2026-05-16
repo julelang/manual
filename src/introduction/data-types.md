@@ -20,7 +20,7 @@ Jule is designed strongly typed. Therefore, the data types of all values must be
 | cmplx64  | 8 bytes            | complex number with 32-bit floating-point real and imaginary parts  |
 | cmplx128 | 16 bytes           | complex number with 64-bit floating-point real and imaginary parts  |
 | bool     | -                  | `true` or `false`                                                   |
-| str      | -                  | UTF-8 byte encoded character string.                                |
+| string   | -                  | UTF-8 byte encoded character string.                                |
 | any      | -                  | Any data.                                                           |
 
 ## Integer Literals

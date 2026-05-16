@@ -91,7 +91,7 @@ Function implementation checks whether type `T` is struct and then prints values
 use "std/comptime"
 
 struct FooBarBaz {
-    Foo: str
+    Foo: string
     Bar: int
     Baz: bool
 }
@@ -113,7 +113,7 @@ fn main() {
 use "std/comptime"
 
 struct FooBarBaz {
-    Foo: str
+    Foo: string
     Bar: int
     Baz: bool
 }
@@ -215,7 +215,7 @@ use "std/comptime"
 
 struct FooBarBaz {
     Foo: int
-    Bar: str
+    Bar: string
     Baz: bool
 }
 

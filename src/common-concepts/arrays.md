@@ -54,7 +54,7 @@ Arrays use indexes to access elements and assignment.
 For example:
 ```jule
 fn main() {
-    let mut myArray: [3]str = ["Hello", "arrays", "indexes"]
+    let mut myArray: [3]string = ["Hello", "arrays", "indexes"]
     println(myArray[0])
     myArray[0] = "Hi"
     println(myArray)
@@ -74,7 +74,7 @@ A multidimensional array is an array storing arrays.
 For example:
 ```jule
 fn main() {
-    let myArray: [2][2]str = [
+    let myArray: [2][2]string = [
         ["Apple", "Banana"],
         ["Bred", "Cheese"],
     ]

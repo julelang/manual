@@ -20,7 +20,7 @@ Comparing byte slices can be efficient and simple when compiler optimizations ar
 
 For example:
 ```jule
-str(bytes1) == str(bytes2)
+string(bytes1) == string(bytes2)
 ```
 
 ::: info
@@ -49,9 +49,9 @@ You can use strict type aliases to extend existing types and add some additional
 
 For example:
 ```jule
-type Str: str
+type String: string
 
-impl Str {
+impl String {
 	fn LineCount(*self): (n: int) {
 		for _, r in []rune(*self) {
 			if r == '\n' {
@@ -63,11 +63,11 @@ impl Str {
 }
 
 fn main() {
-	n := Str("hello\nworld\nfoo\nbar\nbaz").LineCount()
+	n := String("hello\nworld\nfoo\nbar\nbaz").LineCount()
 	println(n)
 }
 ```
-In the example above, the type `Str` is a strict type aliased to the primitive type `str`. If you want to access additional properties as if they were a method, since there is no cast cost, this method might be what you are looking for.
+In the example above, the type `String` is a strict type aliased to the primitive type `string`. If you want to access additional properties as if they were a method, since there is no cast cost, this method might be what you are looking for.
 
 ## Enable Boundary Optimizations
 
@@ -138,7 +138,7 @@ use "std/comptime"
 struct Foo {
 	_: int
 	_: bool
-	_: str
+	_: string
 }
 
 fn main() {

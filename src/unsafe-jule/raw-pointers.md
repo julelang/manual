@@ -40,7 +40,7 @@ When you have an array of pointers, it can be interpreted semantically like this
 
 To better understand data type sampling, array pointers can be interpreted as:
 - `*int` = `[]int`
--  `*str` = `[]str`
+-  `*string` = `[]string`
 
 For example:
 ```jule
@@ -54,7 +54,7 @@ You can cast a pointer to an integer with valid integer types or cast a raw poin
 For example:
 ```jule
 let ptr: int = 0
-let unsafePtr = unsafe { (*str)(ptr) }
+let unsafePtr = unsafe { (*string)(ptr) }
 ```
 
 ## Get Smart Pointer from Raw Pointer

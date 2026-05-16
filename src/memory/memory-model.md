@@ -221,7 +221,7 @@ List of all types which is performs internal reference counting:
 - Slice
 - Trait
 - Any
-- Str (for only heap allocated strings)
+- String (for only heap allocated strings)
 
 ## Variadic Parameters
 

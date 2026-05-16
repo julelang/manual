@@ -46,7 +46,7 @@ extern type char: byte
 
 extern unsafe fn printf(*extern.char)
 
-fn cprint(s: str) {
+fn cprint(s: string) {
     unsafe { extern.printf((*extern.char)(&s[0])) }
 }
 
@@ -59,7 +59,7 @@ The code above prevents you from passing the `*byte` type directly to `*extern.c
 
 ## Type Compatibility
 
-There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types, and therefore, these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `__jule_Str` i.e. `str` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
+There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types, and therefore, these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `__jule_Str` i.e. `string` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
 
 For example:
 
@@ -79,9 +79,9 @@ extern use "myclass.hpp"
 
 #typedef
 extern struct MyClass {
-    data:       str
-    magic_data: str
-    c_data:     str
+    data:       string
+    magic_data: string
+    c_data:     string
 }
 
 fn main() {
@@ -98,7 +98,7 @@ fn main() {
 
 In the above example, your compiler does not detect the types of fields of the external class and generates code accordingly; your compiler behaves as it always does. The generated code works in harmony with each other as it can be converted automatically.
 
-While this type compatibility may work well (but risky for some types like strings) with most primitive types such as `bool`, `str`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes, etc.
+While this type compatibility may work well (but risky for some types like strings) with most primitive types such as `bool`, `string`, and arithmetic data types, we always recommend writing a wrapper for existing C++ classes, etc.
 
 See [wrappers](/api/integrated-jule/wrappers) section of API manual.
 

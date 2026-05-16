@@ -138,7 +138,7 @@ If the type is partially known, short literals are allowed. For this, the type m
 For example:
 ```jule
 struct User {
-	Name: str
+	Name: string
 	Root: bool
 }
 

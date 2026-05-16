@@ -4,9 +4,9 @@ Structures (aka structs) are a good way to collect many variables in one spot. E
 For example, to declare a struct:
 ```jule
 struct Employee {
-    name:   str
+    name:   string
     age:    u8
-    title:  str
+    title:  string
     salary: u32
 }
 ```
@@ -18,9 +18,9 @@ To instantiate structs, you can either give the values of the fields using brace
 For example:
 ```jule
 struct Character {
-    name:  str
+    name:  string
     age:   u64
-    title: str
+    title: string
 }
 
 fn main() {
@@ -74,19 +74,19 @@ fn IDENTIFIER([RECEIVER_PARAMETER], PARAMETERS...): RET_TYPE {
 
 For example to receiver parameters:
 ```jule
-fn method(&self): str { /* Body */ }
+fn method(&self): string { /* Body */ }
 ```
 Immutable [Smart Pointer](/memory/management/smart-pointers) Receiver
 ```jule
-fn method(mut &self): str { /* Body */ }
+fn method(mut &self): string { /* Body */ }
 ```
 Mutable [Smart Pointer](/memory/management/smart-pointers) Receiver
 ```jule
-fn method(*self): str { /* Body */ }
+fn method(*self): string { /* Body */ }
 ```
 Immutable [Reference Pointer](/memory/raw-pointers/reference-pointers) Receiver
 ```jule
-fn method(mut *self): str { /* Body */ }
+fn method(mut *self): string { /* Body */ }
 ```
 Mutable [Reference Pointer](/memory/raw-pointers/reference-pointers) Receiver
 
@@ -106,7 +106,7 @@ The `self` keyword represents the receiver a receiver function has. It is used t
 For example:
 ```jule
 impl Person {
-    fn getName(*self): str {
+    fn getName(*self): string {
         ret self.name
     }
 }
@@ -162,8 +162,8 @@ To add a tag to a struct field, you can use a string literal. \
 For example:
 ```jule
 struct Foo {
-	bar: int `fizz:"myvalue"`
-	baz: str `fuzz:"123"`
+	bar: int    `fizz:"myvalue"`
+	baz: string `fuzz:"123"`
 }
 ```
 For more detailed information about tags, please read the section below.

@@ -198,8 +198,8 @@ For example:
 use "std/time"
 
 async fn main() {
-	ch1 := make(chan str)
-	ch2 := make(chan str)
+	ch1 := make(chan string)
+	ch2 := make(chan string)
 
 	co async fn() {
 		time::Sleep(1 * time::Second).await

@@ -18,14 +18,14 @@
 [type int](#int)\
 [type uint](#uint)\
 [type uintptr](#uintptr)\
-[type str](#str)\
+[type string](#string)\
 [type bool](#bool)\
 [type any](#any)\
 [type byte](#byte)\
 [type rune](#rune)\
 [fn print(v)](#print)\
 [fn println(v)](#println)\
-[fn panic(message: str)](#panic)\
+[fn panic(message: string)](#panic)\
 [fn make(T, ...V): T](#make)\
 [fn copy(mut dest: Dest, mut src: Src): int](#copy)\
 [fn append(mut dest: []T, mut items: ...T): []T](#append)\
@@ -149,9 +149,9 @@ type uintptr: uintptr
 ```
 It is a platform dependent unsigned integer type that is big enough to hold a pointer. Can used for casting pointers to integers.
 
-## str
+## string
 ```jule
-type str: str
+type string: string
 ```
 UTF-8 byte encoded character string. See for more information: http://manual.jule.dev/introduction/data-types#string
 
@@ -197,7 +197,7 @@ This function same with the out function. One difference, prints new line after 
 
 ## panic
 ```jule
-fn panic(message: str)
+fn panic(message: string)
 ```
 Terminates the program immediately, signaling an unrecoverable program violation.
 

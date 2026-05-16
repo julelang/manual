@@ -44,7 +44,7 @@ extern use "log.mm"
 extern type char: byte
 extern unsafe fn Log(text: *extern.char)
 
-fn Log(text: str) {
+fn Log(text: string) {
     unsafe { extern.Log((*extern.char)(&text[0])) }
 }
 

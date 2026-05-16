@@ -13,11 +13,11 @@ Functions in a trait should only exist as prototypes (declaration of a trait, no
 For example:
 ```jule
 trait Person {
-    fn name(*self): str
+    fn name(*self): string
     fn age(*self): u8
 }
 ```
-All constructs that implement the trait above, must have the methods `name(*self): str` and `age(*self): u8`.
+All constructs that implement the trait above, must have the methods `name(*self): string` and `age(*self): u8`.
 
 ## Compatibility
 

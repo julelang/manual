@@ -21,8 +21,8 @@ use "std/encoding/json"
 
 struct User {
 	ID:    int
-	Name:  str
-	Email: str
+	Name:  string
+	Email: string
 }
 
 fn main() {
@@ -32,7 +32,7 @@ fn main() {
 		Email: "john@example.com",
 	}
 	data := json::Encode(u)!
-	println(str(data))
+	println(string(data))
 }
 ```
 In the example above, an instance of the `User` structure is encoded into JSON and the resulting output is written to stdout as a string.
@@ -96,9 +96,9 @@ For example:
 use "std/encoding/json"
 
 struct User {
-	ID:    int `json:"id"`
-	Name:  str `json:"name"`
-	Email: str `json:"email"`
+	ID:    int    `json:"id"`
+	Name:  string `json:"name"`
+	Email: string `json:"email"`
 }
 
 fn main() {
@@ -108,7 +108,7 @@ fn main() {
 		Email: "john@example.com",
 	}
 	data := json::Encode(u)!
-	println(str(data))
+	println(string(data))
 }
 ```
 

@@ -40,7 +40,7 @@ fn main() {
 		extern.libSystem_exit(1)
 	}
 	path = path[:bytes::IndexByte(path, 0)]
-	println(str(path))
+	println(string(path))
 }
 ```
 
@@ -82,6 +82,6 @@ fn main() {
 		sys::Addrcall(uintptr(extern.libSystem_exit), i32(1))
 	}
 	path = path[:bytes::IndexByte(path, 0)]
-	println(str(path))
+	println(string(path))
 }
 ```

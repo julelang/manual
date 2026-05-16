@@ -37,7 +37,7 @@ fn main() {
 	mut x := []byte("hello world")
 	y := x
 	x[0] = 'H'
-	println(str(y))
+	println(string(y))
 }
 ```
 In the example program above, the output will be `Hello world`. This is exactly for the reason explained above. The `y` is an immutable memory. It guarantees immutability, but this is not a guarantee that the memory cannot be modified from `y`. The mutation of the shared memory mutates it.

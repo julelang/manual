@@ -12,7 +12,7 @@ let copyrightBytes = comptime::IncludeBytes("copyright.txt")
 const copyrightText = comptime::IncludeStr("copyright.txt")
 ```
 
-`IncludeBytes` returns the contents of the file as a byte-slice literal. It cannot be used as a constant, but it can be stored by assigning it to variables. `IncludeStr`, on the other hand, returns it as a `str` and has the nature of an untyped constant, meaning it can be stored in a `const` variable.
+`IncludeBytes` returns the contents of the file as a byte-slice literal. It cannot be used as a constant, but it can be stored by assigning it to variables. `IncludeStr`, on the other hand, returns it as a `string` and has the nature of an untyped constant, meaning it can be stored in a `const` variable.
 
 These functions search for the file in the directory of the package where the source code that calls the function resides.\
 An example schema:

@@ -46,14 +46,14 @@ Variadic parameters can contain more than one value. The `...` operator is used 
 
 For example: 
 ```jule
-fn strOut(values: ...str) {
+fn stringOut(values: ...string) {
     for _, s in values {
         print(s)
     }
 }
 
 fn main() {
-    strOut("Hello", "World", "Variadic")
+    stringOut("Hello", "World", "Variadic")
 }
 ```
 As seen in the example above, many arguments could be given to the function even though it was a single parameter. This is a result of the variadic parameter. Putting the `...` operator before its type makes parameter variadic. 
@@ -106,11 +106,11 @@ If another function is doing multiple returns and wants to pass the return of a 
 
 For example:
 ```jule
-fn foo(): (int, f64, str) {
+fn foo(): (int, f64, string) {
     ret 10, 3.14, "foo"
 }
 
-fn bar(): (int, f64, str) {
+fn bar(): (int, f64, string) {
     ret foo()
 }
 ```

@@ -7,7 +7,7 @@ The iteration order over maps is unspecified and is not guaranteed to be the sam
 Example to maps:
 ```jule
 fn main() {
-    let mut mymap: map[i8]str = {
+    let mut mymap: map[i8]string = {
         0: "CPU",
         1: "RAM",
         2: "GPU"
@@ -28,8 +28,8 @@ The reason it is called hint size is that the map is not guaranteed to always be
 
 For example:
 ```jule
-make(map[int]str)
-make(map[int]str, 2000)
+make(map[int]string)
+make(map[int]string, 2000)
 ```
 
 ## Map Literals with Explicit Type
@@ -38,7 +38,7 @@ You can combine casting and map literals for explicit typed map literals.
 
 For example:
 ```jule
-x := (map[int]str)({
+x := (map[int]string)({
 	0: "foo",
 	1: "bar",
 })
@@ -48,7 +48,7 @@ Also you can use it as literal directly.
 
 For example:
 ```jule
-x := map[int]str{
+x := map[int]string{
 	0: "foo",
 	1: "bar",
 }
@@ -92,7 +92,7 @@ The built-in `delete` function deletes the relevant key from the map. It takes t
 For example:
 ```jule
 fn main() {
-    let mut myMap: map[int]str = {
+    let mut myMap: map[int]string = {
         0: "Foo",
         1: "Bar",
         2: "FooBar"
@@ -110,7 +110,7 @@ If you want to remove all keys without deallocating the internal buffer memory, 
 For example:
 ```jule
 fn main() {
-    let mut myMap: map[int]str = {
+    let mut myMap: map[int]string = {
         0: "Foo",
         1: "Bar",
         2: "FooBar"
@@ -128,7 +128,7 @@ Lookup assignments are efficient way to lookup in hashmaps. They lookups for key
 For example:
 ```jule
 fn main() {
-    let mut myMap: map[int]str = {
+    let mut myMap: map[int]string = {
         0: "Foo",
         1: "Bar",
         2: "FooBar"

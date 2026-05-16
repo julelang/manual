@@ -25,14 +25,14 @@ Developers can use these words as identifiers to functions and other definitions
 For example:
 
 ```jule
-type int: str
+type int: string
 
 fn main() {
     let a: int = "hello world"
     println(a)
 }
 ```
-As seen in the example above, the variable `a` is defined as `int` type. At first glance, the variable `a` may be thought to be an integer, but the identifier `int` has been redefined for an alias and corresponds to the type `str`. Therefore, the type `a` is `str`, not `int`.
+As seen in the example above, the variable `a` is defined as `int` type. At first glance, the variable `a` may be thought to be an integer, but the identifier `int` has been redefined for an alias and corresponds to the type `string`. Therefore, the type `a` is `string`, not `int`.
 
 **List of Imaginary Keywords**
 
@@ -41,7 +41,7 @@ int        uint       uintptr     i8
 i16        i32        i64         u8
 u16        u32        u64         f32
 f64        cmplx64    cmplx128    bool
-str        any        rune        byte
+string     any        rune        byte
 true       false      nil         iota
 print      println    panic       make
 copy       append     len         cap

@@ -41,13 +41,13 @@ If a strict type alias points to a trait, that strict type alias behaves as the 
 For example:
 ```jule
 trait Foo {
-	fn foo(*self): str
+	fn foo(*self): string
 }
 
 struct Bar{}
 
 impl Baz for Bar {
-	fn foo(*self): str {
+	fn foo(*self): string {
 		ret "bar"
 	}
 }
@@ -55,7 +55,7 @@ impl Baz for Bar {
 type Baz: Foo
 
 impl Baz for Baz {
-	fn foo(*self): str {
+	fn foo(*self): string {
 		ret "baz"
 	}
 }
@@ -101,7 +101,7 @@ If a type-enum inherited from another is cast to a different type-enum, the unde
 For example:
 ```jule
 enum Bar: type {
-	str,
+	string,
 }
 
 enum Foo: type {
@@ -150,7 +150,7 @@ For example:
 ```jule
 fn main() {
 	x := any("hello world")
-	s, ok := x.(str)
+	s, ok := x.(string)
 	println(s)
 	println(ok)
 }
