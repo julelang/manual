@@ -8,7 +8,7 @@
 [fn Encode\(mut dest: \[\]byte, src: \[\]byte\): int](#encode)\
 [fn Decode\(mut dest: \[\]byte, src: \[\]byte, flush: bool\)\!: \(ndst: int, nsrc: int\)](#decode)\
 [type CorruptInputError](#corruptinputerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)
 
 
 
@@ -56,7 +56,7 @@ type CorruptInputError: i64
 ```
 
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
