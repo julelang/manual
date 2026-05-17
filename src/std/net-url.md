@@ -6,58 +6,58 @@ See RFC 3986. This package generally follows RFC 3986, except where it deviates 
 
 ## Index
 
-[fn QueryUnescape\(s: str\)\!: str](#queryunescape)\
-[fn PathUnescape\(s: str\)\!: str](#pathunescape)\
-[fn QueryEscape\(s: str\): str](#queryescape)\
-[fn PathEscape\(s: str\): str](#pathescape)\
-[fn User\(username: str\): &amp;UserInfo](#user)\
-[fn UserPassword\(username: str, password: str\): &amp;UserInfo](#userpassword)\
-[fn Parse\(rawURL: str\)\!: &amp;URL](#parse)\
-[fn ParseRequestURI\(rawURL: str\)\!: &amp;URL](#parserequesturi)\
-[fn ParseQuery\(query: str\)\!: Values](#parsequery)\
-[fn JoinPath\(base: str, elem: \.\.\.str\)\!: str](#joinpath)\
+[fn QueryUnescape\(s: string\)\!: string](#queryunescape)\
+[fn PathUnescape\(s: string\)\!: string](#pathunescape)\
+[fn QueryEscape\(s: string\): string](#queryescape)\
+[fn PathEscape\(s: string\): string](#pathescape)\
+[fn User\(username: string\): &amp;UserInfo](#user)\
+[fn UserPassword\(username: string, password: string\): &amp;UserInfo](#userpassword)\
+[fn Parse\(rawURL: string\)\!: &amp;URL](#parse)\
+[fn ParseRequestURI\(rawURL: string\)\!: &amp;URL](#parserequesturi)\
+[fn ParseQuery\(query: string\)\!: Values](#parsequery)\
+[fn JoinPath\(base: string, elem: \.\.\.string\)\!: string](#joinpath)\
 [struct Error](#error)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [type EscapeError](#escapeerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
 [type InvalidHostError](#invalidhosterror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [struct UserInfo](#userinfo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Username\(\*self\): str](#username)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Password\(\*self\): \(str, bool\)](#password)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Username\(\*self\): string](#username)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Password\(\*self\): \(string, bool\)](#password)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
 [struct URL](#url)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedPath\(\*self\): str](#escapedpath)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedFragment\(\*self\): str](#escapedfragment)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedPath\(\*self\): string](#escapedpath)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn EscapedFragment\(\*self\): string](#escapedfragment)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAbs\(\*self\): bool](#isabs)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ResolveReference\(mut \*self, mut ref: &amp;URL\): &amp;URL](#resolvereference)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, ref: str\)\!: &amp;URL](#parse-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, ref: string\)\!: &amp;URL](#parse-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Query\(\*self\)\!: Values](#query)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn RequestURI\(\*self\): str](#requesturi)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Hostname\(\*self\): str](#hostname)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Port\(\*self\): str](#port)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn JoinPath\(mut \*self, elem: \.\.\.str\): &amp;URL](#joinpath-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Redacted\(\*self\): str](#redacted)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RequestURI\(\*self\): string](#requesturi)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Hostname\(\*self\): string](#hostname)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Port\(\*self\): string](#port)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn JoinPath\(mut \*self, elem: \.\.\.string\): &amp;URL](#joinpath-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Redacted\(\*self\): string](#redacted)\
 [type Values](#values)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Get\(\*self, key: str\): str](#get)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Set\(mut \*self, key: str, value: str\)](#set)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, key: str, value: str\)](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Del\(mut \*self, key: str\)](#del)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Has\(\*self, key: str\): bool](#has)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\(\*self\): str](#encode)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Get\(\*self, key: string\): string](#get)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Set\(mut \*self, key: string, value: string\)](#set)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, key: string, value: string\)](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Del\(mut \*self, key: string\)](#del)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Has\(\*self, key: string\): bool](#has)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\(\*self\): string](#encode)
 
 
 
 ## QueryUnescape
 ```jule
-fn QueryUnescape(s: str)!: str
+fn QueryUnescape(s: string)!: string
 ```
 Does the inverse transformation of \[QueryEscape\], converting each 3\-byte encoded substring of the form &#34;%AB&#34; into the hex\-decoded byte 0xAB\. It returns an error if any % is not followed by two hexadecimal digits\.
 
 ## PathUnescape
 ```jule
-fn PathUnescape(s: str)!: str
+fn PathUnescape(s: string)!: string
 ```
 Does the inverse transformation of \[PathEscape\], converting each 3\-byte encoded substring of the form &#34;%AB&#34; into the hex\-decoded byte 0xAB\. It returns an error if any % is not followed by two hexadecimal digits\.
 
@@ -65,25 +65,25 @@ It is identical to \[QueryUnescape\] except that it does not unescape &#39;\+&#3
 
 ## QueryEscape
 ```jule
-fn QueryEscape(s: str): str
+fn QueryEscape(s: string): string
 ```
 Escapes the string so it can be safely placed inside a \[URL\] query\.
 
 ## PathEscape
 ```jule
-fn PathEscape(s: str): str
+fn PathEscape(s: string): string
 ```
 Escapes the string so it can be safely placed inside a \[URL\] path segment, replacing special characters \(including /\) with %XX sequences as needed\.
 
 ## User
 ```jule
-fn User(username: str): &UserInfo
+fn User(username: string): &UserInfo
 ```
 Returns a \[UserInfo\] containing the provided username and no password set\.
 
 ## UserPassword
 ```jule
-fn UserPassword(username: str, password: str): &UserInfo
+fn UserPassword(username: string, password: string): &UserInfo
 ```
 Returns a \[UserInfo\] containing the provided username and password\.
 
@@ -91,7 +91,7 @@ This functionality should only be used with legacy web sites\. RFC 2396 warns th
 
 ## Parse
 ```jule
-fn Parse(rawURL: str)!: &URL
+fn Parse(rawURL: string)!: &URL
 ```
 Parses a raw url into a \[URL\] structure\.
 
@@ -99,13 +99,13 @@ The url may be relative \(a path, without a host\) or absolute \(starting with a
 
 ## ParseRequestURI
 ```jule
-fn ParseRequestURI(rawURL: str)!: &URL
+fn ParseRequestURI(rawURL: string)!: &URL
 ```
 Parses a raw url into a \[URL\] structure\. It assumes that url was received in an HTTP request, so the url is interpreted only as an absolute URI or an absolute path\. The string url is assumed not to have a \#fragment suffix\. \(Web browsers strip \#fragment before sending the URL to a web server\.\)
 
 ## ParseQuery
 ```jule
-fn ParseQuery(query: str)!: Values
+fn ParseQuery(query: string)!: Values
 ```
 Parses the URL\-encoded query string and returns a map listing the values specified for each key\. It always returns a non\-nil map containing all the valid query parameters found; err describes the first decoding error encountered, if any\.
 
@@ -113,47 +113,47 @@ Query is expected to be a list of key=value settings separated by ampersands\. A
 
 ## JoinPath
 ```jule
-fn JoinPath(base: str, elem: ...str)!: str
+fn JoinPath(base: string, elem: ...string)!: string
 ```
 Returns a \[URL\] string with the provided path elements joined to the existing path of base and the resulting path cleaned of any \./ or \.\./ elements\.
 
 ## Error
 ```jule
 struct Error {
-	Op:  str
-	URL: str
+	Op:  string
+	URL: string
 	Err: any
 }
 ```
 Reports an error and the operation and URL that caused it\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
 ## EscapeError
 ```jule
-type EscapeError: str
+type EscapeError: string
 ```
 
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
 ## InvalidHostError
 ```jule
-type InvalidHostError: str
+type InvalidHostError: string
 ```
 
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -167,36 +167,36 @@ Immutable encapsulation of username and password details for a \[URL\]\. An exis
 
 ### Username
 ```jule
-fn Username(*self): str
+fn Username(*self): string
 ```
 Returns the username\.
 
 ### Password
 ```jule
-fn Password(*self): (str, bool)
+fn Password(*self): (string, bool)
 ```
 Returns the password in case it is set, and whether it is set\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns the encoded userinfo information in the standard form of &#34;username\[:password\]&#34;\.
 
 ## URL
 ```jule
 struct URL {
-	Scheme:      str
-	Opaque:      str       // encoded opaque data
+	Scheme:      string
+	Opaque:      string    // encoded opaque data
 	User:        &UserInfo // username and password information
-	Host:        str       // host or host:port (see Hostname and Port methods)
-	Path:        str       // path (relative paths may omit leading slash)
-	RawPath:     str       // encoded path hint (see EscapedPath method)
+	Host:        string    // host or host:port (see Hostname and Port methods)
+	Path:        string    // path (relative paths may omit leading slash)
+	RawPath:     string    // encoded path hint (see EscapedPath method)
 	OmitHost:    bool      // do not emit empty host (authority)
 	ForceQuery:  bool      // append a query ('?') even if RawQuery is empty
-	RawQuery:    str       // encoded query values, without '?'
-	Fragment:    str       // fragment for references, without '#'
-	RawFragment: str       // encoded fragment hint (see EscapedFragment method)
+	RawQuery:    string    // encoded query values, without '?'
+	Fragment:    string    // fragment for references, without '#'
+	RawFragment: string    // encoded fragment hint (see EscapedFragment method)
 }
 ```
 A URL represents a parsed URL \(technically, a URI reference\)\.
@@ -217,19 +217,19 @@ Note that the Path field is stored in decoded form: /%47%6f%2f becomes /Go/\. A 
 
 The RawPath field is an optional field which is only set when the default encoding of Path is different from the escaped path\. See the EscapedPath method for more details\.
 
-URL&#39;s Str method uses the EscapedPath method to obtain the path\.
+URL&#39;s String method uses the EscapedPath method to obtain the path\.
 
 ### EscapedPath
 ```jule
-fn EscapedPath(*self): str
+fn EscapedPath(*self): string
 ```
-Returns the escaped form of self\.Path\. In general there are multiple possible escaped forms of any path\. It returns self\.RawPath when it is a valid escaping of self\.Path\. Otherwise it ignores self\.RawPath and computes an escaped form on its own\. The \[URL\.Str\] and \[URL\.RequestURI\] methods use EscapedPath to construct their results\. In general, code should call EscapedPath instead of reading self\.RawPath directly\.
+Returns the escaped form of self\.Path\. In general there are multiple possible escaped forms of any path\. It returns self\.RawPath when it is a valid escaping of self\.Path\. Otherwise it ignores self\.RawPath and computes an escaped form on its own\. The \[URL\.String\] and \[URL\.RequestURI\] methods use EscapedPath to construct their results\. In general, code should call EscapedPath instead of reading self\.RawPath directly\.
 
 ### EscapedFragment
 ```jule
-fn EscapedFragment(*self): str
+fn EscapedFragment(*self): string
 ```
-Returns the escaped form of self\.Fragment\. In general there are multiple possible escaped forms of any fragment\. It returns self\.RawFragment when it is a valid escaping of self\.Fragment\. Otherwise it ignores self\.RawFragment and computes an escaped form on its own\. The \[URL\.Str\] method uses EscapedFragment to construct its result\. In general, code should call EscapedFragment instead of reading self\.RawFragment directly\.
+Returns the escaped form of self\.Fragment\. In general there are multiple possible escaped forms of any fragment\. It returns self\.RawFragment when it is a valid escaping of self\.Fragment\. Otherwise it ignores self\.RawFragment and computes an escaped form on its own\. The \[URL\.String\] method uses EscapedFragment to construct its result\. In general, code should call EscapedFragment instead of reading self\.RawFragment directly\.
 
 ### IsAbs
 ```jule
@@ -245,7 +245,7 @@ Resolves a URI reference to an absolute URI from an absolute base URI self, per 
 
 ### Parse
 ```jule
-fn Parse(mut *self, ref: str)!: &URL
+fn Parse(mut *self, ref: string)!: &URL
 ```
 Parses a \[URL\] in the context of the receiver\. The provided URL may be relative or absolute\. It returns nil, error on parse failure, otherwise its return value is the same as \[URL\.ResolveReference\]\.
 
@@ -257,13 +257,13 @@ Parses RawQuery and returns the corresponding values\.
 
 ### RequestURI
 ```jule
-fn RequestURI(*self): str
+fn RequestURI(*self): string
 ```
 Returns the encoded path?query or opaque?query string that would be used in an HTTP request for self\.
 
 ### Hostname
 ```jule
-fn Hostname(*self): str
+fn Hostname(*self): string
 ```
 Returns self\.Host, stripping any valid port number if present\.
 
@@ -271,7 +271,7 @@ If the result is enclosed in square brackets, as literal IPv6 addresses are, the
 
 ### Port
 ```jule
-fn Port(*self): str
+fn Port(*self): string
 ```
 Returns the port part of self\.Host, without the leading colon\.
 
@@ -279,13 +279,13 @@ If self\.Host doesn&#39;t contain a valid numeric port, returns an empty string\
 
 ### JoinPath
 ```jule
-fn JoinPath(mut *self, elem: ...str): &URL
+fn JoinPath(mut *self, elem: ...string): &URL
 ```
 Returns a new \[URL\] with the provided path elements joined to any existing path and the resulting path cleaned of any \./ or \.\./ elements\. Any sequences of multiple / characters will be reduced to a single /\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Reassembles the \[URL\] into a valid URL string\. The general form of the result is one of:
 
@@ -307,48 +307,48 @@ In the second form, the following rules apply:<br>
 
 ### Redacted
 ```jule
-fn Redacted(*self): str
+fn Redacted(*self): string
 ```
-Like \[URL\.Str\] but replaces any password with &#34;xxxxx&#34;\. Only the password in self\.User is redacted\.
+Like \[URL\.String\] but replaces any password with &#34;xxxxx&#34;\. Only the password in self\.User is redacted\.
 
 ## Values
 ```jule
-type Values: map[str][]str
+type Values: map[string][]string
 ```
 Maps a string key to a list of values\. It is typically used for query parameters and form values\. The keys in a Values map are case\-sensitive\.
 
 ### Get
 ```jule
-fn Get(*self, key: str): str
+fn Get(*self, key: string): string
 ```
 Gets the first value associated with the given key\. If there are no values associated with the key, returns the empty string\. To access multiple values, use the map directly\.
 
 ### Set
 ```jule
-fn Set(mut *self, key: str, value: str)
+fn Set(mut *self, key: string, value: string)
 ```
 Sets the key to value\. It replaces any existing values\.
 
 ### Add
 ```jule
-fn Add(mut *self, key: str, value: str)
+fn Add(mut *self, key: string, value: string)
 ```
 Adds the value to key\. It appends to any existing values associated with key\.
 
 ### Del
 ```jule
-fn Del(mut *self, key: str)
+fn Del(mut *self, key: string)
 ```
 Deletes the values associated with key\.
 
 ### Has
 ```jule
-fn Has(*self, key: str): bool
+fn Has(*self, key: string): bool
 ```
 Reports whether a given key is set\.
 
 ### Encode
 ```jule
-fn Encode(*self): str
+fn Encode(*self): string
 ```
 Encodes the values into “URL encoded” form \(&#34;bar=baz&amp;foo=quux&#34;\) sorted by key\.
