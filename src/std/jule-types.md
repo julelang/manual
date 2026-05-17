@@ -3,30 +3,30 @@
 ## Index
 
 [Variables](#variables)\
-[fn RealKindOf\(kind: str\): str](#realkindof)\
-[fn BitSizeOf\(k: str\): int](#bitsizeof)\
-[fn IntFromBits\(bits: int\): str](#intfrombits)\
-[fn UintFromBits\(bits: int\): str](#uintfrombits)\
-[fn FloatFromBits\(bits: int\): str](#floatfrombits)\
-[fn CheckBitInt\(v: str, bit: int\): bool](#checkbitint)\
-[fn CheckBitUint\(v: str, bit: int\): bool](#checkbituint)\
-[fn CheckBitFloat\(val: str, bit: int\): bool](#checkbitfloat)\
+[fn RealKindOf\(kind: string\): string](#realkindof)\
+[fn BitSizeOf\(k: string\): int](#bitsizeof)\
+[fn IntFromBits\(bits: int\): string](#intfrombits)\
+[fn UintFromBits\(bits: int\): string](#uintfrombits)\
+[fn FloatFromBits\(bits: int\): string](#floatfrombits)\
+[fn CheckBitInt\(v: string, bit: int\): bool](#checkbitint)\
+[fn CheckBitUint\(v: string, bit: int\): bool](#checkbituint)\
+[fn CheckBitFloat\(val: string, bit: int\): bool](#checkbitfloat)\
 [fn BitSizeOfFloat\(x: f64\): int](#bitsizeoffloat)\
 [fn BitSizeOfInt\(x: i64\): int](#bitsizeofint)\
 [fn BitSizeOfUint\(x: u64\): int](#bitsizeofuint)\
 [fn UpdateTarget\(\)](#updatetarget)\
-[fn IsSigInt\(mut k: str\): bool](#issigint)\
-[fn IsUnsigInt\(mut k: str\): bool](#isunsigint)\
-[fn IsInt\(k: str\): bool](#isint)\
-[fn IsFloat\(k: str\): bool](#isfloat)\
-[fn IsCmplx\(k: str\): bool](#iscmplx)\
-[fn IsNum\(k: str\): bool](#isnum)\
-[fn IsSigNum\(k: str\): bool](#issignum)\
-[fn MinI\(mut k: str\): i64](#mini)\
-[fn MaxI\(mut k: str\): i64](#maxi)\
-[fn MaxU\(mut k: str\): u64](#maxu)\
-[fn Min\(mut k: str\): f64](#min)\
-[fn Max\(mut k: str\): f64](#max)
+[fn IsSigInt\(mut k: string\): bool](#issigint)\
+[fn IsUnsigInt\(mut k: string\): bool](#isunsigint)\
+[fn IsInt\(k: string\): bool](#isint)\
+[fn IsFloat\(k: string\): bool](#isfloat)\
+[fn IsCmplx\(k: string\): bool](#iscmplx)\
+[fn IsNum\(k: string\): bool](#isnum)\
+[fn IsSigNum\(k: string\): bool](#issignum)\
+[fn MinI\(mut k: string\): i64](#mini)\
+[fn MaxI\(mut k: string\): i64](#maxi)\
+[fn MaxU\(mut k: string\): u64](#maxu)\
+[fn Min\(mut k: string\): f64](#min)\
+[fn Max\(mut k: string\): f64](#max)
 
 ## Variables
 
@@ -69,7 +69,7 @@ const (
 	Int      = "int"
 	Uintptr  = "uintptr"
 	Bool     = "bool"
-	Str      = "str"
+	String   = "string"
 	Any      = "any"
 )
 ```
@@ -112,49 +112,49 @@ Integer limit values\.
 
 ## RealKindOf
 ```jule
-fn RealKindOf(kind: str): str
+fn RealKindOf(kind: string): string
 ```
 Returns kind&#39;s bit\-specific kind if bit\-specific like int, uint, and uintptr\. Returns kind if not bit\-specific\. Bit\-size is determined by runtime\.
 
 ## BitSizeOf
 ```jule
-fn BitSizeOf(k: str): int
+fn BitSizeOf(k: string): int
 ```
 Returns kind&#39;s bit\-size\. Returns \-1 if kind is not numeric\.
 
 ## IntFromBits
 ```jule
-fn IntFromBits(bits: int): str
+fn IntFromBits(bits: int): string
 ```
 Returns signed integer kind by bit\-size\. Possible bit\-sizes are: 8, 16, 32, and 64\. Returns empty string if bits is invalid\.
 
 ## UintFromBits
 ```jule
-fn UintFromBits(bits: int): str
+fn UintFromBits(bits: int): string
 ```
 Returns unsigned integer kind by bit\-size\. Possible bit\-sizes are: 8, 16, 32, and 64\. Panics if bits is invalid\.
 
 ## FloatFromBits
 ```jule
-fn FloatFromBits(bits: int): str
+fn FloatFromBits(bits: int): string
 ```
 Returns floating\-point kind by bit\-size\. Possible bit\-sizes are: 32, and 64\. Panics if bits is invalid\.
 
 ## CheckBitInt
 ```jule
-fn CheckBitInt(v: str, bit: int): bool
+fn CheckBitInt(v: string, bit: int): bool
 ```
 Reports whether signed integer literal is compatible given bit\-size\.
 
 ## CheckBitUint
 ```jule
-fn CheckBitUint(v: str, bit: int): bool
+fn CheckBitUint(v: string, bit: int): bool
 ```
 Reports whether unsigned integer literal is compatible given bit\-size\.
 
 ## CheckBitFloat
 ```jule
-fn CheckBitFloat(val: str, bit: int): bool
+fn CheckBitFloat(val: string, bit: int): bool
 ```
 Reports whether float literal is compatible given bit\-size\.
 
@@ -203,72 +203,72 @@ Updates platform\-specific information based on the target\. If you will update 
 
 ## IsSigInt
 ```jule
-fn IsSigInt(mut k: str): bool
+fn IsSigInt(mut k: string): bool
 ```
 Reports whether kind is signed integer\.
 
 ## IsUnsigInt
 ```jule
-fn IsUnsigInt(mut k: str): bool
+fn IsUnsigInt(mut k: string): bool
 ```
 Reports kind is unsigned integer\.
 
 ## IsInt
 ```jule
-fn IsInt(k: str): bool
+fn IsInt(k: string): bool
 ```
 Reports whether kind is signed/unsigned integer\.
 
 ## IsFloat
 ```jule
-fn IsFloat(k: str): bool
+fn IsFloat(k: string): bool
 ```
 Reports whether kind is float\.
 
 ## IsCmplx
 ```jule
-fn IsCmplx(k: str): bool
+fn IsCmplx(k: string): bool
 ```
 Reports whether kind is complex\.
 
 ## IsNum
 ```jule
-fn IsNum(k: str): bool
+fn IsNum(k: string): bool
 ```
 Reports whether kind is numeric\.
 
 ## IsSigNum
 ```jule
-fn IsSigNum(k: str): bool
+fn IsSigNum(k: string): bool
 ```
 Reports whether kind is signed numeric\.
 
 ## MinI
 ```jule
-fn MinI(mut k: str): i64
+fn MinI(mut k: string): i64
 ```
 Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
 
 ## MaxI
 ```jule
-fn MaxI(mut k: str): i64
+fn MaxI(mut k: string): i64
 ```
 Returns minimum value of signed integer kinds\. Panics if kind is invalid\.
 
 ## MaxU
 ```jule
-fn MaxU(mut k: str): u64
+fn MaxU(mut k: string): u64
 ```
 Returns maximum value of unsigned integer kinds\. Panics if kind is invalid\.
 
 ## Min
 ```jule
-fn Min(mut k: str): f64
+fn Min(mut k: string): f64
 ```
 Returns minimum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
 
 ## Max
 ```jule
-fn Max(mut k: str): f64
+fn Max(mut k: string): f64
 ```
 Returns maximum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
