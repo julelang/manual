@@ -3,17 +3,17 @@
 ## Index
 
 [Variables](#variables)\
-[fn PathStdlib\(\): str](#pathstdlib)\
-[fn PathExec\(\): str](#pathexec)\
-[fn PathWd\(\): str](#pathwd)\
-[fn PathAPI\(\): str](#pathapi)\
-[fn SetEnv\(exec: str, wd: str\)](#setenv)\
+[fn PathStdlib\(\): string](#pathstdlib)\
+[fn PathExec\(\): string](#pathexec)\
+[fn PathWd\(\): string](#pathwd)\
+[fn PathAPI\(\): string](#pathapi)\
+[fn SetEnv\(exec: string, wd: string\)](#setenv)\
 [fn ModStdlib\(\): &amp;mod::Mod](#modstdlib)\
-[fn IsStdHeaderPath\(p: str\): bool](#isstdheaderpath)\
-[fn IsValidHeaderExt\(ext: str\): bool](#isvalidheaderext)\
-[fn IsValidCppExt\(ext: str\): bool](#isvalidcppext)\
-[fn IsValidAssemblyExt\(ext: str\): bool](#isvalidassemblyext)\
-[fn IsJule\(path: str\): bool](#isjule)
+[fn IsStdHeaderPath\(p: string\): bool](#isstdheaderpath)\
+[fn IsValidHeaderExt\(ext: string\): bool](#isvalidheaderext)\
+[fn IsValidCppExt\(ext: string\): bool](#isvalidcppext)\
+[fn IsValidAssemblyExt\(ext: string\): bool](#isvalidassemblyext)\
+[fn IsJule\(path: string\): bool](#isjule)
 
 ## Variables
 
@@ -39,28 +39,28 @@ Reserved module identity for the standard library module\.
 ---
 
 ```jule
-let CppHeaderExts: [...]str = [ ... ]
+let CppHeaderExts: [...]string = [ ... ]
 ```
 Valid extensions of C\+\+ headers\.
 
 ---
 
 ```jule
-let CppExts: [...]str = [ ... ]
+let CppExts: [...]string = [ ... ]
 ```
 Valid extensions of C\+\+ source files\.
 
 ---
 
 ```jule
-let AssemblyExts: [...]str = [ ... ]
+let AssemblyExts: [...]string = [ ... ]
 ```
 Valid extensions of Assembly source files\.
 
 ---
 
 ```jule
-let ObjectiveCppExts: [...]str = [ ... ]
+let ObjectiveCppExts: [...]string = [ ... ]
 ```
 Valid extensions of Objective\-C\+\+ source files\.
 
@@ -80,31 +80,31 @@ Directory name of standard library\.
 
 ## PathStdlib
 ```jule
-fn PathStdlib(): str
+fn PathStdlib(): string
 ```
 Returns path of standard library\. Returns empty string if not initialized by \[SetEnv\]\.
 
 ## PathExec
 ```jule
-fn PathExec(): str
+fn PathExec(): string
 ```
 Returns path of compiler&#39;s executable file\. Returns empty string if not initialized by \[SetEnv\]\.
 
 ## PathWd
 ```jule
-fn PathWd(): str
+fn PathWd(): string
 ```
 Returns path of working directory\. Returns empty string if not initialized by \[SetEnv\]\.
 
 ## PathAPI
 ```jule
-fn PathAPI(): str
+fn PathAPI(): string
 ```
 Returns path of main API header file\. Returns empty string if not initialized by \[SetEnv\]\.
 
 ## SetEnv
 ```jule
-fn SetEnv(exec: str, wd: str)
+fn SetEnv(exec: string, wd: string)
 ```
 Sets the environment variables of the compiler\. The exec should hold the path of the compiler&#39;s executable path\. The wd should hold the path of working directory\. SetEnv panics is exec or wd is empty and will not check if paths are exist and appropriate for compiler\. Therefore, any misinformation for environment variables may cause analysis issues\.
 
@@ -118,30 +118,30 @@ Returns the reserved module instance of the standard library module\. Returns ni
 
 ## IsStdHeaderPath
 ```jule
-fn IsStdHeaderPath(p: str): bool
+fn IsStdHeaderPath(p: string): bool
 ```
 Reports whether path is C\+\+ std library path\.
 
 ## IsValidHeaderExt
 ```jule
-fn IsValidHeaderExt(ext: str): bool
+fn IsValidHeaderExt(ext: string): bool
 ```
 Reports whether C\+\+ header extension is valid\.
 
 ## IsValidCppExt
 ```jule
-fn IsValidCppExt(ext: str): bool
+fn IsValidCppExt(ext: string): bool
 ```
 Reports whether C\+\+ extension is valid\.
 
 ## IsValidAssemblyExt
 ```jule
-fn IsValidAssemblyExt(ext: str): bool
+fn IsValidAssemblyExt(ext: string): bool
 ```
 Reports whether Assembly extension is valid\.
 
 ## IsJule
 ```jule
-fn IsJule(path: str): bool
+fn IsJule(path: string): bool
 ```
 Reports whether file path is Jule source code\.
