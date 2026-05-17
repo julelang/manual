@@ -3,10 +3,10 @@
 ## Index
 
 [fn IsAscii\(r: rune\): bool](#isascii)\
-[fn ToRune\(mut lit: str\): \(rune, errors: \[\]Error\)](#torune)\
-[fn GetRune\(mut lit: str\): \(r: rune, length: int, errors: \[\]Error\)](#getrune)\
-[fn ToRawStr\(lit: str\): str](#torawstr)\
-[fn ToStr\(mut lit: str\): \(str, errors: \[\]Error\)](#tostr)\
+[fn ToRune\(mut lit: string\): \(rune, errors: \[\]Error\)](#torune)\
+[fn GetRune\(mut lit: string\): \(r: rune, length: int, errors: \[\]Error\)](#getrune)\
+[fn ToRawString\(lit: string\): string](#torawstring)\
+[fn ToString\(mut lit: string\): \(string, errors: \[\]Error\)](#tostring)\
 [struct Error](#error)
 
 
@@ -19,25 +19,25 @@ Reports whether rune is byte actually\. In other words, whether rune is ASCII\.
 
 ## ToRune
 ```jule
-fn ToRune(mut lit: str): (rune, errors: []Error)
+fn ToRune(mut lit: string): (rune, errors: []Error)
 ```
 Returns rune from literal, literal includes quotes\. Allows escape sequences\. Assumes lit is syntactically correct\.
 
 ## GetRune
 ```jule
-fn GetRune(mut lit: str): (r: rune, length: int, errors: []Error)
+fn GetRune(mut lit: string): (r: rune, length: int, errors: []Error)
 ```
 Returns the first rune from ltieral\. Quotes of the literal must be removed\. Allows escape sequences\. Checks the literal syntactically and semantically for the first rune\.
 
-## ToRawStr
+## ToRawString
 ```jule
-fn ToRawStr(lit: str): str
+fn ToRawString(lit: string): string
 ```
 Returns raw\-string value string from literal, literal includes quotes\. Assumes lit is syntactically correct\.
 
-## ToStr
+## ToString
 ```jule
-fn ToStr(mut lit: str): (str, errors: []Error)
+fn ToString(mut lit: string): (string, errors: []Error)
 ```
 Returns string value string from literal, literal includes quotes\. Allows escape sequences\. Assumes lit is syntactically correct\.
 
@@ -45,7 +45,7 @@ Returns string value string from literal, literal includes quotes\. Allows escap
 ```jule
 struct Error {
 	Offset: int
-	Text:   str
+	Text:   string
 }
 ```
 An error for literal parsing\.
