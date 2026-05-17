@@ -4,17 +4,17 @@
 
 [Variables](#variables)\
 [fn Sleep\(mut dur: Duration\)](#sleep)\
-[fn Parse\(layout: str, value: str\)\!: Time](#parse)\
-[fn ParseInLocation\(layout: str, value: str, loc: &amp;Location\)\!: Time](#parseinlocation)\
-[fn ParseDuration\(mut s: str\): \(Duration, bool\)](#parseduration)\
+[fn Parse\(layout: string, value: string\)\!: Time](#parse)\
+[fn ParseInLocation\(layout: string, value: string, loc: &amp;Location\)\!: Time](#parseinlocation)\
+[fn ParseDuration\(mut s: string\): \(Duration, bool\)](#parseduration)\
 [fn Now\(\): Time](#now)\
 [fn Unix\(mut sec: i64, mut nsec: i64\): Time](#unix)\
 [fn Since\(t: Time\): Duration](#since)\
 [fn Until\(t: Time\): Duration](#until)\
 [fn UnixAbs\(sec: i64\): AbsTime](#unixabs)\
 [fn Date\(year: int, month: Month, day: int, hour: int, minute: int, second: int, nsecond: int, loc: &amp;Location\): \(t: Time\)](#date)\
-[fn FixedZone\(name: str, offset: int\): &amp;Location](#fixedzone)\
-[fn LoadLocationFromTZData\(name: str, mut data: \[\]byte\): \(&amp;Location, ok: bool\)](#loadlocationfromtzdata)\
+[fn FixedZone\(name: string, offset: int\): &amp;Location](#fixedzone)\
+[fn LoadLocationFromTZData\(name: string, mut data: \[\]byte\): \(&amp;Location, ok: bool\)](#loadlocationfromtzdata)\
 [type Duration](#duration)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Nanoseconds\(\*self\): Duration](#nanoseconds)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Microseconds\(\*self\): Duration](#microseconds)\
@@ -23,24 +23,24 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Minutes\(\*self\): f64](#minutes)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Hours\(\*self\): f64](#hours)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Abs\(\*self\): Duration](#abs)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [struct ParseError](#parseerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
 [type Month](#month)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [type Weekday](#weekday)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
 [struct Time](#time)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(\*self, mut b: \[\]byte, layout: str\): \[\]byte](#appendformat)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, layout: str\): str](#format)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AppendFormat\(\*self, mut b: \[\]byte, layout: string\): \[\]byte](#appendformat)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, layout: string\): string](#format)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unix\(\*self\): i64](#unix-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMilli\(\*self\): i64](#unixmilli)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnixMicro\(\*self\): i64](#unixmicro)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UnixNano\(\*self\): i64](#unixnano)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn UTC\(\*self\): Time](#utc)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Local\(\*self\): Time](#local)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Zone\(\*self\): \(name: str, offset: int\)](#zone)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Zone\(\*self\): \(name: string, offset: int\)](#zone)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Year\(\*self\): int](#year)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Month\(\*self\): Month](#month-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Day\(\*self\): int](#day)\
@@ -63,7 +63,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeText\(mut \*self, data: \[\]byte\)\!](#decodetext)\
 [struct AbsTime](#abstime)\
 [struct Location](#location)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-5)
 
 ## Variables
 
@@ -250,7 +250,7 @@ Stops execution of the caller coroutine by stated duration\. This function only 
 
 ## Parse
 ```jule
-fn Parse(layout: str, value: str)!: Time
+fn Parse(layout: string, value: string)!: Time
 ```
 Parses a formatted string and returns the time value it represents\. See the documentation for the constant called \[Layout\] to see how to represent the format\. The second argument must be parseable using the format string \(layout\) provided as the first argument\.
 
@@ -272,13 +272,13 @@ When parsing a time with a zone abbreviation like MST, if the zone abbreviation 
 
 ## ParseInLocation
 ```jule
-fn ParseInLocation(layout: str, value: str, loc: &Location)!: Time
+fn ParseInLocation(layout: string, value: string, loc: &Location)!: Time
 ```
 Like Parse but differs in two important ways\. First, in the absence of time zone information, Parse interprets a time as UTC; ParseInLocation interprets the time as in the given location\. Second, when given a zone offset or abbreviation, Parse tries to match it against the Local location; ParseInLocation uses the given location\.
 
 ## ParseDuration
 ```jule
-fn ParseDuration(mut s: str): (Duration, bool)
+fn ParseDuration(mut s: string): (Duration, bool)
 ```
 Parses a duration string and reports whether it successful\. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as &#34;300ms&#34;, &#34;\-1\.5h&#34; or &#34;2h45m&#34;\. Valid time units are &#34;ns&#34;, &#34;us&#34; \(or &#34;µs&#34;\), &#34;ms&#34;, &#34;s&#34;, &#34;m&#34;, &#34;h&#34;\.
 
@@ -330,13 +330,13 @@ A daylight savings time transition skips or repeats times\. For example, in the 
 
 ## FixedZone
 ```jule
-fn FixedZone(name: str, offset: int): &Location
+fn FixedZone(name: string, offset: int): &Location
 ```
 Returns a \[Location\] that always uses the given zone name and offset \(seconds east of UTC\)\.
 
 ## LoadLocationFromTZData
 ```jule
-fn LoadLocationFromTZData(name: str, mut data: []byte): (&Location, ok: bool)
+fn LoadLocationFromTZData(name: string, mut data: []byte): (&Location, ok: bool)
 ```
 Returns a Location with the given name initialized from the IANA Time Zone database\-formatted data\. The data should be in the format of a standard IANA time zone file \(for example, the content of /etc/localtime on Unix systems\)\.
 
@@ -388,27 +388,27 @@ fn Abs(*self): Duration
 ```
 Returns absolute value of duration\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns a string representing the duration in the form &#34;72h3m0\.5s&#34;\. Leading zero units are omitted\. As a special case, durations less than one second format use a smaller unit \(milli\-, micro\-, or nanoseconds\) to ensure that the leading digit is non\-zero\. The zero duration formats as 0s\.
 
 ## ParseError
 ```jule
 struct ParseError {
-	Layout:     str
-	Value:      str
-	LayoutElem: str
-	ValueElem:  str
-	Message:    str
+	Layout:     string
+	Value:      string
+	LayoutElem: string
+	ValueElem:  string
+	Message:    string
 }
 ```
 Describes a problem parsing a time string\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -418,9 +418,9 @@ type Month: int
 ```
 Specifies a month of the year \(January = 1, \.\.\.\)\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns the English name of the month \(&#34;January&#34;, &#34;February&#34;, \.\.\.\)\.
 
@@ -430,9 +430,9 @@ type Weekday: int
 ```
 Specifies a day of the week \(Sunday = 0, \.\.\.\)\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns the English name of the day \(&#34;Sunday&#34;, &#34;Monday&#34;, \.\.\.\)\.
 
@@ -450,21 +450,21 @@ Using the == operator when comparing a Time instance is often not what is desire
 
 ### AppendFormat
 ```jule
-fn AppendFormat(*self, mut b: []byte, layout: str): []byte
+fn AppendFormat(*self, mut b: []byte, layout: string): []byte
 ```
 Like \[Time\.Format\] but appends the textual representation to b and returns the extended buffer\.
 
 ### Format
 ```jule
-fn Format(*self, layout: str): str
+fn Format(*self, layout: string): string
 ```
 Returns a textual representation of the time value formatted according to the layout defined by the argument\. See the documentation for the constant called \[Layout\] to see how to represent the layout format\.
 
 The executable example for \[Time\.Format\] demonstrates the working of the layout string in detail and is a good reference\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns the time formatted using the format string
 
@@ -511,7 +511,7 @@ Returns time with the location set to local time\.
 
 ### Zone
 ```jule
-fn Zone(*self): (name: str, offset: int)
+fn Zone(*self): (name: string, offset: int)
 ```
 Computes the time zone in effect at time specification, returning the abbreviated name of the zone \(such as &#34;CET&#34;\) and its offset in seconds east of UTC\.
 
@@ -662,8 +662,8 @@ Maps time instants to the zone in use at that time\. Typically, the Location rep
 
 Location is used to provide a time zone in a printed Time value and for calculations involving intervals that may cross daylight savings time boundaries\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns a descriptive name for the time zone information\.
