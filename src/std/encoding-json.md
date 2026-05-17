@@ -4,7 +4,7 @@
 
 [fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
 [fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
-[fn EncodeIndent\[T\]\(t: T, indent: str\)\!: \[\]byte](#encodeindent)\
+[fn EncodeIndent\[T\]\(t: T, indent: string\)\!: \[\]byte](#encodeindent)\
 [fn Valid\(data: \[\]byte\): bool](#valid)\
 [type Object](#object)\
 [type Array](#array)\
@@ -12,11 +12,11 @@
 [type Number](#number)\
 [type String](#string)\
 [struct UnsupportedTypeError](#unsupportedtypeerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
 [struct UnsupportedValueError](#unsupportedvalueerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [struct EncodeError](#encodeerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
 [enum Value: type ](#value)
 
 
@@ -175,7 +175,7 @@ JSONEncoder, TextEncoder
 
 ## EncodeIndent
 ```jule
-fn EncodeIndent[T](t: T, indent: str)!: []byte
+fn EncodeIndent[T](t: T, indent: string)!: []byte
 ```
 Same as Encode\[T\] function but enables indentation\.
 
@@ -187,7 +187,7 @@ Reports whether data is a valid JSON encoding\.
 
 ## Object
 ```jule
-type Object: map[str]Value
+type Object: map[string]Value
 ```
 Dynamic JSON object type\.
 
@@ -211,51 +211,51 @@ Dynamic JSON number type\.
 
 ## String
 ```jule
-type String: str
+type String: string
 ```
 Dynamic JSON string type\.
 
 ## UnsupportedTypeError
 ```jule
 struct UnsupportedTypeError {
-	Type: str
+	Type: string
 }
 ```
 Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value type\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
 ## UnsupportedValueError
 ```jule
 struct UnsupportedValueError {
-	Value: str
+	Value: string
 }
 ```
 Returned by \[Encode\] and \[EncodeIndent\] when attempting to encode an unsupported value\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
 ## EncodeError
 ```jule
 struct EncodeError {
-	Type:       str
+	Type:       string
 	Err:        any
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
 Represents an error from calling a reserved \[EncodeText\] method\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
