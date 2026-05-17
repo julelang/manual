@@ -3,16 +3,16 @@
 ## Index
 
 [Variables](#variables)\
-[fn Clean\(path: str\): str](#clean)\
-[fn ToSlash\(path: str\): str](#toslash)\
-[fn FromSlash\(path: str\): str](#fromslash)\
-[fn Join\(elem: \.\.\.str\): str](#join)\
-[fn Ext\(path: str\): str](#ext)\
-[fn Abs\(path: str\)\!: str](#abs)\
-[fn Base\(mut path: str\): str](#base)\
-[fn Dir\(path: str\): str](#dir)\
-[fn VolumeName\(path: str\): str](#volumename)\
-[fn IsAbs\(path: str\): bool](#isabs)\
+[fn Clean\(path: string\): string](#clean)\
+[fn ToSlash\(path: string\): string](#toslash)\
+[fn FromSlash\(path: string\): string](#fromslash)\
+[fn Join\(elem: \.\.\.string\): string](#join)\
+[fn Ext\(path: string\): string](#ext)\
+[fn Abs\(path: string\)\!: string](#abs)\
+[fn Base\(mut path: string\): string](#base)\
+[fn Dir\(path: string\): string](#dir)\
+[fn VolumeName\(path: string\): string](#volumename)\
+[fn IsAbs\(path: string\): bool](#isabs)\
 [fn IsPathSeparator\(c: byte\): bool](#ispathseparator)
 
 ## Variables
@@ -31,7 +31,7 @@ Operating system specific path list separator\.
 
 ## Clean
 ```jule
-fn Clean(path: str): str
+fn Clean(path: string): string
 ```
 Returns the shortest path name equivalent to path by purely lexical processing\. It applies the following rules iteratively until no further processing can be done:
 
@@ -52,55 +52,55 @@ See also Rob Pike, “Lexical File Names in Plan 9 or Getting Dot\-Dot Right” 
 
 ## ToSlash
 ```jule
-fn ToSlash(path: str): str
+fn ToSlash(path: string): string
 ```
 Returns the result of replacing each separator character in path with a slash \(&#39;/&#39;\) character\. Multiple separators are replaced by multiple slashes\.
 
 ## FromSlash
 ```jule
-fn FromSlash(path: str): str
+fn FromSlash(path: string): string
 ```
 Returns the result of replacing each slash \(&#39;/&#39;\) character in path with a separator character\. Multiple slashes are replaced by multiple separators\.
 
 ## Join
 ```jule
-fn Join(elem: ...str): str
+fn Join(elem: ...string): string
 ```
 Joins any number of path elements into a single path, separating them with an OS specific SEPARATOR\. Empty elements are ignored\. The result is cleaned\. However, if the argument list is empty or all its elements are empty, join returns an empty string\. On Windows, the result will only be a UNC path if the first non\-empty element is a UNC path\.
 
 ## Ext
 ```jule
-fn Ext(path: str): str
+fn Ext(path: string): string
 ```
 Returns the file name extension used by path\. The extension is the suffix beginning at the final dot in the final element of path; it is empty if there is no dot\.
 
 ## Abs
 ```jule
-fn Abs(path: str)!: str
+fn Abs(path: string)!: string
 ```
 Returns an absolute representation of path\. If the path is not absolute it will be joined with the current working directory to turn it into an absolute path\. The absolute path name for a given file is not guaranteed to be unique\. abs calls clean on the result\.
 
 ## Base
 ```jule
-fn Base(mut path: str): str
+fn Base(mut path: string): string
 ```
 Returns the last element of path\. Trailing path separators are removed before extracting the last element\. If the path is empty, base returns &#34;\.&#34;\. If the path consists entirely of separators, base returns a single separator\.
 
 ## Dir
 ```jule
-fn Dir(path: str): str
+fn Dir(path: string): string
 ```
 Returns all but the last element of path, typically the path&#39;s directory\. After dropping the final element, dir calls clean on the path and trailing slashes are removed\. If the path is empty, dir returns &#34;\.&#34;\. If the path consists entirely of separators, dir returns a single separator\. The returned path does not end in a separator unless it is the root directory\.
 
 ## VolumeName
 ```jule
-fn VolumeName(path: str): str
+fn VolumeName(path: string): string
 ```
 Returns leading volume name\. Given &#34;C:\\foo\\bar&#34; it returns &#34;C:&#34; on Windows\. Given &#34;\\\\host\\share\\foo&#34; it returns &#34;\\\\host\\share&#34;\. On other platforms it returns empty string\.
 
 ## IsAbs
 ```jule
-fn IsAbs(path: str): bool
+fn IsAbs(path: string): bool
 ```
 Reports whether the path is absolute\.
 
