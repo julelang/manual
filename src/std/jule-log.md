@@ -3,7 +3,7 @@
 ## Index
 
 [Variables](#variables)\
-[fn Logf\(fmt: str, args: \.\.\.any\): str](#logf)\
+[fn Logf\(fmt: string, args: \.\.\.any\): string](#logf)\
 [struct Log](#log)
 
 ## Variables
@@ -18,7 +18,7 @@ Log kinds\.
 
 ## Logf
 ```jule
-fn Logf(fmt: str, args: ...any): str
+fn Logf(fmt: string, args: ...any): string
 ```
 Returns formatted error message by fmt and args\.
 
@@ -28,10 +28,10 @@ struct Log {
 	Kind:       int
 	Row:        int
 	Column:     int
-	Path:       str
-	Text:       str
-	Line:       str
-	Suggestion: str
+	Path:       string
+	Text:       string
+	Line:       string
+	Suggestion: string
 }
 ```
 Compiler log\.
