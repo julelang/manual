@@ -3,21 +3,21 @@
 ## Index
 
 [Variables](#variables)\
-[fn JoinHostPort\(host: str, port: str\): str](#joinhostport)\
-[fn SplitHostPort\(hostport: str\)\!: \(host: str, port: str\)](#splithostport)\
+[fn JoinHostPort\(host: string, port: string\): string](#joinhostport)\
+[fn SplitHostPort\(hostport: string\)\!: \(host: string, port: string\)](#splithostport)\
 [fn IPv4\(a: byte, b: byte, c: byte, d: byte\): IP](#ipv4)\
-[fn ParseIP\(s: str\): IP](#parseip)\
-[fn LookupIP\(mut network: Network, address: str\)\!: \[\]&amp;IPAddr](#lookupip)\
-[fn Listen\(network: Network, addr: str\)\!: Listener](#listen)\
-[fn ListenUDP\(network: Network, addr: str\)\!: &amp;UDPConn](#listenudp)\
-[fn Dial\(network: Network, addr: str\)\!: Conn](#dial)\
-[fn DialTimeout\(network: Network, addr: str, timeout: time::Duration\)\!: Conn](#dialtimeout)\
+[fn ParseIP\(s: string\): IP](#parseip)\
+[fn LookupIP\(mut network: Network, address: string\)\!: \[\]&amp;IPAddr](#lookupip)\
+[fn Listen\(network: Network, addr: string\)\!: Listener](#listen)\
+[fn ListenUDP\(network: Network, addr: string\)\!: &amp;UDPConn](#listenudp)\
+[fn Dial\(network: Network, addr: string\)\!: Conn](#dial)\
+[fn DialTimeout\(network: Network, addr: string, timeout: time::Duration\)\!: Conn](#dialtimeout)\
 [trait Addr](#addr)\
 [trait Conn](#conn)\
 [trait Listener](#listener)\
 [struct Resolver](#resolver)\
 [struct AddrError](#addrerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [type IP](#ip)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\): IP](#empty)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Empty\(\*self\): bool](#empty-1)\
@@ -27,23 +27,23 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsPrivate\(\*self\): bool](#isprivate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To4\(mut \*self\): IP](#to4)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn To16\(mut \*self\): IP](#to16)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
 [struct IPAddr](#ipaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;IPAddr](#resolve)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): string](#network)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: string\)\!: &amp;IPAddr](#resolve)\
 [type HardwareAddr](#hardwareaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: str\)\!: HardwareAddr](#parse)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(s: string\)\!: HardwareAddr](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
 [struct DNSError](#dnserror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-4)\
 [struct TCPAddr](#tcpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;TCPAddr](#resolve-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): string](#network-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-5)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: string\)\!: &amp;TCPAddr](#resolve-1)\
 [struct TCPConn](#tcpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;TCPConn](#dial-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: str, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: string\)\!: &amp;TCPConn](#dial-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: string, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
@@ -53,17 +53,17 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
 [struct TCPListener](#tcplistener)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;TCPListener](#bind)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: string\)\!: &amp;TCPListener](#bind)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Accept\(\*self\)\!: Conn](#accept)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-1)\
 [struct UDPAddr](#udpaddr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): str](#network-4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-6)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: str\)\!: &amp;UDPAddr](#resolve-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): string](#network-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-6)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Resolve\(mut network: Network, address: string\)\!: &amp;UDPAddr](#resolve-2)\
 [struct UDPConn](#udpconn)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: str\)\!: &amp;UDPConn](#bind-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: str\)\!: &amp;UDPConn](#dial-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Bind\(addr: string\)\!: &amp;UDPConn](#bind-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: string\)\!: &amp;UDPConn](#dial-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline-1)\
@@ -174,7 +174,7 @@ The IPv6 address known as link local all routers\. The IP that returned is stati
 
 ## JoinHostPort
 ```jule
-fn JoinHostPort(host: str, port: str): str
+fn JoinHostPort(host: string, port: string): string
 ```
 Combines host and port into a network address of the form &#34;host:port&#34;\. If host contains a colon, as found in literal IPv6 addresses, then JoinHostPort returns &#34;\[host\]:port&#34;\.
 
@@ -182,7 +182,7 @@ See the \[Dial\] function for a description of the host and port parameters\.
 
 ## SplitHostPort
 ```jule
-fn SplitHostPort(hostport: str)!: (host: str, port: str)
+fn SplitHostPort(hostport: string)!: (host: string, port: string)
 ```
 Splits a network address of the form &#34;host:port&#34;, &#34;host%zone:port&#34;, &#34;\[host\]:port&#34; or &#34;\[host%zone\]:port&#34; into host or host%zone and port\.
 
@@ -199,19 +199,19 @@ Returns the IP address \(in 16\-byte form\) of the IPv4 address a\.b\.c\.d\.
 
 ## ParseIP
 ```jule
-fn ParseIP(s: str): IP
+fn ParseIP(s: string): IP
 ```
 Parses s as an IP address, returning the result\. The string s can be in IPv4 dotted decimal \(&#34;192\.0\.2\.1&#34;\), IPv6 \(&#34;2001:db8::68&#34;\), or IPv4\-mapped IPv6 \(&#34;::ffff:192\.0\.2\.1&#34;\) form\. If s is not a valid textual representation of an IP address, it returns nil\. The returned address is always 16 bytes, IPv4 addresses are returned in IPv4\-mapped IPv6 form\.
 
 ## LookupIP
 ```jule
-async fn LookupIP(mut network: Network, address: str)!: []&IPAddr
+async fn LookupIP(mut network: Network, address: string)!: []&IPAddr
 ```
 Looks up host using the local resolver\. It returns a slice of that host&#39;s IPv4 and IPv6 addresses by network\. Network must be IP, IP4 or IP6\. Looks up for IPv4 addresses only, if network is IP4\. Looks up for IPv6 addresses only, if network is IP6\. Looks up for IPv4 and IPv6 addresses, if network is IP\.
 
 ## Listen
 ```jule
-async fn Listen(network: Network, addr: str)!: Listener
+async fn Listen(network: Network, addr: string)!: Listener
 ```
 Listens the address on the named network\. It will forward any error from network connectors\.
 
@@ -221,7 +221,7 @@ See the \[Dial\] function for a description of the network and addr parameters\.
 
 ## ListenUDP
 ```jule
-async fn ListenUDP(network: Network, addr: str)!: &UDPConn
+async fn ListenUDP(network: Network, addr: string)!: &UDPConn
 ```
 Listens the address on the named network\. It will forward any error from network connectors\. Just for UDP networks\.
 
@@ -229,7 +229,7 @@ See the \[Dial\] function for a description of the network and addr parameters\.
 
 ## Dial
 ```jule
-async fn Dial(network: Network, addr: str)!: Conn
+async fn Dial(network: Network, addr: string)!: Conn
 ```
 Connects to the address on the named network\. Network should be one of the fields of the Network enum\. The addr parameter is should represent valid address according to network\.
 
@@ -273,7 +273,7 @@ It will forward any error from network connectors\.
 
 ## DialTimeout
 ```jule
-async fn DialTimeout(network: Network, addr: str, timeout: time::Duration)!: Conn
+async fn DialTimeout(network: Network, addr: string, timeout: time::Duration)!: Conn
 ```
 Same as Dial, but uses timeout\. For UDP networks, timeout will be ignored\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be ignored\.
 
@@ -281,10 +281,10 @@ Same as Dial, but uses timeout\. For UDP networks, timeout will be ignored\. Tim
 ```jule
 trait Addr {
 	// Returns name of the network.
-	fn Network(*self): str
+	fn Network(*self): string
 
 	// String form of address.
-	fn Str(*self): str
+	fn String(*self): string
 }
 ```
 Represents a network end point address\.
@@ -336,15 +336,15 @@ DNS resolver configuration\.
 ## AddrError
 ```jule
 struct AddrError {
-	Err:  str
-	Addr: str
+	Err:  string
+	Addr: string
 }
 ```
 Common type of address errors\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -409,9 +409,9 @@ fn To16(mut *self): IP
 ```
 Converts the IP address to a 16\-byte representation\. Returns empty if address is not an IP address \(it is the wrong length\)\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string form of the IP address\. It returns one of 4 forms:<br>
 
@@ -424,7 +424,7 @@ Returns string form of the IP address\. It returns one of 4 forms:<br>
 ```jule
 struct IPAddr {
 	IP:   IP
-	Zone: str // IPv6 scoped addressing zone
+	Zone: string // IPv6 scoped addressing zone
 }
 ```
 Represents the address of an IP end point\.
@@ -435,19 +435,19 @@ Represents the address of an IP end point\.
 
 ### Network
 ```jule
-fn Network(*self): str
+fn Network(*self): string
 ```
 Returns the address&#39;s network name, &#34;ip&#34;\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: str)!: &IPAddr
+async fn Resolve(mut network: Network, address: string)!: &IPAddr
 ```
 Returns an address of IP end point\. The network must be a IP network name\.
 
@@ -463,7 +463,7 @@ Physical hardware address\.
 
 ### Parse
 ```jule
-fn Parse(s: str)!: HardwareAddr
+fn Parse(s: string)!: HardwareAddr
 ```
 Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over InfiniBand link\-layer address using one of the following formats:<br>
 ```
@@ -479,25 +479,25 @@ Parses s as an IEEE 802 MAC\-48, EUI\-48, EUI\-64, or a 20\-octet IP over Infini
 ```
 Error is always will be AddrError\.Unable\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns address in string form\.
 
 ## DNSError
 ```jule
 struct DNSError {
-	Err:    str // description of the error
-	Name:   str // name looked for
-	Server: str // server used
+	Err:    string // description of the error
+	Name:   string // name looked for
+	Server: string // server used
 }
 ```
 Represents a DNS lookup error\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -506,7 +506,7 @@ fn Str(*self): str
 struct TCPAddr {
 	IP:   IP
 	Port: int
-	Zone: str // IPv6 scoped addressing zone.
+	Zone: string // IPv6 scoped addressing zone.
 }
 ```
 Represents the address of a TCP end point\.
@@ -517,19 +517,19 @@ Represents the address of a TCP end point\.
 
 ### Network
 ```jule
-fn Network(*self): str
+fn Network(*self): string
 ```
 Returns the address&#39;s network name\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: str)!: &TCPAddr
+async fn Resolve(mut network: Network, address: string)!: &TCPAddr
 ```
 Returns an address of TCP end point\. The network must be a TCP network name\.
 
@@ -556,7 +556,7 @@ TCP connection\. In most cases, represents TCP client\.
 
 ### Dial
 ```jule
-async fn Dial(addr: str)!: &TCPConn
+async fn Dial(addr: string)!: &TCPConn
 ```
 Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -564,7 +564,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### DialTimeout
 ```jule
-async fn DialTimeout(addr: str, timeout: time::Duration)!: &TCPConn
+async fn DialTimeout(addr: string, timeout: time::Duration)!: &TCPConn
 ```
 Same as TCPListener\.Dial, but uses timeout\.
 
@@ -630,7 +630,7 @@ TCP listener\. In most cases, represents TCP server\.
 
 ### Bind
 ```jule
-async fn Bind(addr: str)!: &TCPListener
+async fn Bind(addr: string)!: &TCPListener
 ```
 Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse error\. In addition, any bind and listening error will be thrown as error\.
 
@@ -659,7 +659,7 @@ Closes connection\.
 struct UDPAddr {
 	IP:   IP
 	Port: int
-	Zone: str // IPv6 scoped addressing zone.
+	Zone: string // IPv6 scoped addressing zone.
 }
 ```
 Represents the address of a UDP end point\.
@@ -670,19 +670,19 @@ Represents the address of a UDP end point\.
 
 ### Network
 ```jule
-fn Network(*self): str
+fn Network(*self): string
 ```
 Returns the address&#39;s network name\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: str)!: &UDPAddr
+async fn Resolve(mut network: Network, address: string)!: &UDPAddr
 ```
 Returns an address of UDP end point\. The network must be a UDP network name\.
 
@@ -709,7 +709,7 @@ UDP connection\. This structure represents server and client connections\.
 
 ### Bind
 ```jule
-async fn Bind(addr: str)!: &UDPConn
+async fn Bind(addr: string)!: &UDPConn
 ```
 Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -717,7 +717,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Dial
 ```jule
-async fn Dial(addr: str)!: &UDPConn
+async fn Dial(addr: string)!: &UDPConn
 ```
 Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -767,7 +767,7 @@ Closes connection\.
 
 ## Network
 ```jule
-enum Network: str {
+enum Network: string {
 	IP: "ip",
 	IP4: "ip4",
 	IP6: "ip6",
