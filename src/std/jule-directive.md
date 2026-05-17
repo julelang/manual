@@ -3,7 +3,7 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsTop\(directive: str\): bool](#istop)
+[fn IsTop\(directive: string\): bool](#istop)
 
 ## Variables
 
@@ -23,6 +23,6 @@ Compiler directives\.
 
 ## IsTop
 ```jule
-fn IsTop(directive: str): bool
+fn IsTop(directive: string): bool
 ```
 Reports whether directive is top\-directive\.
