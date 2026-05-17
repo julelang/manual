@@ -3,8 +3,8 @@
 ## Index
 
 [Variables](#variables)\
-[fn IsBlank\(name: str\): bool](#isblank)\
-[fn IsAnon\(name: str\): bool](#isanon)
+[fn IsBlank\(name: string\): bool](#isblank)\
+[fn IsAnon\(name: string\): bool](#isanon)
 
 ## Variables
 
@@ -60,12 +60,12 @@ Special identifiers\.
 
 ## IsBlank
 ```jule
-fn IsBlank(name: str): bool
+fn IsBlank(name: string): bool
 ```
 Reports whether identifier is blank\.
 
 ## IsAnon
 ```jule
-fn IsAnon(name: str): bool
+fn IsAnon(name: string): bool
 ```
 Reports whether identifier is anonymous\.
