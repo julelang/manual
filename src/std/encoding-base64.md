@@ -6,9 +6,9 @@
 [fn NewEncoder\(mut enc: &amp;Encoding, mut w: io::Writer\): io::WriteCloser](#newencoder)\
 [fn NewDecoder\(mut enc: &amp;Encoding, mut r: io::Reader\): io::Reader](#newdecoder)\
 [type CorruptInputError](#corruptinputerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [struct Encoding](#encoding)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(encoder: str\): &amp;Encoding](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(encoder: string\): &amp;Encoding](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EncodedLen\(\*self, n: int\): int](#encodedlen)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DecodedLen\(\*self, n: int\): int](#decodedlen)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Clone\(\*self\): &amp;Encoding](#clone)\
@@ -16,10 +16,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Strict\(mut &amp;self\): &amp;Encoding](#strict)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\(\*self, mut dst: \[\]byte, src: \[\]byte\)](#encode)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendEncode\(\*self, mut dst: \[\]byte, src: \[\]byte\): \[\]byte](#appendencode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn EncodeToStr\(\*self, src: \[\]byte\): str](#encodetostr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn EncodeToString\(\*self, src: \[\]byte\): string](#encodetostring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Decode\(\*self, mut dst: \[\]byte, src: \[\]byte\)\!: \(n: int\)](#decode)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendDecode\(\*self, mut dst: \[\]byte, src: \[\]byte\)\!: \[\]byte](#appenddecode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeStr\(\*self, s: str\)\!: \[\]byte](#decodestr)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DecodeString\(\*self, s: string\)\!: \[\]byte](#decodestring)
 
 ## Variables
 
@@ -77,9 +77,9 @@ type CorruptInputError: i64
 ```
 
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -93,7 +93,7 @@ A radix 64 encoding/decoding scheme, defined by a 64\-character alphabet\. The m
 
 ### New
 ```jule
-fn New(encoder: str): &Encoding
+fn New(encoder: string): &Encoding
 ```
 Returns a new padded Encoding defined by the given alphabet, which must be a 64\-byte string that contains unique byte values and does not contain the padding character or CR / LF \(&#39;\\r&#39;, &#39;\\n&#39;\)\. The alphabet is treated as a sequence of byte values without any special treatment for multi\-byte UTF\-8\. The resulting Encoding uses the default padding character \(&#39;=&#39;\), which may be changed or disabled via \[Encoding\.WithPadding\]\.
 
@@ -147,9 +147,9 @@ fn AppendEncode(*self, mut dst: []byte, src: []byte): []byte
 ```
 Appends the base64 encoded src to dst and returns the extended buffer\.
 
-### EncodeToStr
+### EncodeToString
 ```jule
-fn EncodeToStr(*self, src: []byte): str
+fn EncodeToString(*self, src: []byte): string
 ```
 Returns the base64 encoding of src\.
 
@@ -165,8 +165,8 @@ fn AppendDecode(*self, mut dst: []byte, src: []byte)!: []byte
 ```
 Appends the base64 decoded src to dst and returns the extended buffer\. If the input is malformed, it returns the partially decoded src and an error\. New line characters \(\\r and \\n\) are ignored\.
 
-### DecodeStr
+### DecodeString
 ```jule
-fn DecodeStr(*self, s: str)!: []byte
+fn DecodeString(*self, s: string)!: []byte
 ```
 Returns the bytes represented by the base64 string s\. If the input is malformed, it returns the partially decoded data and \[CorruptInputError\]\. New line characters \(\\r and \\n\) are ignored\.
