@@ -4,19 +4,19 @@
 
 [Variables](#variables)\
 [fn FullRune\(p: \[\]byte\): bool](#fullrune)\
-[fn FullRuneStr\(s: str\): bool](#fullrunestr)\
+[fn FullRuneString\(s: string\): bool](#fullrunestring)\
 [fn DecodeRune\(p: \[\]byte\): \(r: rune, size: int\)](#decoderune)\
-[fn DecodeRuneStr\(s: str\): \(r: rune, size: int\)](#decoderunestr)\
+[fn DecodeRuneString\(s: string\): \(r: rune, size: int\)](#decoderunestring)\
 [fn DecodeLastRune\(p: \[\]byte\): \(r: rune, size: int\)](#decodelastrune)\
-[fn DecodeLastRuneStr\(s: str\): \(r: rune, size: int\)](#decodelastrunestr)\
+[fn DecodeLastRuneString\(s: string\): \(r: rune, size: int\)](#decodelastrunestring)\
 [fn RuneLen\(r: rune\): int](#runelen)\
 [fn EncodeRune\(mut p: \[\]byte, mut r: rune\): int](#encoderune)\
 [fn AppendRune\(mut p: \[\]byte, r: rune\): \[\]byte](#appendrune)\
 [fn RuneCount\(p: \[\]byte\): \(n: int\)](#runecount)\
-[fn RuneCountStr\(s: str\): \(n: int\)](#runecountstr)\
+[fn RuneCountString\(s: string\): \(n: int\)](#runecountstring)\
 [fn RuneStart\(b: byte\): bool](#runestart)\
 [fn Valid\(p: \[\]byte\): bool](#valid)\
-[fn ValidStr\(mut s: str\): bool](#validstr)\
+[fn ValidString\(mut s: string\): bool](#validstring)\
 [fn ValidRune\(r: rune\): bool](#validrune)
 
 ## Variables
@@ -37,9 +37,9 @@ fn FullRune(p: []byte): bool
 ```
 Reports whether the bytes in p begin with a full UTF\-8 encoding of a rune\. An invalid encoding is considered a full Rune since it will convert as a width\-1 error rune\.
 
-## FullRuneStr
+## FullRuneString
 ```jule
-fn FullRuneStr(s: str): bool
+fn FullRuneString(s: string): bool
 ```
 Like FullRune but its input is a string\.
 
@@ -51,9 +51,9 @@ Unpacks the first UTF\-8 encoding in p and returns the rune and its width in byt
 
 An encoding is invalid if it is incorrect UTF\-8, encodes a rune that is out of range, or is not the shortest possible UTF\-8 encoding for the value\. No other validation is performed\.
 
-## DecodeRuneStr
+## DecodeRuneString
 ```jule
-fn DecodeRuneStr(s: str): (r: rune, size: int)
+fn DecodeRuneString(s: string): (r: rune, size: int)
 ```
 Like DecodeRune but its input is a string\. If s is empty it returns \(RuneError, 0\)\. Otherwise, if the encoding is invalid, it returns \(RuneError, 1\)\. Both are impossible results for correct, non\-empty UTF\-8\.
 
@@ -67,9 +67,9 @@ Unpacks the last UTF\-8 encoding in p and returns the rune and its width in byte
 
 An encoding is invalid if it is incorrect UTF\-8, encodes a rune that is out of range, or is not the shortest possible UTF\-8 encoding for the value\. No other validation is performed\.
 
-## DecodeLastRuneStr
+## DecodeLastRuneString
 ```jule
-fn DecodeLastRuneStr(s: str): (r: rune, size: int)
+fn DecodeLastRuneString(s: string): (r: rune, size: int)
 ```
 Like DecodeLastRune but its input is a string\. If s is empty it returns \(RuneError, 0\)\. Otherwise, if the encoding is invalid, it returns \(RuneError, 1\)\. Both are impossible results for correct, non\-empty UTF\-8\.
 
@@ -99,9 +99,9 @@ fn RuneCount(p: []byte): (n: int)
 ```
 Returns the number of runes in p\. Erroneous and short encodings are treated as single runes of width 1 byte\.
 
-## RuneCountStr
+## RuneCountString
 ```jule
-fn RuneCountStr(s: str): (n: int)
+fn RuneCountString(s: string): (n: int)
 ```
 Like RuneCount but its input is a string\.
 
@@ -117,9 +117,9 @@ fn Valid(p: []byte): bool
 ```
 Reports whether p consists entirely of valid UTF\-8\-encoded runes\.
 
-## ValidStr
+## ValidString
 ```jule
-fn ValidStr(mut s: str): bool
+fn ValidString(mut s: string): bool
 ```
 Reports whether s consists entirely of valid UTF\-8\-encoded runes\.
 
