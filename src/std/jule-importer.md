@@ -31,14 +31,14 @@ struct CompileInfo {
 	CppStd: CppStd
 
 	// Tags passed.
-	Tags: []str
+	Tags: []string
 }
 ```
 Compile information\.
 
 ## Compiler
 ```jule
-enum Compiler: str {
+enum Compiler: string {
 	Clang: "clang",
 	GCC: "gcc",
 }
@@ -47,7 +47,7 @@ Standard back\-end compilers\.
 
 ## CppStd
 ```jule
-enum CppStd: str {
+enum CppStd: string {
 	Cpp20: "cpp20",
 }
 ```
