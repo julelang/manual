@@ -6,14 +6,14 @@
 [fn NewI64\(x: i64\): &amp;Const](#newi64)\
 [fn NewU64\(x: u64\): &amp;Const](#newu64)\
 [fn NewBool\(x: bool\): &amp;Const](#newbool)\
-[fn NewStr\(x: str\): &amp;Const](#newstr)\
+[fn NewString\(x: string\): &amp;Const](#newstring)\
 [fn NewF64\(x: f64\): &amp;Const](#newf64)\
 [fn NewCmplx128\(x: cmplx128\): &amp;Const](#newcmplx128)\
 [fn NewNil\(\): &amp;Const](#newnil)\
 [struct Const](#const)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(\*self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(\*self\): bool](#readbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(\*self\): str](#readstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadString\(\*self\): string](#readstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadF64\(\*self\): f64](#readf64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadCmplx128\(\*self\): cmplx128](#readcmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsI64\(\*self\): i64](#asi64)\
@@ -24,13 +24,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetI64\(mut \*self, x: i64\)](#seti64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetU64\(mut \*self, x: u64\)](#setu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetBool\(mut \*self, x: bool\)](#setbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetStr\(mut \*self, x: str\)](#setstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetString\(mut \*self, x: string\)](#setstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetF64\(mut \*self, x: f64\)](#setf64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetCmplx128\(mut \*self, x: cmplx128\)](#setcmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetNil\(mut \*self\)](#setnil)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInt\(\*self\): bool](#isint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsBool\(\*self\): bool](#isbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStr\(\*self\): bool](#isstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsString\(\*self\): bool](#isstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsF64\(\*self\): bool](#isf64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsCmplx128\(\*self\): bool](#iscmplx128)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil)\
@@ -52,7 +52,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn XOR\(mut \*self, x: Const\): bool](#xor)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SHL\(mut \*self, x: Const\): bool](#shl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SHR\(mut \*self, x: Const\): bool](#shr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)
 
 
 
@@ -80,9 +80,9 @@ fn NewBool(x: bool): &Const
 ```
 Returns new constant value instance from boolean\.
 
-## NewStr
+## NewString
 ```jule
-fn NewStr(x: str): &Const
+fn NewString(x: string): &Const
 ```
 Returns new constant value instance from string\.
 
@@ -107,7 +107,7 @@ Returns new constant value instance with nil\.
 ## Const
 ```jule
 struct Const {
-	Kind: str
+	Kind: string
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
@@ -125,9 +125,9 @@ fn ReadBool(*self): bool
 ```
 Reads boolean data\. Returns false if data is not boolean\.
 
-### ReadStr
+### ReadString
 ```jule
-fn ReadStr(*self): str
+fn ReadString(*self): string
 ```
 Reads string data\. Returns empty string if data is not string\.
 
@@ -191,9 +191,9 @@ fn SetBool(mut *self, x: bool)
 ```
 Sets constant value from boolean\.
 
-### SetStr
+### SetString
 ```jule
-fn SetStr(mut *self, x: str)
+fn SetString(mut *self, x: string)
 ```
 Sets constant value from string\.
 
@@ -227,9 +227,9 @@ fn IsBool(*self): bool
 ```
 Reports whether data is boolean\.
 
-### IsStr
+### IsString
 ```jule
-fn IsStr(*self): bool
+fn IsString(*self): bool
 ```
 Reports whether data is string\.
 
@@ -393,7 +393,7 @@ fn SHR(mut *self, x: Const): bool
 ```
 Right shifts itself value to x&#39;s value\. Reports whether operation is success\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
