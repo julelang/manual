@@ -6,22 +6,22 @@
 [type UintFlag](#uintflag)\
 [type FloatFlag](#floatflag)\
 [type BoolFlag](#boolflag)\
-[type StrFlag](#strflag)\
+[type StringFlag](#stringflag)\
 [trait CommonFlag](#commonflag)\
 [struct Flag\[T\]](#flag)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn What\(\*self\): str](#what)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): string](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn What\(\*self\): string](#what)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Short\(\*self\): rune](#short)\
 [struct FlagSet](#flagset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;FlagSet](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut \*self, name: str\): CommonFlag](#findflag)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut \*self, name: string\): CommonFlag](#findflag)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlagShort\(mut \*self, name: rune\): CommonFlag](#findflagshort)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut \*self\): \[\]CommonFlag](#flags)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, args: \[\]str\)\!: \[\]str](#parse)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, args: \[\]string\)\!: \[\]string](#parse)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~str\]\(mut \*self, name: str, short: rune, default: T, what: str\): &amp;T](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~str\]\(mut \*self, mut var: &amp;T, name: str, short: rune, what: str\)](#addvar)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~string\]\(mut \*self, name: string, short: rune, default: T, what: string\): &amp;T](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~string\]\(mut \*self, mut var: &amp;T, name: string, short: rune, what: string\)](#addvar)
 
 
 
@@ -49,23 +49,23 @@ type BoolFlag = &Flag[bool]
 ```
 Flag for bool type\.
 
-## StrFlag
+## StringFlag
 ```jule
-type StrFlag = &Flag[str]
+type StringFlag = &Flag[string]
 ```
-Flag for str type
+Flag for string type
 
 ## CommonFlag
 ```jule
 trait CommonFlag {
 	// Returns name of flag.
-	fn Name(*self): str
+	fn Name(*self): string
 
 	// Returns short name of flag.
 	fn Short(*self): rune
 
 	// Returns description of flag.
-	fn What(*self): str
+	fn What(*self): string
 
 	// Resets data to default.
 	fn Reset(mut *self)
@@ -87,13 +87,13 @@ A Flag for FlagSet\.
 
 ### Name
 ```jule
-fn Name(*self): str
+fn Name(*self): string
 ```
 
 
 ### What
 ```jule
-fn What(*self): str
+fn What(*self): string
 ```
 
 
@@ -145,7 +145,7 @@ Returns new flagset\.
 
 ### FindFlag
 ```jule
-fn FindFlag(mut *self, name: str): CommonFlag
+fn FindFlag(mut *self, name: string): CommonFlag
 ```
 Returns flag by name, returns nil if not exist\.
 
@@ -163,7 +163,7 @@ Returns all flags\.
 
 ### Parse
 ```jule
-fn Parse(mut *self, args: []str)!: []str
+fn Parse(mut *self, args: []string)!: []string
 ```
 Parse arguments and process flags\. Returns non\-flag content\. Error is always string and holds error message\.
 
@@ -175,12 +175,12 @@ Resets all flags to default value\.
 
 ### Add
 ```jule
-fn Add[T: ~i64 | ~u64 | ~f64 | ~bool | ~str](mut *self, name: str, short: rune, default: T, what: str): &T
+fn Add[T: ~i64 | ~u64 | ~f64 | ~bool | ~string](mut *self, name: string, short: rune, default: T, what: string): &T
 ```
 Adds new flag and returns allocated reference variable\. Panics if name or short name is alreadys exist\. Zero \(0\) short names will be ignored\. Panics if used unsupported type\.
 
 ### AddVar
 ```jule
-fn AddVar[T: ~i64 | ~u64 | ~f64 | ~bool | ~str](mut *self, mut var: &T, name: str, short: rune, what: str)
+fn AddVar[T: ~i64 | ~u64 | ~f64 | ~bool | ~string](mut *self, mut var: &T, name: string, short: rune, what: string)
 ```
 Same with the Add method but do not allocates new reference, uses existing\.
