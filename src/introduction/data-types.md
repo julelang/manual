@@ -128,18 +128,13 @@ Example to underscored literals:
 0b1100_1100_0110_1010
 ```
 
-## Byte and Rune Literals
+## Rune Literals
 
-A byte or rune literal is represented by a single character between single quotes. Since it is typically a string element, it supports the same escape sequences. A literal can be evaluated in two ways; byte literal and a rune literal. If your character is small enough to be a byte (0 <= b <= 255), it is treated as a byte, it is treated as a rune.
+A `rune` literal is represented by a single character between single quotes. Since it is typically a string element, it supports the same escape sequences.
 
 For example:
-
 ```jule
-'a' // byte
-```
-
-```jule
-'ç' // rune
+'a'
 ```
 
 ## String
@@ -150,7 +145,7 @@ Strings support the `+` operator for concatenation, It's that easy to concatenat
 
 In most cases, any concatenation will result as heap allocation which is might be expensive. For highly-repeated concatenations use string builder utilities instead.
 
-It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares bytes/runes of strings.
+It also supports the `<`, `<=`, `>`, and `>=` operators for comparing strings. But it is not case-sensitive, case-insensitive or like that. This operators just compares bytes of strings.
 
 ### Range Iterations
 
