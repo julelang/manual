@@ -4,17 +4,17 @@
 
 [Variables](#variables)\
 [fn ScanAll\(mut f: &amp;FileSet, opt: int\): \[\]log::Log](#scanall)\
-[fn IsKeyword\(s: str\): bool](#iskeyword)\
+[fn IsKeyword\(s: string\): bool](#iskeyword)\
 [fn IsPostfix\(id: int\): bool](#ispostfix)\
 [fn IsAssign\(id: int\): bool](#isassign)\
 [struct FileSet](#fileset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str\): &amp;FileSet](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: string\): &amp;FileSet](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Fill\(mut \*self, data: \[\]byte\)](#fill)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FillMut\(mut \*self, mut data: \[\]byte\)](#fillmut)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(\*self\): str](#dir)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): str](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir\(\*self\): string](#dir)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): string](#name)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Addr\(\*self\): uintptr](#addr)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(\*self, row: int\): str](#getrow)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GetRow\(\*self, row: int\): string](#getrow)\
 [struct Scanner](#scanner)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut f: &amp;FileSet, opt: int\): &amp;Scanner](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Scan\(mut \*self\): \(token: &amp;Token, EOF: bool\)](#scan)\
@@ -50,13 +50,13 @@ const (
 	COMMENT // /*..*/ or //...
 	NAME    // identifier
 
-	FLOAT // floating-point literal
-	INT   // integer literal
-	STR   // string literal
-	RUNE  // rune literal
-	IMAG  // imaginary part literal
+	FLOAT  // floating-point literal
+	INT    // integer literal
+	STRING // string literal
+	RUNE   // rune literal
+	IMAG   // imaginary part literal
 
-	RET      // ret
+	RETURN   // return
 	CONST    // const
 	TYPE     // type
 	FOR      // for
@@ -83,6 +83,7 @@ const (
 	MUT      // mut
 	DEFER    // defer
 	ERROR    // error
+	THROW    // throw
 	MAP      // map
 	SELECT   // select
 	ASYNC    // async
@@ -154,7 +155,7 @@ Scans all tokens into FileSet f and returns error logs\.
 
 ## IsKeyword
 ```jule
-fn IsKeyword(s: str): bool
+fn IsKeyword(s: string): bool
 ```
 Reports whether s is keyword\.
 
@@ -173,7 +174,7 @@ Reports whether operator kind is assignment operator\.
 ## FileSet
 ```jule
 struct FileSet {
-	Path:   str
+	Path:   string
 	Tokens: []&Token
 	// NOTE: contains filtered hidden or unexported fields
 }
@@ -182,7 +183,7 @@ Fileset for the lexer\.
 
 ### New
 ```jule
-fn New(path: str): &FileSet
+fn New(path: string): &FileSet
 ```
 Returns new FileSet with path\.
 
@@ -200,13 +201,13 @@ Fills data\. Uses mutable copy of data, not allocated new copy\. But it is unsaf
 
 ### Dir
 ```jule
-fn Dir(*self): str
+fn Dir(*self): string
 ```
 Returns directory of file&#39;s path\.
 
 ### Name
 ```jule
-fn Name(*self): str
+fn Name(*self): string
 ```
 Returns filename\.
 
@@ -218,7 +219,7 @@ Returns self as uintptr\.
 
 ### GetRow
 ```jule
-fn GetRow(*self, row: int): str
+fn GetRow(*self, row: int): string
 ```
 Returns line \(not include new\-line char\) by row\. Returns empty string if line is not buffer\.
 
@@ -250,7 +251,7 @@ struct Token {
 	File:   &FileSet // Associated FileSet where token appear.
 	Row:    int      // Row position of token.
 	Column: int      // Column position of token.
-	Kind:   str      // Token kind as string.
+	Kind:   string   // Token kind as string.
 }
 ```
 Token\.
