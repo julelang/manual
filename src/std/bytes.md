@@ -8,15 +8,15 @@ Package `std/bytes` implements functions for the manipulation of byte slices. It
 [fn Compare\(a: \[\]byte, b: \[\]byte\): int](#compare)\
 [fn Count\(s: \[\]byte, sep: \[\]byte\): int](#count)\
 [fn Contains\(b: \[\]byte, subslice: \[\]byte\): bool](#contains)\
-[fn ContainsAny\(b: \[\]byte, chars: str\): bool](#containsany)\
+[fn ContainsAny\(b: \[\]byte, chars: string\): bool](#containsany)\
 [fn ContainsRune\(b: \[\]byte, r: rune\): bool](#containsrune)\
 [fn ContainsFunc\(b: \[\]byte, f: fn\(rune\): bool\): bool](#containsfunc)\
 [fn IndexByte\(b: \[\]byte, c: byte\): int](#indexbyte)\
 [fn LastIndex\(s: \[\]byte, sep: \[\]byte\): int](#lastindex)\
 [fn LastIndexByte\(s: \[\]byte, c: byte\): int](#lastindexbyte)\
 [fn IndexRune\(s: \[\]byte, r: rune\): int](#indexrune)\
-[fn IndexAny\(s: \[\]byte, chars: str\): int](#indexany)\
-[fn LastIndexAny\(s: \[\]byte, chars: str\): int](#lastindexany)\
+[fn IndexAny\(s: \[\]byte, chars: string\): int](#indexany)\
+[fn LastIndexAny\(s: \[\]byte, chars: string\): int](#lastindexany)\
 [fn SplitN\(mut s: \[\]byte, sep: \[\]byte, n: int\): \[\]\[\]byte](#splitn)\
 [fn SplitAfterN\(mut s: \[\]byte, sep: \[\]byte, n: int\): \[\]\[\]byte](#splitaftern)\
 [fn Split\(mut s: \[\]byte, sep: \[\]byte\): \[\]\[\]byte](#split)\
@@ -29,13 +29,13 @@ Package `std/bytes` implements functions for the manipulation of byte slices. It
 [fn IndexFunc\(s: \[\]byte, f: fn\(rune\): bool\): int](#indexfunc)\
 [fn LastIndexFunc\(s: \[\]byte, f: fn\(rune\): bool\): int](#lastindexfunc)\
 [fn TrimLeftFunc\(mut s: \[\]byte, f: fn\(rune\): bool\): \[\]byte](#trimleftfunc)\
-[fn TrimRight\(mut s: \[\]byte, cutset: str\): \[\]byte](#trimright)\
+[fn TrimRight\(mut s: \[\]byte, cutset: string\): \[\]byte](#trimright)\
 [fn TrimRightFunc\(mut s: \[\]byte, f: fn\(rune\): bool\): \[\]byte](#trimrightfunc)\
 [fn TrimFunc\(mut s: \[\]byte, f: fn\(rune\): bool\): \[\]byte](#trimfunc)\
 [fn TrimPrefix\(mut s: \[\]byte, prefix: \[\]byte\): \[\]byte](#trimprefix)\
 [fn TrimSuffix\(mut s: \[\]byte, suffix: \[\]byte\): \[\]byte](#trimsuffix)\
-[fn Trim\(mut s: \[\]byte, cutset: str\): \[\]byte](#trim)\
-[fn TrimLeft\(mut s: \[\]byte, cutset: str\): \[\]byte](#trimleft)\
+[fn Trim\(mut s: \[\]byte, cutset: string\): \[\]byte](#trim)\
+[fn TrimLeft\(mut s: \[\]byte, cutset: string\): \[\]byte](#trimleft)\
 [fn TrimSpace\(mut s: \[\]byte\): \[\]byte](#trimspace)\
 [fn Runes\(s: \[\]byte\): \[\]rune](#runes)\
 [fn Replace\(s: \[\]byte, old: \[\]byte, new: \[\]byte, mut n: int\): \[\]byte](#replace)\
@@ -77,7 +77,7 @@ Reports whether subslice is within b\.
 
 ## ContainsAny
 ```jule
-fn ContainsAny(b: []byte, chars: str): bool
+fn ContainsAny(b: []byte, chars: string): bool
 ```
 Reports whether any of the UTF\-8\-encoded code points in chars are within b\.
 
@@ -119,13 +119,13 @@ Interprets s as a sequence of UTF\-8\-encoded code points\. It returns the byte 
 
 ## IndexAny
 ```jule
-fn IndexAny(s: []byte, chars: str): int
+fn IndexAny(s: []byte, chars: string): int
 ```
 Interprets s as a sequence of UTF\-8\-encoded Unicode code points\. It returns the byte index of the first occurrence in s of any of the Unicode code points in chars\. It returns \-1 if chars is empty or if there is no code point in common\.
 
 ## LastIndexAny
 ```jule
-fn LastIndexAny(s: []byte, chars: str): int
+fn LastIndexAny(s: []byte, chars: string): int
 ```
 Interprets s as a sequence of UTF\-8\-encoded Unicode code points\. It returns the byte index of the last occurrence in s of any of the Unicode code points in chars\. It returns \-1 if chars is empty or if there is no code point in common\.
 
@@ -217,7 +217,7 @@ Treats s as UTF\-8\-encoded bytes and returns a subslice of s by slicing off all
 
 ## TrimRight
 ```jule
-fn TrimRight(mut s: []byte, cutset: str): []byte
+fn TrimRight(mut s: []byte, cutset: string): []byte
 ```
 Returns a subslice of s by slicing off all trailing UTF\-8\-encoded code points that are contained in cutset\.
 
@@ -247,13 +247,13 @@ Returns s without the provided trailing suffix string\. If s doesn&#39;t end wit
 
 ## Trim
 ```jule
-fn Trim(mut s: []byte, cutset: str): []byte
+fn Trim(mut s: []byte, cutset: string): []byte
 ```
 Returns a subslice of s by slicing off all leading and trailing UTF\-8\-encoded code points contained in cutset\.
 
 ## TrimLeft
 ```jule
-fn TrimLeft(mut s: []byte, cutset: str): []byte
+fn TrimLeft(mut s: []byte, cutset: string): []byte
 ```
 Returns a subslice of s by slicing off all leading UTF\-8\-encoded code points contained in cutset\.
 
