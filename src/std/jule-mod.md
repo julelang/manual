@@ -2,8 +2,8 @@
 
 ## Index
 
-[fn ParseFile\(path: str, options: ParseOptions\): \(&amp;Mod, \[\]log::Log\)](#parsefile)\
-[fn IsName\(name: str\): bool](#isname)\
+[fn ParseFile\(path: string, options: ParseOptions\): \(&amp;Mod, \[\]log::Log\)](#parsefile)\
+[fn IsName\(name: string\): bool](#isname)\
 [type ID](#id)\
 [struct Mod](#mod)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Mod\): bool](#equal)\
@@ -13,13 +13,13 @@
 
 ## ParseFile
 ```jule
-fn ParseFile(path: str, options: ParseOptions): (&Mod, []log::Log)
+fn ParseFile(path: string, options: ParseOptions): (&Mod, []log::Log)
 ```
 Parse module from the module file path\.
 
 ## IsName
 ```jule
-fn IsName(name: str): bool
+fn IsName(name: string): bool
 ```
 Reports whether the name is valid to become module name\. It does not checks for reserved names\.
 
@@ -32,9 +32,9 @@ A module identity\.
 ## Mod
 ```jule
 struct Mod {
-	ID:   ID  // Unique identity of the module.
-	Name: str // Name of the module.
-	Path: str // Path of the module. File is not included.
+	ID:   ID     // Unique identity of the module.
+	Name: string // Name of the module.
+	Path: string // Path of the module. File is not included.
 }
 ```
 A module\.
