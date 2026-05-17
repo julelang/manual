@@ -47,13 +47,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AppendBytes\(\*self, mut buf: \[\]byte\): \[\]byte](#appendbytes)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetU64\(mut \*self, x: u64\)](#setu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetI64\(mut \*self, x: i64\)](#seti64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetStr\(mut \*self, mut s: str, base: int\): \(ok: bool\)](#setstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetString\(mut \*self, mut s: string, base: int\): \(ok: bool\)](#setstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn I64\(\*self\): i64](#i64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn U64\(\*self\): u64](#u64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsI64\(\*self\): bool](#isi64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsU64\(\*self\): bool](#isu64)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, b: int\): str](#format)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Format\(\*self, b: int\): string](#format)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn F64\(\*self\): \(f64, Accuracy\)](#f64)\
 [type Word](#word)
 
@@ -405,11 +405,11 @@ fn SetI64(mut *self, x: i64)
 ```
 Sets self to x\.
 
-### SetStr
+### SetString
 ```jule
-fn SetStr(mut *self, mut s: str, base: int): (ok: bool)
+fn SetString(mut *self, mut s: string, base: int): (ok: bool)
 ```
-Sets self to the value of s, interpreted in the given base, and returns a boolean indicating success\. The entire string \(not just a prefix\) must be valid for success\. If SetStr fails, the value of self is undefined\.
+Sets self to the value of s, interpreted in the given base, and returns a boolean indicating success\. The entire string \(not just a prefix\) must be valid for success\. If SetString fails, the value of self is undefined\.
 
 The base argument must be 0 or a value between 2 and \[MaxBase\]\. For base 0, the number prefix determines the actual base: A prefix of “0b” or “0B” selects base 2, “0”, “0o” or “0O” selects base 8, and “0x” or “0X” selects base 16\. Otherwise, the selected base is 10 and no prefix is accepted\.
 
@@ -441,15 +441,15 @@ fn IsU64(*self): bool
 ```
 Reports whether x\(self\) can be represented as a u64\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string representation of x\(self\) in decimal format\.
 
 ### Format
 ```jule
-fn Format(*self, b: int): str
+fn Format(*self, b: int): string
 ```
 Returns the string representation of x\(self\) in the given base\. Base must be between 2 and 62, inclusive\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values 10 to 35, and the upper\-case letters &#39;A&#39; to &#39;Z&#39; for digit values 36 to 61\. No prefix \(such as &#34;0x&#34;\) is added to the string\.
 
