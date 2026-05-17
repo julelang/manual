@@ -23,7 +23,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSlice\(mut \*self, delim: byte\)\!: \(line: \[\]byte, full: bool\)](#readslice)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadLine\(mut \*self\)\!: \(line: \[\]byte, isPrefix: bool\)](#readline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBytes\(mut \*self, delim: byte\)\!: \(buf: \[\]byte\)](#readbytes)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadStr\(mut \*self, delim: byte\)\!: str](#readstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadString\(mut \*self, delim: byte\)\!: string](#readstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(mut \*self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
 [struct Writer](#writer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn NewSize\(mut w: io::Writer, mut size: int\): &amp;Writer](#newsize-1)\
@@ -37,14 +37,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, p: \[\]byte\)\!: \(nn: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteByte\(mut \*self, c: byte\)\!](#writebyte)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteRune\(mut \*self, r: rune\)\!: \(size: int\)](#writerune)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, mut s: str\)\!: int](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteString\(mut \*self, mut s: string\)\!: int](#writestring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadFrom\(mut \*self, mut r: io::Reader\)\!: \(n: i64\)](#readfrom)\
 [type FinalToken](#finaltoken)\
 [type SplitFunc](#splitfunc)\
 [struct Scanner](#scanner)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Scanner](#new-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Token\(mut \*self\): \[\]byte](#token)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Text\(\*self\): str](#text)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Text\(\*self\): string](#text)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EOF\(\*self\): bool](#eof)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Scan\(mut \*self\)\!: bool](#scan)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Split\(mut \*self, split: SplitFunc\)](#split)\
@@ -199,13 +199,13 @@ Returns the number of bytes that can be read from the current buffer\.
 ```jule
 async fn ReadSlice(mut *self, delim: byte)!: (line: []byte, full: bool)
 ```
-Reads until the first occurrence of delim in the input, returning a slice pointing at the bytes in the buffer\. The bytes stop being valid at the next read\. If it encounters an error before finding a delimiter, forwards it\. It fails with full=true if the buffer fills without a delim\. Because the data returned from ReadSlice will be overwritten by the next I/O operation, most clients should use \[Reader\.ReadBytes\] or ReadStr instead\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\.
+Reads until the first occurrence of delim in the input, returning a slice pointing at the bytes in the buffer\. The bytes stop being valid at the next read\. If it encounters an error before finding a delimiter, forwards it\. It fails with full=true if the buffer fills without a delim\. Because the data returned from ReadSlice will be overwritten by the next I/O operation, most clients should use \[Reader\.ReadBytes\] or ReadString instead\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\.
 
 ### ReadLine
 ```jule
 async fn ReadLine(mut *self)!: (line: []byte, isPrefix: bool)
 ```
-Low\-level line\-reading primitive\. Most callers should use \[Reader\.ReadBytes\]\(&#39;\\n&#39;\) or \[Reader\.ReadStr\]\(&#39;\\n&#39;\) instead or use a \[Scanner\]\.
+Low\-level line\-reading primitive\. Most callers should use \[Reader\.ReadBytes\]\(&#39;\\n&#39;\) or \[Reader\.ReadString\]\(&#39;\\n&#39;\) instead or use a \[Scanner\]\.
 
 It tries to return a single line, not including the end\-of\-line bytes\. If the line was too long for the buffer then isPrefix is set and the beginning of the line is returned\. The rest of the line will be returned from future calls\. isPrefix will be false when returning the last fragment of the line\. The returned buffer is only valid until the next call to ReadLine\.
 
@@ -217,9 +217,9 @@ async fn ReadBytes(mut *self, delim: byte)!: (buf: []byte)
 ```
 Reads until the first occurrence of delim in the input, returning a slice containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\. For simple uses, a Scanner may be more convenient\.
 
-### ReadStr
+### ReadString
 ```jule
-async fn ReadStr(mut *self, delim: byte)!: str
+async fn ReadString(mut *self, delim: byte)!: string
 ```
 Reads until the first occurrence of delim in the input, returning a string containing the data up to and including the delimiter\. If it encounters an error before finding a delimiter, forwards it\. Throws error if and only if line does not end in delim because of an error\. If it encounters EOF before finding a delimiter, it returns all the data in the buffer\. If there is no data in the buffer, throws io::EOF\. For simple uses, a Scanner may be more convenient\.
 
@@ -242,7 +242,7 @@ Implements buffering for an \[io::Writer\] object\. If an error occurs writing t
 - `io::Writer`
 - `io::ByteWriter`
 - `io::RuneWriter`
-- `io::StrWriter`
+- `io::StringWriter`
 - `io::ReaderFrom`
 
 ### NewSize
@@ -311,9 +311,9 @@ async fn WriteRune(mut *self, r: rune)!: (size: int)
 ```
 Writes a single Unicode code point, returning the number of bytes written and throws any error\.
 
-### WriteStr
+### WriteString
 ```jule
-async fn WriteStr(mut *self, mut s: str)!: int
+async fn WriteString(mut *self, mut s: string)!: int
 ```
 Writes a string\. It returns the number of bytes written\. If the count is less than len\(s\), it throws an error explaining why the write is short\.
 
@@ -369,7 +369,7 @@ Returns the most recent token generated by a call to \[Scanner\.Scan\]\. The und
 
 ### Text
 ```jule
-fn Text(*self): str
+fn Text(*self): string
 ```
 Returns the most recent token generated by a call to \[Scanner\.Scan\] as a newly allocated string holding its bytes\.
 
