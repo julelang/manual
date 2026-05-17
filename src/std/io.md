@@ -7,7 +7,7 @@
 [fn CopyN\(mut dst: Writer, mut src: Reader, n: i64\)\!: \(written: i64\)](#copyn)\
 [fn Copy\(mut dst: Writer, mut src: Reader\)\!: \(written: i64\)](#copy)\
 [fn CopyBuffer\(mut dst: Writer, mut src: Reader, mut buf: \[\]byte\)\!: \(written: i64\)](#copybuffer)\
-[fn WriteStr\(mut w: Writer, s: str\)\!: \(n: int\)](#writestr)\
+[fn WriteString\(mut w: Writer, s: string\)\!: \(n: int\)](#writestring)\
 [fn WriteByte\(mut w: Writer, b: byte\)\!: \(n: int\)](#writebyte)\
 [fn ReadAll\(mut r: Reader\)\!: \[\]byte](#readall)\
 [fn ReadAtLeast\(mut r: Reader, mut buf: \[\]byte, min: int\)\!: \(n: int\)](#readatleast)\
@@ -15,7 +15,7 @@
 [fn MultiReader\(mut readers: \.\.\.Reader\): Reader](#multireader)\
 [trait Reader](#reader)\
 [trait Writer](#writer)\
-[trait StrWriter](#strwriter)\
+[trait StringWriter](#stringwriter)\
 [trait ByteReader](#bytereader)\
 [trait ByteScanner](#bytescanner)\
 [trait ByteWriter](#bytewriter)\
@@ -115,9 +115,9 @@ async fn CopyBuffer(mut dst: Writer, mut src: Reader, mut buf: []byte)!: (writte
 ```
 Identical to Copy except that it stages through the provided buffer \(if one is required\) rather than allocating a temporary one\. If buf is nil, one is allocated; otherwise if it has zero length, it panics\.
 
-## WriteStr
+## WriteString
 ```jule
-async fn WriteStr(mut w: Writer, s: str)!: (n: int)
+async fn WriteString(mut w: Writer, s: string)!: (n: int)
 ```
 Writes the contents of the string s to w efficiently\. Guarantees a slice will not be allocated\.
 
@@ -179,15 +179,15 @@ Write writes len\(buf\) bytes from buf to the underlying data stream\. It return
 
 Implementations must not retain buf\. Errors are not standardized\. Should be documented by implementations\.
 
-## StrWriter
+## StringWriter
 ```jule
-trait StrWriter {
-	async fn WriteStr(mut *self, s: str)!: (n: int)
+trait StringWriter {
+	async fn WriteString(mut *self, s: string)!: (n: int)
 }
 ```
-Implements the basic WriteStr method\.
+Implements the basic WriteString method\.
 
-The WriteStr method similar to Writer\.Write method but takes string\. Behavior should be same as the Writer\.Write method\.
+The WriteString method similar to Writer\.Write method but takes string\. Behavior should be same as the Writer\.Write method\.
 
 Implementations must not retain s\. Errors are not standardized\. Should be documented by implementations\.
 
