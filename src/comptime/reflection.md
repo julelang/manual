@@ -121,7 +121,7 @@ struct FooBarBaz {
 fn main() {
     const fields = comptime::TypeOf(FooBarBaz).Fields()
     const for _, field in fields {
-        println(field.Type().Str())
+        println(field.Type().String())
     }
 }
 ```
@@ -139,7 +139,7 @@ extern type Int: int
 fn IsNumeric[T](): bool {
     const t = comptime::TypeOf(T)
     const k = t.Kind()
-    ret k == comptime::Int ||
+    return k == comptime::Int ||
         k == comptime::Uint ||
         k == comptime::Uintptr ||
         k == comptime::I8 ||
@@ -158,9 +158,9 @@ fn IsValidType[T](): bool {
     const t = comptime::TypeOf(T)
     const match {
     | t.Extern():
-        ret false
+        return false
     |:
-        ret IsNumeric[T]()
+        return IsNumeric[T]()
     }
 }
 

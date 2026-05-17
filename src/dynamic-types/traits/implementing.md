@@ -23,7 +23,7 @@ struct Rectangle {
 
 impl Shape for Rectangle {
     fn area(*self): f32 {
-        ret f32(self.width * self.height)
+        return f32(self.width * self.height)
     }
 }
 
@@ -33,7 +33,7 @@ struct Circle {
 
 impl Shape for Circle {
     fn area(*self): f32 {
-        ret PI * self.r * self.r
+        return PI * self.r * self.r
     }
 }
 

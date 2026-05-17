@@ -22,27 +22,27 @@ Assigned by entry point.
 ## Functions
 
 ```jule
-fn ptrToStr(p: *unsafe): string
+fn ptrToString(p: *unsafe): string
 ```
 Returns pointer in string form.
 
 ```jule
-fn boolToStr(b: bool): string
+fn boolToString(b: bool): string
 ```
 Returns boolean in string form.
 
 ```jule
-fn i64ToStr(x: i64): string
+fn i64ToString(x: i64): string
 ```
 Returns x in decimal string format.
 
 ```jule
-fn u64ToStr(mut x: u64): string
+fn u64ToString(mut x: u64): string
 ```
 Returns x in decimal string format.
 
 ```jule
-fn f64ToStr(mut f: f64): string
+fn f64ToString(mut f: f64): string
 ```
 Returns x in decimal string format.
 
@@ -123,42 +123,42 @@ unsafe fn panic1(m: *byte, n: int)
 The built-in panic call.
 
 ```jule
-fn panicStr(m: string)
+fn panicString(m: string)
 ```
 Calls the panic1 function by m.
 
 ```jule
-fn compareStr(&a: string, &b: string): int
+fn compareString(&a: string, &b: string): int
 ```
 See `strings::{Compare}` function for documentation.
 
 ```jule
-fn bytesToStr(bytes: []byte): string
+fn bytesToString(bytes: []byte): string
 ```
 Converts `[]byte` to `string`.
 
 ```jule
-fn runesToStr(runes: []rune): string
+fn runesToString(runes: []rune): string
 ```
 Converts `[]rune` to `string`.
 
 ```jule
-fn strToRunes(s: string): []rune
+fn stringToRunes(s: string): []rune
 ```
 Converts `string` to `[]rune`.
 
 ```jule
-fn strToBytes(s: string): []byte
+fn stringToBytes(s: string): []byte
 ```
 Converts `string` to `[]byte`.
 
 ```jule
-fn strFromByte(b: byte): string
+fn stringFromByte(b: byte): string
 ```
 Converts `byte` to `string`.
 
 ```jule
-fn strFromRune(r: rune): string
+fn stringFromRune(r: rune): string
 ```
 Converts `rune` to `string`.
 
@@ -190,13 +190,13 @@ unsafe fn sliceBytePtr(mut b: *byte, len: int, cap: int): []byte
 Returns slice based on b, the parameter b means first element of slice. Will not perform garbage collection.
 
 ```jule
-fn strAsSlice(s: string): []byte
+fn stringAsSlice(s: string): []byte
 ```
 Equals to sliceBytePtr(&s[0], len(s), len(s)) call.
 Returns nil slice for empty string.
 
 ```jule
-fn sliceAsStr(b: []byte): string
+fn sliceAsString(b: []byte): string
 ```
 Returns byte slice as string.
 Equals to strBytePtr(&b[0], len(b)) call.

@@ -43,7 +43,7 @@ let procExitProcess = kernel32.MustFindProc("ExitProcess")
 let procGetModuleFileName = kernel32.MustFindProc("GetModuleFileNameA")
 
 fn GetModuleFileName(mut path: []byte): u32 {
-	ret sys::Addrcall[u32](procGetModuleFileName.Addr(),
+	return sys::Addrcall[u32](procGetModuleFileName.Addr(),
 		uintptr(0), &path[0], u32(len(path)))
 }
 

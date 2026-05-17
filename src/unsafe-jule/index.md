@@ -52,7 +52,7 @@ For example:
 unsafe fn foo(mut x: *int): int {
     println(*x)
     *x++
-    ret *x
+    return *x
 }
 
 fn main() {

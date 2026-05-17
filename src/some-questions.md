@@ -225,17 +225,17 @@ fn Exist(s: string, c: any): bool {
 		match type c {
 		| byte:
 			if r < utf8::RuneSelf && byte(r) == byte(c) {
-				ret true
+				return true
 			}
 		| rune:
 			if r == rune(c) {
-				ret true
+				return true
 			}
 		|:
 			panic("Exist: invalid character type")
 		}
 	}
-	ret false
+	return false
 }
 ```
 

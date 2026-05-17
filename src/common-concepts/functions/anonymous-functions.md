@@ -9,11 +9,11 @@ For example:
 fn main() {
     x, y := 10, 20
     mut f := fn(a: int, b: int): int {
-        ret a + b
+        return a + b
     }
     println(f(x, y)) // 30
     f = fn(a: int, b: int): int {
-        ret a * b
+        return a * b
     }
     println(f(x, y)) // 200
 }
@@ -32,9 +32,9 @@ For example:
 ```jule
 fn fib(): fn(): int {
     mut a, mut b := 0, 1
-    ret fn(): int {
+    return fn(): int {
         a, b = b, a+b
-        ret a
+        return a
     }
 }
 
@@ -124,7 +124,7 @@ fn main() {
 	let mut f1: fn(x: int, y: int)
 	let mut f2: fn(x: int, y: int): int
 	f1 = fn|x, y| { println(x * y) }
-	f2 = fn|x, y| { ret x * y }
+	f2 = fn|x, y| { return x * y }
 }
 ```
 In the example above, short literals have a scope and are not limited to a single statement. However, unlike one-liner literals, they must use standard return statements to return a value.

@@ -6,9 +6,9 @@ In order for the reserved method to be implemented by the compiler, the pattern 
 
 Patterns should only be followed so that the compiler implements the relevant functionalities. They are not things that must be followed compulsorily. Therefore, they do not cause any compiler errors.
 
-## `fn Str(*self): string`
+## `fn String(*self): string`
 
-The `Str` reserved method implements a special string conversion algorithm, replacing the structure's default string formatting applied by the compiler.
+The `String` reserved method implements a special string conversion algorithm, replacing the structure's default string formatting applied by the compiler.
 
 ### The Pattern
 
@@ -30,8 +30,8 @@ struct SNum {
 }
 
 impl SNum {
-    fn Str(*self): string {
-        ret conv::Itoa(self.x)
+    fn String(*self): string {
+        return conv::Itoa(self.x)
     }
 }
 

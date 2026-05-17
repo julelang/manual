@@ -97,7 +97,7 @@ In the example code above, `println` call will print value of the error.
 
 #### Handling with Returns Values
 
-Regarding the handling of return values of fallible function calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and do not require the `ret` keyword; just write the `use` keyword instead of the `ret` keyword.
+Regarding the handling of return values of fallible function calls, it is necessary to provide a default value in case of error or a value to recover the situation. The point to remember is that the return values ​​are always in the last statement and do not require the `return` keyword; just write the `use` keyword instead of the `return` keyword.
 
 For example:
 ```jule
@@ -115,7 +115,7 @@ fn main() {
 ```
 
 ::: tip
-If you want to return a value and prevent the algorithm from continuing, an alternative option is to terminate the scope using keywords like `ret`, `continue`, or `break` instead of `use`.
+If you want to return a value and prevent the algorithm from continuing, an alternative option is to terminate the scope using keywords like `return`, `continue`, or `break` instead of `use`.
 :::
 
 ### Forwarding
@@ -129,7 +129,7 @@ fn fallible0()!: int {
 }
 
 fn fallible1()!: int {
-	ret fallible0() else { throw error }
+	return fallible0() else { throw error }
 }
 
 fn main() {
@@ -152,7 +152,7 @@ fn fallible0()!: int {
 }
 
 fn fallible1()!: int {
-	ret fallible0()?
+	return fallible0()?
 }
 ```
 In the example above, the function `fallible1` return the result and forwards error of the `fallible0` function.
@@ -186,10 +186,10 @@ Fallible functions are disallowed for the global scope. To use them in global sc
 For example:
 ```jule
 fn foo()!: int {
-	ret 10
+	return 10
 }
 
-fn fooMust(): int { ret foo()! }
+fn fooMust(): int { return foo()! }
 
 let a = fooMust()
 

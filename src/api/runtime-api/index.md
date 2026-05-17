@@ -27,27 +27,27 @@ __jule_Bool __jule_ptrEqual(void *a, void *b);
 Declaration of: `ptrEqual`
 
 ```cpp
-__jule_Str __jule_ptrToStr(void *p);
+__jule_String __jule_ptrToString(void *p);
 ```
 Declaration of: `ptrToStr`
 
 ```cpp
-__jule_Str __jule_boolToStr(__jule_Bool b);
+__jule_String __jule_boolToString(__jule_Bool b);
 ```
 Declaration of: `boolToStr`
 
 ```cpp
-__jule_Str __jule_i64ToStr(__jule_I64 x);
+__jule_String __jule_i64ToString(__jule_I64 x);
 ```
 Declaration of: `i64ToStr`
 
 ```cpp
-__jule_Str __jule_u64ToStr(__jule_U64 x);
+__jule_String __jule_u64ToString(__jule_U64 x);
 ```
 Declaration of: `u64ToStr`
 
 ```cpp
-__jule_Str __jule_f64ToStr(__jule_F64 x);
+__jule_String __jule_f64ToString(__jule_F64 x);
 ```
 Declaration of: `f64ToStr`
 
@@ -92,7 +92,7 @@ void __jule_RCFree(__jule_Uint *p);
 Declaration of: `_RCFree`
 
 ```cpp
-__jule_Int __jule_compareStr(__jule_Str *a, __jule_Str *b);
+__jule_Int __jule_compareString(__jule_String *a, __jule_String *b);
 ```
 Declaration of: `compareStr`
 
@@ -117,37 +117,37 @@ void __jule_panic(__jule_U8 *m, __jule_Int n);
 Declaration of: `panic1`
 
 ```cpp
-void __jule_panicStr(__jule_Str m);
+void __jule_panicString(__jule_String m);
 ```
 Declaration of: `panicStr`
 
 ```cpp
-__jule_Str __jule_bytesToStr(__jule_Slice<__jule_U8> bytes);
+__jule_String __jule_bytesToString(__jule_Slice<__jule_U8> bytes);
 ```
 Declaration of: `bytesToStr`
 
 ```cpp
-__jule_Str __jule_runesToStr(__jule_Slice<__jule_I32> runes);
+__jule_String __jule_runesToString(__jule_Slice<__jule_I32> runes);
 ```
 Declaration of: `runesToStr`
 
 ```cpp
-__jule_Slice<__jule_I32> __jule_strToRunes(__jule_Str s);
+__jule_Slice<__jule_I32> __jule_stringToRunes(__jule_String s);
 ```
 Declaration of: `strToRunes`
 
 ```cpp
-__jule_Slice<__jule_U8> __jule_strToBytes(__jule_Str s);
+__jule_Slice<__jule_U8> __jule_stringToBytes(__jule_String s);
 ```
 Declaration of: `strToBytes`
 
 ```cpp
-__jule_Str __jule_strFromByte(__jule_U8 b);
+__jule_String __jule_stringFromByte(__jule_U8 b);
 ```
 Declaration of: `strFromByte`
 
 ```cpp
-__jule_Str __jule_strFromRune(__jule_I32 r);
+__jule_String __jule_stringFromRune(__jule_I32 r);
 ```
 Declaration of: `strFromRune`
 
@@ -172,7 +172,7 @@ void __jule_pseudoMalloc(__jule_Int n, __jule_Uint size);
 Declaration of: `pseudoMalloc`
 
 ```cpp
-__jule_Str __jule_strBytePtr(__jule_U8 *b, __jule_Int n);
+__jule_String __jule_stringBytePtr(__jule_U8 *b, __jule_Int n);
 ```
 Declaration of: `strBytePtr`
 
@@ -182,22 +182,22 @@ __jule_Slice<__jule_U8> __jule_sliceBytePtr(__jule_U8 *b, __jule_Int len, __jule
 Declaration of: `sliceBytePtr`
 
 ```cpp
-__jule_Slice<__jule_U8> __jule_strAsSlice(__jule_Str s);
+__jule_Slice<__jule_U8> __jule_stringAsSlice(__jule_String s);
 ```
 Declaration of: `strAsSlice`
 
 ```cpp
-__jule_Str __jule_sliceAsStr(__jule_Slice<__jule_U8> b);
+__jule_String __jule_sliceAsString(__jule_Slice<__jule_U8> b);
 ```
 Declaration of: `sliceAsStr`
 
 ```cpp
-void __jule_print(__jule_Str s);
+void __jule_print(__jule_String s);
 ```
 Declaration of: `zprint`
 
 ```cpp
-void __jule_println(__jule_Str s);
+void __jule_println(__jule_String s);
 ```
 Declaration of: `zprintln`
 

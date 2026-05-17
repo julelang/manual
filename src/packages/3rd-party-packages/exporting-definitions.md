@@ -20,13 +20,13 @@ Exportion supported definitions:
 
 For example to public definitions: 
 ```jule
-fn add(x: int, y: int): int { ret x + y }
+fn add(x: int, y: int): int { return x + y }
 ```
 The `add` function is private.
 
 For example: 
 ```jule
-fn Add(x: int, y: int): int { ret x + y }
+fn Add(x: int, y: int): int { return x + y }
 ```
 The `add` function is public now.
 
@@ -40,7 +40,7 @@ struct myStruct {
 }
 
 fn NewMyStruct(number: int): myStruct {
-    ret myStruct{
+    return myStruct{
         Number: number,
     }
 }

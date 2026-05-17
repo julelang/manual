@@ -94,7 +94,7 @@ For example to implementing method to structure:
 ```jule
 impl Position {
     fn isOrigin(*self): bool {
-        ret self.x == 0 && self.y == 0
+        return self.x == 0 && self.y == 0
     }
 }
 ```
@@ -107,7 +107,7 @@ For example:
 ```jule
 impl Person {
     fn getName(*self): string {
-        ret self.name
+        return self.name
     }
 }
 ```

@@ -86,7 +86,7 @@ struct Person {
 
 impl Person {
 	fn new(name: string, surname: string): Person {
-		ret Person{
+		return Person{
 			buffer: extern.Person{
 				name: unsafe { (*c::Char)(&name[0]) },
 				surname: unsafe { (*c::Char)(&surname[0]) },
@@ -95,15 +95,15 @@ impl Person {
 	}
 
 	fn name(*self): string {
-		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.name)) }
+		return unsafe { integ::BytePtrToStr((*byte)(self.buffer.name)) }
 	}
 
 	fn surname(*self): string {
-		ret unsafe { integ::BytePtrToStr((*byte)(self.buffer.surname)) }
+		return unsafe { integ::BytePtrToStr((*byte)(self.buffer.surname)) }
 	}
 
 	fn getFullName(*self): string {
-		ret self.name() + " " + self.surname()
+		return self.name() + " " + self.surname()
 	}
 }
 
@@ -131,7 +131,7 @@ struct Person {
 
 impl Person {
 	fn new(name: string, surname: string): Person {
-		ret Person{
+		return Person{
 			buffer: extern.Person{
 				name: name,
 				surname: surname,
@@ -139,11 +139,11 @@ impl Person {
 		}
 	}
 
-	fn name(*self): string { ret self.buffer.name }
-	fn surname(*self): string { ret self.buffer.surname }
+	fn name(*self): string { return self.buffer.name }
+	fn surname(*self): string { return self.buffer.surname }
 
 	fn getFullName(*self): string {
-		ret self.name() + " " + self.surname()
+		return self.name() + " " + self.surname()
 	}
 }
 

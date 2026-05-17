@@ -47,7 +47,7 @@ fn sum(values: ...int) int {
     for _, i in values {
         total += i
     }
-    ret total
+    return total
 }
 
 fn main() {

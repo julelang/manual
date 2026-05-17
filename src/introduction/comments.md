@@ -20,5 +20,5 @@ Where range comments are exist, they are ignored even if a line comment is writt
 
 For example:
 ```jule
-fn Life(): int { ret 42 /* Magic number of life. */ }
+fn Life(): int { return 42 /* Magic number of life. */ }
 ```

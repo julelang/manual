@@ -30,7 +30,7 @@ use "std/math"
 use "std/testing"
 
 fn getPi(): f64 {
-    ret 3.14
+    return 3.14
 }
 
 #test
@@ -47,7 +47,7 @@ fn main() {
 
 The test in the code above will produce an error; it does this with a special error message. When there are more different situations, these logs may contain useful information for you.
 
-Successful completion of a test means that it has not failed or skipped. Any function of the `T` structure will not stop the execution of your test. Therefore, you can use the `ret` statement to stop execution when you skip the test or in case of any failure.
+Successful completion of a test means that it has not failed or skipped. Any function of the `T` structure will not stop the execution of your test. Therefore, you can use the `return` statement to stop execution when you skip the test or in case of any failure.
 
 If you call the `Skip` method, you have skipped the test. If you perform any action indicating an error, such as calling the `Errorf` or `Fail` methods, set the status of the test to fail by calling the.
 

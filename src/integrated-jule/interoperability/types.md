@@ -59,7 +59,7 @@ The code above prevents you from passing the `*byte` type directly to `*extern.c
 
 ## Type Compatibility
 
-There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types, and therefore, these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `__jule_Str` i.e. `string` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
+There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types, and therefore, these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `__jule_String` i.e. `string` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
 
 For example:
 

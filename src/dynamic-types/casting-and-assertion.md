@@ -48,7 +48,7 @@ struct Bar{}
 
 impl Baz for Bar {
 	fn foo(*self): string {
-		ret "bar"
+		return "bar"
 	}
 }
 
@@ -56,7 +56,7 @@ type Baz: Foo
 
 impl Baz for Baz {
 	fn foo(*self): string {
-		ret "baz"
+		return "baz"
 	}
 }
 

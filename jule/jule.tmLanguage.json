@@ -106,7 +106,7 @@
 				},
 				{
 					"name": "keyword.control.jule",
-					"match": "\\b(ret|goto|for|in|break|continue|if|throw|else|match|defer|select|fall|use)\\b"
+					"match": "\\b(return|goto|for|in|break|continue|if|throw|else|match|defer|select|fall|use)\\b"
 				}
 			]
 		},

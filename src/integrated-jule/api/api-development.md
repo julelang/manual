@@ -14,7 +14,7 @@ extern fn printMagic()
 
 #export "magic_calculation"
 fn magicCalculation(x: int, y: int): int {
-	ret ((x * y) ^ 1) / 3
+	return ((x * y) ^ 1) / 3
 }
 
 fn main() {

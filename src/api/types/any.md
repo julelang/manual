@@ -18,14 +18,14 @@ __jule_Bool type_int_eq(void *alloc, void *other) {
     return *(__jule_Int*)alloc == *(__jule_Int*)other;
 }
 
-__jule_Str type_int_to_str(void *alloc) {
+__jule_String type_int_to_string(void *alloc) {
     return std::to_string(*(__jule_Int*)alloc);
 }
 
 __jule_TypeMeta type_int{
     .dealloc=type_int_dealloc,
     .eq=type_int_eq,
-    .to_str=type_int_to_str,
+    .to_str=type_int_to_string,
 };
 
 void type_intptr_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
@@ -35,7 +35,7 @@ void type_intptr_dealloc(__jule_Ptr<__jule_Uintptr> &p) {
 __jule_TypeMeta type_f64ptr{
     .dealloc=type_intptr_dealloc,
     .eq=__jule_ptrEqual,
-    .to_str=__jule_ptrToStr,
+    .to_str=__jule_ptrToString,
 };
 
 int main() {

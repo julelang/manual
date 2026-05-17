@@ -3,21 +3,21 @@
 ## Index
 
 [Variables](#variables)\
-[fn TypeAlias(name: str, t: T)](#typealias)\
+[fn TypeAlias(name: string, t: T)](#typealias)\
 [fn Line(): int](#line)\
 [fn File(): comptimeFile](#file)\
 [fn Files(): comptimeFiles](#files)\
 [fn TypeOf(t: Type): comptimeTypeInfo](#typeof)\
 [fn ValueOf(v: V): comptimeValue](#valueof)\
-[fn IncludeBytes(path: str): []str](#includebytes)\
+[fn IncludeBytes(path: string): []string](#includebytes)\
 [struct comptimeFiles](#comptimeFiles)\
 [struct comptimeFile](#comptimeFile)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Path(\*self): str](#path)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): str](#name)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir(\*self): str](#dir)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Path(\*self): string](#path)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): string](#name)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Dir(\*self): string](#dir)\
 [struct comptimeDecls](#comptimeDecls)\
 [struct comptimeDecl](#comptimeDecl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): str](#name-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Name(\*self): string](#name-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Public(\*self): bool](#public)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Extern(\*self): bool](#extern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Fallible(\*self): bool](#fallible)\
@@ -31,7 +31,7 @@
 [struct comptimeTypeInfo](#comptimeTypeInfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Strict(\*self): bool](#strict)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Kind(\*self): int](#kind)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str(\*self): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String(\*self): string](#string)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Decl(\*self): comptimeDecl](#decl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Bits(\*self): int](#bits)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size(\*self): int](#size)\
@@ -64,9 +64,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Lvalue(\*self): bool](#lvalue)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mutable(\*self): bool](#mutable-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Const(\*self): bool](#const)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Field(\*self, name: str): comptimeValue](#field)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Field(\*self, name: string): comptimeValue](#field)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FieldByIndex(\*self, index: int): comptimeValue](#fieldbyindex)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Method(\*self, name: str): comptimeValue](#method)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Method(\*self, name: string): comptimeValue](#method)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unwrap(\*self)](#unwrap)\
 [enum Kind](#Kind)
 
@@ -88,7 +88,7 @@ const (
 	U64         // u64
 	F32         // f32
 	F64         // f64
-	Str         // str
+	String      // string
 	Bool        // bool
 	Any         // any
 	Array       // Array
@@ -112,7 +112,7 @@ Type kinds.
 
 ## TypeAlias
 ```jule
-fn TypeAlias(name: str, t: T)
+fn TypeAlias(name: string, t: T)
 ```
 Emplaces a type alias declaration to statement which is this function called. Defines a type alias with identifier which is alias for t. The parameter t can take type declarations or comptimeTypeInfo only.
 
@@ -166,13 +166,13 @@ Returns compile-time value information. Cannot assign to memory, just available 
 
 ## IncludeBytes
 ```jule
-fn IncludeBytes(path: str): []byte
+fn IncludeBytes(path: string): []byte
 ```
 Returns the contents of the file at path as a byte slice. The file path is resolved relative to the file path of the package in which the function is called. In other words, the file is searched for in the directory of the package that contains the source file calling the function.
 
 ## IncludeStr
 ```jule
-fn IncludeStr(path: str): []byte
+fn IncludeStr(path: string): []byte
 ```
 Returns the contents of the file at path as constant string. The file path is resolved relative to the file path of the package in which the function is called. In other words, the file is searched for in the directory of the package that contains the source file calling the function.
 
@@ -190,19 +190,19 @@ Private compile-time file information wrapper. Provides interface for source fil
 
 ### Path
 ```jule
-fn Path(*self): str
+fn Path(*self): string
 ```
 Returns path of file as constant expression.
 
 ### Name
 ```jule
-fn Name(*self): str
+fn Name(*self): string
 ```
 Returns name of file as constant expression.
 
 ### Dir
 ```jule
-fn Dir(*self): str
+fn Dir(*self): string
 ```
 Returns directory of file as constant expression.
 
@@ -229,7 +229,7 @@ List of supported types:
 
 ### Name
 ```jule
-fn Name(*self): str
+fn Name(*self): string
 ```
 Returns name of declaration. Returns as constant expression.
 
@@ -295,13 +295,13 @@ Returns count of tags as constant expression. Supports only structure fields.
 
 ### Tag
 ```jule
-fn Tag(*self, key: str): str
+fn Tag(*self, key: string): string
 ```
 Returns the value of the tag corresponding to the key as a constant expression. Supports only structure fields. Parameter key should be constant. Returns empty string if key is not exist in the tags.
 
 ### IsTag
 ```jule
-fn IsTag(*self, key: str): bool
+fn IsTag(*self, key: string): bool
 ```
 Reports whether the key is exist in tags as a constant expression. Supports only structure fields. Parameter key should be constant.
 
@@ -347,9 +347,9 @@ fn Kind(*self): Kind
 ```
 Returns Kind of type. Returns as constant expression.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns string value of type (not actual type). Returns as constant expression.
 
@@ -546,7 +546,7 @@ Reports whether value is constant as constant expression.
 
 ### Field
 ```jule
-fn Field(*self, name: str): comptimeValue
+fn Field(*self, name: string): comptimeValue
 ```
 Returns comptimeValue for field access expression. Supports only structure types. Parameter name should be constant. It allows access to private fields.
 
@@ -558,7 +558,7 @@ Same as the Field method, but takes constant index instead of name.
 
 ### Method
 ```jule
-fn Method(*self, name: str): comptimeValue
+fn Method(*self, name: string): comptimeValue
 ```
 Returns comptimeValue for method access expression. Supports only structure types. Parameter name should be constant. It allows access to private methods. It will not use the actual kind, so this method an provide access to methods of the any strict type alias.
 

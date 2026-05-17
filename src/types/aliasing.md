@@ -47,8 +47,8 @@ For example:
 type Int: int
 
 impl Int {
-	fn IsEven(self): bool { ret self%2 == 0 }
-	fn IsOdd(self): bool { ret self%2 == 1 }
+	fn IsEven(self): bool { return self%2 == 0 }
+	fn IsOdd(self): bool { return self%2 == 1 }
 }
 
 fn main() {

@@ -71,7 +71,7 @@ let foo = bar()
 let mut baz = 0
 
 fn bar(): int {
-	ret baz
+	return baz
 }
 
 fn init() {

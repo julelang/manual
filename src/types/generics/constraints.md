@@ -29,7 +29,7 @@ fn sum[S: []T, T: int | uint](s: S): T {
     for _, x in s {
         n += x
     }
-    ret n
+    return n
 }
 ```
 

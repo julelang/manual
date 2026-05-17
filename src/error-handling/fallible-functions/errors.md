@@ -59,7 +59,7 @@ fn magicDiv(a: f64, b: f64)!: f64 {
 	if b > 100 {
 		throw ErrOverflow
 	}
-	ret a / b
+	return a / b
 }
 
 fn main() {
@@ -92,8 +92,8 @@ struct ParseError {
 }
 
 impl ParseError {
-	fn Str(*self): string {
-		ret fmt::Format("{} {}: {}",
+	fn String(*self): string {
+		return fmt::Format("{} {}: {}",
 			self.Err, self.Input, string(self.Input[self.Column]))
 	}
 }
@@ -108,7 +108,7 @@ fn parseNumeric(s: string)!: int {
 			}
 		}
 	}
-	ret conv::Atoi(s) else { throw error }
+	return conv::Atoi(s) else { throw error }
 }
 
 fn main() {

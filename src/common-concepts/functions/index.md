@@ -75,18 +75,18 @@ fn main() {
     println(div(10, 2))
 }
 
-fn div(a: f64, b: f64): f64 { ret a / b }
+fn div(a: f64, b: f64): f64 { return a / b }
 ```
 The `div` function divides the two parameters and returns the result as a value. To return a value, the function must have the data type for the return. Otherwise, it is considered a function that does not return data. The returned data must also be compatible with the return data type.
 
-Return values are written with the `ret` keyword. Although the keyword `return` is widely used, `ret` was considered as an alternative to this keyword, which is both shorter and without losing its meaning.
+Return values are written with the `return` keyword.
 
 ## Multiple Returnable Functions
 Functions can returns more then one values. For that, specify return data type with multiple type.
 
 For example:
 ```jule
-myFunc(): (int, int) { ret 18, 96 }
+myFunc(): (int, int) { return 18, 96 }
 ```
 Parentheses are used to specify multiple data types, seen as example at above. This option, only valid for function returns.
 
@@ -96,7 +96,7 @@ What happens when specified single data type with parentheses? Nothing, you not 
 
 For example:
 ```jule
-fn lessThan(x: int, y: int): (bool) { ret x < y }
+fn lessThan(x: int, y: int): (bool) { return x < y }
 ```
 The example at above, accepted as one type return. 
 
@@ -107,14 +107,14 @@ If another function is doing multiple returns and wants to pass the return of a 
 For example:
 ```jule
 fn foo(): (int, f64, string) {
-    ret 10, 3.14, "foo"
+    return 10, 3.14, "foo"
 }
 
 fn bar(): (int, f64, string) {
-    ret foo()
+    return foo()
 }
 ```
-In the example above, the functions `foo` and `bar` return the same types. Therefore, the `bar` function can forward the values ​​returned by the `foo` function with a simple `ret foo()` statement.
+In the example above, the functions `foo` and `bar` return the same types. Therefore, the `bar` function can forward the values ​​returned by the `foo` function with a simple `return foo()` statement.
 
 ### Return Type Identifiers
 To give an identifier to the return types, it's enough to make them look like multiple returns. The only addition is to give that return value an identifier before the return type.
@@ -126,7 +126,7 @@ For example:
 fn example(): (x: int, y: int) {
     x = 10
     y = 20
-    ret x, y
+    return x, y
 }
 ```
 As in the example above. These identifiers also cause a variable to be created. For each identifier, the function has a variable initialized in its scope.
@@ -140,7 +140,7 @@ For example:
 fn example(): (x: int, y: int) {
     x = 10
     y = 20
-    ret
+    return
 }
 ```
 Respectively the related variables will be treated as the return statement.
@@ -151,7 +151,7 @@ If you provide a return expression while there are return identifiers, the expre
 
 For example:
 ```jule
-fn example(): (x: int, y: int) { ret 90, 100 }
+fn example(): (x: int, y: int) { return 90, 100 }
 ```
 
 ### Multiple Assignment with Multiple Returned Functions
@@ -159,7 +159,7 @@ It's too similar to normal assignment. Give much identifier same count with func
 
 For example:
 ```jule
-fn compareInt(x: int, y: int): (bool, bool) { ret x < y, x == y }
+fn compareInt(x: int, y: int): (bool, bool) { return x < y, x == y }
 
 fn main() {
     let (less, equal) = compareInt(10, 20)
@@ -179,13 +179,13 @@ For example:
 fn getRate(x: int): int {
     match {
     | x <= 30:
-        ret 0
+        return 0
     | x <= 50
-        ret 1
+        return 1
     | x <= 100:
-        ret 3
+        return 3
     |:
-        ret 8
+        return 8
     }
 }
 ```

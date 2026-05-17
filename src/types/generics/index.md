@@ -26,7 +26,7 @@ Generic functions never can used as type annotation.
 ```jule
 fn sum[T](a: T, b: T) T {
     let x: T = a + b
-    ret x
+    return x
 }
 
 fn main() {

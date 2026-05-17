@@ -90,7 +90,7 @@ impl Foo {
     }
 
     fn Printed(*self): int {
-        ret self.n
+        return self.n
     }
 }
 
@@ -118,7 +118,7 @@ impl Fib {
     fn Next(*self): Fib {
         let f = *self
         f.x, f.y = f.y, f.x + f.y
-        ret f
+        return f
     }
 }
 
@@ -150,13 +150,13 @@ struct Foo {
 
 impl Foo {
     fn New(): Foo {
-        ret Foo{
+        return Foo{
             buf: make([]byte, 32)
         }
     }
 
     unsafe fn Buf(*self): []byte {
-        ret self.buf
+        return self.buf
     }
 }
 

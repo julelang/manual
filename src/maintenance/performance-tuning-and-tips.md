@@ -58,7 +58,7 @@ impl String {
 				n++
 			}
 		}
-		ret
+		return
 	}
 }
 
@@ -77,7 +77,7 @@ For example:
 ```jule
 fn foo(x: []byte): bool {
 	_ = x[2] // boundary check
-	ret x[0] == 10 &&
+	return x[0] == 10 &&
 		x[1] == 20 &&
 		x[2] == 30
 }
