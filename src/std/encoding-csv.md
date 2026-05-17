@@ -4,18 +4,18 @@
 
 [Variables](#variables)\
 [struct ParseError](#parseerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [struct Reader](#reader)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Reader](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(\*self\): i64](#inputoffset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self\)\!: \(record: \[\]str\)](#read)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self\)\!: \(record: \[\]string\)](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FieldPos\(\*self, field: int\): \(line: int, column: int\)](#fieldpos)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut \*self\)\!: \(records: \[\]\[\]str\)](#readall)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadAll\(mut \*self\)\!: \(records: \[\]\[\]string\)](#readall)\
 [struct Writer](#writer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Writer](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, record: \[\]str\)\!](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, record: \[\]string\)\!](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Flush\(mut \*self\)\!](#flush)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut \*self, records: \[\]\[\]str\)\!](#writeall)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteAll\(mut \*self, records: \[\]\[\]string\)\!](#writeall)
 
 ## Variables
 
@@ -37,9 +37,9 @@ struct ParseError {
 ```
 A ParseError is returned for parsing errors\. Line and column numbers are 1\-indexed\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -105,7 +105,7 @@ Returns the input stream byte offset of the current reader position\. The offset
 
 ### Read
 ```jule
-async fn Read(mut *self)!: (record: []str)
+async fn Read(mut *self)!: (record: []string)
 ```
 Reads one record \(a slice of fields\) from r\. If the record has an unexpected number of fields, it throws the \[ErrFieldCount\] as error\. If there is no data left to be read, read returns nil\. If \[self\.ReuseRecord\] is true, the returned slice may be shared between multiple calls to read\.
 
@@ -119,7 +119,7 @@ If this is called with an out\-of\-bounds index, it panics\.
 
 ### ReadAll
 ```jule
-async fn ReadAll(mut *self)!: (records: [][]str)
+async fn ReadAll(mut *self)!: (records: [][]string)
 ```
 Reads all the remaining records from r\. Each record is a slice of fields\.
 
@@ -150,7 +150,7 @@ Returns new Writer instance that writes w\.
 
 ### Write
 ```jule
-async fn Write(mut *self, record: []str)!
+async fn Write(mut *self, record: []string)!
 ```
 Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
 
@@ -162,6 +162,6 @@ Writes any buffered data to the underlying io::Writer\.
 
 ### WriteAll
 ```jule
-async fn WriteAll(mut *self, records: [][]str)!
+async fn WriteAll(mut *self, records: [][]string)!
 ```
 Writes multiple CSV records using \[Writer\.Write\]\.
