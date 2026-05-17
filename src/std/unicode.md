@@ -3,6 +3,7 @@
 ## Index
 
 [Variables](#variables)\
+[fn IsDigit\(r: rune\): bool](#isdigit)\
 [fn IsGraphic\(r: rune\): bool](#isgraphic)\
 [fn IsIn\(r: rune, ranges: \.\.\.&amp;RangeTable\): bool](#isin)\
 [fn IsLetter\(r: rune\): bool](#isletter)\
@@ -10,21 +11,32 @@
 [fn IsPunct\(r: rune\): bool](#ispunct)\
 [fn IsSpace\(r: rune\): bool](#isspace)\
 [fn IsPrint\(r: rune\): bool](#isprint)\
-[fn IsDigit\(r: rune\): bool](#isdigit)\
 [fn To\(case: int, mut r: rune\): rune](#to)\
 [fn ToUpper\(mut r: rune\): rune](#toupper)\
 [fn ToLower\(mut r: rune\): rune](#tolower)\
+[fn ToTitle\(mut r: rune\): rune](#totitle)\
 [fn Is\(rangeTab: &amp;RangeTable, r: rune\): bool](#is)\
 [fn In\(r: rune, ranges: \.\.\.&amp;RangeTable\): bool](#in)\
 [fn IsUpper\(r: rune\): bool](#isupper)\
 [fn IsLower\(r: rune\): bool](#islower)\
+[fn IsTitle\(r: rune\): bool](#istitle)\
 [fn SimpleFold\(r: rune\): rune](#simplefold)\
+[type SpecialCase](#specialcase)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ToUpper\(\*self, r: rune\): rune](#toupper-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ToTitle\(\*self, r: rune\): rune](#totitle-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ToLower\(\*self, r: rune\): rune](#tolower-1)\
 [struct CaseRange](#caserange)\
 [struct Range16](#range16)\
 [struct Range32](#range32)\
 [struct RangeTable](#rangetable)
 
 ## Variables
+
+```jule
+let AzeriCase: SpecialCase = _TurkishCase
+```
+
+---
 
 ```jule
 let GraphicRanges = [ ... ]
@@ -41,345 +53,376 @@ Defines the set of printable characters according to Jule\. ASCII space, U\+0020
 ---
 
 ```jule
-let Categories: map[str]&RangeTable = { ... }
+const (
+	MaxRune         = '\U0010FFFF' // Maximum valid Unicode code point.
+	ReplacementChar = '\uFFFD'     // Represents invalid code points.
+	MaxASCII        = '\u007F'     // Maximum ASCII value.
+	MaxLatin1       = '\u00FF'     // Maximum Latin-1 value.
+)
+```
+
+
+---
+
+```jule
+const (
+	UpperCase = iota
+	LowerCase
+	TitleCase
+	MaxCase
+)
+```
+Indices into the delta arrays inside CaseRanges for case mapping\.
+
+---
+
+```jule
+const (
+	UpperLower = MaxRune + 1 // (Cannot be a valid delta.)
+)
+```
+If the Delta field of a \[CaseRange\] is UpperLower, it means this CaseRange represents a sequence of the form \(say\) \[Upper\] \[Lower\] \[Upper\] \[Lower\]\.
+
+---
+
+```jule
+const Version = "17.0.0"
+```
+The Unicode edition from which the tables are derived\.
+
+---
+
+```jule
+let Categories: map[string]&RangeTable = { ... }
 ```
 The set of Unicode category tables\.
 
 ---
 
 ```jule
-let CC: &RangeTable = _CC    // The set of Unicode characters in category CC (Other, control).
-let CF: &RangeTable = _CF    // The set of Unicode characters in category CF (Other, format).
-let CO: &RangeTable = _CO    // The set of Unicode characters in category CO (Other, private use).
-let CS: &RangeTable = _CS    // The set of Unicode characters in category CS (Other, surrogate).
-let Digit: &RangeTable = _ND // The set of Unicode characters with the "decimal Digit" property.
-let ND: &RangeTable = _ND    // The set of Unicode characters in category ND (Number, decimal Digit).
-let Letter: &RangeTable = _L // The set of Unicode letters, category L.
-let L: &RangeTable = _L      // The set of Unicode letters, category L.
-let LM: &RangeTable = _LM    // The set of Unicode characters in category LM (Letter, modifier).
-let LO: &RangeTable = _LO    // The set of Unicode characters in category LO (Letter, other).
-let Lower: &RangeTable = _LL // The set of Unicode Lower case letters.
-let LL: &RangeTable = _LL    // The set of Unicode characters in category LL (Letter, lowercase).
-let Mark: &RangeTable = _M   // The set of Unicode Mark characters, category M.
-let M: &RangeTable = _M      // The set of Unicode Mark characters, category M.
-let MC: &RangeTable = _MC    // The set of Unicode characters in category MC (Mark, spacing combining).
-let ME: &RangeTable = _ME    // The set of Unicode characters in category ME (Mark, enclosing).
-let MN: &RangeTable = _MN    // The set of Unicode characters in category MN (Mark, nonspacing).
-let NL: &RangeTable = _NL    // The set of Unicode characters in category NL (Number, Letter).
-let NO: &RangeTable = _NO    // The set of Unicode characters in category NO (Number, other).
-let Number: &RangeTable = _N // The set of Unicode Number characters, category N.
-let N: &RangeTable = _N      // The set of Unicode Number characters, category N.
-let Other: &RangeTable = _C  // The set of Unicode control and special characters, category C.
-let C: &RangeTable = _C      // The set of Unicode control and special characters, category C.
-let PC: &RangeTable = _PC    // The set of Unicode characters in category PC (Punctuation, connector).
-let PD: &RangeTable = _PD    // The set of Unicode characters in category PD (Punctuation, Dash).
-let PE: &RangeTable = _PE    // The set of Unicode characters in category PE (Punctuation, close).
-let PF: &RangeTable = _PF    // The set of Unicode characters in category PF (Punctuation, final quote).
-let PI: &RangeTable = _PI    // The set of Unicode characters in category PI (Punctuation, initial quote).
-let PO: &RangeTable = _PO    // The set of Unicode characters in category PO (Punctuation, otger).
-let PS: &RangeTable = _PS    // The set of Unicode characters in category PS (Punctuation, open).
-let Punct: &RangeTable = _P  // The set of Unicode punctuation characters, category P.
-let P: &RangeTable = _P      // The set of Unicode punctuation characters, category P.
-let SC: &RangeTable = _SC    // The set of Unicode characters in category SC (Symbol, currency).
-let SK: &RangeTable = _SK    // The set of Unicode characters in category SK (Symbol, modifier).
-let SM: &RangeTable = _SM    // The set of Unicode characters in category SM (Symbol, math).
-let SO: &RangeTable = _SO    // The set of Unicode characters in category SO (Symbol, other).
-let Space: &RangeTable = _Z  // The set of Unicode SPACE characters, category Z.
-let Z: &RangeTable = _Z      // The set of Unicode SPACE characters, category Z.
-let Symbol: &RangeTable = _S // The set of Unicode symbol characters, category S.
-let S: &RangeTable = _S      // The set of Unicode symbol characters, category S.
-let Title: &RangeTable = _LT // The set of Unicode Title case letters.
-let LT: &RangeTable = _LT    // The set of Unicode characters in category LT (Letter, titlecase).
-let Upper: &RangeTable = _LU // The set of Unicode Upper case letters.
-let LU: &RangeTable = _LU    // The set of Unicode characters in category LU (Letter, uppercase).
-let ZL: &RangeTable = _ZL    // The set of Unicode characters in category ZL (Separator, line).
-let ZP: &RangeTable = _ZP    // The set of Unicode characters in category ZP (Separator, paragraph).
-let ZS: &RangeTable = _ZS    // The set of Unicode characters in category ZS (Separator, Space).
+let CategoryAliases = map[string]string{ ... }
 ```
-
+Maps category aliases to standard category names\.
 
 ---
 
 ```jule
-let Scripts: map[str]&RangeTable = { ... }
+let mut Cc = _Cc    // Cc is the set of Unicode characters in category Cc (Other, control).
+let mut Cf = _Cf    // Cf is the set of Unicode characters in category Cf (Other, format).
+let mut Cn = _Cn    // Cn is the set of Unicode characters in category Cn (Other, not assigned).
+let mut Co = _Co    // Co is the set of Unicode characters in category Co (Other, private use).
+let mut Cs = _Cs    // Cs is the set of Unicode characters in category Cs (Other, surrogate).
+let mut Digit = _Nd // Digit is the set of Unicode characters with the "decimal digit" property.
+let mut Nd = _Nd    // Nd is the set of Unicode characters in category Nd (Number, decimal digit).
+let mut LC = _LC    // LC is the set of Unicode characters in category LC (Letter, cased: Ll | Lt | Lu).
+let mut Letter = _L // Letter/L is the set of Unicode letters, category L.
+let mut L = _L
+let mut Lm = _Lm    // Lm is the set of Unicode characters in category Lm (Letter, modifier).
+let mut Lo = _Lo    // Lo is the set of Unicode characters in category Lo (Letter, other).
+let mut Lower = _Ll // Lower is the set of Unicode lower case letters.
+let mut Ll = _Ll    // Ll is the set of Unicode characters in category Ll (Letter, lowercase).
+let mut Mark = _M   // Mark/M is the set of Unicode mark characters, category M.
+let mut M = _M
+let mut Mc = _Mc    // Mc is the set of Unicode characters in category Mc (Mark, spacing combining).
+let mut Me = _Me    // Me is the set of Unicode characters in category Me (Mark, enclosing).
+let mut Mn = _Mn    // Mn is the set of Unicode characters in category Mn (Mark, nonspacing).
+let mut Nl = _Nl    // Nl is the set of Unicode characters in category Nl (Number, letter).
+let mut No = _No    // No is the set of Unicode characters in category No (Number, other).
+let mut Number = _N // Number/N is the set of Unicode number characters, category N.
+let mut N = _N
+let mut Other = _C // Other/C is the set of Unicode control, special, and unassigned code points, category C.
+let mut C = _C
+let mut Pc = _Pc   // Pc is the set of Unicode characters in category Pc (Punctuation, connector).
+let mut Pd = _Pd   // Pd is the set of Unicode characters in category Pd (Punctuation, dash).
+let mut Pe = _Pe   // Pe is the set of Unicode characters in category Pe (Punctuation, close).
+let mut Pf = _Pf   // Pf is the set of Unicode characters in category Pf (Punctuation, final quote).
+let mut Pi = _Pi   // Pi is the set of Unicode characters in category Pi (Punctuation, initial quote).
+let mut Po = _Po   // Po is the set of Unicode characters in category Po (Punctuation, other).
+let mut Ps = _Ps   // Ps is the set of Unicode characters in category Ps (Punctuation, open).
+let mut Punct = _P // Punct/P is the set of Unicode punctuation characters, category P.
+let mut P = _P
+let mut Sc = _Sc   // Sc is the set of Unicode characters in category Sc (Symbol, currency).
+let mut Sk = _Sk   // Sk is the set of Unicode characters in category Sk (Symbol, modifier).
+let mut Sm = _Sm   // Sm is the set of Unicode characters in category Sm (Symbol, math).
+let mut So = _So   // So is the set of Unicode characters in category So (Symbol, other).
+let mut Space = _Z // Space/Z is the set of Unicode space characters, category Z.
+let mut Z = _Z
+let mut Symbol = _S // Symbol/S is the set of Unicode symbol characters, category S.
+let mut S = _S
+let mut Title = _Lt // Title is the set of Unicode title case letters.
+let mut Lt = _Lt    // Lt is the set of Unicode characters in category Lt (Letter, titlecase).
+let mut Upper = _Lu // Upper is the set of Unicode upper case letters.
+let mut Lu = _Lu    // Lu is the set of Unicode characters in category Lu (Letter, uppercase).
+let mut Zl = _Zl    // Zl is the set of Unicode characters in category Zl (Separator, line).
+let mut Zp = _Zp    // Zp is the set of Unicode characters in category Zp (Separator, paragraph).
+let mut Zs = _Zs    // Zs is the set of Unicode characters in category Zs (Separator, space).
 ```
-The set of Unicode script tables\.
+These variables have type \*RangeTable\.
 
 ---
 
 ```jule
-let Adlam: &RangeTable = _ADLAM                                  // The set of Unicode characters in script Adlam.
-let Ahom: &RangeTable = _AHOM                                    // The set of Unicode characters in script Ahom.
-let AnatolianHieroglyphs: &RangeTable = _ANATOLIAN_HIEROGLYPHS   // The set of Unicode characters in script AnatolianHieroglyphs.
-let Arabic: &RangeTable = _ARABIC                                // The set of Unicode characters in script Arabic.
-let Armenian: &RangeTable = _ARMENIAN                            // The set of Unicode characters in script Armenian.
-let Avestan: &RangeTable = _AVESTAN                              // The set of Unicode characters in script Avestan.
-let Balinese: &RangeTable = _BALINESE                            // The set of Unicode characters in script Balinese.
-let Bamum: &RangeTable = _BAMUM                                  // The set of Unicode characters in script Bamum.
-let BassaVah: &RangeTable = _BASSA_VAH                           // The set of Unicode characters in script BassaVah.
-let Batak: &RangeTable = _BATAK                                  // The set of Unicode characters in script Batak.
-let Bengali: &RangeTable = _BENGALI                              // The set of Unicode characters in script Bengali.
-let Bhaiksuki: &RangeTable = _BHAIKSUKI                          // The set of Unicode characters in script Bhaiksuki.
-let Bopomofo: &RangeTable = _BOPOMOFO                            // The set of Unicode characters in script Bopomofo.
-let Brahmi: &RangeTable = _BRAHMI                                // The set of Unicode characters in script Brahmi.
-let Braille: &RangeTable = _BRAILLE                              // The set of Unicode characters in script Braille.
-let Buginese: &RangeTable = _BUGINESE                            // The set of Unicode characters in script Buginese.
-let Buhid: &RangeTable = _BUHID                                  // The set of Unicode characters in script Buhid.
-let CanadianAboriginal: &RangeTable = _CANADIAN_ABORIGINAL       // The set of Unicode characters in script CanadianAboriginal.
-let Carian: &RangeTable = _CARIAN                                // The set of Unicode characters in script Carian.
-let CaucasianAlbanian: &RangeTable = _CAUCASIAN_ALBANIAN         // The set of Unicode characters in script CaucasianAlbanian.
-let Chakma: &RangeTable = _CHAKMA                                // The set of Unicode characters in script Chakma.
-let Cham: &RangeTable = _CHAM                                    // The set of Unicode characters in script Cham.
-let Cherokee: &RangeTable = _CHEROKEE                            // The set of Unicode characters in script Cherokee.
-let Chorasmian: &RangeTable = _CHORASMIAN                        // The set of Unicode characters in script Chorasmian.
-let Common: &RangeTable = _COMMON                                // The set of Unicode characters in script Common.
-let Coptic: &RangeTable = _COPTIC                                // The set of Unicode characters in script Coptic.
-let Cuneiform: &RangeTable = _CUNEIFORM                          // The set of Unicode characters in script Cuneiform.
-let Cypriot: &RangeTable = _CYPRIOT                              // The set of Unicode characters in script Cypriot.
-let CyproMinoan: &RangeTable = _CYPRO_MINOAN                     // The set of Unicode characters in script CyproMinoan.
-let Cyrillic: &RangeTable = _CYRILLIC                            // The set of Unicode characters in script Cyrillic.
-let Deseret: &RangeTable = _DESERET                              // The set of Unicode characters in script Deseret.
-let Devanagari: &RangeTable = _DEVANAGARI                        // The set of Unicode characters in script Devanagari.
-let DivesAkuru: &RangeTable = _DIVES_AKURU                       // The set of Unicode characters in script DivesAkuru.
-let Dogra: &RangeTable = _DOGRA                                  // The set of Unicode characters in script Dogra.
-let Duployan: &RangeTable = _DUPLOYAN                            // The set of Unicode characters in script Duployan.
-let EgyptianHieroglyphs: &RangeTable = _EGYPTIAN_HIEROGLYPHS     // The set of Unicode characters in script EgyptianHieroglyphs.
-let Elbasan: &RangeTable = _ELBASAN                              // The set of Unicode characters in script Elbasan.
-let Elymaic: &RangeTable = _ELYMAIC                              // The set of Unicode characters in script Elymaic.
-let Ethiopic: &RangeTable = _ETHIOPIC                            // The set of Unicode characters in script Ethiopic.
-let Georgian: &RangeTable = _GEORGIAN                            // The set of Unicode characters in script Georgian.
-let Glagolitic: &RangeTable = _GLAGOLITIC                        // The set of Unicode characters in script Glagolitic.
-let Gothic: &RangeTable = _GOTHIC                                // The set of Unicode characters in script Gothic.
-let Grantha: &RangeTable = _GRANTHA                              // The set of Unicode characters in script Grantha.
-let Greek: &RangeTable = _GREEK                                  // The set of Unicode characters in script Greek.
-let Gujarati: &RangeTable = _GUJARATI                            // The set of Unicode characters in script Gujarati.
-let GunjalaGondi: &RangeTable = _GUNJALA_GONDI                   // The set of Unicode characters in script GunjalaGondi.
-let Gurmukhi: &RangeTable = _GURMUKHI                            // The set of Unicode characters in script Gurmukhi.
-let Han: &RangeTable = _HAN                                      // The set of Unicode characters in script Han.
-let Hangul: &RangeTable = _HANGUL                                // The set of Unicode characters in script Hangul.
-let HanifiRohingya: &RangeTable = _HANIFI_ROHINGYA               // The set of Unicode characters in script HanifiRohingya.
-let Hanunoo: &RangeTable = _HANUNOO                              // The set of Unicode characters in script Hanunoo.
-let Hatran: &RangeTable = _HATRAN                                // The set of Unicode characters in script Hatran.
-let Hebrew: &RangeTable = _HEBREW                                // The set of Unicode characters in script Hebrew.
-let Hiragana: &RangeTable = _HIRAGANA                            // The set of Unicode characters in script Hiragana.
-let ImperialAramaic: &RangeTable = _IMPERIAL_ARAMAIC             // The set of Unicode characters in script ImperialAramaic.
-let Inherited: &RangeTable = _INHERITED                          // The set of Unicode characters in script Inherited.
-let InscriptionalPahlavi: &RangeTable = _INSCRIPTIONAL_PAHLAVI   // The set of Unicode characters in script InscriptionalPahlavi.
-let InscriptionalParthian: &RangeTable = _INSCRIPTIONAL_PARTHIAN // The set of Unicode characters in script InscriptionalParthian.
-let Javanese: &RangeTable = _JAVANESE                            // The set of Unicode characters in script Javanese.
-let Kaithi: &RangeTable = _KAITHI                                // The set of Unicode characters in script Kaithi.
-let Kannada: &RangeTable = _KANNADA                              // The set of Unicode characters in script Kannada.
-let Katakana: &RangeTable = _KATAKANA                            // The set of Unicode characters in script Katakana.
-let Kawi: &RangeTable = _KAWI                                    // The set of Unicode characters in script Kawi.
-let KayahLi: &RangeTable = _KAYAH_LI                             // The set of Unicode characters in script Kayah_Li.
-let Kharoshthi = _KHAROSHTHI                                     // The set of Unicode characters in script Kharoshthi.
-let KhitanSmallScript: &RangeTable = _KHITAN_SMALL_SCRIPT        // The set of Unicode characters in script KhitanSmallScript.
-let Khmer: &RangeTable = _KHMER                                  // The set of Unicode characters in script Khmer.
-let Khojki: &RangeTable = _KHOJKI                                // The set of Unicode characters in script Khojki.
-let Khudawadi: &RangeTable = _KHUDAWADI                          // The set of Unicode characters in script Khudawadi.
-let Lao: &RangeTable = _LAO                                      // The set of Unicode characters in script Lao.
-let Latin: &RangeTable = _LATIN                                  // The set of Unicode characters in script Latin.
-let Lepcha: &RangeTable = _LEPCHA                                // The set of Unicode characters in script Lepcha.
-let Limbu: &RangeTable = _LIMBU                                  // The set of Unicode characters in script Limbu.
-let LinearA: &RangeTable = _LINEAR_A                             // The set of Unicode characters in script Linear_A.
-let LinearB: &RangeTable = _LINEAR_B                             // The set of Unicode characters in script Linear_B.
-let Lisu: &RangeTable = _LISU                                    // The set of Unicode characters in script Lisu.
-let Lycian: &RangeTable = _LYCIAN                                // The set of Unicode characters in script Lycian.
-let Lydian: &RangeTable = _LYDIAN                                // The set of Unicode characters in script Lydian.
-let Mahajani: &RangeTable = _MAHAJANI                            // The set of Unicode characters in script Mahajani.
-let Makasar: &RangeTable = _MAKASAR                              // The set of Unicode characters in script Makasar.
-let Malayalam: &RangeTable = _MALAYALAM                          // The set of Unicode characters in script Malayalam.
-let Mandaic: &RangeTable = _MANDAIC                              // The set of Unicode characters in script Mandaic.
-let Manichaean: &RangeTable = _MANICHAEAN                        // The set of Unicode characters in script Manichaean.
-let Marchen: &RangeTable = _MARCHEN                              // The set of Unicode characters in script Marchen.
-let MasaramGondi: &RangeTable = _MASARAM_GONDI                   // The set of Unicode characters in script Masaram_Gondi.
-let Medefaidrin: &RangeTable = _MEDEFAIDRIN                      // The set of Unicode characters in script Medefaidrin.
-let MeeteiMayek: &RangeTable = _MEETEI_MAYEK                     // The set of Unicode characters in script MeeteiMayek.
-let MendeKikakui: &RangeTable = _MENDE_KIKAKUI                   // The set of Unicode characters in script MendeKikakui.
-let MeroiticCursive: &RangeTable = _MEROITIC_CURSIVE             // The set of Unicode characters in script MeroiticCursive.
-let MeroiticHieroglyphs: &RangeTable = _MEROITIC_HIEROGLYPHS     // The set of Unicode characters in script MeroiticHieroglyphs.
-let Miao: &RangeTable = _MIAO                                    // The set of Unicode characters in script Miao.
-let Modi: &RangeTable = _MODI                                    // The set of Unicode characters in script Modi.
-let Mongolian: &RangeTable = _MONGOLIAN                          // The set of Unicode characters in script Mongolian.
-let Mro: &RangeTable = _MRO                                      // The set of Unicode characters in script Mro.
-let Multani: &RangeTable = _MULTANI                              // The set of Unicode characters in script Multani.
-let Myanmar: &RangeTable = _MYANMAR                              // The set of Unicode characters in script Myanmar.
-let Nabataean: &RangeTable = _NABATAEAN                          // The set of Unicode characters in script Nabataean.
-let NagMundari: &RangeTable = _NAG_MUNDARI                       // The set of Unicode characters in script Nag_Mundari.
-let Nandinagari: &RangeTable = _NANDINAGARI                      // The set of Unicode characters in script Nandinagari.
-let NewTaiLue: &RangeTable = _NEW_TAI_LUE                        // The set of Unicode characters in script New_Tai_Lue.
-let Newa: &RangeTable = _NEWA                                    // The set of Unicode characters in script Newa.
-let Nko: &RangeTable = _NKO                                      // The set of Unicode characters in script Nko.
-let Nushu: &RangeTable = _NUSHU                                  // The set of Unicode characters in script Nushu.
-let NyiakengPuachueHmong: &RangeTable = _NYIAKENG_PUACHUE_HMONG  // The set of Unicode characters in script NyiakengPuachueHmong.
-let Ogham: &RangeTable = _OGHAM                                  // The set of Unicode characters in script Ogham.
-let OlChiki: &RangeTable = _OL_CHIKI                             // The set of Unicode characters in script OlChiki.
-let OldHungarian: &RangeTable = _OLD_HUNGARIAN                   // The set of Unicode characters in script OldHungarian.
-let OldItalic: &RangeTable = _OLD_ITALIC                         // The set of Unicode characters in script OldItalic.
-let OldNorthArabian: &RangeTable = _OLD_NORTH_ARABIAN            // The set of Unicode characters in script OldNorthArabian.
-let OldPermic: &RangeTable = _OLD_PERMIC                         // The set of Unicode characters in script OldPermic.
-let OldPersian: &RangeTable = _OLD_PERSIAN                       // The set of Unicode characters in script OldPersian.
-let OldSogdian: &RangeTable = _OLD_SOGDIAN                       // The set of Unicode characters in script OldSogdian.
-let OldSouthArabian: &RangeTable = _OLD_SOUTH_ARABIAN            // The set of Unicode characters in script OldSouthArabian.
-let OldTurkic: &RangeTable = _OLD_TURKIC                         // The set of Unicode characters in script OldTurkic.
-let OldUyghur: &RangeTable = _OLD_UYGHUR                         // The set of Unicode characters in script OldUyghur.
-let Oriya: &RangeTable = _ORIYA                                  // The set of Unicode characters in script Oriya.
-let Osage: &RangeTable = _OSAGE                                  // The set of Unicode characters in script Osage.
-let Osmanya: &RangeTable = _OSMANYA                              // The set of Unicode characters in script Osmanya.
-let PahawhHmong: &RangeTable = _PAHAWH_HMONG                     // The set of Unicode characters in script PahawhHmong.
-let Palmyrene: &RangeTable = _PALMYRENE                          // The set of Unicode characters in script Palmyrene.
-let PauCinHau: &RangeTable = _PAU_CIN_HAU                        // The set of Unicode characters in script PauCinHau.
-let PhagsPa: &RangeTable = _PHAGS_PA                             // The set of Unicode characters in script PhagsPa.
-let Phoenician: &RangeTable = _PHOENICIAN                        // The set of Unicode characters in script Phoenician.
-let PsalterPahlavi: &RangeTable = _PSALTER_PAHLAVI               // The set of Unicode characters in script PsalterPahlavi.
-let Rejang: &RangeTable = _REJANG                                // The set of Unicode characters in script Rejang.
-let Runic: &RangeTable = _RUNIC                                  // The set of Unicode characters in script Runic.
-let Samaritan: &RangeTable = _SAMARITAN                          // The set of Unicode characters in script Samaritan.
-let Saurashtra: &RangeTable = _SAURASHTRA                        // The set of Unicode characters in script Saurashtra.
-let Sharada: &RangeTable = _SHARADA                              // The set of Unicode characters in script Sharada.
-let Shavian: &RangeTable = _SHAVIAN                              // The set of Unicode characters in script Shavian.
-let Siddham: &RangeTable = _SIDDHAM                              // The set of Unicode characters in script Siddham.
-let SignWriting: &RangeTable = _SIGN_WRITING                     // The set of Unicode characters in script SignWriting.
-let Sinhala: &RangeTable = _SINHALA                              // The set of Unicode characters in script Sinhala.
-let Sogdian: &RangeTable = _SOGDIAN                              // The set of Unicode characters in script Sogdian.
-let SoraSompeng: &RangeTable = _SORA_SOMPENG                     // The set of Unicode characters in script SoraSompeng.
-let Soyombo: &RangeTable = _SOYOMBO                              // The set of Unicode characters in script Soyombo.
-let Sundanese: &RangeTable = _SUNDANESE                          // The set of Unicode characters in script Sundanese.
-let SylotiNagri: &RangeTable = _SYLOTI_NAGRI                     // The set of Unicode characters in script SylotiNagri.
-let Syriac: &RangeTable = _SYRIAC                                // The set of Unicode characters in script Syriac.
-let Tagalog: &RangeTable = _TAGALOG                              // The set of Unicode characters in script Tagalog.
-let Tagbanwa: &RangeTable = _TAGBANWA                            // The set of Unicode characters in script Tagbanwa.
-let TaiLe: &RangeTable = _TAI_LE                                 // The set of Unicode characters in script TaiLe.
-let TaiTham: &RangeTable = _TAI_THAM                             // The set of Unicode characters in script TaiTham.
-let TaiViet: &RangeTable = _TAI_VIET                             // The set of Unicode characters in script TaiViet.
-let Takri: &RangeTable = _TAKRI                                  // The set of Unicode characters in script Takri.
-let Tamil: &RangeTable = _TAMIL                                  // The set of Unicode characters in script Tamil.
-let Tangsa: &RangeTable = _TANGSA                                // The set of Unicode characters in script Tangsa.
-let Tangut: &RangeTable = _TANGUT                                // The set of Unicode characters in script Tangut.
-let Telugu: &RangeTable = _TELUGU                                // The set of Unicode characters in script Telugu.
-let Thaana: &RangeTable = _THAANA                                // The set of Unicode characters in script Thaana.
-let Thai: &RangeTable = _THAI                                    // The set of Unicode characters in script Thai.
-let Tibetan: &RangeTable = _TIBETAN                              // The set of Unicode characters in script Tibetan.
-let Tifinagh: &RangeTable = _TIFINAGH                            // The set of Unicode characters in script Tifinagh.
-let Tirhuta: &RangeTable = _TIRHUTA                              // The set of Unicode characters in script Tirhuta.
-let Toto: &RangeTable = _TOTO                                    // The set of Unicode characters in script Toto.
-let Ugaritic: &RangeTable = _UGARITIC                            // The set of Unicode characters in script Ugaritic.
-let Vai: &RangeTable = _VAI                                      // The set of Unicode characters in script Vai.
-let Vithkuqi: &RangeTable = _VITHKUQI                            // The set of Unicode characters in script Vithkuqi.
-let Wancho: &RangeTable = _WANCHO                                // The set of Unicode characters in script Wancho.
-let WarangCiti: &RangeTable = _WARANG_CITI                       // The set of Unicode characters in script WarangCiti.
-let Yezidi: &RangeTable = _YEZIDI                                // The set of Unicode characters in script Yezidi.
-let Yi: &RangeTable = _YI                                        // The set of Unicode characters in script Yi.
-let ZanabazarSquare: &RangeTable = _ZANABAZAR_SQUARE             // The set of Unicode characters in script ZanabazarSquare.
+let mut Scripts = map[string]&RangeTable{ ... }
 ```
-
+Set of Unicode script tables\.
 
 ---
 
 ```jule
-let Properties: map[str]&RangeTable = { ... }
+let mut Adlam = _Adlam                                   // Adlam is the set of Unicode characters in script Adlam.
+let mut Ahom = _Ahom                                     // Ahom is the set of Unicode characters in script Ahom.
+let mut Anatolian_Hieroglyphs = _Anatolian_Hieroglyphs   // Anatolian_Hieroglyphs is the set of Unicode characters in script Anatolian_Hieroglyphs.
+let mut Arabic = _Arabic                                 // Arabic is the set of Unicode characters in script Arabic.
+let mut Armenian = _Armenian                             // Armenian is the set of Unicode characters in script Armenian.
+let mut Avestan = _Avestan                               // Avestan is the set of Unicode characters in script Avestan.
+let mut Balinese = _Balinese                             // Balinese is the set of Unicode characters in script Balinese.
+let mut Bamum = _Bamum                                   // Bamum is the set of Unicode characters in script Bamum.
+let mut Bassa_Vah = _Bassa_Vah                           // Bassa_Vah is the set of Unicode characters in script Bassa_Vah.
+let mut Batak = _Batak                                   // Batak is the set of Unicode characters in script Batak.
+let mut Bengali = _Bengali                               // Bengali is the set of Unicode characters in script Bengali.
+let mut Beria_Erfe = _Beria_Erfe                         // Beria_Erfe is the set of Unicode characters in script Beria_Erfe.
+let mut Bhaiksuki = _Bhaiksuki                           // Bhaiksuki is the set of Unicode characters in script Bhaiksuki.
+let mut Bopomofo = _Bopomofo                             // Bopomofo is the set of Unicode characters in script Bopomofo.
+let mut Brahmi = _Brahmi                                 // Brahmi is the set of Unicode characters in script Brahmi.
+let mut Braille = _Braille                               // Braille is the set of Unicode characters in script Braille.
+let mut Buginese = _Buginese                             // Buginese is the set of Unicode characters in script Buginese.
+let mut Buhid = _Buhid                                   // Buhid is the set of Unicode characters in script Buhid.
+let mut Canadian_Aboriginal = _Canadian_Aboriginal       // Canadian_Aboriginal is the set of Unicode characters in script Canadian_Aboriginal.
+let mut Carian = _Carian                                 // Carian is the set of Unicode characters in script Carian.
+let mut Caucasian_Albanian = _Caucasian_Albanian         // Caucasian_Albanian is the set of Unicode characters in script Caucasian_Albanian.
+let mut Chakma = _Chakma                                 // Chakma is the set of Unicode characters in script Chakma.
+let mut Cham = _Cham                                     // Cham is the set of Unicode characters in script Cham.
+let mut Cherokee = _Cherokee                             // Cherokee is the set of Unicode characters in script Cherokee.
+let mut Chorasmian = _Chorasmian                         // Chorasmian is the set of Unicode characters in script Chorasmian.
+let mut Common = _Common                                 // Common is the set of Unicode characters in script Common.
+let mut Coptic = _Coptic                                 // Coptic is the set of Unicode characters in script Coptic.
+let mut Cuneiform = _Cuneiform                           // Cuneiform is the set of Unicode characters in script Cuneiform.
+let mut Cypriot = _Cypriot                               // Cypriot is the set of Unicode characters in script Cypriot.
+let mut Cypro_Minoan = _Cypro_Minoan                     // Cypro_Minoan is the set of Unicode characters in script Cypro_Minoan.
+let mut Cyrillic = _Cyrillic                             // Cyrillic is the set of Unicode characters in script Cyrillic.
+let mut Deseret = _Deseret                               // Deseret is the set of Unicode characters in script Deseret.
+let mut Devanagari = _Devanagari                         // Devanagari is the set of Unicode characters in script Devanagari.
+let mut Dives_Akuru = _Dives_Akuru                       // Dives_Akuru is the set of Unicode characters in script Dives_Akuru.
+let mut Dogra = _Dogra                                   // Dogra is the set of Unicode characters in script Dogra.
+let mut Duployan = _Duployan                             // Duployan is the set of Unicode characters in script Duployan.
+let mut Egyptian_Hieroglyphs = _Egyptian_Hieroglyphs     // Egyptian_Hieroglyphs is the set of Unicode characters in script Egyptian_Hieroglyphs.
+let mut Elbasan = _Elbasan                               // Elbasan is the set of Unicode characters in script Elbasan.
+let mut Elymaic = _Elymaic                               // Elymaic is the set of Unicode characters in script Elymaic.
+let mut Ethiopic = _Ethiopic                             // Ethiopic is the set of Unicode characters in script Ethiopic.
+let mut Garay = _Garay                                   // Garay is the set of Unicode characters in script Garay.
+let mut Georgian = _Georgian                             // Georgian is the set of Unicode characters in script Georgian.
+let mut Glagolitic = _Glagolitic                         // Glagolitic is the set of Unicode characters in script Glagolitic.
+let mut Gothic = _Gothic                                 // Gothic is the set of Unicode characters in script Gothic.
+let mut Grantha = _Grantha                               // Grantha is the set of Unicode characters in script Grantha.
+let mut Greek = _Greek                                   // Greek is the set of Unicode characters in script Greek.
+let mut Gujarati = _Gujarati                             // Gujarati is the set of Unicode characters in script Gujarati.
+let mut Gunjala_Gondi = _Gunjala_Gondi                   // Gunjala_Gondi is the set of Unicode characters in script Gunjala_Gondi.
+let mut Gurmukhi = _Gurmukhi                             // Gurmukhi is the set of Unicode characters in script Gurmukhi.
+let mut Gurung_Khema = _Gurung_Khema                     // Gurung_Khema is the set of Unicode characters in script Gurung_Khema.
+let mut Han = _Han                                       // Han is the set of Unicode characters in script Han.
+let mut Hangul = _Hangul                                 // Hangul is the set of Unicode characters in script Hangul.
+let mut Hanifi_Rohingya = _Hanifi_Rohingya               // Hanifi_Rohingya is the set of Unicode characters in script Hanifi_Rohingya.
+let mut Hanunoo = _Hanunoo                               // Hanunoo is the set of Unicode characters in script Hanunoo.
+let mut Hatran = _Hatran                                 // Hatran is the set of Unicode characters in script Hatran.
+let mut Hebrew = _Hebrew                                 // Hebrew is the set of Unicode characters in script Hebrew.
+let mut Hiragana = _Hiragana                             // Hiragana is the set of Unicode characters in script Hiragana.
+let mut Imperial_Aramaic = _Imperial_Aramaic             // Imperial_Aramaic is the set of Unicode characters in script Imperial_Aramaic.
+let mut Inherited = _Inherited                           // Inherited is the set of Unicode characters in script Inherited.
+let mut Inscriptional_Pahlavi = _Inscriptional_Pahlavi   // Inscriptional_Pahlavi is the set of Unicode characters in script Inscriptional_Pahlavi.
+let mut Inscriptional_Parthian = _Inscriptional_Parthian // Inscriptional_Parthian is the set of Unicode characters in script Inscriptional_Parthian.
+let mut Javanese = _Javanese                             // Javanese is the set of Unicode characters in script Javanese.
+let mut Kaithi = _Kaithi                                 // Kaithi is the set of Unicode characters in script Kaithi.
+let mut Kannada = _Kannada                               // Kannada is the set of Unicode characters in script Kannada.
+let mut Katakana = _Katakana                             // Katakana is the set of Unicode characters in script Katakana.
+let mut Kawi = _Kawi                                     // Kawi is the set of Unicode characters in script Kawi.
+let mut Kayah_Li = _Kayah_Li                             // Kayah_Li is the set of Unicode characters in script Kayah_Li.
+let mut Kharoshthi = _Kharoshthi                         // Kharoshthi is the set of Unicode characters in script Kharoshthi.
+let mut Khitan_Small_Script = _Khitan_Small_Script       // Khitan_Small_Script is the set of Unicode characters in script Khitan_Small_Script.
+let mut Khmer = _Khmer                                   // Khmer is the set of Unicode characters in script Khmer.
+let mut Khojki = _Khojki                                 // Khojki is the set of Unicode characters in script Khojki.
+let mut Khudawadi = _Khudawadi                           // Khudawadi is the set of Unicode characters in script Khudawadi.
+let mut Kirat_Rai = _Kirat_Rai                           // Kirat_Rai is the set of Unicode characters in script Kirat_Rai.
+let mut Lao = _Lao                                       // Lao is the set of Unicode characters in script Lao.
+let mut Latin = _Latin                                   // Latin is the set of Unicode characters in script Latin.
+let mut Lepcha = _Lepcha                                 // Lepcha is the set of Unicode characters in script Lepcha.
+let mut Limbu = _Limbu                                   // Limbu is the set of Unicode characters in script Limbu.
+let mut Linear_A = _Linear_A                             // Linear_A is the set of Unicode characters in script Linear_A.
+let mut Linear_B = _Linear_B                             // Linear_B is the set of Unicode characters in script Linear_B.
+let mut Lisu = _Lisu                                     // Lisu is the set of Unicode characters in script Lisu.
+let mut Lycian = _Lycian                                 // Lycian is the set of Unicode characters in script Lycian.
+let mut Lydian = _Lydian                                 // Lydian is the set of Unicode characters in script Lydian.
+let mut Mahajani = _Mahajani                             // Mahajani is the set of Unicode characters in script Mahajani.
+let mut Makasar = _Makasar                               // Makasar is the set of Unicode characters in script Makasar.
+let mut Malayalam = _Malayalam                           // Malayalam is the set of Unicode characters in script Malayalam.
+let mut Mandaic = _Mandaic                               // Mandaic is the set of Unicode characters in script Mandaic.
+let mut Manichaean = _Manichaean                         // Manichaean is the set of Unicode characters in script Manichaean.
+let mut Marchen = _Marchen                               // Marchen is the set of Unicode characters in script Marchen.
+let mut Masaram_Gondi = _Masaram_Gondi                   // Masaram_Gondi is the set of Unicode characters in script Masaram_Gondi.
+let mut Medefaidrin = _Medefaidrin                       // Medefaidrin is the set of Unicode characters in script Medefaidrin.
+let mut Meetei_Mayek = _Meetei_Mayek                     // Meetei_Mayek is the set of Unicode characters in script Meetei_Mayek.
+let mut Mende_Kikakui = _Mende_Kikakui                   // Mende_Kikakui is the set of Unicode characters in script Mende_Kikakui.
+let mut Meroitic_Cursive = _Meroitic_Cursive             // Meroitic_Cursive is the set of Unicode characters in script Meroitic_Cursive.
+let mut Meroitic_Hieroglyphs = _Meroitic_Hieroglyphs     // Meroitic_Hieroglyphs is the set of Unicode characters in script Meroitic_Hieroglyphs.
+let mut Miao = _Miao                                     // Miao is the set of Unicode characters in script Miao.
+let mut Modi = _Modi                                     // Modi is the set of Unicode characters in script Modi.
+let mut Mongolian = _Mongolian                           // Mongolian is the set of Unicode characters in script Mongolian.
+let mut Mro = _Mro                                       // Mro is the set of Unicode characters in script Mro.
+let mut Multani = _Multani                               // Multani is the set of Unicode characters in script Multani.
+let mut Myanmar = _Myanmar                               // Myanmar is the set of Unicode characters in script Myanmar.
+let mut Nabataean = _Nabataean                           // Nabataean is the set of Unicode characters in script Nabataean.
+let mut Nag_Mundari = _Nag_Mundari                       // Nag_Mundari is the set of Unicode characters in script Nag_Mundari.
+let mut Nandinagari = _Nandinagari                       // Nandinagari is the set of Unicode characters in script Nandinagari.
+let mut New_Tai_Lue = _New_Tai_Lue                       // New_Tai_Lue is the set of Unicode characters in script New_Tai_Lue.
+let mut Newa = _Newa                                     // Newa is the set of Unicode characters in script Newa.
+let mut Nko = _Nko                                       // Nko is the set of Unicode characters in script Nko.
+let mut Nushu = _Nushu                                   // Nushu is the set of Unicode characters in script Nushu.
+let mut Nyiakeng_Puachue_Hmong = _Nyiakeng_Puachue_Hmong // Nyiakeng_Puachue_Hmong is the set of Unicode characters in script Nyiakeng_Puachue_Hmong.
+let mut Ogham = _Ogham                                   // Ogham is the set of Unicode characters in script Ogham.
+let mut Ol_Chiki = _Ol_Chiki                             // Ol_Chiki is the set of Unicode characters in script Ol_Chiki.
+let mut Ol_Onal = _Ol_Onal                               // Ol_Onal is the set of Unicode characters in script Ol_Onal.
+let mut Old_Hungarian = _Old_Hungarian                   // Old_Hungarian is the set of Unicode characters in script Old_Hungarian.
+let mut Old_Italic = _Old_Italic                         // Old_Italic is the set of Unicode characters in script Old_Italic.
+let mut Old_North_Arabian = _Old_North_Arabian           // Old_North_Arabian is the set of Unicode characters in script Old_North_Arabian.
+let mut Old_Permic = _Old_Permic                         // Old_Permic is the set of Unicode characters in script Old_Permic.
+let mut Old_Persian = _Old_Persian                       // Old_Persian is the set of Unicode characters in script Old_Persian.
+let mut Old_Sogdian = _Old_Sogdian                       // Old_Sogdian is the set of Unicode characters in script Old_Sogdian.
+let mut Old_South_Arabian = _Old_South_Arabian           // Old_South_Arabian is the set of Unicode characters in script Old_South_Arabian.
+let mut Old_Turkic = _Old_Turkic                         // Old_Turkic is the set of Unicode characters in script Old_Turkic.
+let mut Old_Uyghur = _Old_Uyghur                         // Old_Uyghur is the set of Unicode characters in script Old_Uyghur.
+let mut Oriya = _Oriya                                   // Oriya is the set of Unicode characters in script Oriya.
+let mut Osage = _Osage                                   // Osage is the set of Unicode characters in script Osage.
+let mut Osmanya = _Osmanya                               // Osmanya is the set of Unicode characters in script Osmanya.
+let mut Pahawh_Hmong = _Pahawh_Hmong                     // Pahawh_Hmong is the set of Unicode characters in script Pahawh_Hmong.
+let mut Palmyrene = _Palmyrene                           // Palmyrene is the set of Unicode characters in script Palmyrene.
+let mut Pau_Cin_Hau = _Pau_Cin_Hau                       // Pau_Cin_Hau is the set of Unicode characters in script Pau_Cin_Hau.
+let mut Phags_Pa = _Phags_Pa                             // Phags_Pa is the set of Unicode characters in script Phags_Pa.
+let mut Phoenician = _Phoenician                         // Phoenician is the set of Unicode characters in script Phoenician.
+let mut Psalter_Pahlavi = _Psalter_Pahlavi               // Psalter_Pahlavi is the set of Unicode characters in script Psalter_Pahlavi.
+let mut Rejang = _Rejang                                 // Rejang is the set of Unicode characters in script Rejang.
+let mut Runic = _Runic                                   // Runic is the set of Unicode characters in script Runic.
+let mut Samaritan = _Samaritan                           // Samaritan is the set of Unicode characters in script Samaritan.
+let mut Saurashtra = _Saurashtra                         // Saurashtra is the set of Unicode characters in script Saurashtra.
+let mut Sharada = _Sharada                               // Sharada is the set of Unicode characters in script Sharada.
+let mut Shavian = _Shavian                               // Shavian is the set of Unicode characters in script Shavian.
+let mut Siddham = _Siddham                               // Siddham is the set of Unicode characters in script Siddham.
+let mut Sidetic = _Sidetic                               // Sidetic is the set of Unicode characters in script Sidetic.
+let mut SignWriting = _SignWriting                       // SignWriting is the set of Unicode characters in script SignWriting.
+let mut Sinhala = _Sinhala                               // Sinhala is the set of Unicode characters in script Sinhala.
+let mut Sogdian = _Sogdian                               // Sogdian is the set of Unicode characters in script Sogdian.
+let mut Sora_Sompeng = _Sora_Sompeng                     // Sora_Sompeng is the set of Unicode characters in script Sora_Sompeng.
+let mut Soyombo = _Soyombo                               // Soyombo is the set of Unicode characters in script Soyombo.
+let mut Sundanese = _Sundanese                           // Sundanese is the set of Unicode characters in script Sundanese.
+let mut Sunuwar = _Sunuwar                               // Sunuwar is the set of Unicode characters in script Sunuwar.
+let mut Syloti_Nagri = _Syloti_Nagri                     // Syloti_Nagri is the set of Unicode characters in script Syloti_Nagri.
+let mut Syriac = _Syriac                                 // Syriac is the set of Unicode characters in script Syriac.
+let mut Tagalog = _Tagalog                               // Tagalog is the set of Unicode characters in script Tagalog.
+let mut Tagbanwa = _Tagbanwa                             // Tagbanwa is the set of Unicode characters in script Tagbanwa.
+let mut Tai_Le = _Tai_Le                                 // Tai_Le is the set of Unicode characters in script Tai_Le.
+let mut Tai_Tham = _Tai_Tham                             // Tai_Tham is the set of Unicode characters in script Tai_Tham.
+let mut Tai_Viet = _Tai_Viet                             // Tai_Viet is the set of Unicode characters in script Tai_Viet.
+let mut Tai_Yo = _Tai_Yo                                 // Tai_Yo is the set of Unicode characters in script Tai_Yo.
+let mut Takri = _Takri                                   // Takri is the set of Unicode characters in script Takri.
+let mut Tamil = _Tamil                                   // Tamil is the set of Unicode characters in script Tamil.
+let mut Tangsa = _Tangsa                                 // Tangsa is the set of Unicode characters in script Tangsa.
+let mut Tangut = _Tangut                                 // Tangut is the set of Unicode characters in script Tangut.
+let mut Telugu = _Telugu                                 // Telugu is the set of Unicode characters in script Telugu.
+let mut Thaana = _Thaana                                 // Thaana is the set of Unicode characters in script Thaana.
+let mut Thai = _Thai                                     // Thai is the set of Unicode characters in script Thai.
+let mut Tibetan = _Tibetan                               // Tibetan is the set of Unicode characters in script Tibetan.
+let mut Tifinagh = _Tifinagh                             // Tifinagh is the set of Unicode characters in script Tifinagh.
+let mut Tirhuta = _Tirhuta                               // Tirhuta is the set of Unicode characters in script Tirhuta.
+let mut Todhri = _Todhri                                 // Todhri is the set of Unicode characters in script Todhri.
+let mut Tolong_Siki = _Tolong_Siki                       // Tolong_Siki is the set of Unicode characters in script Tolong_Siki.
+let mut Toto = _Toto                                     // Toto is the set of Unicode characters in script Toto.
+let mut Tulu_Tigalari = _Tulu_Tigalari                   // Tulu_Tigalari is the set of Unicode characters in script Tulu_Tigalari.
+let mut Ugaritic = _Ugaritic                             // Ugaritic is the set of Unicode characters in script Ugaritic.
+let mut Vai = _Vai                                       // Vai is the set of Unicode characters in script Vai.
+let mut Vithkuqi = _Vithkuqi                             // Vithkuqi is the set of Unicode characters in script Vithkuqi.
+let mut Wancho = _Wancho                                 // Wancho is the set of Unicode characters in script Wancho.
+let mut Warang_Citi = _Warang_Citi                       // Warang_Citi is the set of Unicode characters in script Warang_Citi.
+let mut Yezidi = _Yezidi                                 // Yezidi is the set of Unicode characters in script Yezidi.
+let mut Yi = _Yi                                         // Yi is the set of Unicode characters in script Yi.
+let mut Zanabazar_Square = _Zanabazar_Square             // Zanabazar_Square is the set of Unicode characters in script Zanabazar_Square.
 ```
-The set of Unicode property tables\.
+These variables have type &amp;RangeTable\.
 
 ---
 
 ```jule
-let AsciiHexDigit: &RangeTable = _ASCII_HEX_DIGIT                                     // The set of Unicode characters with property AsciiHexDigit.
-let BidiControl: &RangeTable = _BIDI_CONTROL                                          // The set of Unicode characters with property BidiControl.
-let Dash: &RangeTable = _DASH                                                         // The set of Unicode characters with property Dash.
-let Deprecated: &RangeTable = _DEPRECATED                                             // The set of Unicode characters with property Deprecated.
-let Diacritic: &RangeTable = _DIACRITIC                                               // The set of Unicode characters with property Diacritic.
-let Extender: &RangeTable = _EXTENDER                                                 // The set of Unicode characters with property Extender.
-let HexDigit: &RangeTable = _HEX_DIGIT                                                // The set of Unicode characters with property HexDigit.
-let Hyphen: &RangeTable = _HYPHEN                                                     // The set of Unicode characters with property Hyphen.
-let IdsBinaryOperator: &RangeTable = _IDS_BINARY_OPERATOR                             // The set of Unicode characters with property IdsBinaryOperator.
-let IdsTrinaryOperator: &RangeTable = _IDS_TRINARY_OPERATOR                           // The set of Unicode characters with property IdsTrinaryOperator.
-let Ideographic: &RangeTable = _IDEOGRAPHIC                                           // The set of Unicode characters with property Ideographic.
-let JoinControl: &RangeTable = _JOIN_CONTROL                                          // The set of Unicode characters with property JoinControl.
-let LogicalOrderException: &RangeTable = _LOGICAL_ORDER_EXCEPTION                     // The set of Unicode characters with property LogicalOrderException.
-let NoncharacterCodePoint: &RangeTable = _NONCHARACTER_CODE_POINT                     // The set of Unicode characters with property NoncharacterCodePoint.
-let OtherAlphabetic: &RangeTable = _OTHER_ALPHABETIC                                  // The set of Unicode characters with property OtherAlphabetic.
-let OtherDefaultIgnorableCodePoint: &RangeTable = _OTHER_DEFAULT_IGNORABLE_CODE_POINT // The set of Unicode characters with property OtherDefaultIgnorableCodePoint.
-let OtherGraphemeExtend: &RangeTable = _OTHER_GRAPHEME_EXTEND                         // The set of Unicode characters with property OtherGraphemeExtend.
-let OtherIdContinue: &RangeTable = _OTHER_ID_CONTINUE                                 // The set of Unicode characters with property OtherIdContinue.
-let OtherIdStart: &RangeTable = _OTHER_ID_START                                       // The set of Unicode characters with property OtherIdStart.
-let OtherLowercase: &RangeTable = _OTHER_LOWERCASE                                    // The set of Unicode characters with property OtherLowercase.
-let OtherMath: &RangeTable = _OTHER_MATH                                              // The set of Unicode characters with property OtherMath.
-let OtherUppercase: &RangeTable = _OTHER_UPPERCASE                                    // The set of Unicode characters with property OtherUppercase.
-let PatternSyntax: &RangeTable = _PATTERN_SYNTAX                                      // The set of Unicode characters with property PatternSyntax.
-let PatternWhiteSpace: &RangeTable = _PATTERN_WHITE_SPACE                             // The set of Unicode characters with property PatternWhiteSpace.
-let PrependedConcatenationMark: &RangeTable = _PREPENDED_CONCATENATION_MARK           // The set of Unicode characters with property PrependedConcatenationMark.
-let QuotationMark: &RangeTable = _QUOTATION_MARK                                      // The set of Unicode characters with property QuotationMark.
-let Radical: &RangeTable = _RADICAL                                                   // The set of Unicode characters with property Radical.
-let RegionalIndicator: &RangeTable = _REGIONAL_INDICATOR                              // The set of Unicode characters with property RegionalIndicator.
-let SentenceTerminal: &RangeTable = _SENTENCE_TERMINAL                                // The set of Unicode characters with property SentenceTerminal.
-let SoftDotted: &RangeTable = _SOFT_DOTTED                                            // The set of Unicode characters with property SoftDotted.
-let TerminalPunctuation: &RangeTable = _TERMINAL_PUNCTUATION                          // The set of Unicode characters with property TerminalPunctuation.
-let UnifiedIdeograph: &RangeTable = _UNIFIED_IDEOGRAPH                                // The set of Unicode characters with property UnifiedIdeograph.
-let VariationSelector: &RangeTable = _VARIATION_SELECTOR                              // The set of Unicode characters with property VariationSelector.
-let WhiteSpace: &RangeTable = _WHITE_SPACE                                            // The set of Unicode characters with property WhiteSpace.
+let mut Properties = map[string]&RangeTable{ ... }
 ```
-
+Set of Unicode property tables\.
 
 ---
 
 ```jule
-let FoldCategory: map[str]&RangeTable = { ... }
+let mut ASCII_Hex_Digit = _ASCII_Hex_Digit                                       // ASCII_Hex_Digit is the set of Unicode characters with property ASCII_Hex_Digit.
+let mut Bidi_Control = _Bidi_Control                                             // Bidi_Control is the set of Unicode characters with property Bidi_Control.
+let mut Dash = _Dash                                                             // Dash is the set of Unicode characters with property Dash.
+let mut Deprecated = _Deprecated                                                 // Deprecated is the set of Unicode characters with property Deprecated.
+let mut Diacritic = _Diacritic                                                   // Diacritic is the set of Unicode characters with property Diacritic.
+let mut Extender = _Extender                                                     // Extender is the set of Unicode characters with property Extender.
+let mut Hex_Digit = _Hex_Digit                                                   // Hex_Digit is the set of Unicode characters with property Hex_Digit.
+let mut Hyphen = _Hyphen                                                         // Hyphen is the set of Unicode characters with property Hyphen.
+let mut IDS_Binary_Operator = _IDS_Binary_Operator                               // IDS_Binary_Operator is the set of Unicode characters with property IDS_Binary_Operator.
+let mut IDS_Trinary_Operator = _IDS_Trinary_Operator                             // IDS_Trinary_Operator is the set of Unicode characters with property IDS_Trinary_Operator.
+let mut IDS_Unary_Operator = _IDS_Unary_Operator                                 // IDS_Unary_Operator is the set of Unicode characters with property IDS_Unary_Operator.
+let mut ID_Compat_Math_Continue = _ID_Compat_Math_Continue                       // ID_Compat_Math_Continue is the set of Unicode characters with property ID_Compat_Math_Continue.
+let mut ID_Compat_Math_Start = _ID_Compat_Math_Start                             // ID_Compat_Math_Start is the set of Unicode characters with property ID_Compat_Math_Start.
+let mut Ideographic = _Ideographic                                               // Ideographic is the set of Unicode characters with property Ideographic.
+let mut Join_Control = _Join_Control                                             // Join_Control is the set of Unicode characters with property Join_Control.
+let mut Logical_Order_Exception = _Logical_Order_Exception                       // Logical_Order_Exception is the set of Unicode characters with property Logical_Order_Exception.
+let mut Modifier_Combining_Mark = _Modifier_Combining_Mark                       // Modifier_Combining_Mark is the set of Unicode characters with property Modifier_Combining_Mark.
+let mut Noncharacter_Code_Point = _Noncharacter_Code_Point                       // Noncharacter_Code_Point is the set of Unicode characters with property Noncharacter_Code_Point.
+let mut Other_Alphabetic = _Other_Alphabetic                                     // Other_Alphabetic is the set of Unicode characters with property Other_Alphabetic.
+let mut Other_Default_Ignorable_Code_Point = _Other_Default_Ignorable_Code_Point // Other_Default_Ignorable_Code_Point is the set of Unicode characters with property Other_Default_Ignorable_Code_Point.
+let mut Other_Grapheme_Extend = _Other_Grapheme_Extend                           // Other_Grapheme_Extend is the set of Unicode characters with property Other_Grapheme_Extend.
+let mut Other_ID_Continue = _Other_ID_Continue                                   // Other_ID_Continue is the set of Unicode characters with property Other_ID_Continue.
+let mut Other_ID_Start = _Other_ID_Start                                         // Other_ID_Start is the set of Unicode characters with property Other_ID_Start.
+let mut Other_Lowercase = _Other_Lowercase                                       // Other_Lowercase is the set of Unicode characters with property Other_Lowercase.
+let mut Other_Math = _Other_Math                                                 // Other_Math is the set of Unicode characters with property Other_Math.
+let mut Other_Uppercase = _Other_Uppercase                                       // Other_Uppercase is the set of Unicode characters with property Other_Uppercase.
+let mut Pattern_Syntax = _Pattern_Syntax                                         // Pattern_Syntax is the set of Unicode characters with property Pattern_Syntax.
+let mut Pattern_White_Space = _Pattern_White_Space                               // Pattern_White_Space is the set of Unicode characters with property Pattern_White_Space.
+let mut Prepended_Concatenation_Mark = _Prepended_Concatenation_Mark             // Prepended_Concatenation_Mark is the set of Unicode characters with property Prepended_Concatenation_Mark.
+let mut Quotation_Mark = _Quotation_Mark                                         // Quotation_Mark is the set of Unicode characters with property Quotation_Mark.
+let mut Radical = _Radical                                                       // Radical is the set of Unicode characters with property Radical.
+let mut Regional_Indicator = _Regional_Indicator                                 // Regional_Indicator is the set of Unicode characters with property Regional_Indicator.
+let mut STerm = _Sentence_Terminal                                               // STerm is an alias for Sentence_Terminal.
+let mut Sentence_Terminal = _Sentence_Terminal                                   // Sentence_Terminal is the set of Unicode characters with property Sentence_Terminal.
+let mut Soft_Dotted = _Soft_Dotted                                               // Soft_Dotted is the set of Unicode characters with property Soft_Dotted.
+let mut Terminal_Punctuation = _Terminal_Punctuation                             // Terminal_Punctuation is the set of Unicode characters with property Terminal_Punctuation.
+let mut Unified_Ideograph = _Unified_Ideograph                                   // Unified_Ideograph is the set of Unicode characters with property Unified_Ideograph.
+let mut Variation_Selector = _Variation_Selector                                 // Variation_Selector is the set of Unicode characters with property Variation_Selector.
+let mut White_Space = _White_Space                                               // White_Space is the set of Unicode characters with property White_Space.
 ```
-Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category\. If there is NO entry for a category name, there are NO such points\.
+These variables have type &amp;RangeTable\.
 
 ---
 
 ```jule
-let FoldScript: map[str]&RangeTable = { ... }
+let FoldCategory = map[string]&RangeTable{ ... }
 ```
-Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script\. If there is NO entry for a script name, there are NO such points\.
+Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category\. If there is no entry for a category name, there are no such points\.
 
 ---
 
 ```jule
-const MaxRune = '\U0010FFFF'
+let FoldScript = map[string]&RangeTable{ ... }
 ```
-Maximum valid Unicode code point\.
+Maps a script name to a table of code points outside the script that are equivalent under simple case folding to code points inside the script\. If there is no entry for a script name, there are no such points\.
 
----
-
+## IsDigit
 ```jule
-const ReplacementChar = '\uFFFD'
+fn IsDigit(r: rune): bool
 ```
-Represents invalid code points\.
-
----
-
-```jule
-const MaxASCII = '\u007F'
-```
-Maximum ASCII value\.
-
----
-
-```jule
-const MaxLatin1 = '\u00FF'
-```
-Maximum Latin\-1 value\.
-
----
-
-```jule
-const (
-	UpperCase = 0
-	LowerCase = 1
-	TitleCase = 2
-	MaxCase   = 3
-)
-```
-Indices into the delta arrays inside CaseRanges for case mapping\.
+Reports whether the rune is a decimal digit\.
 
 ## IsGraphic
 ```jule
 fn IsGraphic(r: rune): bool
 ```
-Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, ZS\.
+Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, Zs\.
 
 ## IsIn
 ```jule
@@ -422,12 +465,6 @@ fn IsPrint(r: rune): bool
 ```
 Reports whether the rune is defined as printable by Jule\. Such characters include letters, marks, numbers, punctuation, symbols, and the ASCII space character, from categories \[L\], \[M\], \[N\], \[P\], \[S\] and the ASCII space character\. This categorization is the same as \[IsGraphic\] except that the only spacing character is ASCII space, U\+0020\.
 
-## IsDigit
-```jule
-fn IsDigit(r: rune): bool
-```
-Reports whether the rune is a decimal digit\.
-
 ## To
 ```jule
 fn To(case: int, mut r: rune): rune
@@ -445,6 +482,12 @@ Maps the rune to upper case\.
 fn ToLower(mut r: rune): rune
 ```
 Maps the rune to lower case\.
+
+## ToTitle
+```jule
+fn ToTitle(mut r: rune): rune
+```
+Maps the rune to title case\.
 
 ## Is
 ```jule
@@ -470,6 +513,12 @@ fn IsLower(r: rune): bool
 ```
 Reports whether the rune is a lower case letter\.
 
+## IsTitle
+```jule
+fn IsTitle(r: rune): bool
+```
+Reports whether the rune is a title case letter\.
+
 ## SimpleFold
 ```jule
 fn SimpleFold(r: rune): rune
@@ -491,6 +540,30 @@ SimpleFold('1') = '1'
 SimpleFold(-2) = -2
 ```
 
+
+## SpecialCase
+```jule
+type SpecialCase: []CaseRange
+```
+Represents language\-specific case mappings such as Turkish\. Methods of SpecialCase customize \(by overriding\) the standard mappings\.
+
+### ToUpper
+```jule
+fn ToUpper(*self, r: rune): rune
+```
+Maps the rune to upper case giving priority to the special mapping\.
+
+### ToTitle
+```jule
+fn ToTitle(*self, r: rune): rune
+```
+Maps the rune to title case giving priority to the special mapping\.
+
+### ToLower
+```jule
+fn ToLower(*self, r: rune): rune
+```
+Maps the rune to lower case giving priority to the special mapping\.
 
 ## CaseRange
 ```jule
