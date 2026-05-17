@@ -12,7 +12,7 @@
 [struct ArrayType](#arraytype)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAutoSized\(\*self\): bool](#isautosized)\
 [struct MapType](#maptype)\
-[struct RetType](#rettype)\
+[struct ReturnType](#returntype)\
 [struct Expr](#expr)\
 [struct RangeExpr](#rangeexpr)\
 [struct UseExpr](#useexpr)\
@@ -58,7 +58,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsShort\(\*self\): bool](#isshort)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDecl\(\*self\): bool](#isdecl)\
 [struct Var](#var)\
-[struct Ret](#ret)\
+[struct Return](#return)\
 [struct Throw](#throw)\
 [struct Iter](#iter)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInfinite\(\*self\): bool](#isinfinite)\
@@ -187,9 +187,9 @@ struct MapType {
 ```
 Map type\.
 
-## RetType
+## ReturnType
 ```jule
-struct RetType {
+struct ReturnType {
 	Type:  &Expr
 	Names: []&token::Token
 }
@@ -235,7 +235,7 @@ Tuple expression\.
 ```jule
 struct LitExpr {
 	Token: &token::Token
-	Value: str
+	Value: string
 }
 ```
 Literal expression\.
@@ -253,7 +253,7 @@ Unsafe expression\.
 ```jule
 struct NameExpr {
 	Token:  &token::Token // Token of identifier.
-	Name:   str           // The name.
+	Name:   string        // The name.
 	Extern: bool          // It is in the extern namespace.
 }
 ```
@@ -441,7 +441,7 @@ Constraint\.
 ```jule
 struct Generic {
 	Token:      &token::Token
-	Name:       str
+	Name:       string
 	Constraint: &Constraint
 }
 ```
@@ -451,7 +451,7 @@ Generic type declaration\.
 ```jule
 struct Label {
 	Token: &token::Token
-	Name:  str
+	Name:  string
 }
 ```
 Label statement\.
@@ -479,7 +479,7 @@ struct AssignLeft {
 	Token:     &token::Token
 	Mutable:   bool
 	Reference: bool
-	Name:      str
+	Name:      string
 	X:         &Expr // Expression.
 }
 ```
@@ -535,7 +535,7 @@ struct Param {
 	Variadic:  bool
 	Reference: bool
 	Type:      &Expr
-	Name:      str
+	Name:      string
 }
 ```
 Parameter\.
@@ -570,11 +570,11 @@ struct Func {
 	Short:      bool // Whether this function is an anonymous function, defined by short literal.
 	Static:     bool
 	Fallible:   bool
-	Name:       str
+	Name:       string
 	Directives: []&Directive
 	Scope:      &ScopeTree
 	Generics:   []&Generic
-	Result:     &RetType
+	Result:     &ReturnType
 	Params:     []&Param
 }
 ```
@@ -604,7 +604,7 @@ struct Var {
 	Scope:      &ScopeTree // nil for global scopes
 	Token:      &token::Token
 	Op:         &token::Token // Expression assign operator token.
-	Name:       str
+	Name:       string
 	Extern:     bool
 	Public:     bool
 	Mutable:    bool
@@ -622,9 +622,9 @@ struct Var {
 ```
 Variable declaration\.
 
-## Ret
+## Return
 ```jule
-struct Ret {
+struct Return {
 	Token: &token::Token
 	X:     &Expr // Expression.
 }
@@ -738,7 +738,7 @@ struct TypeAlias {
 	Public:   bool
 	Extern:   bool
 	Token:    &token::Token
-	Name:     str
+	Name:     string
 	Strict:   bool
 	Type:     &Expr
 	Generics: []&Generic
@@ -805,7 +805,7 @@ Use declaration statement\.
 ```jule
 struct EnumItem {
 	Token: &token::Token
-	Name:  str
+	Name:  string
 	X:     &Expr // Nil for auto expression.
 }
 ```
@@ -822,7 +822,7 @@ Reports whether item has auto expression\.
 struct Enum {
 	Token:  &token::Token
 	Public: bool
-	Name:   str
+	Name:   string
 	Type:   &Expr
 	Items:  []&EnumItem
 	End:    &token::Token
@@ -850,7 +850,7 @@ TypeEnum item\.
 struct TypeEnum {
 	Token:  &token::Token
 	Public: bool
-	Name:   str
+	Name:   string
 	Items:  []&TypeEnumItem
 	End:    &token::Token
 }
@@ -863,7 +863,7 @@ struct Field {
 	Token:   &token::Token
 	Public:  bool
 	Mutable: bool // Interior mutability.
-	Name:    str
+	Name:    string
 	Type:    &Expr
 	Tag:     &token::Token // Nil if not given.
 }
@@ -875,7 +875,7 @@ Field declaration\.
 struct Struct {
 	Token:      &token::Token
 	End:        &token::Token
-	Name:       str
+	Name:       string
 	Fields:     []&Field
 	Public:     bool
 	Extern:     bool
@@ -891,7 +891,7 @@ struct Trait {
 	// Trait declaration.
 	Token:    &token::Token
 	End:      &token::Token
-	Name:     str
+	Name:     string
 	Public:   bool
 	Inherits: []&Expr
 	Methods:  []&Func
@@ -981,7 +981,7 @@ Type of Expr&#39;s data\.
 ```jule
 enum StmtData: type {
 	&Var,
-	&Ret,
+	&Return,
 	&Goto,
 	&Break,
 	&Continue,
