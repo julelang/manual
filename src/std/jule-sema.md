@@ -10,12 +10,12 @@
 [trait Importer](#importer)\
 [trait Kind](#kind)\
 [struct Enum](#enum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindItem\(mut \*self, name: str\): &amp;Var](#finditem)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindItem\(mut \*self, name: string\): &amp;Var](#finditem)\
 [struct TypeEnumItem](#typeenumitem)\
 [struct TypeEnum](#typeenum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-1)\
 [struct Value](#value)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil)\
@@ -23,7 +23,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsConst\(\*self\): bool](#isconst)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn GoodOperand\(\*self, mut other: &amp;Value\): bool](#goodoperand)\
 [struct ValueSym](#valuesym)\
-[struct RetType](#rettype)\
+[struct ReturnType](#returntype)\
 [struct Param](#param)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(\*self\): bool](#isself)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsSmartptr\(\*self\): bool](#issmartptr)\
@@ -36,16 +36,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(\*self\): bool](#isanon)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AnyVar\(\*self\): bool](#anyvar)\
 [struct ParamIns](#paramins)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [struct FuncIns](#funcins)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-3)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn EqualFunc\(&amp;self, f: &amp;FuncIns, responsive: bool\): bool](#equalfunc)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Types\(mut \*self\): \[\]&amp;Type](#types)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsBuiltin\(\*self\): bool](#isbuiltin)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(\*self\): bool](#isanon-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Same\(\*self, f: &amp;FuncIns\): bool](#same)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn GetKindStr\(\*self, name: bool\): str](#getkindstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn GetKindString\(\*self, name: bool\): string](#getkindstring)\
 [struct Impl](#impl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(\*self\): bool](#istraitimpl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(\*self\): bool](#isstructimpl)\
@@ -92,26 +92,26 @@
 [struct AddrcallExpr](#addrcallexpr)\
 [struct ImportInfo](#importinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_: bool\): &amp;Var](#findvar)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_: bool\): &amp;TypeAlias](#findtypealias)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_: bool\): &amp;Struct](#findstruct)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_: bool\): &amp;Func](#findfunc)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: str\): &amp;Trait](#findtrait)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: str\): &amp;Enum](#findenum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_: bool\): &amp;Var](#findvar)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: string, \_: bool\): &amp;TypeAlias](#findtypealias)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: string, \_: bool\): &amp;Struct](#findstruct)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: string, \_: bool\): &amp;Func](#findfunc)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: string\): &amp;Trait](#findtrait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: string\): &amp;Enum](#findenum)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: string\): &amp;TypeEnum](#findtypeenum)\
 [struct Package](#package)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_extern: bool\): &amp;Var](#findvar-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_extern: bool\): &amp;TypeAlias](#findtypealias-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_extern: bool\): &amp;Struct](#findstruct-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_extern: bool\): &amp;Func](#findfunc-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: str\): &amp;Trait](#findtrait-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: str\): &amp;Enum](#findenum-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_extern: bool\): &amp;Var](#findvar-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: string, \_extern: bool\): &amp;TypeAlias](#findtypealias-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: string, \_extern: bool\): &amp;Struct](#findstruct-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: string, \_extern: bool\): &amp;Func](#findfunc-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: string\): &amp;Trait](#findtrait-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: string\): &amp;Enum](#findenum-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: string\): &amp;TypeEnum](#findtypeenum-1)\
 [struct FuncPattern](#funcpattern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Main\(f: &amp;Func\): bool](#main)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Init\(f: &amp;Func\): bool](#init)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(f: &amp;Func\): bool](#str-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(f: &amp;Func\): bool](#string-4)\
 [type ScopeTrait](#scopetrait)\
 [struct Scope](#scope)\
 [struct Use](#use)\
@@ -136,20 +136,20 @@
 [struct Select](#select)\
 [struct Case](#case)\
 [struct Fall](#fall)\
-[struct Ret](#ret)\
+[struct Return](#return)\
 [struct Field](#field)\
 [struct Struct](#struct)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: str, \_static: bool\): &amp;Func](#findmethod)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindField\(mut \*self, name: str\): &amp;Field](#findfield)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: string, \_static: bool\): &amp;Func](#findmethod)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindField\(mut \*self, name: string\): &amp;Field](#findfield)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsImplements\(\*self, t: &amp;Trait\): bool](#isimplements)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn HasRefAccessible\(\*self\): bool](#hasrefaccessible)\
 [struct FieldIns](#fieldins)\
 [struct StructIns](#structins)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-5)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-5)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Same\(\*self, s: &amp;StructIns\): bool](#same-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: str, \_static: bool\): &amp;Func](#findmethod-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindField\(mut \*self, name: str\): &amp;FieldIns](#findfield-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: string, \_static: bool\): &amp;Func](#findmethod-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindField\(mut \*self, name: string\): &amp;FieldIns](#findfield-1)\
 [struct ReferenceStack](#referencestack)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn At\(mut \*self, i: int\): any](#at)\
@@ -158,23 +158,23 @@
 [struct Pass](#pass)\
 [struct SymTab](#symtab)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, selector: fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: str, \_extern: bool\): &amp;Var](#findvar-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: str, \_extern: bool\): &amp;TypeAlias](#findtypealias-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: str, \_extern: bool\): &amp;Struct](#findstruct-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: str, \_extern: bool\): &amp;Func](#findfunc-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: str\): &amp;Trait](#findtrait-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: str\): &amp;Enum](#findenum-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: str\): &amp;TypeEnum](#findtypeenum-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_extern: bool\): &amp;Var](#findvar-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: string, \_extern: bool\): &amp;TypeAlias](#findtypealias-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: string, \_extern: bool\): &amp;Struct](#findstruct-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: string, \_extern: bool\): &amp;Func](#findfunc-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: string\): &amp;Trait](#findtrait-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: string\): &amp;Enum](#findenum-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: string\): &amp;TypeEnum](#findtypeenum-2)\
 [struct Trait](#trait)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-6)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-6)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-4)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: str\): &amp;Func](#findmethod-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindMethod\(mut \*self, name: string\): &amp;Func](#findmethod-2)\
 [struct ConstraintMask](#constraintmask)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-7)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-7)\
 [struct InsGeneric](#insgeneric)\
 [struct TypeAlias](#typealias)\
 [struct Type](#type)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-8)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-8)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-5)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Extern\(\*self\): bool](#extern)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsNil\(\*self\): bool](#isnil-1)\
@@ -203,7 +203,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Tuple\(mut \*self\): &amp;Tuple](#tuple)\
 [struct TypeSym](#typesym)\
 [struct Prim](#prim-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-9)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-9)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-6)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsConstraint\(\*self\): bool](#isconstraint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsI8\(\*self\): bool](#isi8)\
@@ -222,34 +222,35 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUint\(\*self\): bool](#isuint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUintptr\(\*self\): bool](#isuintptr)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsBool\(\*self\): bool](#isbool)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStr\(\*self\): bool](#isstr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn IsString\(\*self\): bool](#isstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAny\(\*self\): bool](#isany)\
 [struct Chan](#chan-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-10)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-10)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-7)\
 [struct Sptr](#sptr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-11)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-11)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-8)\
 [struct Slice](#slice-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-12)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-12)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-9)\
 [struct Tuple](#tuple-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-13)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-13)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-10)\
 [struct Map](#map-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-14)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-14)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-11)\
 [struct Array](#array-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-15)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-15)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-12)\
 [struct Ptr](#ptr-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str-16)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-16)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-13)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsUnsafe\(\*self\): bool](#isunsafe)\
 [struct Var](#var)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsInitialized\(\*self\): bool](#isinitialized)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTypeInferred\(\*self\): bool](#istypeinferred)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsEnumField\(\*self\): bool](#isenumfield)\
+[enum FuncOwner: type ](#funcowner)\
 [enum Expr: type ](#expr)\
 [enum Stmt: type ](#stmt)\
 [enum CaseOwner: type ](#caseowner)\
@@ -351,31 +352,31 @@ trait Lookup {
 
 	// Find variable by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindVar(mut *self, name: str, _extern: bool): &Var
+	fn FindVar(mut *self, name: string, _extern: bool): &Var
 
 	// Find type alias by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
+	fn FindTypeAlias(mut *self, name: string, _extern: bool): &TypeAlias
 
 	// Find structure by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindStruct(mut *self, name: str, _extern: bool): &Struct
+	fn FindStruct(mut *self, name: string, _extern: bool): &Struct
 
 	// Find function by identifier and external state.
 	// Returns nil if did not found any match.
-	fn FindFunc(mut *self, name: str, _extern: bool): &Func
+	fn FindFunc(mut *self, name: string, _extern: bool): &Func
 
 	// Find trait by identifier.
 	// Returns nil if did not found any match.
-	fn FindTrait(mut *self, name: str): &Trait
+	fn FindTrait(mut *self, name: string): &Trait
 
 	// Find enum by identifier.
 	// Returns nil if did not found any match.
-	fn FindEnum(mut *self, name: str): &Enum
+	fn FindEnum(mut *self, name: string): &Enum
 
 	// Find type enum by identifier.
 	// Returns nil if did not found any match.
-	fn FindTypeEnum(mut *self, name: str): &TypeEnum
+	fn FindTypeEnum(mut *self, name: string): &TypeEnum
 }
 ```
 Generic behavior of lookupable types\. Typically it is a scope like global scope, function scope or etc\.
@@ -392,19 +393,19 @@ trait Importer {
 	fn GetMod(mut *self): &mod::Mod
 
 	// Returns module path by identity.
-	fn ModById(mut *self, id: mod::ID): &mod::Mod
+	fn ModByID(mut *self, id: mod::ID): &mod::Mod
 
 	// Returns &ImportInfo by path.
 	// This function accepted as returns already imported and checked package.
 	// If returns not-nil value, will be used instead of ImportPackage
 	// if possible and package content is not checked by Sema.
-	fn GetImport(mut *self, path: str): &ImportInfo
+	fn GetImport(mut *self, path: string): &ImportInfo
 
 	// Path is the directory path of package to import.
 	// Should return abstract syntax tree of package files.
 	// Logs accepts as error.
 	// Updates module to package's module if exist when updateMod is true.
-	fn ImportPackage(mut *self, path: str, updateMod: bool): ([]&ast::AST, []log::Log)
+	fn ImportPackage(mut *self, path: string, updateMod: bool): ([]&ast::AST, []log::Log)
 
 	// Invoked after the package is imported.
 	// Sets module identitity of the imported package to current module.
@@ -421,10 +422,10 @@ trait Importer {
 	// Returns File by path.
 	// This function accepted as returns already included file.
 	// If returns not-nil value, will be used instead of IncludeFile if possible.
-	fn GetFile(mut *self, path: str): resource::File
+	fn GetFile(mut *self, path: string): resource::File
 
 	// Includes the file by path, returns nil if failed.
-	fn IncludeFile(mut *self, path: str): resource::File
+	fn IncludeFile(mut *self, path: string): resource::File
 
 	// Invoked after the file is included.
 	fn IncludedFile(mut *self, mut file: resource::File)
@@ -435,7 +436,7 @@ Package importer for the semantic analysis\. Used by semantic analysis to import
 ## Kind
 ```jule
 trait Kind {
-	fn Str(*self): str
+	fn String(*self): string
 	fn Equal(&self, other: &Type): bool
 }
 ```
@@ -446,7 +447,7 @@ Kind of type declaration\.
 struct Enum {
 	Token:   &token::Token
 	Public:  bool
-	Name:    str
+	Name:    string
 	TypeSym: &TypeSym
 	Items:   []&Var // See developer reference (14).
 }
@@ -457,9 +458,9 @@ Enum\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns Enum&#39;s identifier\.
 
@@ -471,7 +472,7 @@ Reports whether types are same\.
 
 ### FindItem
 ```jule
-fn FindItem(mut *self, name: str): &Var
+fn FindItem(mut *self, name: string): &Var
 ```
 Returns item by identifier\. Returns nil if not exist any item in this identifier\.
 
@@ -489,7 +490,7 @@ TypeEnum item\.
 struct TypeEnum {
 	Token:  &token::Token
 	Public: bool
-	Name:   str
+	Name:   string
 	Items:  []&TypeEnumItem
 }
 ```
@@ -499,9 +500,9 @@ TypeEnum\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns TypeEnum&#39;s identifier\.
 
@@ -570,9 +571,9 @@ struct ValueSym {
 ```
 Value\.
 
-## RetType
+## ReturnType
 ```jule
-struct RetType {
+struct ReturnType {
 	TypeSym: &TypeSym
 	Names:   []&token::Token
 }
@@ -587,7 +588,7 @@ struct Param {
 	Variadic:  bool
 	Reference: bool
 	TypeSym:   &TypeSym
-	Name:      str
+	Name:      string
 }
 ```
 Parameter\.
@@ -625,7 +626,7 @@ struct Func {
 	Static:     bool
 	Fallible:   bool
 	HasDefer:   bool // Whether function has at least one deferred scope.
-	Name:       str
+	Name:       string
 	Directives: []&ast::Directive
 
 	// Scope is the scope of function, aka body.
@@ -635,9 +636,9 @@ struct Func {
 	Scope: &ast::ScopeTree
 
 	Generics: []&ast::Generic
-	Result:   &RetType
+	Result:   &ReturnType
 	Params:   []&Param
-	Owner:    &Struct
+	Owner:    FuncOwner
 
 	// Function instances for each unique type combination of function call.
 	// Nil if function is never used.
@@ -692,9 +693,9 @@ struct ParamIns {
 ```
 Parameter instance\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns ParamIns&#39;s type kind as string\.
 
@@ -721,9 +722,9 @@ Function instance\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns function&#39;s type kind as string\.
 
@@ -763,9 +764,9 @@ fn Same(*self, f: &FuncIns): bool
 ```
 Reports whether instances are same\. Returns true if declarations and generics are same\.
 
-### GetKindStr
+### GetKindString
 ```jule
-fn GetKindStr(*self, name: bool): str
+fn GetKindString(*self, name: bool): string
 ```
 Returns kind string of function instance\. Appends identifier to kind of this instance\. Does not appends identifier of this instance to kind if self\.Decl is nil\.
 
@@ -1173,7 +1174,7 @@ Rune literal expression model\. For example: &#39;a&#39;
 ## BackendEmitExpr
 ```jule
 struct BackendEmitExpr {
-	Code: str
+	Code: string
 
 	// Expression Model: for expression or type emit to backend from Jule source code.
 	Exprs: []Expr
@@ -1198,14 +1199,14 @@ struct ImportInfo {
 	Decl: &ast::Use
 
 	// Absolute path.
-	Path: str
+	Path: string
 
 	// Use declaration path string.
 	// Quotes are not included.
-	LinkPath: str
+	LinkPath: string
 
 	// Package alias identifier.
-	Alias: str
+	Alias: string
 
 	// True if imported with Importer.GetImport function.
 	Duplicate: bool
@@ -1237,7 +1238,7 @@ Returns always nil\.
 
 ### FindVar
 ```jule
-fn FindVar(mut *self, name: str, _: bool): &Var
+fn FindVar(mut *self, name: string, _: bool): &Var
 ```
 Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
 
@@ -1245,7 +1246,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-external 
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut *self, name: str, _: bool): &TypeAlias
+fn FindTypeAlias(mut *self, name: string, _: bool): &TypeAlias
 ```
 Returns type alias by identifier\. Returns nil if not exist any type alias in this identifier\.
 
@@ -1253,7 +1254,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-external 
 
 ### FindStruct
 ```jule
-fn FindStruct(mut *self, name: str, _: bool): &Struct
+fn FindStruct(mut *self, name: string, _: bool): &Struct
 ```
 Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
@@ -1261,7 +1262,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-external 
 
 ### FindFunc
 ```jule
-fn FindFunc(mut *self, name: str, _: bool): &Func
+fn FindFunc(mut *self, name: string, _: bool): &Func
 ```
 Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
@@ -1269,7 +1270,7 @@ Lookups by import way such as identifier selection\. Just lookups non\-external 
 
 ### FindTrait
 ```jule
-fn FindTrait(mut *self, name: str): &Trait
+fn FindTrait(mut *self, name: string): &Trait
 ```
 Returns trait by identifier\. Returns nil if not exist any trait in this identifier\.
 
@@ -1277,7 +1278,7 @@ Lookups by import way such as identifier selection\.
 
 ### FindEnum
 ```jule
-fn FindEnum(mut *self, name: str): &Enum
+fn FindEnum(mut *self, name: string): &Enum
 ```
 Returns enum by identifier\. Returns nil if not exist any enum in this identifier\.
 
@@ -1285,7 +1286,7 @@ Lookups by import way such as identifier selection\.
 
 ### FindTypeEnum
 ```jule
-fn FindTypeEnum(mut *self, name: str): &TypeEnum
+fn FindTypeEnum(mut *self, name: string): &TypeEnum
 ```
 Returns type enum by identifier\. Returns nil if not exist any type enum in this identifier\.
 
@@ -1312,43 +1313,43 @@ Returns always nil\.
 
 ### FindVar
 ```jule
-fn FindVar(mut *self, name: str, _extern: bool): &Var
+fn FindVar(mut *self, name: string, _extern: bool): &Var
 ```
 Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
+fn FindTypeAlias(mut *self, name: string, _extern: bool): &TypeAlias
 ```
 Returns type alias by identifier and external state\. Returns nil if not exist any type alias in this identifier\.
 
 ### FindStruct
 ```jule
-fn FindStruct(mut *self, name: str, _extern: bool): &Struct
+fn FindStruct(mut *self, name: string, _extern: bool): &Struct
 ```
 Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
 ### FindFunc
 ```jule
-fn FindFunc(mut *self, name: str, _extern: bool): &Func
+fn FindFunc(mut *self, name: string, _extern: bool): &Func
 ```
 Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
 ### FindTrait
 ```jule
-fn FindTrait(mut *self, name: str): &Trait
+fn FindTrait(mut *self, name: string): &Trait
 ```
 Returns trait by identifier\. Returns nil if not exist any trait in this identifier\.
 
 ### FindEnum
 ```jule
-fn FindEnum(mut *self, name: str): &Enum
+fn FindEnum(mut *self, name: string): &Enum
 ```
 Returns enum by identifier\. Returns nil if not exist any enum in this identifier\.
 
 ### FindTypeEnum
 ```jule
-fn FindTypeEnum(mut *self, name: str): &TypeEnum
+fn FindTypeEnum(mut *self, name: string): &TypeEnum
 ```
 Returns type enum by identifier\. Returns nil if not exist any type enum in this identifier\.
 
@@ -1370,11 +1371,11 @@ fn Init(f: &Func): bool
 ```
 Reports whether function is the reserved init function\.
 
-### Str
+### String
 ```jule
-fn Str(f: &Func): bool
+fn String(f: &Func): bool
 ```
-Reports whether function is the reserved Str function\.
+Reports whether function is the reserved String function\.
 
 ## ScopeTrait
 ```jule
@@ -1504,7 +1505,7 @@ Throw statement\.
 ## Label
 ```jule
 struct Label {
-	Name:  str
+	Name:  string
 	Scope: &Scope // Owner scope.
 	Index: int    // Index of statement.
 }
@@ -1520,7 +1521,7 @@ Basic direction flags\.
 ## Goto
 ```jule
 struct Goto {
-	Name:      str
+	Name:      string
 	Token:     &token::Token
 	Label:     &Label
 	Scope:     &Scope // Owner scope.
@@ -1534,7 +1535,7 @@ Goto statement\.
 ```jule
 struct Postfix {
 	Expr: Expr
-	Op:   str
+	Op:   string
 }
 ```
 Postfix assignment\.
@@ -1615,9 +1616,9 @@ struct Fall {
 ```
 Fall statement\.
 
-## Ret
+## Return
 ```jule
-struct Ret {
+struct Return {
 	Func: &FuncIns
 	Expr: Expr
 }
@@ -1631,10 +1632,10 @@ struct Field {
 	Token:   &token::Token
 	Public:  bool
 	Mutable: bool // Interior mutability.
-	Name:    str
+	Name:    string
 	TypeSym: &TypeSym
-	Tag:     &token::Token // Tag declaration.
-	Tags:    map[str]str   // Tags in key:value format.
+	Tag:     &token::Token     // Tag declaration.
+	Tags:    map[string]string // Tags in key:value format.
 }
 ```
 Field\.
@@ -1651,7 +1652,7 @@ struct Struct {
 	Depends: []&Struct
 
 	Token:      &token::Token
-	Name:       str
+	Name:       string
 	Fields:     []&Field
 	Methods:    []&Func
 	Public:     bool
@@ -1671,13 +1672,13 @@ Structure\.
 
 ### FindMethod
 ```jule
-fn FindMethod(mut *self, name: str, _static: bool): &Func
+fn FindMethod(mut *self, name: string, _static: bool): &Func
 ```
 Returns method by identifier\. Returns nil if not exist any method in this identifier\.
 
 ### FindField
 ```jule
-fn FindField(mut *self, name: str): &Field
+fn FindField(mut *self, name: string): &Field
 ```
 Returns field by identifier\. Returns nil if not exist any field in this identifier\.
 
@@ -1724,9 +1725,9 @@ Structure instance\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns Struct&#39;s type kind as string\.
 
@@ -1744,13 +1745,13 @@ Reports whether instances are same\. Returns true if declarations and generics a
 
 ### FindMethod
 ```jule
-fn FindMethod(mut *self, name: str, _static: bool): &Func
+fn FindMethod(mut *self, name: string, _static: bool): &Func
 ```
 Returns method by identifier\. Returns nil if not exist any method in this identifier\.
 
 ### FindField
 ```jule
-fn FindField(mut *self, name: str): &FieldIns
+fn FindField(mut *self, name: string): &FieldIns
 ```
 Returns field by identifier\. Returns nil if not exist any field in this identifier\.
 
@@ -1797,7 +1798,7 @@ Reports whether reference is exist\.
 ```jule
 struct Pass {
 	Token: &token::Token
-	Args:  []str
+	Args:  []string
 }
 ```
 Directive pass\.
@@ -1832,43 +1833,43 @@ Returns imported package by selector\. Returns nil if selector returns false for
 
 ### FindVar
 ```jule
-fn FindVar(mut *self, name: str, _extern: bool): &Var
+fn FindVar(mut *self, name: string, _extern: bool): &Var
 ```
 Returns variable by identifier and external state\. Returns nil if refenrece not exist any variable in this identifier\.
 
 ### FindTypeAlias
 ```jule
-fn FindTypeAlias(mut *self, name: str, _extern: bool): &TypeAlias
+fn FindTypeAlias(mut *self, name: string, _extern: bool): &TypeAlias
 ```
 Returns type alias by identifier and external state\. Returns nil if not exist any type alias in this identifier\.
 
 ### FindStruct
 ```jule
-fn FindStruct(mut *self, name: str, _extern: bool): &Struct
+fn FindStruct(mut *self, name: string, _extern: bool): &Struct
 ```
 Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
 
 ### FindFunc
 ```jule
-fn FindFunc(mut *self, name: str, _extern: bool): &Func
+fn FindFunc(mut *self, name: string, _extern: bool): &Func
 ```
 Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
 
 ### FindTrait
 ```jule
-fn FindTrait(mut *self, name: str): &Trait
+fn FindTrait(mut *self, name: string): &Trait
 ```
 Returns trait by identifier\. Returns nil if not exist any trait in this identifier\.
 
 ### FindEnum
 ```jule
-fn FindEnum(mut *self, name: str): &Enum
+fn FindEnum(mut *self, name: string): &Enum
 ```
 Returns enum by identifier\. Returns nil if not exist any enum in this identifier\.
 
 ### FindTypeEnum
 ```jule
-fn FindTypeEnum(mut *self, name: str): &TypeEnum
+fn FindTypeEnum(mut *self, name: string): &TypeEnum
 ```
 Returns type enum by identifier\. Returns nil if not exist any type enum in this identifier\.
 
@@ -1876,7 +1877,7 @@ Returns type enum by identifier\. Returns nil if not exist any type enum in this
 ```jule
 struct Trait {
 	Token:       &token::Token
-	Name:        str
+	Name:        string
 	Public:      bool
 	Inherits:    []&TypeSym
 	Methods:     []&Func
@@ -1889,9 +1890,9 @@ Trait\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Implement: Kind Returns Trait&#39;s identifier\.
 
@@ -1903,7 +1904,7 @@ Reports whether types are same\.
 
 ### FindMethod
 ```jule
-fn FindMethod(mut *self, name: str): &Func
+fn FindMethod(mut *self, name: string): &Func
 ```
 Returns method by identifier\. Returns nil if not exist any method in this identifier\.
 
@@ -1916,9 +1917,9 @@ struct ConstraintMask {
 ```
 Single mask value for a constraint\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
@@ -1941,7 +1942,7 @@ struct TypeAlias {
 	Used:     bool
 	Generic:  bool
 	Token:    &token::Token
-	Name:     str
+	Name:     string
 	TypeSym:  &TypeSym
 	Generics: []&ast::Generic // See the developer reference (3).
 }
@@ -1951,7 +1952,7 @@ Type alias\.
 ## Type
 ```jule
 struct Type {
-	Provider: str // Identifier of the type alias, if type provided by a type alias.
+	Provider: string // Identifier of the type alias, if type provided by a type alias.
 	Generic:  bool
 	Variadic: bool
 	Kind:     Kind
@@ -1963,9 +1964,9 @@ Evaluated type declaration\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns kind as string\.
 
@@ -2137,7 +2138,7 @@ Type\.
 ## Prim
 ```jule
 struct Prim {
-	Kind: str
+	Kind: string
 }
 ```
 Primitive type\.
@@ -2146,9 +2147,9 @@ Primitive type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns kind\.
 
@@ -2260,11 +2261,11 @@ fn IsBool(*self): bool
 ```
 Reports whether type is primitive bool\.
 
-### IsStr
+### IsString
 ```jule
-fn IsStr(*self): bool
+fn IsString(*self): bool
 ```
-Reports whether type is primitive str\.
+Reports whether type is primitive string\.
 
 ### IsAny
 ```jule
@@ -2286,9 +2287,9 @@ Channel type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns smart pointer kind as string\.
 
@@ -2310,9 +2311,9 @@ Smart pointer\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns smart pointer kind as string\.
 
@@ -2334,9 +2335,9 @@ Slice type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns slice kind as string\.
 
@@ -2358,9 +2359,9 @@ Tuple type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns tuple kind as string\.
 
@@ -2383,9 +2384,9 @@ Map type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns map kind as string\.
 
@@ -2409,9 +2410,9 @@ Array type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns array kind as string\.
 
@@ -2433,9 +2434,9 @@ Pointer type\.
 
 - `Kind`
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 Returns pointer kind as string\.
 
@@ -2456,7 +2457,7 @@ Reports whether pointer is unsafe pointer \(\*unsafe\)\.
 struct Var {
 	Scope:      &Scope
 	Token:      &token::Token
-	Name:       str
+	Name:       string
 	Extern:     bool
 	Constant:   bool
 	Mutable:    bool
@@ -2506,6 +2507,15 @@ Reports whether variable is type inferred\.
 fn IsEnumField(*self): bool
 ```
 Reports whether variable is enum field\.
+
+## FuncOwner
+```jule
+enum FuncOwner: type {
+	&Struct,
+	&Trait,
+}
+```
+Types of a potential owner of a function\.
 
 ## Expr
 ```jule
@@ -2576,7 +2586,7 @@ enum Stmt: type {
 	&Match,
 	&Fall,
 	&Break,
-	&Ret,
+	&Return,
 	&Select,
 	&Use,
 	&Throw,
