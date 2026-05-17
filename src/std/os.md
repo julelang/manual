@@ -60,36 +60,36 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 ## Index
 
 [Variables](#variables)\
-[fn ReadDir\(path: str\)\!: \(dirents: \[\]DirEntry\)](#readdir)\
-[fn Mkdir\(path: str\)\!](#mkdir)\
-[fn Rmdir\(path: str\)\!](#rmdir)\
-[fn Open\(path: str\)\!: &amp;File](#open)\
-[fn OpenFile\(path: str, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
-[fn Remove\(path: str\)\!](#remove)\
-[fn Create\(path: str\)\!: &amp;File](#create)\
-[fn ReadFile\(path: str\)\!: \[\]byte](#readfile)\
-[fn ReadFileSync\(path: str\)\!: \[\]byte](#readfilesync)\
-[fn WriteFile\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefile)\
-[fn WriteFileSync\(path: str, data: \[\]byte, perm: FileMode\)\!](#writefilesync)\
+[fn ReadDir\(path: string\)\!: \(dirents: \[\]DirEntry\)](#readdir)\
+[fn Mkdir\(path: string\)\!](#mkdir)\
+[fn Rmdir\(path: string\)\!](#rmdir)\
+[fn Open\(path: string\)\!: &amp;File](#open)\
+[fn OpenFile\(path: string, flag: int, perm: FileMode\)\!: &amp;File](#openfile)\
+[fn Remove\(path: string\)\!](#remove)\
+[fn Create\(path: string\)\!: &amp;File](#create)\
+[fn ReadFile\(path: string\)\!: \[\]byte](#readfile)\
+[fn ReadFileSync\(path: string\)\!: \[\]byte](#readfilesync)\
+[fn WriteFile\(path: string, data: \[\]byte, perm: FileMode\)\!](#writefile)\
+[fn WriteFileSync\(path: string, data: \[\]byte, perm: FileMode\)\!](#writefilesync)\
 [fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Pipe\(\)\!: \(r: &amp;File, w: &amp;File\)](#pipe)\
 [fn Exit\(code: int\)](#exit)\
-[fn Executable\(\): str](#executable)\
-[fn Args\(\): \[\]str](#args)\
-[fn Getwd\(\)\!: str](#getwd)\
-[fn Chdir\(path: str\)\!](#chdir)\
-[fn Environ\(\): \[\]str](#environ)\
-[fn Getenv\(key: str\): str](#getenv)\
-[fn LookupEnv\(key: str\): \(value: str, found: bool\)](#lookupenv)\
-[fn Setenv\(key: str, value: str\)\!](#setenv)\
-[fn Stat\(path: str\)\!: FileInfo](#stat)\
-[fn Lstat\(path: str\)\!: FileInfo](#lstat)\
+[fn Executable\(\): string](#executable)\
+[fn Args\(\): \[\]string](#args)\
+[fn Getwd\(\)\!: string](#getwd)\
+[fn Chdir\(path: string\)\!](#chdir)\
+[fn Environ\(\): \[\]string](#environ)\
+[fn Getenv\(key: string\): string](#getenv)\
+[fn LookupEnv\(key: string\): \(value: string, found: bool\)](#lookupenv)\
+[fn Setenv\(key: string, value: string\)\!](#setenv)\
+[fn Stat\(path: string\)\!: FileInfo](#stat)\
+[fn Lstat\(path: string\)\!: FileInfo](#lstat)\
 [fn Stdin\(\): &amp;File](#stdin)\
 [fn Stdout\(\): &amp;File](#stdout)\
 [fn Stderr\(\): &amp;File](#stderr)\
-[fn Hostname\(\)\!: str](#hostname)\
+[fn Hostname\(\)\!: string](#hostname)\
 [struct Cmd](#cmd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: str, mut args: \.\.\.str\): &amp;Cmd](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: string, mut args: \.\.\.string\): &amp;Cmd](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(\*self, mut r: &amp;File\)\!](#stdin-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(\*self, mut w: &amp;File\)\!](#stdout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(\*self, mut w: &amp;File\)\!](#stderr-1)\
@@ -108,7 +108,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteSync\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#writesync)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteStr\(mut \*self, s: str\)\!: \(n: int\)](#writestr)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteString\(mut \*self, s: string\)\!: \(n: int\)](#writestring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSync\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#readsync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut \*self, offset: i64, whence: int\)\!: i64](#seek)\
@@ -123,7 +123,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Size\(\*self\): i64](#size)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SameFile\(\*self, fi2: FileInfo\): bool](#samefile)\
 [type FileMode](#filemode)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Str\(\*self\): str](#str)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsRegular\(\*self\): bool](#isregular)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Perm\(\*self\): FileMode](#perm)\
@@ -191,67 +191,67 @@ The defined file mode bits are the most significant bits of the \[FileMode\]\. T
 
 ## ReadDir
 ```jule
-fn ReadDir(path: str)!: (dirents: []DirEntry)
+fn ReadDir(path: string)!: (dirents: []DirEntry)
 ```
 Reads the named directory and returns all its directory entries can read\.
 
 ## Mkdir
 ```jule
-fn Mkdir(path: str)!
+fn Mkdir(path: string)!
 ```
 Creates directory\.
 
 ## Rmdir
 ```jule
-fn Rmdir(path: str)!
+fn Rmdir(path: string)!
 ```
 Removes empty directory\.
 
 ## Open
 ```jule
-fn Open(path: str)!: &File
+fn Open(path: string)!: &File
 ```
 Opens the named file for reading\. If successful, methods on the returned file can be used for reading; the associated file descriptor has mode O\_RDONLY\.
 
 ## OpenFile
 ```jule
-fn OpenFile(path: str, flag: int, perm: FileMode)!: &File
+fn OpenFile(path: string, flag: int, perm: FileMode)!: &File
 ```
 Opens file stream with named file, specified flag \(O\_RDWR, O\_TRUNC etc\.\) and perm\. If named file does not exist and O\_CREATE flag is passed, will created with mode perm \(before umask\)\. If successful, returns File reference with handle to file stream and the reference can used for I/O operations\.
 
 ## Remove
 ```jule
-fn Remove(path: str)!
+fn Remove(path: string)!
 ```
 Removes named file\.
 
 ## Create
 ```jule
-fn Create(path: str)!: &File
+fn Create(path: string)!: &File
 ```
 Creates or truncates the named file\. If the file already exists, it is truncated\. If the file does not exist, it is created with mode 0666 \(before umask\)\. If successful, methods on the returned File can be used for I/O; the associated file descriptor has mode O\_RDWR\. Calls internally \`File\.Open\` and forwards any error\.
 
 ## ReadFile
 ```jule
-async fn ReadFile(path: str)!: []byte
+async fn ReadFile(path: string)!: []byte
 ```
 Reads bytes of file\. First, learns byte\-size of file\. Then reads bytes and returns buffer\.
 
 ## ReadFileSync
 ```jule
-fn ReadFileSync(path: str)!: []byte
+fn ReadFileSync(path: string)!: []byte
 ```
 Sync variant of \[ReadFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
 ## WriteFile
 ```jule
-async fn WriteFile(path: str, data: []byte, perm: FileMode)!
+async fn WriteFile(path: string, data: []byte, perm: FileMode)!
 ```
 Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any error\.
 
 ## WriteFileSync
 ```jule
-fn WriteFileSync(path: str, data: []byte, perm: FileMode)!
+fn WriteFileSync(path: string, data: []byte, perm: FileMode)!
 ```
 Sync variant of \[WriteFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
@@ -275,61 +275,61 @@ Causes the current program to exit with the given status code\. Conventionally, 
 
 ## Executable
 ```jule
-fn Executable(): str
+fn Executable(): string
 ```
 Returns executable path\. Returns empty string if any error occurs\.
 
 ## Args
 ```jule
-fn Args(): []str
+fn Args(): []string
 ```
 Returns command\-line arguments\. Starts with the program name\.
 
 ## Getwd
 ```jule
-fn Getwd()!: str
+fn Getwd()!: string
 ```
 Returns an absolute path name of the current working directory of the calling process\.
 
 ## Chdir
 ```jule
-fn Chdir(path: str)!
+fn Chdir(path: string)!
 ```
 Changes the current working directory to the given directory\.
 
 ## Environ
 ```jule
-fn Environ(): []str
+fn Environ(): []string
 ```
 Returns environment variables\.
 
 ## Getenv
 ```jule
-fn Getenv(key: str): str
+fn Getenv(key: string): string
 ```
 Retrieves the value of the environment variable named by the key\. It returns the value, which will be empty if the variable is not present\. To distinguish between an empty value and an found value, use \[LookupEnv\]\.
 
 ## LookupEnv
 ```jule
-fn LookupEnv(key: str): (value: str, found: bool)
+fn LookupEnv(key: string): (value: string, found: bool)
 ```
 Retrieves the value of the environment variable named by the key\. If the variable is present in the environment the value \(which may be empty\) is returned and the boolean is true\. Otherwise the returned value will be empty and the boolean will be false\.
 
 ## Setenv
 ```jule
-fn Setenv(key: str, value: str)!
+fn Setenv(key: string, value: string)!
 ```
 Sets the value of the environment variable named by the key\.
 
 ## Stat
 ```jule
-fn Stat(path: str)!: FileInfo
+fn Stat(path: string)!: FileInfo
 ```
 Returns a \[FileInfo\] describing the named file\.
 
 ## Lstat
 ```jule
-fn Lstat(path: str)!: FileInfo
+fn Lstat(path: string)!: FileInfo
 ```
 Returns a \[FileInfo\] describing the named file\. If the file is a symbolic link, the returned FileInfo describes the symbolic link\. It makes no attempt to follow the link\.
 
@@ -355,7 +355,7 @@ Returns File for the standard error file descriptor\.
 
 ## Hostname
 ```jule
-fn Hostname()!: str
+fn Hostname()!: string
 ```
 Returns the host name reported by the kernel\.
 
@@ -366,18 +366,18 @@ struct Cmd {
 	//
 	// This is the only field that must be set to a non-zero
 	// value. If it is relative, it is evaluated relative to Dir.
-	Path: str
+	Path: string
 
 	// Specifies the working directory of the command.
 	// If it is the empty string, Cmd runs the command in the
 	// calling process's current directory.
-	Dir: str
+	Dir: string
 
 	// Holds command line arguments, including the command as Args[0].
 	// If it is empty or nil, Start uses {Path}.
 	//
 	// In typical use, both Path and Args are set by calling [Cmd.New].
-	Args: []str
+	Args: []string
 
 	// Specifies the environment of the process.
 	// Each entry is of the form "key=value".
@@ -386,7 +386,7 @@ struct Cmd {
 	// value in the slice for each duplicate key is used.
 	// As a special case on Windows, SYSTEMROOT is always added if
 	// missing and not explicitly set to the empty string.
-	Env: []str
+	Env: []string
 
 	// NOTE: contains filtered hidden or unexported fields
 }
@@ -397,7 +397,7 @@ Once a Cmd has been executed, it is not recommended to reuse the same instance m
 
 ### New
 ```jule
-fn New(path: str, mut args: ...str): &Cmd
+fn New(path: string, mut args: ...string): &Cmd
 ```
 Returns Cmd instance for path with arguments\.
 
@@ -468,7 +468,7 @@ Kills the command\. The command must have been started by \[Cmd\.Start\]\.
 ## DirEntry
 ```jule
 struct DirEntry {
-	Name: str
+	Name: string
 	Stat: FileInfo
 }
 ```
@@ -504,7 +504,7 @@ A file descriptor is only guaranteed to exhibit blocking behavior when the progr
 - `io::ReadSeeker`
 - `io::WriteSeeker`
 - `io::Seeker`
-- `io::StrWriter`
+- `io::StringWriter`
 
 ### RawFD
 ```jule
@@ -546,9 +546,9 @@ fn WriteSync(mut *self, buf: []byte)!: (n: int)
 ```
 Sync variant of \[Write\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
-### WriteStr
+### WriteString
 ```jule
-async fn WriteStr(mut *self, s: str)!: (n: int)
+async fn WriteString(mut *self, s: string)!: (n: int)
 ```
 Like Write, but writes the contents of string s rather than a slice of bytes\.
 
@@ -640,9 +640,9 @@ type FileMode: u32
 ```
 Represents a file&#39;s mode and permission bits\. The bits have the same definition on all systems, so that information about files can be moved from one system to another portably\. Not all bits apply to all systems\. The only required bit is \[ModeDir\] for directories\.
 
-### Str
+### String
 ```jule
-fn Str(*self): str
+fn String(*self): string
 ```
 
 
