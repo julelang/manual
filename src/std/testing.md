@@ -7,9 +7,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Failed\(\*self\): bool](#failed)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Skip\(\*self\)](#skip)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Skipped\(\*self\): bool](#skipped)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Assert\(\*self, expr: bool, message: str\): bool](#assert)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Errorf\(\*self, fmt: str, args: \.\.\.any\)](#errorf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Logf\(\*self, fmt: str, args: \.\.\.any\)](#logf)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Assert\(\*self, expr: bool, message: string\): bool](#assert)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Errorf\(\*self, fmt: string, args: \.\.\.any\)](#errorf)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Logf\(\*self, fmt: string, args: \.\.\.any\)](#logf)
 
 
 
@@ -47,18 +47,18 @@ Reports whether test is skipped\.
 
 ### Assert
 ```jule
-fn Assert(*self, expr: bool, message: str): bool
+fn Assert(*self, expr: bool, message: string): bool
 ```
 Set status of test as failure if expression is evaluated false at runtime\.
 
 ### Errorf
 ```jule
-fn Errorf(*self, fmt: str, args: ...any)
+fn Errorf(*self, fmt: string, args: ...any)
 ```
 Set status of test as failure and print message by formatting\. Prints new\-line after formatted text\. Uses &#34;std/fmt&#34; internally\.
 
 ### Logf
 ```jule
-fn Logf(*self, fmt: str, args: ...any)
+fn Logf(*self, fmt: string, args: ...any)
 ```
 Logs message with no error, test status will not be affected\.
