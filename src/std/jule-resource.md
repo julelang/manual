@@ -10,7 +10,7 @@
 ```jule
 trait File {
 	// Returns path of the file.
-	fn Path(*self): str
+	fn Path(*self): string
 
 	// Returns file content in bytes.
 	// The return value may be mutable reference to the internal buffer,
@@ -18,7 +18,7 @@ trait File {
 	fn Bytes(*self): []byte
 
 	// Returns file content in text.
-	fn Text(*self): str
+	fn Text(*self): string
 }
 ```
 A general file instance for compile\-time embed files\.
