@@ -141,6 +141,7 @@ Enables special optimizations for string operations.
 - Eliminates neutral binary expressions such as concatenation with the empty string.
 - Optimizes allocations of the string concatenations if possible.
 - Optimizes string and bytes conversions of binary expressions such as `string([]byte) == string([]byte)`.
+- Optimizes `string([]byte)` and `string([]rune)` casting expressions to `string` literal when all slice values are constant.
 
 ---
 
