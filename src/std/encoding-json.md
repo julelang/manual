@@ -98,13 +98,13 @@ Dynamic decoding will always decode using dynamic types;
 If you use Value as destination type, it may store any JSON value,
 and the type will be determined dynamically based on the JSON value.
 ```
-Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+Decode cannot handle cyclic data structures and will enforce a strict nesting limit\. Passing cyclic structures or data exceeding 256 nested levels will throw an error to prevent recursive call stack overflow and system crashes\.
 
 Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
 JSONDecoder, TextDecoder
 ```
-
+Decode validates the JSON data on the fly rather than beforehand\. As a result, when decoding invalid JSON data, certain modifications may be made to the target memory until an error is encountered, which can lead to partially decoded data\. If you require absolute accuracy beforehand, validate the JSON data using the \`Valid\` function\.
 
 ## Encode
 ```jule
@@ -165,7 +165,7 @@ Smart Pointers:
 	If smart pointer is nil, encode as null JSON value.
 	Otherwise, will encode dereferenced value.
 ```
-Encode cannot represent cyclic data structures and does not handle them\. Passing cyclic structures for encoding will result in an cycle at runtime\. Too many nested types are not specifically checked and may cause too many recursive function calls, resulting in a crash at runtime\. As a result of the tests, it is recommended that a data type can carry a maximum of 256 nested data\.
+Encode cannot handle cyclic data structures and will enforce a strict nesting limit\. Passing cyclic structures or data exceeding 256 nested levels will throw an error to prevent recursive call stack overflow and system crashes\.
 
 Supported trait implementations by higher\-to\-lower precedence \(having methods without implementing the trait is valid\):<br>
 ```
