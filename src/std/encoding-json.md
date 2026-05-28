@@ -2,9 +2,9 @@
 
 ## Index
 
-[fn Decode\[T\]\(data: \[\]byte, mut &amp;t: \*T\)\!](#decode)\
-[fn Encode\[T\]\(t: T\)\!: \[\]byte](#encode)\
-[fn EncodeIndent\[T\]\(t: T, indent: string\)\!: \[\]byte](#encodeindent)\
+[fn Decode\[T\]\(data: \[\]byte, mut &amp;v: \*T\)\!](#decode)\
+[fn Encode\[T\]\(v: T\)\!: \[\]byte](#encode)\
+[fn EncodeIndent\[T\]\(v: T, indent: string\)\!: \[\]byte](#encodeindent)\
 [fn Valid\(data: \[\]byte\): bool](#valid)\
 [type Object](#object)\
 [type Array](#array)\
@@ -17,13 +17,25 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [struct EncodeError](#encodeerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-3)\
+[struct Encoder](#encoder)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut w: io::Writer\): &amp;Encoder](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Encode\[T\]\(\*self, v: T\)\!](#encode-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetIndent\(mut \*self, indent: string\)](#setindent)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetMaxNestedDepth\(mut \*self, depth: int\)](#setmaxnesteddepth)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetEscapeHTML\(mut \*self, escape: bool\)](#setescapehtml)\
+[struct Decoder](#decoder)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(mut r: io::Reader\): &amp;Decoder](#new-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Decode\[T\]\(\*self, mut &amp;v: \*T\)\!: int](#decode-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetMaxNestedDepth\(mut \*self, depth: int\)](#setmaxnesteddepth-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(\*self\): i64](#inputoffset)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DisallowUnknownFields\(\*self\)](#disallowunknownfields)\
 [enum Value: type ](#value)
 
 
 
 ## Decode
 ```jule
-fn Decode[T](data: []byte, mut &t: *T)!
+fn Decode[T](data: []byte, mut &v: *T)!
 ```
 Implements decoding of JSON as defined in RFC 7159\.
 
@@ -108,7 +120,7 @@ Decode validates the JSON data on the fly rather than beforehand\. As a result, 
 
 ## Encode
 ```jule
-fn Encode[T](t: T)!: []byte
+fn Encode[T](v: T)!: []byte
 ```
 Implements encoding of JSON as defined in RFC 7159\.
 
@@ -175,7 +187,7 @@ JSONEncoder, TextEncoder
 
 ## EncodeIndent
 ```jule
-fn EncodeIndent[T](t: T, indent: string)!: []byte
+fn EncodeIndent[T](v: T, indent: string)!: []byte
 ```
 Same as Encode\[T\] function but enables indentation\.
 
@@ -258,6 +270,91 @@ Represents an error from calling a reserved \[EncodeText\] method\.
 fn String(*self): string
 ```
 
+
+## Encoder
+```jule
+struct Encoder {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+An Encoder writes JSON values to an output stream\.
+
+### New
+```jule
+fn New(mut w: io::Writer): &Encoder
+```
+Returns a new encoder that writes to w\.
+
+### Encode
+```jule
+async fn Encode[T](*self, v: T)!
+```
+Writes the JSON encoding of v to the stream, followed by a newline character\.
+
+See the documentation for \[Encode\] for details about the conversion of Jule values to JSON\.
+
+### SetIndent
+```jule
+fn SetIndent(mut *self, indent: string)
+```
+Enables indentation for each subsequent encoded value\. Calling SetIndent\(&#34;&#34;\) disables indentation\.
+
+### SetMaxNestedDepth
+```jule
+fn SetMaxNestedDepth(mut *self, depth: int)
+```
+Sets maximum nested depth limit\. Panics if depth is a negative value\.
+
+### SetEscapeHTML
+```jule
+fn SetEscapeHTML(mut *self, escape: bool)
+```
+Specifies whether problematic HTML characters should be escaped inside JSON quoted strings\. The default behavior is to escape &amp;, &lt;, and &gt; to \\u0026, \\u003c, and \\u003e to avoid certain safety problems that can arise when embedding JSON in HTML\.
+
+In non\-HTML settings where the escaping interferes with the readability of the output, SetEscapeHTML\(false\) disables this behavior\.
+
+## Decoder
+```jule
+struct Decoder {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+A Decoder reads and decodes JSON values from an input stream\.
+
+### New
+```jule
+fn New(mut r: io::Reader): &Decoder
+```
+Returns a new decoder that reads from r\.
+
+The decoder introduces its own buffering and may read data from r beyond the JSON values requested\.
+
+### Decode
+```jule
+#disable boundary
+async fn Decode[T](*self, mut &v: *T)!: int
+```
+Reads the next JSON\-encoded value from its input and stores it in the value pointed to by v\.
+
+See the documentation for \[Decode\] for details about the conversion of JSON into a Jule value\.
+
+### SetMaxNestedDepth
+```jule
+fn SetMaxNestedDepth(mut *self, depth: int)
+```
+Sets maximum nested depth limit\. Panics if depth is a negative value\.
+
+### InputOffset
+```jule
+fn InputOffset(*self): i64
+```
+Returns the input stream byte offset of the current decoder position\. The offset gives the location of the end of the most recently returned token and the beginning of the next token\.
+
+### DisallowUnknownFields
+```jule
+fn DisallowUnknownFields(*self)
+```
+Causes the Decoder to throw an error when the destination is a struct and the input contains object keys which do not match any non\-ignored, exported fields in the destination\.
 
 ## Value
 ```jule
