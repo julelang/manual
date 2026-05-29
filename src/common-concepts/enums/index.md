@@ -23,12 +23,12 @@ The value assignments are based on the previous field. The first element is assi
 For example:
 ```jule
 enum MyEnum {
-    A: -20,
+    A = -20,
     B,
     C,
-    D: 20,
+    D = 20,
     E,
-    F: 1,
+    F = 1,
     G,
     H,
 }
@@ -75,7 +75,7 @@ You may want to cast your enum for various reasons. Normal casting rules apply h
 
 ```jule
 enum MyEnum {
-    MyVal: 10,
+    MyVal = 10,
 }
 
 fn main() {

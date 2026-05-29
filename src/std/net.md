@@ -768,15 +768,15 @@ Closes connection\.
 ## Network
 ```jule
 enum Network: string {
-	IP: "ip",
-	IP4: "ip4",
-	IP6: "ip6",
-	TCP: "tcp",
-	TCP4: "tcp4",
-	TCP6: "tcp6",
-	UDP: "udp",
-	UDP4: "udp4",
-	UDP6: "udp6",
+	IP   = "ip",
+	IP4  = "ip4",
+	IP6  = "ip6",
+	TCP  = "tcp",
+	TCP4 = "tcp4",
+	TCP6 = "tcp6",
+	UDP  = "udp",
+	UDP4 = "udp4",
+	UDP6 = "udp6",
 }
 ```
 Network names\.

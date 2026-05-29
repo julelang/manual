@@ -39,8 +39,8 @@ Compile information\.
 ## Compiler
 ```jule
 enum Compiler: string {
-	Clang: "clang",
-	GCC: "gcc",
+	Clang = "clang",
+	GCC   = "gcc",
 }
 ```
 Standard back\-end compilers\.
@@ -48,7 +48,7 @@ Standard back\-end compilers\.
 ## CppStd
 ```jule
 enum CppStd: string {
-	Cpp20: "cpp20",
+	Cpp20 = "cpp20",
 }
 ```
 Supported C\+\+ standards\.
