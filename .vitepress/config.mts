@@ -22,11 +22,33 @@ class Jule implements ILanguageRegistration {
   }
 }
 
-const jule = new Jule();
+class JuleMod implements ILanguageRegistration {
+  id: string;
+  name: string;
+  scopeName: string;
+  displayName?: string | undefined;
+  path: string;
+  grammar?: IGrammar | undefined;
+  aliases?: string[] | undefined;
+
+  constructor() {
+    this.id = "julemod";
+    this.name = "julemod";
+    this.scopeName = "jule.mod";
+    this.displayName = "jule module";
+    this.path = "";
+    this.grammar = JSON.parse(readFileSync("jule/mod.tmLanguage.json").toString());
+  }
+}
+
 const highlighter = await getHighlighter({
   theme: JSON.parse(readFileSync("jule/draculaTheme.json").toString()),
 });
+const jule = new Jule();
 await highlighter.loadLanguage(jule);
+
+const julemod = new JuleMod();
+await highlighter.loadLanguage(julemod);
 
 export default defineConfig({
   srcDir: 'src',
@@ -35,7 +57,7 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
-    languages: [jule],
+    languages: [jule, julemod],
     highlight(str, lang, attrs) {
       return highlighter.codeToHtml(str.trim(), { lang: lang });
     },

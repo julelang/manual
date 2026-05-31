@@ -7,7 +7,7 @@ Modules are represented with `jule.mod` files. The directories containing these 
 Every module must have a module name. Module names define how the root directory of a module is represented in the import paths. This is important for portability, as it ensures a definitive name is used regardless of the root module directory.
 
 In the module file, it is represented as follows:
-```
+```julemod
 module mylib
 ```
 In the example above, the module name is specified as `mylib`.
