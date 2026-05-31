@@ -461,7 +461,7 @@ export default defineConfig({
               text: 'Interoperability',
               link: '/integrated-jule/interoperability/',
               items: [
-                { text: 'Headers', link: '/integrated-jule/interoperability/header-files' },
+                { text: 'External Sources', link: '/integrated-jule/interoperability/external-sources' },
                 { text: 'Variables', link: '/integrated-jule/interoperability/variables' },
                 { text: 'Functions', link: '/integrated-jule/interoperability/functions' },
                 { text: 'Structures', link: '/integrated-jule/interoperability/structures' },

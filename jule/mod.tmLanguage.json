@@ -4,9 +4,6 @@
 	"patterns": [
 		{
 			"include": "#keywords"
-		},
-		{
-			"include": "#text"
 		}
 	],
 	"repository": {
@@ -14,26 +11,7 @@
 			"patterns": [
 				{
 					"name": "keyword.jule.mod",
-					"match": "\\b(module|cpp|include|link)\\b"
-				}
-			]
-		},
-		"text": {
-			"patterns": [
-				{
-					"begin": "\"",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.begin.jule.mod"
-						}
-					},
-					"end": "\"",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.end.jule.mod"
-						}
-					},
-					"name": "string.quoted.double.jule.mod"
+					"match": "\\b(module)\\b"
 				}
 			]
 		}
