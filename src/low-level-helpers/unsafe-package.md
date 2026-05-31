@@ -15,7 +15,7 @@ use "std/unsafe"
 
 fn main() {
     mut b := []byte("hello world")
-    s := unsafe::BytesStr(b)
+    s := unsafe::BytesString(b)
     b[0] = 'H'
     println(s) // Hello world
 }

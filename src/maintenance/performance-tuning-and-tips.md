@@ -10,9 +10,9 @@ These suggestions and recommendations will result in positive improvements in co
 
 Converting between byte slices and strings can have a significant impact on memory usage in some cases. To avoid this, you can avoid allocations by implicitly passing allocations that you will not use again to the other type. The package `std/unsafe` provides some very useful functionality for this.
 
-For example, you have a byte slice, and this byte slice should be returned as a string from the function. Also, that slice can no longer be changed; it becomes inaccessible after it is returned from the function, etc., so it is safe to return it as a string. In this case, the function `unsafe::StrFromBytes` will convert it to a string for you without any allocation and preserve GC. There is also an `unsafe::BytesFromStr` function for the opposite case.
+For example, you have a byte slice, and this byte slice should be returned as a string from the function. Also, that slice can no longer be changed; it becomes inaccessible after it is returned from the function, etc., so it is safe to return it as a string. In this case, the function `unsafe::StringFromBytes` will convert it to a string for you without any allocation and preserve GC. There is also an `unsafe::BytesFromString` function for the opposite case.
 
-If mutability is not required if conversion is needed temporarily, the `unsafe::StrBytes` or `unsafe::BytesStr` functions can also be used for a simpler conversion without GC, if it is considered safe.
+If mutability is not required if conversion is needed temporarily, the `unsafe::StringBytes` or `unsafe::BytesString` functions can also be used for a simpler conversion without GC, if it is considered safe.
 
 ### Comparing Byte Slices
 
