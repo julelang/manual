@@ -395,6 +395,10 @@ trait Importer {
 	// Returns module path by identity.
 	fn ModByID(mut *self, id: mod::ID): &mod::Mod
 
+	// Returns all modules.
+	// The return value may be mutable reference to the internal buffer.
+	fn Mods(mut *self): []&mod::Mod
+
 	// Returns &ImportInfo by path.
 	// This function accepted as returns already imported and checked package.
 	// If returns not-nil value, will be used instead of ImportPackage
