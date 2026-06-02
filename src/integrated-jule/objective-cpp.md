@@ -4,6 +4,13 @@ Objective-C++ implements Objective-C's plugins for C++. In this way, it becomes 
 
 ## Using
 
+We need to initialize a module because our program will use external sources.
+
+Run this command in your terminal:
+```sh
+julec mod init myobjc
+```
+
 You can create your header files with the extension `.h` in the standard way. But we recommended to use `.hpp` extension for C++ headers. These are does not pose any compatibility issues as it is one of the standard extensions supported by Jule.
 
 For recommended development experience, declarations should be in the header file and implementation in another source code file. In this context, let's say we have Objective-C++ code like this:
@@ -30,26 +37,27 @@ void Log(const char *text) {
 }
 ```
 
-We want to use above Objective-C++ code with Jule. The first thing we need to do is pass the `-framework Foundation` argument to the build command using the `jule:pass` top-directive. Otherwise, we will encounter a compilation error.
+We want to use above Objective-C++ code with Jule. The first thing we need to do is pass the `-framework Foundation` argument to the build command of the back-end compiler using the `extern use framework` declaration. Otherwise, we will encounter a compilation error.
 
 Then we link the definitions we want to use by linking the relevant header file and source code. Then we are ready to use it.
 
 Our `main.jule`:
 ```jule
-#pass "-framework" "Foundation"
+extern use framework "Foundation"
 
-extern use "log.hpp"
-extern use "log.mm"
+extern use "myobjc/log.hpp"
+extern use "myobjc/log.mm"
 
 extern type char: byte
+
 extern unsafe fn Log(text: *extern.char)
 
 fn Log(text: string) {
-    unsafe { extern.Log((*extern.char)(&text[0])) }
+	unsafe { extern.Log((*extern.char)(&text[0])) }
 }
 
 fn main() {
-    Log("Log from Jule!")
+	Log("Log from Jule!")
 }
 ```
 
