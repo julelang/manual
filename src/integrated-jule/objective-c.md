@@ -4,6 +4,13 @@ Objective-C is an object-oriented programming language written on top of C. It c
 
 ## Using
 
+We need to initialize a module because our program will use external sources.
+
+Run this command in your terminal:
+```sh
+julec mod init mycocoa
+```
+
 First of all, there's something you should know, Jule does not accept Objective-C source code lineages, ie `.m` extensions, for safety reasons. That's why Objective-C++ source code files should use the extension `.mm`. This is because compilers can have trouble compiling Objective-C and C++ code together.
 
 You can create your header files with the extension `.h` in the standard way. This does not pose any compatibility issues as it is one of the standard extensions supported by Jule.
@@ -34,7 +41,7 @@ int GetBitsPerPixel(const int &index) {
 }
 ```
 
-We want to use above Objective-C code with Jule. The first thing we need to do is pass the `-framework Cocoa` argument to the build command using the `jule:pass` top-directive. Otherwise, we will encounter a compilation error.
+We want to use above Objective-C code with Jule. The first thing we need to do is pass the `-framework Cocoa` argument to the build command of the back-end compiler using the `extern use framework` declaration. Otherwise, we will encounter a compilation error.
 
 Then we link the definitions we want to use by linking the relevant header file and source code. Then we are ready to use it.
 
@@ -42,15 +49,15 @@ For example:
 
 Our `main.jule`:
 ```jule
-#pass "-framework" "Cocoa"
+extern use framework "Cocoa"
 
-extern use "cocoa.h"
-extern use "cocoa.mm"
+extern use "mycocoa/cocoa.h"
+extern use "mycocoa/cocoa.mm"
 
 extern fn GetBitsPerPixel(index: int): int
 
 fn main() {
-    let depth = extern.GetBitsPerPixel(0)
-    println(depth)
+	depth := extern.GetBitsPerPixel(0)
+	println(depth)
 }
 ```
