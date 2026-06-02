@@ -46,18 +46,38 @@ extern use include "modulename/include"
 
 ## Passing Link Directories
 
-It takes a path and passes that path as an absolute path to the back-end compiler with the `-L` argument. The path must be within the module path. In other words, it looks for the specified directory path at the location where the module is situated. Use the reserved `link` alias for this kind of use declarations.
+It takes a path and passes that path as an absolute path to the back-end compiler with the `-L` argument. The path must be within the module path. In other words, it looks for the specified directory path at the location where the module is situated. Use the reserved `libraries` alias for this kind of use declarations.
 
 For example:
 ```jule
-extern use link "modulename/lib"
+extern use libraries "modulename/libs"
 ```
 
 ## Passing Framework Directories
 
-It takes a path and passes that path as an absolute path to the back-end compiler with the `-F` argument. The path must be within the module path. In other words, it looks for the specified directory path at the location where the module is situated. Use the reserved `framework` alias for this kind of use declarations.
+It takes a path and passes that path as an absolute path to the back-end compiler with the `-F` argument. The path must be within the module path. In other words, it looks for the specified directory path at the location where the module is situated. Use the reserved `frameworks` alias for this kind of use declarations.
 
 For example:
 ```jule
-extern use framework "modulename/framework"
+extern use frameworks "modulename/frameworks"
+```
+
+## Linking Library
+
+It takes an argument and passes it to te back-end compiler with the `-l` argument. Use the reserved `library` alias for this kind of use declarations.
+
+For example:
+```jule
+extern use library "raylib"
+extern use library "shell32"
+```
+
+## Linking Framework
+
+It takes an argument and passes it to te back-end compiler with the `-framework` argument. Use the reserved `framework` alias for this kind of use declarations.
+
+For example:
+```jule
+extern use framework "Cocoa"
+extern use framework "Foundation"
 ```
