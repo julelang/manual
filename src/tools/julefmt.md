@@ -19,6 +19,10 @@ $ julefmt <directory>
 $ julefmt <file>
 ```
 
+`julefmt` can format Jule source code files and module files. It performs formatting based on the name; while formatting files in the `*.jule` pattern as Jule source code files, it recognizes and formats files named `jule.mod` as module files. If a directory is being formatted, it will format both the source code files and the module files.
+
+When the data comes from stdin, if it starts with `module `, it formats the content as a module file; otherwise, it formats it as Jule source code.
+
 ### Formatter Options
 
 `-w`\
