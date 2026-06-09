@@ -4,6 +4,7 @@
 
 [Variables](#variables)\
 [fn IsWindows\(os: string\): bool](#iswindows)\
+[fn IsMacOS\(os: string\): bool](#ismacos)\
 [fn IsDarwin\(os: string\): bool](#isdarwin)\
 [fn IsLinux\(os: string\): bool](#islinux)\
 [fn IsI386\(arch: string\): bool](#isi386)\
@@ -19,6 +20,7 @@
 const (
 	Windows = "windows"
 	Linux   = "linux"
+	MacOS   = "macos"
 	Darwin  = "darwin"
 	Unix    = "unix"
 )
@@ -42,7 +44,13 @@ Architectures for file annotation kind\.
 ```jule
 fn IsWindows(os: string): bool
 ```
-Reports whether os is windows\.
+Reports whether os is Windows\.
+
+## IsMacOS
+```jule
+fn IsMacOS(os: string): bool
+```
+Reports whether os is macOS\.
 
 ## IsDarwin
 ```jule
@@ -54,7 +62,7 @@ Reports whether os is darwin\.
 ```jule
 fn IsLinux(os: string): bool
 ```
-Reports whether os is linux\.
+Reports whether os is Linux\.
 
 ## IsI386
 ```jule
