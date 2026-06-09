@@ -6,7 +6,7 @@
 
 Kernel 3.2 or later.
 
-### macOS (aka Darwin)
+### macOS
 
 macOS Big Sur 11 or newer.
 

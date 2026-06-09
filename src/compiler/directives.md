@@ -40,9 +40,10 @@ The syntax is simple and easy to learn. The logical and operator is `&&` and the
 
 Here is the list of tags and their existence:
 
-- `windows`: operating system is windows
+- `windows`: operating system is Windows
+- `macos`: operating system is macOS
 - `darwin`: operating system is darwin
-- `linux`: operating system is linux
+- `linux`: operating system is Linux
 - `unix`: operating system is UNIX, or UNIX-like
 - `i386`: cpu architecture is intel 386
 - `arm64`: cpu architecture is ARM64

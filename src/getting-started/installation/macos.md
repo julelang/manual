@@ -3,11 +3,11 @@
 ## Pre-compiled Binaries
 
 1. Download the latest precompiled package from [GitHub Releases](https://github.com/julelang/jule/releases/latest)<br>
-The file will be named `jule-darwin-amd64.zip` for x86_64 systems and `jule-darwin-arm64.zip` for ARM64 systems.
+The file will be named `jule-macos-amd64.zip` for AMD64 (aka x86-64) systems and `jule-macos-arm64.zip` for ARM64 (aka AArch64) systems.
 
 2. Extract the ZIP archive with `unzip`:
 ```bash
-unzip jule-darwin-arm64.zip
+unzip jule-macos-arm64.zip
 ```
 
 3. The `julec` binary will be located in the `jule/bin` directory<br>

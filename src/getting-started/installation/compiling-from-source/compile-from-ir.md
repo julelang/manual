@@ -46,8 +46,8 @@ Recommended compile command for your system:
 - [`windows-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/windows-arm64.txt)
 - [`linux-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/linux-amd64.txt)
 - [`linux-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/linux-arm64.txt)
-- [`darwin-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/darwin-amd64.txt)
-- [`darwin-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/darwin-arm64.txt)
+- [`macos-amd64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/macos-amd64.txt)
+- [`macos-arm64`](https://raw.githubusercontent.com/julelang/julec-ir/refs/heads/main/meta/macos-arm64.txt)
 
 ::: warning
 The commands here are automatically generated and used as defined by [RELEASE.md](https://github.com/julelang/jule/blob/master/RELEASE.md) to retrieve julec's release builds. The relevant compiler may not exist directly or under the same name on your system. Additional effort may be required for such issues.

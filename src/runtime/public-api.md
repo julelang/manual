@@ -25,7 +25,7 @@ Whether the running program's architecture is little-endian.
 ```jule
 const OS: string
 ```
-The running program's operating system target: one of darwin, linux and so on.\
+The running program's operating system target: one of macos, linux and so on.\
 To view possible combinations of OS, run `julec tool distos`
 
 ```jule

@@ -4,7 +4,7 @@ julec guarantees that the code and standard library it produces will be compatib
 ## Supported Operating Systems
 
 - `windows`
-- `darwin`
+- `macos`
 - `linux`
 
 ## Supported Architectures

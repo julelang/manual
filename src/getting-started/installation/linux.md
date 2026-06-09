@@ -36,7 +36,7 @@ Refer to the [NixOS Search entry](https://search.nixos.org/packages?show=julec) 
 ## Pre-compiled Binaries
 
 1. Download the latest precompiled package from [GitHub Releases](https://github.com/julelang/jule/releases/latest)<br>
-The file will be named `jule-linux-amd64.zip` for x86_64 systems and `jule-linux-arm64.zip` for ARM64 systems.
+The file will be named `jule-linux-amd64.zip` for AMD64 (aka x86-64) systems and `jule-linux-arm64.zip` for ARM64 (aka AArch64) systems.
 
 2. Extract the ZIP archive with `unzip`:
 ```bash

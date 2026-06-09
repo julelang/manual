@@ -22,7 +22,7 @@ Using example for PowerShell:
 $ build.bat
 ```
 
-### macOS (Darwin)
+### macOS
 ::: tip
 Ideal scripts for macOS: usually shellscripts (.sh).
 :::
