@@ -22,3 +22,8 @@ $ juledoc [arguments] <file>
 
 `-w`\
 Write result to `doc.*` file instead of stdout.
+
+`--vue`\
+Enables Vue compatibility.
+Some comment lines may be perceived by Vue as template syntax, or other issues may arise.
+To prevent this, it wraps the Markdown output with `::: v-pre` block.
