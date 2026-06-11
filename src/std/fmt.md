@@ -1,4 +1,4 @@
-# std/fmt
+::: v-pre
 
 ## Index
 
@@ -30,13 +30,13 @@ Prints arguments to w with default formatting\. Prints new\-line after arguments
 ```jule
 async fn Fprintf(mut w: io::Writer, fmt: string, args: ...any)!
 ```
-Prints result of formatting to w\. See documentation of the \[Sprint\] function for formatting\. Forwards errors, if any\.
+Prints result of formatting to w\. See documentation of the \[Sprintf\] function for formatting\. Forwards errors, if any\.
 
 ## Printf
 ```jule
 fn Printf(fmt: string, args: ...any)
 ```
-Prints result of formatting to stdout\. See documentation of the \[Sprint\] function for formatting\. Panics if any error appears\. Write operation is blocking\.
+Prints result of formatting to stdout\. See documentation of the \[Sprintf\] function for formatting\. Panics if any error appears\. Write operation is blocking\.
 
 ## Print
 ```jule
@@ -66,25 +66,47 @@ Returns string result of argument with default formatting\. It uses comptime to 
 ```jule
 fn Sprintf(fmt: string, args: ...any): string
 ```
-It places the passes arguments in the string relative to the corresponding format string\. Returns format string if len\(args\) == 0\. If the arguments have ended, the remaining part of format string is not processed and is returned as is\. For supported types it uses custom functions for conversion, but for unusupported types it uses default runtime string conversion function of type\.
+Formats arguments according to the format string and returns the resulting string\.
 
-Formatting:<br>
-```
-Arguments are processed sequentially. That is, when an argument
-encounters a format string parameter, it will be processed according
-to how many parameters it is. The 5th parameter uses the 5th argument
-as the value.
+The format string is composed of ordinary text and replacement fields\. Ordinary text is copied to the output unchanged\.
 
-Each format parameter is represented as "{}" in the format string.
-These parameters will then be deleted according to the processing
-algorithm and replaced with arguments.
+Replacement fields are written between braces:
 
-The parameter "{{}}" is formatted as "{}" actually,
-And does not increase argument list offset.
 ```
-Examples:<br>
+{}         Selects the next argument in sequence
+{index}    Explicit argument selection
 ```
-Sprintf("{} {}!", "Hello", "World") = "Hello World!"
-Sprintf("{} {}") = "{} {}"
-Sprintf("{} is the {}", "Pi Number") = "Pi Number is the {}"
+Braces can be escaped by doubling them:
+
 ```
+{{      Writes a literal '{'
+}}      Writes a literal '}'
+{{}}    Writes a literal "{}"
+```
+Automatic and explicit indexing may be mixed\. Automatic placeholders consume arguments sequentially, while indexed placeholders always refer to the specified argument position\.
+
+The formatting behavior of individual argument types is implementation defined and may be customized by the caller or by type\-specific formatters\.
+
+Format strings are malformed when:
+
+- A replacement field is not closed
+- An unexpected closing brace appears
+- A field contains invalid syntax
+- A field references an argument that does not exist
+
+Parsing is performed from left to right and replacement fields are evaluated in the order they appear in the format string\.
+
+Missing arguments do not cause formatting to fail\. If a replacement field refers to an argument that does not exist, the field is replaced with the special marker:
+
+```
+{!MISSING}
+```
+Examples:
+
+```
+Sprintf("{} {}", "hello") -> "hello {!MISSING}"
+Sprintf("{1}", "hello")   -> "{!MISSING}"
+```
+
+
+:::
