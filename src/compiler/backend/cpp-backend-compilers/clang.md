@@ -7,6 +7,7 @@ Clang is a C/C++ compiler using LLVM. Jule gives priority support to Clang and i
 - Clang has descriptive and informative compiler messages.
 - Clang has fast compilation performance.
 - Clang has low memory footprint.
+- Clang provides a consistent experience across operating systems and architectures.
 - Clang provides a reliable experience for Jule.
 
 ## Clang on Windows

@@ -8,6 +8,12 @@ GCC has partial support. This is because it has a number of identified problems.
 
 ## Known Problems
 
+### macOS SDK Compatibility Issues
+
+On macOS, a bug in the macOS SDK can cause compile errors when using GCC.
+
+For more information, see [Homebrew Discussion #6778](https://github.com/orgs/Homebrew/discussions/6778)
+
 ### Coroutine Lowering Bug
 
 It appears that GCC 13 has several bugs in coroutine lowering and is unable to compile certain codes. We encountered this issue in some of our CI workflows: [workflow 1](https://github.com/julelang/jule/actions/runs/20505531861/job/58919433605), [workflow 2](https://github.com/julelang/jule/actions/runs/20505531859/job/58919433588).
