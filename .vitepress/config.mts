@@ -467,7 +467,6 @@ export default defineConfig({
                 { text: 'Structures', link: '/integrated-jule/interoperability/structures' },
                 { text: 'Types', link: '/integrated-jule/interoperability/types' },
                 { text: 'Macros', link: '/integrated-jule/interoperability/macros' },
-                { text: 'Namespaces', link: '/integrated-jule/interoperability/namespaces' },
                 { text: 'Jule Wrappers', link: '/integrated-jule/interoperability/jule-wrappers' },
               ],
             },

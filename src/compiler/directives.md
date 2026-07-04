@@ -103,9 +103,6 @@ In external structs, if the structure is a `typedef` use this will configure cod
 ## Directive: `cdef`
 In external functions, if the function is a `#define`, it configures code generation to be compatible.
 
-## Directive: `namespace`
-Adds namespace selection for supported external types. Uses string literal as argument, but literals are not processed, accepts directly. So, you can't use escape sequences like original string literals.
-
 ## Directive: `test`
 Declares test function. For more information, read the [Writing Tests](/debugging/testing/writing-tests) section.
 
