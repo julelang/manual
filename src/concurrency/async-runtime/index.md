@@ -37,7 +37,7 @@ Async functions generate a state machine by default and introduce additional ove
 
 In the section above, one of the rules stated that async functions can only be called from another async function. This may raise the question: what should you do if your program's `main` function is not `async`?
 
-By default, Jule has a synchronous `main` function. However, you can also define it as async. A `main` function defined as async is treated as a [coroutine](/concurrency/coroutines) at runtime.
+By default, Jule has a synchronous `main` function. However, you can also define it as async. A `main` function defined as async is treated as a [coroutine](/concurrency/async-runtime/coroutines) at runtime.
 
 Here is an example of an async `main` function:
 ```jule
