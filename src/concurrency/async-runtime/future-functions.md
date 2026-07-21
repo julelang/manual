@@ -8,7 +8,7 @@ To create an async function that returns a future, you must define it using the 
 
 A call to `future` takes two functions. The first function is used for the ready state, and the second is the suspend function triggered when waiting is or may be required. Writing a future function is straightforward, as the ready and suspend functions share a signature very similar to that of the future function itself. The ready function is a non-async function, but its return type, fallibility, and parameters are identical. The suspend function, on the other hand, shares the exact same signature as the future function.
 
-The ready function is defined with the `#ready` directive and can set whether the async function is ready by using a call to the built-in `ready` function. If it is ready, the suspend function is not executed at all, allowing the execution overhead of the async function to be reduced.
+The ready function is defined with the `#ready` directive and can set whether the async function is ready by using a call to the built-in `ready` function. If it is ready, the suspend function is not executed at all, allowing the execution overhead of the async function to be reduced. The default ready status value is `false` for ready functions.
 
 Here is a simple addition example:
 ```jule
