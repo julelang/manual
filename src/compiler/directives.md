@@ -119,3 +119,11 @@ Disables some default configuration options of the language for specific areas o
 List of arguments:
 - `boundary`: Disables boundary checking for slice and array index/slice expressions. It also disables nil checking for slices.
 - `nilptr`: Disables nil pointer dereferencing checking for reference pointer dereferencing, smart pointer dereferencing, and anonymous function call expressions.
+
+## Directive `future`
+
+Declares an async function as [future function](/concurrency/async-runtime/future-functions).
+
+## Directive `ready`
+
+Declares a function as ready function, suitable for the future returns.

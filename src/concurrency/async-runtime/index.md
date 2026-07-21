@@ -31,6 +31,8 @@ Working with asynchronous functions is based on the following fundamental princi
 - Each `await` point is a potential suspension point.
 - The root async function is always a coroutine scheduled by the runtime.
 
+Async functions generate a state machine by default and introduce additional overhead for potential conditions such as suspension. If the compiler optimizes these, an async function can be transformed under the hood into a future-like function, but this is not guaranteed. The best way to achieve this is to design an async function to return a [future](/concurrency/async-runtime/future-functions) when it is possible to determine that the function will not need to wait. This makes it possible to write directly faster async functions without relying on compiler optimizations.
+
 ## Using Async Runtime
 
 In the section above, one of the rules stated that async functions can only be called from another async function. This may raise the question: what should you do if your program's `main` function is not `async`?

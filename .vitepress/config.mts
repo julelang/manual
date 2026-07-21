@@ -337,8 +337,14 @@ export default defineConfig({
           text: 'Concurrency',
           link: "/concurrency/",
           items: [
-            { text: 'Async Runtime', link: '/concurrency/async-runtime' },
-            { text: 'Coroutines', link: '/concurrency/coroutines' },
+            {
+              text: 'Async Runtime',
+              link: '/concurrency/async-runtime/',
+              items: [
+                { text: 'Coroutines', link: '/concurrency/async-runtime/coroutines' },
+                { text: 'Future Functions', link: '/concurrency/async-runtime/future-functions' },
+              ]
+            },
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
             { text: 'Atomicity', link: '/concurrency/atomicity' },
             { text: 'Mutexes', link: '/concurrency/mutexes' },
