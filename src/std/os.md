@@ -104,6 +104,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ShouldAsync\(\*self\): bool](#shouldasync)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
@@ -130,6 +131,20 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(\*self\): FileMode](#type)
 
 ## Variables
+
+```jule
+let mut ErrNoDeadline = poll::ErrNoDeadline
+```
+File type does not support deadline\.
+
+---
+
+```jule
+let mut ErrDeadlineExceeded = poll::ErrDeadlineExceeded
+```
+Expired deadline error\.
+
+---
 
 ```jule
 const DevNull = devNull
@@ -518,21 +533,33 @@ fn ShouldAsync(*self): bool
 ```
 Reports whether treating the file descriptor as async is the correct approach\. If the fd has the potential to exhibit non\-blocking behavior, it should be handled with async API\. Behavior in sync API is undefined\. However, this is not a definitive guarantee that the fd is non\-blocking\.
 
+### SetDeadline
+```jule
+fn SetDeadline(mut *self, deadline: time::Duration)!
+```
+Sets the read and write deadlines for a File\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
+
+Only some kinds of files support setting a deadline\. Calls to SetDeadline for files that do not support deadlines will return ErrNoDeadline\. On most systems ordinary files do not support deadlines, but pipes do\.
+
+A deadline is an absolute time after which I/O operations fail with an error instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
+
+If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps ErrDeadlineExceeded\.
+
+An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
+
+A zero value means I/O operations will not time out\.
+
 ### SetReadDeadline
 ```jule
 fn SetReadDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future read operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
-
-If file does not supports async I/O, throws error\.
+Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\. Not all files support setting deadlines; see SetDeadline\.
 
 ### SetWriteDeadline
 ```jule
 fn SetWriteDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future write operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
-
-If file does not supports async I/O, throws error\.
+Sets the deadline for any future Write calls and any currently\-blocked Write call\. Even if Write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\. Not all files support setting deadlines; see SetDeadline\.
 
 ### Write
 ```jule
