@@ -46,6 +46,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: string, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetNoDelay\(mut \*self, noDelay: bool\)\!](#setnodelay)\
@@ -66,6 +67,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: string\)\!: &amp;UDPConn](#dial-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-5)\
@@ -295,13 +297,14 @@ trait Conn {
 	io::Reader
 	io::Writer
 	io::Closer
+	fn SetDeadline(mut *self, deadline: time::Duration)!
 	fn SetReadDeadline(mut *self, deadline: time::Duration)!
 	fn SetWriteDeadline(mut *self, deadline: time::Duration)!
 	fn Network(*self): Network
 	fn RawFD(*self): u64
 }
 ```
-Common connection behavior\. Inherits the io::Reader, io::Writer, and io::Closer traits\.
+Common connection behavior\.
 
 ## Listener
 ```jule
@@ -311,7 +314,7 @@ trait Listener {
 	fn Network(*self): Network
 }
 ```
-Common listener behavior\. Inherits the io::Closer trait\.
+Common listener behavior\.
 
 ## Resolver
 ```jule
@@ -572,25 +575,39 @@ Same as TCPListener\.Dial, but uses timeout\.
 ```jule
 async fn Read(mut *self, mut buf: []byte)!: int
 ```
-Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
+Reads data from the connection\. Read can be made to time out and return an error after a fixed time limit; see SetDeadline and SetReadDeadline\.
 
 ### Write
 ```jule
 async fn Write(mut *self, buf: []byte)!: int
 ```
-Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
+Writes data to the connection\. Write can be made to time out and return an error after a fixed time limit; see SetDeadline and SetWriteDeadline\.
+
+### SetDeadline
+```jule
+fn SetDeadline(mut *self, deadline: time::Duration)!
+```
+Sets the read and write deadlines associated with the connection\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
+
+A deadline is an absolute time after which I/O operations fail instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
+
+If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps os::ErrDeadlineExceeded\.
+
+An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
+
+A zero value means I/O operations will not time out\.
 
 ### SetReadDeadline
 ```jule
 fn SetReadDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future read operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\.
 
 ### SetWriteDeadline
 ```jule
 fn SetWriteDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future write operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+Sets the deadline for future Write calls and any currently\-blocked Write call\. Even if write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\.
 
 ### SetNoDelay
 ```jule
@@ -614,7 +631,7 @@ Returns raw socket/file\-descriptor of the connection\. Intended for low\-level 
 ```jule
 async fn Close(mut *self)!
 ```
-Closes connection\.
+Closes connection\. Any blocked Read or Write operations will be unblocked and return errors\. Close may or may not block until any buffered data is sent\.
 
 ## TCPListener
 ```jule
@@ -727,25 +744,39 @@ See the \[Dial\] function for a description of the addr parameter\.
 ```jule
 async fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
-Read bytes to buffer from connection and returns read byte count\. The number of bytes read can never exceed the length of the buffer\. If the buffer is larger than the number of bytes that can be read, the buffer will not cause an overflow\. It will panic if connection is closed\.
+Reads data from the connection\. Read can be made to time out and return an error after a fixed time limit; see SetDeadline and SetReadDeadline\.
 
 ### Write
 ```jule
 async fn Write(mut *self, buf: []byte)!: (n: int)
 ```
-Writes bytes to connection and returns written byte count\. The number of bytes written can never exceed the length of the buffer\.
+Writes data to the connection\. Write can be made to time out and return an error after a fixed time limit; see SetDeadline and SetWriteDeadline\.
+
+### SetDeadline
+```jule
+fn SetDeadline(mut *self, deadline: time::Duration)!
+```
+Sets the read and write deadlines associated with the connection\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
+
+A deadline is an absolute time after which I/O operations fail instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
+
+If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps os::ErrDeadlineExceeded\.
+
+An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
+
+A zero value means I/O operations will not time out\.
 
 ### SetReadDeadline
 ```jule
 fn SetReadDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future read operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\.
 
 ### SetWriteDeadline
 ```jule
 fn SetWriteDeadline(mut *self, deadline: time::Duration)!
 ```
-Sets or updates a deadline for the future write operations\. If the deadline is given as 0, the deadline is cleared\. The deadline is evaluated against an absolute point in time\. In practice, the given deadline is equivalent to \`time::Now\(\)\.Add\(deadline\)\`\. It does not apply per operation, but remains valid until this absolute time\. Any operation initiated after this deadline has passed will fail\.
+Sets the deadline for future Write calls and any currently\-blocked Write call\. Even if write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\.
 
 ### Network
 ```jule
@@ -763,7 +794,7 @@ Returns raw socket/file\-descriptor of the connection\. Intended for low\-level 
 ```jule
 async fn Close(mut *self)!
 ```
-Closes connection\.
+Closes connection\. Any blocked Read or Write operations will be unblocked and return errors\. Close may or may not block until any buffered data is sent\.
 
 ## Network
 ```jule
