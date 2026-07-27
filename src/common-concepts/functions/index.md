@@ -206,3 +206,14 @@ The fact that functions can be used as data types makes it possible to use and s
 
 When you need function address for low-level purposes, you can cast to the `uintptr` type.
 Casting functions to `uintptr`, gives the memory address of the function as integer.
+Casting a function will not marks it as "used anonymously".
+So if the function is not used anonymously, casting it will not trigger anonymous function data handling.
+
+For example:
+```jule
+uintptr(myFunc)
+```
+
+Result addresses are:
+- Returns function address when casting a function, static or non-static method
+- Returns trait-relevant function address when casting a trait method, the returned address may be address of a wrapper function or actual function.
