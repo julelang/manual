@@ -17,7 +17,7 @@ Some things you can do with compile-time reflection:
 
 ## Introduction to Reflection for Types
 
-To start examine any type, use `comptime::TypeOf` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for type examination.
+To start examine any type, use `comptime::Typeof` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for type examination.
 
 For example:
 
@@ -25,18 +25,18 @@ For example:
 use "std/comptime"
 
 fn FooBar[T](x: T) {
-    const t = comptime::TypeOf(T)
+    const t = comptime::Typeof(T)
     // ...
 }
 ```
 
-The `comptime::TypeOf` function will return type information wrapper for the type. This wrapper provides some functionalities according the type.
+The `comptime::Typeof` function will return type information wrapper for the type. This wrapper provides some functionalities according the type.
 
 The type information wrapper provides only functionalities for the type. Not declaration, generic instances and other analysis-related information.
 
 ## Introduction to Reflection for Values
 
-To start examine any value, use `comptime:ValueOf` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for value examination.
+To start examine any value, use `comptime:Valueof` function. This function provided by the [`std/comptime`](/std/comptime) library and it's essential for value examination.
 
 For example:
 
@@ -44,18 +44,18 @@ For example:
 use "std/comptime"
 
 fn FooBar[T](x: T) {
-    const v = comptime::ValueOf(x)
+    const v = comptime::Valueof(x)
     // ...
 }
 ```
 
-The `comptime::ValueOf` function will return value information wrapper for the value. This wrapper provides some functionalities according the value.
+The `comptime::Valueof` function will return value information wrapper for the value. This wrapper provides some functionalities according the value.
 
 The value information wrapper provides functionalities only for the value. Not declaration, generic instances and other analysis-related information.
 
 ### Unwrap Expression of Wrapper
 
-Since the function designed for comptime, expressions of `comptime::ValueOf` will not be executed at runtime by default. To do this, you should call the `Unwrap` method of the value information wrapper. The `Unwrap` method is unwraps expression of value information wrapper to called statement, so expression will be executed ad runtime.
+Since the function designed for comptime, expressions of `comptime::Valueof` will not be executed at runtime by default. To do this, you should call the `Unwrap` method of the value information wrapper. The `Unwrap` method is unwraps expression of value information wrapper to called statement, so expression will be executed ad runtime.
 
 This unwrap functionality provides additional benefits for value reflection such as dynamic access to struct fields. Thus, not just examination, we have dynamic handled expressions at comptime.
 
@@ -65,12 +65,12 @@ For example:
 use "std/comptime"
 
 fn PrintFields[T](s: T) {
-    const t = comptime::TypeOf(T)
+    const t = comptime::Typeof(T)
     const match {
     | t.Kind() != comptime::Struct:
         panic("PrintFields[T]: T is not struct")
     }
-    const v = comptime::ValueOf(s)
+    const v = comptime::Valueof(s)
     const fields = t.Decl().Fields()
     const for _, field in fields {
         println(v.Field(field.Name()).Unwrap())
@@ -80,7 +80,7 @@ fn PrintFields[T](s: T) {
 
 The example above, defines the `PrintFields` function with generic type which is prints value of struct's fields. Therefore The parameter `s` should be structure, so the type `T` is structure.
 
-Function implementation checks whether type `T` is struct and then prints values of struct fields using dynamic access with power of the `comptime::ValueOf` function. Thus, the `PrintFields` function can print fields of all structures without runtime reflection cost.
+Function implementation checks whether type `T` is struct and then prints values of struct fields using dynamic access with power of the `comptime::Valueof` function. Thus, the `PrintFields` function can print fields of all structures without runtime reflection cost.
 
 ## Example Programs
 
@@ -97,7 +97,7 @@ struct FooBarBaz {
 }
 
 fn main() {
-    const fields = comptime::TypeOf(FooBarBaz).Decl().Fields()
+    const fields = comptime::Typeof(FooBarBaz).Decl().Fields()
     const for _, field in fields {
         println(field.Name())
     }
@@ -119,7 +119,7 @@ struct FooBarBaz {
 }
 
 fn main() {
-    const fields = comptime::TypeOf(FooBarBaz).Fields()
+    const fields = comptime::Typeof(FooBarBaz).Fields()
     const for _, field in fields {
         println(field.Type().String())
     }
@@ -137,7 +137,7 @@ use "std/comptime"
 extern type Int: int
 
 fn IsNumeric[T](): bool {
-    const t = comptime::TypeOf(T)
+    const t = comptime::Typeof(T)
     const k = t.Kind()
     return k == comptime::Int ||
         k == comptime::Uint ||
@@ -155,7 +155,7 @@ fn IsNumeric[T](): bool {
 }
 
 fn IsValidType[T](): bool {
-    const t = comptime::TypeOf(T)
+    const t = comptime::Typeof(T)
     const match {
     | t.Extern():
         return false
@@ -183,11 +183,11 @@ fn main() {
 use "std/comptime"
 
 fn Fill[Arr, Value](mut &arr: *Arr, mut elem: Value) {
-	const t = comptime::TypeOf(Arr)
+	const t = comptime::Typeof(Arr)
 	const match {
 	| t.Kind() != comptime::Array:
 		panic("type Arr is not an array")
-	| t.Value() != comptime::TypeOf(Value):
+	| t.Value() != comptime::Typeof(Value):
 		panic("type Value is not same with type Arr's value type")
 	}
 	mut i := 0
@@ -220,13 +220,13 @@ struct FooBarBaz {
 }
 
 fn printPublicFields[T](x: T) {
-    const t = comptime::TypeOf(T)
+    const t = comptime::Typeof(T)
     const match {
     | t.Kind() != comptime::Struct:
         panic("type T is not a struct")
     }
     const fields = t.Decl().Fields()
-    const expr = comptime::ValueOf(x)
+    const expr = comptime::Valueof(x)
     const for _, field in fields {
         const match {
         | field.Public():

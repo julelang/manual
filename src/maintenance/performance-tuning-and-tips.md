@@ -143,7 +143,7 @@ struct Foo {
 
 fn main() {
 	f := Foo{10, true, "baz"}
-	const fv = comptime::ValueOf(f)
+	const fv = comptime::Valueof(f)
 	const for i in fv.Type().Decl().Fields() {
 		println(fv.FieldByIndex(i).Unwrap())
 	}

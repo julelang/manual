@@ -7,8 +7,8 @@
 [fn Line(): int](#line)\
 [fn File(): comptimeFile](#file)\
 [fn Files(): comptimeFiles](#files)\
-[fn TypeOf(t: Type): comptimeTypeInfo](#typeof)\
-[fn ValueOf(v: V): comptimeValue](#valueof)\
+[fn Typeof(t: Type): comptimeTypeInfo](#typeof)\
+[fn Valueof(v: V): comptimeValue](#valueof)\
 [fn IncludeBytes(path: string): []string](#includebytes)\
 [fn IncludeString(path: string): []string](#includestring)\
 [struct comptimeFiles](#comptimeFiles)\
@@ -135,9 +135,9 @@ fn Files(): comptimeFiles
 ```
 Returns file wrappers for source files of package which is this function called.
 
-## TypeOf
+## Typeof
 ```jule
-fn TypeOf(t: T): comptimeTypeInfo
+fn Typeof(t: T): comptimeTypeInfo
 ```
 Returns compile-time type information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine type in compile-time and will not executed at runtime.
 
@@ -147,7 +147,7 @@ All type information functionalities uses actual type (may there are exception c
 For example:
 ```jule
 type ByteSlice: []byte
-const t = comptime::TypeOf(ByteSlice)
+const t = comptime::Typeof(ByteSlice)
 const match type t.Kind() {
 | comptime::Slice:
 	const match type t.Value().Kind() {
@@ -159,9 +159,9 @@ const match type t.Kind() {
 In the example code above, the ByteSlice type is a strict type alias. But we can examine the actual type with comptime type information API.
 :::
 
-## ValueOf
+## Valueof
 ```jule
-fn ValueOf(v: V): comptimeValue
+fn Valueof(v: V): comptimeValue
 ```
 Returns compile-time value information. Cannot assign to memory, just available in compile-time. The expression is evaluated to determine and handle value in compile-time and will not executed at runtime.
 

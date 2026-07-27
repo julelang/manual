@@ -20,7 +20,7 @@ struct MyStruct {
 }
 
 fn main() {
-    const t = comptime::TypeOf(MyStruct)
+    const t = comptime::Typeof(MyStruct)
     const for _, field in t.Decl().Fields() {
         println(field.Name())
     }

@@ -91,7 +91,7 @@ const MagicNumber = 20
 
 fn main() {
     let x = MagicNumber
-    const xt = comptime::TypeOf(x)
+    const xt = comptime::Typeof(x)
     println(xt.Kind())
 }
 ```

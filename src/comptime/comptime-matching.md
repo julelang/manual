@@ -65,14 +65,14 @@ fn printKind[T]() {
 ```
 In the example above, the generic type `T` is matched at compile time and only the matching case is taken into account.
 
-If the `comptimeTypeInfo` (it usually returned by the `comptime::TypeOf` function) structure is used for type matching, the type it contains information about will be used for matching.
+If the `comptimeTypeInfo` (it usually returned by the `comptime::Typeof` function) structure is used for type matching, the type it contains information about will be used for matching.
 
 For example:
 ```jule
 use "std/comptime"
 
 fn printType[T]() {
-    const match type comptime::TypeOf(T) {
+    const match type comptime::Typeof(T) {
     | int:
         println("type is int")
     | uint:
@@ -82,7 +82,7 @@ fn printType[T]() {
     }
 }
 ```
-The above code maps the type returned from the `comptime::TypeOf` call for type `T`. This exhibits the same behavior as the example above, since the `comptimeTypeInfo` structure returned is for type `T`, `T` will still be used for matching.
+The above code maps the type returned from the `comptime::Typeof` call for type `T`. This exhibits the same behavior as the example above, since the `comptimeTypeInfo` structure returned is for type `T`, `T` will still be used for matching.
 
 ## Compile-Time Panic
 
