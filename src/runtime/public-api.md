@@ -7,8 +7,9 @@ The runtime library is not completely internal, also provides a public API. This
 [Variables](#variables)\
 [fn COMAXPROCS(): int](#comaxprocs)\
 [fn NumCPU(): int](#numcpu)\
-[async fn Yield()](#yield)
-[async fn Blocking()](#blocking)
+[async fn Yield()](#yield)\
+[async fn Blocking()](#blocking)\
+[fn Task()](#task)
 
 ## Variables
 
@@ -63,10 +64,16 @@ Yields the processor, allowing other coroutines to run. It does not suspend the 
 ```jule
 async fn Blocking(job: fn())
 ```
-Executes the given job on the blocking thread-pool, isolating a potentially blocking operation from the scheduler.
+Executes the given job on the blocking thread pool, isolating a potentially blocking operation from the scheduler.
 
 The scheduler does NOT automatically detect or offload blocking operations. If a blocking call (e.g. file I/O or FFI) is executed directly, the underlying scheduler thread (M) will block.
 
 Use this function when you want to explicitly prevent a blocking operation from stalling scheduler progress.
 
 This function is opt-in and never used implicitly by the runtime.
+
+## Task
+```jule
+fn Task(job: fn())
+```
+Designed for CPU-bound work, where each task is executed on a thread pool. This thread pool may be shared with the pool used by the [Blocking]. It is designed to enable synchronous programs to perform concurrent computations for CPU-bound tasks without thread management concerns.
