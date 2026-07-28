@@ -2,6 +2,11 @@
 
 The runtime library is not completely internal, also provides a public API. This API is mostly safe, and they may influence common runtime behavior or provide some additional opportunities.
 
+::: info
+The `runtime` package also provides compiler hint semantics.
+This API is not documented here, see [Hints](/compiler/compiler-hints) seciton instead.
+:::
+
 ## Index
 
 [Variables](#variables)\
