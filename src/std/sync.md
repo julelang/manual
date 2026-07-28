@@ -16,10 +16,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Unlock\(\*self\)](#unlock-1)\
 [struct Once](#once)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): Once](#new-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(\*self, f: fn\(\)\)](#do)\
-[struct AsyncOnce](#asynconce)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): AsyncOnce](#new-2)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(\*self, f: async fn\(\)\)](#do-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(\*self, f: async fn\(\)\)](#do)\
+[struct BlockingOnce](#blockingonce)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): BlockingOnce](#new-2)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Do\(\*self, f: fn\(\)\)](#do-1)\
 [struct RWMutex](#rwmutex)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RLock\(\*self\)](#rlock)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn TryRLock\(\*self\): bool](#tryrlock)\
@@ -32,7 +32,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;WaitGroup](#new-3)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, delta: int\)](#add)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Done\(mut \*self\)](#done)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut \*self\)](#wait-1)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut \*self\)](#wait-1)\
+[struct BlockingWaitGroup](#blockingwaitgroup)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;BlockingWaitGroup](#new-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\(mut \*self, delta: int\)](#add-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Done\(mut \*self\)](#done-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(mut \*self\)](#wait-2)
 
 
 
@@ -163,7 +168,7 @@ Returns new instance for Once\.
 
 ### Do
 ```jule
-fn Do(*self, f: fn())
+async fn Do(*self, f: async fn())
 ```
 Calls the function f if and only if Do is being called for the first time for this instance of Once\. In other words, given
 
@@ -181,30 +186,30 @@ Because no call to Do returns until the one call to f returns, if f causes Do to
 
 If f panics, Do considers it to have returned; future calls of Do return without calling f\.
 
-## AsyncOnce
+## BlockingOnce
 ```jule
-struct AsyncOnce {
+struct BlockingOnce {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-AsyncOnce is an object that will perform exactly one action\. An AsyncOnce must not be copied after first use\.
+BlockingOnce is an object that will perform exactly one action\. A BlockingOnce must not be copied after first use\.
 
 ### New
 ```jule
-fn New(): AsyncOnce
+fn New(): BlockingOnce
 ```
-Returns new instance for AsyncOnce\.
+Returns new instance for BlockingOnce\.
 
 ### Do
 ```jule
-async fn Do(*self, f: async fn())
+fn Do(*self, f: fn())
 ```
-Calls the function f if and only if Do is being called for the first time for this instance of AsyncOnce\. In other words, given
+Calls the function f if and only if Do is being called for the first time for this instance of BlockingOnce\. In other words, given
 
 ```
-once := AsyncOnce{}
+once := BlockingOnce{}
 ```
-if once\.Do\(f\) is called multiple times, only the first call will invoke f, even if f has a different value in each invocation\. A new instance of AsyncOnce is required for each function to execute\.
+if once\.Do\(f\) is called multiple times, only the first call will invoke f, even if f has a different value in each invocation\. A new instance of BlockingOnce is required for each function to execute\.
 
 Do is intended for initialization that must be run exactly once\. Since f is niladic, it may be necessary to use a function literal to capture the arguments to a function to be invoked by Do:
 
@@ -318,3 +323,39 @@ Decrements the \[WaitGroup\] counter by one\.
 async fn Wait(mut *self)
 ```
 Blocks until the \[WaitGroup\] counter is zero\.
+
+## BlockingWaitGroup
+```jule
+struct BlockingWaitGroup {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+A BlockingWaitGroup waits for a collection of threads/tasks to finish\. The main thread calls \[BlockingWaitGroup\.Add\] to set the number of threads/tasks to wait for\. Then each of the threads/tasks runs and calls \[BlockingWaitGroup\.Done\] when finished\. At the same time, \[BlockingWaitGroup\.Wait\] can be used to block until all threads/tasks have finished\.
+
+A BlockingWaitGroup must not be copied after first use\.
+
+### New
+```jule
+fn New(): &BlockingWaitGroup
+```
+Returns new \[BlockingWaitGroup\] instance\.
+
+### Add
+```jule
+fn Add(mut *self, delta: int)
+```
+Adds delta, which may be negative, to the \[BlockingWaitGroup\] counter\. If the counter becomes zero, all threads blocked on \[BlockingWaitGroup\.Wait\] are released\. If the counter goes negative, Add panics\.
+
+Note that calls with a positive delta that occur when the counter is zero must happen before a Wait\. Calls with a negative delta, or calls with a positive delta that start when the counter is greater than zero, may happen at any time\. Typically this means the calls to Add should execute before the statement creating the thread or other event to be waited for\. If a \[BlockingWaitGroup\] is reused to wait for several independent sets of events, new Add calls must happen after all previous Wait calls have returned\.
+
+### Done
+```jule
+fn Done(mut *self)
+```
+Decrements the \[BlockingWaitGroup\] counter by one\.
+
+### Wait
+```jule
+fn Wait(mut *self)
+```
+Blocks until the \[BlockingWaitGroup\] counter is zero\.
