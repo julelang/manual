@@ -1,5 +1,7 @@
 # std/slices
 
+::: v-pre
+
 ## Index
 
 [fn Insert\[S: \~\[\]E, E\]\(mut s: S, i: int, mut v: \.\.\.E\): S](#insert)\
@@ -14,7 +16,8 @@
 [fn Sort\[S: \~\[\]E, E: ordered\]\(mut s: S\)](#sort)\
 [fn SortFunc\[S: \~\[\]E, E\]\(mut x: S, cmp: fn\(a: E, b: E\): int\)](#sortfunc)\
 [fn SortStableFunc\[S: \~\[\]E, E\]\(mut x: S, cmp: fn\(a: E, b: E\): int\)](#sortstablefunc)\
-[fn IsSorted\[S: \~\[\]E, E: ordered\]\(mut s: S\): bool](#issorted)
+[fn IsSorted\[S: \~\[\]E, E: ordered\]\(s: S\): bool](#issorted)\
+[fn IsSortedFunc\[S: \~\[\]E, E\]\(x: S, cmp: fn\(a: E, b: E\): int\): bool](#issortedfunc)
 
 
 
@@ -94,6 +97,14 @@ Sorts the slice x while keeping the original order of equal elements, using cmp 
 
 ## IsSorted
 ```jule
-fn IsSorted[S: ~[]E, E: ordered](mut s: S): bool
+fn IsSorted[S: ~[]E, E: ordered](s: S): bool
 ```
 Reports whether x is sorted in ascending order\.
+
+## IsSortedFunc
+```jule
+fn IsSortedFunc[S: ~[]E, E](x: S, cmp: fn(a: E, b: E): int): bool
+```
+Reports whether x is sorted in ascending order, with cmp as the comparison function as defined by \[SortFunc\]\.
+
+:::
