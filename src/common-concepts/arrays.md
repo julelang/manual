@@ -84,7 +84,7 @@ fn main() {
 
 Output of program:
 ```
-[[Apple Banana] [Bred Cheese]]
+[[Apple, Banana], [Bred, Cheese]]
 ```
 
 ## Length of Arrays
