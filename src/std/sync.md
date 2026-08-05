@@ -1,5 +1,7 @@
 # std/sync
 
+::: v-pre
+
 ## Index
 
 [trait Locker](#locker)\
@@ -134,6 +136,7 @@ This mutex implementation will not check ownership of the mutex\. So, a locked M
 
 ### Lock
 ```jule
+#future
 async fn Lock(*self)
 ```
 Locks mutex\. If the lock is already in use, the calling coroutine blocks until the mutex is available\.
@@ -168,6 +171,7 @@ Returns new instance for Once\.
 
 ### Do
 ```jule
+#future
 async fn Do(*self, f: async fn())
 ```
 Calls the function f if and only if Do is being called for the first time for this instance of Once\. In other words, given
@@ -240,6 +244,7 @@ The n&#39;th call to \[RWMutex\.Unlock\] “synchronizes before” the m&#39;th 
 
 ### RLock
 ```jule
+#future
 async fn RLock(*self)
 ```
 Locks for reading\.
@@ -320,6 +325,7 @@ Decrements the \[WaitGroup\] counter by one\.
 
 ### Wait
 ```jule
+#future
 async fn Wait(mut *self)
 ```
 Blocks until the \[WaitGroup\] counter is zero\.
@@ -359,3 +365,5 @@ Decrements the \[BlockingWaitGroup\] counter by one\.
 fn Wait(mut *self)
 ```
 Blocks until the \[BlockingWaitGroup\] counter is zero\.
+
+:::
