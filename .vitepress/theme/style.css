@@ -365,3 +365,7 @@ kbd {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+html {
+  overflow-y: scroll;
+}
