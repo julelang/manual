@@ -57,6 +57,8 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 
 </details>
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -89,7 +91,7 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Stderr\(\): &amp;File](#stderr)\
 [fn Hostname\(\)\!: string](#hostname)\
 [struct Cmd](#cmd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: string, mut args: \.\.\.string\): &amp;Cmd](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: string, args: \.\.\.string\): &amp;Cmd](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stdin\(\*self, mut r: &amp;File\)\!](#stdin-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stdout\(\*self, mut w: &amp;File\)\!](#stdout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Stderr\(\*self, mut w: &amp;File\)\!](#stderr-1)\
@@ -412,7 +414,7 @@ Once a Cmd has been executed, it is not recommended to reuse the same instance m
 
 ### New
 ```jule
-fn New(path: string, mut args: ...string): &Cmd
+fn New(path: string, args: ...string): &Cmd
 ```
 Returns Cmd instance for path with arguments\.
 
@@ -696,3 +698,5 @@ Returns the Unix permission bits in self \(self &amp; \[ModePerm\]\)\.
 fn Type(*self): FileMode
 ```
 Returns type bits in self \(self &amp; \[ModeType\]\)\.
+
+:::
