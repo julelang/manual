@@ -110,7 +110,7 @@ export default defineConfig({
               items: [
                 { text: 'Windows', link: '/getting-started/installation/windows' },
                 { text: 'Linux', link: '/getting-started/installation/linux' },
-                { text: 'MacOS', link: '/getting-started/installation/macos' },
+                { text: 'macOS', link: '/getting-started/installation/macos' },
                 { text: 'Packages', link: '/getting-started/installation/packages' },
                 {
                   text: 'Compiling from Source',

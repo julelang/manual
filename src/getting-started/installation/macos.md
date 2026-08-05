@@ -1,4 +1,4 @@
-# MacOS Installation
+# macOS Installation
 
 ## Pre-compiled Binaries
 
