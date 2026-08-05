@@ -272,9 +272,9 @@ There were significant concerns that it negatively affected readability. In part
 In the future, a feature for assigning default values to structs may be reintroduced. However, it can be said with certainty that this won't be part of the struct declaration itself, as it was in the previous implementation. Instead, it will most likely involve using a struct literal returned from a dedicated reserved method. Just like the old implementation, all default values for the struct fields will be required to be constants. If you're wondering why they must be constants, see the old QA below.
 
 > #### Why default values of fields must be constant?
->>
-> We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.
->>
+>\
+> We thought this was the most appropriate way to add default value support without compromising simplicity. Otherwise, there could have been too much implicit control flow; when you consider that each field could potentially depend on a value returned from a function by default, even creating a structure with only default values could have had a significant cost and would result in code implicitly inserted everywhere.\
+>\
 > Initializing a structure by default should be a simple action. If you need a more complex initialization, you are encouraged to write a separate function for it. This way, the cost of the code that would otherwise be implicitly scattered throughout the codebase becomes more predictable.
 
 ### Why do not captured variables of closures need to be specified?
