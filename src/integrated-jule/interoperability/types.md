@@ -119,13 +119,13 @@ extern unsafe fn printf(s: *c::Char)
 
 fn main() {
     s := "hello world\n"
-    sb := integ::BytesFromStr(s)
+    sb := integ::BytesFromString(s)
     unsafe {
         extern.printf((*c::Char)(&sb[0]))
     }
 }
 ```
-The above example includes a simple C-string compatibility conversion. The `BytesFromStr` function returns the given string as a NULL-terminated byte-slice. Since this is compatible with the `char*` type, it can be safely used as a C-string with a pointer.
+The above example includes a simple C-string compatibility conversion. The `BytesFromString` function returns the given string as a NULL-terminated byte-slice. Since this is compatible with the `char*` type, it can be safely used as a C-string with a pointer.
 
 Considering that strings are UTF-8 byte encoded, you can also use string pointers directly if your strings are NULL-terminated to avoid unnecessary allocations.
 
