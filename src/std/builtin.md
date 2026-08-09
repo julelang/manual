@@ -31,7 +31,7 @@
 [fn append(mut dest: []T, mut items: ...T): []T](#append)\
 [fn len(T): int](#len)\
 [fn cap(T): int](#cap)\
-[fn delete(mut map[Key]Value, ...)](#delete)\
+[fn delete(mut map[Key]Value, key: Key)](#delete)\
 [fn new(T, ...T): &T](#new)\
 [fn close(c: chan<- T)](#close)\
 [fn real(c: Cmplx): Float](#real)\
@@ -39,6 +39,7 @@
 [fn cmplx(r: Float, i: Float): Cmplx](#cmplx)
 [fn future(ready: ReadyFunc, suspend: SuspendFunc)](#future)
 [fn ready(status: bool)](#ready)
+[fn clear\[T: ~\[\]Type | ~map\[Type\]Key\](mut t: T)](#clear)
 
 ## Variables
 
@@ -339,9 +340,9 @@ Returns zero for nil or unbuffered channels.
 
 ## delete
 ```jule
-fn delete(mut map[Key]Value, ...)
+fn delete(mut map[Key]Value, key: Key)
 ```
-Deletes key from map. It takes two argument. The first one is map, second one is the key. If just given one argument, this one is a map, and clears all keys of map.
+Deletes the element with the specified key (m[key]) from the map. If m is nil or there is no such element, delete is a no-op.
 
 ## new
 ```jule
@@ -384,3 +385,11 @@ Used to return a future in async functions defined with the `#future` directive.
 fn ready(status: bool)
 ```
 Used to indicate the ready state in functions defined as `#ready`. Sets the ready state to the boolean result it receives. Can be called multiple times.
+
+## clear
+```jule
+fn clear[T: ~[]Type | ~map[Type]Key](mut t: T)
+```
+Clears maps and slices. For maps, clear deletes all entries, resulting in an empty map. For slices, clear sets all elements up to the length of the slice to the zero value of the respective element type. If the argument type is a type parameter, the type parameter's type set must contain only map, slice or array types, and clear performs the operation implied by the type argument. If t is nil, clear is a no-op.
+
+The argument may be array slicing. Slicing is allowed for arrays on mutable memory. Thus, the changes will be reflected in the array. See documentation of the [Copy] function for mutable array slices on built-in functions.

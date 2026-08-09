@@ -105,7 +105,7 @@ In the example above, the `delete` call will remove the `2:"FooBar"` pair from t
 
 ---
 
-If you want to remove all keys without deallocating the internal buffer memory, just give the map without key.
+If you want to remove all keys without deallocating the internal buffer memory, just use the `clear` function.
 
 For example:
 ```jule
@@ -115,7 +115,7 @@ fn main() {
         1: "Bar",
         2: "FooBar"
     }
-    delete(myMap)
+    clear(myMap)
     println(len(myMap)) // 0
 }
 ```
