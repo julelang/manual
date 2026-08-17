@@ -11,6 +11,7 @@
 [fn Valueof(v: V): comptimeValue](#valueof)\
 [fn IncludeBytes(path: string): []string](#includebytes)\
 [fn IncludeString(path: string): []string](#includestring)\
+[fn HasTag(tag: string): bool](#hastag)\
 [struct comptimeFiles](#comptimeFiles)\
 [struct comptimeFile](#comptimeFile)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Path(\*self): string](#path)\
@@ -176,6 +177,12 @@ Returns the contents of the file at path as a byte slice. The file path is resol
 fn IncludeString(path: string): []byte
 ```
 Returns the contents of the file at path as constant string. The file path is resolved relative to the file path of the package in which the function is called. In other words, the file is searched for in the directory of the package that contains the source file calling the function.
+
+## HasTag
+```jule
+fn HasTag(tag: string): bool
+```
+Reports whether constant tag string is defined as constant expression.
 
 ## comptimeFiles
 ```jule
