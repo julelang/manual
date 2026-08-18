@@ -6,7 +6,7 @@ The [`std/runtime`](/runtime/) package defines the necessary flags to provide th
 
 For example:
 ```jule
-runtime::Hint(runtime::H_CONCURRENT)
+unsafe { runtime::Hint(runtime::H_CONCURRENT) }
 ```
 
 ::: warning
