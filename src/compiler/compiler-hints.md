@@ -23,3 +23,10 @@ Indicates that the function performs or may perform concurrent/parallel operatio
 If the compiler detects no concurrency/parallelism within your normal Jule program, it may drop atomic overhead to speed up mechanisms such as reference counting. In this case, various memory management errors may occur.
 
 To prevent this, you must provide the compiler with the `H_CONCURRENT` hint. This allows the compiler to recognize that unknown concurrency exists here and adjust its optimizations accordingly.
+
+### `H_UNREACHABLE`
+Indicates to the compiler that this code block or function is unreachable.
+
+Used to provide a hint to the compiler in cases where execution is guaranteed never to reach this point. Using this hint, the compiler may treat the corresponding block as dead code, optimize branches, or produce backend-specific unreachability attributes.
+
+If code marked with this hint is reached at runtime, undefined behavior may occur.
