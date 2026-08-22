@@ -11,10 +11,10 @@ A simple example:
 ```jule
 use "std/os"
 
-fn main() {
+async fn main() {
 	cmd := os::Cmd.New("ls", "-l")
 	cmd.Stdout(os::Stdout())!
-	cmd.Run()!
+	cmd.Run().await!
 }
 ```
 The example code above, runs `ls -l` with main process's standard output. So child process's output will be written to parent's output. The `Stdout` method sets command's child process's stdout handle to input, which is `os::Stdout`. If handles are nil, `Cmd` will be assign child process's handles to DevNull.
@@ -31,8 +31,8 @@ async fn main() {
 	mut r := cmd.StdoutPipe()!
 	cmd.Start()!
 	data := io::ReadAll(r).await!
-	cmd.Wait()!
-	println(str(data))
+	cmd.Wait().await!
+	println(string(data))
 }
 ```
 The example code above creates a pipe for stdout using the `StdoutPipe` method and obtains it as an `io::ReadCloser`. The `Wait` call will release the created pipes after the child process completed. If you do not use `Wait`, resources may leak.
@@ -46,11 +46,11 @@ async fn main() {
 	mut r, mut w := os::Pipe()!
 	cmd := os::Cmd.New("ls", "-l")
 	cmd.Stdout(w)!
-	cmd.Run()!
+	cmd.Run().await!
 	w.Close().await!
 	data := io::ReadAll(r).await!
 	r.Close().await!
-	println(str(data))
+	println(string(data))
 }
 ```
 The example above creates a pipe using the `Pipe` function and assigns the writer pipe to `Stdout`, passing it to the child process. After executing the child process with `Run`, it closes the writer pipe. This step is crucial because the `Cmd` structure does not release resources provided by third parties, so they must be manually closed. Finally, the output is read, and the reader pipe is also closed. Functionally, this is equivalent to using `StdoutPipe`.
@@ -100,7 +100,9 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(\*self\)\!: io::ReadCloser](#stderrpipe)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(\*self\)\!](#start)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(\*self\)\!](#run)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn RunBlocking\(\*self\)\!](#runblocking)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn WaitBlocking\(\*self\)\!: int](#waitblocking)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Kill\(\*self\)\!](#kill)\
 [struct DirEntry](#direntry)\
 [struct File](#file)\
@@ -466,13 +468,25 @@ Starts the specified command but does not wait for it to complete\. After a succ
 
 ### Run
 ```jule
-fn Run(*self)!
+async fn Run(*self)!
+```
+Starts the specified command and waits for it to complete\.
+
+### RunBlocking
+```jule
+fn RunBlocking(*self)!
 ```
 Starts the specified command and waits for it to complete\. Wait operation is blocking\.
 
 ### Wait
 ```jule
-fn Wait(*self)!: int
+async fn Wait(*self)!: int
+```
+Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
+
+### WaitBlocking
+```jule
+fn WaitBlocking(*self)!: int
 ```
 Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\. Wait operation is blocking\.
 
