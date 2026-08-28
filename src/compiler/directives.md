@@ -120,6 +120,26 @@ List of arguments:
 - `boundary`: Disables boundary checking for slice and array index/slice expressions. It also disables nil checking for slices.
 - `nilptr`: Disables nil pointer dereferencing checking for reference pointer dereferencing, smart pointer dereferencing, and anonymous function call expressions.
 
+## Directive `noinit`
+
+Disables default and compiler-generated zero-initialization for global variables. When applied, the variable is allocated in uninitialized memory.
+
+::: danger
+Using `#noinit` is unsafe and intended for low-level or performance-critical programming. Reading from a variable marked with `#noinit` before manually initializing it results in undefined behavior.
+:::
+
+## Directive: `inline`
+
+Suggests to the compiler that the body of the target function should be expanded directly at each call site, replacing the standard function call overhead (such as stack frame allocation and jump instructions) with the function's actual instruction stream.
+
+::: info
+In C++, inline also relaxes the One Definition Rule (ODR), allowing the function to be defined across multiple translation units (headers) without causing duplicate symbol linker errors. Modern compilers treat inline as a hint rather than a command and may ignore it if inlining is suboptimal.
+:::
+
+## Directive: `noinline`
+
+Explicitly instructs the compiler never to inline the marked function, forcing it to remain a standalone call site regardless of optimization levels.
+
 ## Directive `future`
 
 Declares an async function as [future function](/concurrency/async-runtime/future-functions).
