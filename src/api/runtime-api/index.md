@@ -167,9 +167,14 @@ __jule_Int __jule_runeCount(__jule_Str s);
 Declaration of: `runeCount`
 
 ```cpp
-void __jule_pseudoMalloc(__jule_Int n, __jule_Uint size);
+void __jule_malloc(__jule_Uintptr size);
 ```
-Declaration of: `pseudoMalloc`
+Declaration of: `malloc`
+
+```cpp
+void __jule_dealloc(void *p);
+```
+Declaration of: `dealloc`
 
 ```cpp
 __jule_String __jule_stringBytePtr(__jule_U8 *b, __jule_Int n);

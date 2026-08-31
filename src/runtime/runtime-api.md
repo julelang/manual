@@ -173,14 +173,20 @@ fn runeCount(s: string): int
 Returns rune count of the string.
 
 ```jule
-fn pseudoMalloc(n: i64, size: uint)
+fn malloc(size: uintptr)
 ```
-Pseudo memory allocation, for allocation checking and documentation purposes. Any runtime allocation must be follow this implementation documentation. Pseudo allocates linear memory on the heap. The |n| is non-negative count of elements. The |size| is size in bytes of the single instance of a type which is will be allocated. Panics if |n*size > maxAlloc || n > max(int)|, also panics if allocation failed. Returns pointer to the allocation (pointer to the first cell if n>1). The allocated memory will not be initialized by default.
+Allocates linear memory on the heap and returns it. If it fails, it may return nil pointer or panic. The |size| is size in bytes of the memory which is will be allocated. Returns pointer to the allocation (pointer to the first cell if it is and array). The allocated memory is raw, it will not be initialized by default.
 
 Calling this function, performs allocation size checking as described and panics if conditions are met.
 
 ```jule
-unsafe fn strBytePtr(b: *byte, n: int): string
+void __jule_dealloc(void *p);
+```
+Deallocates the memory.
+The memory should be allocated by malloc.
+
+```jule
+unsafe fn stringBytePtr(b: *byte, n: int): string
 ```
 Returns string based on b, the parameter b means first byte of string. The returned string uses n as length. Will not perform garbage collection.
 
@@ -199,7 +205,7 @@ Returns nil slice for empty string.
 fn sliceAsString(b: []byte): string
 ```
 Returns byte slice as string.
-Equals to strBytePtr(&b[0], len(b)) call.
+Equals to stringBytePtr(&b[0], len(b)) call.
 Returns empty string if len(b) == 0.
 
 ```jule
