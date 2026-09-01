@@ -1,5 +1,7 @@
 # std/sync/atomic
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -9,6 +11,7 @@
 [fn Add\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, delta: T, order: memoryOrder\): \(new: T\)](#add)\
 [fn Load\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(&amp;addr: \*T, order: memoryOrder\): T](#load)\
 [fn Store\[T: \~int \| \~uint \| \~i8 \| \~i16 \| \~i32 \| \~i64 \| \~u8 \| \~u16 \| \~u32 \| \~u64 \| \~uintptr\]\(mut &amp;addr: \*T, val: T, order: memoryOrder\)](#store)\
+[fn Fence\(order: memoryOrder\)](#fence)\
 [type I8](#i8)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Swap\(mut \*self, new: i8, order: memoryOrder\): \(old: i8\)](#swap-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn CompareAndSwap\(mut \*self, old: i8, new: i8, succ: memoryOrder, fail: memoryOrder\): \(swapped: bool\)](#compareandswap-1)\
@@ -159,6 +162,12 @@ Atomically loads addr\. Only integer types are supported\.
 fn Store[T: ~int | ~uint | ~i8 | ~i16 | ~i32 | ~i64 | ~u8 | ~u16 | ~u32 | ~u64 | ~uintptr](mut &addr: *T, val: T, order: memoryOrder)
 ```
 Atomically stores val into addr\. Only integer types are supported\.
+
+## Fence
+```jule
+fn Fence(order: memoryOrder)
+```
+Fences create synchronization between themselves and atomic operations or fences in other threads\. It can be helpful to think of a fence as preventing the compiler and CPU from reordering certain types of memory operations around it, but that is a simplified model which fails to capture some of the nuances\.
 
 ## I8
 ```jule
@@ -621,3 +630,5 @@ Atomically reads and returns value\.
 fn Store(mut *self, val: uintptr, order: memoryOrder)
 ```
 Atomically assigns to value\.
+
+:::
