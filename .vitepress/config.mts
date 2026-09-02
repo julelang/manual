@@ -133,7 +133,6 @@ export default defineConfig({
             { text: 'Basic Commands', link: '/compiler/basic-commands' },
             { text: 'Compiler Options', link: '/compiler/compiler-options' },
             { text: 'Compiler Optimizations', link: '/compiler/compiler-optimizations' },
-            { text: 'Compiler Hints', link: '/compiler/compiler-hints' },
             {
               text: 'Compiling',
               link: '/compiler/compiling/',
@@ -165,6 +164,7 @@ export default defineConfig({
                 },
               ],
             },
+            { text: 'Compiler Intrinsics', link: '/compiler/compiler-intrinsics' },
           ],
         },
         {
@@ -589,6 +589,7 @@ export default defineConfig({
                 { text: 'std/integ/c', link: '/std/integ-c' }
               ]
             },
+            { text: 'std/intrinsic', link: '/std/intrinsic' },
             { text: 'std/io', link: '/std/io' },
             {
               text: 'std/jule',
