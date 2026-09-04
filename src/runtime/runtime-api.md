@@ -57,11 +57,6 @@ fn writeStderr(mut buf: []byte): int
 Writes to stderr. Returns written byte count if success, `-1` otherwise.
 
 ```jule
-fn readStdin(mut buf: []byte): int
-```
-Reads from stdin. Returns read byte count if success, `-1` otherwise.
-
-```jule
 fn ptrEqual(a: *unsafe, b: *unsafe): bool
 ```
 Reports whether pointer allocations are points to same address.

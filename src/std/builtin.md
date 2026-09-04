@@ -192,11 +192,13 @@ Before printing the value will be converted to string. For string conversion, Ju
 
 String conversion implementation of runtime package may not be exact for some types compared to other conversion implementations which is provided by other standard library packages such as "std/conv".
 
+If write fails, it panics.
+
 ## println
 ```jule
 fn println(t: T)
 ```
-This function same with the out function. One difference, prints new line after print.
+This function same with the print function. One difference, prints new line after print.
 
 ## panic
 ```jule
@@ -207,6 +209,8 @@ Terminates the program immediately, signaling an unrecoverable program violation
 It is used to report conditions that must never occur during correct execution, such as broken invariants, invalid internal state, or contract violations. It is not an error-handling mechanism and must not be used for recoverable failures. Recoverable conditions should be handled using exceptional functions instead.
 
 It does not run deferred or cleanup code. Transfers control directly to the runtime, which aborts execution. No guarantee for user code execution after panic is invoked. Resource cleanup is delegated to the operating system or external supervisors. Because panic is a terminating operation, functions that call panic do not return.
+
+Writes panic message to the stderr. If it is closed, exits program silently.
 
 ## make
 ```jule

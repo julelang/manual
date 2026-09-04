@@ -107,11 +107,6 @@ __jule_Int __jule_writeStderr(__jule_Slice<__jule_U8> buf);
 Declaration of: `writeStderr`
 
 ```cpp
-__jule_Int __jule_readStdin(__jule_Slice<__jule_U8> buf);
-```
-Declaration of: `readStdin`
-
-```cpp
 void __jule_panic(__jule_U8 *m, __jule_Int n);
 ```
 Declaration of: `panic1`
