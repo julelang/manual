@@ -175,7 +175,7 @@ Allocates linear memory on the heap and returns it. If it fails, it may return n
 Calling this function, performs allocation size checking as described and panics if conditions are met.
 
 ```jule
-void __jule_dealloc(void *p);
+void __jule_free(void *p);
 ```
 Deallocates the memory.
 The memory should be allocated by malloc.
