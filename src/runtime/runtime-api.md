@@ -168,7 +168,7 @@ fn runeCount(s: string): int
 Returns rune count of the string.
 
 ```jule
-fn malloc(size: uintptr)
+fn malloc(size: uintptr, needzero: bool)
 ```
 Allocates linear memory on the heap and returns it. If it fails, it may return nil pointer or panic. The |size| is size in bytes of the memory which is will be allocated. Returns pointer to the allocation (pointer to the first cell if it is and array). The allocated memory is raw, it will not be initialized by default.
 

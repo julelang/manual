@@ -162,7 +162,7 @@ __jule_Int __jule_runeCount(__jule_Str s);
 Declaration of: `runeCount`
 
 ```cpp
-void __jule_malloc(__jule_Uintptr size);
+void __jule_malloc(__jule_Uintptr size, bool needzero);
 ```
 Declaration of: `malloc`
 
