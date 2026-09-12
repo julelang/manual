@@ -1,5 +1,7 @@
 # std/time
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -26,6 +28,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
 [struct ParseError](#parseerror)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-1)\
+[struct Instant](#instant)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Now\(\): Instant](#now-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Raw\(\*self\): i64](#raw)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Since\(\*self\): Duration](#since-1)\
 [type Month](#month)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-2)\
 [type Weekday](#weekday)\
@@ -412,6 +418,32 @@ fn String(*self): string
 ```
 
 
+## Instant
+```jule
+struct Instant {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+Represents a specific point in monotonic time\.
+
+### Now
+```jule
+fn Now(): Instant
+```
+Returns the current monotonic time point\.
+
+### Raw
+```jule
+fn Raw(*self): i64
+```
+Returns the monotonic time as raw integer\.
+
+### Since
+```jule
+fn Since(*self): Duration
+```
+Returns the time elapsed since the monotonic time point\.
+
 ## Month
 ```jule
 type Month: int
@@ -591,7 +623,7 @@ Returns the time self\+d\.
 ```jule
 fn Sub(*self, u: Time): Duration
 ```
-Returns the duration t\(self\)\-u\. If the result exceeds the maximum \(or minimum\) value that can be stored in a \[Duration\], the maximum \(or minimum\) duration will be returned\. To compute t\-d for a duration d, use t\.Add\(\-d\)\.
+Returns the duration time\-u\. If the result exceeds the maximum \(or minimum\) value that can be stored in a \[Duration\], the maximum \(or minimum\) duration will be returned\. To compute time\-d for a duration d, use sef\.Add\(\-d\)\.
 
 ### After
 ```jule
@@ -609,7 +641,7 @@ Reports whether the time instant is before u\.
 ```jule
 fn Compare(*self, u: Time): int
 ```
-Compares the time instant t\(self\) with u\. If t is before u, it returns \-1; if t is after u, it returns \+1; if they&#39;re the same, it returns 0\.
+Compares the time instant with u\. If time is before u, it returns \-1; if time is after u, it returns \+1; if they&#39;re the same, it returns 0\.
 
 ### Equal
 ```jule
@@ -667,3 +699,5 @@ Location is used to provide a time zone in a printed Time value and for calculat
 fn String(*self): string
 ```
 Returns a descriptive name for the time zone information\.
+
+:::
