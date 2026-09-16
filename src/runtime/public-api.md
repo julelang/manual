@@ -5,10 +5,8 @@ The runtime library is not completely internal, also provides a public API. This
 ## Index
 
 [Variables](#variables)\
-[fn COMAXPROCS(): int](#comaxprocs)\
 [fn NumCPU(): int](#numcpu)\
-[async fn Yield()](#yield)\
-[async fn Blocking()](#blocking)\
+[fn Yield()](#yield)\
 [fn Task()](#task)
 
 ## Variables
@@ -40,12 +38,6 @@ const RCDelta: untyped integer
 ```
 The reference counting data delta value that must occur per each reference counting operation.
 
-## COMAXPROCS
-```jule
-fn COMAXPROCS(): int
-```
-Returns the maximum number of CPUs that can be executing simultaneously.
-
 ## NumCPU
 ```jule
 fn NumCPU(): int
@@ -56,24 +48,14 @@ The set of available CPUs is checked by querying the operating system at process
 
 ## Yield
 ```jule
-async fn Yield()
+fn Yield()
 ```
-Yields the processor, allowing other coroutines to run. It does not suspend the current coroutine, so execution resumes automatically.
+Cooperatively gives up a timeslice to the OS scheduler.
 
-## Blocking
-```jule
-async fn Blocking(job: fn())
-```
-Executes the given job on the blocking thread pool, isolating a potentially blocking operation from the scheduler.
-
-The scheduler does NOT automatically detect or offload blocking operations. If a blocking call (e.g. file I/O or FFI) is executed directly, the underlying scheduler thread (M) will block.
-
-Use this function when you want to explicitly prevent a blocking operation from stalling scheduler progress.
-
-This function is opt-in and never used implicitly by the runtime.
+This calls the underlying OS scheduler's yield primitive, signaling that the calling thread is willing to give up its remaining timeslice so that the OS may schedule other threads on the CPU.
 
 ## Task
 ```jule
 fn Task(job: fn())
 ```
-Designed for CPU-bound work, where each task is executed on a thread pool. This thread pool may be shared with the pool used by the [Blocking]. It is designed to enable synchronous programs to perform concurrent computations for CPU-bound tasks without thread management concerns.
+Designed for CPU-bound work, where each task is executed on a thread pool. It is designed to enable synchronous programs to perform concurrent computations for CPU-bound tasks without thread management concerns. Uses a common thread pool for all jobs.

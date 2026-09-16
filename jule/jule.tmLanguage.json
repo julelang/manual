@@ -102,7 +102,7 @@
 			"patterns": [
 				{
 					"name": "keyword.jule",
-					"match": "\\b(map|type|impl|trait|struct|enum|fn|co|unsafe|chan|async|await|error)\\b"
+					"match": "\\b(map|type|impl|trait|struct|enum|fn|spawn|unsafe|chan|error)\\b"
 				},
 				{
 					"name": "keyword.control.jule",
@@ -276,9 +276,6 @@
 					"patterns": [
 						{
 							"include": "#stringEscapedChar"
-						},
-						{
-							"include": "#stringPlaceholder"
 						}
 					]
 				}
@@ -293,14 +290,6 @@
 				{
 					"match": "\\\\[^0-7xuUabfnrtv\\'\"]",
 					"name": "invalid.illegal.unknown-escape.jule"
-				}
-			]
-		},
-		"stringPlaceholder": {
-			"patterns": [
-				{
-					"match": "%(\\[\\d+\\])?([\\+#\\-0\\x20]{,2}((\\d+|\\*)?(\\.?(\\d+|\\*|(\\[\\d+\\])\\*?)?(\\[\\d+\\])?)?))?[vT%tbcdoqxXUbeEfFgGspw]",
-					"name": "constant.other.placeholder.jule"
 				}
 			]
 		},

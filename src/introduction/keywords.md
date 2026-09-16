@@ -12,8 +12,8 @@ const    let       mut         for
 in       break     continue    goto
 match    fall      if          else
 return   error     throw       use
-co       extern    unsafe      defer
-chan     select    async       await
+spawn    extern    unsafe      defer
+chan     select
 ```
 
 ## Imaginary Keywords

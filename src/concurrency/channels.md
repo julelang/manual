@@ -12,7 +12,7 @@ From A Tour of Go:
 > ```
 > (The data flows in the direction of the arrow.)
 
-This is exactly the same for Jule. Channels are advantageous and one of the key features of Jule for concurrency. Thanks to channels, synchronization between coroutines can be achieved without the need for mechanisms like locks or condition variables.
+This is exactly the same for Jule. Channels are advantageous and one of the key features of Jule for concurrency. Thanks to channels, synchronization between threads can be achieved without the need for mechanisms like locks or condition variables.
 
 Channels can be `nil` and are comparable types. Any comparison operation compares the memory addresses of the channels. That is, when two channels have the same memory address (i.e., the same channel instance) or are both `nil`, the result is true.
 
@@ -22,7 +22,7 @@ A channel type is defined with the `chan` keyword, followed by the type of the c
 
 ## Unbuffered Channels
 
-Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is blocked until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the coroutine gains control of channel, it sends the data to the channel and blocks execution until the data is received.
+Unbuffered channels have no buffer. When data is attempted to be received from an unbuffered channel, if no data has been sent to the channel, execution is blocked until data is sent. When attempted to sent data to the channel, it waits for the completion of other send operation if any, and when the thread gains control of channel, it sends the data to the channel and blocks execution until the data is received.
 
 To initialize an unbuffered channel, the `make` function can be used by providing the desired channel type.
 For example:
@@ -36,24 +36,18 @@ In the example code above, the `c` is the unbuffered channel for the `int` type.
 ```jule
 use "std/fmt"
 
-async fn main() {
+fn main() {
 	c := make(chan int)
-	co async fn() {
-		fmt::Println("Received value: ", <-c)
+	spawn fn() {
+		c <- 42
 	}()
-	c <- 42
+	fmt::Println("Received value: ", <-c)
 }
 ```
 In the example code above, the `c` channel is an unbuffered channel.
-An anonymous function is used to create a coroutine, and this coroutine attempts to read a value from the `c` channel.
-The value read is then printed.
-The main coroutine sends the value 42 to `c`, and the execution waits until the other coroutine receives the value.
+An anonymous function is used to create a thread, and this thread sends a value to the `c` channel.
+The main thread reads the value 42 from `c`, and the execution waits until the other thread sends the value.
 Once the data is read, it is printed to stdout.
-
-::: warning
-After the data is received, the send operation in the main coroutine ends the blocking of program's execution.
-Therefore, the program's execution might end before the data is printed to stdout.
-:::
 
 ## Buffered Channels
 
@@ -87,11 +81,11 @@ Similarly, sent data is added to the end of the queue.
 ```jule
 use "std/time"
 
-async fn main() {
+fn main() {
 	c := make(chan int, 4)
 	mut n := 0
 	for n < 4; n++ {
-		co async fn() {
+		spawn fn() {
 			c <- time::Now().Nanosecond()
 		}()
 	}
@@ -103,11 +97,11 @@ async fn main() {
 }
 ```
 In the above code example, `c` is a buffered channel with a buffer capacity of `4`.
-The program creates 4 coroutines, and each of these coroutines sends data to the channel.
-The main coroutine reads as many values from the channel as the number of coroutines created.
-The advantage of using a buffer here is that the coroutines can write data and terminate directly without blocking each other.
+The program creates 4 threads, and each of these threads sends data to the channel.
+The main thread reads as many values from the channel as the number of threads created.
+The advantage of using a buffer here is that the threads can write data and terminate directly without blocking each other.
 
-The main coroutine waits until all the data is received and then terminates by printing the result to stdout.
+The main thread waits until all the data is received and then terminates by printing the result to stdout.
 In this program, synchronization is achieved without the need for a `WaitGroup` or any similar structure.
 
 ## Closing Channels
@@ -128,7 +122,7 @@ In buffered channels, if there are pending items in the queue, you will continue
 
 Calling `close` on a channel that is already closed does not result in a panic. However, attempting to close a `nil` channel will result in a panic.
 
-As explained in the [Concurrency Model](/concurrency/concurrency-model) section, when all sender coroutines that send data to a channel finish their work, they must close the channel. This ensures that the receiver coroutines operate correctly. Closing the channel sends a signal to the receivers and wakes up those that are sleeping. Otherwise, they may remain asleep forever.
+As explained in the [Concurrency Model](/concurrency/concurrency-model) section, when all sender threads that send data to a channel finish their work, they must close the channel. This ensures that the receiver threads operate correctly. Closing the channel sends a signal to the receivers and wakes up those that are sleeping. Otherwise, they may remain asleep forever.
 
 ### Receiving Data with Status
 
@@ -175,7 +169,7 @@ For detailed information on channels and mutability, please refer to the main se
 
 ## Send/Recv on nil Channels
 
-Any send or receive operation on a `nil` channel will block execution of the coroutine indefinitely.
+Any send or receive operation on a `nil` channel will block execution of the thread indefinitely.
 
 ## Select Statement
 
@@ -197,17 +191,17 @@ For example:
 ```jule
 use "std/time"
 
-async fn main() {
+fn main() {
 	ch1 := make(chan string)
 	ch2 := make(chan string)
 
-	co async fn() {
-		time::Sleep(1 * time::Second).await
+	spawn fn() {
+		time::Sleep(1 * time::Second)
 		ch1 <- "Message from channel 1"
 	}()
 
-	co async fn() {
-		time::Sleep(1 * time::Second).await
+	spawn fn() {
+		time::Sleep(1 * time::Second)
 		ch2 <- "Message from channel 2"
 	}()
 
@@ -225,9 +219,9 @@ In the code above, the values received in `receive` operations are inaccessible.
 
 For example:
 ```jule
-async fn main() {
+fn main() {
 	x := make(chan int)
-	co async fn() {
+	spawn fn() {
 		x <- 56
 	}()
 
@@ -245,7 +239,7 @@ In the code above, an attempt is made to receive data from the same channel. Any
 
 ### Empty Select Statement
 
-An empty select statement results in a CPU yield, meaning it parks the current coroutine and switches to executing a different coroutine. Coroutine will not continue to execute following statements after an empty statement.
+An empty select statement results in a CPU yield, meaning it parks the current thread and switches to executing a different thread. Thread will not continue to execute following statements after an empty statement.
 
 For example:
 ```jule
@@ -258,7 +252,7 @@ Channels can be used in range iterations. For this, a channel must have the rece
 
 For example:
 ```jule
-async fn main() {
+fn main() {
 	c := make(chan int, 4)
 	c <- 10
 	c <- 20

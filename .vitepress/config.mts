@@ -340,11 +340,10 @@ export default defineConfig({
           link: "/concurrency/",
           items: [
             {
-              text: 'Async Runtime',
-              link: '/concurrency/async-runtime/',
+              text: 'Threads',
+              link: '/concurrency/threads/',
               items: [
-                { text: 'Coroutines', link: '/concurrency/async-runtime/coroutines' },
-                { text: 'Future Functions', link: '/concurrency/async-runtime/future-functions' },
+                { text: 'Thread Pool', link: '/concurrency/threads/thread-pool' },
               ]
             },
             { text: 'Wait Groups', link: '/concurrency/wait-groups' },
@@ -504,13 +503,7 @@ export default defineConfig({
           text: 'API',
           link: '/api/',
           items: [
-            {
-              text: 'Runtime API',
-              link: '/api/runtime-api/',
-              items: [
-                { text: 'Async Runtime', link: '/api/runtime-api/async-runtime' },
-              ],
-            },
+            { text: 'Runtime API', link: '/api/runtime-api/' },
             {
               text: 'Implementation',
               link: '/api/implementation/',

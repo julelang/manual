@@ -20,6 +20,10 @@ It appears that GCC 13 has several bugs in coroutine lowering and is unable to c
 
 Using GCC 14 resolved these issues.
 
+::: info
+Coroutines are not available after jule0.2.2, this issue is related to async runtime of Jule.
+:::
+
 ### File Too Big or Too Many Sections
 
 GCC can sometimes document an error like `File too big` or `Too Many Sections` when compiling IR codes. We encountered this while compiling the julec IR when we tried to build a CI on GitHub Actions. We solved this by adding `-Wa,-mbig-obj` to the compile command.

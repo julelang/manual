@@ -161,19 +161,19 @@ In the example above, the function `fallible1` return the result and forwards er
 One thing to remember is that your compiler may place a temporary expression there for correct backend compilation. However, this shouldn't affect how your program's runtime behavior; it may just be a must-have knowledge for extreme memory efficiency requirements.
 :::
 
-## Coroutines
+## Threads
 
-Fallible functions cannot be used in coroutine calls. It is recommended to use an anonymous function or define a separate function for their handling.
+Fallible functions cannot be used in spawn calls. It is recommended to use an anonymous function or define a separate function for their handling.
 
 For example:
 
 ```jule
-async fn myFallible()! {
+fn myFallible()! {
 	throw "my error"
 }
 
-async fn main() {
-	co async fn() {
+fn main() {
+	spawn fn() {
 		myFallible().await!
 	}()
 }

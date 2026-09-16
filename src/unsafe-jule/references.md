@@ -1,14 +1,14 @@
 # References
 
-## Corotuine Calls with Reference Parameters
+## Spawn Calls with Reference Parameters
 
-References cannot be used with coroutine calls because of potential reference dangling. Because there is no clear guarantee that the coroutine call is being followed and that the program is safely waiting for the coroutine call to terminate at a non-dangling point. Therefore, your compiler cannot be sure that what you are doing is safe.
+References cannot be used with spawn calls because of potential reference dangling. Because there is no clear guarantee that the spawn call is being followed and that the program is safely waiting for the spawn call to terminate at a non-dangling point. Therefore, your compiler cannot be sure that what you are doing is safe.
 
-If you are confident and aware that this coroutine call you make will be safe, you should take responsibility by showing that you know that the call you are making is unsafe. So your compiler will respect you and allow you to coroutine call a function with reference parameters.
+If you are confident and aware that this spawn call you make will be safe, you should take responsibility by showing that you know that the call you are making is unsafe. So your compiler will respect you and allow you to spawn call a function with reference parameters.
 
 For example:
 ```jule
-unsafe { co myFunction(myVar) }
+unsafe { spawn myFunction(myVar) }
 ```
 
 ## Access Reference from Parent Scope

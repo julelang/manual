@@ -185,29 +185,29 @@ Channels are structures implemented by the Jule runtime and compiler. Each initi
 
 A channel struct instance consists of a capacity field, a closed-state flag, linked lists for waiting receivers and senders, an array used as the buffer, and a mutex that protects all of these.
 
-In unbuffered channels, everything operates synchronously. The mutex is used for every operation. If there is no waiting receiver or sender in the queue, a coroutine parks itself until another coroutine wakes it. No buffer is used for receiving or sending data. In unbuffered channels, the buffer field is never used. Before a coroutine parks itself, it obtains a pointer on the stack and saves it. When a receiver or sender coroutine wakes a parked coroutine, it writes the data to or reads the data from the pointer that the parked coroutine saved. In other words, it operates using a hand-off algorithm.
+In unbuffered channels, everything operates synchronously. The mutex is used for every operation. If there is no waiting receiver or sender in the queue, a thread parks itself until another thread wakes it. No buffer is used for receiving or sending data. In unbuffered channels, the buffer field is never used. Before a thread parks itself, it obtains a pointer on the stack and saves it. When a receiver or sender thread wakes a parked thread, it writes the data to or reads the data from the pointer that the parked thread saved. In other words, it operates using a hand-off algorithm.
 
-In buffered channels, an array is preallocated and used as a ring buffer. To keep the performance of buffered channels extremely high at high frequencies, mutex usage is minimized as much as possible. The array used as the buffer is designed as a lock-free MPMC queue (Dmitry Vyukov's). Coroutines first attempt to receive or send data through this queue in a lock-free manner. If they fail, they park themselves just like in unbuffered channels. Before parking, if they detect a parked counterpart, a hand-off occurs exactly as in unbuffered channels.
+In buffered channels, an array is preallocated and used as a ring buffer. To keep the performance of buffered channels extremely high at high frequencies, mutex usage is minimized as much as possible. The array used as the buffer is designed as a lock-free MPMC queue (Dmitry Vyukov's). Threads first attempt to receive or send data through this queue in a lock-free manner. If they fail, they park themselves just like in unbuffered channels. Before parking, if they detect a parked counterpart, a hand-off occurs exactly as in unbuffered channels.
 
-Because buffered channels are not fully synchronized via a mutex and are optimized for high-frequency messaging, they also minimize mutex usage for waking coroutines. Parked receiver coroutines are *not* woken by a sender when data is written. They are unparked only in two cases: when the channel is closed, or when the queue becomes full.
+Because buffered channels are not fully synchronized via a mutex and are optimized for high-frequency messaging, they also minimize mutex usage for waking threads. Parked receiver threads are *not* woken by a sender when data is written. They are unparked only in two cases: when the channel is closed, or when the queue becomes full.
 
-This is, in fact, one of the fundamental reasons mentioned in the [Concurrency Model](/concurrency/concurrency-model#channels) section, why failing to close a channel can lead to unexpected results. In an example scenario, a receiver attempting to receive from the channel may fail and park itself. When a sender sends data, it will not wake the receiver until the queue becomes full, so that the receiver may never wake. Because the capacity might never be filled-even after the last value is sent, closing the channel becomes essential once no more data will be sent. Based on the assumption that this is done correctly, buffered channels minimize coroutine management and tend to provide very good performance at very high messaging frequencies.
+This is, in fact, one of the fundamental reasons mentioned in the [Concurrency Model](/concurrency/concurrency-model#channels) section, why failing to close a channel can lead to unexpected results. In an example scenario, a receiver attempting to receive from the channel may fail and park itself. When a sender sends data, it will not wake the receiver until the queue becomes full, so that the receiver may never wake. Because the capacity might never be filled-even after the last value is sent, closing the channel becomes essential once no more data will be sent. Based on the assumption that this is done correctly, buffered channels minimize thread management and tend to provide very good performance at very high messaging frequencies.
 
 Channels can experience spurious wakeups, which are essentially unexpected wake events that occur before a hand-off takes place.
 
-In unbuffered channels, which are synchronous, this can only happen when the channel is closed. When a channel is closed, all coroutines are unparked, and this counts as a spurious wakeup for those coroutines. In this situation, the channel is treated as having a "received" state (because a signal received about messaging: no more messages), but reports failure. This can be captured using a variable, e.g., `data, ok:= <-ourChan`.
+In unbuffered channels, which are synchronous, this can only happen when the channel is closed. When a channel is closed, all threads are unparked, and this counts as a spurious wakeup for those threads. In this situation, the channel is treated as having a "received" state (because a signal received about messaging: no more messages), but reports failure. This can be captured using a variable, e.g., `data, ok:= <-ourChan`.
 
-Buffered channels can experience spurious wakeups in two ways. The first is the channel being closed, which behaves like an unbuffered channel. The second occurs when a receiver coroutine is woken by a sender because the buffer is full. When the buffer is full, only one receiver is woken, and no hand-off occurs. The woken receiver then tries to take data from the queue, and if it fails, it parks again.
+Buffered channels can experience spurious wakeups in two ways. The first is the channel being closed, which behaves like an unbuffered channel. The second occurs when a receiver thread is woken by a sender because the buffer is full. When the buffer is full, only one receiver is woken, and no hand-off occurs. The woken receiver then tries to take data from the queue, and if it fails, it parks again.
 
 ### Select Statements
 
 In select statements, an execution record is created first. Each expression is evaluated once and stored in memory: the channels used in the cases, the values to be sent, and the memory address where the received value should be written.
 
-The select then proceeds to its first phase by attempting all cases. If any case succeeds, it returns immediately. If all fail and a default case exists, the default case is executed. If there is no default case, the coroutine parks itself.
+The select then proceeds to its first phase by attempting all cases. If any case succeeds, it returns immediately. If all fail and a default case exists, the default case is executed. If there is no default case, the thread parks itself.
 
 After being unparked, the select chooses one of the cases that is ready and returns. If no case is ready-meaning it was a spurious wakeup- the select retries all channels. If the retry fails again, it parks itself once more. This loop continues until a case succeeds.
 
-As explained above, closing a channel causes a spurious wakeup, but this counts as a failed "received" state for the receiver coroutines. Still, because it is technically in a "received" state, a `select` statement may choose the case with the failed "received" state.
+As explained above, closing a channel causes a spurious wakeup, but this counts as a failed "received" state for the receiver threads. Still, because it is technically in a "received" state, a `select` statement may choose the case with the failed "received" state.
 
 ## Smart Pointers
 
@@ -249,11 +249,11 @@ It is automatically emitted by the compiler at the required locations during com
 
 Jule has concurrency built-in. Concurrency calls are made with the `co` keyword.
 
-In terms of overhead, basically, a lightweight coroutine is created. To achieve this, Jule can define some wrapper functions in the background and perform heap allocations. But these heap allocations do not have any GC cycle. The coroutine call is made to the wrapper function, and the wrapper function redirects directly to the main function, with minimal overhead as possible. When the execution of the main function ends, it automatically releases the heap allocations, if any.
+In terms of overhead, basically, a lightweight thread is created. To achieve this, Jule can define some wrapper functions in the background and perform heap allocations. But these heap allocations do not have any GC cycle. The spawn call is made to the wrapper function, and the wrapper function redirects directly to the main function, with minimal overhead as possible. When the execution of the main function ends, it automatically releases the heap allocations, if any.
 
 Heap allocation is mostly about arguments. A heap allocation is created to store the arguments, and the wrapper function calls the main function with arguments using this allocation. So, the size of the heap allocation is largely related to the arguments.
 
-If the functions used for coroutine calls are wrapped by a wrapper, they have to be treated as an anonymous function. That is, they are treated as a function that is used as an anonymous function.
+If the functions used for spawn calls are wrapped by a wrapper, they have to be treated as an anonymous function. That is, they are treated as a function that is used as an anonymous function.
 
 ### Concurrency and RC
 Jule has language-level concurrency, and reference counting should be atomic for safe concurrency. Reference counting may not occur correctly if there is no atomicity in concurrency. That is, when a reference is referenced by a different reference, it must do so in an atomic way. But the fact that this happens all the time raises a problem: the critical impact on performance.

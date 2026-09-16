@@ -152,11 +152,6 @@ void __jule_runeStep(__jule_U8 *s, __jule_Int len, __jule_I32 *r, __jule_Int *ou
 Declaration of: `runeStep`
 
 ```cpp
-__jule_Bool __jule_coSpawn(void *func, void *args);
-```
-Declaration of: `coSpawn`
-
-```cpp
 __jule_Int __jule_runeCount(__jule_Str s);
 ```
 Declaration of: `runeCount`

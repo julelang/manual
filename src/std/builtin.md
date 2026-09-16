@@ -37,8 +37,6 @@
 [fn real(c: Cmplx): Float](#real)\
 [fn imag(c: Cmplx): Float](#imag)\
 [fn cmplx(r: Float, i: Float): Cmplx](#cmplx)
-[fn future(ready: ReadyFunc, suspend: SuspendFunc)](#future)
-[fn ready(status: bool)](#ready)
 [fn clear\[T: ~\[\]Type | ~map\[Type\]Key\](mut t: T)](#clear)
 
 ## Variables
@@ -377,18 +375,6 @@ Returns the imaginary part of the complex number c. The return value will be flo
 fn cmplx(r: Float, i: Float): Cmplx
 ```
 Constructs a complex value from two floating-point values. The real and imaginary parts must be of the same size, either f32 or f64 (or assignable to them), and the return value will be the corresponding complex type (cmplx64 for f32, cmplx128 for f64).
-
-## future
-```jule
-fn future(ready: ReadyFunc, suspend: SuspendFunc)
-```
-Used to return a future in async functions defined with the `#future` directive. The first argument must be a function defined with the `#ready` directive. The second function is the function to be executed in the suspend state. The signatures of both functions must match the signature of the function defined as `#future`. The exact same parameters are passed directly to these functions. If the ready function returns false, the suspend function is executed. Otherwise, when the ready function succeeds, the suspend function is not triggered. The ready and suspend functions can only be named functions, or the suspend function can be an explicitly defined closure/anonymous function.
-
-## ready
-```jule
-fn ready(status: bool)
-```
-Used to indicate the ready state in functions defined as `#ready`. Sets the ready state to the boolean result it receives. Can be called multiple times.
 
 ## clear
 ```jule

@@ -38,9 +38,3 @@ One or more of the indexes you used in an indexing or slicing operation were out
 
 `divide by zero`\
 In a division or modulo operation, the denominator was zero.
-
----
-
-`runtime: all coroutines are asleep - deadlock!`\
-Your program is concurrent (or not?) and your concurrency management has issues.
-All coroutines are asleep, so waiting to be triggered by another coroutines, which causes deadlock.

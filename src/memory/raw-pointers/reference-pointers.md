@@ -67,8 +67,8 @@ Anonymous functions copy instead of referencing the definitions of the scope in 
 
 If you're sure it's safe to do so, [Unsafe Jule](/unsafe-jule/) lets you access such dangerous references.
 
-## Coroutines
+## Threads
 
-Concurrency imposes a number of process-intensive conditions that are difficult to trace at compile time and further increase compile times. Using reference pointers in a coroutine call means that the scope of the variable cannot be properly traced. Therefore, coroutine calls do not support functions with reference parameters.
+Concurrency imposes a number of process-intensive conditions that are difficult to trace at compile time and further increase compile times. Using reference pointers in a spawn call means that the scope of the variable cannot be properly traced. Therefore, spawn calls do not support functions with reference parameters.
 
 Of course, if you want to do this even though you know it's unsafe, [Unsafe Jule](/unsafe-jule/) lets you do it.
