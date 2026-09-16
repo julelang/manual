@@ -140,11 +140,3 @@ In C++, inline also relaxes the One Definition Rule (ODR), allowing the function
 ## Directive: `noinline`
 
 Explicitly instructs the compiler never to inline the marked function, forcing it to remain a standalone call site regardless of optimization levels.
-
-## Directive `future`
-
-Declares an async function as [future function](/concurrency/async-runtime/future-functions).
-
-## Directive `ready`
-
-Declares a function as ready function, suitable for the future returns.
