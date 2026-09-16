@@ -26,6 +26,7 @@
 - [Why the function keyword needed for short function literals?](#why-the-function-keyword-needed-for-short-function-literals)
 - [Why mutability is not handled automatically for parameters of short function literals?](#why-mutability-is-not-handled-automatically-for-parameters-of-short-function-literals)
 - [Why doesn't Jule perform stack unwinding in panic situations?](#why-doesn-t-jule-perform-stack-unwinding-in-panic-situations)
+- [Why did Jule return to a thread-based concurrency model?](#why-did-jule-return-to-a-thread-based-concurrency-model)
 
 ### Why another language?
 
@@ -353,3 +354,30 @@ This approach has several technical consequences:
 Rather than solving failure recovery through implicit control-flow mechanisms at the language level, Jule favors explicit error handling combined with system-level supervision (such as process restarts or isolation strategies). In this model, panic is not a flow-control tool, but a definitive signal that the program is no longer reliable.
 
 In summary, Jule positions panic not as an "error", but as a **program violation**, building its error model entirely on explicit, visible, and controllable constructs.
+
+### Why did Jule return to a thread-based concurrency model?
+
+With Jule 0.2.0, Jule abandoned its thread-based concurrency model in favor of a Go-like, coroutine-based model. It possessed its own scheduler and event loop. The coroutine design relied on C++20 coroutines under the hood and used the `async`/`await` keywords for functions.
+
+After experimenting with this model for a while, we observed several factors that led us to conclude it was not suitable for Jule:
+- Jule does not commit to targeting C++ as its back-end forever. Relying on C++20 coroutines creates a heavy dependency that is difficult to replicate across other back-ends.
+- While C++20 coroutines excel at I/O operations, they are ill-suited for small, short-lived tasks.
+- `async`/`await` chains degrade both code readability and ergonomics.
+- Async functions incur a severe performance overhead due to C++20 coroutines.
+- Because I/O is asynchronous, general I/O libraries must also be async even for synchronous R/W operations which adversely impacts performance.
+- Creating and maintaining a unified API for both async and sync programs is difficult and unsustainable.
+- C++ compilers occasionally exhibit coroutine lowering bugs.
+- Developers are heavily restricted regarding thread management. Supporting both coroutine-based and thread-based models simultaneously is difficult to maintain and unergonomic.
+
+Instead, a stackful coroutine architecture could have been considered, but it comes with its own set of issues:
+- Keeping the stack size small easily triggers stack overflows, whereas a large stack size prevents spawning high numbers of coroutines.
+- Thread control remains restricted for developers, making it hard to maintain both models in parallel.
+- Platform and compiler-specific Assembly code introduces a hard to maintain dependency.
+- A runtime scheduler is still required. The distinction between async and sync APIs must remain; even if functions are not explicitly marked as async, they will use an event loop under the hood. Fulfilling conflicting requirements still necessitates maintaining two separate API variants.
+
+For these reasons, we chose to focus on a thread-based concurrency model in Jule's design:
+- It eliminates invisible overheads, incurring only the cost of the OS threads themselves.
+- Thread management is handed to the developer, they pay only for what they use.
+- There is no need to provide separate APIs for async and sync programs.
+- There is no runtime scheduler; the OS handles scheduling, making maintenance straightforward.
+- The resulting code is both readable and ergonomic.
