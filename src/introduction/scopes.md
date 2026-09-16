@@ -36,11 +36,11 @@ This example code compiles to the following:
 ```jule
 fn readFile(path: string): []byte {
 	ioMutex.Lock()
-	mut f := OpenFile(path) else {
+	mut f := OpenFile(path) catch {
 		ioMutex.Unlock()
 		throw error
 	}
-	mut data := f.Read() else {
+	mut data := f.Read() catch {
 		f.Close()
 		ioMutex.Unlock()
 		throw error

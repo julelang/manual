@@ -103,8 +103,8 @@ fn bar(x: int, y: int, z: int, j: int) {
 
 fn main() {
 	fiz := true
-	bar(foo() else { use 90 }, foo() else { use 80 }, foo()!,
-		foo() else {
+	bar(foo() catch { use 90 }, foo() catch { use 80 }, foo()!,
+		foo() catch {
 			mut r := 0
 			if fiz {
 				r = 1
@@ -121,10 +121,10 @@ The example above has a negative impact on maintainability. However, since the c
 ```jule
 fn main() {
 	fiz := true
-	x := foo() else { use 90 }
-	y := foo() else { use 80 }
+	x := foo() catch { use 90 }
+	y := foo() catch { use 80 }
 	z := foo()!
-	j := foo() else {
+	j := foo() catch {
 		mut r := 0
 		if fiz {
 			r = 1

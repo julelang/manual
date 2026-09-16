@@ -114,7 +114,7 @@ fn getInt()!: &int { throw "foo" }
 
 fn main() {
 	y := new(int, 90)
-	x := getInt() else {
+	x := getInt() catch {
 		use y
 	}
 	println(*x)

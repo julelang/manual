@@ -63,7 +63,7 @@ fn magicDiv(a: f64, b: f64)!: f64 {
 }
 
 fn main() {
-	let x = magicDiv(5, 200) else {
+	let x = magicDiv(5, 200) catch {
 		mut r := f64(0)
 		match error {
 		| ErrDivByZero:
@@ -108,7 +108,7 @@ fn parseNumeric(s: string)!: int {
 			}
 		}
 	}
-	return conv::Atoi(s) else { throw error }
+	return conv::Atoi(s) catch { throw error }
 }
 
 fn main() {
