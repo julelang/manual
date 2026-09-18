@@ -6,6 +6,8 @@ Supplementer package for C interoperability of Integrated Jule. Provides helper 
 This package contains low-level implementations and is under the terms of the [Unsafe Jule](/unsafe-jule/). Be careful using API of this package.
 :::
 
+::: v-pre
+
 ## Index
 
 [fn Malloc\(size: uint\): \*unsafe](#malloc)\
@@ -298,3 +300,5 @@ Type alias for intptr\_t type\.
 type Ptrdiff: extern.ptrdiff_t
 ```
 Type alias for ptrdiff\_t type\.
+
+:::
