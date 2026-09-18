@@ -1,5 +1,7 @@
 # std/jule/ast
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -47,7 +49,7 @@
 [struct AssignLeft](#assignleft)\
 [struct Assign](#assign)\
 [struct Stmt](#stmt)\
-[struct ScopeTree](#scopetree)\
+[struct Scope](#scope)\
 [struct ChanSend](#chansend)\
 [struct Param](#param)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(\*self\): bool](#isself-1)\
@@ -87,6 +89,7 @@
 [struct Impl](#impl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(\*self\): bool](#istraitimpl)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(\*self\): bool](#isstructimpl)\
+[type Flag](#flag)\
 [enum NodeData: type ](#nodedata)\
 [enum ExprData: type ](#exprdata)\
 [enum StmtData: type ](#stmtdata)\
@@ -105,10 +108,36 @@ Channel directions\.
 ---
 
 ```jule
-let mut Ignored = new(ScopeTree)   // Error is ignored, like foo()!
-let mut Forwarded = new(ScopeTree) // Error is forwarded, like foo()?
+let mut Ignored = new(Scope)   // Error is ignored, like foo()!
+let mut Forwarded = new(Scope) // Error is forwarded, like foo()?
 ```
 Special error handler scopes\.
+
+---
+
+```jule
+const (
+	F_EXTERN: Flag = 1 << iota
+	F_SPAWN
+	F_MUTABLE
+	F_REFERENCE
+	F_UNSAFE
+	F_DEFER
+	F_VARIADIC
+	F_PUBLIC
+	F_GLOBAL
+	F_SHORT
+	F_STATIC
+	F_FALLIBLE
+	F_CONST
+	F_STRICT
+	F_TYPE
+
+	// The iota offset value for custom flags.
+	F_CUSTOMS_IOTA = iota
+)
+```
+Flags for Flag\.
 
 ## Unparen
 ```jule
@@ -252,9 +281,12 @@ Unsafe expression\.
 ## NameExpr
 ```jule
 struct NameExpr {
-	Token:  &token::Token // Token of identifier.
-	Name:   string        // The name.
-	Extern: bool          // It is in the extern namespace.
+	Token: &token::Token // Token of identifier.
+	Name:  string        // The name.
+
+	// Possible flags are:
+	//	F_EXTERN: external name
+	Flags: Flag
 }
 ```
 Identifier expression\.
@@ -330,11 +362,13 @@ Binary operation\.
 ```jule
 struct CallExpr {
 	Token:   &token::Token
-	Func:    &Expr      // Function expression.
-	Args:    []&Expr    // Function arguments, or nil.
-	Handler: &ScopeTree // Error handling scope, or nil.
-	IsCo:    bool       // Whether this is the concurrent call.
-	Await:   bool       // Awaited.
+	Func:    &Expr   // Function expression.
+	Args:    []&Expr // Function arguments, or nil.
+	Handler: &Scope  // Error handling scope, or nil.
+
+	// Possible flags are:
+	//	F_SPAWN: if this is a concurrent call.
+	Flags: Flag
 }
 ```
 Function call expression kind\.
@@ -476,11 +510,14 @@ Fall statement\.
 ## AssignLeft
 ```jule
 struct AssignLeft {
-	Token:     &token::Token
-	Mutable:   bool
-	Reference: bool
-	Name:      string
-	X:         &Expr // Expression.
+	Token: &token::Token
+	Name:  string
+	X:     &Expr // Expression.
+
+	// Possible flags are:
+	//	F_MUTABLE: if name declared as mutable
+	//	F_REFERENCE: if name declared as a reference
+	Flags: Flag
 }
 ```
 Left expression of assign statement\.
@@ -506,14 +543,17 @@ struct Stmt {
 ```
 Statement\.
 
-## ScopeTree
+## Scope
 ```jule
-struct ScopeTree {
-	Parent:   &ScopeTree // Nil if scope is root.
-	Unsafe:   bool
-	Deferred: bool
-	Stmts:    []Stmt
-	End:      &token::Token
+struct Scope {
+	Parent: &Scope // Nil if scope is root.
+	Stmts:  []Stmt
+	End:    &token::Token
+
+	// Possible flags are:
+	//	F_UNSAFE: if scope is unsafe
+	//	F_DEFER: if scope is deferred or short function literal body
+	Flags: Flag
 }
 ```
 Scope tree\.
@@ -530,12 +570,15 @@ Channel send data statement\.
 ## Param
 ```jule
 struct Param {
-	Token:     &token::Token
-	Mutable:   bool
-	Variadic:  bool
-	Reference: bool
-	Type:      &Expr
-	Name:      string
+	Token: &token::Token
+	Type:  &Expr
+	Name:  string
+
+	// Possible flags are:
+	//	F_MUTABLE: if parameter is mutable
+	//	F_VARIADIC: if parameter is variadic
+	//	F_REFERENCE: if parameter is a reference
+	Flags: Flag
 }
 ```
 Parameter\.
@@ -562,20 +605,22 @@ Reports whether self \(receiver\) parameter is reference pointer\.
 ```jule
 struct Func {
 	Token:      &token::Token
-	Global:     bool
-	Async:      bool
-	Unsafe:     bool
-	Public:     bool
-	Extern:     bool
-	Short:      bool // Whether this function is an anonymous function, defined by short literal.
-	Static:     bool
-	Fallible:   bool
 	Name:       string
 	Directives: []&Directive
-	Scope:      &ScopeTree
+	Scope:      &Scope
 	Generics:   []&Generic
 	Result:     &ReturnType
 	Params:     []&Param
+
+	// Possible flags are:
+	//	F_GLOBAL: if function declared in the global scope
+	//	F_UNSAFE: if function is unsafe
+	//	F_PUBLIC: if function is public
+	//	F_EXTERN: if function is an external declaration
+	//	F_SHORT: if function is an anonymous function, defined by short literal.
+	//	F_STATIC: if function is static
+	//	F_FALLIBLE: if function is fallibe
+	Flags: Flag
 }
 ```
 Function declaration\. Also represents anonymous function expression and function type declarations\.\. For short function literals, Scope will be deferred to represent one\-line body\.
@@ -601,16 +646,10 @@ Reports whether the function is type declaration\.
 ## Var
 ```jule
 struct Var {
-	Scope:      &ScopeTree // nil for global scopes
+	Scope:      &Scope // nil for global scopes
 	Token:      &token::Token
 	Op:         &token::Token // Expression assign operator token.
 	Name:       string
-	Extern:     bool
-	Public:     bool
-	Mutable:    bool
-	Const:      bool
-	Static:     bool
-	Reference:  bool
 	Directives: []&Directive
 	Type:       &Expr // Type declaration, or nil if type inferred.
 	X:          &Expr // Initializer expression, or nil.
@@ -618,6 +657,14 @@ struct Var {
 	// See developer reference (12).
 	GroupIndex: int    // Index of variable in the group, if variable is grouped.
 	Group:      []&Var // All variables of group in define order, if variable is grouped.
+
+	// Possible flags are:
+	//	F_EXTERN: if variable is an external declaration
+	//	F_PUBLIC: if variable is public
+	//	F_CONST: if variable is constant
+	//	F_STATIC: if variable is static
+	//	F_REFERENCE: if variable is a reference
+	Flags: Flag
 }
 ```
 Variable declaration\.
@@ -634,9 +681,12 @@ Return statement\.
 ## Throw
 ```jule
 struct Throw {
-	Token:  &token::Token
-	Unsafe: bool
-	Error:  &Expr // Error expression.
+	Token: &token::Token
+	Error: &Expr // Error expression.
+
+	// Possible flags are:
+	//	F_UNSAFE: if it is an unsafe throw
+	Flags: Flag
 }
 ```
 Throw statement\.
@@ -644,10 +694,13 @@ Throw statement\.
 ## Iter
 ```jule
 struct Iter {
-	Comptime: bool
-	Token:    &token::Token
-	Kind:     IterKind
-	Scope:    &ScopeTree
+	Token: &token::Token
+	Kind:  IterKind
+	Scope: &Scope
+
+	// Possible flags are:
+	//	F_CONST: if it is a comptime iteration
+	Flags: Flag
 }
 ```
 Iteration\.
@@ -707,7 +760,7 @@ Continue statement\.
 ```jule
 struct If {
 	Token: &token::Token
-	Scope: &ScopeTree
+	Scope: &Scope
 	X:     &Expr
 }
 ```
@@ -717,7 +770,7 @@ If condition\.
 ```jule
 struct Else {
 	Token: &token::Token
-	Scope: &ScopeTree
+	Scope: &Scope
 }
 ```
 Else condition\.
@@ -734,14 +787,17 @@ Condition chain\.
 ## TypeAlias
 ```jule
 struct TypeAlias {
-	Scope:    &ScopeTree
-	Public:   bool
-	Extern:   bool
+	Scope:    &Scope
 	Token:    &token::Token
 	Name:     string
-	Strict:   bool
 	Type:     &Expr
 	Generics: []&Generic
+
+	// Possible flags are:
+	//	F_PUBLİC: if type alias is public
+	//	F_EXTERN: if type alias stands for an external type declaration
+	//	F_STRICT: if type alias is a strict type alias
+	Flags: Flag
 }
 ```
 Type alias declaration\.
@@ -750,7 +806,7 @@ Type alias declaration\.
 ```jule
 struct Case {
 	Token: &token::Token
-	Scope: &ScopeTree
+	Scope: &Scope
 
 	// Holds expression.
 	// Expressions holds *Type if case is for type matching.
@@ -768,13 +824,16 @@ Case of match\-case\.
 ## Match
 ```jule
 struct Match {
-	Comptime: bool
-	Token:    &token::Token
-	End:      &token::Token
-	Type:     bool    // Type matching.
-	X:        &Expr   // Expression to match.
-	Cases:    []&Case // First one is the head case.
-	Default:  &Else
+	Token:   &token::Token
+	End:     &token::Token
+	X:       &Expr   // Expression to match.
+	Cases:   []&Case // First one is the head case.
+	Default: &Else
+
+	// Possible flags are:
+	//	F_CONST: if it is a comptime match
+	//	F_TYPE: if it is a type matching statement
+	Flags: Flag
 }
 ```
 Match statement\.
@@ -793,10 +852,13 @@ Select statement\.
 ## Use
 ```jule
 struct Use {
-	Token:  &token::Token
-	Path:   &token::Token // Use declaration path token.
-	Alias:  &token::Token // Custom alias. Nil if not given.
-	Extern: bool          // External use declaration.
+	Token: &token::Token
+	Path:  &token::Token // Use declaration path token.
+	Alias: &token::Token // Custom alias. Nil if not given.
+
+	// Possible flags are:
+	//	F_EXTERN: if it is an use declaration for an external resource
+	Flags: Flag
 }
 ```
 Use declaration statement\.
@@ -820,12 +882,15 @@ Reports whether item has auto expression\.
 ## Enum
 ```jule
 struct Enum {
-	Token:  &token::Token
-	Public: bool
-	Name:   string
-	Type:   &Expr
-	Items:  []&EnumItem
-	End:    &token::Token
+	Token: &token::Token
+	Name:  string
+	Type:  &Expr
+	Items: []&EnumItem
+	End:   &token::Token
+
+	// Possible flags are:
+	//	F_PUBLIC: if enum is public
+	Flags: Flag
 }
 ```
 Enum declaration\.
@@ -848,11 +913,14 @@ TypeEnum item\.
 ## TypeEnum
 ```jule
 struct TypeEnum {
-	Token:  &token::Token
-	Public: bool
-	Name:   string
-	Items:  []&TypeEnumItem
-	End:    &token::Token
+	Token: &token::Token
+	Name:  string
+	Items: []&TypeEnumItem
+	End:   &token::Token
+
+	// Possible flags are:
+	//	F_PUBLIC: if type enum is public
+	Flags: Flag
 }
 ```
 TypeEnum declaration\.
@@ -860,12 +928,15 @@ TypeEnum declaration\.
 ## Field
 ```jule
 struct Field {
-	Token:   &token::Token
-	Public:  bool
-	Mutable: bool // Interior mutability.
-	Name:    string
-	Type:    &Expr
-	Tag:     &token::Token // Nil if not given.
+	Token: &token::Token
+	Name:  string
+	Type:  &Expr
+	Tag:   &token::Token // Nil if not given.
+
+	// Possible flags are:
+	//	F_PUBLIC: if field is public
+	//	F_MUTABLE: if field has interior mutability
+	Flags: Flag
 }
 ```
 Field declaration\.
@@ -877,10 +948,13 @@ struct Struct {
 	End:        &token::Token
 	Name:       string
 	Fields:     []&Field
-	Public:     bool
-	Extern:     bool
 	Directives: []&Directive
 	Generics:   []&Generic
+
+	// Possible flags are:
+	//	F_PUBLIC: if struct is public
+	//	F_EXTERN: if struct is an external declaration
+	Flags: Flag
 }
 ```
 Structure declaration\.
@@ -892,9 +966,12 @@ struct Trait {
 	Token:    &token::Token
 	End:      &token::Token
 	Name:     string
-	Public:   bool
 	Inherits: []&Expr
 	Methods:  []&Func
+
+	// Possible flags are:
+	//	F_PUBLIC: if trait is public
+	Flags: Flag
 }
 ```
 
@@ -930,6 +1007,12 @@ Reports whether implementation type is trait to structure\.
 fn IsStructImpl(*self): bool
 ```
 Reports whether implementation type is append to destination structure\.
+
+## Flag
+```jule
+type Flag: uint
+```
+A commonf flagset for AST nodes\.
 
 ## NodeData
 ```jule
@@ -992,7 +1075,7 @@ enum StmtData: type {
 	&Assign,
 	&Fall,
 	&Label,
-	&ScopeTree,
+	&Scope,
 	&TypeAlias,
 	&UseExpr,
 	&Select,
@@ -1009,3 +1092,5 @@ enum IterKind: type {
 }
 ```
 Type of Iter&#39;s kind\.
+
+:::
