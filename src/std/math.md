@@ -1,5 +1,7 @@
 # std/math
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -969,3 +971,5 @@ Returns the IEEE 754 binary representation of f, with the sign bit of f and the 
 fn F64frombits(b: u64): f64
 ```
 Returns the floating\-point number corresponding to the IEEE 754 binary representation b, with the sign bit of b and the result in the same bit position\. F64frombits\(F64bits\(x\)\) == x\.
+
+:::
