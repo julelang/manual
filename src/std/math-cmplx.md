@@ -1,5 +1,7 @@
 # std/math/cmplx
 
+::: v-pre
+
 ## Index
 
 [fn Abs\(x: cmplx128\): f64](#abs)\
@@ -199,3 +201,5 @@ Returns the hyperbolic tangent of complex number\.
 fn Cot(x: cmplx128): cmplx128
 ```
 Returns the cotangent of complex number\.
+
+:::
