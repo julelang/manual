@@ -1,5 +1,7 @@
 # std/errors
 
+::: v-pre
+
 ## Index
 
 [fn New\(err: string\): &amp;Error](#new)\
@@ -25,3 +27,5 @@ Internal type for anonymous errors\.
 fn String(*self): string
 ```
 Returns error as string\.
+
+:::
