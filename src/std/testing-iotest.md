@@ -1,5 +1,7 @@
 # std/testing/iotest
 
+::: v-pre
+
 ## Index
 
 [fn OneByteReader\(mut r: io::Reader\): io::Reader](#onebytereader)\
@@ -25,3 +27,5 @@ Returns a Reader that implements Read by reading half as many requested bytes fr
 fn DataErrReader(mut r: io::Reader): io::Reader
 ```
 Changes the way errors are handled by a Reader\. Normally, a Reader returns an error from the first Read call after the last piece of data is read\. DataErrReader wraps a Reader and changes its behavior so the final error is returned along with the final data, instead of in the first call after the final data\.
+
+:::
