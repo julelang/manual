@@ -1,5 +1,7 @@
 # std/strings
 
+::: v-pre
+
 ## Index
 
 [fn Compare\(a: string, b: string\): int](#compare)\
@@ -56,7 +58,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Cap\(\*self\): int](#cap)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Buf\(mut \*self\): \[\]byte](#buf)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetBuf\(mut \*self, mut buf: \[\]byte\)](#setbuf)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Async\(mut &amp;self\): asyncBuilder](#async)\
 [struct Reader](#reader)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(s: string\): &amp;Reader](#new)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Len\(\*self\): int](#len-1)\
@@ -70,7 +71,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(\*self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteTo\(\*self, mut w: io::Writer\)\!: \(n: i64\)](#writeto)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self, s: string\)](#reset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Async\(mut &amp;self\): asyncReader](#async-1)\
 [struct Replacer](#replacer)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(oldnew: \.\.\.string\): &amp;Replacer](#new-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Replace\(&amp;self, s: string\): string](#replace-1)\
@@ -380,6 +380,13 @@ String builder for efficient concatenation\. Optimized for single string buildin
 
 A Builder must not be copied after first use\.
 
+### Implemented Traits
+
+- `io::Writer`
+- `io::ByteWriter`
+- `io::RuneWriter`
+- `io::StringWriter`
+
 ### Write
 ```jule
 fn Write(mut *self, b: []byte)!: (n: int)
@@ -446,12 +453,6 @@ unsafe fn SetBuf(mut *self, mut buf: []byte)
 ```
 Sets mutable internal buffer for low\-level interactions\.
 
-### Async
-```jule
-fn Async(mut &self): asyncBuilder
-```
-Returns async wrapper for the Builder\. Useful to satisfy behavior implemented \`io\` traits\.
-
 ## Reader
 ```jule
 struct Reader {
@@ -459,6 +460,15 @@ struct Reader {
 }
 ```
 Implements the io::Reader, io::ReaderAt, io::ByteReader, io::RuneReader, io::Seeker, and io::WriterTo traits by reading from a string\. The zero value for Reader operates like a Reader of an empty string\.
+
+### Implemented Traits
+
+- `io::Reader`
+- `io::ReaderAt`
+- `io::ByteReader`
+- `io::RuneReader`
+- `io::Seeker`
+- `io::WriterTo`
 
 ### New
 ```jule
@@ -522,7 +532,7 @@ Implements behavior of the io::Seeker trait\.
 
 ### WriteTo
 ```jule
-async fn WriteTo(*self, mut w: io::Writer)!: (n: i64)
+fn WriteTo(*self, mut w: io::Writer)!: (n: i64)
 ```
 Implements behavior the io::WriterTo trait\.
 
@@ -532,19 +542,13 @@ fn Reset(mut *self, s: string)
 ```
 Resets the Reader to be reading from s\.
 
-### Async
-```jule
-fn Async(mut &self): asyncReader
-```
-Returns async wrapper for the Reader\. Useful to satisfy behavior implemented \`io\` traits\.
-
 ## Replacer
 ```jule
 struct Replacer {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
-Replaces a list of strings with replacements\. It is more efficient than Replace function for multiple replacements on one string\. It is safe for concurrent use by multiple coroutines\.
+Replaces a list of strings with replacements\. It is more efficient than Replace function for multiple replacements on one string\. It is safe for concurrent use by multiple threads\.
 
 ### New
 ```jule
@@ -562,6 +566,8 @@ Returns a copy of s with all replacements performed\.
 
 ### WriteString
 ```jule
-async fn WriteString(&self, mut w: io::Writer, s: string)!: (n: int)
+fn WriteString(&self, mut w: io::Writer, s: string)!: (n: int)
 ```
 Writes s to w with all replacements performed\.
+
+:::
