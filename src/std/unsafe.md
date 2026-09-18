@@ -4,6 +4,8 @@
 This package is under the terms of the [Unsafe Jule](/unsafe-jule/). Be careful using API of this package. Doing things correct is developer's responsibility.
 :::
 
+::: v-pre
+
 ## Index
 
 [fn String\(b: \*byte, n: int\): string](#string)\
@@ -57,3 +59,5 @@ Same as \[BytesString\] but keeps garbage collection\.
 fn BytesFromString(s: string): []byte
 ```
 Same as \[StringBytes\] but keeps garbage collection\.
+
+:::
