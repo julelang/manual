@@ -1,7 +1,10 @@
 # std/jule/mod
 
+::: v-pre
+
 ## Index
 
+[Variables](#variables)\
 [fn Parse\(path: string, data: \[\]byte, options: ParseOptions\): \(&amp;Mod, \[\]log::Log\)](#parse)\
 [fn ParseFile\(path: string, options: ParseOptions\): \(&amp;Mod, \[\]log::Log\)](#parsefile)\
 [fn IsName\(name: string\): bool](#isname)\
@@ -10,7 +13,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Mod\): bool](#equal)\
 [struct ParseOptions](#parseoptions)
 
+## Variables
 
+```jule
+const InvalidID = ID(-1)
+```
+The standard invalid module ID\. All module implementations must consider this special value as invalid\.
 
 ## Parse
 ```jule
@@ -62,3 +70,5 @@ struct ParseOptions {
 }
 ```
 Options for the module file parsing\.
+
+:::
