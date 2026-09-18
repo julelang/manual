@@ -4,6 +4,8 @@ Package url parses URLs and implements query escaping.
 
 See RFC 3986. This package generally follows RFC 3986, except where it deviates for compatibility reasons.
 
+::: v-pre
+
 ## Index
 
 [fn QueryUnescape\(s: string\)\!: string](#queryunescape)\
@@ -352,3 +354,5 @@ Reports whether a given key is set\.
 fn Encode(*self): string
 ```
 Encodes the values into “URL encoded” form \(&#34;bar=baz&amp;foo=quux&#34;\) sorted by key\.
+
+:::
