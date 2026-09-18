@@ -1,5 +1,7 @@
 # std/unicode/utf8
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -128,3 +130,5 @@ Reports whether s consists entirely of valid UTF\-8\-encoded runes\.
 fn ValidRune(r: rune): bool
 ```
 Reports whether r can be legally encoded as UTF\-8\. Code points that are out of range or a surrogate half are illegal\.
+
+:::
