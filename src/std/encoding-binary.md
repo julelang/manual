@@ -1,5 +1,7 @@
 # std/encoding/binary
 
+::: v-pre
+
 ## Index
 
 [struct BigEndian](#bigendian)\
@@ -144,3 +146,5 @@ Encodes unsigned 64\-bit integer and appends to slice\.
 fn DecodeU64(b: []byte): u64
 ```
 Decodes unsigned 64\-bit integer from 8\-bytes\.
+
+:::
