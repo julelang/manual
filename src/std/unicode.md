@@ -1,5 +1,7 @@
 # std/unicode
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -33,8 +35,16 @@
 ## Variables
 
 ```jule
+let TurkishCase: SpecialCase = _TurkishCase
+```
+
+
+---
+
+```jule
 let AzeriCase: SpecialCase = _TurkishCase
 ```
+
 
 ---
 
@@ -401,6 +411,13 @@ These variables have type &amp;RangeTable\.
 ---
 
 ```jule
+let CaseRanges = _CaseRanges
+```
+The table describing case mappings for all letters with non\-self mappings\.
+
+---
+
+```jule
 let FoldCategory = map[string]&RangeTable{ ... }
 ```
 Maps a category name to a table of code points outside the category that are equivalent under simple case folding to code points inside the category\. If there is no entry for a category name, there are no such points\.
@@ -609,3 +626,5 @@ struct RangeTable {
 }
 ```
 Defines a set of Unicode code points by listing the ranges of code points within the set\. The ranges are listed in two slices to save space: a slice of 16\-bit ranges and a slice of 32\-bit ranges\. The two slices must be in sorted order and non\-overlapping\. Also, R32 should contain only values &gt;= 0x10000 \(1&lt;&lt;16\)\.
+
+:::
