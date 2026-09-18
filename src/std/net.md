@@ -1,5 +1,7 @@
 # std/net
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -46,9 +48,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn DialTimeout\(addr: string, timeout: time::Duration\)\!: &amp;TCPConn](#dialtimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: int](#read)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: int](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetNoDelay\(mut \*self, noDelay: bool\)\!](#setnodelay)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
@@ -67,9 +68,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Dial\(addr: string\)\!: &amp;UDPConn](#dial-2)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadTimeout\(mut \*self, timeout: time::Duration\)\!](#setreadtimeout-1)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteTimeout\(mut \*self, timeout: time::Duration\)\!](#setwritetimeout-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Network\(\*self\): Network](#network-5)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close-2)\
@@ -207,13 +207,13 @@ Parses s as an IP address, returning the result\. The string s can be in IPv4 do
 
 ## LookupIP
 ```jule
-async fn LookupIP(mut network: Network, address: string)!: []&IPAddr
+fn LookupIP(mut network: Network, address: string)!: []&IPAddr
 ```
 Looks up host using the local resolver\. It returns a slice of that host&#39;s IPv4 and IPv6 addresses by network\. Network must be IP, IP4 or IP6\. Looks up for IPv4 addresses only, if network is IP4\. Looks up for IPv6 addresses only, if network is IP6\. Looks up for IPv4 and IPv6 addresses, if network is IP\.
 
 ## Listen
 ```jule
-async fn Listen(network: Network, addr: string)!: Listener
+fn Listen(network: Network, addr: string)!: Listener
 ```
 Listens the address on the named network\. It will forward any error from network connectors\.
 
@@ -223,7 +223,7 @@ See the \[Dial\] function for a description of the network and addr parameters\.
 
 ## ListenUDP
 ```jule
-async fn ListenUDP(network: Network, addr: string)!: &UDPConn
+fn ListenUDP(network: Network, addr: string)!: &UDPConn
 ```
 Listens the address on the named network\. It will forward any error from network connectors\. Just for UDP networks\.
 
@@ -231,7 +231,7 @@ See the \[Dial\] function for a description of the network and addr parameters\.
 
 ## Dial
 ```jule
-async fn Dial(network: Network, addr: string)!: Conn
+fn Dial(network: Network, addr: string)!: Conn
 ```
 Connects to the address on the named network\. Network should be one of the fields of the Network enum\. The addr parameter is should represent valid address according to network\.
 
@@ -275,7 +275,7 @@ It will forward any error from network connectors\.
 
 ## DialTimeout
 ```jule
-async fn DialTimeout(network: Network, addr: string, timeout: time::Duration)!: Conn
+fn DialTimeout(network: Network, addr: string, timeout: time::Duration)!: Conn
 ```
 Same as Dial, but uses timeout\. For UDP networks, timeout will be ignored\. Timeout precision is microseconds\. If the timeout is below one microsecond it will be ignored\.
 
@@ -297,9 +297,8 @@ trait Conn {
 	io::Reader
 	io::Writer
 	io::Closer
-	fn SetDeadline(mut *self, deadline: time::Duration)!
-	fn SetReadDeadline(mut *self, deadline: time::Duration)!
-	fn SetWriteDeadline(mut *self, deadline: time::Duration)!
+	fn SetReadTimeout(mut *self, timeout: time::Duration)!
+	fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 	fn Network(*self): Network
 	fn RawFD(*self): u64
 }
@@ -310,7 +309,7 @@ Common connection behavior\.
 ```jule
 trait Listener {
 	io::Closer
-	async fn Accept(*self)!: Conn
+	fn Accept(*self)!: Conn
 	fn Network(*self): Network
 }
 ```
@@ -450,7 +449,7 @@ Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: string)!: &IPAddr
+fn Resolve(mut network: Network, address: string)!: &IPAddr
 ```
 Returns an address of IP end point\. The network must be a IP network name\.
 
@@ -532,7 +531,7 @@ Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: string)!: &TCPAddr
+fn Resolve(mut network: Network, address: string)!: &TCPAddr
 ```
 Returns an address of TCP end point\. The network must be a TCP network name\.
 
@@ -559,7 +558,7 @@ TCP connection\. In most cases, represents TCP client\.
 
 ### Dial
 ```jule
-async fn Dial(addr: string)!: &TCPConn
+fn Dial(addr: string)!: &TCPConn
 ```
 Connects to TCP listener by given address\. Returns relevant created &amp;TCPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -567,47 +566,33 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### DialTimeout
 ```jule
-async fn DialTimeout(addr: string, timeout: time::Duration)!: &TCPConn
+fn DialTimeout(addr: string, timeout: time::Duration)!: &TCPConn
 ```
 Same as TCPListener\.Dial, but uses timeout\.
 
 ### Read
 ```jule
-async fn Read(mut *self, mut buf: []byte)!: int
+fn Read(mut *self, mut buf: []byte)!: int
 ```
 Reads data from the connection\. Read can be made to time out and return an error after a fixed time limit; see SetDeadline and SetReadDeadline\.
 
 ### Write
 ```jule
-async fn Write(mut *self, buf: []byte)!: int
+fn Write(mut *self, buf: []byte)!: int
 ```
 Writes data to the connection\. Write can be made to time out and return an error after a fixed time limit; see SetDeadline and SetWriteDeadline\.
 
-### SetDeadline
+### SetReadTimeout
 ```jule
-fn SetDeadline(mut *self, deadline: time::Duration)!
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
 ```
-Sets the read and write deadlines associated with the connection\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
+Sets read timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
 
-A deadline is an absolute time after which I/O operations fail instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
-
-If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps os::ErrDeadlineExceeded\.
-
-An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
-
-A zero value means I/O operations will not time out\.
-
-### SetReadDeadline
+### SetWriteTimeout
 ```jule
-fn SetReadDeadline(mut *self, deadline: time::Duration)!
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 ```
-Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\.
-
-### SetWriteDeadline
-```jule
-fn SetWriteDeadline(mut *self, deadline: time::Duration)!
-```
-Sets the deadline for future Write calls and any currently\-blocked Write call\. Even if write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\.
+Sets write timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
 
 ### SetNoDelay
 ```jule
@@ -629,7 +614,7 @@ Returns raw socket/file\-descriptor of the connection\. Intended for low\-level 
 
 ### Close
 ```jule
-async fn Close(mut *self)!
+fn Close(mut *self)!
 ```
 Closes connection\. Any blocked Read or Write operations will be unblocked and return errors\. Close may or may not block until any buffered data is sent\.
 
@@ -647,7 +632,7 @@ TCP listener\. In most cases, represents TCP server\.
 
 ### Bind
 ```jule
-async fn Bind(addr: string)!: &TCPListener
+fn Bind(addr: string)!: &TCPListener
 ```
 Binds new TCP listener and starts listening given address\. Returns relevant created &amp;TCPListener if success\. If addr is not a valid address, it will forward relevant parse error\. In addition, any bind and listening error will be thrown as error\.
 
@@ -655,7 +640,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Accept
 ```jule
-async fn Accept(*self)!: Conn
+fn Accept(*self)!: Conn
 ```
 Accepts incoming connection, returns &amp;TCPConn\. Panics if connection is closed\.
 
@@ -667,7 +652,7 @@ Returns network name which is listening\. If connection closed, returns Network\
 
 ### Close
 ```jule
-async fn Close(mut *self)!
+fn Close(mut *self)!
 ```
 Closes connection\.
 
@@ -699,7 +684,7 @@ Returns string form of address\.
 
 ### Resolve
 ```jule
-async fn Resolve(mut network: Network, address: string)!: &UDPAddr
+fn Resolve(mut network: Network, address: string)!: &UDPAddr
 ```
 Returns an address of UDP end point\. The network must be a UDP network name\.
 
@@ -726,7 +711,7 @@ UDP connection\. This structure represents server and client connections\.
 
 ### Bind
 ```jule
-async fn Bind(addr: string)!: &UDPConn
+fn Bind(addr: string)!: &UDPConn
 ```
 Binds new UDP listener and starts listening given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -734,7 +719,7 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Dial
 ```jule
-async fn Dial(addr: string)!: &UDPConn
+fn Dial(addr: string)!: &UDPConn
 ```
 Connects to UDP listener by given address\. Returns relevant created &amp;UDPConn if success\. If addr is not a valid address, it will forward relevant parse errors\. In addition, any bind and listening error will be thrown as error\.
 
@@ -742,41 +727,27 @@ See the \[Dial\] function for a description of the addr parameter\.
 
 ### Read
 ```jule
-async fn Read(mut *self, mut buf: []byte)!: (n: int)
+fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
 Reads data from the connection\. Read can be made to time out and return an error after a fixed time limit; see SetDeadline and SetReadDeadline\.
 
 ### Write
 ```jule
-async fn Write(mut *self, buf: []byte)!: (n: int)
+fn Write(mut *self, buf: []byte)!: (n: int)
 ```
 Writes data to the connection\. Write can be made to time out and return an error after a fixed time limit; see SetDeadline and SetWriteDeadline\.
 
-### SetDeadline
+### SetReadTimeout
 ```jule
-fn SetDeadline(mut *self, deadline: time::Duration)!
+fn SetReadTimeout(mut *self, timeout: time::Duration)!
 ```
-Sets the read and write deadlines associated with the connection\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
+Sets read timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
 
-A deadline is an absolute time after which I/O operations fail instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
-
-If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps os::ErrDeadlineExceeded\.
-
-An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
-
-A zero value means I/O operations will not time out\.
-
-### SetReadDeadline
+### SetWriteTimeout
 ```jule
-fn SetReadDeadline(mut *self, deadline: time::Duration)!
+fn SetWriteTimeout(mut *self, timeout: time::Duration)!
 ```
-Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\.
-
-### SetWriteDeadline
-```jule
-fn SetWriteDeadline(mut *self, deadline: time::Duration)!
-```
-Sets the deadline for future Write calls and any currently\-blocked Write call\. Even if write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\.
+Sets write timeout for connection\. Timeout precision is milliseconds\. If the timeout is below one millisecond it will be accepted as zero\. The maximum timeout is 40 days, if timeout is greater than 40 fays, it panics\. The zero timeout, clears current timeout if exist\.
 
 ### Network
 ```jule
@@ -792,7 +763,7 @@ Returns raw socket/file\-descriptor of the connection\. Intended for low\-level 
 
 ### Close
 ```jule
-async fn Close(mut *self)!
+fn Close(mut *self)!
 ```
 Closes connection\. Any blocked Read or Write operations will be unblocked and return errors\. Close may or may not block until any buffered data is sent\.
 
@@ -811,3 +782,5 @@ enum Network: string {
 }
 ```
 Network names\.
+
+:::
