@@ -1,5 +1,7 @@
 # std/encoding/base64
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -170,3 +172,5 @@ Appends the base64 decoded src to dst and returns the extended buffer\. If the i
 fn DecodeString(*self, s: string)!: []byte
 ```
 Returns the bytes represented by the base64 string s\. If the input is malformed, it returns the partially decoded data and \[CorruptInputError\]\. New line characters \(\\r and \\n\) are ignored\.
+
+:::
