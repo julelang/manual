@@ -1,5 +1,7 @@
 # std/hash/adler32
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -24,3 +26,5 @@ Returns a new hash::Hash32 computing the Adler\-32 checksum\. Its Sum method wil
 fn Checksum(data: []byte): u32
 ```
 Returns the Adler\-32 checksum of data\.
+
+:::
