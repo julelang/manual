@@ -1,5 +1,7 @@
 # std/jule/constant
 
+::: v-pre
+
 ## Index
 
 [fn NewInt\(i: big::Int\): &amp;Const](#newint)\
@@ -397,3 +399,6 @@ Right shifts itself value to x&#39;s value\. Reports whether operation is succes
 ```jule
 fn String(*self): string
 ```
+
+
+:::
