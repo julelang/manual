@@ -1,5 +1,7 @@
 # std/jule/dist
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -99,3 +101,5 @@ Reports whether architecture is 32\-bit\.
 fn Is64bit(arch: string): bool
 ```
 Reports whether architecture is 64\-bit\.
+
+:::
