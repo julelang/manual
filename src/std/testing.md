@@ -1,5 +1,7 @@
 # std/testing
 
+::: v-pre
+
 ## Index
 
 [struct T](#t)\
@@ -62,3 +64,5 @@ Set status of test as failure and print message by formatting\. Prints new\-line
 fn Logf(*self, fmt: string, args: ...any)
 ```
 Logs message with no error, test status will not be affected\.
+
+:::
