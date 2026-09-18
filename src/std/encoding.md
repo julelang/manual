@@ -1,5 +1,7 @@
 # std/encoding
 
+::: v-pre
+
 ## Index
 
 [trait TextEncoder](#textencoder)\
@@ -22,3 +24,5 @@ trait TextDecoder {
 }
 ```
 Implements custom decoder method for text decoding\. For types with this method, this method is called instead of the default decoding strategy and custom decoding is performed\. The data parameter is the corresponding data equivalent and is always UTF\-8 encoded text in bytes\. It may be a mutable copy taken from the data used for decoding, so any change may cause mutation in the main data\. According to the defined behavior, decoder methods should not mutate the content of the data\. Throwing any error is considered valid\. The thrown error will be forwarded by the decoder\. Successful decoding should not throw any errors and self should be changed as required\.
+
+:::
