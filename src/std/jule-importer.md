@@ -1,5 +1,7 @@
 # std/jule/importer
 
+::: v-pre
+
 ## Index
 
 [fn New\(mut info: CompileInfo\): sema::Importer](#new)\
@@ -52,3 +54,5 @@ enum CppStd: string {
 }
 ```
 Supported C\+\+ standards\.
+
+:::
