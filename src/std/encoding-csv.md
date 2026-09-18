@@ -1,5 +1,7 @@
 # std/encoding/csv
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -105,7 +107,7 @@ Returns the input stream byte offset of the current reader position\. The offset
 
 ### Read
 ```jule
-async fn Read(mut *self)!: (record: []string)
+fn Read(mut *self)!: (record: []string)
 ```
 Reads one record \(a slice of fields\) from r\. If the record has an unexpected number of fields, it throws the \[ErrFieldCount\] as error\. If there is no data left to be read, read returns nil\. If \[self\.ReuseRecord\] is true, the returned slice may be shared between multiple calls to read\.
 
@@ -119,7 +121,7 @@ If this is called with an out\-of\-bounds index, it panics\.
 
 ### ReadAll
 ```jule
-async fn ReadAll(mut *self)!: (records: [][]string)
+fn ReadAll(mut *self)!: (records: [][]string)
 ```
 Reads all the remaining records from r\. Each record is a slice of fields\.
 
@@ -150,18 +152,20 @@ Returns new Writer instance that writes w\.
 
 ### Write
 ```jule
-async fn Write(mut *self, record: []string)!
+fn Write(mut *self, record: []string)!
 ```
 Writes a single CSV record along with any necessary quoting\. A record is a slice of strings with each string being one field\.
 
 ### Flush
 ```jule
-async fn Flush(mut *self)!
+fn Flush(mut *self)!
 ```
 Writes any buffered data to the underlying io::Writer\.
 
 ### WriteAll
 ```jule
-async fn WriteAll(mut *self, records: [][]string)!
+fn WriteAll(mut *self, records: [][]string)!
 ```
 Writes multiple CSV records using \[Writer\.Write\]\.
+
+:::
