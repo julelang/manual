@@ -1,5 +1,7 @@
 # std/encoding/ascii85
 
+::: v-pre
+
 ## Index
 
 [fn MaxEncodeLen\(n: int\): int](#maxencodelen)\
@@ -60,3 +62,6 @@ type CorruptInputError: i64
 ```jule
 fn String(*self): string
 ```
+
+
+:::
