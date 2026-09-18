@@ -2,6 +2,8 @@
 
 Package `std/bytes` implements functions for the manipulation of byte slices. It is analogous to the facilities of the `std/strings` package. But optimized for byte slices, may provide more efficient functions. If you have byte slice form of strings, this package is the best option for most cases.
 
+::: v-pre
+
 ## Index
 
 [fn Equal\(a: \[\]byte, b: \[\]byte\): bool](#equal)\
@@ -334,3 +336,5 @@ Returns a copy of the byte slice s with all Unicode letters mapped to their uppe
 fn ToLower(s: []byte): []byte
 ```
 Returns a copy of the byte slice s with all Unicode letters mapped to their lower case\.
+
+:::
