@@ -1,5 +1,7 @@
 # std/encoding/json
 
+::: v-pre
+
 ## Index
 
 [fn Decode\[T\]\(data: \[\]byte, mut &amp;v: \*T\)\!](#decode)\
@@ -287,7 +289,7 @@ Returns a new encoder that writes to w\.
 
 ### Encode
 ```jule
-async fn Encode[T](*self, v: T)!
+fn Encode[T](*self, v: T)!
 ```
 Writes the JSON encoding of v to the stream, followed by a newline character\.
 
@@ -332,7 +334,7 @@ The decoder introduces its own buffering and may read data from r beyond the JSO
 ### Decode
 ```jule
 #disable boundary
-async fn Decode[T](*self, mut &v: *T)!: int
+fn Decode[T](*self, mut &v: *T)!: int
 ```
 Reads the next JSON\-encoded value from its input and stores it in the value pointed to by v\.
 
@@ -367,3 +369,5 @@ enum Value: type {
 }
 ```
 Dynamic JSON value type\. Can store any JSON value\.
+
+:::
