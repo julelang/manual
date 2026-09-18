@@ -1,5 +1,7 @@
 # std/conv
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -317,3 +319,6 @@ Records a failed conversion\.
 ```jule
 fn String(*self): string
 ```
+
+
+:::
