@@ -1,5 +1,7 @@
 # std/jule/types
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -272,3 +274,5 @@ Returns minimum value of signed/unsigned integer and floating\-point kinds\. Pan
 fn Max(mut k: string): f64
 ```
 Returns maximum value of signed/unsigned integer and floating\-point kinds\. Panics if kind is invalid\.
+
+:::
