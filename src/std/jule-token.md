@@ -1,9 +1,11 @@
 # std/jule/token
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
-[fn ScanAll\(mut f: &amp;FileSet, opt: int\): \[\]log::Log](#scanall)\
+[fn AppendAll\(mut buf: \[\]&amp;Token, mut f: &amp;FileSet, opt: int\): \(\[\]&amp;Token, \[\]log::Log\)](#appendall)\
 [fn IsKeyword\(s: string\): bool](#iskeyword)\
 [fn IsPostfix\(id: int\): bool](#ispostfix)\
 [fn IsAssign\(id: int\): bool](#isassign)\
@@ -22,6 +24,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Precedence\(\*self\): int](#precedence)
 
 ## Variables
+
+```jule
+const InvalidID = -1
+```
+The standard invalid FileSet ID\. All FileSet implementations must consider this special value as invalid\.
+
+---
 
 ```jule
 const (
@@ -69,7 +78,7 @@ const (
 	GOTO     // goto
 	ENUM     // enum
 	STRUCT   // struct
-	CO       // co
+	SPAWN    // spawn
 	MATCH    // match
 	SELF     // self
 	TRAIT    // trait
@@ -86,8 +95,7 @@ const (
 	THROW    // throw
 	MAP      // map
 	SELECT   // select
-	ASYNC    // async
-	AWAIT    // await
+	CATCH    // catch
 
 	EQL  // ==
 	NEQ  // !=
@@ -147,11 +155,11 @@ const (
 ```
 A set of constants for precedence\-based expression parsing\. Non\-operators have lowest precedence, followed by operators starting with precedence 1 up to unary operators\. The highest precedence serves as &#34;catch\-all&#34; precedence for selector, indexing, and other operator and delimiter tokens\.
 
-## ScanAll
+## AppendAll
 ```jule
-fn ScanAll(mut f: &FileSet, opt: int): []log::Log
+fn AppendAll(mut buf: []&Token, mut f: &FileSet, opt: int): ([]&Token, []log::Log)
 ```
-Scans all tokens into FileSet f and returns error logs\.
+Scans and appends all tokens of the FileSet f to buf and returns it with error logs\.
 
 ## IsKeyword
 ```jule
@@ -174,8 +182,8 @@ Reports whether operator kind is assignment operator\.
 ## FileSet
 ```jule
 struct FileSet {
-	Path:   string
-	Tokens: []&Token
+	ID:   int // Unique identity of the FileSet.
+	Path: string
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
@@ -242,16 +250,16 @@ Returns new Scanner for the FileSet f\.
 ```jule
 fn Scan(mut *self): (token: &Token, EOF: bool)
 ```
-Scans and returns new token, reports if EOF\. If and error appeared, returns nil token and not\-EOF\.
+Scans and returns new token, reports if EOF\. If and error appeared or a token ignored, returns nil token and not\-EOF\.
 
 ## Token
 ```jule
 struct Token {
-	ID:     int      // Identity of token.
-	File:   &FileSet // Associated FileSet where token appear.
-	Row:    int      // Row position of token.
-	Column: int      // Column position of token.
-	Kind:   string   // Token kind as string.
+	ID:        int    // Identity of token.
+	FileSetID: int    // ID of the associated FileSet where token appear.
+	Row:       int    // Row position of token.
+	Column:    int    // Column position of token.
+	Kind:      string // Token kind as string.
 }
 ```
 Token\.
@@ -261,3 +269,5 @@ Token\.
 fn Precedence(*self): int
 ```
 Returns operator precedence of token\. Returns 0 if token is not operator or invalid operator for operator precedence\. It only reports for the binary operators, otherwise returns LowestPrec\.
+
+:::
