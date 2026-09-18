@@ -1,5 +1,7 @@
 # std/jule/build
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -28,13 +30,6 @@ Target operating system\. Set to runtime operating system by default\.
 let mut Arch = runtime::Arch
 ```
 Target architecture\. Set to runtime architecture by default\.
-
----
-
-```jule
-const ModStdlibID: mod::ID = 0
-```
-Reserved module identity for the standard library module\.
 
 ---
 
@@ -145,3 +140,5 @@ Reports whether Assembly extension is valid\.
 fn IsJule(path: string): bool
 ```
 Reports whether file path is Jule source code\.
+
+:::
