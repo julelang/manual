@@ -1,5 +1,7 @@
 # std/io
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -93,55 +95,55 @@ A \[Writer\] on which all Write calls succeed without doing anything\.
 
 ## NopCloser
 ```jule
-async fn NopCloser(mut r: Reader): ReadCloser
+fn NopCloser(mut r: Reader): ReadCloser
 ```
 Returns a \[ReadCloser\] with a no\-op Close method wrapping the provided \[Reader\] r\.
 
 ## CopyN
 ```jule
-async fn CopyN(mut dst: Writer, mut src: Reader, n: i64)!: (written: i64)
+fn CopyN(mut dst: Writer, mut src: Reader, n: i64)!: (written: i64)
 ```
 Copies n bytes \(or until an error\) from src to dst\. It returns the number of bytes copied and throws the earliest error encountered while copying\. On return, written == n if and only if no error\.
 
 ## Copy
 ```jule
-async fn Copy(mut dst: Writer, mut src: Reader)!: (written: i64)
+fn Copy(mut dst: Writer, mut src: Reader)!: (written: i64)
 ```
 Copies from src to dst until either EOF is reached on src or an error occurs\. It returns the number of bytes copied, if any\. Otherwise, if throws the error, if any\.
 
 ## CopyBuffer
 ```jule
-async fn CopyBuffer(mut dst: Writer, mut src: Reader, mut buf: []byte)!: (written: i64)
+fn CopyBuffer(mut dst: Writer, mut src: Reader, mut buf: []byte)!: (written: i64)
 ```
 Identical to Copy except that it stages through the provided buffer \(if one is required\) rather than allocating a temporary one\. If buf is nil, one is allocated; otherwise if it has zero length, it panics\.
 
 ## WriteString
 ```jule
-async fn WriteString(mut w: Writer, s: string)!: (n: int)
+fn WriteString(mut w: Writer, s: string)!: (n: int)
 ```
 Writes the contents of the string s to w efficiently\. Guarantees a slice will not be allocated\.
 
 ## WriteByte
 ```jule
-async fn WriteByte(mut w: Writer, b: byte)!: (n: int)
+fn WriteByte(mut w: Writer, b: byte)!: (n: int)
 ```
 Writes a single byte to w efficiently\. Guarantees a slice will not be allocated\.
 
 ## ReadAll
 ```jule
-async fn ReadAll(mut r: Reader)!: []byte
+fn ReadAll(mut r: Reader)!: []byte
 ```
 Reads from r until an error or EOF and returns the data it read\. A successful call throws no error\.
 
 ## ReadAtLeast
 ```jule
-async fn ReadAtLeast(mut r: Reader, mut buf: []byte, min: int)!: (n: int)
+fn ReadAtLeast(mut r: Reader, mut buf: []byte, min: int)!: (n: int)
 ```
 Reads from r into buf until it has read at least min bytes\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading fewer than min bytes, error is ErrUnexpectedEOF\. If min is greater than the length of buf, error is ErrShortBuffer\. On return, n &gt;= min if and only if err == nil\. If r returns an error having read at least min bytes, the error is dropped\.
 
 ## ReadFull
 ```jule
-async fn ReadFull(mut r: Reader, mut buf: []byte)!: (n: int)
+fn ReadFull(mut r: Reader, mut buf: []byte)!: (n: int)
 ```
 Reads exactly len\(buf\) bytes from r into buf\. It returns the number of bytes copied and an error if fewer bytes were read\. The error is EOF only if no bytes were read\. If an EOF happens after reading some but not all the bytes, error is ErrUnexpectedEOF\. On return, n == len\(buf\) if and only if err == nil\. If r returns an error having read at least len\(buf\) bytes, the error is dropped\.
 
@@ -154,7 +156,7 @@ Returns a Reader that&#39;s the logical concatenation of the provided input read
 ## Reader
 ```jule
 trait Reader {
-	async fn Read(mut *self, mut buf: []byte)!: (n: int)
+	fn Read(mut *self, mut buf: []byte)!: (n: int)
 }
 ```
 Implements the basic Read method\.
@@ -170,7 +172,7 @@ Implementations must not retain buf\. Errors are not standardized\. Should be do
 ## Writer
 ```jule
 trait Writer {
-	async fn Write(mut *self, buf: []byte)!: (n: int)
+	fn Write(mut *self, buf: []byte)!: (n: int)
 }
 ```
 Implements the basic Write method\.
@@ -182,7 +184,7 @@ Implementations must not retain buf\. Errors are not standardized\. Should be do
 ## StringWriter
 ```jule
 trait StringWriter {
-	async fn WriteString(mut *self, s: string)!: (n: int)
+	fn WriteString(mut *self, s: string)!: (n: int)
 }
 ```
 Implements the basic WriteString method\.
@@ -194,7 +196,7 @@ Implementations must not retain s\. Errors are not standardized\. Should be docu
 ## ByteReader
 ```jule
 trait ByteReader {
-	async fn ReadByte(mut *self)!: (byte, n: int)
+	fn ReadByte(mut *self)!: (byte, n: int)
 }
 ```
 Implements the basic ReadByte method\.
@@ -209,7 +211,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ```jule
 trait ByteScanner {
 	ByteReader
-	async fn UnreadByte(mut *self)!
+	fn UnreadByte(mut *self)!
 }
 ```
 Implements the UnreadByte method to the basic ReadByte method of ByteReader\.
@@ -219,7 +221,7 @@ It causes the next call to ReadByte to return the last byte read\. If the last o
 ## ByteWriter
 ```jule
 trait ByteWriter {
-	async fn WriteByte(mut *self, b: byte)!
+	fn WriteByte(mut *self, b: byte)!
 }
 ```
 Implements the basic WriteByte method\.
@@ -231,7 +233,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ## RuneReader
 ```jule
 trait RuneReader {
-	async fn ReadRune(mut *self)!: (r: rune, size: int)
+	fn ReadRune(mut *self)!: (r: rune, size: int)
 }
 ```
 Implements the basic ReadRune method\.
@@ -246,7 +248,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ```jule
 trait RuneScanner {
 	RuneReader
-	async fn UnreadRune(mut *self)!
+	fn UnreadRune(mut *self)!
 }
 ```
 Implements the UnreadRune method to the basic ReadRune method of RuneReader\.
@@ -256,7 +258,7 @@ It causes the next call to ReadRune to return the last rune read\. If the last o
 ## RuneWriter
 ```jule
 trait RuneWriter {
-	async fn WriteRune(mut *self, r: rune)!: (n: int)
+	fn WriteRune(mut *self, r: rune)!: (n: int)
 }
 ```
 Implements the basic WriteRune method\.
@@ -270,7 +272,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ## Closer
 ```jule
 trait Closer {
-	async fn Close(mut *self)!
+	fn Close(mut *self)!
 }
 ```
 Implements the basic Close method\.
@@ -284,7 +286,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ## ReaderAt
 ```jule
 trait ReaderAt {
-	async fn ReadAt(mut *self, mut p: []byte, off: i64)!: (n: int)
+	fn ReadAt(mut *self, mut p: []byte, off: i64)!: (n: int)
 }
 ```
 The trait that wraps the basic ReadAt method\.
@@ -308,7 +310,7 @@ Implementations must not retain p\. Errors are not standardized\. Should be docu
 ## ReaderFrom
 ```jule
 trait ReaderFrom {
-	async fn ReadFrom(mut *self, mut r: Reader)!: (n: i64)
+	fn ReadFrom(mut *self, mut r: Reader)!: (n: i64)
 }
 ```
 The trait that wraps the basic ReadFrom method\.
@@ -320,7 +322,7 @@ It should throw io:EOF for EOF\.
 ## WriterTo
 ```jule
 trait WriterTo {
-	async fn WriteTo(mut *self, mut w: Writer)!: (n: i64)
+	fn WriteTo(mut *self, mut w: Writer)!: (n: i64)
 }
 ```
 The trait that wraps the WriteTo method\.
@@ -334,7 +336,7 @@ Errors are not standardized\. Should be documented by implementations\.
 ## Seeker
 ```jule
 trait Seeker {
-	async fn Seek(mut *self, offset: i64, whence: int)!: i64
+	fn Seek(mut *self, offset: i64, whence: int)!: i64
 }
 ```
 The trait that wraps the basic Seek method\.
@@ -437,5 +439,8 @@ Returns a LimitedReader that reads from r but stops like EOF after n bytes\.
 
 ### Read
 ```jule
-async fn Read(mut *self, mut p: []byte)!: (n: int)
+fn Read(mut *self, mut p: []byte)!: (n: int)
 ```
+
+
+:::
