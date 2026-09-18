@@ -1,5 +1,7 @@
 # std/maps
 
+::: v-pre
+
 ## Index
 
 [fn Equal\[M: \~map\[K\]V, K: comparable, V: comparable\]\(m1: M, m2: M\): bool](#equal)\
@@ -25,3 +27,5 @@ Returns all keys in a slice of map\. Returns nil if m == nil \|\| len\(m\) == 0\
 fn Values[M: ~map[K]V, K, V](mut m: M): []V
 ```
 Returns all values in a slice of map\. Returns nil if m == nil \|\| len\(m\) == 0\.
+
+:::
