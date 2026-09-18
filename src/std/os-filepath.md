@@ -1,5 +1,7 @@
 # std/os/filepath
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -13,7 +15,9 @@
 [fn Dir\(path: string\): string](#dir)\
 [fn VolumeName\(path: string\): string](#volumename)\
 [fn IsAbs\(path: string\): bool](#isabs)\
-[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)
+[fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
+[fn Split\(path: string\): \(dir: string, file: string\)](#split)\
+[fn SplitList\(path: string\): \[\]string](#splitlist)
 
 ## Variables
 
@@ -109,3 +113,17 @@ Reports whether the path is absolute\.
 fn IsPathSeparator(c: byte): bool
 ```
 Reports whether c is path separator\.
+
+## Split
+```jule
+fn Split(path: string): (dir: string, file: string)
+```
+Splits path immediately following the final \[Separator\], separating it into a directory and file name component\. If there is no Separator in path, Split returns an empty dir and file set to path\. The returned values have the property that path = dir\+file\.
+
+## SplitList
+```jule
+fn SplitList(path: string): []string
+```
+Splits a list of paths joined by the OS\-specific \[ListSeparator\], usually found in PATH environment variable\. Unlike strings::Split, it returns an empty slice when passed an empty string\.
+
+:::
