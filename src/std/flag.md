@@ -1,63 +1,65 @@
 # std/flag
 
+::: v-pre
+
 ## Index
 
-[type IntFlag](#intflag)\
-[type UintFlag](#uintflag)\
-[type FloatFlag](#floatflag)\
-[type BoolFlag](#boolflag)\
-[type StringFlag](#stringflag)\
-[trait CommonFlag](#commonflag)\
+[type Int](#int)\
+[type Uint](#uint)\
+[type Float](#float)\
+[type Bool](#bool)\
+[type String](#string)\
+[trait Common](#common)\
 [struct Flag\[T\]](#flag)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Name\(\*self\): string](#name)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn What\(\*self\): string](#what)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Short\(\*self\): rune](#short)\
-[struct FlagSet](#flagset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;FlagSet](#new)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut \*self, name: string\): CommonFlag](#findflag)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlagShort\(mut \*self, name: rune\): CommonFlag](#findflagshort)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut \*self\): \[\]CommonFlag](#flags)\
+[struct Set](#set)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn New\(\): &amp;Set](#new)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlag\(mut \*self, name: string\): Common](#findflag)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFlagShort\(mut \*self, name: rune\): Common](#findflagshort)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Flags\(mut \*self\): \[\]Common](#flags)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Parse\(mut \*self, args: \[\]string\)\!: \[\]string](#parse)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Reset\(mut \*self\)](#reset-1)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~string\]\(mut \*self, name: string, short: rune, default: T, what: string\): &amp;T](#add)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: \~i64 \| \~u64 \| \~f64 \| \~bool \| \~string\]\(mut \*self, mut var: &amp;T, name: string, short: rune, what: string\)](#addvar)
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Add\[T: i64 \| u64 \| f64 \| bool \| string\]\(mut \*self, name: string, short: rune, default: T, what: string\): &amp;T](#add)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn AddVar\[T: i64 \| u64 \| f64 \| bool \| string\]\(mut \*self, mut var: &amp;T, name: string, short: rune, what: string\)](#addvar)
 
 
 
-## IntFlag
+## Int
 ```jule
-type IntFlag = &Flag[i64]
+type Int = &Flag[i64]
 ```
 Flag for i64 type\.
 
-## UintFlag
+## Uint
 ```jule
-type UintFlag = &Flag[u64]
+type Uint = &Flag[u64]
 ```
 Flag for u64 type\.
 
-## FloatFlag
+## Float
 ```jule
-type FloatFlag = &Flag[f64]
+type Float = &Flag[f64]
 ```
 Flag for f64 type\.
 
-## BoolFlag
+## Bool
 ```jule
-type BoolFlag = &Flag[bool]
+type Bool = &Flag[bool]
 ```
 Flag for bool type\.
 
-## StringFlag
+## String
 ```jule
-type StringFlag = &Flag[string]
+type String = &Flag[string]
 ```
 Flag for string type
 
-## CommonFlag
+## Common
 ```jule
-trait CommonFlag {
+trait Common {
 	// Returns name of flag.
 	fn Name(*self): string
 
@@ -83,7 +85,7 @@ A Flag for FlagSet\.
 
 ### Implemented Traits
 
-- `CommonFlag`
+- `Common`
 
 ### Name
 ```jule
@@ -109,9 +111,9 @@ fn Short(*self): rune
 ```
 
 
-## FlagSet
+## Set
 ```jule
-struct FlagSet {
+struct Set {
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
@@ -139,25 +141,25 @@ should follow respectively.
 
 ### New
 ```jule
-fn New(): &FlagSet
+fn New(): &Set
 ```
 Returns new flagset\.
 
 ### FindFlag
 ```jule
-fn FindFlag(mut *self, name: string): CommonFlag
+fn FindFlag(mut *self, name: string): Common
 ```
 Returns flag by name, returns nil if not exist\.
 
 ### FindFlagShort
 ```jule
-fn FindFlagShort(mut *self, name: rune): CommonFlag
+fn FindFlagShort(mut *self, name: rune): Common
 ```
 Returns flag by short name, returns nil if not exist\.
 
 ### Flags
 ```jule
-fn Flags(mut *self): []CommonFlag
+fn Flags(mut *self): []Common
 ```
 Returns all flags\.
 
@@ -175,12 +177,14 @@ Resets all flags to default value\.
 
 ### Add
 ```jule
-fn Add[T: ~i64 | ~u64 | ~f64 | ~bool | ~string](mut *self, name: string, short: rune, default: T, what: string): &T
+fn Add[T: i64 | u64 | f64 | bool | string](mut *self, name: string, short: rune, default: T, what: string): &T
 ```
 Adds new flag and returns allocated reference variable\. Panics if name or short name is alreadys exist\. Zero \(0\) short names will be ignored\. Panics if used unsupported type\.
 
 ### AddVar
 ```jule
-fn AddVar[T: ~i64 | ~u64 | ~f64 | ~bool | ~string](mut *self, mut var: &T, name: string, short: rune, what: string)
+fn AddVar[T: i64 | u64 | f64 | bool | string](mut *self, mut var: &T, name: string, short: rune, what: string)
 ```
 Same with the Add method but do not allocates new reference, uses existing\.
+
+:::
