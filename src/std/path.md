@@ -1,5 +1,7 @@
 # std/path
 
+::: v-pre
+
 ## Index
 
 [fn Clean\(path: string\): string](#clean)\
@@ -64,3 +66,5 @@ Reports whether the path is absolute\.
 fn Dir(path: string): string
 ```
 Returns all but the last element of path, typically the path&#39;s directory\. After dropping the final element using \[Split\], the path is Cleaned and trailing slashes are removed\. If the path is empty, returns &#34;\.&#34;\. If the path consists entirely of slashes followed by non\-slash bytes, returns a single slash\. In any other case, the returned path does not end in a slash\.
+
+:::
