@@ -1,5 +1,7 @@
 # std/math/bits
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -389,3 +391,5 @@ Returns the remainder of \(hi, lo\) divided by y\. rem32 panics for y == 0 \(div
 fn Rem64(hi: u64, lo: u64, y: u64): u64
 ```
 Returns the remainder of \(hi, lo\) divided by y\. rem64 panics for y == 0 \(division by zero\) but, unlike div64, it doesn&#39;t panic on a quotient overflow\.
+
+:::
