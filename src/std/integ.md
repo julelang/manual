@@ -7,6 +7,8 @@ This packages includes some built-in powered functions:
 - [Emit](/integrated-jule/backend-emits)
 :::
 
+::: v-pre
+
 ## Index
 
 [fn AnyToUnsafeptr\(x: any\): \*unsafe](#anytounsafeptr)\
@@ -54,3 +56,5 @@ Returns the string of s, with a terminating NULL removed\. Returns empty string 
 fn BytesFromString(s: string): []byte
 ```
 Returns s as NULL terminated byte slice which is able to be used safely as NULL terminated string pointer\. If s contains NULL termination at any location, accepts NULL termination is the end of s and skips following bytes\.
+
+:::
