@@ -1,5 +1,7 @@
 # std/math/rand
 
+::: v-pre
+
 ## Index
 
 [fn NewPCG\(seed1: u64, seed2: u64\): &amp;PCG](#newpcg)\
@@ -195,7 +197,7 @@ trait Source {
 ```
 A Source is a source of uniformly\-distributed pseudo\-random u64 values in the range \[0, 1&lt;&lt;64\)\.
 
-It is not safe for concurrent use by multiple coroutines\.
+It is not safe for concurrent use by multiple threads\.
 
 ## PCG
 ```jule
@@ -364,3 +366,5 @@ A Zipf generates Zipf distributed variates\.
 fn U64(*self): u64
 ```
 Returns a value drawn from the Zipf distribution described by the Zipf object\.
+
+:::
