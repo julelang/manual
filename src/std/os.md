@@ -11,10 +11,10 @@ A simple example:
 ```jule
 use "std/os"
 
-async fn main() {
+fn main() {
 	cmd := os::Cmd.New("ls", "-l")
 	cmd.Stdout(os::Stdout())!
-	cmd.Run().await!
+	cmd.Run()!
 }
 ```
 The example code above, runs `ls -l` with main process's standard output. So child process's output will be written to parent's output. The `Stdout` method sets command's child process's stdout handle to input, which is `os::Stdout`. If handles are nil, `Cmd` will be assign child process's handles to DevNull.
@@ -26,12 +26,12 @@ A simple example:
 use "std/io"
 use "std/os"
 
-async fn main() {
+fn main() {
 	cmd := os::Cmd.New("ls", "-l")
 	mut r := cmd.StdoutPipe()!
 	cmd.Start()!
-	data := io::ReadAll(r).await!
-	cmd.Wait().await!
+	data := io::ReadAll(r)!
+	cmd.Wait()!
 	println(string(data))
 }
 ```
@@ -42,14 +42,14 @@ If you want to redirect a different pipe;
 use "std/io"
 use "std/os"
 
-async fn main() {
+fn main() {
 	mut r, mut w := os::Pipe()!
 	cmd := os::Cmd.New("ls", "-l")
 	cmd.Stdout(w)!
-	cmd.Run().await!
-	w.Close().await!
-	data := io::ReadAll(r).await!
-	r.Close().await!
+	cmd.Run()!
+	w.Close()!
+	data := io::ReadAll(r)!
+	r.Close()!
 	println(string(data))
 }
 ```
@@ -70,9 +70,10 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Remove\(path: string\)\!](#remove)\
 [fn Create\(path: string\)\!: &amp;File](#create)\
 [fn ReadFile\(path: string\)\!: \[\]byte](#readfile)\
-[fn ReadFileSync\(path: string\)\!: \[\]byte](#readfilesync)\
 [fn WriteFile\(path: string, data: \[\]byte, perm: FileMode\)\!](#writefile)\
-[fn WriteFileSync\(path: string, data: \[\]byte, perm: FileMode\)\!](#writefilesync)\
+[fn Stdin\(\): &amp;File](#stdin)\
+[fn Stdout\(\): &amp;File](#stdout)\
+[fn Stderr\(\): &amp;File](#stderr)\
 [fn IsPathSeparator\(c: byte\): bool](#ispathseparator)\
 [fn Pipe\(\)\!: \(r: &amp;File, w: &amp;File\)](#pipe)\
 [fn Exit\(code: int\)](#exit)\
@@ -86,9 +87,6 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 [fn Setenv\(key: string, value: string\)\!](#setenv)\
 [fn Stat\(path: string\)\!: FileInfo](#stat)\
 [fn Lstat\(path: string\)\!: FileInfo](#lstat)\
-[fn Stdin\(\): &amp;File](#stdin)\
-[fn Stdout\(\): &amp;File](#stdout)\
-[fn Stderr\(\): &amp;File](#stderr)\
 [fn Hostname\(\)\!: string](#hostname)\
 [struct Cmd](#cmd)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(path: string, args: \.\.\.string\): &amp;Cmd](#new)\
@@ -100,27 +98,18 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn StderrPipe\(\*self\)\!: io::ReadCloser](#stderrpipe)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Start\(\*self\)\!](#start)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Run\(\*self\)\!](#run)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn RunBlocking\(\*self\)\!](#runblocking)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Wait\(\*self\)\!: int](#wait)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WaitBlocking\(\*self\)\!: int](#waitblocking)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Kill\(\*self\)\!](#kill)\
 [struct DirEntry](#direntry)\
 [struct File](#file)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn RawFD\(\*self\): u64](#rawfd)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ShouldAsync\(\*self\): bool](#shouldasync)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetDeadline\(mut \*self, deadline: time::Duration\)\!](#setdeadline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetReadDeadline\(mut \*self, deadline: time::Duration\)\!](#setreaddeadline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetWriteDeadline\(mut \*self, deadline: time::Duration\)\!](#setwritedeadline)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Write\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#write)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn WriteSync\(mut \*self, buf: \[\]byte\)\!: \(n: int\)](#writesync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn WriteString\(mut \*self, s: string\)\!: \(n: int\)](#writestring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Read\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#read)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadSync\(mut \*self, mut buf: \[\]byte\)\!: \(n: int\)](#readsync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Seek\(mut \*self, offset: i64, whence: int\)\!: i64](#seek)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Sync\(mut \*self\)\!](#sync)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Truncate\(mut \*self, size: i64\)\!](#truncate)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Close\(mut \*self\)\!](#close)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn CloseSync\(mut \*self\)\!](#closesync)\
 [struct FileInfo](#fileinfo)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsDir\(\*self\): bool](#isdir)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Mode\(\*self\): FileMode](#mode)\
@@ -135,20 +124,6 @@ The example above creates a pipe using the `Pipe` function and assigns the write
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Type\(\*self\): FileMode](#type)
 
 ## Variables
-
-```jule
-let mut ErrNoDeadline = poll::ErrNoDeadline
-```
-File type does not support deadline\.
-
----
-
-```jule
-let mut ErrDeadlineExceeded = poll::ErrDeadlineExceeded
-```
-Expired deadline error\.
-
----
 
 ```jule
 const DevNull = devNull
@@ -252,27 +227,33 @@ Creates or truncates the named file\. If the file already exists, it is truncate
 
 ## ReadFile
 ```jule
-async fn ReadFile(path: string)!: []byte
+fn ReadFile(path: string)!: []byte
 ```
 Reads bytes of file\. First, learns byte\-size of file\. Then reads bytes and returns buffer\.
 
-## ReadFileSync
-```jule
-fn ReadFileSync(path: string)!: []byte
-```
-Sync variant of \[ReadFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
-
 ## WriteFile
 ```jule
-async fn WriteFile(path: string, data: []byte, perm: FileMode)!
+fn WriteFile(path: string, data: []byte, perm: FileMode)!
 ```
 Writes data to the named file, creating it if necessary\. If the file does not exist, creates it with permissions perm \(before umask\); otherwise truncates it before writing, without changing permissions\. Since requires multiple system calls to complete, a failure mid\-operation can leave the file in a partially written state\. Calls internally \`File\.Open\`, \`File\.Write\`, \`File\.Close\` and forwards any error\.
 
-## WriteFileSync
+## Stdin
 ```jule
-fn WriteFileSync(path: string, data: []byte, perm: FileMode)!
+fn Stdin(): &File
 ```
-Sync variant of \[WriteFile\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
+Returns File for the standard input file descriptor\.
+
+## Stdout
+```jule
+fn Stdout(): &File
+```
+Returns File for the standard output file descriptor\.
+
+## Stderr
+```jule
+fn Stderr(): &File
+```
+Returns File for the standard error file descriptor\.
 
 ## IsPathSeparator
 ```jule
@@ -353,24 +334,6 @@ fn Lstat(path: string)!: FileInfo
 Returns a \[FileInfo\] describing the named file\. If the file is a symbolic link, the returned FileInfo describes the symbolic link\. It makes no attempt to follow the link\.
 
 On Windows, if the file is a reparse point that is a surrogate for another named entity \(such as a symbolic link or mounted folder\), the returned FileInfo describes the reparse point, and makes no attempt to resolve it\.
-
-## Stdin
-```jule
-fn Stdin(): &File
-```
-Returns File for the standard input file descriptor\.
-
-## Stdout
-```jule
-fn Stdout(): &File
-```
-Returns File for the standard output file descriptor\.
-
-## Stderr
-```jule
-fn Stderr(): &File
-```
-Returns File for the standard error file descriptor\.
 
 ## Hostname
 ```jule
@@ -468,27 +431,15 @@ Starts the specified command but does not wait for it to complete\. After a succ
 
 ### Run
 ```jule
-async fn Run(*self)!
+fn Run(*self)!
 ```
 Starts the specified command and waits for it to complete\.
 
-### RunBlocking
-```jule
-fn RunBlocking(*self)!
-```
-Starts the specified command and waits for it to complete\. Wait operation is blocking\.
-
 ### Wait
 ```jule
-async fn Wait(*self)!: int
+fn Wait(*self)!: int
 ```
 Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\.
-
-### WaitBlocking
-```jule
-fn WaitBlocking(*self)!: int
-```
-Waits for the command to exit\. The command must have been started by \[Cmd\.Start\]\. It releases any resources associated with the \[Cmd\]\. After calling it, Cmd will be ready to reuse\. Wait operation is blocking\.
 
 ### Kill
 ```jule
@@ -543,99 +494,47 @@ fn RawFD(*self): u64
 ```
 Returns raw file\-descriptor\. Intended for low\-level use\. Just borrow, do not close or something else\.
 
-### ShouldAsync
-```jule
-fn ShouldAsync(*self): bool
-```
-Reports whether treating the file descriptor as async is the correct approach\. If the fd has the potential to exhibit non\-blocking behavior, it should be handled with async API\. Behavior in sync API is undefined\. However, this is not a definitive guarantee that the fd is non\-blocking\.
-
-### SetDeadline
-```jule
-fn SetDeadline(mut *self, deadline: time::Duration)!
-```
-Sets the read and write deadlines for a File\. It is equivalent to calling both SetReadDeadline and SetWriteDeadline\.
-
-Only some kinds of files support setting a deadline\. Calls to SetDeadline for files that do not support deadlines will return ErrNoDeadline\. On most systems ordinary files do not support deadlines, but pipes do\.
-
-A deadline is an absolute time after which I/O operations fail with an error instead of blocking\. The deadline applies to all future and pending I/O, not just the immediately following call to Read or Write\. After a deadline has been exceeded, the connection can be refreshed by setting a deadline in the future\.
-
-If the deadline is exceeded a call to Read or Write or to other I/O methods will return an error that wraps ErrDeadlineExceeded\.
-
-An idle timeout can be implemented by repeatedly extending the deadline after successful Read or Write calls\.
-
-A zero value means I/O operations will not time out\.
-
-### SetReadDeadline
-```jule
-fn SetReadDeadline(mut *self, deadline: time::Duration)!
-```
-Sets the deadline for future Read calls and any currently\-blocked Read call\. A zero value means Read will not time out\. Not all files support setting deadlines; see SetDeadline\.
-
-### SetWriteDeadline
-```jule
-fn SetWriteDeadline(mut *self, deadline: time::Duration)!
-```
-Sets the deadline for any future Write calls and any currently\-blocked Write call\. Even if Write times out, it may return n &gt; 0, indicating that some of the data was successfully written\. A zero value means Write will not time out\. Not all files support setting deadlines; see SetDeadline\.
-
 ### Write
 ```jule
-async fn Write(mut *self, buf: []byte)!: (n: int)
+fn Write(mut *self, buf: []byte)!: (n: int)
 ```
 Writes bytes to handle and returns written byte count\. The number of bytes written can never exceed the length of the buf\.
 
-### WriteSync
-```jule
-fn WriteSync(mut *self, buf: []byte)!: (n: int)
-```
-Sync variant of \[Write\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
-
 ### WriteString
 ```jule
-async fn WriteString(mut *self, s: string)!: (n: int)
+fn WriteString(mut *self, s: string)!: (n: int)
 ```
 Like Write, but writes the contents of string s rather than a slice of bytes\.
 
 ### Read
 ```jule
-async fn Read(mut *self, mut buf: []byte)!: (n: int)
+fn Read(mut *self, mut buf: []byte)!: (n: int)
 ```
 Read bytes to buffer from handle and returns read byte count\. The number of bytes read can never exceed the length of the buf\. If the buf is larger than the number of bytes that can be read, the buffer will not cause an overflow\. Offset will be shifted by the number of bytes read\.
 
-### ReadSync
-```jule
-fn ReadSync(mut *self, mut buf: []byte)!: (n: int)
-```
-Sync variant of \[Write\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
-
 ### Seek
 ```jule
-async fn Seek(mut *self, offset: i64, whence: int)!: i64
+fn Seek(mut *self, offset: i64, whence: int)!: i64
 ```
 Sets offset to next Read/Write operation and returns the new offset\. whence: 0 \(io::SeekStart\) means, relative to the whence of the file, 1 \(io::SeekCurrent\) means relative to the current offset, and 2 \(io::SeekEnd\) means relative to end\.
 
 ### Sync
 ```jule
-async fn Sync(mut *self)!
+fn Sync(mut *self)!
 ```
 Commits the current contents of the file to stable storage\. Typically, this means flushing the file system&#39;s in\-memory copy of recently written data to disk\.
 
 ### Truncate
 ```jule
-async fn Truncate(mut *self, size: i64)!
+fn Truncate(mut *self, size: i64)!
 ```
 Changes the size of the file\. It does not change the I/O offset\.
 
 ### Close
 ```jule
-async fn Close(mut *self)!
+fn Close(mut *self)!
 ```
 Closes file handle\.
-
-### CloseSync
-```jule
-fn CloseSync(mut *self)!
-```
-Sync variant of \[Close\]\. It is provided for blocking operations and must be used carefully in an async runtime; it blocks the thread, not the coroutine\.
 
 ## FileInfo
 ```jule
