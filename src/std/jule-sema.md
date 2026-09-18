@@ -1,13 +1,14 @@
 # std/jule/sema
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
 [fn AnalyzePackage\(mut files: \[\]&amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;Package, \[\]log::Log\)](#analyzepackage)\
 [fn AnalyzeFile\(mut f: &amp;ast::AST, mut importer: Importer, flags: int\): \(&amp;SymTab, \[\]log::Log\)](#analyzefile)\
-[fn Fastmemcopy\(mut t: &amp;Type\): \(r: bool\)](#fastmemcopy)\
-[trait Lookup](#lookup)\
 [trait Importer](#importer)\
+[trait Lookup](#lookup)\
 [trait Kind](#kind)\
 [struct Enum](#enum)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)\
@@ -22,7 +23,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsVoid\(\*self\): bool](#isvoid)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsConst\(\*self\): bool](#isconst)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn GoodOperand\(\*self, mut other: &amp;Value\): bool](#goodoperand)\
-[struct ValueSym](#valuesym)\
+[type Flag](#flag)\
 [struct ReturnType](#returntype)\
 [struct Param](#param)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsSelf\(\*self\): bool](#isself)\
@@ -46,9 +47,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn IsAnon\(\*self\): bool](#isanon-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Same\(\*self, f: &amp;FuncIns\): bool](#same)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn GetKindString\(\*self, name: bool\): string](#getkindstring)\
-[struct Impl](#impl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsTraitImpl\(\*self\): bool](#istraitimpl)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn IsStructImpl\(\*self\): bool](#isstructimpl)\
+[struct ImportInfo](#importinfo)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_: bool\): &amp;Var](#findvar)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: string, \_: bool\): &amp;TypeAlias](#findtypealias)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: string, \_: bool\): &amp;Struct](#findstruct)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: string, \_: bool\): &amp;Func](#findfunc)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: string\): &amp;Trait](#findtrait)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: string\): &amp;Enum](#findenum)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: string\): &amp;TypeEnum](#findtypeenum)\
 [struct OperandExpr](#operandexpr)\
 [struct BinaryExpr](#binaryexpr)\
 [struct UnaryExpr](#unaryexpr)\
@@ -85,20 +92,14 @@
 [struct BuiltinRealCallExpr](#builtinrealcallexpr)\
 [struct BuiltinImagCallExpr](#builtinimagcallexpr)\
 [struct BuiltinCmplxCallExpr](#builtincmplxcallexpr)\
+[struct BuiltinFutureCallExpr](#builtinfuturecallexpr)\
+[struct BuiltinReadyCallExpr](#builtinreadycallexpr)\
+[struct BuiltinClearCallExpr](#builtinclearcallexpr)\
 [struct SizeofExpr](#sizeofexpr)\
 [struct AlignofExpr](#alignofexpr)\
 [struct RuneExpr](#runeexpr)\
 [struct BackendEmitExpr](#backendemitexpr)\
 [struct AddrcallExpr](#addrcallexpr)\
-[struct ImportInfo](#importinfo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_: bool\): &amp;Var](#findvar)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeAlias\(mut \*self, name: string, \_: bool\): &amp;TypeAlias](#findtypealias)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindStruct\(mut \*self, name: string, \_: bool\): &amp;Struct](#findstruct)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindFunc\(mut \*self, name: string, \_: bool\): &amp;Func](#findfunc)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTrait\(mut \*self, name: string\): &amp;Trait](#findtrait)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindEnum\(mut \*self, name: string\): &amp;Enum](#findenum)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn FindTypeEnum\(mut \*self, name: string\): &amp;TypeEnum](#findtypeenum)\
 [struct Package](#package)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SelectPackage\(mut \*self, fn\(&amp;ImportInfo\): bool\): &amp;ImportInfo](#selectpackage-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn FindVar\(mut \*self, name: string, \_extern: bool\): &amp;Var](#findvar-1)\
@@ -112,6 +113,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Main\(f: &amp;Func\): bool](#main)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Init\(f: &amp;Func\): bool](#init)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(f: &amp;Func\): bool](#string-4)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadyParam\(mut p: &amp;ParamIns\): bool](#readyparam)\
 [type ScopeTrait](#scopetrait)\
 [struct Scope](#scope)\
 [struct Use](#use)\
@@ -201,7 +203,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Trait\(mut \*self\): &amp;Trait](#trait-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Map\(mut \*self\): &amp;Map](#map)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Tuple\(mut \*self\): &amp;Tuple](#tuple)\
-[struct TypeSym](#typesym)\
 [struct Prim](#prim-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string-9)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Equal\(&amp;self, other: &amp;Type\): bool](#equal-6)\
@@ -270,10 +271,44 @@ Flags for semantic analysis\.
 
 ```jule
 const (
+	F_USED = 1 << iota
+	F_VARIADIC
+	F_GENERIC
+	F_MUTABLE
+	F_COMPARABLE
+	F_HAS_DEFER
+	F_ANON
+	F_AS_ANON
+	F_CALLED_SPAWN
+	F_IOTA
+	F_CONST
+	F_TYPE
+	F_FUTURE
+	F_READY
+
+	// Internal sema flags.
+	// This flags may be passed without documentation.
+	F_CHECKED
+	F_RELOADED
+	F_ONELINER
+)
+```
+Flags for Flag\.
+
+---
+
+```jule
+const (
+	// Scope is deferred.
+	ST_DEFER: ScopeTrait = 1 << iota
+
+	// Scope is unsafe.
+	ST_UNSAFE
+
 	// Scope is an infinite scope.
 	// This passed when scope owner is exactly and infinite iteration,
 	// or while-next iteration with no condition.
-	ST_INFINITE: ScopeTrait = 1 << iota
+	ST_INFINITE
 
 	// Scope is an error handling scope.
 	ST_ERROR_HANDLER
@@ -307,6 +342,11 @@ Dependent Parameters:<br>
 working-directory: uses working directory path provided by build
 std-path:          uses standard library path provided by build
 ```
+Constraints:<br>
+
+- importer&#39;s main package path should be set\.
+- importer&#39;s module must be point to the package&#39;s module, if exist\.
+
 Risks:<br>
 ```
 You can pass nil to importer, but panics if importer is nil and
@@ -318,30 +358,87 @@ semantic analyzer used nil importer.
 ```jule
 fn AnalyzeFile(mut f: &ast::AST, mut importer: Importer, flags: int): (&SymTab, []log::Log)
 ```
-Builds symbol table of AST\. Returns nil if f is nil\. Returns nil if pwd is empty\. Returns nil if pstd is empty\. Accepts current working directory is pwd\.
+Same as \[AnalyzePackage\], but it takes a singe file\.
 
-Parameters:<br>
-```
-f:        file's abstract syntax tree
-importer: importer that used for use declarations
-```
-Dependent Parameters:<br>
-```
-working-directory: uses working directory path provided by build
-std-path:          uses standard library path provided by build
-```
-Risks:<br>
-```
-You can pass nil to importer, but panics if importer is nil and
-semantic analyzer used nil importer.
-```
-
-
-## Fastmemcopy
+## Importer
 ```jule
-fn Fastmemcopy(mut t: &Type): (r: bool)
+trait Importer {
+	// Returns FileSet by ID.
+	// Returns nil if ID is not matched with any FileSet.
+	fn GetFileSet(mut *self, id: int): &token::FileSet
+
+	// Reports whether the build tag is defined.
+	fn HasTag(mut *self, tag: string): bool
+
+	// Set current module.
+	// Set to nil if module is not exist.
+	fn SetMod(mut *self, mut mod: &mod::Mod)
+
+	// Returns current module.
+	// Returns nil if module is not exist.
+	fn GetMod(mut *self): &mod::Mod
+
+	// Returns module by ID.
+	fn ModByID(mut *self, id: mod::ID): &mod::Mod
+
+	// Registers the current module.
+	// Sets the module identity to a valid ID and
+	// then registers it as a used module.
+	//
+	// If the current module is nil, then it does nothing.
+	// If the current module is already registered, then it does nothing.
+	fn RegisterMod(mut *self)
+
+	// Sets path as the main package path.
+	fn SetMainPackagePath(mut *self, path: string)
+
+	// Returns the main package path, specified with [SetMainPackagePath].
+	// The default value is empty string.
+	fn GetMainPackagePath(mut *self): string
+
+	// Returns &ImportInfo by path.
+	// This function accepted as returns already imported and checked package.
+	// If returns not-nil value, will be used instead of ImportPackage
+	// if possible and package content is not checked by Sema.
+	fn GetImport(mut *self, path: string): &ImportInfo
+
+	// Path is the directory path of package to import.
+	// Should return abstract syntax tree of package files.
+	// Logs accepts as error.
+	// Updates module to package's module if exist when updateMod is true.
+	// But the module and package will not be registered.
+	// Package and module can be registered with [Imported].
+	// For only module, it can be registered with [RegisterMod].
+	//
+	// The module identity will be invalid ID.
+	// The [Imported] or [RegisterMod] will assign a valid ID when registered.
+	fn ImportPackage(mut *self, path: string, updateMod: bool): ([]&ast::AST, []log::Log)
+
+	// Invoke after the package is imported.
+	// Registers package as an imported and used package.
+	// If the current module is not registered, sets module identitity and
+	// register it as used modules.
+	fn Imported(mut *self, mut &ImportInfo)
+
+	// Returns all imported packages.
+	// The return value may be mutable reference to the internal buffer.
+	// Packages should be ordered by FIFO; starting with the first deepest
+	// imported package, and ending with the last imported package.
+	fn AllPackages(mut *self): []&ImportInfo
+
+	// Returns File by path.
+	// This function accepted as returns already included file.
+	// If returns not-nil value, will be used instead of IncludeFile if possible.
+	fn GetFile(mut *self, path: string): resource::File
+
+	// Includes the file by path, returns nil if failed.
+	fn IncludeFile(mut *self, path: string): resource::File
+
+	// Invoked after the file is included.
+	fn IncludedFile(mut *self, mut file: resource::File)
+}
 ```
-Reports whether type supports fastmemcopy implementation\. Which is highly optimized variant of the built\-in copy function\.
+Package importer for the semantic analysis\. Used by semantic analysis to import use declarations\. The default importer implementation is highly recommended\. 3rd\-party importer implementations may cause unpredictable issues\.
 
 ## Lookup
 ```jule
@@ -381,62 +478,6 @@ trait Lookup {
 ```
 Generic behavior of lookupable types\. Typically it is a scope like global scope, function scope or etc\.
 
-## Importer
-```jule
-trait Importer {
-	// Set current module.
-	// Set to nil if module is not exist.
-	fn SetMod(mut *self, mut mod: &mod::Mod)
-
-	// Returns current module.
-	// Returns nil if module is not exist.
-	fn GetMod(mut *self): &mod::Mod
-
-	// Returns module path by identity.
-	fn ModByID(mut *self, id: mod::ID): &mod::Mod
-
-	// Returns all modules.
-	// The return value may be mutable reference to the internal buffer.
-	fn Mods(mut *self): []&mod::Mod
-
-	// Returns &ImportInfo by path.
-	// This function accepted as returns already imported and checked package.
-	// If returns not-nil value, will be used instead of ImportPackage
-	// if possible and package content is not checked by Sema.
-	fn GetImport(mut *self, path: string): &ImportInfo
-
-	// Path is the directory path of package to import.
-	// Should return abstract syntax tree of package files.
-	// Logs accepts as error.
-	// Updates module to package's module if exist when updateMod is true.
-	fn ImportPackage(mut *self, path: string, updateMod: bool): ([]&ast::AST, []log::Log)
-
-	// Invoked after the package is imported.
-	// Sets module identitity of the imported package to current module.
-	// If the current module is not registered, for example,
-	// updated by the ImportPackage it will be registered.
-	fn Imported(mut *self, mut &ImportInfo)
-
-	// Returns all imported packages.
-	// The return value may be mutable reference to the internal buffer.
-	// Packages should be ordered by FIFO; starting with the first deepest
-	// imported package, and ending with the last imported package.
-	fn AllPackages(mut *self): []&ImportInfo
-
-	// Returns File by path.
-	// This function accepted as returns already included file.
-	// If returns not-nil value, will be used instead of IncludeFile if possible.
-	fn GetFile(mut *self, path: string): resource::File
-
-	// Includes the file by path, returns nil if failed.
-	fn IncludeFile(mut *self, path: string): resource::File
-
-	// Invoked after the file is included.
-	fn IncludedFile(mut *self, mut file: resource::File)
-}
-```
-Package importer for the semantic analysis\. Used by semantic analysis to import use declarations\. The default importer implementation is highly recommended\. 3rd\-party importer implementations may cause unpredictable issues\.
-
 ## Kind
 ```jule
 trait Kind {
@@ -449,11 +490,13 @@ Kind of type declaration\.
 ## Enum
 ```jule
 struct Enum {
-	Token:   &token::Token
-	Public:  bool
-	Name:    string
-	TypeSym: &TypeSym
-	Items:   []&Var // See developer reference (14).
+	AST: &ast::Enum
+
+	FullName: string // See developer reference (16).
+	Type:     &Type
+	Items:    []&Var // See developer reference (14).
+
+	// NOTE: contains filtered hidden or unexported fields
 }
 ```
 Enum\.
@@ -483,8 +526,8 @@ Returns item by identifier\. Returns nil if not exist any item in this identifie
 ## TypeEnumItem
 ```jule
 struct TypeEnumItem {
-	Token:   &token::Token
-	TypeSym: &TypeSym
+	AST:  &ast::TypeEnumItem
+	Type: &Type
 }
 ```
 TypeEnum item\.
@@ -492,10 +535,11 @@ TypeEnum item\.
 ## TypeEnum
 ```jule
 struct TypeEnum {
-	Token:  &token::Token
-	Public: bool
-	Name:   string
-	Items:  []&TypeEnumItem
+	AST:      &ast::TypeEnum
+	FullName: string // See developer reference (16).
+	Items:    []&TypeEnumItem
+
+	// NOTE: contains filtered hidden or unexported fields
 }
 ```
 TypeEnum\.
@@ -566,20 +610,17 @@ fn GoodOperand(*self, mut other: &Value): bool
 ```
 See developer reference \(9\.2\)\. Reports left and right operand is good order\. If reports false, left and right operand should be swapped\. Accepts itself as left operand\.
 
-## ValueSym
+## Flag
 ```jule
-struct ValueSym {
-	Expr:  &ast::Expr
-	Value: &Value
-}
+type Flag: uint
 ```
-Value\.
+A commonf flagset for sema\. May contain internal flags of semantic analysis\.
 
 ## ReturnType
 ```jule
 struct ReturnType {
-	TypeSym: &TypeSym
-	Names:   []&token::Token
+	AST:  &ast::ReturnType
+	Type: &Type
 }
 ```
 Return type\.
@@ -587,12 +628,8 @@ Return type\.
 ## Param
 ```jule
 struct Param {
-	Token:     &token::Token
-	Mutable:   bool
-	Variadic:  bool
-	Reference: bool
-	TypeSym:   &TypeSym
-	Name:      string
+	AST:  &ast::Param
+	Type: &Type
 }
 ```
 Parameter\.
@@ -618,35 +655,21 @@ Reports whether self \(receiver\) parameter is reference pointer\.
 ## Func
 ```jule
 struct Func {
-	// Token of function declaration.
-	// It may be nil if function is created by a deferred scope.
-	Token: &token::Token
+	AST: &ast::Func
 
-	Global:     bool
-	Async:      bool
-	Unsafe:     bool
-	Public:     bool
-	Extern:     bool
-	Static:     bool
-	Fallible:   bool
-	HasDefer:   bool // Whether function has at least one deferred scope.
-	Name:       string
-	Directives: []&ast::Directive
-
-	// Scope is the scope of function, aka body.
-	// If this function is created by a deferred scope, the Scope.Deferred will be true.
-	// So it means this function is represents a deferred scope function.
-	// It may be a closure.
-	Scope: &ast::ScopeTree
-
-	Generics: []&ast::Generic
-	Result:   &ReturnType
-	Params:   []&Param
-	Owner:    FuncOwner
+	Result: &ReturnType
+	Params: []&Param
+	Owner:  FuncOwner
 
 	// Function instances for each unique type combination of function call.
 	// Nil if function is never used.
 	Instances: []&FuncIns
+
+	// Possible flags are:
+	//	F_HAS_DEFER: if function has at least one deferred scope.
+	//	F_FUTURE: if function is a #future
+	//	F_READY: if function is a #ready
+	Flags: Flag
 	// NOTE: contains filtered hidden or unexported fields
 }
 ```
@@ -713,9 +736,12 @@ struct FuncIns {
 	Result:   &Type // Result type of the instance, nil for void.
 	Scope:    &Scope
 	Refers:   &ReferenceStack
-	Anon:     bool // Whether this function instance is anonymous function literal.
-	AsAnon:   bool // Whether this function instance used as anonymous function.
-	CalledCo: bool // Whether this function instance used for concurrent call.
+
+	// Possible flags are:
+	//	F_ANON: if function instance is an anonymous function literal
+	//	F_AS_ANON: if function instance used as anonymous function
+	//	F_CALLED_SPAWN: if function instance used for concurrent call
+	Flags: Flag
 
 	// NOTE: contains filtered hidden or unexported fields
 }
@@ -774,32 +800,105 @@ fn GetKindString(*self, name: bool): string
 ```
 Returns kind string of function instance\. Appends identifier to kind of this instance\. Does not appends identifier of this instance to kind if self\.Decl is nil\.
 
-## Impl
+## ImportInfo
 ```jule
-struct Impl {
-	// Equivalent to ast::Impl's base field.
-	Base: &ast::Expr
+struct ImportInfo {
+	// Declaration.
+	Decl: &ast::Use
 
-	// Equivalent to ast::Impl's dest field.
-	Dest: &ast::Expr
+	// Absolute path.
+	Path: string
 
-	// Equivalent to ast::Impl's methods field.
-	Methods: []&Func
+	// Use declaration path string.
+	// Quotes are not included.
+	LinkPath: string
+
+	// Package alias identifier.
+	Alias: string
+
+	// True if imported with Importer.GetImport function.
+	Duplicate: bool
+
+	// Is external use declaration.
+	Extern: bool
+
+	// Is standard library package.
+	Std: bool
+
+	// Nil if package is external header.
+	Package: &Package
+
+	// Module ID.
+	ModID: mod::ID
 }
 ```
-Implementation\.
+Import information\. Represents imported package by use declaration\.
 
-### IsTraitImpl
-```jule
-fn IsTraitImpl(*self): bool
-```
-Reports whether implementation type is trait to structure\.
+### Implemented Traits
 
-### IsStructImpl
+- `Lookup`
+
+### SelectPackage
 ```jule
-fn IsStructImpl(*self): bool
+fn SelectPackage(mut *self, fn(&ImportInfo): bool): &ImportInfo
 ```
-Reports whether implementation type is append to destination structure\.
+Returns always nil\.
+
+### FindVar
+```jule
+fn FindVar(mut *self, name: string, _: bool): &Var
+```
+Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
+
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
+
+### FindTypeAlias
+```jule
+fn FindTypeAlias(mut *self, name: string, _: bool): &TypeAlias
+```
+Returns type alias by identifier\. Returns nil if not exist any type alias in this identifier\.
+
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
+
+### FindStruct
+```jule
+fn FindStruct(mut *self, name: string, _: bool): &Struct
+```
+Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
+
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
+
+### FindFunc
+```jule
+fn FindFunc(mut *self, name: string, _: bool): &Func
+```
+Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
+
+Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
+
+### FindTrait
+```jule
+fn FindTrait(mut *self, name: string): &Trait
+```
+Returns trait by identifier\. Returns nil if not exist any trait in this identifier\.
+
+Lookups by import way such as identifier selection\.
+
+### FindEnum
+```jule
+fn FindEnum(mut *self, name: string): &Enum
+```
+Returns enum by identifier\. Returns nil if not exist any enum in this identifier\.
+
+Lookups by import way such as identifier selection\.
+
+### FindTypeEnum
+```jule
+fn FindTypeEnum(mut *self, name: string): &TypeEnum
+```
+Returns type enum by identifier\. Returns nil if not exist any type enum in this identifier\.
+
+Lookups by import way such as identifier selection\.
 
 ## OperandExpr
 ```jule
@@ -881,8 +980,7 @@ Type assertion expression model\. For example: myExpr\.\(destType\)
 struct FuncCallExpr {
 	Token:    &token::Token
 	Func:     &FuncIns
-	IsCo:     bool
-	Await:    bool
+	IsSpawn:  bool
 	Expr:     Expr
 	Args:     []Expr
 	Handler:  &Scope // Nil for ignored.
@@ -1077,8 +1175,8 @@ Expression Model: for built\-in close function calls\.
 ```jule
 struct BuiltinMakeCallExpr {
 	Type: &Type
-	Len:  Expr
-	Cap:  Expr
+	Len:  &Value
+	Cap:  &Value
 }
 ```
 Expression Model: for built\-in make function calls\. If Type is slice, the Len and Cap fields may be meaningful\. If Type is channel, the buffer size specified in the Cap field if exist\. The Len field is undefined for channel types\.
@@ -1149,7 +1247,33 @@ struct BuiltinCmplxCallExpr {
 	Imag: &Value
 }
 ```
-Expression Model: for built\-in imag function calls\.
+Expression Model: for built\-in cmplx function calls\.
+
+## BuiltinFutureCallExpr
+```jule
+struct BuiltinFutureCallExpr {
+	Owner:   &FuncIns
+	Ready:   &Value
+	Suspend: &Value
+}
+```
+Expression Model: for built\-in future function calls\.
+
+## BuiltinReadyCallExpr
+```jule
+struct BuiltinReadyCallExpr {
+	Status: &Value
+}
+```
+Expression Model: for built\-in ready function calls\.
+
+## BuiltinClearCallExpr
+```jule
+struct BuiltinClearCallExpr {
+	Value: &Value
+}
+```
+Expression Model: for built\-in clear function calls\.
 
 ## SizeofExpr
 ```jule
@@ -1195,106 +1319,6 @@ struct AddrcallExpr {
 }
 ```
 Expression Model: for address\-based function call\.
-
-## ImportInfo
-```jule
-struct ImportInfo {
-	// Declaration.
-	Decl: &ast::Use
-
-	// Absolute path.
-	Path: string
-
-	// Use declaration path string.
-	// Quotes are not included.
-	LinkPath: string
-
-	// Package alias identifier.
-	Alias: string
-
-	// True if imported with Importer.GetImport function.
-	Duplicate: bool
-
-	// Is external use declaration.
-	Extern: bool
-
-	// Is standard library package.
-	Std: bool
-
-	// Nil if package is external header.
-	Package: &Package
-
-	// Module identity.
-	ModID: mod::ID
-}
-```
-Import information\. Represents imported package by use declaration\.
-
-### Implemented Traits
-
-- `Lookup`
-
-### SelectPackage
-```jule
-fn SelectPackage(mut *self, fn(&ImportInfo): bool): &ImportInfo
-```
-Returns always nil\.
-
-### FindVar
-```jule
-fn FindVar(mut *self, name: string, _: bool): &Var
-```
-Returns variable by identifier and external state\. Returns nil if not exist any variable in this identifier\.
-
-Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
-
-### FindTypeAlias
-```jule
-fn FindTypeAlias(mut *self, name: string, _: bool): &TypeAlias
-```
-Returns type alias by identifier\. Returns nil if not exist any type alias in this identifier\.
-
-Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
-
-### FindStruct
-```jule
-fn FindStruct(mut *self, name: string, _: bool): &Struct
-```
-Returns struct by identifier and external state\. Returns nil if not exist any struct in this identifier\.
-
-Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
-
-### FindFunc
-```jule
-fn FindFunc(mut *self, name: string, _: bool): &Func
-```
-Returns function by identifier and external state\. Returns nil if not exist any function in this identifier\.
-
-Lookups by import way such as identifier selection\. Just lookups non\-external defines\.
-
-### FindTrait
-```jule
-fn FindTrait(mut *self, name: string): &Trait
-```
-Returns trait by identifier\. Returns nil if not exist any trait in this identifier\.
-
-Lookups by import way such as identifier selection\.
-
-### FindEnum
-```jule
-fn FindEnum(mut *self, name: string): &Enum
-```
-Returns enum by identifier\. Returns nil if not exist any enum in this identifier\.
-
-Lookups by import way such as identifier selection\.
-
-### FindTypeEnum
-```jule
-fn FindTypeEnum(mut *self, name: string): &TypeEnum
-```
-Returns type enum by identifier\. Returns nil if not exist any type enum in this identifier\.
-
-Lookups by import way such as identifier selection\.
 
 ## Package
 ```jule
@@ -1381,6 +1405,12 @@ fn String(f: &Func): bool
 ```
 Reports whether function is the reserved String function\.
 
+### ReadyParam
+```jule
+fn ReadyParam(mut p: &ParamIns): bool
+```
+Reports whether the parameter is a good \`ready\` function response parameter\.
+
 ## ScopeTrait
 ```jule
 type ScopeTrait: int
@@ -1390,12 +1420,10 @@ Represents traits of a scope\.
 ## Scope
 ```jule
 struct Scope {
-	Traits:   ScopeTrait
-	Owner:    uintptr // Memory address of the owner.
-	Parent:   &Scope
-	Unsafe:   bool
-	Deferred: bool
-	Stmts:    []Stmt
+	Traits: ScopeTrait
+	Owner:  uintptr // Memory address of the owner.
+	Parent: &Scope
+	Stmts:  []Stmt
 
 	// Data of the child scope starting from the root scope.
 	// For the root scope, counting starts from 0. So the root scope will be 0.
@@ -1568,12 +1596,15 @@ Multi\-declarative assignment\.
 ## Match
 ```jule
 struct Match {
-	Scope:     &Scope // Owner scope. See developer reference (8).
-	Expr:      &Value
-	TypeMatch: bool
-	Comptime:  bool
-	Cases:     []&Case
-	Default:   &Case
+	Scope:   &Scope // Owner scope. See developer reference (8).
+	Expr:    &Value
+	Cases:   []&Case
+	Default: &Case
+
+	// Possible flags are:
+	//	F_TYPE: if it is a type match statement
+	//	F_CONST: if it is a comptime match statement
+	Flags: Flag
 }
 ```
 Match\-Case\.
@@ -1632,14 +1663,10 @@ Return statement\.
 ## Field
 ```jule
 struct Field {
-	Owner:   &Struct
-	Token:   &token::Token
-	Public:  bool
-	Mutable: bool // Interior mutability.
-	Name:    string
-	TypeSym: &TypeSym
-	Tag:     &token::Token     // Tag declaration.
-	Tags:    map[string]string // Tags in key:value format.
+	AST:   &ast::Field
+	Owner: &Struct
+	Type:  &Type
+	Tags:  map[string]string // Tags in key:value format.
 }
 ```
 Field\.
@@ -1647,6 +1674,8 @@ Field\.
 ## Struct
 ```jule
 struct Struct {
+	AST: &ast::Struct
+
 	// This structure depended to these structures, except external ones.
 	// Only stores plain identifier references such as A, B, and MyStruct.
 	// Not includes non-plain identifier references such as *A, &B, and []MyStruct.
@@ -1655,14 +1684,9 @@ struct Struct {
 	// This collection applied for all instances.
 	Depends: []&Struct
 
-	Token:      &token::Token
-	Name:       string
+	FullName:   string // See developer reference (16).
 	Fields:     []&Field
 	Methods:    []&Func
-	Public:     bool
-	Extern:     bool
-	Directives: []&ast::Directive
-	Generics:   []&ast::Generic
 	Implements: []&Trait
 
 	// Structure instances for each unique type combination of structure.
@@ -1711,14 +1735,17 @@ Field instance\.
 ## StructIns
 ```jule
 struct StructIns {
-	Source:     &Type // See developer reference (9).
-	Decl:       &Struct
-	Generics:   []&InsGeneric
-	Fields:     []&FieldIns
-	Methods:    []&Func
-	Mutable:    bool // This structure has mutable defines.
-	Comparable: bool
-	Refers:     &ReferenceStack
+	Source:   &Type // See developer reference (9).
+	Decl:     &Struct
+	Generics: []&InsGeneric
+	Fields:   []&FieldIns
+	Methods:  []&Func
+	Refers:   &ReferenceStack
+
+	// Possible flags are:
+	//	F_MUTABLE: if structure has fields with mutable types
+	//	F_COMPARABLE: if all structure fields are comparable
+	Flags: Flag
 
 	// NOTE: contains filtered hidden or unexported fields
 }
@@ -1772,7 +1799,7 @@ List of necessary references;<br>
 - &amp;FuncIns
 - &amp;StructIns
 - &amp;Trait
-- &amp;Var \-&gt; Only global ones\.
+- &amp;Var \-&gt; Only global and non\-constant ones\.
 
 ### Len
 ```jule
@@ -1820,7 +1847,7 @@ struct SymTab {
 	Traits:      []&Trait        // Traits.
 	Enums:       []&Enum         // Enums.
 	TypeEnums:   []&TypeEnum     // Type enums.
-	Impls:       []&Impl         // Implementations.
+	Impls:       []&ast::Impl    // Implementations.
 }
 ```
 Symbol table\. Builds by semantic analyzer\.
@@ -1880,12 +1907,13 @@ Returns type enum by identifier\. Returns nil if not exist any type enum in this
 ## Trait
 ```jule
 struct Trait {
-	Token:       &token::Token
-	Name:        string
-	Public:      bool
-	Inherits:    []&TypeSym
+	AST:         &ast::Trait
+	FullName:    string // See developer reference (16).
+	Inherits:    []&Type
 	Methods:     []&Func
 	Implemented: []&Struct
+
+	// NOTE: contains filtered hidden or unexported fields
 }
 ```
 Trait\.
@@ -1939,16 +1967,16 @@ Generic type for instance types\.
 ## TypeAlias
 ```jule
 struct TypeAlias {
-	Scope:    &ast::ScopeTree
-	Strict:   bool
-	Public:   bool
-	Extern:   bool
-	Used:     bool
-	Generic:  bool
-	Token:    &token::Token
-	Name:     string
-	TypeSym:  &TypeSym
+	AST:      &ast::TypeAlias
+	Scope:    &ast::Scope
+	FullName: string // See developer reference (16).
+	Type:     &Type
 	Generics: []&ast::Generic // See the developer reference (3).
+
+	// Possible flags are:
+	//	F_USED: if type alias is used in code
+	//	F_GENERIC: if type alias is generic
+	Flags: Flag
 }
 ```
 Type alias\.
@@ -1957,9 +1985,12 @@ Type alias\.
 ```jule
 struct Type {
 	Provider: string // Identifier of the type alias, if type provided by a type alias.
-	Generic:  bool
-	Variadic: bool
 	Kind:     Kind
+
+	// Possible flags are:
+	//	F_VARIADIC: if type is variadic
+	//	F_GENERIC: if type is resolved from a generic type alias
+	Flags: Flag
 }
 ```
 Evaluated type declaration\.
@@ -2129,15 +2160,6 @@ Returns map type if actual kind is map, nil if not\.
 fn Tuple(mut *self): &Tuple
 ```
 Returns tuple type if actual kind is tuple, nil if not\.
-
-## TypeSym
-```jule
-struct TypeSym {
-	Decl: &ast::Expr // Never changed by semantic analyzer.
-	Type: &Type
-}
-```
-Type\.
 
 ## Prim
 ```jule
@@ -2459,21 +2481,11 @@ Reports whether pointer is unsafe pointer \(\*unsafe\)\.
 ## Var
 ```jule
 struct Var {
-	Scope:      &Scope
-	Token:      &token::Token
-	Name:       string
-	Extern:     bool
-	Constant:   bool
-	Mutable:    bool
-	Public:     bool
-	Used:       bool
-	Static:     bool
-	Reference:  bool
-	Checked:    bool
-	TypeSym:    &TypeSym
-	ValueSym:   &ValueSym
-	Refers:     &ReferenceStack
-	Directives: []&ast::Directive
+	AST:    &ast::Var
+	Scope:  &Scope
+	Type:   &Type
+	Value:  &Value
+	Refers: &ReferenceStack
 
 	// Return variable state for this variable.
 	RetState: RetState
@@ -2489,7 +2501,11 @@ struct Var {
 	// See developer reference (13).
 	GroupIndex: int    // Index of variable in the group, if variable is grouped.
 	Group:      []&Var // All variables of group in define order, if variable is grouped.
-	Iota:       bool   // The enumerable iota variable used in the expression.
+
+	// Possible flags are:
+	//	F_USED: if variable is used in code
+	//	F_IOTA: if enumerable iota variable used in the expression
+	Flags: Flag
 }
 ```
 Variable\.
@@ -2558,6 +2574,9 @@ enum Expr: type {
 	&BuiltinRealCallExpr,
 	&BuiltinImagCallExpr,
 	&BuiltinCmplxCallExpr,
+	&BuiltinFutureCallExpr,
+	&BuiltinReadyCallExpr,
+	&BuiltinClearCallExpr,
 	&SizeofExpr,
 	&AlignofExpr,
 	&RuneExpr,
@@ -2616,3 +2635,5 @@ enum RetState {
 }
 ```
 Return variable states\.
+
+:::
