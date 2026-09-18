@@ -1,5 +1,7 @@
 # std/jule/resource
 
+::: v-pre
+
 ## Index
 
 [trait File](#file)
@@ -22,3 +24,5 @@ trait File {
 }
 ```
 A general file instance for compile\-time embed files\.
+
+:::
