@@ -250,9 +250,9 @@ Represents the system&#39;s local time zone\. On Unix systems, Local consults th
 
 ## Sleep
 ```jule
-async fn Sleep(mut dur: Duration)
+fn Sleep(mut dur: Duration)
 ```
-Stops execution of the caller coroutine by stated duration\. This function only affects execution of caller coroutine, not process\. If duration is &lt;=0, function will return immediately\. It guarantees sleeping at least for the stated duration\.
+Stops execution of the caller thread by stated duration\. This function only affects execution of caller thread\. If duration is &lt;=0, function will return immediately\. It guarantees sleeping at least for the stated duration\.
 
 ## Parse
 ```jule
