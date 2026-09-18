@@ -1,3 +1,5 @@
+# std/fmt
+
 ::: v-pre
 
 ## Index
@@ -16,19 +18,19 @@
 
 ## Fprint
 ```jule
-async fn Fprint(mut w: io::Writer, args: ...any)!
+fn Fprint(mut w: io::Writer, args: ...any)!
 ```
 Prints arguments to w with default formatting\. See documentation of the \[Sprint\] function for formatting\. Forwards errors, if any\.
 
 ## Fprintln
 ```jule
-async fn Fprintln(mut w: io::Writer, args: ...any)!
+fn Fprintln(mut w: io::Writer, args: ...any)!
 ```
 Prints arguments to w with default formatting\. Prints new\-line after arguments\. See documentation of the \[Sprint\] function for formatting\. Forwards errors, if any\.
 
 ## Fprintf
 ```jule
-async fn Fprintf(mut w: io::Writer, fmt: string, args: ...any)!
+fn Fprintf(mut w: io::Writer, fmt: string, args: ...any)!
 ```
 Prints result of formatting to w\. See documentation of the \[Sprintf\] function for formatting\. Forwards errors, if any\.
 
@@ -36,19 +38,19 @@ Prints result of formatting to w\. See documentation of the \[Sprintf\] function
 ```jule
 fn Printf(fmt: string, args: ...any)
 ```
-Prints result of formatting to stdout\. See documentation of the \[Sprintf\] function for formatting\. Panics if any error appears\. Write operation is blocking\.
+Prints result of formatting to stdout\. See documentation of the \[Sprintf\] function for formatting\. Panics if any error appears\.
 
 ## Print
 ```jule
 fn Print(args: ...any)
 ```
-Prints arguments with default formatting to stdout\. Panics if any error appears\. Write operation is blocking\.
+Prints arguments with default formatting to stdout\. Panics if any error appears\.
 
 ## Println
 ```jule
 fn Println(args: ...any)
 ```
-Prints arguments with default formatting to stdout\. Prints new\-line after arguments\. Panics if any error appears\. Write operation is blocking\.
+Prints arguments with default formatting to stdout\. Prints new\-line after arguments\. Panics if any error appears\.
 
 ## Sprint
 ```jule
