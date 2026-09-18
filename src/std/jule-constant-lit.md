@@ -1,5 +1,7 @@
 # std/jule/constant/lit
 
+::: v-pre
+
 ## Index
 
 [fn IsAscii\(r: rune\): bool](#isascii)\
@@ -49,3 +51,5 @@ struct Error {
 }
 ```
 An error for literal parsing\.
+
+:::
