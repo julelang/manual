@@ -1,5 +1,7 @@
 # std/hash
 
+::: v-pre
+
 ## Index
 
 [trait Hash](#hash)\
@@ -50,3 +52,5 @@ trait Hash64 {
 }
 ```
 Common trait implemented by all 64\-bit hash functions\.
+
+:::
