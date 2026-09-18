@@ -1,5 +1,7 @@
 # std/math/big
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -464,3 +466,5 @@ Returns the f64 value nearest x\(self\), and an indication of any rounding that 
 type Word: uint
 ```
 Represents a single digit of a multi\-precision unsigned integer\.
+
+:::
