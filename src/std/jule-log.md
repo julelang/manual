@@ -1,5 +1,7 @@
 # std/jule/log
 
+::: v-pre
+
 ## Index
 
 [Variables](#variables)\
@@ -35,3 +37,5 @@ struct Log {
 }
 ```
 Compiler log\.
+
+:::
