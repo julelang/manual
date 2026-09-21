@@ -6,6 +6,7 @@
 
 [Variables](#variables)\
 [fn CmpFloat\(&amp;x: \*float, &amp;y: \*float\): int](#cmpfloat)\
+[struct Rat](#rat)\
 [type Accuracy](#accuracy)\
 [struct Int](#int)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn New\(x: i64\): Int](#new)\
@@ -88,6 +89,16 @@ Compares x and y and returns:<br>
 - \-1 if x &lt; y;
 - 0 if x == y \(incl\. \-0 == 0, \-Inf == \-Inf, and \+Inf == \+Inf\);
 - \+1 if x &gt; y\.
+
+## Rat
+```jule
+struct Rat {
+	// NOTE: contains filtered hidden or unexported fields
+}
+```
+A Rat represents a quotient a/b of arbitrary precision\. The zero value for a Rat represents the value 0\.
+
+Operations always take pointer arguments \(\*Rat\) rather than Rat values, and each unique Rat value requires its own unique \*Rat pointer\. To &#34;copy&#34; a Rat value, an existing \(or newly allocated\) Rat must be set to a new value using the \[Rat\.Set\] method; shallow copies of Rats are not supported and may lead to errors due to internal mutable buffer\.
 
 ## Accuracy
 ```jule
