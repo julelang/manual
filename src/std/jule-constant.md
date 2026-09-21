@@ -4,7 +4,7 @@
 
 ## Index
 
-[fn NewInt\(i: big::Int\): &amp;Const](#newint)\
+[fn NewInt\(mut i: big::Int\): &amp;Const](#newint)\
 [fn NewI64\(x: i64\): &amp;Const](#newi64)\
 [fn NewU64\(x: u64\): &amp;Const](#newu64)\
 [fn NewBool\(x: bool\): &amp;Const](#newbool)\
@@ -13,7 +13,7 @@
 [fn NewCmplx128\(x: cmplx128\): &amp;Const](#newcmplx128)\
 [fn NewNil\(\): &amp;Const](#newnil)\
 [struct Const](#const)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(\*self\): big::Int](#readint)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn ReadInt\(mut \*self\): big::Int](#readint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadBool\(\*self\): bool](#readbool)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadString\(\*self\): string](#readstring)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn ReadF64\(\*self\): f64](#readf64)\
@@ -22,7 +22,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsU64\(\*self\): u64](#asu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsF64\(\*self\): f64](#asf64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn AsCmplx128\(\*self\): cmplx128](#ascmplx128)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn SetInt\(mut \*self, x: big::Int\)](#setint)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn SetInt\(mut \*self, mut x: big::Int\)](#setint)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetI64\(mut \*self, x: i64\)](#seti64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetU64\(mut \*self, x: u64\)](#setu64)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetBool\(mut \*self, x: bool\)](#setbool)\
@@ -60,7 +60,7 @@
 
 ## NewInt
 ```jule
-fn NewInt(i: big::Int): &Const
+fn NewInt(mut i: big::Int): &Const
 ```
 Returns new constant value instance from big\-integer\.
 
@@ -117,7 +117,7 @@ Constant data\. Use NewNil function instead of Const\{\} for nil literal\.
 
 ### ReadInt
 ```jule
-fn ReadInt(*self): big::Int
+fn ReadInt(mut *self): big::Int
 ```
 Reads integer data\. Returns zero value if data is not integer\.
 
@@ -171,7 +171,7 @@ Reads data as 128\-bit floating\-point complex\. Returns 0 if data is string, bo
 
 ### SetInt
 ```jule
-fn SetInt(mut *self, x: big::Int)
+fn SetInt(mut *self, mut x: big::Int)
 ```
 Sets constant value from big\-integer\.
 
