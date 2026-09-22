@@ -30,7 +30,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[fn Decode\[T\]\(\*self, mut &amp;v: \*T\)\!: int](#decode-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn SetMaxNestedDepth\(mut \*self, depth: int\)](#setmaxnesteddepth-1)\
 &nbsp;&nbsp;&nbsp;&nbsp;[fn InputOffset\(\*self\): i64](#inputoffset)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn DisallowUnknownFields\(\*self\)](#disallowunknownfields)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn DisallowUnknownFields\(\*self, option: bool\)](#disallowunknownfields)\
 [enum Value: type ](#value)
 
 
@@ -165,12 +165,12 @@ Arrays:
 
 Slices:
 	Encode as JSON array.
-	If slice is nil, encode as empty array [] JSON value.
+	If slice is nil, encode as empty JSON array value.
 	For the []byte type, encodes as a base64-encoded string.
 
 Maps:
 	Encode as JSON object.
-	If map is nil, encode as empty object {} JSON value.
+	If map is nil, encode as empty JSON object value.
 	The keys of the map always will be quoted.
 	Also map's key type only can be: signed integer, unsigned integer and string.
 	Other types will cause error with [UnsupportedTypeError].
@@ -354,9 +354,9 @@ Returns the input stream byte offset of the current decoder position\. The offse
 
 ### DisallowUnknownFields
 ```jule
-fn DisallowUnknownFields(*self)
+fn DisallowUnknownFields(*self, option: bool)
 ```
-Causes the Decoder to throw an error when the destination is a struct and the input contains object keys which do not match any non\-ignored, exported fields in the destination\.
+When enabled it causes the Decoder to throw an error when the destination is a struct and the input contains object keys which do not match any non\-ignored, exported fields in the destination\.
 
 ## Value
 ```jule
