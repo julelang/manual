@@ -622,11 +622,6 @@ export default defineConfig({
               ],
             },
             {
-              text: 'std/mem',
-              link: '/std/mem',
-              items: [],
-            },
-            {
               text: 'std/net',
               link: '/std/net',
               items: [
