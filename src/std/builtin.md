@@ -36,8 +36,11 @@
 [fn close(c: chan<- T)](#close)\
 [fn real(c: Cmplx): Float](#real)\
 [fn imag(c: Cmplx): Float](#imag)\
-[fn cmplx(r: Float, i: Float): Cmplx](#cmplx)
-[fn clear\[T: ~\[\]Type | ~map\[Type\]Key\](mut t: T)](#clear)
+[fn cmplx(r: Float, i: Float): Cmplx](#cmplx)\
+[fn clear\[T: ~\[\]Type | ~map\[Type\]Key\](mut t: T)](#clear)\
+[fn sizeof\[T: type | expr\](x: T): uintptr](#sizeof)\
+[fn alignof\[T: type | expr\](x: T): uintptr](#alignof)\
+[fn offsetof\[T\](x: T): uintptr](#offsetof)
 
 ## Variables
 
@@ -383,3 +386,21 @@ fn clear[T: ~[]Type | ~map[Type]Key](mut t: T)
 Clears maps and slices. For maps, clear deletes all entries, resulting in an empty map. For slices, clear sets all elements up to the length of the slice to the zero value of the respective element type. If the argument type is a type parameter, the type parameter's type set must contain only map, slice or array types, and clear performs the operation implied by the type argument. If t is nil, clear is a no-op.
 
 The argument may be array slicing. Slicing is allowed for arrays on mutable memory. Thus, the changes will be reflected in the array. See documentation of the [Copy] function for mutable array slices on built-in functions.
+
+## sizeof
+```jule
+fn sizeof[T: type | expr](x: T): uintptr
+```
+Takes an expression of any type or a type declaration and returns the size in bytes of the corresponding type. For an expression x, this is equivalent to the size of an object of the type of x. The result includes any padding required by the type's object representation, including padding between and after fields of a struct. The size does not include any storage or memory referenced by the object. For example, if x is a pointer, the size of the pointer itself is returned, not the size of the object it points to. If x is a slice, the size of the slice descriptor is returned, not the size of the memory referenced by the slice. The return value is not a Jule constant.
+
+## alignof
+```jule
+fn alignof[T: type | expr](x: T): uintptr
+```
+Takes an expression of any type or a type declaration and returns the alignment requirement of the corresponding type. For an expression x, this is equivalent to the alignment requirement of the type of x. The result specifies the required alignment for objects of that type; an object must be placed at an address that satisfies this alignment requirement. The return value is not a Jule constant.
+
+## offsetof
+```jule
+fn offsetof[T](x: T): uintptr
+```
+Returns the offset within the struct of the field represented by x, which must be of the form structValue.field. In other words, it returns the number of bytes between the start of the struct and the start of the field. The return value is not a Jule constant.
