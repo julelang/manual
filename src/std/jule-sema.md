@@ -97,6 +97,7 @@
 [struct BuiltinClearCallExpr](#builtinclearcallexpr)\
 [struct SizeofExpr](#sizeofexpr)\
 [struct AlignofExpr](#alignofexpr)\
+[struct OffsetofExpr](#offsetofexpr)\
 [struct RuneExpr](#runeexpr)\
 [struct BackendEmitExpr](#backendemitexpr)\
 [struct AddrcallExpr](#addrcallexpr)\
@@ -1290,6 +1291,15 @@ struct AlignofExpr {
 }
 ```
 Expression Model: for alignof expressions\. For example, in C\+\+: alignof\(int\)
+
+## OffsetofExpr
+```jule
+struct OffsetofExpr {
+	Struct: &StructIns
+	Field:  &FieldIns
+}
+```
+Expression Model: for offsetof expressions\. For example, in C\+\+: offsetof\(type, field\)
 
 ## RuneExpr
 ```jule
@@ -2579,6 +2589,7 @@ enum Expr: type {
 	&BuiltinClearCallExpr,
 	&SizeofExpr,
 	&AlignofExpr,
+	&OffsetofExpr,
 	&RuneExpr,
 	&BackendEmitExpr,
 	&ChanRecv,
