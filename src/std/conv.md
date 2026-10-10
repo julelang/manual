@@ -18,9 +18,9 @@
 [fn AppendFloat\(mut dst: \[\]byte, f: f64, fmt: byte, prec: int, bitSize: int\): \[\]byte](#appendfloat)\
 [fn FormatUint\(i: u64, base: int\): string](#formatuint)\
 [fn FormatInt\(i: i64, base: int\): string](#formatint)\
+[fn Itoa\(i: int\): string](#itoa)\
 [fn AppendInt\(mut dst: \[\]byte, i: i64, base: int\): \[\]byte](#appendint)\
 [fn AppendUint\(mut dst: \[\]byte, i: u64, base: int\): \[\]byte](#appenduint)\
-[fn Itoa\(i: int\): string](#itoa)\
 [fn Quote\(s: string\): string](#quote)\
 [fn AppendQuote\(mut dst: \[\]byte, s: string\): \[\]byte](#appendquote)\
 [fn QuoteToASCII\(s: string\): string](#quotetoascii)\
@@ -38,8 +38,8 @@
 [fn QuotedPrefix\(s: string\)\!: string](#quotedprefix)\
 [fn Unquote\(s: string\)\!: string](#unquote)\
 [fn IsGraphic\(r: rune\): bool](#isgraphic)\
-[struct NumError](#numerror)\
-&nbsp;&nbsp;&nbsp;&nbsp;[fn String\(\*self\): string](#string)
+[type Error](#error)\
+&nbsp;&nbsp;&nbsp;&nbsp;[fn Error\(\*self\): string](#error-1)
 
 ## Variables
 
@@ -51,16 +51,15 @@ Is the size in bits of an int or uint value\.
 ---
 
 ```jule
-let mut ErrSyntax = errors::New("invalid syntax")
+const (
+	ErrRange
+	ErrSyntax
+	ErrBase
+	ErrBitSize
+	// NOTE: contains filtered hidden or unexported variables
+)
 ```
-Indicates that a value does not have the right syntax for the target type\. Mutation is undefined behavior\.
 
----
-
-```jule
-let mut ErrRange = errors::New("value out of range")
-```
-That a value is out of range for the target type\. Mutation is undefined behavior\.
 
 ## ParseBool
 ```jule
@@ -102,11 +101,9 @@ Converts the string s to a floating\-point number with the precision specified b
 
 It accepts decimal and hexadecimal floating\-point numbers as defined by the Jule syntax for \[floating\-point literals\]\. If s is well\-formed and near a valid floating\-point number, it returns the nearest floating\-point number rounded using IEEE754 unbiased rounding\. \(Parsing a hexadecimal floating\-point value only rounds when there are more bits in the hexadecimal representation than will fit in the mantissa\.\)
 
-The errors that it returns have concrete type &amp;NumError and include err\.Num = s\.
+If s is not syntactically well\-formed, throws ErrSyntax\.
 
-If s is not syntactically well\-formed, it returns err\.Err = ErrSyntax\.
-
-If s is syntactically well\-formed but is more than 1/2 ULP away from the largest floating point number of the given size, it returns f = ±Inf, err\.Err = ErrRange\.
+If s is syntactically well\-formed but is more than 1/2 ULP away from the largest floating point number of the given size, throws ErrRange\.
 
 It recognizes the string &#34;NaN&#34;, and the \(possibly signed\) strings &#34;Inf&#34; and &#34;Infinity&#34; as their respective special floating point values\. It ignores case when matching\.
 
@@ -114,6 +111,7 @@ It recognizes the string &#34;NaN&#34;, and the \(possibly signed\) strings &#34
 
 ## ParseUint
 ```jule
+#disable boundary
 fn ParseUint(mut s: string, mut base: int, mut bitSize: int)!: u64
 ```
 Is like \[ParseInt\] but for unsigned numbers\.
@@ -122,6 +120,7 @@ A sign prefix is not permitted\.
 
 ## ParseInt
 ```jule
+#disable boundary
 fn ParseInt(mut s: string, base: int, mut bitSize: int)!: i64
 ```
 Interprets a string s in the given base \(0, 2 to 36\) and bit size \(0 to 64\) and returns the corresponding value i\.
@@ -132,12 +131,13 @@ If the base argument is 0, the true base is implied by the string&#39;s prefix f
 
 The bitSize argument specifies the integer type that the result must fit into\. Bit sizes 0, 8, 16, 32, and 64 correspond to int, i8, i16, i32, and i64\. If bitSize is below 0 or above 64, an error is returned\.
 
-The errors that it returns have concrete type \[&amp;NumError\] and include err\.Num = s\. If s is empty or contains invalid  digits, err\.Err = \[ErrSyntax\]; if the value corresponding to s cannot be represented by a signed integer of the given size,  err\.Err = \[ErrRange\]\.
+If s is empty or contains invalid digits, throws ErrSyntax; if the value corresponding to s cannot be represented by a signed integer of the given size, throws ErrRange\.
 
 \[integer literals\]: https://manual\.jule\.dev/introduction/data\-types\#integer\-literals
 
 ## Atoi
 ```jule
+#disable boundary
 fn Atoi(mut s: string)!: int
 ```
 Is equivalent to ParseInt\(s, 10, 0\), converted to int\.
@@ -156,9 +156,18 @@ fn FormatFloat(f: f64, fmt: byte, prec: int, bitSize: int): string
 ```
 Converts the floating\-point number f to a string, according to the format fmt and precision prec\. It rounds the result assuming that the original was obtained from a floating\-point value of bitSize bits \(32 for f32, 64 for f64\)\.
 
-The format fmt is one of &#39;b&#39; \(\-ddddp±ddd, a binary exponent\), &#39;e&#39; \(\-d\.dddde±dd, a decimal exponent\), &#39;E&#39; \(\-d\.ddddE±dd, a decimal exponent\), &#39;f&#39; \(\-ddd\.dddd, no exponent\), &#39;g&#39; \(&#39;e&#39; for large exponents, &#39;f&#39; otherwise\), &#39;G&#39; \(&#39;E&#39; for large exponents, &#39;f&#39; otherwise\), &#39;x&#39; \(\-0xd\.ddddp±ddd, a hexadecimal fraction and binary exponent\), or &#39;X&#39; \(\-0Xd\.ddddP±ddd, a hexadecimal fraction and binary exponent\)\.
+The format fmt is one of<br>
 
-The precision prec controls the number of digits \(excluding the exponent\) printed by the &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;g&#39;, &#39;G&#39;, &#39;x&#39;, and &#39;X&#39; formats\. For &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;x&#39;, and &#39;X&#39;, it is the number of digits after the decimal point\. For &#39;g&#39; and &#39;G&#39; it is the maximum number of significant digits \(trailing zeros are removed\)\. The special precision \-1 uses the smallest number of digits necessary such that ParseFloat will return f exactly\.
+- &#39;b&#39; \(\-ddddp±ddd, a binary exponent\),
+- &#39;e&#39; \(\-d\.dddde±dd, a decimal exponent\),
+- &#39;E&#39; \(\-d\.ddddE±dd, a decimal exponent\),
+- &#39;f&#39; \(\-ddd\.dddd, no exponent\),
+- &#39;g&#39; \(&#39;e&#39; for large exponents, &#39;f&#39; otherwise\),
+- &#39;G&#39; \(&#39;E&#39; for large exponents, &#39;f&#39; otherwise\),
+- &#39;x&#39; \(\-0xd\.ddddp±ddd, a hexadecimal fraction and binary exponent\), or
+- &#39;X&#39; \(\-0Xd\.ddddP±ddd, a hexadecimal fraction and binary exponent\)\.
+
+The precision prec controls the number of digits \(excluding the exponent\) printed by the &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;g&#39;, &#39;G&#39;, &#39;x&#39;, and &#39;X&#39; formats\. For &#39;e&#39;, &#39;E&#39;, &#39;f&#39;, &#39;x&#39;, and &#39;X&#39;, it is the number of digits after the decimal point\. For &#39;g&#39; and &#39;G&#39; it is the maximum number of significant digits \(trailing zeros are removed\)\. The special precision \-1 uses the smallest number of digits necessary such that ParseFloat will return f exactly\. The exponent is written as a decimal integer; for all formats other than &#39;b&#39;, it will be at least two digits\.
 
 ## AppendFloat
 ```jule
@@ -178,6 +187,12 @@ fn FormatInt(i: i64, base: int): string
 ```
 Returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36\. The result uses the lower\-case letters &#39;a&#39; to &#39;z&#39; for digit values &gt;= 10\.
 
+## Itoa
+```jule
+fn Itoa(i: int): string
+```
+Equivalent to \[FormatInt\]\(i64\(i\), 10\)\.
+
 ## AppendInt
 ```jule
 fn AppendInt(mut dst: []byte, i: i64, base: int): []byte
@@ -189,12 +204,6 @@ Appends the string form of the integer i, as generated by \[FormatInt\], to dst 
 fn AppendUint(mut dst: []byte, i: u64, base: int): []byte
 ```
 Appends the string form of the unsigned integer i, as generated by \[FormatUint\], to dst and returns the extended buffer\.
-
-## Itoa
-```jule
-fn Itoa(i: int): string
-```
-Is equivalent to \[FormatInt\]\(i64\(i\), 10\)\.
 
 ## Quote
 ```jule
@@ -305,19 +314,15 @@ fn IsGraphic(r: rune): bool
 ```
 Reports whether the rune is defined as a Graphic by Unicode\. Such characters include letters, marks, numbers, punctuation, symbols, and spaces, from categories L, M, N, P, S, and Zs\.
 
-## NumError
+## Error
 ```jule
-struct NumError {
-	Func: string // the failing function (ParseBool, ParseInt, ParseUint, ParseFloat, ParseComplex)
-	Num:  string // the input
-	Err:  any    // the reason the conversion failed (e.g. ErrRange, ErrSyntax, etc.)
-}
+type Error: int
 ```
-Records a failed conversion\.
+Copyright 2022 The Jule Project Contributors\. All rights reserved\. Use of this source code is governed by a BSD 3\-Clause license that can be found in the LICENSE file\.
 
-### String
+### Error
 ```jule
-fn String(*self): string
+fn Error(*self): string
 ```
 
 
