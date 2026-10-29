@@ -57,6 +57,10 @@ fn main() {
 
 The code above prevents you from passing the `*byte` type directly to `*extern.char` as your compiler encourages you to be safe. This is an important incentive to make the generated IR compilable. If your compiler didn't do this and considered it compatible, the backend-compiler would have told you that the type `__jule_U8*` and `char*` are not compatible.
 
+## Castings
+
+If an external type is used for casting, the system will always attempt a direct cast, regardless of the circumstances. For instance, when an external type-such as one bound as a `string`, is cast to a `[]byte`, it is not handled like a standard conversion between Jule types. Instead, the compiler attempts to convert the types directly into one another.
+
 ## Type Compatibility
 
 There is no direct compatibility between Jule types and C/C++ types. Definitions within the Jule API may exhibit automatic conversion to C/C++ types, and therefore, these types can be used directly with each other. But it is a poorly tested and unreliable method. To give an example of type conversion, the API's `__jule_String` i.e. `string` type in Jule can often be used with C++'s `std::string` type and C's `char*` type. However, Jule strings are not implemented with C-string logic and are not NULL terminated, so using them with types such as `char*` can be risky.
