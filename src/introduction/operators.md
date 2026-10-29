@@ -43,9 +43,9 @@ Arithmetic operators are used to perform common mathematical operations. And som
 
 | Operator | Description | Supported Type(s) |
 | -------- | ----------- | ----------------- |
-| `+` | Addition | integers, floats, strings |
-| `-` | Subtraction | integers, floats |
-| `*` | Multiplication | integer, floats |
+| `+` | Addition | integers, floats, complex, strings |
+| `-` | Subtraction | integers, floats, complex |
+| `*` | Multiplication | integer, floats, complex |
 | `/` | Division | integer, floats |
 | `%` | Modulus | integers |
 | `<<` | Left shift | integer << integer |
@@ -71,7 +71,7 @@ Arithmetic operators are used to perform common mathematical operations. And som
 | `\|` | Bitwise OR |
 | `^` | Bitwise XOR, Bitwise NOT |
 
-## Comparison Operators
+## Logical Operators
 | Operator | Description |
 | -------- | ----------- |
 | `&&` | Logical and |
@@ -81,7 +81,7 @@ Arithmetic operators are used to perform common mathematical operations. And som
 ## Precedences
 | Precedence (Descending) | Operator(s) |
 | ----------------------- | ----------- |
-| 5 |  `*` `%` `/` `<<` `>>` `&` |
+| 5 | `*` `%` `/` `<<` `>>` `&` |
 | 4 | `+` `-` `\|` `^` |
 | 3 | `==` `!=` `<` `<=` `>` `>=` |
 | 2 | `&&` |
