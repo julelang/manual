@@ -1,54 +1,28 @@
 import { defineConfig } from 'vitepress'
-import { ILanguageRegistration, getHighlighter } from 'shiki';
-import { IGrammar } from 'vscode-textmate';
-import { readFileSync } from 'fs';
+import { createHighlighter } from 'shiki';
+import { readFileSync } from 'node:fs';
 
-class Jule implements ILanguageRegistration {
-  id: string;
-  name: string;
-  scopeName: string;
-  displayName?: string | undefined;
-  path: string;
-  grammar?: IGrammar | undefined;
-  aliases?: string[] | undefined;
+const jule = {
+  ...JSON.parse(readFileSync("jule/jule.tmLanguage.json", "utf8")),
+  name: "jule",
+};
 
-  constructor() {
-    this.id = "jule";
-    this.name = "jule";
-    this.scopeName = "source.jule";
-    this.displayName = "jule";
-    this.path = "";
-    this.grammar = JSON.parse(readFileSync("jule/jule.tmLanguage.json").toString());
-  }
-}
+const julemod = {
+  ...JSON.parse(readFileSync("jule/mod.tmLanguage.json", "utf8")),
+  name: "julemod",
+};
 
-class JuleMod implements ILanguageRegistration {
-  id: string;
-  name: string;
-  scopeName: string;
-  displayName?: string | undefined;
-  path: string;
-  grammar?: IGrammar | undefined;
-  aliases?: string[] | undefined;
+const juleTheme = {
+  ...JSON.parse(readFileSync("jule/draculaTheme.json", "utf8")),
+  name: "dracula-soft",
+};
 
-  constructor() {
-    this.id = "julemod";
-    this.name = "julemod";
-    this.scopeName = "jule.mod";
-    this.displayName = "jule module";
-    this.path = "";
-    this.grammar = JSON.parse(readFileSync("jule/mod.tmLanguage.json").toString());
-  }
-}
+const languages = ['bash', 'c', 'cpp', 'objective-c', 'objective-cpp', jule, julemod];
 
-const highlighter = await getHighlighter({
-  theme: JSON.parse(readFileSync("jule/draculaTheme.json").toString()),
+const highlighter = await createHighlighter({
+  langs: languages,
+  themes: [juleTheme],
 });
-const jule = new Jule();
-await highlighter.loadLanguage(jule);
-
-const julemod = new JuleMod();
-await highlighter.loadLanguage(julemod);
 
 export default defineConfig({
   srcDir: 'src',
@@ -57,9 +31,9 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
-    languages: [jule, julemod],
+    languages: languages,
     highlight(str, lang, attrs) {
-      return highlighter.codeToHtml(str.trim(), { lang: lang });
+      return highlighter.codeToHtml(str.trim(), { lang, theme: "dracula-soft" });
     },
     theme: "dracula-soft",
   },
