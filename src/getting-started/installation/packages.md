@@ -12,6 +12,7 @@ If you see a maintainer with the `✔` mark, it means they are officially recogn
 
 | Maintainer                                      | Trusted | Packages                                                                   |
 |-------------------------------------------------|---------|----------------------------------------------------------------------------|
+| [lareii](https://github.com/lareii)             | ✔       | Homebrew: `jule`, `julefmt`, `juledoc`                                     |
 | [koi](https://koi.rip)                          | ✔       | Nixpkgs, AUR: `jule`, `julefmt`, `juledoc`                                 |
 | [sebaguardian](https://github.com/sebaguardian) |         | Nixpkgs:      `jule`, `julefmt`, `juledoc`                                 |
 

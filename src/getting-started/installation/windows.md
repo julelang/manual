@@ -20,4 +20,7 @@ You can add the `bin` directory to your system's `PATH` variable to run `julec` 
 
 There are also unofficial community-made installers for Windows.
 
+[See more information about packages and maintainers](/getting-started/installation/packages)
+
+List of installers:
 - [Jule Universal Installer](https://github.com/JustLachin/jule-universal-installer)

@@ -21,3 +21,16 @@ For example, add the following line to your shell's configuration file (e.g. `~/
 export PATH="$PATH:/path/to/jule/bin"
 ```
 :::
+
+## Community-Made Packages
+
+There are also unofficial community-made packages for macOS.
+
+[See more information about packages and maintainers](/getting-started/installation/packages)
+
+### Homebrew
+
+```bash
+brew tap lareii/tap
+brew install lareii/tap/jule
+```
