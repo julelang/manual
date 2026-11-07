@@ -92,3 +92,5 @@ Your compiler has some built-in constraint statements to make things easier. The
 | `immutable`  | Immutable types (deep match)                                                |
 | `comparable` | All types which is supports the `==`, `!=` operators (deep match)           |
 | `ordered`    | All types which is supports the `<`, `<=`, `>=`, `>` operators (deep match) |
+| `array`      | Array types (deep match)                                                    |
+| `slice`      | Slice types (deep match)                                                    |
